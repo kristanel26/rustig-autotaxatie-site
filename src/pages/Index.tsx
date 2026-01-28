@@ -40,9 +40,9 @@ const Index = () => {
             <h1 className="text-xl font-bold text-foreground">Automobiel Taxaties</h1>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
-            <a href="tel:+31612345678" className="flex items-center gap-2 hover:text-foreground transition-colors">
+            <a href="tel:+31851234567" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Phone className="w-4 h-4" />
-              06 1234 5678
+              085 123 4567
             </a>
             <a href="mailto:info@automobieltaxaties.nl" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Mail className="w-4 h-4" />
@@ -149,7 +149,7 @@ const Index = () => {
             We bespreken graag wat we voor je kunnen betekenen.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+31612345678">
+            <a href="tel:+31851234567">
               <Button variant="hero" size="xl">
                 <Phone className="w-5 h-5 mr-2" />
                 Bel ons
@@ -187,9 +187,9 @@ const Index = () => {
               <h3 className="font-semibold mb-4">Contact</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <a href="tel:+31612345678" className="hover:text-foreground transition-colors flex items-center gap-2">
+                  <a href="tel:+31851234567" className="hover:text-foreground transition-colors flex items-center gap-2">
                     <Phone className="w-4 h-4" />
-                    06 1234 5678
+                    085 123 4567
                   </a>
                 </li>
                 <li>
