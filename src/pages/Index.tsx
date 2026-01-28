@@ -57,20 +57,17 @@ const Index = () => {
         <div className="container-wide">
           <div className="max-w-3xl">
             <p className="text-accent-foreground/80 font-medium mb-4 animate-fade-in uppercase tracking-wider text-sm">
-              Met ruime ervaring in BPM-taxaties, verzekeringstaxaties en fiscale waarderingen
+              Met meer dan 15 jaar ervaring in voertuigtaxaties
             </p>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight animate-slide-up text-balance">
               Onafhankelijke voertuigwaarderingen
             </h2>
             <div className="text-lg md:text-xl text-primary-foreground/80 mb-10 animate-slide-up leading-relaxed max-w-2xl space-y-4" style={{ animationDelay: "100ms" }}>
               <p>
-                Automobiel Taxaties is een onafhankelijk taxatiebureau dat voertuigen waardeert voor verschillende doeleinden.
+                Automobiel Taxaties is een onafhankelijk taxatiebureau voor voertuigen. We helpen ondernemers en particulieren met zorgvuldig uitgevoerde taxaties voor verschillende situaties, zoals verzekering, BPM en fiscale doeleinden.
               </p>
               <p>
-                Wij ondersteunen ondernemers en particulieren met zorgvuldig onderbouwde taxaties voor BPM-aangifte, verzekeringstaxaties en fiscale waarderingen.
-              </p>
-              <p>
-                We kijken rustig en zorgvuldig naar het voertuig en alles wat de waarde beïnvloedt. Dat resulteert in een helder taxatierapport dat je kunt gebruiken bij je aangifte bij de Belastingdienst.
+                We kijken rustig en zorgvuldig naar het voertuig en alles wat de waarde beïnvloedt. Zo ontvang je een helder taxatierapport waar je op kunt vertrouwen, passend bij het doel waarvoor je het nodig hebt.
               </p>
             </div>
             <a href="#diensten" className="inline-block animate-slide-up" style={{ animationDelay: "200ms" }}>
