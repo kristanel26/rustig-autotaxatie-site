@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
-import { FileText, Users, Shield, ClipboardCheck } from "lucide-react";
+import { Users, FileText, Shield, ClipboardCheck, Heart } from "lucide-react";
 
 const BpmTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -15,8 +15,21 @@ const BpmTaxatie = () => {
       <LandingHero
         subtitle="BPM-taxatie"
         title="BPM-taxatie bij import van voertuigen"
-        description="Importeer je een voertuig en wil je vooraf duidelijkheid over hoeveel BPM daarbij hoort? Met een onafhankelijke BPM-taxatie krijg je inzicht in het juiste BPM-bedrag en voorkom je discussie achteraf met de Belastingdienst."
-        ctaText="Vraag een BPM-taxatie aan"
+        description={
+          <>
+            <p className="text-lg md:text-xl text-muted-foreground mb-4">
+              Een zorgvuldig opgesteld BPM-rapport voor ondernemers en particulieren.
+              <br className="hidden md:block" />
+              Dat standhoudt bij de Belastingdienst.
+            </p>
+            <p className="text-base md:text-lg text-muted-foreground">
+              Importeer je een voertuig en heb je een BPM-taxatie nodig? Wij stellen een onafhankelijk 
+              en goed onderbouwd rapport op, gebaseerd op de werkelijke staat en uitvoering van het voertuig. 
+              Geen aannames en geen standaardlijsten, maar een taxatie die rust en duidelijkheid geeft.
+            </p>
+          </>
+        }
+        ctaText="Neem contact op voor een BPM-taxatie"
         onCtaClick={scrollToForm}
       />
 
@@ -28,28 +41,33 @@ const BpmTaxatie = () => {
               <Users className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h2 className="text-2xl md:text-3xl font-semibold mb-4">
+              <h2 className="text-2xl md:text-3xl font-semibold">
                 Voor wie is een BPM-taxatie bedoeld?
               </h2>
             </div>
           </div>
           <div className="prose prose-lg max-w-none text-muted-foreground">
             <p>
-              Een BPM-taxatie is bedoeld voor ondernemers en particulieren die een voertuig importeren 
-              en zekerheid willen over de juiste BPM-heffing. Dit geldt vooral in situaties waarin 
-              standaardtabellen of koerslijsten geen goed beeld geven van de werkelijke waarde en 
-              staat van het voertuig.
+              Onze BPM-taxaties zijn vooral bedoeld voor ondernemers die voertuigen importeren 
+              en zekerheid willen over de fiscale waardering. Ook particulieren die een voertuig 
+              importeren en discussie willen voorkomen, kunnen bij ons terecht.
             </p>
-            <p>
-              Denk aan voertuigen met bijzondere uitvoeringen, schade, hoge kilometerstanden of 
-              specifieke opties die de waarde beïnvloeden. In die gevallen biedt een taxatie 
-              meer duidelijkheid dan een algemene berekening.
+            <p className="mt-4">
+              Een BPM-taxatie is met name zinvol wanneer:
+            </p>
+            <ul className="mt-2 space-y-2">
+              <li>het voertuig afwijkt van standaard uitvoeringen</li>
+              <li>er gebruikssporen of schade aanwezig is</li>
+              <li>opties of aanpassingen invloed hebben op de waarde</li>
+            </ul>
+            <p className="mt-4">
+              In deze situaties geeft een taxatie meer houvast dan een algemene berekening.
             </p>
           </div>
         </div>
       </section>
 
-      {/* BPM binnen fiscale kaders */}
+      {/* Wat is BPM */}
       <section className="section-padding bg-secondary/30">
         <div className="container-narrow">
           <div className="flex items-start gap-4 mb-6">
@@ -57,21 +75,19 @@ const BpmTaxatie = () => {
               <FileText className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h2 className="text-2xl md:text-3xl font-semibold mb-4">
-                BPM binnen fiscale kaders
+              <h2 className="text-2xl md:text-3xl font-semibold">
+                Wat is BPM?
               </h2>
             </div>
           </div>
           <div className="prose prose-lg max-w-none text-muted-foreground">
             <p>
-              BPM is een belastingaangifte die je doet bij de import van een voertuig. De Belastingdienst 
-              kent meerdere manieren om het BPM-bedrag vast te stellen. Een taxatie is één van de 
-              toegestane methodes, mits deze zorgvuldig, controleerbaar en goed onderbouwd is.
+              BPM is een belasting die je betaalt bij de registratie van een geïmporteerd voertuig in Nederland. 
+              De Belastingdienst kent meerdere manieren om het BPM-bedrag vast te stellen.
             </p>
             <p>
-              Een correcte taxatie helpt om naheffingen en discussie achteraf te voorkomen. Het rapport 
-              moet helder zijn over hoe het bedrag tot stand is gekomen en welke factoren daarbij 
-              zijn meegewogen.
+              Een taxatie is één van de toegestane methodes. Voorwaarde is wel dat het rapport 
+              zorgvuldig en controleerbaar is opgesteld.
             </p>
           </div>
         </div>
@@ -85,7 +101,7 @@ const BpmTaxatie = () => {
               <Shield className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h2 className="text-2xl md:text-3xl font-semibold mb-4">
+              <h2 className="text-2xl md:text-3xl font-semibold">
                 Waarom een onafhankelijke BPM-taxatie?
               </h2>
             </div>
@@ -93,19 +109,18 @@ const BpmTaxatie = () => {
           <div className="prose prose-lg max-w-none text-muted-foreground">
             <p>
               Een onafhankelijke taxatie zorgt voor een realistische vaststelling van het BPM-bedrag. 
-              Het rapport voldoet aan de fiscale richtlijnen en is opgesteld om stand te kunnen houden 
-              bij een eventuele controle.
+              Je krijgt inzicht in hoe dat bedrag tot stand komt en het rapport is geschikt voor 
+              eventuele controle achteraf.
             </p>
             <p>
-              Bij Automobiel Taxaties werken we zonder standaardlijstjes. Elk voertuig wordt afzonderlijk 
-              beoordeeld op basis van de werkelijke staat, uitvoering en marktpositie. Zo krijg je een 
-              taxatie die past bij jouw specifieke situatie.
+              Wij werken niet met standaard koerstabellen. Elk voertuig wordt afzonderlijk beoordeeld 
+              op basis van de specifieke situatie.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Werkwijze in hoofdlijnen */}
+      {/* Werkwijze */}
       <section className="section-padding bg-secondary/30">
         <div className="container-narrow">
           <div className="flex items-start gap-4 mb-6">
@@ -113,43 +128,28 @@ const BpmTaxatie = () => {
               <ClipboardCheck className="w-6 h-6 text-primary" />
             </div>
             <div>
-              <h2 className="text-2xl md:text-3xl font-semibold mb-4">
-                Werkwijze in hoofdlijnen
+              <h2 className="text-2xl md:text-3xl font-semibold">
+                Werkwijze
               </h2>
             </div>
           </div>
-          <div className="prose prose-lg max-w-none text-muted-foreground">
-            <p className="mb-6">
-              De aanpak is overzichtelijk en persoonlijk:
-            </p>
-            <div className="space-y-4">
-              <div className="flex items-start gap-4">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent-foreground flex items-center justify-center font-medium text-sm">1</span>
-                <div>
-                  <p className="font-medium text-foreground mb-1">Intake van voertuig en situatie</p>
-                  <p className="text-muted-foreground">We bespreken samen welk voertuig je wilt importeren en wat de context is.</p>
-                </div>
+          <div className="space-y-4">
+            <div className="flex items-start gap-4">
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent-foreground flex items-center justify-center font-medium text-sm">1</span>
+              <div>
+                <p className="font-medium text-foreground">Afstemming over voertuig en situatie</p>
               </div>
-              <div className="flex items-start gap-4">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent-foreground flex items-center justify-center font-medium text-sm">2</span>
-                <div>
-                  <p className="font-medium text-foreground mb-1">Beoordeling van uitvoering, staat en marktpositie</p>
-                  <p className="text-muted-foreground">Het voertuig wordt grondig bekeken op alle relevante aspecten.</p>
-                </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent-foreground flex items-center justify-center font-medium text-sm">2</span>
+              <div>
+                <p className="font-medium text-foreground">Taxatie op basis van staat, uitvoering en marktpositie</p>
               </div>
-              <div className="flex items-start gap-4">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent-foreground flex items-center justify-center font-medium text-sm">3</span>
-                <div>
-                  <p className="font-medium text-foreground mb-1">Vaststelling van het BPM-bedrag</p>
-                  <p className="text-muted-foreground">Op basis van de beoordeling wordt het juiste BPM-bedrag bepaald.</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent-foreground flex items-center justify-center font-medium text-sm">4</span>
-                <div>
-                  <p className="font-medium text-foreground mb-1">Oplevering van een zorgvuldig onderbouwd taxatierapport</p>
-                  <p className="text-muted-foreground">Je ontvangt een rapport dat compleet en controleerbaar is.</p>
-                </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent-foreground flex items-center justify-center font-medium text-sm">3</span>
+              <div>
+                <p className="font-medium text-foreground">Oplevering van een zorgvuldig onderbouwd BPM-taxatierapport</p>
               </div>
             </div>
           </div>
@@ -159,18 +159,24 @@ const BpmTaxatie = () => {
       {/* Vertrouwen en deskundigheid */}
       <section className="section-padding bg-background">
         <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-6">
-            Vertrouwen en deskundigheid
-          </h2>
+          <div className="flex items-start gap-4 mb-6">
+            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Heart className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <h2 className="text-2xl md:text-3xl font-semibold">
+                Vertrouwen en deskundigheid
+              </h2>
+            </div>
+          </div>
           <div className="prose prose-lg max-w-none text-muted-foreground">
             <p>
-              Automobiel Taxaties werkt onafhankelijk en met jarenlange ervaring in voertuigtaxaties. 
-              Elk rapport wordt met persoonlijke betrokkenheid opgesteld en is bedoeld voor gebruik 
-              richting de Belastingdienst en andere betrokken partijen.
+              Automobiel Taxaties werkt onafhankelijk en met jarenlange ervaring. 
+              Elk rapport wordt met persoonlijke betrokkenheid opgesteld en is bedoeld 
+              voor gebruik richting de Belastingdienst.
             </p>
             <p>
-              Zorgvuldigheid staat centraal. Dat betekent heldere communicatie, een gedegen onderbouwing 
-              en een rapport waar je op kunt vertrouwen.
+              Zorgvuldigheid staat bij ons boven snelheid.
             </p>
           </div>
         </div>
@@ -181,10 +187,10 @@ const BpmTaxatie = () => {
         <div className="container-narrow">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-semibold mb-4">
-              Vraag een BPM-taxatie aan
+              BPM-taxatie nodig?
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Vul het formulier in en we nemen contact met je op om je situatie te bespreken.
+              Neem gerust contact met ons op. We bespreken je situatie en geven aan wat je kunt verwachten.
             </p>
           </div>
           <IntakeForm serviceType="BPM-taxatie" />
