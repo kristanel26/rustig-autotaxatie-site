@@ -8,8 +8,8 @@ const indicators = [
   },
   {
     icon: Clock,
-    title: "Snel geregeld",
-    description: "Binnen 48 uur je taxatierapport",
+    title: "Zorgvuldige afstemming",
+    description: "Duidelijke communicatie over het proces",
   },
   {
     icon: Award,
