@@ -14,11 +14,11 @@ const services = [
   },
   {
     icon: Caravan,
-    title: "Verzekeringstaxaties",
+    title: "Verzekeringstaxatie voertuig",
     description:
-      "Een verzekeringstaxatie legt de werkelijke waarde van je voertuig vast. Zo weet je zeker dat je bij schade of diefstal correct wordt uitgekeerd.",
+      "Wil je je voertuig goed verzekeren? Met een officiële verzekeringstaxatie leg je de juiste waarde vast, zodat je bij schade of diefstal weet waar je aan toe bent.",
     href: "/camper-taxatie",
-    cta: "Meer over verzekeringstaxaties",
+    cta: "Meer over verzekeringstaxatie",
   },
   {
     icon: Scale,
