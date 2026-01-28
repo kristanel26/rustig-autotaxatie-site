@@ -70,7 +70,7 @@ const Index = () => {
                 Wij ondersteunen ondernemers en particulieren met zorgvuldig onderbouwde taxaties voor BPM-aangifte, verzekeringstaxaties en fiscale waarderingen.
               </p>
               <p>
-                Elke taxatie wordt uitgevoerd met oog voor het voertuig, de context en het doel van de waardering. Geen standaardoplossingen, maar een rapport dat klopt en standhoudt bij controle.
+                We kijken rustig en zorgvuldig naar het voertuig en alles wat de waarde beïnvloedt. Dat resulteert in een helder taxatierapport dat je kunt gebruiken bij je aangifte bij de Belastingdienst.
               </p>
             </div>
             <a href="#diensten" className="inline-block animate-slide-up" style={{ animationDelay: "200ms" }}>
