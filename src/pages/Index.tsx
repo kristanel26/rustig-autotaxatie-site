@@ -60,18 +60,23 @@ const Index = () => {
               Erkend taxateur in Nederland
             </p>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight animate-slide-up text-balance">
-              Deskundige autotaxaties waar je op kunt vertrouwen
+              Taxaties voor verzekering, BPM en fiscale doeleinden
             </h2>
             <p className="text-lg md:text-xl text-primary-foreground/80 mb-10 animate-slide-up leading-relaxed max-w-2xl" style={{ animationDelay: "100ms" }}>
-              Al meer dan 15 jaar helpen we particulieren en bedrijven met betrouwbare taxaties. 
-              Van campers tot importvoertuigen, van verzekering tot fiscale doeleinden.
+              Automobiel Taxaties helpt je met betrouwbare waardebepalingen van je voertuig. 
+              Of het nu gaat om een verzekeringstaxatie, importberekening of een rapport voor de Belastingdienst.
             </p>
+            <a href="#diensten" className="inline-block animate-slide-up" style={{ animationDelay: "200ms" }}>
+              <Button variant="hero" size="xl">
+                Bekijk onze diensten
+              </Button>
+            </a>
           </div>
         </div>
       </section>
 
       {/* Services */}
-      <section className="section-padding bg-background">
+      <section id="diensten" className="section-padding bg-background scroll-mt-8">
         <div className="container-wide">
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
