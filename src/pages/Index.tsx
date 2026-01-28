@@ -128,15 +128,16 @@ const Index = () => {
       <section className="section-padding bg-background">
         <div className="container-narrow text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance">
-            Persoonlijk en zorgvuldig
+            Vertrouwen en deskundigheid
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-            Elke taxatie wordt persoonlijk uitgevoerd door een geregistreerde taxateur. 
-            Geen haastwerk, maar een grondige beoordeling van het voertuig en een rapport dat klopt.
+            Automobiel Taxaties werkt onafhankelijk en met meer dan 15 jaar ervaring in voertuigwaarderingen.
+          </p>
+          <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+            We nemen de tijd om een voertuig goed te bekijken en leggen vast wat écht van invloed is op de waarde. Geen aannames, geen haastwerk.
           </p>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Bij vragen of controle kan het rapport worden toegelicht. 
-            Heb je vooraf vragen? Neem gerust contact op.
+            Zo ontvang je een duidelijk en zorgvuldig opgesteld taxatierapport waar je op kunt vertrouwen, afgestemd op het doel waarvoor je het gebruikt.
           </p>
         </div>
       </section>
