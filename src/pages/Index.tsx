@@ -5,28 +5,28 @@ import { Caravan, Calculator, Scale, ArrowRight, Phone, Mail } from "lucide-reac
 
 const services = [
   {
-    icon: Caravan,
-    title: "Verzekeringstaxatie camper",
+    icon: Calculator,
+    title: "BPM-taxaties",
     description:
-      "Bescherm de waarde van je camper met een officiële taxatie. Zo krijg je bij schade of diefstal de werkelijke waarde uitgekeerd.",
-    href: "/camper-taxatie",
-    cta: "Meer over campertaxatie",
+      "Importeer je een voertuig? Een onafhankelijk BPM-taxatierapport geeft inzicht in de juiste waardering en is bruikbaar bij de aangifte.",
+    href: "/bpm-taxatie",
+    cta: "Meer over BPM-taxaties",
   },
   {
-    icon: Calculator,
-    title: "BPM voorbereiding",
+    icon: Caravan,
+    title: "Verzekeringstaxaties",
     description:
-      "Overweeg je een auto te importeren? Weet vooraf precies wat je aan BPM gaat betalen. Geen verrassingen, wel zekerheid.",
-    href: "/bpm-voorbereiding",
-    cta: "Meer over BPM",
+      "Een verzekeringstaxatie legt de werkelijke waarde van je voertuig vast. Zo weet je zeker dat je bij schade of diefstal correct wordt uitgekeerd.",
+    href: "/camper-taxatie",
+    cta: "Meer over verzekeringstaxaties",
   },
   {
     icon: Scale,
-    title: "WEV taxatie",
+    title: "Fiscale waarderingen",
     description:
-      "Een objectieve waardebepaling van je voertuig voor zakelijke of fiscale doeleinden. Erkend door de Belastingdienst.",
+      "Een objectieve waardebepaling voor zakelijke of fiscale doeleinden, zoals een WEV-taxatie. Zorgvuldig onderbouwd en bruikbaar bij de Belastingdienst.",
     href: "/wev-taxatie",
-    cta: "Meer over WEV",
+    cta: "Meer over fiscale waarderingen",
   },
 ];
 
@@ -131,16 +131,15 @@ const Index = () => {
       <section className="section-padding bg-background">
         <div className="container-narrow text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance">
-            Persoonlijk en deskundig
+            Persoonlijk en zorgvuldig
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-            Bij Automobiel Taxaties geloven we in persoonlijk contact en vakmanschap. 
-            Elke taxatie wordt uitgevoerd door een ervaren taxateur die de tijd neemt 
-            om jouw voertuig grondig te beoordelen. Geen haastwerk, wel kwaliteit.
+            Elke taxatie wordt persoonlijk uitgevoerd door een geregistreerde taxateur. 
+            Geen haastwerk, maar een grondige beoordeling van het voertuig en een rapport dat klopt.
           </p>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            We werken transparant en houden je op de hoogte van elke stap. 
-            Heb je vragen? Neem gerust contact op, we helpen je graag verder.
+            Bij vragen of controle kan het rapport worden toegelicht. 
+            Heb je vooraf vragen? Neem gerust contact op.
           </p>
         </div>
       </section>
@@ -149,11 +148,11 @@ const Index = () => {
       <section className="section-padding bg-primary">
         <div className="container-narrow text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-foreground text-balance">
-            Klaar om te beginnen?
+            Vragen of een taxatie nodig?
           </h2>
           <p className="text-lg text-primary-foreground/80 mb-8 max-w-xl mx-auto">
-            Neem contact met ons op voor een vrijblijvend gesprek. 
-            We bespreken graag wat we voor je kunnen betekenen.
+            Neem contact op om je situatie te bespreken. 
+            We kijken graag mee welke taxatie bij jouw vraag past.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:+31851234567">
@@ -185,9 +184,9 @@ const Index = () => {
             <div>
               <h3 className="font-semibold mb-4">Diensten</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link to="/camper-taxatie" className="hover:text-foreground transition-colors">Verzekeringstaxatie camper</Link></li>
-                <li><Link to="/bpm-voorbereiding" className="hover:text-foreground transition-colors">BPM voorbereiding</Link></li>
-                <li><Link to="/wev-taxatie" className="hover:text-foreground transition-colors">WEV taxatie</Link></li>
+                <li><Link to="/bpm-taxatie" className="hover:text-foreground transition-colors">BPM-taxaties</Link></li>
+                <li><Link to="/camper-taxatie" className="hover:text-foreground transition-colors">Verzekeringstaxaties</Link></li>
+                <li><Link to="/wev-taxatie" className="hover:text-foreground transition-colors">Fiscale waarderingen</Link></li>
               </ul>
             </div>
             <div>

@@ -3,23 +3,23 @@ import { Shield, Clock, Award, Users } from "lucide-react";
 const indicators = [
   {
     icon: Shield,
-    title: "Gecertificeerd",
-    description: "Erkend door alle grote verzekeraars",
+    title: "Geregistreerd taxateur",
+    description: "Rapporten opgesteld door een erkende taxateur",
   },
   {
     icon: Clock,
-    title: "Zorgvuldige afstemming",
-    description: "Duidelijke communicatie over het proces",
+    title: "Zorgvuldig onderbouwd",
+    description: "Elk rapport is geschikt voor controle achteraf",
   },
   {
     icon: Award,
-    title: "15+ jaar ervaring",
-    description: "Duizenden taxaties uitgevoerd",
+    title: "Ruime ervaring",
+    description: "Jarenlange expertise in voertuigwaarderingen",
   },
   {
     icon: Users,
-    title: "Persoonlijk contact",
-    description: "Altijd een vaste contactpersoon",
+    title: "Persoonlijke aanpak",
+    description: "Direct contact met de taxateur zelf",
   },
 ];
 
