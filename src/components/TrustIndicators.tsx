@@ -9,16 +9,16 @@ const indicators = [
   {
     icon: Clock,
     title: "Zorgvuldig onderbouwd",
-    description: "Helder en verdedigbaar, ook bij controle achteraf",
+    description: "Helder en verdedigbaar, ook bij controle",
   },
   {
     icon: Award,
-    title: "15+ jaar ervaring",
-    description: "Jarenlange ervaring in voertuigwaarderingen",
+    title: "Ruime ervaring",
+    description: "Meer dan 15 jaar ervaring in voertuigwaarderingen",
   },
   {
     icon: Users,
-    title: "Persoonlijk contact",
+    title: "Persoonlijke aanpak",
     description: "Direct contact met de taxateur zelf",
   },
 ];
