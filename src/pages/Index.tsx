@@ -82,14 +82,11 @@ const Index = () => {
       {/* Services */}
       <section id="diensten" className="section-padding bg-background scroll-mt-8">
         <div className="container-wide">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
-              Onze diensten
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Kies de taxatie die past bij jouw situatie. We staan voor je klaar met persoonlijk advies.
-            </p>
-          </div>
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+            Onze diensten
+          </h2>
+        </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {services.map((service, index) => (
