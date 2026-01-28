@@ -22,11 +22,11 @@ const services = [
   },
   {
     icon: Scale,
-    title: "Fiscale waarderingen",
+    title: "WEV-taxatie",
     description:
-      "Een objectieve waardebepaling voor zakelijke of fiscale doeleinden, zoals een WEV-taxatie. Zorgvuldig onderbouwd en bruikbaar bij de Belastingdienst.",
+      "Een objectieve waardebepaling van je voertuig voor zakelijke of fiscale doeleinden. De WEV-taxatie geeft inzicht in de waarde op een specifiek moment.",
     href: "/wev-taxatie",
-    cta: "Meer over fiscale waarderingen",
+    cta: "Meer over WEV-taxatie",
   },
 ];
 
@@ -183,7 +183,7 @@ const Index = () => {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><Link to="/bpm-taxatie" className="hover:text-foreground transition-colors">BPM-taxaties</Link></li>
                 <li><Link to="/camper-taxatie" className="hover:text-foreground transition-colors">Verzekeringstaxaties</Link></li>
-                <li><Link to="/wev-taxatie" className="hover:text-foreground transition-colors">Fiscale waarderingen</Link></li>
+                <li><Link to="/wev-taxatie" className="hover:text-foreground transition-colors">WEV-taxatie</Link></li>
               </ul>
             </div>
             <div>
