@@ -57,15 +57,22 @@ const Index = () => {
         <div className="container-wide">
           <div className="max-w-3xl">
             <p className="text-accent-foreground/80 font-medium mb-4 animate-fade-in uppercase tracking-wider text-sm">
-              Erkend taxateur in Nederland
+              Met ruime ervaring in BPM-taxaties, verzekeringstaxaties en fiscale waarderingen
             </p>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight animate-slide-up text-balance">
-              Taxaties voor verzekering, BPM en fiscale doeleinden
+              Onafhankelijke voertuigwaarderingen
             </h2>
-            <p className="text-lg md:text-xl text-primary-foreground/80 mb-10 animate-slide-up leading-relaxed max-w-2xl" style={{ animationDelay: "100ms" }}>
-              Automobiel Taxaties helpt je met betrouwbare waardebepalingen van je voertuig. 
-              Of het nu gaat om een verzekeringstaxatie, importberekening of een rapport voor de Belastingdienst.
-            </p>
+            <div className="text-lg md:text-xl text-primary-foreground/80 mb-10 animate-slide-up leading-relaxed max-w-2xl space-y-4" style={{ animationDelay: "100ms" }}>
+              <p>
+                Automobiel Taxaties is een onafhankelijk taxatiebureau dat voertuigen waardeert voor verschillende doeleinden.
+              </p>
+              <p>
+                Wij ondersteunen ondernemers en particulieren met zorgvuldig onderbouwde taxaties voor BPM-aangifte, verzekeringstaxaties en fiscale waarderingen.
+              </p>
+              <p>
+                Elke taxatie wordt uitgevoerd met oog voor het voertuig, de context en het doel van de waardering. Geen standaardoplossingen, maar een rapport dat klopt en standhoudt bij controle.
+              </p>
+            </div>
             <a href="#diensten" className="inline-block animate-slide-up" style={{ animationDelay: "200ms" }}>
               <Button variant="hero" size="xl">
                 Bekijk onze diensten
