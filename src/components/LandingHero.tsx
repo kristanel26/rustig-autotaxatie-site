@@ -5,7 +5,7 @@ import { ArrowDown } from "lucide-react";
 interface LandingHeroProps {
   title: string;
   subtitle: string;
-  description: string;
+  description: string | ReactNode;
   ctaText: string;
   onCtaClick: () => void;
   children?: ReactNode;
@@ -39,9 +39,9 @@ const LandingHero = ({
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight animate-slide-up text-balance">
             {title}
           </h1>
-          <p className="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-2xl animate-slide-up leading-relaxed" style={{ animationDelay: "100ms" }}>
+          <div className="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-2xl animate-slide-up leading-relaxed" style={{ animationDelay: "100ms" }}>
             {description}
-          </p>
+          </div>
           <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: "200ms" }}>
             <Button variant="hero" size="xl" onClick={onCtaClick}>
               {ctaText}
