@@ -6,11 +6,11 @@ import { Caravan, Calculator, Scale, ArrowRight, Phone, Mail } from "lucide-reac
 const services = [
   {
     icon: Calculator,
-    title: "BPM-taxaties",
+    title: "BPM-taxatie bij import",
     description:
-      "Importeer je een voertuig? Een onafhankelijk BPM-taxatierapport geeft inzicht in de juiste waardering en is bruikbaar bij de aangifte.",
+      "Importeer je een voertuig en heb je een BPM-taxatie nodig? Wij maken een zorgvuldig onderbouwd taxatierapport dat je kunt gebruiken bij je BPM-aangifte. Helder, controleerbaar en passend bij het voertuig.",
     href: "/bpm-taxatie",
-    cta: "Meer over BPM-taxaties",
+    cta: "Meer over BPM-taxatie",
   },
   {
     icon: Caravan,
