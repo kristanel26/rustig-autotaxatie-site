@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import CamperTaxatie from "./pages/CamperTaxatie";
 import BpmVoorbereiding from "./pages/BpmVoorbereiding";
+import BpmTaxatie from "./pages/BpmTaxatie";
 import WevTaxatie from "./pages/WevTaxatie";
 import NotFound from "./pages/NotFound";
 
@@ -21,6 +22,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/camper-taxatie" element={<CamperTaxatie />} />
           <Route path="/bpm-voorbereiding" element={<BpmVoorbereiding />} />
+          <Route path="/bpm-taxatie" element={<BpmTaxatie />} />
           <Route path="/wev-taxatie" element={<WevTaxatie />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
