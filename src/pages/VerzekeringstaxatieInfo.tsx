@@ -167,6 +167,29 @@ const VerzekeringstaxatieInfo = () => {
       </section>
 
       <section className="section-padding bg-secondary/30">
+        <div className="container-narrow">
+          <div className="prose prose-lg max-w-none">
+            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-8">
+              Acceptatie door verzekeraars en geldigheid van het rapport
+            </h2>
+            <div className="space-y-6 text-foreground/90 leading-relaxed">
+              <p>
+                De verzekeringstaxaties worden uitgevoerd door een geregistreerd taxateur die is aangesloten bij erkende registers. Dat is voor verzekeraars een belangrijk uitgangspunt bij het beoordelen en accepteren van taxatierapporten.
+              </p>
+              
+              <p>
+                Verzekeraars gebruiken onze taxatierapporten om de verzekerde waarde van het voertuig vast te leggen. De rapporten zijn zorgvuldig opgebouwd en laten duidelijk zien hoe de waarde tot stand is gekomen.
+              </p>
+              
+              <p>
+                Een verzekeringstaxatierapport is doorgaans drie tot vijf jaar geldig. De exacte geldigheid verschilt per verzekeraar en polis. Het is daarom altijd verstandig om hierover navraag te doen bij je verzekeraar.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding bg-background">
         <div className="container-wide">
           <TrustIndicators />
         </div>
