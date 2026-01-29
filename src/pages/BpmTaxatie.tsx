@@ -217,6 +217,7 @@ const BpmTaxatie = () => {
             formSubtext="Vul onderstaand formulier zo volledig mogelijk in. Op basis hiervan bepalen wij de juiste aanpak en voeren wij de BPM-aangifte voor je uit."
             toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig en de import."
             submitButtonText="Aanvraag indienen"
+            showVoertuigType={true}
           />
         </div>
       </section>
