@@ -205,13 +205,19 @@ const BpmTaxatie = () => {
         <div className="container-narrow">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-semibold mb-4">
-              BPM-taxatie nodig?
+              BPM-aangifte laten uitvoeren
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Neem gerust contact met ons op. We bespreken je situatie en geven aan wat je kunt verwachten.
+              Wil je dat de BPM netjes en onafhankelijk wordt geregeld, dan kun je hieronder een aanvraag indienen. Aan de hand van de gegevens bekijken wij wat in jouw situatie de juiste aanpak is.
             </p>
           </div>
-          <IntakeForm serviceType="BPM-taxatie" />
+          <IntakeForm 
+            serviceType="BPM-aangifte"
+            formTitle="Aanvraag BPM-aangifte"
+            formSubtext="Vul onderstaand formulier zo volledig mogelijk in. Op basis hiervan bepalen wij de juiste aanpak en voeren wij de BPM-aangifte voor je uit."
+            toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig en de import."
+            submitButtonText="Aanvraag indienen"
+          />
         </div>
       </section>
 

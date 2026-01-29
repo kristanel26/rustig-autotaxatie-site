@@ -7,10 +7,21 @@ import { CheckCircle } from "lucide-react";
 
 interface IntakeFormProps {
   serviceType: string;
+  formTitle?: string;
+  formSubtext?: string;
+  toelichtingPlaceholder?: string;
+  submitButtonText?: string;
   onSuccess?: () => void;
 }
 
-const IntakeForm = ({ serviceType, onSuccess }: IntakeFormProps) => {
+const IntakeForm = ({ 
+  serviceType, 
+  formTitle,
+  formSubtext,
+  toelichtingPlaceholder,
+  submitButtonText,
+  onSuccess 
+}: IntakeFormProps) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     naam: "",
@@ -54,9 +65,9 @@ const IntakeForm = ({ serviceType, onSuccess }: IntakeFormProps) => {
   return (
     <form onSubmit={handleSubmit} className="card-elevated p-8 md:p-12 animate-slide-up">
       <div className="mb-8">
-        <h3 className="text-2xl font-semibold mb-2">Vraag een {serviceType} aan</h3>
+        <h3 className="text-2xl font-semibold mb-2">{formTitle || `Vraag een ${serviceType} aan`}</h3>
         <p className="text-muted-foreground">
-          Vul onderstaand formulier in en we nemen binnen één werkdag contact met je op.
+          {formSubtext || "Vul onderstaand formulier in en we nemen binnen één werkdag contact met je op."}
         </p>
       </div>
 
@@ -121,7 +132,7 @@ const IntakeForm = ({ serviceType, onSuccess }: IntakeFormProps) => {
           <Textarea
             id="bericht"
             name="bericht"
-            placeholder="Vertel kort over je situatie en wat je nodig hebt..."
+            placeholder={toelichtingPlaceholder || "Vertel kort over je situatie en wat je nodig hebt..."}
             value={formData.bericht}
             onChange={handleChange}
             rows={4}
@@ -130,7 +141,7 @@ const IntakeForm = ({ serviceType, onSuccess }: IntakeFormProps) => {
         </div>
 
         <Button type="submit" variant="cta" size="xl" className="w-full">
-          Verstuur aanvraag
+          {submitButtonText || "Verstuur aanvraag"}
         </Button>
 
         <p className="text-sm text-muted-foreground text-center">
