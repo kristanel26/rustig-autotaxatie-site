@@ -71,13 +71,18 @@ const BpmTaxatie = () => {
           </div>
           <div className="prose prose-lg max-w-none text-muted-foreground">
             <p>
-              BPM is een belasting die je betaalt wanneer je een voertuig uit het buitenland 
-              in Nederland registreert. De Belastingdienst kent meerdere toegestane methodes 
-              om het BPM-bedrag vast te stellen.
+              BPM is een belasting die je betaalt wanneer je een voertuig uit het buitenland in Nederland op kenteken zet. De Belastingdienst staat meerdere methodes toe om het BPM-bedrag vast te stellen.
             </p>
             <p className="mt-4">
-              Een taxatie is één van die methodes. Voorwaarde is dat het rapport zorgvuldig 
-              is opgebouwd en controleerbaar is. Daar zorgen wij voor.
+              De meest gebruikte methodes zijn:
+            </p>
+            <ul className="mt-2 space-y-1 list-disc list-inside">
+              <li>een afschrijvingstabel</li>
+              <li>een koerslijst</li>
+              <li>een BPM-taxatierapport</li>
+            </ul>
+            <p className="mt-4">
+              Welke methode het meest geschikt is, hangt af van het voertuig en de staat waarin het verkeert.
             </p>
           </div>
         </div>
