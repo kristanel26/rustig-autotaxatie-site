@@ -47,6 +47,29 @@ const VerzekeringstaxatieInfo = () => {
                 Met een verzekeringstaxatie is die waarde vooraf helder. Zo weet je waar je aan toe bent en wordt bij schade of diefstal uitgekeerd op basis van de getaxeerde waarde.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding bg-secondary/30">
+        <div className="container-narrow">
+          <div className="prose prose-lg max-w-none">
+            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-8">
+              Wat kun je verwachten van een verzekeringstaxatie?
+            </h2>
+            <div className="space-y-6 text-foreground/90 leading-relaxed">
+              <p>
+                Een verzekeringstaxatie legt de waarde van het voertuig vast op basis van de werkelijke staat en uitvoering op het moment van taxeren. Die waarde wordt vastgelegd in een taxatierapport dat wordt gebruikt voor de verzekering.
+              </p>
+              
+              <p>
+                In het rapport wordt onder andere gekeken naar de staat van het voertuig, de uitvoering, eventuele bijzonderheden en de onderbouwing van de waarde. Alles wordt overzichtelijk vastgelegd, zodat duidelijk is hoe de waarde tot stand is gekomen.
+              </p>
+              
+              <p>
+                Het doel van een verzekeringstaxatie is niet alleen een bedrag op papier, maar vooral duidelijkheid vooraf. Zodat er bij schade of diefstal geen onduidelijkheid ontstaat over de verzekerde waarde.
+              </p>
+            </div>
 
             <div className="mt-12 flex flex-col sm:flex-row gap-4">
               <Button variant="cta" size="lg" onClick={scrollToForm}>
