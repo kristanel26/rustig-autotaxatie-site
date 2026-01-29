@@ -64,10 +64,10 @@ const Index = () => {
             </h2>
             <div className="text-lg md:text-xl text-primary-foreground/80 mb-10 animate-slide-up leading-relaxed max-w-2xl space-y-4" style={{ animationDelay: "100ms" }}>
               <p>
-                Automobiel Taxaties is een onafhankelijk taxatiebureau voor voertuigen. We helpen ondernemers en particulieren met zorgvuldig uitgevoerde taxaties voor verschillende situaties, zoals verzekering, BPM en fiscale doeleinden.
+                Automobiel Taxaties is een onafhankelijk taxatiebureau voor voertuigen.
               </p>
               <p>
-                We kijken rustig en zorgvuldig naar het voertuig en alles wat de waarde beïnvloedt. Zo ontvang je een helder taxatierapport waar je op kunt vertrouwen, passend bij het doel waarvoor je het nodig hebt.
+                We ondersteunen ondernemers en particulieren met zorgvuldig onderbouwde taxaties voor BPM, verzekering en fiscale waarderingen.
               </p>
             </div>
             <a href="#diensten" className="inline-block animate-slide-up" style={{ animationDelay: "200ms" }}>
