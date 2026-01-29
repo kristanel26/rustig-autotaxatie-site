@@ -26,6 +26,9 @@ const VerzekeringstaxatieInfo = () => {
       <section className="section-padding bg-background">
         <div className="container-narrow">
           <div className="prose prose-lg max-w-none">
+            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-8">
+              Zekerheid over de waarde van je voertuig
+            </h2>
             <div className="space-y-6 text-foreground/90 leading-relaxed">
               <p>
                 Een verzekeringstaxatie is er voor wie vooraf duidelijkheid wil over de waarde van zijn voertuig. Zodat bij schade of diefstal geen discussie ontstaat over wat het voertuig waard was.
