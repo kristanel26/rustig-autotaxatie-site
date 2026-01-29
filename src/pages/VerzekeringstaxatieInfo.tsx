@@ -19,7 +19,7 @@ const VerzekeringstaxatieInfo = () => {
         subtitle="Verzekeringstaxatie"
         title="Wanneer is een verzekeringstaxatie nodig?"
         description="Vooraf duidelijkheid over de waarde van je voertuig. Zodat bij schade of diefstal geen discussie ontstaat."
-        ctaText="Vraag een taxatie aan"
+        ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
       />
 
@@ -73,12 +73,12 @@ const VerzekeringstaxatieInfo = () => {
 
             <div className="mt-12 flex flex-col sm:flex-row gap-4">
               <Button variant="cta" size="lg" onClick={scrollToForm}>
-                Vraag een taxatie aan
+                Verzekeringstaxatie aanvragen
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
               <Button variant="outline" size="lg" asChild>
                 <Link to="/camper-taxatie">
-                  Bekijk campertaxaties
+                  Campertaxatie bekijken
                 </Link>
               </Button>
             </div>
@@ -213,7 +213,7 @@ const VerzekeringstaxatieInfo = () => {
             serviceType="verzekeringstaxatie"
             formTitle="Verzekeringstaxatie aanvragen"
             formSubtext="Vul onderstaand formulier in en we nemen binnen één werkdag contact met je op."
-            toelichtingPlaceholder="Vertel kort over je voertuig en waarom je een taxatie wilt..."
+            toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig."
           />
         </div>
       </section>
