@@ -47,14 +47,10 @@ const BpmTaxatie = () => {
           </div>
           <div className="prose prose-lg max-w-none text-muted-foreground">
             <p>
-              Onze BPM-taxaties zijn bedoeld voor ondernemers die voertuigen importeren 
-              en een gedegen rapport nodig hebben voor de BPM-aangifte. Denk aan autobedrijven, 
-              handelaren en importeurs.
+              Onze BPM-werkzaamheden zijn bedoeld voor ondernemers die voertuigen importeren, zoals autobedrijven, handelaren en importeurs. Zij willen het BPM-traject correct laten uitvoeren, met een onderbouwing die klopt.
             </p>
             <p className="mt-4">
-              Ook particulieren die een voertuig importeren kunnen bij ons terecht. 
-              Bijvoorbeeld wanneer het voertuig afwijkt van gangbare uitvoeringen 
-              of wanneer je een zorgvuldige onderbouwing wilt voor je aangifte.
+              Ook particulieren kunnen bij ons terecht wanneer zij een voertuig importeren en zekerheid willen over de gekozen methode en de onderbouwing daarvan.
             </p>
           </div>
         </div>
