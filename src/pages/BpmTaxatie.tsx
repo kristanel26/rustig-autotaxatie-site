@@ -18,14 +18,13 @@ const BpmTaxatie = () => {
         description={
           <>
             <p className="text-lg md:text-xl text-muted-foreground mb-4">
-              Een zorgvuldig onderbouwd BPM-rapport voor ondernemers en particulieren.
-              <br className="hidden md:block" />
-              Opgesteld om te gebruiken bij je BPM-aangifte.
+              Importeer je een auto of motor uit het buitenland en wil je deze in Nederland registreren, dan moet je BPM betalen. De manier waarop de BPM wordt vastgesteld, heeft direct invloed op het te betalen bedrag.
+            </p>
+            <p className="text-base md:text-lg text-muted-foreground mb-4">
+              Wij verzorgen de BPM-vaststelling voor ondernemers en particulieren. Dat doen wij door de juiste methode toe te passen én uit te voeren: via een afschrijvingstabel, een koerslijst of een BPM-taxatierapport. Per voertuig beoordelen wij welke methode het meest voordelig én verdedigbaar is en zorgen wij voor de volledige onderbouwing voor de BPM-aangifte.
             </p>
             <p className="text-base md:text-lg text-muted-foreground">
-              Wij maken onafhankelijke BPM-taxatierapporten die standhouden bij controle. 
-              Gebaseerd op de werkelijke staat en uitvoering van het voertuig, 
-              met een duidelijke onderbouwing.
+              Wanneer een BPM-taxatierapport nodig is, stellen wij dit op basis van de werkelijke staat van het voertuig op. Het rapport is zo opgebouwd dat het ook bij controle duidelijk en uitlegbaar is.
             </p>
           </>
         }
