@@ -195,11 +195,23 @@ const VerzekeringstaxatieInfo = () => {
         </div>
       </section>
 
+      <section className="section-padding bg-secondary/30">
+        <div className="container-narrow text-center">
+          <p className="text-lg text-foreground/90 mb-6">
+            Wil je een verzekeringstaxatie laten uitvoeren, dan kun je hieronder eenvoudig een aanvraag indienen.
+          </p>
+          <Button variant="cta" size="lg" onClick={scrollToForm}>
+            Verzekeringstaxatie aanvragen
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </Button>
+        </div>
+      </section>
+
       <section className="section-padding bg-background" ref={formRef}>
         <div className="container-narrow">
           <IntakeForm 
             serviceType="verzekeringstaxatie"
-            formTitle="Vraag een verzekeringstaxatie aan"
+            formTitle="Verzekeringstaxatie aanvragen"
             formSubtext="Vul onderstaand formulier in en we nemen binnen één werkdag contact met je op."
             toelichtingPlaceholder="Vertel kort over je voertuig en waarom je een taxatie wilt..."
           />
