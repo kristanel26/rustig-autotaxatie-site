@@ -8,6 +8,7 @@ import CamperTaxatie from "./pages/CamperTaxatie";
 import BpmVoorbereiding from "./pages/BpmVoorbereiding";
 import BpmTaxatie from "./pages/BpmTaxatie";
 import WevTaxatie from "./pages/WevTaxatie";
+import VerzekeringstaxatieInfo from "./pages/VerzekeringstaxatieInfo";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/bpm-voorbereiding" element={<BpmVoorbereiding />} />
           <Route path="/bpm-taxatie" element={<BpmTaxatie />} />
           <Route path="/wev-taxatie" element={<WevTaxatie />} />
+          <Route path="/verzekeringstaxatie-info" element={<VerzekeringstaxatieInfo />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
