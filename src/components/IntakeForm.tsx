@@ -11,6 +11,7 @@ interface IntakeFormProps {
   formSubtext?: string;
   toelichtingPlaceholder?: string;
   submitButtonText?: string;
+  showVoertuigType?: boolean;
   onSuccess?: () => void;
 }
 
@@ -20,6 +21,7 @@ const IntakeForm = ({
   formSubtext,
   toelichtingPlaceholder,
   submitButtonText,
+  showVoertuigType = false,
   onSuccess 
 }: IntakeFormProps) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -27,6 +29,7 @@ const IntakeForm = ({
     naam: "",
     email: "",
     telefoon: "",
+    voertuigType: "",
     kenteken: "",
     bericht: "",
   });
@@ -107,7 +110,7 @@ const IntakeForm = ({
               id="email"
               name="email"
               type="email"
-              placeholder="je@email.nl"
+              placeholder="je@emailadres.nl"
               value={formData.email}
               onChange={handleChange}
               required
@@ -119,13 +122,27 @@ const IntakeForm = ({
             <Input
               id="kenteken"
               name="kenteken"
-              placeholder="AB-123-CD"
+              placeholder="Indien bekend"
               value={formData.kenteken}
               onChange={handleChange}
               className="h-12"
             />
           </div>
         </div>
+
+        {showVoertuigType && (
+          <div className="space-y-2">
+            <Label htmlFor="voertuigType">Type voertuig</Label>
+            <Input
+              id="voertuigType"
+              name="voertuigType"
+              placeholder="Personenauto, bedrijfsauto, camper, motor"
+              value={formData.voertuigType}
+              onChange={handleChange}
+              className="h-12"
+            />
+          </div>
+        )}
 
         <div className="space-y-2">
           <Label htmlFor="bericht">Toelichting</Label>
