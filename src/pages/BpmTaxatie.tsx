@@ -191,9 +191,10 @@ const BpmTaxatie = () => {
           </div>
           <div className="prose prose-lg max-w-none text-muted-foreground">
             <p>
-              Automobiel Taxaties werkt onafhankelijk en met jarenlange ervaring. 
-              Elk rapport wordt met zorg opgesteld en is bedoeld voor gebruik 
-              bij de Belastingdienst.
+              Automobiel Taxaties werkt als onafhankelijk en geregistreerd taxateur. De vakkennis wordt actief onderhouden en toegepast in iedere BPM-aangifte en taxatie.
+            </p>
+            <p className="mt-4">
+              Zo weet je dat de onderbouwing niet alleen klopt op papier, maar ook inhoudelijk zorgvuldig is opgebouwd voor gebruik bij de Belastingdienst.
             </p>
           </div>
         </div>
