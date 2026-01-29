@@ -69,6 +69,9 @@ const Index = () => {
               <p>
                 We ondersteunen ondernemers en particulieren met zorgvuldig onderbouwde taxaties voor BPM, verzekering en fiscale waarderingen.
               </p>
+              <p>
+                We kijken rustig en zorgvuldig naar het voertuig en alles wat de waarde beïnvloedt. Dat resulteert in een helder taxatierapport dat past bij het doel waarvoor je het nodig hebt.
+              </p>
             </div>
             <a href="#diensten" className="inline-block animate-slide-up" style={{ animationDelay: "200ms" }}>
               <Button variant="hero" size="xl">
