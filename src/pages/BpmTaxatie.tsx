@@ -103,13 +103,10 @@ const BpmTaxatie = () => {
           </div>
           <div className="prose prose-lg max-w-none text-muted-foreground">
             <p>
-              Een onafhankelijke taxatie geeft je een rapport dat je kunt gebruiken 
-              bij je BPM-aangifte. Het voertuig wordt zorgvuldig beoordeeld op staat, 
-              uitvoering en marktpositie.
+              Een BPM-taxatie heeft alleen waarde wanneer deze onafhankelijk wordt uitgevoerd. Daarom werken wij niet met vooraf afgesproken uitkomsten, vaste afschrijvingen of belangen bij aankoop of verkoop.
             </p>
             <p className="mt-4">
-              Het rapport bevat een duidelijke onderbouwing, zodat het ook bij 
-              eventuele controle achteraf stand kan houden.
+              Die onafhankelijkheid zorgt ervoor dat de onderbouwing klopt en dat ook later nog duidelijk is hoe de BPM tot stand is gekomen.
             </p>
           </div>
         </div>
