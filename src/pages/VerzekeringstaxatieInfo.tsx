@@ -57,82 +57,70 @@ const VerzekeringstaxatieInfo = () => {
       <section className="section-padding bg-secondary/30">
         <div className="container-narrow">
           <div className="prose prose-lg max-w-none">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-8">
+            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
               Wat kun je verwachten van een verzekeringstaxatie?
             </h2>
             <div className="space-y-6 text-foreground/90 leading-relaxed">
               <p>
-                Een verzekeringstaxatie legt de waarde van het voertuig vast op basis van de werkelijke staat en uitvoering op het moment van taxeren. Die waarde wordt vastgelegd in een taxatierapport dat wordt gebruikt voor de verzekering.
+                Een verzekeringstaxatie legt de waarde van het voertuig vast op basis van de werkelijke staat en uitvoering op het moment van taxeren.
               </p>
-              
               <p>
-                In het rapport wordt onder andere gekeken naar de staat van het voertuig, de uitvoering, eventuele bijzonderheden en de onderbouwing van de waarde. Alles wordt overzichtelijk vastgelegd, zodat duidelijk is hoe de waarde tot stand is gekomen.
-              </p>
-              
-              <p>
-                Het doel van een verzekeringstaxatie is niet alleen een bedrag op papier, maar vooral duidelijkheid vooraf. Zodat er bij schade of diefstal geen onduidelijkheid ontstaat over de verzekerde waarde.
+                Die waarde wordt vastgelegd in een taxatierapport dat wordt gebruikt voor de verzekering. Het doel is duidelijkheid vooraf, zodat bij schade of diefstal geen discussie ontstaat over de verzekerde waarde.
               </p>
             </div>
 
-            <div className="mt-12 flex flex-col sm:flex-row gap-4">
-              <Button variant="cta" size="lg" onClick={scrollToForm}>
-                Verzekeringstaxatie aanvragen
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-              <Button variant="outline" size="lg" asChild>
-                <Link to="/camper-taxatie">
-                  Campertaxatie bekijken
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <div className="prose prose-lg max-w-none">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
-              Verzekeringstaxatie per voertuigtype
-            </h2>
-            <p className="text-foreground/90 leading-relaxed mb-8">
-              Een verzekeringstaxatie wordt uitgevoerd voor verschillende typen voertuigen. De werkwijze is in de basis gelijk, maar de aandachtspunten verschillen per voertuig.
-            </p>
-            <p className="text-foreground/90 leading-relaxed mb-8">
-              Lees meer over verzekeringstaxaties voor specifieke voertuigen:
-            </p>
-            <div className="space-y-6">
-              <div>
-                <Link to="/camper-taxatie" className="text-lg font-semibold text-primary hover:underline">
-                  Camper verzekeringstaxatie
-                </Link>
-                <p className="text-foreground/90 mt-1">
-                  Voor campers waarbij zekerheid gewenst is over de waarde, bijvoorbeeld bij aanpassingen of zelfbouw.
-                </p>
-              </div>
-              <div>
-                <Link to="/oldtimer-taxatie" className="text-lg font-semibold text-primary hover:underline">
-                  Oldtimer verzekeringstaxatie
-                </Link>
-                <p className="text-foreground/90 mt-1">
-                  Voor oldtimers waarbij originaliteit, staat en gebruik een belangrijke rol spelen.
-                </p>
-              </div>
-              <div>
-                <Link to="/youngtimer-taxatie" className="text-lg font-semibold text-primary hover:underline">
-                  Youngtimer verzekeringstaxatie
-                </Link>
-                <p className="text-foreground/90 mt-1">
-                  Voor youngtimers waarvan de waarde afwijkt van standaard verzekeringsbedragen.
-                </p>
-              </div>
-              <div>
-                <Link to="/motor-taxatie" className="text-lg font-semibold text-primary hover:underline">
-                  Motor verzekeringstaxatie
-                </Link>
-                <p className="text-foreground/90 mt-1">
-                  Voor motoren waarbij de verzekerde waarde vooraf duidelijk moet zijn vastgelegd.
-                </p>
+            <div className="mt-12">
+              <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
+                Verzekeringstaxatie per voertuigtype
+              </h2>
+              <p className="text-foreground/90 leading-relaxed mb-8">
+                Een verzekeringstaxatie wordt uitgevoerd voor verschillende typen voertuigen. De werkwijze is in de basis gelijk, maar de aandachtspunten verschillen per voertuig.
+              </p>
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground">Camper verzekeringstaxatie</h3>
+                  <p className="text-foreground/90 mt-1 mb-3">
+                    Voor campers waarbij zekerheid gewenst is over de waarde, bijvoorbeeld bij aanpassingen of zelfbouw.
+                  </p>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link to="/camper-taxatie">
+                      Camperverzekeringstaxatie bekijken
+                    </Link>
+                  </Button>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground">Oldtimer verzekeringstaxatie</h3>
+                  <p className="text-foreground/90 mt-1 mb-3">
+                    Voor oldtimers waarbij originaliteit, staat en gebruik een belangrijke rol spelen.
+                  </p>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link to="/oldtimer-taxatie">
+                      Oldtimerverzekeringstaxatie bekijken
+                    </Link>
+                  </Button>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground">Youngtimer verzekeringstaxatie</h3>
+                  <p className="text-foreground/90 mt-1 mb-3">
+                    Voor youngtimers waarvan de waarde afwijkt van standaard verzekeringsbedragen.
+                  </p>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link to="/youngtimer-taxatie">
+                      Youngtimerverzekeringstaxatie bekijken
+                    </Link>
+                  </Button>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground">Motor verzekeringstaxatie</h3>
+                  <p className="text-foreground/90 mt-1 mb-3">
+                    Voor motoren waarbij de verzekerde waarde vooraf duidelijk moet zijn vastgelegd.
+                  </p>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link to="/motor-taxatie">
+                      Motorverzekeringstaxatie bekijken
+                    </Link>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
