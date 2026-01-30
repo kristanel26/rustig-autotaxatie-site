@@ -19,8 +19,8 @@ const buttonVariants = cva(
         cta: "bg-[hsl(var(--cta))] text-[hsl(var(--cta-foreground))] hover:bg-[hsl(var(--cta))]/90 shadow-lg hover:shadow-xl hover:-translate-y-0.5",
         // Hero button - same as CTA for dark backgrounds
         hero: "bg-[hsl(var(--cta))] text-[hsl(var(--cta-foreground))] hover:bg-[hsl(var(--cta))]/90 shadow-lg hover:shadow-xl hover:-translate-y-0.5",
-        // Secondary outline button - dark blue border and text
-        "secondary-action": "border border-[hsl(var(--secondary-button))] bg-white text-[hsl(var(--secondary-button))] hover:bg-[hsl(var(--secondary-button-hover))] hover:text-white hover:border-[hsl(var(--secondary-button-hover))]",
+        // Secondary outline button - dark blue border and text, with arrow animation
+        "secondary-action": "border-2 border-[hsl(var(--secondary-button))] bg-white text-[hsl(var(--secondary-button))] font-semibold hover:bg-[hsl(var(--secondary-button-hover))] hover:text-white hover:border-[hsl(var(--secondary-button-hover))] group",
         // Subtle outline for secondary actions
         subtle: "border-2 border-primary/20 bg-transparent text-primary hover:border-primary/40 hover:bg-primary/5",
       },

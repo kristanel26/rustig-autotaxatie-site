@@ -83,8 +83,9 @@ const VerzekeringstaxatieInfo = () => {
                     Voor campers waarbij zekerheid gewenst is over de waarde, bijvoorbeeld bij aanpassingen of zelfbouw.
                   </p>
                   <Button variant="secondary-action" size="sm" asChild>
-                    <Link to="/camper-taxatie">
+                    <Link to="/camper-taxatie" className="inline-flex items-center gap-2">
                       Camperverzekeringstaxatie bekijken
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </Button>
                 </div>
@@ -94,8 +95,9 @@ const VerzekeringstaxatieInfo = () => {
                     Voor oldtimers waarbij originaliteit, staat en gebruik een belangrijke rol spelen.
                   </p>
                   <Button variant="secondary-action" size="sm" asChild>
-                    <Link to="/oldtimer-taxatie">
+                    <Link to="/oldtimer-taxatie" className="inline-flex items-center gap-2">
                       Oldtimerverzekeringstaxatie bekijken
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </Button>
                 </div>
@@ -105,8 +107,9 @@ const VerzekeringstaxatieInfo = () => {
                     Voor youngtimers waarvan de waarde afwijkt van standaard verzekeringsbedragen.
                   </p>
                   <Button variant="secondary-action" size="sm" asChild>
-                    <Link to="/youngtimer-taxatie">
+                    <Link to="/youngtimer-taxatie" className="inline-flex items-center gap-2">
                       Youngtimerverzekeringstaxatie bekijken
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </Button>
                 </div>
@@ -116,8 +119,9 @@ const VerzekeringstaxatieInfo = () => {
                     Voor motoren waarbij de verzekerde waarde vooraf duidelijk moet zijn vastgelegd.
                   </p>
                   <Button variant="secondary-action" size="sm" asChild>
-                    <Link to="/motor-taxatie">
+                    <Link to="/motor-taxatie" className="inline-flex items-center gap-2">
                       Motorverzekeringstaxatie bekijken
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </Button>
                 </div>
