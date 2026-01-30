@@ -33,6 +33,14 @@
     --accent: 175 45% 40%;
     --accent-foreground: 0 0% 100%;
 
+    /* CTA Orange - primary action color */
+    --cta: 21 100% 56%;
+    --cta-foreground: 0 0% 100%;
+
+    /* Secondary button colors - dark blue */
+    --secondary-button: 216 58% 28%;
+    --secondary-button-hover: 213 37% 55%;
+
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 

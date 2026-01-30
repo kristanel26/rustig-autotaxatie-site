@@ -15,10 +15,12 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        // CTA button with accent color and shadow
-        cta: "bg-accent text-accent-foreground hover:bg-accent/90 shadow-button hover:shadow-lg hover:-translate-y-0.5",
-        // Hero button for dark backgrounds
-        hero: "bg-accent text-accent-foreground hover:bg-accent/90 shadow-button hover:shadow-lg hover:-translate-y-0.5",
+        // CTA button with orange background - only for primary actions
+        cta: "bg-[hsl(var(--cta))] text-[hsl(var(--cta-foreground))] hover:bg-[hsl(var(--cta))]/90 shadow-lg hover:shadow-xl hover:-translate-y-0.5",
+        // Hero button - same as CTA for dark backgrounds
+        hero: "bg-[hsl(var(--cta))] text-[hsl(var(--cta-foreground))] hover:bg-[hsl(var(--cta))]/90 shadow-lg hover:shadow-xl hover:-translate-y-0.5",
+        // Secondary outline button - dark blue border and text
+        "secondary-action": "border border-[hsl(var(--secondary-button))] bg-white text-[hsl(var(--secondary-button))] hover:bg-[hsl(var(--secondary-button-hover))] hover:text-white hover:border-[hsl(var(--secondary-button-hover))]",
         // Subtle outline for secondary actions
         subtle: "border-2 border-primary/20 bg-transparent text-primary hover:border-primary/40 hover:bg-primary/5",
       },
