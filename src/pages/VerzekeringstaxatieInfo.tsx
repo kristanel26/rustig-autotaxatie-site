@@ -82,48 +82,56 @@ const VerzekeringstaxatieInfo = () => {
                   <p className="text-foreground/90 mt-1 mb-3">
                     Voor campers waarbij zekerheid gewenst is over de waarde, bijvoorbeeld bij aanpassingen of zelfbouw.
                   </p>
-                  <Button variant="secondary-action" size="sm" asChild>
-                    <Link to="/camper-taxatie" className="inline-flex items-center gap-2">
-                      Camperverzekeringstaxatie bekijken
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
+                  <div className="inline-block bg-[#ADAFC7]/15 p-2 rounded-lg">
+                    <Button variant="secondary-action" size="sm" asChild>
+                      <Link to="/camper-taxatie" className="inline-flex items-center gap-2">
+                        Camperverzekeringstaxatie bekijken
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-foreground">Oldtimer verzekeringstaxatie</h3>
                   <p className="text-foreground/90 mt-1 mb-3">
                     Voor oldtimers waarbij originaliteit, staat en gebruik een belangrijke rol spelen.
                   </p>
-                  <Button variant="secondary-action" size="sm" asChild>
-                    <Link to="/oldtimer-taxatie" className="inline-flex items-center gap-2">
-                      Oldtimerverzekeringstaxatie bekijken
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
+                  <div className="inline-block bg-[#ADAFC7]/15 p-2 rounded-lg">
+                    <Button variant="secondary-action" size="sm" asChild>
+                      <Link to="/oldtimer-taxatie" className="inline-flex items-center gap-2">
+                        Oldtimerverzekeringstaxatie bekijken
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-foreground">Youngtimer verzekeringstaxatie</h3>
                   <p className="text-foreground/90 mt-1 mb-3">
                     Voor youngtimers waarvan de waarde afwijkt van standaard verzekeringsbedragen.
                   </p>
-                  <Button variant="secondary-action" size="sm" asChild>
-                    <Link to="/youngtimer-taxatie" className="inline-flex items-center gap-2">
-                      Youngtimerverzekeringstaxatie bekijken
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
+                  <div className="inline-block bg-[#ADAFC7]/15 p-2 rounded-lg">
+                    <Button variant="secondary-action" size="sm" asChild>
+                      <Link to="/youngtimer-taxatie" className="inline-flex items-center gap-2">
+                        Youngtimerverzekeringstaxatie bekijken
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-foreground">Motor verzekeringstaxatie</h3>
                   <p className="text-foreground/90 mt-1 mb-3">
                     Voor motoren waarbij de verzekerde waarde vooraf duidelijk moet zijn vastgelegd.
                   </p>
-                  <Button variant="secondary-action" size="sm" asChild>
-                    <Link to="/motor-taxatie" className="inline-flex items-center gap-2">
-                      Motorverzekeringstaxatie bekijken
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </Button>
+                  <div className="inline-block bg-[#ADAFC7]/15 p-2 rounded-lg">
+                    <Button variant="secondary-action" size="sm" asChild>
+                      <Link to="/motor-taxatie" className="inline-flex items-center gap-2">
+                        Motorverzekeringstaxatie bekijken
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
