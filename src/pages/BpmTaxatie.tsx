@@ -28,7 +28,7 @@ const BpmTaxatie = () => {
             </p>
           </>
         }
-        ctaText="Neem contact op"
+        ctaText="BPM-aangifte aanvragen"
         onCtaClick={scrollToForm}
       />
 
