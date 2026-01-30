@@ -65,7 +65,7 @@ const VerzekeringstaxatieInfo = () => {
                 Een verzekeringstaxatie legt de waarde van het voertuig vast op basis van de werkelijke staat en uitvoering op het moment van taxeren.
               </p>
               <p>
-                Die waarde wordt vastgelegd in een taxatierapport dat wordt gebruikt voor de verzekering. Het doel is duidelijkheid vooraf, zodat bij schade of diefstal geen discussie ontstaat over de verzekerde waarde.
+                Die waarde wordt vastgelegd in een taxatierapport dat wordt gebruikt voor de verzekering, zodat bij schade of diefstal geen discussie ontstaat over de verzekerde waarde.
               </p>
             </div>
 
