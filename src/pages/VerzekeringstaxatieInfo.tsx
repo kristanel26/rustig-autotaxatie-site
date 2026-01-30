@@ -93,6 +93,56 @@ const VerzekeringstaxatieInfo = () => {
         <div className="container-narrow">
           <div className="prose prose-lg max-w-none">
             <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
+              Verzekeringstaxatie per voertuigtype
+            </h2>
+            <p className="text-foreground/90 leading-relaxed mb-8">
+              Een verzekeringstaxatie wordt uitgevoerd voor verschillende typen voertuigen. De werkwijze is in de basis gelijk, maar de aandachtspunten verschillen per voertuig.
+            </p>
+            <p className="text-foreground/90 leading-relaxed mb-8">
+              Lees meer over verzekeringstaxaties voor specifieke voertuigen:
+            </p>
+            <div className="space-y-6">
+              <div>
+                <Link to="/camper-taxatie" className="text-lg font-semibold text-primary hover:underline">
+                  Camper verzekeringstaxatie
+                </Link>
+                <p className="text-foreground/90 mt-1">
+                  Voor campers waarbij zekerheid gewenst is over de waarde, bijvoorbeeld bij aanpassingen of zelfbouw.
+                </p>
+              </div>
+              <div>
+                <Link to="/oldtimer-taxatie" className="text-lg font-semibold text-primary hover:underline">
+                  Oldtimer verzekeringstaxatie
+                </Link>
+                <p className="text-foreground/90 mt-1">
+                  Voor oldtimers waarbij originaliteit, staat en gebruik een belangrijke rol spelen.
+                </p>
+              </div>
+              <div>
+                <Link to="/youngtimer-taxatie" className="text-lg font-semibold text-primary hover:underline">
+                  Youngtimer verzekeringstaxatie
+                </Link>
+                <p className="text-foreground/90 mt-1">
+                  Voor youngtimers waarvan de waarde afwijkt van standaard verzekeringsbedragen.
+                </p>
+              </div>
+              <div>
+                <Link to="/motor-taxatie" className="text-lg font-semibold text-primary hover:underline">
+                  Motor verzekeringstaxatie
+                </Link>
+                <p className="text-foreground/90 mt-1">
+                  Voor motoren waarbij de verzekerde waarde vooraf duidelijk moet zijn vastgelegd.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding bg-background">
+        <div className="container-narrow">
+          <div className="prose prose-lg max-w-none">
+            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
               Onze werkwijze bij een verzekeringstaxatie
             </h2>
             <div className="space-y-6 text-foreground/90 leading-relaxed mb-10">
