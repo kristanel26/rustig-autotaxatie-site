@@ -200,13 +200,13 @@ const BpmMotorTaxatie = () => {
             Onafhankelijk en verdedigbaar
           </h2>
           <p className="text-foreground/90 leading-relaxed mb-4">
-            Het BPM-taxatierapport wordt gebruikt als onderbouwing bij de BPM-aangifte. Het rapport maakt inzichtelijk hoe de afschrijving tot stand is gekomen, zodat de aangifte inhoudelijk verdedigbaar is bij controle door de Belastingdienst.
+            Automobiel Taxaties werkt als onafhankelijk taxateur. De taxaties worden uitgevoerd door een taxateur die is geregistreerd bij de Vereniging van Register-Taxateurs (VRT) en is aangesloten bij de Taxateursvereniging voor Motorvoertuigen (TMV).
           </p>
           <p className="text-foreground/90 leading-relaxed mb-4">
-            BPM-taxaties worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt. Wij werken onafhankelijk en zonder vooraf afgesproken uitkomsten of wensbedragen.
+            De vakkennis wordt actief onderhouden en toegepast bij iedere taxatie. Rapportages zijn zorgvuldig opgebouwd, controleerbaar en bedoeld voor gebruik in fiscale context. Er worden geen vooraf afgesproken uitkomsten of wensbedragen gehanteerd.
           </p>
           <p className="text-foreground/90 leading-relaxed">
-            Die onafhankelijkheid is essentieel om de BPM-aangifte inhoudelijk te kunnen onderbouwen en discussie achteraf te voorkomen.
+            Het BPM-taxatierapport maakt inzichtelijk hoe de afschrijving tot stand is gekomen, zodat de aangifte inhoudelijk verdedigbaar is bij controle door de Belastingdienst.
           </p>
         </div>
       </section>
