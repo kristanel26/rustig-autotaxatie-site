@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import CamperTaxatie from "./pages/CamperTaxatie";
 import MotorTaxatie from "./pages/MotorTaxatie";
 import OldtimerTaxatie from "./pages/OldtimerTaxatie";
+import YoungtimerTaxatie from "./pages/YoungtimerTaxatie";
 import BpmVoorbereiding from "./pages/BpmVoorbereiding";
 import BpmTaxatie from "./pages/BpmTaxatie";
 import WevTaxatie from "./pages/WevTaxatie";
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/camper-taxatie" element={<CamperTaxatie />} />
           <Route path="/motor-taxatie" element={<MotorTaxatie />} />
           <Route path="/oldtimer-taxatie" element={<OldtimerTaxatie />} />
+          <Route path="/youngtimer-taxatie" element={<YoungtimerTaxatie />} />
           <Route path="/bpm-voorbereiding" element={<BpmVoorbereiding />} />
           <Route path="/bpm-taxatie" element={<BpmTaxatie />} />
           <Route path="/wev-taxatie" element={<WevTaxatie />} />
