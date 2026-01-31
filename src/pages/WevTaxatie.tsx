@@ -22,14 +22,6 @@ const WevTaxatie = () => {
         onCtaClick={scrollToForm}
       />
 
-      {/* Intro */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-narrow">
-          <p className="text-foreground/90 leading-relaxed">
-            Automobiel Taxaties stelt onafhankelijke WEV-taxaties op die inhoudelijk verdedigbaar zijn en aansluiten bij de fiscale context waarin ze worden gebruikt.
-          </p>
-        </div>
-      </section>
 
       {/* Wanneer is een WEV-taxatie nodig */}
       <section className="section-padding bg-background">
@@ -241,7 +233,10 @@ const WevTaxatie = () => {
             Onafhankelijk en fiscaal verdedigbaar
           </h2>
           <p className="text-foreground/90 leading-relaxed mb-4">
-            WEV-taxaties worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt. Wij werken onafhankelijk en zonder vooraf afgesproken uitkomsten of wensbedragen.
+            Automobiel Taxaties stelt onafhankelijke WEV-taxaties op die inhoudelijk verdedigbaar zijn en aansluiten bij de fiscale context waarin ze worden gebruikt.
+          </p>
+          <p className="text-foreground/90 leading-relaxed mb-4">
+            De taxaties worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt. Wij werken onafhankelijk en zonder vooraf afgesproken uitkomsten of wensbedragen.
           </p>
           <p className="text-foreground/90 leading-relaxed">
             Die onafhankelijkheid is essentieel bij fiscale waarderingen en voorkomt discussie bij controle achteraf.
