@@ -236,10 +236,10 @@ const WevTaxatie = () => {
             Onafhankelijk en fiscaal verdedigbaar
           </h2>
           <p className="text-foreground/90 leading-relaxed mb-4">
-            Automobiel Taxaties stelt onafhankelijke WEV-taxaties op die inhoudelijk verdedigbaar zijn en aansluiten bij de fiscale context waarin ze worden gebruikt.
+            Automobiel Taxaties werkt als onafhankelijk taxateur. De taxaties worden uitgevoerd door een taxateur die is geregistreerd bij de Vereniging van Register-Taxateurs (VRT) en is aangesloten bij de Taxateursvereniging voor Motorvoertuigen (TMV).
           </p>
           <p className="text-foreground/90 leading-relaxed mb-4">
-            De taxaties worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt. Wij werken onafhankelijk en zonder vooraf afgesproken uitkomsten of wensbedragen.
+            De vakkennis wordt actief onderhouden en toegepast bij iedere taxatie. Rapportages zijn zorgvuldig opgebouwd, controleerbaar en bedoeld voor gebruik in fiscale, administratieve en verzekeringscontext. Er worden geen vooraf afgesproken uitkomsten of wensbedragen gehanteerd.
           </p>
           <p className="text-foreground/90 leading-relaxed">
             Die onafhankelijkheid is essentieel bij fiscale waarderingen en voorkomt discussie bij controle achteraf.

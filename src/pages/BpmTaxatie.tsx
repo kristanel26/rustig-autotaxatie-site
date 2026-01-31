@@ -222,7 +222,10 @@ const BpmTaxatie = () => {
           </div>
           <div className="prose prose-lg max-w-none text-muted-foreground">
             <p>
-              Automobiel Taxaties werkt als onafhankelijk en geregistreerd taxateur. Er worden geen vooraf afgesproken uitkomsten of wensbedragen gehanteerd. Iedere BPM-taxatie en onderbouwing wordt opgesteld op basis van de werkelijke staat van het voertuig en vastgelegd in een controleerbaar rapport.
+              Automobiel Taxaties werkt als onafhankelijk taxateur. De taxaties worden uitgevoerd door een taxateur die is geregistreerd bij de Vereniging van Register-Taxateurs (VRT) en is aangesloten bij de Taxateursvereniging voor Motorvoertuigen (TMV).
+            </p>
+            <p className="mt-4">
+              De vakkennis wordt actief onderhouden en toegepast bij iedere taxatie. Rapportages zijn zorgvuldig opgebouwd, controleerbaar en bedoeld voor gebruik in fiscale context. Er worden geen vooraf afgesproken uitkomsten of wensbedragen gehanteerd.
             </p>
             <p className="mt-4">
               Afhankelijk van de situatie wordt een BPM-taxatierapport opgesteld of wordt de onderbouwing verwerkt in de BPM-aangifte, zodat het dossier ook bij controle door de Belastingdienst inhoudelijk verdedigbaar is.

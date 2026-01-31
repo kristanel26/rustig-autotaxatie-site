@@ -207,10 +207,13 @@ const YoungtimerTaxatie = () => {
             Acceptatie door verzekeraars en geldigheid van het rapport
           </h2>
           <p className="text-foreground/90 leading-relaxed mb-6">
-            De taxaties worden uitgevoerd door een geregistreerd taxateur, aangesloten bij VRT, TMV en (waar van toepassing) FEHAC. Deze registraties zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten.
+            Automobiel Taxaties werkt als onafhankelijk taxateur. De taxaties worden uitgevoerd door een taxateur die is geregistreerd bij de Vereniging van Register-Taxateurs (VRT) en is aangesloten bij de Taxateursvereniging voor Motorvoertuigen (TMV).
           </p>
           <p className="text-foreground/90 leading-relaxed mb-6">
-            Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van het voertuig vast te leggen. Het rapport laat helder zien hoe de waarde is onderbouwd.
+            Voor specialistische voertuigwaarderingen, zoals youngtimers, wordt gewerkt binnen de richtlijnen van de FEHAC. De vakkennis wordt actief onderhouden en toegepast bij iedere taxatie. Rapportages zijn zorgvuldig opgebouwd, controleerbaar en bedoeld voor gebruik in fiscale, administratieve en verzekeringscontext.
+          </p>
+          <p className="text-foreground/90 leading-relaxed mb-6">
+            Deze registraties zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten. Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van youngtimers vast te leggen.
           </p>
           <p className="text-foreground/90 leading-relaxed">
             Een verzekeringstaxatierapport is doorgaans 2 tot 3 jaar geldig. De exacte geldigheid verschilt per verzekeraar en polis. Informeer hier altijd naar bij je verzekeraar.
