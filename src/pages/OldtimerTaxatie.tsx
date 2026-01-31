@@ -169,6 +169,9 @@ const OldtimerTaxatie = () => {
           <p className="text-foreground/90 leading-relaxed mb-6">
             Deze registraties en richtlijnen zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten.
           </p>
+          <p className="text-foreground/90 leading-relaxed mb-6">
+            Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van oldtimers vast te leggen. Het rapport laat helder zien hoe de waarde is onderbouwd.
+          </p>
           <p className="text-foreground/90 leading-relaxed">
             Een oldtimerverzekeringstaxatierapport is doorgaans twee tot drie jaar geldig. De exacte geldigheid verschilt per verzekeraar en polis. Het is verstandig om dit vooraf te controleren bij je verzekeraar en tijdig te beoordelen of een hertaxatie nodig is.
           </p>
