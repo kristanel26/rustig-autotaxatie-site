@@ -1,94 +1,89 @@
-import { ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 const FoodtruckTaxatie = () => {
+  const formRef = useRef<HTMLDivElement>(null);
+
   const scrollToForm = () => {
-    document.getElementById("aanvragen")?.scrollIntoView({ behavior: "smooth" });
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <div className="min-h-screen bg-background">
       <LandingHero
+        subtitle="VERZEKERINGSTAXATIE FOODTRUCK"
         title="Zekerheid over de waarde van je foodtruck"
-        subtitle="Foodtruckverzekeringstaxatie"
-        description="Een foodtruck is vaak meer dan alleen een voertuig. De inrichting, apparatuur en staat bepalen in grote mate de waarde. Die waarde sluit lang niet altijd aan bij standaard verzekeringsbedragen. Met een verzekeringstaxatie leg je de waarde van je foodtruck vooraf vast. Zo weet je waar je aan toe bent en voorkom je discussie met de verzekeraar bij schade of diefstal."
-        ctaText="Foodtruckverzekeringstaxatie aanvragen"
+        description="Je foodtruck is meer dan alleen een voertuig. Met een verzekeringstaxatie leg je vast wat het op dit moment werkelijk waard is. Die waarde vormt de basis voor de verzekering, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde."
+        ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
       />
 
-      {/* Waarom sectie */}
+      {/* Waarom een verzekeringstaxatie */}
       <section className="section-padding bg-muted/30">
         <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-6">
+          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
             Waarom een verzekeringstaxatie voor je foodtruck?
           </h2>
-          <p className="text-muted-foreground mb-6">
-            Bij foodtrucks wijkt de werkelijke waarde vaak af van wat een verzekeraar standaard hanteert. Denk aan professionele keukenapparatuur, vaste inbouw, aanpassingen of een specifieke staat van onderhoud.
+          <p className="text-foreground/90 leading-relaxed mb-6">
+            Bij veel verzekeraars is een taxatierapport vereist wanneer de waarde van een foodtruck afwijkt van standaard verzekeringsbedragen. Dat is vaak het geval wanneer de waarde niet vanzelfsprekend is.
           </p>
-          <p className="text-muted-foreground mb-6">
-            Een verzekeringstaxatie is daarom in veel gevallen noodzakelijk, en vaak ook een vereiste van de verzekeraar, bijvoorbeeld:
-          </p>
-          <ul className="space-y-3 text-muted-foreground mb-6">
-            <li className="flex items-start gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-              <span>wanneer de foodtruck is opgebouwd of aangepast</span>
+          <ul className="space-y-2 text-foreground/90 mb-6">
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>bij foodtrucks met aanpassingen of extra apparatuur</span>
             </li>
-            <li className="flex items-start gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-              <span>bij vaste keukeninrichting en apparatuur</span>
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>bij zelfbouw of bijzondere uitvoeringen</span>
             </li>
-            <li className="flex items-start gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-              <span>wanneer de waarde niet past binnen standaard verzekeringsbedragen</span>
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>wanneer de waarde afwijkt van gebruikelijke verzekeringsbedragen</span>
             </li>
-            <li className="flex items-start gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-              <span>wanneer je zekerheid wilt over de uitkering bij schade of diefstal</span>
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>wanneer de verzekeraar vooraf zekerheid wil over de waarde</span>
             </li>
           </ul>
-          <p className="text-muted-foreground">
-            Met een taxatierapport wordt de waarde vooraf vastgelegd. Dat geeft rust en duidelijkheid, ook als het er echt toe doet.
+          <p className="text-foreground/90 leading-relaxed">
+            Met een taxatierapport wordt de waarde vooraf vastgelegd. Zo is duidelijk welke waarde wordt verzekerd en ontstaat er bij schade of diefstal geen discussie achteraf.
           </p>
         </div>
       </section>
 
       {/* Wat kun je verwachten */}
-      <section className="section-padding">
+      <section className="section-padding bg-background">
         <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-6">
-            Wat kun je verwachten van een foodtruckverzekeringstaxatie?
+          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
+            Wat kun je verwachten van een verzekeringstaxatie?
           </h2>
-          <p className="text-muted-foreground mb-6">
-            Tijdens de taxatie wordt gekeken naar de foodtruck zoals deze op dat moment wordt gebruikt. De waardebepaling is gebaseerd op de werkelijke staat en uitvoering.
+          <p className="text-foreground/90 leading-relaxed mb-6">
+            Een verzekeringstaxatie legt de waarde van het voertuig vast op basis van de werkelijke staat en uitvoering op het moment van taxeren.
           </p>
-          <p className="text-muted-foreground mb-4">Daarbij wordt onder andere gekeken naar:</p>
-          <ul className="space-y-3 text-muted-foreground">
-            <li className="flex items-start gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-              <span>de staat van het voertuig</span>
+          <ul className="space-y-2 text-foreground/90 mb-6">
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>de technische en cosmetische staat van het voertuig</span>
             </li>
-            <li className="flex items-start gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-              <span>de opbouw en vaste inrichting</span>
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>de uitvoering en aanwezige opties</span>
             </li>
-            <li className="flex items-start gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-              <span>aanwezige keukenapparatuur en installaties</span>
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>aanpassingen, accessoires of zelfbouw</span>
             </li>
-            <li className="flex items-start gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-              <span>onderhoud en algemene conditie</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-              <span>de marktpositie van vergelijkbare foodtrucks</span>
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>de marktpositie van vergelijkbare voertuigen</span>
             </li>
           </ul>
-          <p className="text-muted-foreground mt-6">
-            De vastgestelde waarde wordt zorgvuldig vastgelegd in een taxatierapport dat wordt gebruikt voor de verzekering.
+          <p className="text-foreground/90 leading-relaxed">
+            De vastgestelde waarde wordt opgenomen in een taxatierapport dat wordt gebruikt voor de verzekering. Het doel is duidelijkheid vooraf, zodat later geen onduidelijkheid ontstaat over de verzekerde waarde.
           </p>
         </div>
       </section>
@@ -96,153 +91,158 @@ const FoodtruckTaxatie = () => {
       {/* Werkwijze */}
       <section className="section-padding bg-muted/30">
         <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-8">
-            Onze werkwijze bij een foodtruckverzekeringstaxatie
+          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
+            Onze werkwijze bij een verzekeringstaxatie
           </h2>
-          <p className="text-muted-foreground mb-8">
-            Een verzekeringstaxatie verloopt bij ons volgens een vaste en overzichtelijke werkwijze.
+          <p className="text-foreground/90 leading-relaxed mb-10">
+            Een verzekeringstaxatie verloopt bij ons volgens een vaste en overzichtelijke werkwijze. Zo weet je vooraf waar je aan toe bent.
           </p>
-          <div className="space-y-6">
+
+          <div className="space-y-8">
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-sm">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
                 1
               </div>
               <div>
-                <h3 className="font-semibold mb-1">Aanvraag indienen</h3>
-                <p className="text-muted-foreground">
-                  Je dient een aanvraag in voor een foodtruckverzekeringstaxatie.
+                <h3 className="text-lg font-semibold text-foreground mb-2">Aanleveren van basisgegevens</h3>
+                <p className="text-foreground/90">
+                  Je dient een aanvraag in en levert de beschikbare gegevens over het voertuig aan.
                 </p>
               </div>
             </div>
+
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-sm">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
                 2
               </div>
               <div>
-                <h3 className="font-semibold mb-1">Fysieke inspectie van de foodtruck</h3>
-                <p className="text-muted-foreground">
-                  De foodtruck wordt fysiek geïnspecteerd, op locatie of bij ons op kantoor. Daarbij bekijken wij zowel het voertuig als de vaste inrichting.
+                <h3 className="text-lg font-semibold text-foreground mb-2">Fysieke inspectie van het voertuig</h3>
+                <p className="text-foreground/90">
+                  Het voertuig wordt op locatie of bij ons geïnspecteerd. Daarbij kijken we naar staat, uitvoering en bijzonderheden.
                 </p>
               </div>
             </div>
+
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-sm">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
                 3
               </div>
               <div>
-                <h3 className="font-semibold mb-1">Vaststellen van de waarde</h3>
-                <p className="text-muted-foreground">
-                  Op basis van de inspectie en relevante marktinformatie wordt een realistische en verdedigbare waarde vastgesteld.
+                <h3 className="text-lg font-semibold text-foreground mb-2">Vaststellen van de waarde</h3>
+                <p className="text-foreground/90">
+                  Op basis van inspectie en marktgegevens wordt een realistische en verdedigbare waarde vastgesteld.
                 </p>
               </div>
             </div>
+
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-sm">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
                 4
               </div>
               <div>
-                <h3 className="font-semibold mb-1">Opstellen van het taxatierapport</h3>
-                <p className="text-muted-foreground">
-                  Alle bevindingen en de vastgestelde waarde worden overzichtelijk vastgelegd in een taxatierapport.
+                <h3 className="text-lg font-semibold text-foreground mb-2">Opstellen van het taxatierapport</h3>
+                <p className="text-foreground/90">
+                  De bevindingen en waarde worden overzichtelijk vastgelegd in een taxatierapport.
                 </p>
               </div>
             </div>
+
             <div className="flex gap-4">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-sm">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
                 5
               </div>
               <div>
-                <h3 className="font-semibold mb-1">Oplevering van het rapport</h3>
-                <p className="text-muted-foreground">
-                  Je ontvangt het taxatierapport digitaal en kunt dit gebruiken voor de verzekering.
+                <h3 className="text-lg font-semibold text-foreground mb-2">Oplevering van het rapport</h3>
+                <p className="text-foreground/90">
+                  Je ontvangt het rapport digitaal en kunt dit gebruiken voor de verzekering.
                 </p>
               </div>
             </div>
           </div>
+
+          <p className="text-foreground/90 leading-relaxed mt-10">
+            De taxaties worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt.
+          </p>
         </div>
       </section>
 
       {/* Belangrijk om te weten */}
-      <section className="section-padding">
+      <section className="section-padding bg-background">
         <div className="container-narrow">
-          <div className="border-l-4 border-primary/20 pl-6 py-2">
-            <h2 className="text-xl font-semibold mb-3">Belangrijk om te weten vóór de taxatie</h2>
-            <p className="text-muted-foreground">
-              De staat van de foodtruck op de dag van taxatie is bepalend voor de vastgestelde waarde. Werkzaamheden zoals afbouw, aanpassingen of vervanging van apparatuur moeten daarom vóór de taxatiedatum zijn afgerond.
-            </p>
-            <p className="text-muted-foreground mt-3">
-              Alleen wat op dat moment aanwezig en in gebruik is, kan worden meegenomen in de waardebepaling. Dit voorkomt onduidelijkheid achteraf.
-            </p>
-          </div>
+          <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-4">
+            Belangrijk om te weten vóór de taxatie
+          </h3>
+          <p className="text-foreground/90 leading-relaxed mb-4">
+            De waarde van het voertuig wordt vastgesteld op basis van de staat op de dag van taxatie. Werkzaamheden zoals herstel, afbouw of aanpassingen moeten daarom vóór de taxatiedatum zijn afgerond.
+          </p>
+          <p className="text-foreground/90 leading-relaxed">
+            Alleen wat op dat moment aanwezig en zichtbaar is, wordt meegenomen in de waardebepaling. Dit voorkomt discussie of teleurstelling achteraf, voor jou én voor de verzekeraar.
+          </p>
         </div>
       </section>
 
-      {/* Wat hebben wij nodig */}
+      {/* Wat hebben wij van je nodig */}
       <section className="section-padding bg-muted/30">
         <div className="container-narrow">
-          <div className="border-l-4 border-primary/20 pl-6 py-2">
-            <h2 className="text-xl font-semibold mb-3">Wat hebben wij van je nodig?</h2>
-            <p className="text-muted-foreground mb-4">
-              Om de taxatie goed te kunnen voorbereiden, vragen wij je het volgende aan te leveren:
-            </p>
-            <ol className="space-y-2 text-muted-foreground list-decimal list-inside">
-              <li>je naam en contactgegevens</li>
-              <li>kenteken- en voertuiggegevens</li>
-              <li>indien beschikbaar: documentatie van opbouw of inrichting</li>
-              <li>facturen van vaste apparatuur of aanpassingen</li>
-            </ol>
-          </div>
+          <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-4">
+            Wat hebben wij van je nodig?
+          </h3>
+          <p className="text-foreground/90 leading-relaxed mb-4">
+            Om de taxatie goed te kunnen uitvoeren, vragen wij je het volgende aan te leveren:
+          </p>
+          <ul className="list-disc list-inside space-y-2 text-foreground/90">
+            <li>je naam en contactgegevens</li>
+            <li>de kentekencard van het voertuig</li>
+            <li>onderhoudsboekje of servicehistorie (indien aanwezig)</li>
+            <li>facturen van aanpassingen, accessoires of zelfbouw</li>
+            <li>eventuele bijzonderheden in de historie (revisie, restauratie)</li>
+          </ul>
         </div>
       </section>
 
-      {/* Acceptatie */}
-      <section className="section-padding">
+      {/* Acceptatie en geldigheid */}
+      <section className="section-padding bg-background">
         <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-6">
-            Acceptatie van het taxatierapport
+          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
+            Acceptatie door verzekeraars en geldigheid van het rapport
           </h2>
-          <p className="text-muted-foreground mb-4">
-            De taxaties worden uitgevoerd door een geregistreerd taxateur die is aangesloten bij erkende registers, waaronder VRT en TMV. Daarnaast wordt gewerkt volgens de richtlijnen die binnen de branche worden gehanteerd, zoals die van FEHAC. Deze registraties en richtlijnen zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten.
+          <p className="text-foreground/90 leading-relaxed mb-6">
+            De taxaties worden uitgevoerd door een geregistreerd taxateur, aangesloten bij VRT, TMV en (waar van toepassing) FEHAC. Deze registraties zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten.
           </p>
-          <p className="text-muted-foreground mb-4">
-            Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van foodtrucks vast te leggen. Het rapport laat helder zien hoe de waarde is onderbouwd.
+          <p className="text-foreground/90 leading-relaxed mb-6">
+            Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van het voertuig vast te leggen. Het rapport laat helder zien hoe de waarde is onderbouwd.
           </p>
-          <p className="text-muted-foreground">
-            De geldigheid van een verzekeringstaxatie is doorgaans 2 tot 3 jaar. Informeer hierover altijd bij je eigen verzekeraar, aangezien voorwaarden kunnen verschillen.
+          <p className="text-foreground/90 leading-relaxed">
+            Een verzekeringstaxatierapport is doorgaans 2 tot 3 jaar geldig. De exacte geldigheid verschilt per verzekeraar en polis. Informeer hier altijd naar bij je verzekeraar.
           </p>
         </div>
       </section>
 
-      {/* Aanvraagformulier */}
-      <section id="aanvragen" className="section-padding bg-muted/30">
+      {/* Form section */}
+      <section className="section-padding bg-muted/30" ref={formRef}>
         <div className="container-narrow">
-          <div className="mb-8">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-4">
-              Foodtruckverzekeringstaxatie aanvragen
-            </h2>
-            <p className="text-muted-foreground">
-              Wil je een verzekeringstaxatie laten uitvoeren, dan kun je hieronder een aanvraag indienen. Wij plannen vervolgens de taxatie in en zorgen voor een zorgvuldige vastlegging van de waarde.
+          <div className="text-center mb-8">
+            <p className="text-foreground/90 leading-relaxed">
+              Wil je een verzekeringstaxatie laten uitvoeren, dan kun je hieronder eenvoudig een aanvraag indienen.
             </p>
           </div>
           <IntakeForm 
-            serviceType="foodtruckverzekeringstaxatie"
-            formTitle="Foodtruckverzekeringstaxatie aanvragen"
-            formSubtext="Vul onderstaand formulier in en we nemen binnen één werkdag contact met je op."
-            toelichtingPlaceholder="Beschrijf je foodtruck, de opbouw, inrichting en eventuele bijzonderheden..."
-            submitButtonText="Aanvraag versturen"
+            serviceType="foodtruckverzekeringstaxatie" 
+            formTitle="Verzekeringstaxatie aanvragen"
+            submitButtonText="Verzekeringstaxatie aanvragen"
           />
         </div>
       </section>
 
-      {/* Terug link */}
-      <section className="section-padding">
-        <div className="container-narrow">
-          <Link to="/verzekeringstaxatie-info">
-            <Button variant="secondary-action" className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
+      {/* Terug naar overzicht */}
+      <section className="section-padding bg-background">
+        <div className="container-narrow text-center">
+          <Button variant="secondary-action" size="sm" asChild>
+            <Link to="/verzekeringstaxatie-info" className="inline-flex items-center gap-2">
               Terug naar verzekeringstaxatie overzicht
-            </Button>
-          </Link>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </Button>
         </div>
       </section>
     </div>
