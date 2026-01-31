@@ -97,8 +97,11 @@ const WevTaxatie = () => {
               <span>de context waarin de waarde fiscaal wordt toegepast</span>
             </li>
           </ul>
-          <p className="text-foreground/90 leading-relaxed">
+          <p className="text-foreground/90 leading-relaxed mb-4">
             De uitkomst wordt vastgelegd in een taxatierapport dat controleerbaar en uitlegbaar is.
+          </p>
+          <p className="text-foreground/90 leading-relaxed">
+            Het WEV-taxatierapport dient als onderbouwing voor je eigen administratie en kan bij een eventuele controle door de Belastingdienst worden overlegd om de gehanteerde waarde te verantwoorden.
           </p>
         </div>
       </section>
@@ -121,7 +124,7 @@ const WevTaxatie = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">Aanleveren van gegevens</h3>
                 <p className="text-foreground/90">
-                  Je levert de beschikbare voertuiggegevens aan en geeft aan in welke fiscale context de WEV-taxatie wordt gebruikt.
+                  Je levert de voertuiggegevens aan, zoals kenteken, merk, type, bouwjaar en kilometerstand. Daarnaast geef je aan in welke fiscale context de WEV-taxatie wordt gebruikt, bijvoorbeeld bij overgang van zakelijk naar privé of bij inbreng in de onderneming.
                 </p>
               </div>
             </div>
