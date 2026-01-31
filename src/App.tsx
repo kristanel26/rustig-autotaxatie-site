@@ -11,6 +11,7 @@ import YoungtimerTaxatie from "./pages/YoungtimerTaxatie";
 import FoodtruckTaxatie from "./pages/FoodtruckTaxatie";
 import BpmVoorbereiding from "./pages/BpmVoorbereiding";
 import BpmTaxatie from "./pages/BpmTaxatie";
+import BpmMotorTaxatie from "./pages/BpmMotorTaxatie";
 import WevTaxatie from "./pages/WevTaxatie";
 import VerzekeringstaxatieInfo from "./pages/VerzekeringstaxatieInfo";
 import NotFound from "./pages/NotFound";
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/foodtruck-taxatie" element={<FoodtruckTaxatie />} />
           <Route path="/bpm-voorbereiding" element={<BpmVoorbereiding />} />
           <Route path="/bpm-taxatie" element={<BpmTaxatie />} />
+          <Route path="/bpm-motor-taxatie" element={<BpmMotorTaxatie />} />
           <Route path="/wev-taxatie" element={<WevTaxatie />} />
           <Route path="/verzekeringstaxatie-info" element={<VerzekeringstaxatieInfo />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
