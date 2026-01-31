@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
-import TrustIndicators from "@/components/TrustIndicators";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
@@ -63,7 +62,7 @@ const MotorTaxatie = () => {
             Onze werkwijze bij een motorverzekeringstaxatie
           </h2>
           <p className="text-foreground/90 leading-relaxed mb-10">
-            Een motorverzekeringstaxatie verloopt bij ons volgens een vaste en overzichtelijke werkwijze.
+            Een motorverzekeringstaxatie verloopt bij ons volgens een vaste en overzichtelijke werkwijze. Zo weet je vooraf waar je aan toe bent.
           </p>
 
           <div className="space-y-8">
@@ -72,9 +71,9 @@ const MotorTaxatie = () => {
                 1
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Aanleveren van gegevens</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-2">Aanleveren van basisgegevens</h3>
                 <p className="text-foreground/90">
-                  Je dient een aanvraag in en levert de beschikbare gegevens over de motor aan. Denk hierbij aan je naam- en contactgegevens, de kentekencard van de motor en, indien aanwezig, het onderhoudsboekje. Ook facturen van accessoires of aanpassingen en informatie over onderhoud, revisies of bijzonderheden kunnen worden meegenomen.
+                  Je dient een aanvraag in en levert de beschikbare gegevens over de motor aan.
                 </p>
               </div>
             </div>
@@ -86,7 +85,7 @@ const MotorTaxatie = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">Fysieke inspectie van de motor</h3>
                 <p className="text-foreground/90">
-                  De motor wordt fysiek geïnspecteerd. Dit kan op locatie plaatsvinden of bij ons op kantoor, afhankelijk van de situatie. Tijdens de inspectie wordt gekeken naar de staat, uitvoering, accessoires en eventuele bijzonderheden.
+                  De motor wordt op locatie of bij ons geïnspecteerd. Daarbij kijken we naar staat, uitvoering en bijzonderheden.
                 </p>
               </div>
             </div>
@@ -98,7 +97,7 @@ const MotorTaxatie = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">Vaststellen van de waarde</h3>
                 <p className="text-foreground/90">
-                  Op basis van de inspectie en relevante marktgegevens wordt een realistische en verdedigbare waarde vastgesteld.
+                  Op basis van inspectie en marktgegevens wordt een realistische en verdedigbare waarde vastgesteld.
                 </p>
               </div>
             </div>
@@ -110,7 +109,7 @@ const MotorTaxatie = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">Opstellen van het taxatierapport</h3>
                 <p className="text-foreground/90">
-                  De bevindingen en de vastgestelde waarde worden overzichtelijk vastgelegd in een motorverzekeringstaxatierapport. In het rapport is duidelijk te volgen hoe de waarde tot stand is gekomen.
+                  De bevindingen en waarde worden overzichtelijk vastgelegd in een taxatierapport.
                 </p>
               </div>
             </div>
@@ -122,15 +121,45 @@ const MotorTaxatie = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">Oplevering van het rapport</h3>
                 <p className="text-foreground/90">
-                  Je ontvangt het taxatierapport digitaal. Dit rapport kun je zelf doorsturen naar je verzekeraar om de verzekerde waarde vast te leggen.
+                  Je ontvangt het rapport digitaal en kunt dit gebruiken voor de verzekering.
                 </p>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <p className="text-foreground/90 leading-relaxed mt-8">
-            De taxaties worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt.
+      {/* Belangrijk om te weten */}
+      <section className="section-padding bg-background">
+        <div className="container-narrow">
+          <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-4">
+            Belangrijk om te weten vóór de taxatie
+          </h3>
+          <p className="text-foreground/90 leading-relaxed mb-4">
+            De waarde van de motor wordt vastgesteld op basis van de staat op de dag van taxatie. Werkzaamheden zoals herstel of aanpassingen moeten daarom vóór de taxatiedatum zijn afgerond.
           </p>
+          <p className="text-foreground/90 leading-relaxed">
+            Alleen wat op dat moment aanwezig en zichtbaar is, wordt meegenomen in de waardebepaling. Dit voorkomt discussie of teleurstelling achteraf, voor jou én voor de verzekeraar.
+          </p>
+        </div>
+      </section>
+
+      {/* Wat hebben wij van je nodig */}
+      <section className="section-padding bg-secondary/30">
+        <div className="container-narrow">
+          <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-4">
+            Wat hebben wij van je nodig?
+          </h3>
+          <p className="text-foreground/90 leading-relaxed mb-4">
+            Om de taxatie goed te kunnen uitvoeren, vragen wij je het volgende aan te leveren:
+          </p>
+          <ul className="list-disc list-inside space-y-2 text-foreground/90">
+            <li>je naam en contactgegevens</li>
+            <li>de kentekencard van de motor</li>
+            <li>onderhoudsboekje of servicehistorie (indien aanwezig)</li>
+            <li>facturen van aanpassingen of accessoires</li>
+            <li>eventuele bijzonderheden in de historie (revisie, restauratie)</li>
+          </ul>
         </div>
       </section>
 
@@ -141,26 +170,17 @@ const MotorTaxatie = () => {
             Acceptatie door verzekeraars en geldigheid van het rapport
           </h2>
           <p className="text-foreground/90 leading-relaxed mb-6">
-            De motorverzekeringstaxaties worden uitgevoerd door een geregistreerd taxateur die is aangesloten bij erkende registers, waaronder VRT en TMV. Daarnaast wordt gewerkt volgens de richtlijnen die binnen de branche worden gehanteerd, zoals die van FEHAC.
+            De taxaties worden uitgevoerd door een geregistreerd taxateur, aangesloten bij VRT, TMV en FEHAC. Deze registraties zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten.
           </p>
           <p className="text-foreground/90 leading-relaxed mb-6">
-            Deze registraties en richtlijnen zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van motoren vast te leggen. Het rapport laat helder zien hoe de waarde is onderbouwd.
+            Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van de motor vast te leggen. Het rapport laat helder zien hoe de waarde is onderbouwd.
           </p>
           <p className="text-foreground/90 leading-relaxed">
-            Een motorverzekeringstaxatierapport is doorgaans twee tot drie jaar geldig. De exacte geldigheid verschilt per verzekeraar en polis. Het is verstandig om dit vooraf te controleren bij je verzekeraar en tijdig te kijken of een hertaxatie nodig is.
+            Een motorverzekeringstaxatierapport is doorgaans 2 tot 3 jaar geldig. De exacte geldigheid verschilt per verzekeraar en polis. Informeer hier altijd naar bij je verzekeraar.
           </p>
         </div>
       </section>
 
-      {/* Trust indicators */}
-      <section className="section-padding bg-secondary/30">
-        <div className="container-wide">
-          <TrustIndicators />
-        </div>
-      </section>
 
       {/* Form section */}
       <section className="section-padding bg-background" ref={formRef}>
