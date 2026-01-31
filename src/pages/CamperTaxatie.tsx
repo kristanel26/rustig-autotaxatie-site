@@ -99,53 +99,79 @@ const CamperTaxatie = () => {
       {/* Werkwijze */}
       <section className="section-padding bg-secondary/30">
         <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
+          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
             Onze werkwijze bij een camperverzekeringstaxatie
           </h2>
-          <p className="text-foreground/90 leading-relaxed mb-8">
-            Een camperverzekeringstaxatie verloopt bij ons volgens een vaste en overzichtelijke werkwijze. Zo weet je vooraf waar je aan toe bent en wordt de waarde zorgvuldig vastgelegd.
-          </p>
-          
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Aanleveren van basisgegevens</h3>
-              <p className="text-foreground/90">
-                Je dient een aanvraag in en levert de beschikbare gegevens over de camper aan.
-              </p>
+          <div className="space-y-6 text-foreground/90 leading-relaxed mb-10">
+            <p>
+              Een camperverzekeringstaxatie verloopt bij ons volgens een vaste en overzichtelijke werkwijze. Zo weet je vooraf waar je aan toe bent en wordt de waarde zorgvuldig vastgelegd.
+            </p>
+            <p>
+              De taxaties worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt.
+            </p>
+          </div>
+
+          <div className="space-y-8">
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
+                1
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-foreground mb-2">Aanleveren van basisgegevens</h3>
+                <p className="text-foreground/90">
+                  Je dient een aanvraag in en levert de beschikbare gegevens over de camper aan.
+                </p>
+              </div>
             </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Fysieke inspectie van de camper</h3>
-              <p className="text-foreground/90">
-                De camper wordt op locatie geïnspecteerd. Daarbij wordt gekeken naar staat, uitvoering en eventuele aanpassingen.
-              </p>
+
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
+                2
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-foreground mb-2">Fysieke inspectie van de camper</h3>
+                <p className="text-foreground/90">
+                  De camper wordt op locatie geïnspecteerd. Daarbij wordt gekeken naar staat, uitvoering en eventuele aanpassingen.
+                </p>
+              </div>
             </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Vaststellen van de waarde</h3>
-              <p className="text-foreground/90">
-                Op basis van de inspectie en relevante marktgegevens wordt een realistische en verdedigbare waarde vastgesteld.
-              </p>
+
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
+                3
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-foreground mb-2">Vaststellen van de waarde</h3>
+                <p className="text-foreground/90">
+                  Op basis van de inspectie en relevante marktgegevens wordt een realistische en verdedigbare waarde vastgesteld.
+                </p>
+              </div>
             </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Opstellen van het taxatierapport</h3>
-              <p className="text-foreground/90">
-                De bevindingen en de vastgestelde waarde worden overzichtelijk vastgelegd in een taxatierapport.
-              </p>
+
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
+                4
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-foreground mb-2">Opstellen van het taxatierapport</h3>
+                <p className="text-foreground/90">
+                  De bevindingen en de vastgestelde waarde worden overzichtelijk vastgelegd in een taxatierapport.
+                </p>
+              </div>
             </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Oplevering van het rapport</h3>
-              <p className="text-foreground/90">
-                Je ontvangt het taxatierapport en kunt dit gebruiken voor de verzekering.
-              </p>
+
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
+                5
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-foreground mb-2">Oplevering van het rapport</h3>
+                <p className="text-foreground/90">
+                  Je ontvangt het taxatierapport en kunt dit gebruiken voor de verzekering.
+                </p>
+              </div>
             </div>
           </div>
-          
-          <p className="text-foreground/90 leading-relaxed mt-8">
-            De taxaties worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt.
-          </p>
         </div>
       </section>
 
