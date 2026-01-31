@@ -17,8 +17,15 @@ const services = [
     title: "Verzekeringstaxatie voertuig",
     description:
       "Wil je je voertuig goed verzekeren? Met een officiële verzekeringstaxatie leg je de juiste waarde vast, zodat je bij schade of diefstal weet waar je aan toe bent.",
-    href: "/camper-taxatie",
+    href: "/verzekeringstaxatie-info",
     cta: "Meer over verzekeringstaxatie",
+    subLinks: [
+      { label: "Camper", href: "/camper-taxatie" },
+      { label: "Oldtimer", href: "/oldtimer-taxatie" },
+      { label: "Youngtimer", href: "/youngtimer-taxatie" },
+      { label: "Motor", href: "/motor-taxatie" },
+      { label: "Foodtruck", href: "/foodtruck-taxatie" },
+    ],
   },
   {
     icon: Scale,
@@ -111,6 +118,21 @@ const Index = () => {
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
+                {service.subLinks && (
+                  <div className="mt-4 pt-4 border-t border-border">
+                    <div className="flex flex-wrap gap-2">
+                      {service.subLinks.map((subLink, subIndex) => (
+                        <Link
+                          key={subIndex}
+                          to={subLink.href}
+                          className="text-sm text-muted-foreground hover:text-foreground transition-colors hover:underline"
+                        >
+                          {subLink.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
