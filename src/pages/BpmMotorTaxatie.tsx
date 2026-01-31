@@ -26,7 +26,7 @@ const BpmMotorTaxatie = () => {
       <section className="section-padding bg-muted/30">
         <div className="container-narrow">
           <p className="text-foreground/90 leading-relaxed">
-            Automobiel Taxaties ondersteunt ondernemers en particulieren bij het zorgvuldig vaststellen van de BPM bij import van motoren. Dat doen wij met een onderbouwde berekening of, wanneer nodig, met een BPM-taxatierapport.
+            Wanneer de BPM bij import van een motor niet realistisch kan worden vastgesteld via een afschrijvingstabel of koerslijst, is een BPM-taxatie de meest logische en verdedigbare methode. Automobiel Taxaties stelt in die gevallen een BPM-taxatierapport op, gebaseerd op een fysieke inspectie en de werkelijke staat van de motor.
           </p>
         </div>
       </section>
@@ -123,7 +123,7 @@ const BpmMotorTaxatie = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">Aanleveren van gegevens</h3>
                 <p className="text-foreground/90">
-                  Je levert de beschikbare voertuiggegevens aan, zoals kentekeninformatie, aankoopgegevens en eventuele buitenlandse documenten.
+                  Je levert de beschikbare voertuiggegevens aan, waaronder het buitenlandse kenteken of chassisnummer, de aankoopfactuur, de actuele kilometerstand, recente foto's van de motor en beschikbare informatie over schade, gebruik en onderhoud.
                 </p>
               </div>
             </div>
@@ -204,6 +204,9 @@ const BpmMotorTaxatie = () => {
           <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
             Onafhankelijk en verdedigbaar
           </h2>
+          <p className="text-foreground/90 leading-relaxed mb-4">
+            Het BPM-taxatierapport wordt gebruikt als onderbouwing bij de BPM-aangifte. Het rapport is opgesteld op basis van een fysieke inspectie en maakt inzichtelijk hoe de afschrijving tot stand is gekomen, zodat de aangifte inhoudelijk verdedigbaar is bij controle door de Belastingdienst.
+          </p>
           <p className="text-foreground/90 leading-relaxed mb-4">
             BPM-taxaties worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt. Wij werken onafhankelijk en zonder vooraf afgesproken uitkomsten of wensbedragen.
           </p>
