@@ -204,8 +204,38 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* Onafhankelijk en fiscaal verdedigbaar */}
+      {/* Wat hebben wij van je nodig */}
       <section className="section-padding bg-background">
+        <div className="container-narrow">
+          <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-4">
+            Wat hebben wij van je nodig?
+          </h3>
+          <p className="text-foreground/90 leading-relaxed mb-6">
+            Om een WEV-taxatie zorgvuldig te kunnen uitvoeren, ontvangen wij graag de volgende gegevens:
+          </p>
+          <ol className="space-y-3 text-foreground/90">
+            <li className="flex items-start gap-3">
+              <span className="font-semibold text-primary min-w-[24px]">1.</span>
+              <span>Naam en contactgegevens</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="font-semibold text-primary min-w-[24px]">2.</span>
+              <span>Voertuiggegevens (kenteken, merk, type, bouwjaar, kilometerstand)</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="font-semibold text-primary min-w-[24px]">3.</span>
+              <span>Fiscale context (bijv. overgang zakelijk naar privé, inbreng in onderneming)</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="font-semibold text-primary min-w-[24px]">4.</span>
+              <span>Relevante documentatie (onderhoudsboekje, facturen van uitgevoerde werkzaamheden)</span>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      {/* Onafhankelijk en fiscaal verdedigbaar */}
+      <section className="section-padding bg-muted/30">
         <div className="container-narrow">
           <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
             Onafhankelijk en fiscaal verdedigbaar
