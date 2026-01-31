@@ -177,6 +177,43 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
+      {/* Wat kun je van ons verwachten */}
+      <section className="section-padding bg-background">
+        <div className="container-narrow">
+          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
+            Wat kun je van ons verwachten?
+          </h2>
+          <div className="prose prose-lg max-w-none text-muted-foreground">
+            <p>
+              Bij Automobiel Taxaties begeleiden wij het BPM-traject zorgvuldig en inhoudelijk onderbouwd. Per voertuig beoordelen wij welke methode fiscaal logisch en verdedigbaar is om de BPM vast te stellen.
+            </p>
+            <p className="mt-4">
+              Wanneer standaardmethodes zoals een afschrijvingstabel of koerslijst geen realistisch beeld geven, stellen wij een BPM-taxatierapport op op basis van een fysieke inspectie en de werkelijke staat van het voertuig.
+            </p>
+            <p className="mt-4">
+              Je kunt rekenen op een onafhankelijke beoordeling, duidelijke uitleg over de gekozen methode en een onderbouwing die is ingericht om ook bij controle door de Belastingdienst inzichtelijk en uitlegbaar te zijn. Wij werken zonder wensbedragen en zonder vooraf vastgestelde uitkomsten.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Wat hebben wij van je nodig */}
+      <section className="section-padding bg-muted/30">
+        <div className="container-narrow">
+          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
+            Wat hebben wij van je nodig?
+          </h2>
+          <div className="prose prose-lg max-w-none text-muted-foreground">
+            <p>
+              Voor een correcte vaststelling van de BPM hebben wij vooraf volledige en juiste voertuiggegevens nodig. Dit betreft onder meer het buitenlandse kenteken of chassisnummer, de aankoopfactuur, de actuele kilometerstand en beschikbare informatie over schade, gebruik en onderhoud.
+            </p>
+            <p className="mt-4">
+              Deze gegevens zijn noodzakelijk om te kunnen beoordelen welke BPM-methode van toepassing is en om, indien nodig, de taxatie en fysieke inspectie zorgvuldig voor te bereiden. Onvolledige of onjuiste informatie kan leiden tot vertraging of aanvullende vragen bij de BPM-aangifte.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Belangrijk om te weten vóór de BPM-aangifte */}
       <section className="section-padding bg-background">
         <div className="container-narrow">
