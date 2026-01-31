@@ -170,7 +170,33 @@ const CamperTaxatie = () => {
                   Je ontvangt het taxatierapport en kunt dit gebruiken voor de verzekering.
                 </p>
               </div>
-            </div>
+          </div>
+          </div>
+
+          {/* Belangrijk om te weten */}
+          <div className="mt-10 border-l-2 border-muted pl-6">
+            <h3 className="text-lg font-semibold text-foreground mb-3">
+              Belangrijk om te weten vóór de taxatie
+            </h3>
+            <p className="text-foreground/90 leading-relaxed">
+              De waarde van de camper wordt vastgesteld op basis van de staat op de dag van de taxatie. Eventuele werkzaamheden, reparaties of aanpassingen moeten dus vooraf zijn afgerond. Alleen wat op dat moment aanwezig en zichtbaar is, kan worden meegenomen in de waardebepaling.
+            </p>
+          </div>
+
+          {/* Wat hebben wij nodig */}
+          <div className="mt-8 border-l-2 border-muted pl-6">
+            <h3 className="text-lg font-semibold text-foreground mb-3">
+              Wat hebben wij van je nodig?
+            </h3>
+            <p className="text-foreground/90 mb-3">
+              Om de taxatie goed te kunnen voorbereiden, vragen wij je het volgende aan te leveren:
+            </p>
+            <ol className="list-decimal list-inside space-y-1 text-foreground/90">
+              <li>Je naam en contactgegevens</li>
+              <li>De kentekencard van de camper</li>
+              <li>Eventueel onderhoudsboekje of servicehistorie</li>
+              <li>Facturen van aanpassingen, accessoires of zelfbouw</li>
+            </ol>
           </div>
 
           <p className="text-foreground/90 leading-relaxed mt-8">
