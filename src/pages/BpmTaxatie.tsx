@@ -244,7 +244,7 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* Onafhankelijk en fiscaal verdedigbaar */}
+      {/* Onafhankelijkheid, expertise en juridische borging */}
       <section className="section-padding bg-muted/30">
         <div className="container-narrow">
           <div className="flex items-start gap-4 mb-6">
@@ -253,7 +253,7 @@ const BpmTaxatie = () => {
             </div>
             <div>
               <h2 className="text-2xl md:text-3xl font-semibold">
-                Onafhankelijk en fiscaal verdedigbaar
+                Onafhankelijkheid, expertise en juridische borging
               </h2>
             </div>
           </div>
@@ -262,10 +262,13 @@ const BpmTaxatie = () => {
               Automobiel Taxaties werkt als onafhankelijk taxateur. De taxaties worden uitgevoerd door een taxateur die is geregistreerd bij de Vereniging van Register-Taxateurs (VRT) en is aangesloten bij de Taxateursvereniging voor Motorvoertuigen (TMV).
             </p>
             <p className="mt-4">
-              De vakkennis wordt actief onderhouden en toegepast bij iedere taxatie. Rapportages zijn zorgvuldig opgebouwd, controleerbaar en bedoeld voor gebruik in fiscale context. Er worden geen vooraf afgesproken uitkomsten of wensbedragen gehanteerd.
+              De vakkennis wordt actief onderhouden en toegepast bij iedere taxatie. Er worden geen vooraf afgesproken uitkomsten of wensbedragen gehanteerd.
             </p>
             <p className="mt-4">
-              Afhankelijk van de situatie wordt een BPM-taxatierapport opgesteld of wordt de onderbouwing verwerkt in de BPM-aangifte, zodat het dossier ook bij controle door de Belastingdienst inhoudelijk verdedigbaar is.
+              BPM-taxaties en onderbouwingen worden zorgvuldig opgebouwd met het oog op controle achteraf door de Belastingdienst. De rapportages zijn transparant, controleerbaar en inhoudelijk verdedigbaar opgesteld.
+            </p>
+            <p className="mt-4">
+              Wanneer er vragen ontstaan of een inhoudelijke discussie volgt, werken wij samen met een jurist die is gespecialiseerd in BPM- en fiscale voertuigwaarderingen, zodat de onderbouwing ook juridisch standhoudt.
             </p>
           </div>
         </div>

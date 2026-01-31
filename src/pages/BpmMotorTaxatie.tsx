@@ -178,35 +178,114 @@ const BpmMotorTaxatie = () => {
         </div>
       </section>
 
-      {/* Belangrijk om te weten */}
+      {/* Wat kun je van ons verwachten */}
       <section className="section-padding bg-muted/30">
         <div className="container-narrow">
-          <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-4">
-            Belangrijk om te weten vóór de taxatie
-          </h3>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            De staat van de motor op het moment van taxatie is bepalend voor de vastgestelde afschrijving. Werkzaamheden of herstel die nog gepland staan, moeten daarom vóór de taxatiedatum zijn uitgevoerd.
+          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
+            Wat kun je van ons verwachten?
+          </h2>
+          <p className="text-foreground/90 leading-relaxed mb-6">
+            Bij Automobiel Taxaties begeleiden wij het BPM-traject voor motoren zorgvuldig en inhoudelijk onderbouwd. Per voertuig beoordelen wij welke methode fiscaal logisch en verdedigbaar is.
           </p>
+          <ul className="space-y-2 text-foreground/90 mb-6">
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>een onafhankelijke beoordeling per motor</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>geen wensbedragen of vooraf afgesproken uitkomsten</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>duidelijke uitleg over de gekozen methode</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>onderbouwing die is ingericht op controle door de Belastingdienst</span>
+            </li>
+          </ul>
           <p className="text-foreground/90 leading-relaxed">
-            Zo wordt de BPM vastgesteld op basis van de daadwerkelijke staat van de motor en is het rapport verdedigbaar bij controle.
+            Wij werken zonder vooraf vastgestelde uitkomsten en richten ons op een dossier dat inhoudelijk verdedigbaar is.
           </p>
         </div>
       </section>
 
-      {/* Onafhankelijk en verdedigbaar */}
+      {/* Wat hebben wij van je nodig */}
       <section className="section-padding bg-background">
         <div className="container-narrow">
           <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Onafhankelijk en verdedigbaar
+            Wat hebben wij van je nodig?
+          </h2>
+          <p className="text-foreground/90 leading-relaxed mb-6">
+            Voor een correcte vaststelling van de BPM hebben wij vooraf volledige en juiste voertuiggegevens nodig. Dit betreft onder meer:
+          </p>
+          <ul className="space-y-2 text-foreground/90 mb-6">
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>het buitenlandse kenteken of chassisnummer</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>de aankoopfactuur</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>de actuele kilometerstand</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>recente foto's van de motor</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-primary mt-1">•</span>
+              <span>informatie over staat, schade en onderhoud</span>
+            </li>
+          </ul>
+          <p className="text-foreground/90 leading-relaxed">
+            Volledige informatie is noodzakelijk om het BPM-dossier zorgvuldig en verdedigbaar op te bouwen. Onvolledige of onjuiste gegevens kunnen leiden tot vertraging of aanvullende vragen bij de aangifte.
+          </p>
+        </div>
+      </section>
+
+      {/* Belangrijk om te weten */}
+      <section className="section-padding bg-muted/30">
+        <div className="container-narrow">
+          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
+            Belangrijk om te weten vóór de BPM-aangifte
+          </h2>
+          <p className="text-foreground/90 leading-relaxed mb-4">
+            De staat van de motor op het moment van taxatie is bepalend voor de vastgestelde afschrijving. Werkzaamheden of herstel die nog gepland staan, moeten daarom vóór de taxatiedatum zijn uitgevoerd.
+          </p>
+          <p className="text-foreground/90 leading-relaxed mb-4">
+            Een BPM-taxatierapport heeft een beperkte geldigheidsduur. Het rapport moet actueel zijn op het moment van de aangifte.
+          </p>
+          <p className="text-foreground/90 leading-relaxed mb-4">
+            Juiste aankoopgegevens zijn essentieel. De aankoopfactuur en eventuele buitenlandse documenten vormen een belangrijk onderdeel van het dossier.
+          </p>
+          <p className="text-foreground/90 leading-relaxed">
+            Houd er rekening mee dat de Belastingdienst BPM-aangiftes kan controleren. Een zorgvuldig en transparant opgebouwd dossier verkleint het risico op discussie achteraf.
+          </p>
+        </div>
+      </section>
+
+      {/* Onafhankelijkheid, expertise en juridische borging */}
+      <section className="section-padding bg-background">
+        <div className="container-narrow">
+          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
+            Onafhankelijkheid, expertise en juridische borging
           </h2>
           <p className="text-foreground/90 leading-relaxed mb-4">
             Automobiel Taxaties werkt als onafhankelijk taxateur. De taxaties worden uitgevoerd door een taxateur die is geregistreerd bij de Vereniging van Register-Taxateurs (VRT) en is aangesloten bij de Taxateursvereniging voor Motorvoertuigen (TMV).
           </p>
           <p className="text-foreground/90 leading-relaxed mb-4">
-            De vakkennis wordt actief onderhouden en toegepast bij iedere taxatie. Rapportages zijn zorgvuldig opgebouwd, controleerbaar en bedoeld voor gebruik in fiscale context. Er worden geen vooraf afgesproken uitkomsten of wensbedragen gehanteerd.
+            De vakkennis wordt actief onderhouden en toegepast bij iedere taxatie. Er worden geen vooraf afgesproken uitkomsten of wensbedragen gehanteerd.
+          </p>
+          <p className="text-foreground/90 leading-relaxed mb-4">
+            BPM-taxaties en onderbouwingen worden zorgvuldig opgebouwd met het oog op controle achteraf door de Belastingdienst. De rapportages zijn transparant, controleerbaar en inhoudelijk verdedigbaar opgesteld.
           </p>
           <p className="text-foreground/90 leading-relaxed">
-            Het BPM-taxatierapport maakt inzichtelijk hoe de afschrijving tot stand is gekomen, zodat de aangifte inhoudelijk verdedigbaar is bij controle door de Belastingdienst.
+            Wanneer er vragen ontstaan of een inhoudelijke discussie volgt, werken wij samen met een jurist die is gespecialiseerd in BPM- en fiscale voertuigwaarderingen, zodat de onderbouwing ook juridisch standhoudt.
           </p>
         </div>
       </section>
