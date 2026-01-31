@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
-import { Users, FileText, Shield, ClipboardCheck, AlertCircle } from "lucide-react";
+import { Users, FileText, Shield, ClipboardCheck, List, AlertTriangle } from "lucide-react";
 
 const BpmTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -21,7 +21,6 @@ const BpmTaxatie = () => {
       />
 
       {/* Inleidende uitleg: BPM bij import van voertuigen */}
-      {/* Inleidende uitleg: BPM bij import van voertuigen */}
       <section className="section-padding bg-muted/30">
         <div className="container-narrow">
           <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
@@ -29,9 +28,6 @@ const BpmTaxatie = () => {
           </h2>
           <p className="text-foreground/90 leading-relaxed mb-4">
             Wanneer je een voertuig uit het buitenland importeert en in Nederland wilt registreren, krijg je te maken met BPM. Dit is een belasting die je betaalt voordat het voertuig op Nederlands kenteken kan worden gezet.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            De hoogte van de BPM hangt af van de manier waarop de afschrijving wordt vastgesteld. Afhankelijk van het voertuig en de situatie kan dit via een afschrijvingstabel, een koerslijst of een BPM-taxatierapport.
           </p>
           <p className="text-foreground/90 leading-relaxed">
             Automobiel Taxaties beoordeelt per voertuig welke methode fiscaal logisch en verdedigbaar is. Die keuze heeft direct invloed op de BPM-aangifte en de onderbouwing richting de Belastingdienst.
@@ -78,48 +74,46 @@ const BpmTaxatie = () => {
           </div>
           <div className="prose prose-lg max-w-none text-muted-foreground">
             <p>
-              BPM is een belasting die je betaalt wanneer je een voertuig uit het buitenland in Nederland op kenteken zet. De Belastingdienst staat meerdere methodes toe om het BPM-bedrag vast te stellen.
+              BPM is een belasting die je betaalt wanneer je een voertuig uit het buitenland in Nederland op kenteken zet. De hoogte van de BPM hangt af van de afschrijving die op het voertuig van toepassing is.
             </p>
             <p className="mt-4">
-              De meest gebruikte methodes zijn:
-            </p>
-            <ul className="mt-2 space-y-1 list-disc list-inside">
-              <li>een afschrijvingstabel</li>
-              <li>een koerslijst</li>
-              <li>een BPM-taxatierapport</li>
-            </ul>
-            <p className="mt-4">
-              Welke methode het meest geschikt is, hangt af van het voertuig en de staat waarin het verkeert.
-            </p>
-            <p className="mt-4">
-              Wanneer standaardmethodes geen realistisch beeld geven van de waarde en staat van het voertuig, is een BPM-taxatie noodzakelijk om de BPM correct en inhoudelijk verdedigbaar vast te stellen.
+              De Belastingdienst staat meerdere methodes toe om de afschrijving vast te stellen. Welke methode van toepassing is, hangt af van het voertuig en de staat waarin het verkeert.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Wanneer is een BPM-taxatie noodzakelijk */}
+      {/* Welke BPM-methodes zijn mogelijk */}
       <section className="section-padding bg-background">
         <div className="container-narrow">
           <div className="flex items-start gap-4 mb-6">
             <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-              <AlertCircle className="w-6 h-6 text-primary" />
+              <List className="w-6 h-6 text-primary" />
             </div>
             <div>
               <h2 className="text-2xl md:text-3xl font-semibold">
-                Wanneer is een BPM-taxatie noodzakelijk?
+                Welke BPM-methodes zijn mogelijk?
               </h2>
             </div>
           </div>
           <div className="prose prose-lg max-w-none text-muted-foreground">
             <p>
+              Er zijn drie methodes waarmee de afschrijving kan worden vastgesteld:
+            </p>
+            <p className="mt-4">
+              <strong>Afschrijvingstabel</strong><br />
+              Een forfaitaire tabel op basis van de leeftijd van het voertuig. Deze methode houdt geen rekening met de werkelijke staat of specifieke kenmerken van het voertuig.
+            </p>
+            <p className="mt-4">
+              <strong>Koerslijst</strong><br />
+              Een gestandaardiseerde waardebepaling op basis van merk, model en uitvoering. Ook hier wordt de werkelijke staat van het voertuig niet individueel beoordeeld.
+            </p>
+            <p className="mt-4">
+              <strong>BPM-taxatierapport</strong><br />
+              Een onderbouwing op basis van een fysieke inspectie door een geregistreerd taxateur. De werkelijke staat van het voertuig vormt het uitgangspunt voor de afschrijving.
+            </p>
+            <p className="mt-6">
               Wanneer de BPM niet op een realistische en verdedigbare manier kan worden vastgesteld met een afschrijvingstabel of koerslijst, is een onafhankelijke BPM-taxatie noodzakelijk. Alleen met een fysieke inspectie en een zorgvuldig opgebouwd BPM-taxatierapport kan de afschrijving dan correct worden onderbouwd.
-            </p>
-            <p className="mt-4">
-              Een BPM-taxatie is geen alternatief voor een eigen inschatting of zelftaxatie. De taxatie wordt uitsluitend uitgevoerd door een onafhankelijke en geregistreerde taxateur. Er worden geen vooraf afgesproken uitkomsten of wensbedragen gehanteerd.
-            </p>
-            <p className="mt-4">
-              Dit zorgt ervoor dat de onderbouwing inhoudelijk klopt en dat het rapport ook bij controle door de Belastingdienst verdedigbaar is.
             </p>
           </div>
         </div>
@@ -140,10 +134,7 @@ const BpmTaxatie = () => {
           </div>
           <div className="prose prose-lg max-w-none text-muted-foreground mb-8">
             <p>
-              De BPM-taxaties en aangiften worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt. Zo weet je dat de onderbouwing niet alleen klopt op papier, maar ook inhoudelijk zorgvuldig is opgebouwd.
-            </p>
-            <p className="mt-4">
-              Een BPM-aangifte bestaat uit meerdere stappen. Wij zorgen ervoor dat dit proces overzichtelijk verloopt en dat alles zorgvuldig wordt uitgewerkt.
+              De BPM-taxaties en aangiften worden uitgevoerd door een geregistreerd taxateur. Zo weet je dat de onderbouwing niet alleen klopt op papier, maar ook inhoudelijk zorgvuldig is opgebouwd.
             </p>
           </div>
           <div className="space-y-6">
@@ -151,28 +142,28 @@ const BpmTaxatie = () => {
               <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-medium text-sm">1</span>
               <div>
                 <p className="font-medium text-foreground mb-1">Aanleveren van voertuiggegevens</p>
-                <p className="text-muted-foreground">Je levert de beschikbare voertuiggegevens aan, zoals het buitenlandse kenteken of chassisnummer, de aankoopfactuur en eventuele buitenlandse documenten. Dat vormt de basis voor de verdere uitwerking.</p>
+                <p className="text-muted-foreground">Je levert de beschikbare voertuiggegevens aan, zoals het buitenlandse kenteken of chassisnummer, de aankoopfactuur en eventuele buitenlandse documenten.</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-medium text-sm">2</span>
               <div>
                 <p className="font-medium text-foreground mb-1">Beoordelen van de juiste methode</p>
-                <p className="text-muted-foreground">Wij beoordelen per voertuig welke BPM-methode fiscaal logisch en verdedigbaar is. Dit kan een afschrijvingstabel of koerslijst zijn, of een BPM-taxatie wanneer de staat van het voertuig daartoe aanleiding geeft.</p>
+                <p className="text-muted-foreground">Per voertuig wordt beoordeeld welke BPM-methode fiscaal logisch en verdedigbaar is. Dit kan een afschrijvingstabel of koerslijst zijn, of een BPM-taxatie wanneer de staat van het voertuig daartoe aanleiding geeft.</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-medium text-sm">3</span>
               <div>
                 <p className="font-medium text-foreground mb-1">Uitvoering van de gekozen methode</p>
-                <p className="text-muted-foreground">De gekozen methode voeren wij volledig uit. Bij een afschrijvingstabel of koerslijst verzorgen wij de volledige BPM-aangifte. Wanneer een taxatie nodig is, voeren wij een fysieke inspectie op locatie uit en stellen wij een zorgvuldig onderbouwd BPM-taxatierapport op.</p>
+                <p className="text-muted-foreground">De gekozen methode wordt volledig uitgevoerd. Bij een afschrijvingstabel of koerslijst verzorgen wij de volledige BPM-aangifte. Wanneer een taxatie nodig is, voeren wij een fysieke inspectie op locatie uit en stellen wij een zorgvuldig onderbouwd BPM-taxatierapport op.</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-medium text-sm">4</span>
               <div>
                 <p className="font-medium text-foreground mb-1">Opstellen van de BPM-aangifte</p>
-                <p className="text-muted-foreground">Wij werken de BPM-aangifte volledig voor je uit. Alle onderbouwingen worden hierin verwerkt, zodat de aangifte compleet en controleerbaar is opgebouwd.</p>
+                <p className="text-muted-foreground">De BPM-aangifte wordt volledig uitgewerkt. Alle onderbouwingen worden hierin verwerkt, zodat de aangifte compleet en controleerbaar is opgebouwd.</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
@@ -183,14 +174,41 @@ const BpmTaxatie = () => {
               </div>
             </div>
           </div>
-          <p className="text-muted-foreground mt-6">
-            Zo blijft het proces overzichtelijk en hoef je zelf niets samen te stellen of uit te zoeken.
-          </p>
+        </div>
+      </section>
+
+      {/* Belangrijk om te weten vóór de BPM-aangifte */}
+      <section className="section-padding bg-background">
+        <div className="container-narrow">
+          <div className="flex items-start gap-4 mb-6">
+            <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+              <AlertTriangle className="w-6 h-6 text-primary" />
+            </div>
+            <div>
+              <h2 className="text-2xl md:text-3xl font-semibold">
+                Belangrijk om te weten vóór de BPM-aangifte
+              </h2>
+            </div>
+          </div>
+          <div className="prose prose-lg max-w-none text-muted-foreground">
+            <p>
+              De wijze waarop de BPM wordt vastgesteld, heeft direct invloed op de BPM-aangifte en de onderbouwing richting de Belastingdienst. Daarom is het belangrijk om vooraf rekening te houden met een aantal uitgangspunten.
+            </p>
+            <p className="mt-4">
+              De BPM wordt vastgesteld op basis van de staat van het voertuig op het moment waarop de aangifte wordt voorbereid. Wanneer gebruik wordt gemaakt van een BPM-taxatie, is een fysieke inspectie vereist en vormt de werkelijke staat van het voertuig het uitgangspunt voor de afschrijving.
+            </p>
+            <p className="mt-4">
+              Een BPM-taxatierapport heeft een beperkte geldigheid en is bedoeld als onderbouwing bij de BPM-aangifte. Het voertuig dient daarom in de getaxeerde staat te blijven totdat de aangifte is ingediend en verwerkt, zodat de onderbouwing ook bij een eventuele controle inzichtelijk blijft.
+            </p>
+            <p className="mt-4">
+              Voor een correcte BPM-aangifte is het essentieel dat de aankoopgegevens volledig en juist zijn vastgelegd. Ontbrekende of onjuiste informatie kan leiden tot vragen of afwijzing van de aangifte door de Belastingdienst.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Onafhankelijk en fiscaal verdedigbaar */}
-      <section className="section-padding bg-background">
+      <section className="section-padding bg-muted/30">
         <div className="container-narrow">
           <div className="flex items-start gap-4 mb-6">
             <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
@@ -214,7 +232,7 @@ const BpmTaxatie = () => {
       </section>
 
       {/* Afsluitende CTA en formulier */}
-      <section className="section-padding bg-muted/30" ref={formRef}>
+      <section className="section-padding bg-background" ref={formRef}>
         <div className="container-narrow">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-semibold mb-4">
