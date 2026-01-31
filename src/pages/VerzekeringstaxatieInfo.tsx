@@ -227,11 +227,15 @@ const VerzekeringstaxatieInfo = () => {
             </h2>
             <div className="space-y-6 text-foreground/90 leading-relaxed">
               <p>
-                De verzekeringstaxaties worden uitgevoerd door een geregistreerd taxateur die is aangesloten bij erkende registers. Dat is voor verzekeraars een belangrijk uitgangspunt bij het beoordelen en accepteren van taxatierapporten.
+                De taxaties worden uitgevoerd door een geregistreerd taxateur die is aangesloten bij erkende registers, waaronder VRT en TMV. Daarnaast wordt gewerkt volgens de richtlijnen die binnen de branche worden gehanteerd, zoals die van FEHAC.
               </p>
               
               <p>
-                Verzekeraars gebruiken onze taxatierapporten om de verzekerde waarde van het voertuig vast te leggen. De rapporten zijn zorgvuldig opgebouwd en laten duidelijk zien hoe de waarde tot stand is gekomen.
+                Deze registraties en richtlijnen zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten.
+              </p>
+              
+              <p>
+                Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van het voertuig vast te leggen. De rapporten zijn zorgvuldig opgebouwd en laten duidelijk zien hoe de waarde tot stand is gekomen.
               </p>
               
               <p>
