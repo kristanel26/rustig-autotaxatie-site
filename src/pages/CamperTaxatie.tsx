@@ -18,19 +18,10 @@ const CamperTaxatie = () => {
       <LandingHero
         subtitle="Camperverzekeringstaxatie"
         title="Weet wat je camper waard is en verzeker hem goed"
-        description="Een camper is meer dan een voertuig. Vaak zit er veel tijd, geld en aandacht in, en soms ook emotionele waarde. Met een verzekeringstaxatie leg je vast wat je camper op dit moment werkelijk waard is. Die waarde vormt de basis voor de verzekering, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde."
+        description="Een camper is meer dan een voertuig. Vaak zit er veel tijd, geld en aandacht in, en soms ook emotionele waarde. Met een verzekeringstaxatie leg je vast wat je camper op dit moment werkelijk waard is. Die waarde vormt de basis voor de verzekering, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde. Een taxatierapport geeft vooraf duidelijkheid. Voor jezelf én voor de verzekeraar."
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
       />
-
-      {/* Intro */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <p className="text-lg text-foreground/90 leading-relaxed">
-            Een taxatierapport geeft vooraf duidelijkheid. Voor jezelf en voor de verzekeraar.
-          </p>
-        </div>
-      </section>
 
       {/* Waarom een verzekeringstaxatie */}
       <section className="section-padding bg-secondary/30">
