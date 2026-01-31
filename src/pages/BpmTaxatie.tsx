@@ -15,31 +15,26 @@ const BpmTaxatie = () => {
       <LandingHero
         subtitle="BPM-taxatie"
         title="BPM-taxatie bij import van voertuigen"
-        description={
-          <>
-            <p className="text-lg md:text-xl text-muted-foreground mb-4">
-              Importeer je een auto of motor uit het buitenland en wil je deze in Nederland registreren, dan moet je BPM betalen. De manier waarop de BPM wordt vastgesteld, heeft direct invloed op het te betalen bedrag.
-            </p>
-            <p className="text-base md:text-lg text-muted-foreground mb-4">
-              Wij verzorgen de BPM-vaststelling voor ondernemers en particulieren. Dat doen wij door de juiste methode toe te passen én uit te voeren: via een afschrijvingstabel, een koerslijst of een BPM-taxatierapport. Per voertuig beoordelen wij welke methode het meest voordelig én verdedigbaar is en zorgen wij voor de volledige onderbouwing voor de BPM-aangifte.
-            </p>
-            <p className="text-base md:text-lg text-muted-foreground">
-              Wanneer een BPM-taxatierapport nodig is, stellen wij dit op basis van de werkelijke staat van het voertuig op. Het rapport is zo opgebouwd dat het ook bij controle duidelijk en uitlegbaar is.
-            </p>
-          </>
-        }
+        description="Wanneer je een voertuig uit het buitenland importeert en in Nederland wilt registreren, moet er BPM worden aangegeven. De manier waarop de BPM wordt vastgesteld, verschilt per situatie en heeft direct invloed op de onderbouwing richting de Belastingdienst."
         ctaText="BPM-aangifte aanvragen"
         onCtaClick={scrollToForm}
       />
 
       {/* Inleidende uitleg: BPM bij import van voertuigen */}
+      {/* Inleidende uitleg: BPM bij import van voertuigen */}
       <section className="section-padding bg-muted/30">
         <div className="container-narrow">
+          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
+            BPM bij import van voertuigen
+          </h2>
           <p className="text-foreground/90 leading-relaxed mb-4">
-            Importeer je een voertuig uit het buitenland en wil je dit in Nederland registreren, dan krijg je te maken met BPM. De manier waarop deze BPM wordt vastgesteld, verschilt per voertuig en situatie en heeft direct invloed op de aangifte en de onderbouwing richting de Belastingdienst.
+            Wanneer je een voertuig uit het buitenland importeert en in Nederland wilt registreren, krijg je te maken met BPM. Dit is een belasting die je betaalt voordat het voertuig op Nederlands kenteken kan worden gezet.
+          </p>
+          <p className="text-foreground/90 leading-relaxed mb-4">
+            De hoogte van de BPM hangt af van de manier waarop de afschrijving wordt vastgesteld. Afhankelijk van het voertuig en de situatie kan dit via een afschrijvingstabel, een koerslijst of een BPM-taxatierapport.
           </p>
           <p className="text-foreground/90 leading-relaxed">
-            Automobiel Taxaties beoordeelt per voertuig welke methode fiscaal logisch en verdedigbaar is. Dit kan een afschrijvingstabel of koerslijst zijn, of een BPM-taxatie wanneer de werkelijke staat van het voertuig niet correct kan worden weerspiegeld via standaardmethodes.
+            Automobiel Taxaties beoordeelt per voertuig welke methode fiscaal logisch en verdedigbaar is. Die keuze heeft direct invloed op de BPM-aangifte en de onderbouwing richting de Belastingdienst.
           </p>
         </div>
       </section>
@@ -153,38 +148,38 @@ const BpmTaxatie = () => {
           </div>
           <div className="space-y-6">
             <div className="flex items-start gap-4">
-              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent-foreground flex items-center justify-center font-medium text-sm">1</span>
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-medium text-sm">1</span>
               <div>
                 <p className="font-medium text-foreground mb-1">Aanleveren van voertuiggegevens</p>
-                <p className="text-muted-foreground">Je levert de voertuiggegevens aan die op dat moment beschikbaar zijn, zoals voertuiggegevens, aankoopinformatie en eventuele buitenlandse documenten. Dat vormt de basis voor de verdere uitwerking.</p>
+                <p className="text-muted-foreground">Je levert de beschikbare voertuiggegevens aan, zoals het buitenlandse kenteken of chassisnummer, de aankoopfactuur en eventuele buitenlandse documenten. Dat vormt de basis voor de verdere uitwerking.</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent-foreground flex items-center justify-center font-medium text-sm">2</span>
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-medium text-sm">2</span>
               <div>
                 <p className="font-medium text-foreground mb-1">Beoordelen van de juiste methode</p>
-                <p className="text-muted-foreground">Wij beoordelen per voertuig welke BPM-methode fiscaal het meest logisch en verdedigbaar is. Dit kan een afschrijvingstabel of koerslijst zijn, of een BPM-taxatie wanneer de staat van het voertuig daartoe aanleiding geeft.</p>
+                <p className="text-muted-foreground">Wij beoordelen per voertuig welke BPM-methode fiscaal logisch en verdedigbaar is. Dit kan een afschrijvingstabel of koerslijst zijn, of een BPM-taxatie wanneer de staat van het voertuig daartoe aanleiding geeft.</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent-foreground flex items-center justify-center font-medium text-sm">3</span>
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-medium text-sm">3</span>
               <div>
                 <p className="font-medium text-foreground mb-1">Uitvoering van de gekozen methode</p>
                 <p className="text-muted-foreground">De gekozen methode voeren wij volledig uit. Bij een afschrijvingstabel of koerslijst verzorgen wij de volledige BPM-aangifte. Wanneer een taxatie nodig is, voeren wij een fysieke inspectie op locatie uit en stellen wij een zorgvuldig onderbouwd BPM-taxatierapport op.</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent-foreground flex items-center justify-center font-medium text-sm">4</span>
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-medium text-sm">4</span>
               <div>
                 <p className="font-medium text-foreground mb-1">Opstellen van de BPM-aangifte</p>
-                <p className="text-muted-foreground">Wij werken de BPM-aangifte volledig voor je uit. Alle onderbouwingen worden hierin verwerkt, zodat de aangifte compleet is opgebouwd.</p>
+                <p className="text-muted-foreground">Wij werken de BPM-aangifte volledig voor je uit. Alle onderbouwingen worden hierin verwerkt, zodat de aangifte compleet en controleerbaar is opgebouwd.</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent-foreground flex items-center justify-center font-medium text-sm">5</span>
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-medium text-sm">5</span>
               <div>
                 <p className="font-medium text-foreground mb-1">Oplevering per e-mail</p>
-                <p className="text-muted-foreground">Je ontvangt per e-mail de complete BPM-aangifte. Je hoeft deze alleen nog te ondertekenen en op te sturen naar de Belastingdienst.</p>
+                <p className="text-muted-foreground">Je ontvangt per e-mail de complete BPM-aangifte en eventuele bijlagen. Je hoeft deze alleen nog te ondertekenen en op te sturen naar de Belastingdienst.</p>
               </div>
             </div>
           </div>
