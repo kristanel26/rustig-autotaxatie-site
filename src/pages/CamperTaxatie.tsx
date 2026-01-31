@@ -186,7 +186,13 @@ const CamperTaxatie = () => {
             Acceptatie door verzekeraars en geldigheid van het rapport
           </h2>
           <p className="text-foreground/90 leading-relaxed mb-6">
-            Onze taxatierapporten worden opgesteld door een geregistreerd taxateur en worden in de praktijk gebruikt door verzekeraars om de verzekerde waarde van campers vast te leggen. De rapporten zijn zorgvuldig onderbouwd en laten duidelijk zien hoe de waarde tot stand is gekomen.
+            De taxaties worden uitgevoerd door een geregistreerd taxateur die is aangesloten bij erkende registers, waaronder VRT en TMV. Daarnaast wordt gewerkt volgens de richtlijnen die binnen de branche worden gehanteerd, zoals die van FEHAC.
+          </p>
+          <p className="text-foreground/90 leading-relaxed mb-6">
+            Deze registraties en richtlijnen zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten.
+          </p>
+          <p className="text-foreground/90 leading-relaxed mb-6">
+            Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van campers vast te leggen. De rapporten zijn zorgvuldig opgebouwd en laten duidelijk zien hoe de waarde tot stand is gekomen.
           </p>
           <p className="text-foreground/90 leading-relaxed">
             Een verzekeringstaxatierapport is doorgaans drie tot vijf jaar geldig. De exacte geldigheid verschilt per verzekeraar en polis. Het is daarom altijd verstandig om dit vooraf even te controleren bij je verzekeraar.
