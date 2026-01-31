@@ -128,6 +128,29 @@ const OldtimerTaxatie = () => {
             </div>
           </div>
 
+          {/* Informatieblokken */}
+          <div className="mt-12 space-y-8">
+            <div className="border-l-2 border-muted pl-6">
+              <h3 className="text-lg font-semibold text-foreground mb-3">Belangrijk om te weten vóór de taxatie</h3>
+              <p className="text-foreground/80 leading-relaxed">
+                De staat van het voertuig op de dag van taxatie is bepalend voor de vastgestelde waarde. Daarom is het belangrijk dat het voertuig op dat moment klaar is zoals het getaxeerd moet worden. Werkzaamheden zoals herstel, afbouw of aanpassingen die nog gepland staan, dienen vóór de taxatiedatum te zijn afgerond. Zo wordt de waarde vastgesteld op basis van de daadwerkelijke staat van het voertuig en ontstaat er achteraf geen discussie of teleurstelling. Deze werkwijze zorgt voor duidelijkheid, voor zowel jou als de verzekeraar.
+              </p>
+            </div>
+
+            <div className="border-l-2 border-muted pl-6">
+              <h3 className="text-lg font-semibold text-foreground mb-3">Wat hebben wij van je nodig?</h3>
+              <ol className="list-decimal list-inside space-y-2 text-foreground/80 leading-relaxed mb-4">
+                <li>Naam en contactgegevens.</li>
+                <li>De kentekencard van het voertuig.</li>
+                <li>Indien aanwezig het onderhoudsboekje.</li>
+                <li>Facturen van onderhoud, herstel of revisiewerkzaamheden die relevant zijn voor de staat van het voertuig.</li>
+              </ol>
+              <p className="text-foreground/80 leading-relaxed">
+                Het is geen probleem wanneer niet alle documenten beschikbaar zijn. Samen bekijken we wat nodig is voor een zorgvuldige taxatie.
+              </p>
+            </div>
+          </div>
+
           <p className="text-foreground/90 leading-relaxed mt-8">
             De taxaties worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt.
           </p>
