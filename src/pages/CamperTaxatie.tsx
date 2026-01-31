@@ -172,6 +172,10 @@ const CamperTaxatie = () => {
               </div>
             </div>
           </div>
+
+          <p className="text-foreground/90 leading-relaxed mt-8">
+            De taxaties worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt.
+          </p>
         </div>
       </section>
 
