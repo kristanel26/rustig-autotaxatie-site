@@ -132,6 +132,20 @@ const VerzekeringstaxatieInfo = () => {
                     </Button>
                   </div>
                 </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-foreground">Foodtruck verzekeringstaxatie</h3>
+                  <p className="text-foreground/90 mt-1 mb-3">
+                    Voor foodtrucks waarbij de inrichting, apparatuur en opbouw de waarde bepalen.
+                  </p>
+                  <div className="inline-block bg-[#ADAFC7]/15 p-2 rounded-lg">
+                    <Button variant="secondary-action" size="sm" asChild>
+                      <Link to="/foodtruck-taxatie" className="inline-flex items-center gap-2">
+                        Foodtruckverzekeringstaxatie bekijken
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
