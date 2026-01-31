@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
-import TrustIndicators from "@/components/TrustIndicators";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
@@ -63,7 +62,7 @@ const OldtimerTaxatie = () => {
             Onze werkwijze bij een oldtimerverzekeringstaxatie
           </h2>
           <p className="text-foreground/90 leading-relaxed mb-10">
-            Een oldtimerverzekeringstaxatie verloopt bij ons volgens een vaste en overzichtelijke werkwijze.
+            Een oldtimerverzekeringstaxatie verloopt bij ons volgens een vaste en overzichtelijke werkwijze. Zo weet je vooraf waar je aan toe bent.
           </p>
 
           <div className="space-y-8">
@@ -72,9 +71,9 @@ const OldtimerTaxatie = () => {
                 1
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Aanleveren van gegevens</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-2">Aanleveren van basisgegevens</h3>
                 <p className="text-foreground/90">
-                  Je dient een aanvraag in en levert de beschikbare gegevens over de oldtimer aan. Denk hierbij aan naam- en contactgegevens, voertuiggegevens en, indien aanwezig, documentatie over onderhoud, restauratie of historie.
+                  Je dient een aanvraag in en levert de beschikbare gegevens over de oldtimer aan.
                 </p>
               </div>
             </div>
@@ -86,7 +85,7 @@ const OldtimerTaxatie = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">Fysieke inspectie van de oldtimer</h3>
                 <p className="text-foreground/90">
-                  De oldtimer wordt fysiek geïnspecteerd. Dit kan op locatie plaatsvinden of bij ons, afhankelijk van de situatie. Tijdens de inspectie wordt gekeken naar de staat, originaliteit, uitvoering en eventuele bijzonderheden.
+                  De oldtimer wordt op locatie of bij ons geïnspecteerd. Daarbij kijken we naar staat, uitvoering en bijzonderheden.
                 </p>
               </div>
             </div>
@@ -98,7 +97,7 @@ const OldtimerTaxatie = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">Vaststellen van de waarde</h3>
                 <p className="text-foreground/90">
-                  Op basis van de inspectie en relevante marktgegevens wordt een realistische en verdedigbare waarde vastgesteld, passend bij het doel van de verzekeringstaxatie.
+                  Op basis van inspectie en marktgegevens wordt een realistische en verdedigbare waarde vastgesteld.
                 </p>
               </div>
             </div>
@@ -110,7 +109,7 @@ const OldtimerTaxatie = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">Opstellen van het taxatierapport</h3>
                 <p className="text-foreground/90">
-                  De bevindingen en de vastgestelde waarde worden overzichtelijk vastgelegd in een oldtimerverzekeringstaxatierapport. In het rapport is duidelijk te volgen hoe de waarde tot stand is gekomen.
+                  De bevindingen en waarde worden overzichtelijk vastgelegd in een taxatierapport.
                 </p>
               </div>
             </div>
@@ -122,38 +121,45 @@ const OldtimerTaxatie = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">Oplevering van het rapport</h3>
                 <p className="text-foreground/90">
-                  Je ontvangt het taxatierapport digitaal en kunt dit zelf doorsturen naar je verzekeraar.
+                  Je ontvangt het rapport digitaal en kunt dit gebruiken voor de verzekering.
                 </p>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Informatieblokken */}
-          <div className="mt-12 space-y-8">
-            <div className="border-l-2 border-muted pl-6">
-              <h3 className="text-lg font-semibold text-foreground mb-3">Belangrijk om te weten vóór de taxatie</h3>
-              <p className="text-foreground/80 leading-relaxed">
-                De staat van het voertuig op de dag van taxatie is bepalend voor de vastgestelde waarde. Daarom is het belangrijk dat het voertuig op dat moment klaar is zoals het getaxeerd moet worden. Werkzaamheden zoals herstel, afbouw of aanpassingen die nog gepland staan, dienen vóór de taxatiedatum te zijn afgerond. Zo wordt de waarde vastgesteld op basis van de daadwerkelijke staat van het voertuig en ontstaat er achteraf geen discussie of teleurstelling. Deze werkwijze zorgt voor duidelijkheid, voor zowel jou als de verzekeraar.
-              </p>
-            </div>
-
-            <div className="border-l-2 border-muted pl-6">
-              <h3 className="text-lg font-semibold text-foreground mb-3">Wat hebben wij van je nodig?</h3>
-              <ol className="list-decimal list-inside space-y-2 text-foreground/80 leading-relaxed mb-4">
-                <li>Naam en contactgegevens.</li>
-                <li>De kentekencard van het voertuig.</li>
-                <li>Indien aanwezig het onderhoudsboekje.</li>
-                <li>Facturen van onderhoud, herstel of revisiewerkzaamheden die relevant zijn voor de staat van het voertuig.</li>
-              </ol>
-              <p className="text-foreground/80 leading-relaxed">
-                Het is geen probleem wanneer niet alle documenten beschikbaar zijn. Samen bekijken we wat nodig is voor een zorgvuldige taxatie.
-              </p>
-            </div>
-          </div>
-
-          <p className="text-foreground/90 leading-relaxed mt-8">
-            De taxaties worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt.
+      {/* Belangrijk om te weten */}
+      <section className="section-padding bg-background">
+        <div className="container-narrow">
+          <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-4">
+            Belangrijk om te weten vóór de taxatie
+          </h3>
+          <p className="text-foreground/90 leading-relaxed mb-4">
+            De waarde van de oldtimer wordt vastgesteld op basis van de staat op de dag van taxatie. Werkzaamheden zoals herstel, restauratie of aanpassingen moeten daarom vóór de taxatiedatum zijn afgerond.
           </p>
+          <p className="text-foreground/90 leading-relaxed">
+            Alleen wat op dat moment aanwezig en zichtbaar is, wordt meegenomen in de waardebepaling. Dit voorkomt discussie of teleurstelling achteraf, voor jou én voor de verzekeraar.
+          </p>
+        </div>
+      </section>
+
+      {/* Wat hebben wij van je nodig */}
+      <section className="section-padding bg-secondary/30">
+        <div className="container-narrow">
+          <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-4">
+            Wat hebben wij van je nodig?
+          </h3>
+          <p className="text-foreground/90 leading-relaxed mb-4">
+            Om de taxatie goed te kunnen uitvoeren, vragen wij je het volgende aan te leveren:
+          </p>
+          <ul className="list-disc list-inside space-y-2 text-foreground/90">
+            <li>je naam en contactgegevens</li>
+            <li>de kentekencard van de oldtimer</li>
+            <li>onderhoudsboekje of servicehistorie (indien aanwezig)</li>
+            <li>facturen van restauratie, onderhoud of revisiewerkzaamheden</li>
+            <li>eventuele bijzonderheden in de historie</li>
+          </ul>
         </div>
       </section>
 
@@ -164,24 +170,14 @@ const OldtimerTaxatie = () => {
             Acceptatie door verzekeraars en geldigheid van het rapport
           </h2>
           <p className="text-foreground/90 leading-relaxed mb-6">
-            De taxaties worden uitgevoerd door een geregistreerd taxateur die is aangesloten bij erkende registers, waaronder VRT en TMV. Daarnaast wordt gewerkt volgens de richtlijnen die binnen de branche worden gehanteerd, zoals die van FEHAC.
+            De taxaties worden uitgevoerd door een geregistreerd taxateur, aangesloten bij VRT, TMV en FEHAC. Deze registraties zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten.
           </p>
           <p className="text-foreground/90 leading-relaxed mb-6">
-            Deze registraties en richtlijnen zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van oldtimers vast te leggen. Het rapport laat helder zien hoe de waarde is onderbouwd.
+            Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van de oldtimer vast te leggen. Het rapport laat helder zien hoe de waarde is onderbouwd.
           </p>
           <p className="text-foreground/90 leading-relaxed">
-            Een oldtimerverzekeringstaxatierapport is doorgaans twee tot drie jaar geldig. De exacte geldigheid verschilt per verzekeraar en polis. Het is verstandig om dit vooraf te controleren bij je verzekeraar en tijdig te beoordelen of een hertaxatie nodig is.
+            Een oldtimerverzekeringstaxatierapport is doorgaans 3 tot 5 jaar geldig. De exacte geldigheid verschilt per verzekeraar en polis. Informeer hier altijd naar bij je verzekeraar.
           </p>
-        </div>
-      </section>
-
-      {/* Trust indicators */}
-      <section className="section-padding bg-secondary/30">
-        <div className="container-wide">
-          <TrustIndicators />
         </div>
       </section>
 
