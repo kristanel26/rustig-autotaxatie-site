@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
-import TrustIndicators from "@/components/TrustIndicators";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
@@ -221,34 +220,18 @@ const VerzekeringstaxatieInfo = () => {
 
       <section className="section-padding bg-secondary/30">
         <div className="container-narrow">
-          <div className="prose prose-lg max-w-none">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-8">
-              Acceptatie door verzekeraars en geldigheid van het rapport
-            </h2>
-            <div className="space-y-6 text-foreground/90 leading-relaxed">
-              <p>
-                De taxaties worden uitgevoerd door een geregistreerd taxateur die is aangesloten bij erkende registers, waaronder VRT en TMV. Daarnaast wordt gewerkt volgens de richtlijnen die binnen de branche worden gehanteerd, zoals die van FEHAC.
-              </p>
-              
-              <p>
-                Deze registraties en richtlijnen zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten.
-              </p>
-              
-              <p>
-                Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van het voertuig vast te leggen. De rapporten zijn zorgvuldig opgebouwd en laten duidelijk zien hoe de waarde tot stand is gekomen.
-              </p>
-              
-              <p>
-                Een verzekeringstaxatierapport is doorgaans drie tot vijf jaar geldig. De exacte geldigheid verschilt per verzekeraar en polis. Het is daarom altijd verstandig om hierover navraag te doen bij je verzekeraar.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-padding bg-background">
-        <div className="container-wide">
-          <TrustIndicators />
+          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
+            Acceptatie door verzekeraars en geldigheid van het rapport
+          </h2>
+          <p className="text-foreground/90 leading-relaxed mb-6">
+            De taxaties worden uitgevoerd door een geregistreerd taxateur, aangesloten bij VRT, TMV en FEHAC. Deze registraties zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten.
+          </p>
+          <p className="text-foreground/90 leading-relaxed mb-6">
+            Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van het voertuig vast te leggen. Het rapport laat helder zien hoe de waarde is onderbouwd.
+          </p>
+          <p className="text-foreground/90 leading-relaxed">
+            Een verzekeringstaxatierapport is doorgaans 3 tot 5 jaar geldig. De exacte geldigheid verschilt per verzekeraar en polis. Informeer hier altijd naar bij je verzekeraar.
+          </p>
         </div>
       </section>
 

@@ -2,7 +2,6 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
-import TrustIndicators from "@/components/TrustIndicators";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
@@ -96,47 +95,15 @@ const CamperTaxatie = () => {
         </div>
       </section>
 
-      {/* Wat hebben wij van je nodig */}
-      <section className="section-padding bg-secondary/30">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Wat hebben wij van je nodig?
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            Om de taxatie goed te kunnen voorbereiden, vragen wij je het volgende aan te leveren:
-          </p>
-          <ol className="list-decimal list-inside space-y-2 text-foreground/90">
-            <li>Je naam en contactgegevens</li>
-            <li>De kentekencard van de camper</li>
-            <li>Eventueel onderhoudsboekje of servicehistorie</li>
-            <li>Facturen van aanpassingen, accessoires of zelfbouw</li>
-          </ol>
-        </div>
-      </section>
-
-      {/* Belangrijk om te weten */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Belangrijk om te weten vóór de taxatie
-          </h2>
-          <p className="text-foreground/90 leading-relaxed">
-            De waarde van de camper wordt vastgesteld op basis van de staat op de dag van de taxatie. Eventuele werkzaamheden, reparaties of aanpassingen moeten dus vooraf zijn afgerond. Alleen wat op dat moment aanwezig en zichtbaar is, kan worden meegenomen in de waardebepaling.
-          </p>
-        </div>
-      </section>
-
       {/* Werkwijze */}
       <section className="section-padding bg-secondary/30">
         <div className="container-narrow">
           <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
             Onze werkwijze bij een camperverzekeringstaxatie
           </h2>
-          <div className="space-y-6 text-foreground/90 leading-relaxed mb-10">
-            <p>
-              Een camperverzekeringstaxatie verloopt bij ons volgens een vaste en overzichtelijke werkwijze. Zo weet je vooraf waar je aan toe bent en wordt de waarde zorgvuldig vastgelegd.
-            </p>
-          </div>
+          <p className="text-foreground/90 leading-relaxed mb-10">
+            Een camperverzekeringstaxatie verloopt bij ons volgens een vaste en overzichtelijke werkwijze. Zo weet je vooraf waar je aan toe bent.
+          </p>
 
           <div className="space-y-8">
             <div className="flex gap-4">
@@ -158,7 +125,7 @@ const CamperTaxatie = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">Fysieke inspectie van de camper</h3>
                 <p className="text-foreground/90">
-                  De camper wordt op locatie geïnspecteerd. Daarbij wordt gekeken naar staat, uitvoering en eventuele aanpassingen.
+                  De camper wordt op locatie of bij ons geïnspecteerd. Daarbij kijken we naar staat, uitvoering en bijzonderheden.
                 </p>
               </div>
             </div>
@@ -170,7 +137,7 @@ const CamperTaxatie = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">Vaststellen van de waarde</h3>
                 <p className="text-foreground/90">
-                  Op basis van de inspectie en relevante marktgegevens wordt een realistische en verdedigbare waarde vastgesteld.
+                  Op basis van inspectie en marktgegevens wordt een realistische en verdedigbare waarde vastgesteld.
                 </p>
               </div>
             </div>
@@ -182,7 +149,7 @@ const CamperTaxatie = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">Opstellen van het taxatierapport</h3>
                 <p className="text-foreground/90">
-                  De bevindingen en de vastgestelde waarde worden overzichtelijk vastgelegd in een taxatierapport.
+                  De bevindingen en waarde worden overzichtelijk vastgelegd in een taxatierapport.
                 </p>
               </div>
             </div>
@@ -194,15 +161,45 @@ const CamperTaxatie = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">Oplevering van het rapport</h3>
                 <p className="text-foreground/90">
-                  Je ontvangt het taxatierapport en kunt dit gebruiken voor de verzekering.
+                  Je ontvangt het rapport digitaal en kunt dit gebruiken voor de verzekering.
                 </p>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <p className="text-foreground/90 leading-relaxed mt-8">
-            De taxaties worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt.
+      {/* Belangrijk om te weten */}
+      <section className="section-padding bg-background">
+        <div className="container-narrow">
+          <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-4">
+            Belangrijk om te weten vóór de taxatie
+          </h3>
+          <p className="text-foreground/90 leading-relaxed mb-4">
+            De waarde van de camper wordt vastgesteld op basis van de staat op de dag van taxatie. Werkzaamheden zoals herstel, afbouw of aanpassingen moeten daarom vóór de taxatiedatum zijn afgerond.
           </p>
+          <p className="text-foreground/90 leading-relaxed">
+            Alleen wat op dat moment aanwezig en zichtbaar is, wordt meegenomen in de waardebepaling. Dit voorkomt discussie of teleurstelling achteraf, voor jou én voor de verzekeraar.
+          </p>
+        </div>
+      </section>
+
+      {/* Wat hebben wij van je nodig */}
+      <section className="section-padding bg-secondary/30">
+        <div className="container-narrow">
+          <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-4">
+            Wat hebben wij van je nodig?
+          </h3>
+          <p className="text-foreground/90 leading-relaxed mb-4">
+            Om de taxatie goed te kunnen uitvoeren, vragen wij je het volgende aan te leveren:
+          </p>
+          <ul className="list-disc list-inside space-y-2 text-foreground/90">
+            <li>je naam en contactgegevens</li>
+            <li>de kentekencard van de camper</li>
+            <li>onderhoudsboekje of servicehistorie (indien aanwezig)</li>
+            <li>facturen van aanpassingen, accessoires of zelfbouw</li>
+            <li>eventuele bijzonderheden in de historie</li>
+          </ul>
         </div>
       </section>
 
@@ -213,24 +210,14 @@ const CamperTaxatie = () => {
             Acceptatie door verzekeraars en geldigheid van het rapport
           </h2>
           <p className="text-foreground/90 leading-relaxed mb-6">
-            De taxaties worden uitgevoerd door een geregistreerd taxateur die is aangesloten bij erkende registers, waaronder VRT en TMV. Daarnaast wordt gewerkt volgens de richtlijnen die binnen de branche worden gehanteerd, zoals die van FEHAC.
+            De taxaties worden uitgevoerd door een geregistreerd taxateur, aangesloten bij VRT, TMV en FEHAC. Deze registraties zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten.
           </p>
           <p className="text-foreground/90 leading-relaxed mb-6">
-            Deze registraties en richtlijnen zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van campers vast te leggen. De rapporten zijn zorgvuldig opgebouwd en laten duidelijk zien hoe de waarde tot stand is gekomen.
+            Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van de camper vast te leggen. Het rapport laat helder zien hoe de waarde is onderbouwd.
           </p>
           <p className="text-foreground/90 leading-relaxed">
-            Een verzekeringstaxatierapport is doorgaans drie tot vijf jaar geldig. De exacte geldigheid verschilt per verzekeraar en polis. Het is daarom altijd verstandig om dit vooraf even te controleren bij je verzekeraar.
+            Een camperverzekeringstaxatierapport is doorgaans 3 tot 5 jaar geldig. De exacte geldigheid verschilt per verzekeraar en polis. Informeer hier altijd naar bij je verzekeraar.
           </p>
-        </div>
-      </section>
-
-      {/* Trust indicators */}
-      <section className="section-padding bg-secondary/30">
-        <div className="container-wide">
-          <TrustIndicators />
         </div>
       </section>
 
