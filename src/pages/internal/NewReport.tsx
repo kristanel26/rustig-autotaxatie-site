@@ -18,13 +18,31 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 
+// Format Dutch license plate: remove spaces, uppercase, format as XX-XX-XX
+const formatLicensePlate = (value: string): string => {
+  // Remove all spaces and hyphens, convert to uppercase
+  const cleaned = value.replace(/[\s-]/g, '').toUpperCase();
+  
+  // If exactly 6 characters, format as XX-XX-XX
+  if (cleaned.length === 6) {
+    return `${cleaned.slice(0, 2)}-${cleaned.slice(2, 4)}-${cleaned.slice(4, 6)}`;
+  }
+  
+  // Return cleaned value if not 6 characters yet
+  return cleaned;
+};
+
+const LICENSE_PLATE_REGEX = /^[A-Z0-9]{2}-[A-Z0-9]{2}-[A-Z0-9]{2}$/;
+
 const reportSchema = z.object({
   client_name: z.string().trim().min(1, 'Klantnaam is verplicht'),
   opdrachtgever: z.string().optional(),
   customer_title: z.string().optional(),
   customer_initials: z.string().optional(),
   customer_last_name: z.string().optional(),
-  license_plate: z.string().optional(),
+  license_plate: z.string()
+    .min(1, 'Kenteken is verplicht')
+    .regex(LICENSE_PLATE_REGEX, 'Kenteken moet worden opgeslagen als 65-PR-VK'),
   vin: z.string().optional(),
   vehicle_model: z.string().optional(),
   inspection_location: z.string().optional(),
@@ -215,13 +233,20 @@ const NewReport = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="license_plate">Kenteken</Label>
+              <Label htmlFor="license_plate">Kenteken *</Label>
               <Input
                 id="license_plate"
                 value={formData.license_plate}
-                onChange={(e) => handleChange('license_plate', e.target.value)}
-                placeholder="XX-XXX-X"
+                onChange={(e) => {
+                  const formatted = formatLicensePlate(e.target.value);
+                  handleChange('license_plate', formatted);
+                }}
+                placeholder="65-PR-VK"
+                className={errors.license_plate ? 'border-destructive' : ''}
               />
+              {errors.license_plate && (
+                <p className="text-sm text-destructive">{errors.license_plate}</p>
+              )}
             </div>
             <div className="space-y-2">
               <Label htmlFor="vin">VIN / Chassisnummer</Label>
