@@ -8,7 +8,7 @@ import { ArrowLeft, Calendar, MapPin, Car, Euro } from 'lucide-react';
 
 interface Report {
   id: string;
-  report_number: number;
+  report_number: string;
   document_reference: string | null;
   client_name: string;
   opdrachtgever: string | null;

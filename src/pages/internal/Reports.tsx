@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 
 interface Report {
   id: string;
-  report_number: number;
+  report_number: string;
   license_plate: string | null;
   client_name: string;
   inspection_date: string | null;

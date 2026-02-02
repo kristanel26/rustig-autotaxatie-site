@@ -43,7 +43,6 @@ const NewReport = () => {
 
   const [formData, setFormData] = useState({
     client_name: '',
-    document_reference: '',
     opdrachtgever: '',
     license_plate: '',
     vin: '',
@@ -87,10 +86,9 @@ const NewReport = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase.from('reports').insert({
+      const { error } = await supabase.from('reports').insert([{
         user_id: user!.id,
         client_name: formData.client_name,
-        document_reference: formData.document_reference || null,
         opdrachtgever: formData.opdrachtgever || null,
         license_plate: formData.license_plate || null,
         vin: formData.vin || null,
@@ -102,7 +100,7 @@ const NewReport = () => {
         appraised_value_text: formData.appraised_value_text || null,
         quality_class: formData.quality_class ? parseInt(formData.quality_class) : null,
         general_remarks: formData.general_remarks || null,
-      });
+      }] as any);
 
       if (error) throw error;
 
@@ -151,14 +149,6 @@ const NewReport = () => {
                 id="opdrachtgever"
                 value={formData.opdrachtgever}
                 onChange={(e) => handleChange('opdrachtgever', e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="document_reference">Documentreferentie</Label>
-              <Input
-                id="document_reference"
-                value={formData.document_reference}
-                onChange={(e) => handleChange('document_reference', e.target.value)}
               />
             </div>
           </CardContent>
