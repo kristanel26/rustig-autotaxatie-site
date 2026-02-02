@@ -181,8 +181,8 @@ const PDFCover = () => {
           )}
         </div>
 
-        {/* Inspection Details & Executor Block */}
-        <div className="mb-2 space-y-0.5">
+        {/* Inspection Details */}
+        <div className="mb-4 space-y-0.5">
           <p className="text-sm leading-tight">
             <span className="text-slate-500 font-medium">Opnamedatum:</span>{' '}
             <span className="font-semibold text-slate-800">{formatDate(report.inspection_date)}</span>
@@ -199,7 +199,11 @@ const PDFCover = () => {
             <span className="text-slate-500 font-medium">Plaats:</span>{' '}
             <span className="font-semibold text-slate-800">{report.inspection_location || '-'}</span>
           </p>
-          <p className="text-sm leading-tight mt-1">
+        </div>
+
+        {/* Uitgevoerd door */}
+        <div className="mb-6">
+          <p className="text-sm leading-tight">
             <span className="text-slate-500 font-medium">Uitgevoerd door:</span>{' '}
             <span className="font-semibold text-slate-800">Erik Elderson</span>
           </p>
@@ -207,8 +211,11 @@ const PDFCover = () => {
           <p className="text-sm text-slate-500 font-medium leading-tight">Register-Taxateur VRT</p>
         </div>
 
+        {/* Spacer to push footer down */}
+        <div className="flex-grow" />
+
         {/* Footer with Company Details */}
-        <div className="border-t border-slate-300 pt-4">
+        <div className="border-t border-slate-300 pt-5 mt-auto">
           <div className="flex items-center gap-4">
             <img 
               src={logoAutomobiel} 
