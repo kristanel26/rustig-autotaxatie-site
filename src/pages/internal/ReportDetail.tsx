@@ -179,17 +179,16 @@ const ReportDetail = () => {
                 Klantgegevens
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="col-span-2">
-                  <p className="text-sm text-muted-foreground">Naam</p>
-                  <p className="font-medium">{customerName}</p>
-                </div>
-                {customerAddress && (
-                  <div className="col-span-2">
-                    <p className="text-sm text-muted-foreground">Adres</p>
-                    <p className="font-medium">{customerAddress}</p>
-                  </div>
+            <CardContent>
+              <div className="space-y-1">
+                <p className="font-medium">{customerName}</p>
+                {report.customer_street && (
+                  <p className="text-muted-foreground">{report.customer_street}</p>
+                )}
+                {(report.customer_postcode || report.customer_city) && (
+                  <p className="text-muted-foreground">
+                    {[report.customer_postcode, report.customer_city].filter(Boolean).join(' ')}
+                  </p>
                 )}
               </div>
             </CardContent>
