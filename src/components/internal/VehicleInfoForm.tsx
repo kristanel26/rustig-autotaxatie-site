@@ -33,6 +33,7 @@ export interface VehicleFormData {
   rdw_datum_eerste_toelating: string;
   rdw_datum_eerste_tenaamstelling: string;
   rdw_datum_laatste_tenaamstelling: string;
+  rdw_kleur: string;
 
   // Sectie 2: Technische hoofdgegevens (RDW)
   rdw_brandstof: string;
@@ -91,6 +92,7 @@ export const getInitialVehicleFormData = (): VehicleFormData => ({
   rdw_datum_eerste_toelating: '',
   rdw_datum_eerste_tenaamstelling: '',
   rdw_datum_laatste_tenaamstelling: '',
+  rdw_kleur: '',
   rdw_brandstof: '',
   rdw_transmissie: '',
   rdw_aantal_cilinders: '',
@@ -159,7 +161,7 @@ export const VehicleInfoForm = ({
       const rdwFields: (keyof VehicleFormData)[] = [
         'rdw_merk', 'rdw_handelsbenaming', 'rdw_voertuigsoort', 'rdw_carrosserievorm',
         'rdw_bouwjaar', 'rdw_datum_eerste_toelating', 'rdw_datum_eerste_tenaamstelling',
-        'rdw_datum_laatste_tenaamstelling', 'rdw_brandstof', 'rdw_transmissie',
+        'rdw_datum_laatste_tenaamstelling', 'rdw_kleur', 'rdw_brandstof', 'rdw_transmissie',
         'rdw_aantal_cilinders', 'rdw_cilinderinhoud', 'rdw_vermogen_kw',
         'rdw_aantal_deuren', 'rdw_wielbasis', 'rdw_ledig_gewicht',
         'rdw_massa_rijklaar', 'rdw_max_massa', 'rdw_apk_gekeurd',
@@ -321,6 +323,10 @@ export const VehicleInfoForm = ({
                 <div className="space-y-2">
                   <Label>Datum laatste tenaamstelling</Label>
                   <Input value={formData.rdw_datum_laatste_tenaamstelling} readOnly disabled className="bg-muted" />
+                </div>
+                <div className="space-y-2">
+                  <Label>Kleur</Label>
+                  <Input value={formData.rdw_kleur || '-'} readOnly disabled className="bg-muted" />
                 </div>
               </div>
             </div>

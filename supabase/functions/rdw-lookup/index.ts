@@ -27,6 +27,7 @@ interface RDWVoertuig {
   datum_tenaamstelling?: string;
   vervaldatum_apk?: string;
   wielbasis?: string;
+  eerste_kleur?: string;
 }
 
 interface RDWBrandstof {
@@ -179,6 +180,7 @@ serve(async (req) => {
       rdw_datum_eerste_toelating: parseRDWDate(voertuig.datum_eerste_toelating),
       rdw_datum_eerste_tenaamstelling: parseRDWDate(voertuig.datum_eerste_tenaamstelling_in_nederland),
       rdw_datum_laatste_tenaamstelling: parseRDWDate(voertuig.datum_tenaamstelling),
+      rdw_kleur: voertuig.eerste_kleur || null,
 
       // Sectie 2: Technische hoofdgegevens
       rdw_brandstof: brandstofData?.brandstof_omschrijving || null,
