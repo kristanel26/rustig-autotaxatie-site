@@ -181,8 +181,8 @@ const PDFCover = () => {
           )}
         </div>
 
-        {/* Inspection Details */}
-        <div className="mb-4 space-y-0.5">
+        {/* Inspection Details & Executor Block */}
+        <div className="mb-2 space-y-0.5">
           <p className="text-sm leading-tight">
             <span className="text-slate-500 font-medium">Opnamedatum:</span>{' '}
             <span className="font-semibold text-slate-800">{formatDate(report.inspection_date)}</span>
@@ -199,16 +199,12 @@ const PDFCover = () => {
             <span className="text-slate-500 font-medium">Plaats:</span>{' '}
             <span className="font-semibold text-slate-800">{report.inspection_location || '-'}</span>
           </p>
-        </div>
-
-        {/* Uitgevoerd door */}
-        <div className="mb-4">
-          <p className="text-sm">
+          <p className="text-sm leading-tight mt-1">
             <span className="text-slate-500 font-medium">Uitgevoerd door:</span>{' '}
             <span className="font-semibold text-slate-800">Erik Elderson</span>
           </p>
-          <p className="text-sm text-slate-500 font-medium leading-snug">TMV Register-Taxateur</p>
-          <p className="text-sm text-slate-500 font-medium leading-snug">Register-Taxateur VRT</p>
+          <p className="text-sm text-slate-500 font-medium leading-tight">TMV Register-Taxateur</p>
+          <p className="text-sm text-slate-500 font-medium leading-tight">Register-Taxateur VRT</p>
         </div>
 
         {/* Footer with Company Details */}
