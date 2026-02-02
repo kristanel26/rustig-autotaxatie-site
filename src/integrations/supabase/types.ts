@@ -19,6 +19,7 @@ export type Database = {
           appraised_value: number | null
           appraised_value_text: string | null
           client_name: string | null
+          constructievorm: string | null
           created_at: string
           customer_city: string | null
           customer_initials: string | null
@@ -27,6 +28,7 @@ export type Database = {
           customer_street: string | null
           customer_title: string | null
           document_reference: string | null
+          gebruik: string | null
           general_remarks: string | null
           id: string
           inspection_date: string | null
@@ -34,9 +36,39 @@ export type Database = {
           inspection_location: string | null
           inspection_start_time: string | null
           license_plate: string | null
+          opbouw_merk: string | null
+          opbouw_type: string | null
           opdrachtgever: string | null
           quality_class: number | null
+          rdw_aantal_cilinders: number | null
+          rdw_aantal_deuren: number | null
+          rdw_apk_gekeurd: boolean | null
+          rdw_apk_vervaldatum: string | null
+          rdw_bouwjaar: number | null
+          rdw_brandstof: string | null
+          rdw_carrosserievorm: string | null
+          rdw_cilinderinhoud: number | null
+          rdw_data_locked: boolean | null
+          rdw_datum_eerste_tenaamstelling: string | null
+          rdw_datum_eerste_toelating: string | null
+          rdw_datum_laatste_tenaamstelling: string | null
+          rdw_fetched_at: string | null
+          rdw_handelsbenaming: string | null
+          rdw_importvoertuig: boolean | null
+          rdw_ledig_gewicht: number | null
+          rdw_massa_rijklaar: number | null
+          rdw_max_massa: number | null
+          rdw_merk: string | null
+          rdw_transmissie: string | null
+          rdw_vermogen_kw: number | null
+          rdw_voertuigsoort: string | null
+          rdw_wielbasis: number | null
           report_number: string
+          soort_bouw: string | null
+          staat_bij_opname: string | null
+          stalling: string | null
+          tellerstand: number | null
+          tellerstand_type: string | null
           updated_at: string
           user_id: string
           vehicle_brand: string | null
@@ -48,6 +80,7 @@ export type Database = {
           appraised_value?: number | null
           appraised_value_text?: string | null
           client_name?: string | null
+          constructievorm?: string | null
           created_at?: string
           customer_city?: string | null
           customer_initials?: string | null
@@ -56,6 +89,7 @@ export type Database = {
           customer_street?: string | null
           customer_title?: string | null
           document_reference?: string | null
+          gebruik?: string | null
           general_remarks?: string | null
           id?: string
           inspection_date?: string | null
@@ -63,9 +97,39 @@ export type Database = {
           inspection_location?: string | null
           inspection_start_time?: string | null
           license_plate?: string | null
+          opbouw_merk?: string | null
+          opbouw_type?: string | null
           opdrachtgever?: string | null
           quality_class?: number | null
+          rdw_aantal_cilinders?: number | null
+          rdw_aantal_deuren?: number | null
+          rdw_apk_gekeurd?: boolean | null
+          rdw_apk_vervaldatum?: string | null
+          rdw_bouwjaar?: number | null
+          rdw_brandstof?: string | null
+          rdw_carrosserievorm?: string | null
+          rdw_cilinderinhoud?: number | null
+          rdw_data_locked?: boolean | null
+          rdw_datum_eerste_tenaamstelling?: string | null
+          rdw_datum_eerste_toelating?: string | null
+          rdw_datum_laatste_tenaamstelling?: string | null
+          rdw_fetched_at?: string | null
+          rdw_handelsbenaming?: string | null
+          rdw_importvoertuig?: boolean | null
+          rdw_ledig_gewicht?: number | null
+          rdw_massa_rijklaar?: number | null
+          rdw_max_massa?: number | null
+          rdw_merk?: string | null
+          rdw_transmissie?: string | null
+          rdw_vermogen_kw?: number | null
+          rdw_voertuigsoort?: string | null
+          rdw_wielbasis?: number | null
           report_number: string
+          soort_bouw?: string | null
+          staat_bij_opname?: string | null
+          stalling?: string | null
+          tellerstand?: number | null
+          tellerstand_type?: string | null
           updated_at?: string
           user_id: string
           vehicle_brand?: string | null
@@ -77,6 +141,7 @@ export type Database = {
           appraised_value?: number | null
           appraised_value_text?: string | null
           client_name?: string | null
+          constructievorm?: string | null
           created_at?: string
           customer_city?: string | null
           customer_initials?: string | null
@@ -85,6 +150,7 @@ export type Database = {
           customer_street?: string | null
           customer_title?: string | null
           document_reference?: string | null
+          gebruik?: string | null
           general_remarks?: string | null
           id?: string
           inspection_date?: string | null
@@ -92,9 +158,39 @@ export type Database = {
           inspection_location?: string | null
           inspection_start_time?: string | null
           license_plate?: string | null
+          opbouw_merk?: string | null
+          opbouw_type?: string | null
           opdrachtgever?: string | null
           quality_class?: number | null
+          rdw_aantal_cilinders?: number | null
+          rdw_aantal_deuren?: number | null
+          rdw_apk_gekeurd?: boolean | null
+          rdw_apk_vervaldatum?: string | null
+          rdw_bouwjaar?: number | null
+          rdw_brandstof?: string | null
+          rdw_carrosserievorm?: string | null
+          rdw_cilinderinhoud?: number | null
+          rdw_data_locked?: boolean | null
+          rdw_datum_eerste_tenaamstelling?: string | null
+          rdw_datum_eerste_toelating?: string | null
+          rdw_datum_laatste_tenaamstelling?: string | null
+          rdw_fetched_at?: string | null
+          rdw_handelsbenaming?: string | null
+          rdw_importvoertuig?: boolean | null
+          rdw_ledig_gewicht?: number | null
+          rdw_massa_rijklaar?: number | null
+          rdw_max_massa?: number | null
+          rdw_merk?: string | null
+          rdw_transmissie?: string | null
+          rdw_vermogen_kw?: number | null
+          rdw_voertuigsoort?: string | null
+          rdw_wielbasis?: number | null
           report_number?: string
+          soort_bouw?: string | null
+          staat_bij_opname?: string | null
+          stalling?: string | null
+          tellerstand?: number | null
+          tellerstand_type?: string | null
           updated_at?: string
           user_id?: string
           vehicle_brand?: string | null
