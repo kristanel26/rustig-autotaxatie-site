@@ -116,15 +116,17 @@ const PDFCover = () => {
   return (
     <div className="min-h-screen bg-white flex print:flex font-sans">
       {/* Left Column - ~45% */}
-      <div className="w-[45%] min-h-screen flex flex-col p-8 print:p-6 relative z-10 bg-white">
+      <div className="w-[45%] flex flex-col justify-between p-8 print:p-6 relative z-10 bg-white">
         
-        {/* Register Logos - horizontal row */}
-        <div className="flex items-center gap-3 mb-10">
-          <img src={logoVrt} alt="VRT" className="h-12 w-auto object-contain" />
-          <img src={logoHobeon} alt="Hobeon SKO" className="h-12 w-auto object-contain" />
-          <img src={logoTmv} alt="TMV" className="h-12 w-auto object-contain" />
-          <img src={logoFehac} alt="FEHAC" className="h-12 w-auto object-contain" />
-        </div>
+        {/* Content wrapper */}
+        <div>
+          {/* Register Logos - horizontal row */}
+          <div className="flex items-center gap-3 mb-10">
+            <img src={logoVrt} alt="VRT" className="h-12 w-auto object-contain" />
+            <img src={logoHobeon} alt="Hobeon SKO" className="h-12 w-auto object-contain" />
+            <img src={logoTmv} alt="TMV" className="h-12 w-auto object-contain" />
+            <img src={logoFehac} alt="FEHAC" className="h-12 w-auto object-contain" />
+          </div>
 
         {/* Title Block */}
         <div className="mb-8">
@@ -207,13 +209,14 @@ const PDFCover = () => {
         </div>
 
         {/* Uitgevoerd door */}
-        <div className="mb-6">
+        <div>
           <p className="text-sm leading-tight">
             <span className="text-slate-500 font-medium">Uitgevoerd door:</span>{' '}
             <span className="font-semibold text-slate-800">Erik Elderson</span>
           </p>
           <p className="text-sm text-slate-500 font-medium leading-tight">TMV Register-Taxateur</p>
           <p className="text-sm text-slate-500 font-medium leading-tight">Register-Taxateur VRT</p>
+        </div>
         </div>
 
         {/* Footer with Company Details */}
