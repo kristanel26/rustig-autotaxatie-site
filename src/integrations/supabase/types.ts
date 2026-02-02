@@ -19,6 +19,7 @@ export type Database = {
           appraised_value: number | null
           appraised_value_text: string | null
           client_name: string | null
+          cover_photo_url: string | null
           created_at: string
           customer_city: string | null
           customer_initials: string | null
@@ -47,6 +48,7 @@ export type Database = {
           appraised_value?: number | null
           appraised_value_text?: string | null
           client_name?: string | null
+          cover_photo_url?: string | null
           created_at?: string
           customer_city?: string | null
           customer_initials?: string | null
@@ -75,6 +77,7 @@ export type Database = {
           appraised_value?: number | null
           appraised_value_text?: string | null
           client_name?: string | null
+          cover_photo_url?: string | null
           created_at?: string
           customer_city?: string | null
           customer_initials?: string | null
