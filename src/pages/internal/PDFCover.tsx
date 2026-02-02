@@ -114,151 +114,187 @@ const PDFCover = () => {
     : null;
 
   return (
-    <div className="min-h-screen bg-white flex print:flex font-sans">
-      {/* Left Column - ~45% */}
-      <div className="w-[45%] flex flex-col justify-between p-8 print:p-6 relative z-10 bg-white">
-        
+    <div 
+      className="bg-white font-sans"
+      style={{
+        width: '210mm',
+        height: '297mm',
+        display: 'flex',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Left Column - 45% */}
+      <div 
+        style={{
+          width: '45%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          padding: '24px',
+          boxSizing: 'border-box',
+          backgroundColor: 'white',
+        }}
+      >
         {/* Content wrapper */}
         <div>
           {/* Register Logos - horizontal row */}
-          <div className="flex items-center gap-3 mb-10">
-            <img src={logoVrt} alt="VRT" className="h-12 w-auto object-contain" />
-            <img src={logoHobeon} alt="Hobeon SKO" className="h-12 w-auto object-contain" />
-            <img src={logoTmv} alt="TMV" className="h-12 w-auto object-contain" />
-            <img src={logoFehac} alt="FEHAC" className="h-12 w-auto object-contain" />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '32px' }}>
+            <img src={logoVrt} alt="VRT" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
+            <img src={logoHobeon} alt="Hobeon SKO" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
+            <img src={logoTmv} alt="TMV" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
+            <img src={logoFehac} alt="FEHAC" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
           </div>
 
-        {/* Title Block */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-semibold tracking-tight text-slate-800 uppercase leading-tight">
-            TAXATIERAPPORT
-          </h1>
-          <p className="text-base text-slate-500 font-normal leading-snug">
-            Volgens artikel 7:960 BW
-          </p>
-        </div>
-
-        {/* Inzake (Vehicle) */}
-        <div className="mb-5">
-          <p className="text-sm text-slate-500 font-medium leading-tight">
-            Inzake
-          </p>
-          <p className="text-xl font-semibold uppercase text-slate-800 leading-tight">
-            {vehicleDisplay}
-          </p>
-        </div>
-
-        {/* Kenteken */}
-        <div className="mb-5">
-          <p className="text-sm text-slate-500 font-medium leading-tight">
-            Kenteken
-          </p>
-          <p className="text-xl font-semibold text-slate-800 leading-tight">
-            {report.license_plate || '-'}
-          </p>
-        </div>
-
-        {/* Documentkenmerk */}
-        <div className="mb-8">
-          <p className="text-sm text-slate-500 font-medium leading-tight">
-            Documentkenmerk
-          </p>
-          <p className="text-xl font-semibold text-slate-800 leading-tight">
-            {report.document_reference || '-'}
-          </p>
-        </div>
-
-        {/* In opdracht van */}
-        <div className="mb-8">
-          <p className="text-sm text-slate-500 font-medium leading-tight mb-1">
-            In opdracht van
-          </p>
-          <p className="text-lg font-semibold text-slate-800 leading-snug">
-            {customerName}
-          </p>
-          {report.customer_street && (
-            <p className="text-lg font-semibold text-slate-800 leading-snug">
-              {report.customer_street.toUpperCase()}
+          {/* Title Block */}
+          <div style={{ marginBottom: '24px' }}>
+            <h1 style={{ fontSize: '28px', fontWeight: 600, letterSpacing: '-0.025em', color: '#1e293b', textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }}>
+              TAXATIERAPPORT
+            </h1>
+            <p style={{ fontSize: '14px', color: '#64748b', fontWeight: 400, lineHeight: 1.4, margin: '4px 0 0 0' }}>
+              Volgens artikel 7:960 BW
             </p>
-          )}
-          {(report.customer_postcode || report.customer_city) && (
-            <p className="text-lg font-semibold text-slate-800 leading-snug">
-              {[report.customer_postcode, report.customer_city?.toUpperCase()].filter(Boolean).join(' ')}
+          </div>
+
+          {/* Inzake (Vehicle) */}
+          <div style={{ marginBottom: '16px' }}>
+            <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
+              Inzake
             </p>
-          )}
-        </div>
+            <p style={{ fontSize: '18px', fontWeight: 600, textTransform: 'uppercase', color: '#1e293b', lineHeight: 1.2, margin: '2px 0 0 0' }}>
+              {vehicleDisplay}
+            </p>
+          </div>
 
-        {/* Inspection Details */}
-        <div className="mb-4 space-y-0.5">
-          <p className="text-sm leading-tight">
-            <span className="text-slate-500 font-medium">Opnamedatum:</span>{' '}
-            <span className="font-semibold text-slate-800">{formatDate(report.inspection_date)}</span>
-          </p>
-          <p className="text-sm leading-tight">
-            <span className="text-slate-500 font-medium">Aanvangstijd opname:</span>{' '}
-            <span className="font-semibold text-slate-800">{formatTime(report.inspection_start_time)}</span>
-          </p>
-          <p className="text-sm leading-tight">
-            <span className="text-slate-500 font-medium">Eindtijd opname:</span>{' '}
-            <span className="font-semibold text-slate-800">{formatTime(report.inspection_end_time)}</span>
-          </p>
-          <p className="text-sm leading-tight">
-            <span className="text-slate-500 font-medium">Plaats:</span>{' '}
-            <span className="font-semibold text-slate-800">{capitalizeFirst(report.inspection_location)}</span>
-          </p>
-        </div>
+          {/* Kenteken */}
+          <div style={{ marginBottom: '16px' }}>
+            <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
+              Kenteken
+            </p>
+            <p style={{ fontSize: '18px', fontWeight: 600, color: '#1e293b', lineHeight: 1.2, margin: '2px 0 0 0' }}>
+              {report.license_plate || '-'}
+            </p>
+          </div>
 
-        {/* Uitgevoerd door */}
-        <div>
-          <p className="text-sm leading-tight">
-            <span className="text-slate-500 font-medium">Uitgevoerd door:</span>{' '}
-            <span className="font-semibold text-slate-800">Erik Elderson</span>
-          </p>
-          <p className="text-sm text-slate-500 font-medium leading-tight">TMV Register-Taxateur</p>
-          <p className="text-sm text-slate-500 font-medium leading-tight">Register-Taxateur VRT</p>
-        </div>
+          {/* Documentkenmerk */}
+          <div style={{ marginBottom: '24px' }}>
+            <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
+              Documentkenmerk
+            </p>
+            <p style={{ fontSize: '18px', fontWeight: 600, color: '#1e293b', lineHeight: 1.2, margin: '2px 0 0 0' }}>
+              {report.document_reference || '-'}
+            </p>
+          </div>
+
+          {/* In opdracht van */}
+          <div style={{ marginBottom: '24px' }}>
+            <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.2, margin: '0 0 4px 0' }}>
+              In opdracht van
+            </p>
+            <p style={{ fontSize: '16px', fontWeight: 600, color: '#1e293b', lineHeight: 1.3, margin: 0 }}>
+              {customerName}
+            </p>
+            {report.customer_street && (
+              <p style={{ fontSize: '16px', fontWeight: 600, color: '#1e293b', lineHeight: 1.3, margin: 0 }}>
+                {report.customer_street.toUpperCase()}
+              </p>
+            )}
+            {(report.customer_postcode || report.customer_city) && (
+              <p style={{ fontSize: '16px', fontWeight: 600, color: '#1e293b', lineHeight: 1.3, margin: 0 }}>
+                {[report.customer_postcode, report.customer_city?.toUpperCase()].filter(Boolean).join(' ')}
+              </p>
+            )}
+          </div>
+
+          {/* Inspection Details */}
+          <div style={{ marginBottom: '16px' }}>
+            <p style={{ fontSize: '12px', lineHeight: 1.4, margin: '2px 0' }}>
+              <span style={{ color: '#64748b', fontWeight: 500 }}>Opnamedatum:</span>{' '}
+              <span style={{ fontWeight: 600, color: '#1e293b' }}>{formatDate(report.inspection_date)}</span>
+            </p>
+            <p style={{ fontSize: '12px', lineHeight: 1.4, margin: '2px 0' }}>
+              <span style={{ color: '#64748b', fontWeight: 500 }}>Aanvangstijd opname:</span>{' '}
+              <span style={{ fontWeight: 600, color: '#1e293b' }}>{formatTime(report.inspection_start_time)}</span>
+            </p>
+            <p style={{ fontSize: '12px', lineHeight: 1.4, margin: '2px 0' }}>
+              <span style={{ color: '#64748b', fontWeight: 500 }}>Eindtijd opname:</span>{' '}
+              <span style={{ fontWeight: 600, color: '#1e293b' }}>{formatTime(report.inspection_end_time)}</span>
+            </p>
+            <p style={{ fontSize: '12px', lineHeight: 1.4, margin: '2px 0' }}>
+              <span style={{ color: '#64748b', fontWeight: 500 }}>Plaats:</span>{' '}
+              <span style={{ fontWeight: 600, color: '#1e293b' }}>{capitalizeFirst(report.inspection_location)}</span>
+            </p>
+          </div>
+
+          {/* Uitgevoerd door */}
+          <div>
+            <p style={{ fontSize: '12px', lineHeight: 1.4, margin: '2px 0' }}>
+              <span style={{ color: '#64748b', fontWeight: 500 }}>Uitgevoerd door:</span>{' '}
+              <span style={{ fontWeight: 600, color: '#1e293b' }}>Erik Elderson</span>
+            </p>
+            <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.4, margin: '2px 0' }}>TMV Register-Taxateur</p>
+            <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.4, margin: '2px 0' }}>Register-Taxateur VRT</p>
+          </div>
         </div>
 
         {/* Footer with Company Details */}
-        <div className="border-t border-slate-300 pt-4">
-          <div className="flex items-center gap-4">
+        <div style={{ borderTop: '1px solid #cbd5e1', paddingTop: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <img 
               src={logoAutomobiel} 
               alt="Automobiel Taxaties" 
-              className="h-14 w-auto flex-shrink-0"
+              style={{ height: '48px', width: 'auto', flexShrink: 0 }}
             />
-            <div className="text-sm text-slate-600 leading-relaxed">
-              <span className="font-semibold text-slate-800">Automobiel Taxaties</span>
-              <span className="mx-1">|</span>
+            <div style={{ fontSize: '11px', color: '#475569', lineHeight: 1.5 }}>
+              <span style={{ fontWeight: 600, color: '#1e293b' }}>Automobiel Taxaties</span>
+              <span style={{ margin: '0 4px' }}>|</span>
               <span>Leigraaf 160, 6651 GJ Druten</span>
-              <span className="mx-1">|</span>
+              <span style={{ margin: '0 4px' }}>|</span>
               <span>KVK: 95549269</span>
-              <span className="mx-1">|</span>
+              <span style={{ margin: '0 4px' }}>|</span>
               <span>BTW: NL003366178B93</span>
               <br />
               <span>TMV 33106</span>
-              <span className="mx-1">|</span>
+              <span style={{ margin: '0 4px' }}>|</span>
               <span>VRT 22-523-M</span>
-              <span className="mx-1">|</span>
+              <span style={{ margin: '0 4px' }}>|</span>
               <span>Bank: NL80RABO 0387915680</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Right Column - ~55% - Vehicle Photo */}
-      <div className="w-[55%] min-h-screen relative">
+      {/* Right Column - 55% - Vehicle Photo */}
+      <div 
+        style={{
+          width: '55%',
+          height: '100%',
+          position: 'relative',
+        }}
+      >
         {coverPhoto ? (
           <img
             src={coverPhoto}
             alt="Voertuig"
-            className="w-full h-full object-cover"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-100">
-            <div className="text-center text-gray-400">
+          <div style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#f3f4f6',
+          }}>
+            <div style={{ textAlign: 'center', color: '#9ca3af' }}>
               <svg
-                className="mx-auto h-24 w-24 mb-4 opacity-50"
+                style={{ margin: '0 auto', height: '96px', width: '96px', opacity: 0.5 }}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -270,7 +306,7 @@ const PDFCover = () => {
                   d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                 />
               </svg>
-              <p className="text-sm">Geen voertuigfoto beschikbaar</p>
+              <p style={{ fontSize: '14px', marginTop: '16px' }}>Geen voertuigfoto beschikbaar</p>
             </div>
           </div>
         )}
