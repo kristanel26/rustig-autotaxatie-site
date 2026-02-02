@@ -205,7 +205,7 @@ const NewReport = () => {
         
         // RDW Sectie 2: Technische gegevens
         rdw_brandstof: vehicleData.rdw_brandstof || null,
-        rdw_transmissie: vehicleData.rdw_transmissie || null,
+        transmissie: vehicleData.transmissie || null,
         rdw_aantal_cilinders: vehicleData.rdw_aantal_cilinders ? parseInt(vehicleData.rdw_aantal_cilinders) : null,
         rdw_cilinderinhoud: vehicleData.rdw_cilinderinhoud ? parseInt(vehicleData.rdw_cilinderinhoud) : null,
         rdw_vermogen_kw: vehicleData.rdw_vermogen_kw ? parseInt(vehicleData.rdw_vermogen_kw) : null,

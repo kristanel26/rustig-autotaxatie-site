@@ -70,6 +70,7 @@ export type Database = {
           stalling: string | null
           tellerstand: number | null
           tellerstand_type: string | null
+          transmissie: string | null
           updated_at: string
           user_id: string
           vehicle_brand: string | null
@@ -133,6 +134,7 @@ export type Database = {
           stalling?: string | null
           tellerstand?: number | null
           tellerstand_type?: string | null
+          transmissie?: string | null
           updated_at?: string
           user_id: string
           vehicle_brand?: string | null
@@ -196,6 +198,7 @@ export type Database = {
           stalling?: string | null
           tellerstand?: number | null
           tellerstand_type?: string | null
+          transmissie?: string | null
           updated_at?: string
           user_id?: string
           vehicle_brand?: string | null
