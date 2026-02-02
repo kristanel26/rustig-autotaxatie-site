@@ -30,7 +30,7 @@ export type Database = {
           license_plate: string | null
           opdrachtgever: string | null
           quality_class: number | null
-          report_number: number
+          report_number: string
           updated_at: string
           user_id: string
           vin: string | null
@@ -50,7 +50,7 @@ export type Database = {
           license_plate?: string | null
           opdrachtgever?: string | null
           quality_class?: number | null
-          report_number?: number
+          report_number: string
           updated_at?: string
           user_id: string
           vin?: string | null
@@ -70,7 +70,7 @@ export type Database = {
           license_plate?: string | null
           opdrachtgever?: string | null
           quality_class?: number | null
-          report_number?: number
+          report_number?: string
           updated_at?: string
           user_id?: string
           vin?: string | null
