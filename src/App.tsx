@@ -26,6 +26,7 @@ import Reports from "./pages/internal/Reports";
 import NewReport from "./pages/internal/NewReport";
 import ReportDetail from "./pages/internal/ReportDetail";
 import EditReport from "./pages/internal/EditReport";
+import PDFCover from "./pages/internal/PDFCover";
 
 const queryClient = new QueryClient();
 
@@ -92,6 +93,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <EditReport />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/intern/pdf/voorblad/:id"
+              element={
+                <ProtectedRoute>
+                  <PDFCover />
                 </ProtectedRoute>
               }
             />

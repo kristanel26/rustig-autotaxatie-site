@@ -151,6 +151,12 @@ const ReportDetail = () => {
             Rapport Bewerken
             <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
           </Button>
+          <Button 
+            variant="outline" 
+            onClick={() => window.open(`/intern/pdf/voorblad/${id}`, '_blank')}
+          >
+            PDF Voorblad
+          </Button>
         </div>
 
         {/* Report Header */}
