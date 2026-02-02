@@ -4,7 +4,7 @@ import InternalLayout from '@/components/internal/InternalLayout';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, Calendar, MapPin, Car, Euro } from 'lucide-react';
+import { ArrowLeft, Calendar, MapPin, Car, Euro, FileDown } from 'lucide-react';
 
 interface Report {
   id: string;
@@ -94,6 +94,34 @@ const ReportDetail = () => {
     return labels[value] || String(value);
   };
 
+  // Generate PDF filename: Taxatierapport_[document_reference]_[kenteken]_[merk]-[model].pdf
+  const generatePdfFilename = () => {
+    if (!report) return 'Taxatierapport.pdf';
+    
+    const parts = [
+      'Taxatierapport',
+      report.document_reference || '',
+      report.license_plate || '',
+      [report.vehicle_brand, report.vehicle_model].filter(Boolean).join('-')
+    ].filter(Boolean);
+    
+    return parts.join('_').replace(/\s+/g, '-') + '.pdf';
+  };
+
+  const handlePdfDownload = () => {
+    const pdfUrl = `/intern/pdf/voorblad/${id}`;
+    const filename = generatePdfFilename();
+    
+    // Open PDF in new tab with suggested filename
+    const link = document.createElement('a');
+    link.href = pdfUrl;
+    link.target = '_blank';
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   if (loading) {
     return (
       <InternalLayout title="Rapport laden...">
@@ -153,9 +181,16 @@ const ReportDetail = () => {
           </Button>
           <Button 
             variant="outline" 
+            onClick={handlePdfDownload}
+          >
+            <FileDown className="h-4 w-4 mr-2" />
+            PDF Downloaden
+          </Button>
+          <Button 
+            variant="ghost" 
             onClick={() => window.open(`/intern/pdf/voorblad/${id}`, '_blank')}
           >
-            PDF Voorblad
+            PDF Bekijken
           </Button>
         </div>
 
