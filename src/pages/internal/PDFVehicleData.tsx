@@ -25,7 +25,9 @@ interface Report {
   
   // RDW Sectie 2: Technische hoofdgegevens
   rdw_brandstof: string | null;
-  rdw_transmissie: string | null;
+  
+  // Taxateur: Transmissie
+  transmissie: string | null;
   rdw_aantal_cilinders: number | null;
   rdw_cilinderinhoud: number | null;
   rdw_vermogen_kw: number | null;
@@ -202,7 +204,13 @@ const PDFVehicleData = () => {
           <div style={{ marginBottom: '16px' }}>
             <SectionHeader number="2" title="Technische hoofdgegevens (RDW)" />
             <DataRow label="Brandstof" value={report.rdw_brandstof || '-'} source="RDW" />
-            <DataRow label="Transmissie" value={report.rdw_transmissie || '-'} source="RDW" />
+            {report.transmissie && (
+              <DataRow 
+                label="Transmissie" 
+                value={report.transmissie === 'handgeschakeld' ? 'Handgeschakeld' : report.transmissie === 'automaat' ? 'Automaat' : '-'} 
+                source="Taxateur" 
+              />
+            )}
             <DataRow label="Aantal cilinders" value={formatNumber(report.rdw_aantal_cilinders)} source="RDW" />
             <DataRow label="Cilinderinhoud (cc)" value={formatNumber(report.rdw_cilinderinhoud, 'cc')} source="RDW" />
             <DataRow label="Vermogen (kW)" value={formatNumber(report.rdw_vermogen_kw, 'kW')} source="RDW" />

@@ -37,12 +37,14 @@ export interface VehicleFormData {
 
   // Sectie 2: Technische hoofdgegevens (RDW)
   rdw_brandstof: string;
-  rdw_transmissie: string;
   rdw_aantal_cilinders: string;
   rdw_cilinderinhoud: string;
   rdw_vermogen_kw: string;
   rdw_aantal_deuren: string;
   rdw_wielbasis: string;
+
+  // Transmissie (Taxateur - verplicht veld)
+  transmissie: string;
 
   // Sectie 3: Massa en gewichten (RDW)
   rdw_ledig_gewicht: string;
@@ -94,7 +96,7 @@ export const getInitialVehicleFormData = (): VehicleFormData => ({
   rdw_datum_laatste_tenaamstelling: '',
   rdw_kleur: '',
   rdw_brandstof: '',
-  rdw_transmissie: '',
+  transmissie: '',
   rdw_aantal_cilinders: '',
   rdw_cilinderinhoud: '',
   rdw_vermogen_kw: '',
@@ -157,11 +159,11 @@ export const VehicleInfoForm = ({
         return;
       }
 
-      // Update all RDW fields
+      // Update all RDW fields (transmissie is now a taxateur field, not from RDW)
       const rdwFields: (keyof VehicleFormData)[] = [
         'rdw_merk', 'rdw_handelsbenaming', 'rdw_voertuigsoort', 'rdw_carrosserievorm',
         'rdw_bouwjaar', 'rdw_datum_eerste_toelating', 'rdw_datum_eerste_tenaamstelling',
-        'rdw_datum_laatste_tenaamstelling', 'rdw_kleur', 'rdw_brandstof', 'rdw_transmissie',
+        'rdw_datum_laatste_tenaamstelling', 'rdw_kleur', 'rdw_brandstof',
         'rdw_aantal_cilinders', 'rdw_cilinderinhoud', 'rdw_vermogen_kw',
         'rdw_aantal_deuren', 'rdw_wielbasis', 'rdw_ledig_gewicht',
         'rdw_massa_rijklaar', 'rdw_max_massa', 'rdw_apk_gekeurd',
@@ -350,10 +352,6 @@ export const VehicleInfoForm = ({
                 <Input value={formData.rdw_brandstof} readOnly disabled className="bg-muted" />
               </div>
               <div className="space-y-2">
-                <Label>Transmissie</Label>
-                <Input value={formData.rdw_transmissie || '-'} readOnly disabled className="bg-muted" />
-              </div>
-              <div className="space-y-2">
                 <Label>Aantal cilinders</Label>
                 <Input value={formData.rdw_aantal_cilinders} readOnly disabled className="bg-muted" />
               </div>
@@ -377,6 +375,33 @@ export const VehicleInfoForm = ({
           </CardContent>
         </Card>
       )}
+
+      {/* Transmissie (Taxateur - verplicht veld) */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Transmissie</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-2">
+            <Label htmlFor="transmissie">Transmissie *</Label>
+            <Select
+              value={formData.transmissie}
+              onValueChange={(value) => onChange('transmissie', value)}
+            >
+              <SelectTrigger className={errors.transmissie ? 'border-destructive' : ''}>
+                <SelectValue placeholder="Selecteer transmissie..." />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="handgeschakeld">Handgeschakeld</SelectItem>
+                <SelectItem value="automaat">Automaat</SelectItem>
+              </SelectContent>
+            </Select>
+            {errors.transmissie && (
+              <p className="text-sm text-destructive">{errors.transmissie}</p>
+            )}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Sectie 3: Massa en gewichten (RDW) */}
       {rdwLocked && (
