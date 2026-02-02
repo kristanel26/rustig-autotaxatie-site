@@ -21,8 +21,7 @@ interface Report {
   rdw_datum_eerste_toelating: string | null;
   rdw_datum_eerste_tenaamstelling: string | null;
   rdw_datum_laatste_tenaamstelling: string | null;
-  rdw_apk_gekeurd: boolean | null;
-  rdw_apk_vervaldatum: string | null;
+  rdw_kleur: string | null;
   
   // RDW Sectie 2: Technische hoofdgegevens
   rdw_brandstof: string | null;
@@ -39,6 +38,8 @@ interface Report {
   rdw_max_massa: number | null;
   
   // RDW Sectie 4: Keuring en status
+  rdw_apk_gekeurd: boolean | null;
+  rdw_apk_vervaldatum: string | null;
   rdw_importvoertuig: boolean | null;
   
   // Taxateur Sectie 5: Tellerstand
@@ -129,35 +130,28 @@ const PDFVehicleData = () => {
     );
   }
 
-  const DataRow = ({ label, value }: { label: string; value: string }) => (
-    <div style={{ display: 'flex', padding: '6px 0', borderBottom: '1px solid #e2e8f0' }}>
-      <span style={{ width: '50%', color: '#64748b', fontSize: '11px', fontWeight: 500 }}>{label}</span>
-      <span style={{ width: '50%', color: '#1e293b', fontSize: '11px', fontWeight: 600 }}>{value}</span>
+  const DataRow = ({ label, value, source }: { label: string; value: string; source?: string }) => (
+    <div style={{ display: 'flex', padding: '5px 0', borderBottom: '1px solid #e2e8f0' }}>
+      <span style={{ width: '45%', color: '#64748b', fontSize: '10px', fontWeight: 500 }}>{label}</span>
+      <span style={{ width: '40%', color: '#1e293b', fontSize: '10px', fontWeight: 600 }}>{value}</span>
+      {source && (
+        <span style={{ width: '15%', color: '#94a3b8', fontSize: '9px', fontWeight: 400, textAlign: 'right' }}>{source}</span>
+      )}
     </div>
   );
 
-  const SectionHeader = ({ title, badge }: { title: string; badge?: string }) => (
+  const SectionHeader = ({ number, title }: { number: string; title: string }) => (
     <div style={{ 
       display: 'flex', 
       alignItems: 'center', 
       gap: '8px',
-      marginBottom: '12px',
-      paddingBottom: '8px',
+      marginBottom: '8px',
+      paddingBottom: '6px',
       borderBottom: '2px solid #1e293b'
     }}>
-      <h3 style={{ fontSize: '14px', fontWeight: 600, color: '#1e293b', margin: 0 }}>{title}</h3>
-      {badge && (
-        <span style={{ 
-          fontSize: '9px', 
-          fontWeight: 500, 
-          color: '#64748b', 
-          backgroundColor: '#f1f5f9',
-          padding: '2px 6px',
-          borderRadius: '4px'
-        }}>
-          {badge}
-        </span>
-      )}
+      <h3 style={{ fontSize: '12px', fontWeight: 600, color: '#1e293b', margin: 0 }}>
+        {number}. {title}
+      </h3>
     </div>
   );
 
@@ -167,104 +161,104 @@ const PDFVehicleData = () => {
       style={{
         width: '210mm',
         minHeight: '297mm',
-        padding: '24px',
+        padding: '20px 24px',
         boxSizing: 'border-box',
         position: 'relative',
       }}
     >
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
         <div>
-          <h1 style={{ fontSize: '20px', fontWeight: 600, color: '#1e293b', margin: 0 }}>VOERTUIGGEGEVENS</h1>
-          <p style={{ fontSize: '11px', color: '#64748b', margin: '4px 0 0 0' }}>
+          <h1 style={{ fontSize: '18px', fontWeight: 600, color: '#1e293b', margin: 0, textTransform: 'uppercase' }}>VOERTUIGGEGEVENS</h1>
+          <p style={{ fontSize: '10px', color: '#64748b', margin: '2px 0 0 0' }}>
             Documentkenmerk: {report.document_reference || '-'}
           </p>
         </div>
-        <img src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '40px', width: 'auto' }} />
+        <img src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '36px', width: 'auto' }} />
       </div>
 
       {/* Two-column layout */}
-      <div style={{ display: 'flex', gap: '24px' }}>
+      <div style={{ display: 'flex', gap: '20px' }}>
         {/* Left Column */}
         <div style={{ width: '50%' }}>
-          {/* Sectie 1: Voertuigidentificatie (RDW) */}
-          <div style={{ marginBottom: '20px' }}>
-            <SectionHeader title="1. Voertuigidentificatie" badge="RDW" />
-            <DataRow label="Kenteken" value={report.license_plate || '-'} />
-            <DataRow label="Merk" value={report.rdw_merk || '-'} />
-            <DataRow label="Handelsbenaming / Model" value={report.rdw_handelsbenaming || '-'} />
-            <DataRow label="Voertuigsoort" value={report.rdw_voertuigsoort || '-'} />
-            <DataRow label="Carrosserievorm" value={report.rdw_carrosserievorm || '-'} />
-            <DataRow label="Chassisnummer (VIN)" value={report.vin || '-'} />
-            <DataRow label="Meldcode" value={getMeldcode(report.vin)} />
-            <DataRow label="Bouwjaar" value={report.rdw_bouwjaar?.toString() || '-'} />
-            <DataRow label="Datum eerste toelating" value={formatDate(report.rdw_datum_eerste_toelating)} />
-            <DataRow label="Datum eerste tenaamstelling" value={formatDate(report.rdw_datum_eerste_tenaamstelling)} />
-            <DataRow label="Datum laatste tenaamstelling" value={formatDate(report.rdw_datum_laatste_tenaamstelling)} />
-            <DataRow label="APK gekeurd" value={formatBoolean(report.rdw_apk_gekeurd)} />
-            <DataRow label="APK vervaldatum" value={formatDate(report.rdw_apk_vervaldatum)} />
-            <p style={{ fontSize: '9px', color: '#94a3b8', fontStyle: 'italic', marginTop: '8px' }}>
-              Gegevens afkomstig uit RDW OVI.
-            </p>
+          {/* Sectie 1: Identificatie (RDW) */}
+          <div style={{ marginBottom: '16px' }}>
+            <SectionHeader number="1" title="Identificatie (RDW)" />
+            <DataRow label="Kenteken" value={report.license_plate || '-'} source="RDW" />
+            <DataRow label="Merk" value={report.rdw_merk || '-'} source="RDW" />
+            <DataRow label="Handelsbenaming" value={report.rdw_handelsbenaming || '-'} source="RDW" />
+            <DataRow label="Voertuigsoort" value={report.rdw_voertuigsoort || '-'} source="RDW" />
+            <DataRow label="Carrosserievorm" value={report.rdw_carrosserievorm || '-'} source="RDW" />
+            <DataRow label="Chassisnummer (VIN)" value={report.vin || '-'} source="RDW" />
+            <DataRow label="Meldcode" value={getMeldcode(report.vin)} source="" />
+            <DataRow label="Bouwjaar" value={report.rdw_bouwjaar?.toString() || '-'} source="RDW" />
+            <DataRow label="Datum eerste toelating" value={formatDate(report.rdw_datum_eerste_toelating)} source="RDW" />
+            <DataRow label="Datum eerste tenaamstelling" value={formatDate(report.rdw_datum_eerste_tenaamstelling)} source="RDW" />
+            <DataRow label="Datum laatste tenaamstelling" value={formatDate(report.rdw_datum_laatste_tenaamstelling)} source="RDW" />
+            <DataRow label="Kleur" value={report.rdw_kleur || '-'} source="RDW" />
           </div>
 
           {/* Sectie 2: Technische hoofdgegevens (RDW) */}
-          <div style={{ marginBottom: '20px' }}>
-            <SectionHeader title="2. Technische hoofdgegevens" badge="RDW" />
-            <DataRow label="Brandstof" value={report.rdw_brandstof || '-'} />
-            <DataRow label="Transmissie" value={report.rdw_transmissie || '-'} />
-            <DataRow label="Aantal cilinders" value={formatNumber(report.rdw_aantal_cilinders)} />
-            <DataRow label="Cilinderinhoud" value={formatNumber(report.rdw_cilinderinhoud, 'cc')} />
-            <DataRow label="Vermogen" value={formatNumber(report.rdw_vermogen_kw, 'kW')} />
-            <DataRow label="Aantal deuren" value={formatNumber(report.rdw_aantal_deuren)} />
-            <DataRow label="Wielbasis" value={formatNumber(report.rdw_wielbasis, 'mm')} />
+          <div style={{ marginBottom: '16px' }}>
+            <SectionHeader number="2" title="Technische hoofdgegevens (RDW)" />
+            <DataRow label="Brandstof" value={report.rdw_brandstof || '-'} source="RDW" />
+            <DataRow label="Transmissie" value={report.rdw_transmissie || '-'} source="RDW" />
+            <DataRow label="Aantal cilinders" value={formatNumber(report.rdw_aantal_cilinders)} source="RDW" />
+            <DataRow label="Cilinderinhoud (cc)" value={formatNumber(report.rdw_cilinderinhoud, 'cc')} source="RDW" />
+            <DataRow label="Vermogen (kW)" value={formatNumber(report.rdw_vermogen_kw, 'kW')} source="RDW" />
+            <DataRow label="Aantal deuren" value={formatNumber(report.rdw_aantal_deuren)} source="RDW" />
+            <DataRow label="Wielbasis" value={formatNumber(report.rdw_wielbasis, 'mm')} source="RDW" />
           </div>
 
           {/* Sectie 3: Massa en gewichten (RDW) */}
-          <div style={{ marginBottom: '20px' }}>
-            <SectionHeader title="3. Massa en gewichten" badge="RDW" />
-            <DataRow label="Ledig gewicht" value={formatNumber(report.rdw_ledig_gewicht, 'kg')} />
-            <DataRow label="Massa rijklaar" value={formatNumber(report.rdw_massa_rijklaar, 'kg')} />
-            <DataRow label="Toegestane maximale massa" value={formatNumber(report.rdw_max_massa, 'kg')} />
+          <div style={{ marginBottom: '16px' }}>
+            <SectionHeader number="3" title="Massa en gewichten (RDW)" />
+            <DataRow label="Ledig gewicht" value={formatNumber(report.rdw_ledig_gewicht, 'kg')} source="RDW" />
+            <DataRow label="Massa rijklaar" value={formatNumber(report.rdw_massa_rijklaar, 'kg')} source="RDW" />
+            <DataRow label="Toegestane max. massa" value={formatNumber(report.rdw_max_massa, 'kg')} source="RDW" />
           </div>
         </div>
 
         {/* Right Column */}
         <div style={{ width: '50%' }}>
           {/* Sectie 4: Keuring en status (RDW) */}
-          <div style={{ marginBottom: '20px' }}>
-            <SectionHeader title="4. Keuring en status" badge="RDW" />
-            <DataRow label="APK-status" value={formatBoolean(report.rdw_apk_gekeurd)} />
-            <DataRow label="Importvoertuig" value={formatBoolean(report.rdw_importvoertuig)} />
+          <div style={{ marginBottom: '16px' }}>
+            <SectionHeader number="4" title="Keuring en status (RDW)" />
+            <DataRow label="APK gekeurd" value={formatBoolean(report.rdw_apk_gekeurd)} source="RDW" />
+            <DataRow label="APK vervaldatum" value={formatDate(report.rdw_apk_vervaldatum)} source="RDW" />
+            <DataRow label="Importvoertuig" value={formatBoolean(report.rdw_importvoertuig)} source="RDW" />
           </div>
 
-          {/* Sectie 5: Tellerstand en gebruik (Taxateur) */}
-          <div style={{ marginBottom: '20px' }}>
-            <SectionHeader title="5. Tellerstand en gebruik" badge="Taxateur" />
+          {/* Sectie 5: Tellerstand (Taxateur) */}
+          <div style={{ marginBottom: '16px' }}>
+            <SectionHeader number="5" title="Tellerstand (Taxateur)" />
             <DataRow 
               label="Tellerstand" 
-              value={report.tellerstand ? `${report.tellerstand.toLocaleString('nl-NL')} ${report.tellerstand_type || 'km'}` : '-'} 
+              value={report.tellerstand ? `${report.tellerstand.toLocaleString('nl-NL')}` : '-'} 
+              source="Taxateur"
             />
-            <p style={{ fontSize: '9px', color: '#94a3b8', fontStyle: 'italic', marginTop: '8px' }}>
-              Tellerstand vastgesteld bij fysieke opname.
-            </p>
+            <DataRow 
+              label="Tellerstand type" 
+              value={report.tellerstand_type === 'km' ? 'Kilometer (km)' : report.tellerstand_type === 'miles' ? 'Miles' : '-'} 
+              source="Taxateur"
+            />
           </div>
 
           {/* Sectie 6: Opbouw en constructie (Taxateur) */}
-          <div style={{ marginBottom: '20px' }}>
-            <SectionHeader title="6. Opbouw en constructie" badge="Taxateur" />
-            <DataRow label="Soort bouw" value={report.soort_bouw || '-'} />
-            <DataRow label="Opbouw merk" value={report.opbouw_merk || '-'} />
-            <DataRow label="Opbouw type" value={report.opbouw_type || '-'} />
-            <DataRow label="Constructievorm" value={report.constructievorm || '-'} />
+          <div style={{ marginBottom: '16px' }}>
+            <SectionHeader number="6" title="Opbouw en constructie (Taxateur)" />
+            <DataRow label="Soort bouw" value={report.soort_bouw || '-'} source="Taxateur" />
+            <DataRow label="Opbouw merk" value={report.opbouw_merk || '-'} source="Taxateur" />
+            <DataRow label="Opbouw type" value={report.opbouw_type || '-'} source="Taxateur" />
+            <DataRow label="Constructievorm" value={report.constructievorm || '-'} source="Taxateur" />
           </div>
 
           {/* Sectie 7: Gebruik en stalling (Taxateur) */}
-          <div style={{ marginBottom: '20px' }}>
-            <SectionHeader title="7. Gebruik en stalling" badge="Taxateur" />
-            <DataRow label="Gebruik" value={report.gebruik || '-'} />
-            <DataRow label="Stalling" value={report.stalling || '-'} />
-            <DataRow label="Staat bij opname" value={report.staat_bij_opname || '-'} />
+          <div style={{ marginBottom: '16px' }}>
+            <SectionHeader number="7" title="Gebruik en stalling (Taxateur)" />
+            <DataRow label="Gebruik" value={report.gebruik || '-'} source="Taxateur" />
+            <DataRow label="Stalling" value={report.stalling || '-'} source="Taxateur" />
+            <DataRow label="Staat bij opname" value={report.staat_bij_opname || '-'} source="Taxateur" />
           </div>
         </div>
       </div>
@@ -272,21 +266,23 @@ const PDFVehicleData = () => {
       {/* Footer */}
       <div style={{ 
         position: 'absolute', 
-        bottom: '24px', 
+        bottom: '20px', 
         left: '24px', 
         right: '24px',
         borderTop: '1px solid #cbd5e1', 
-        paddingTop: '12px',
+        paddingTop: '10px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <div style={{ fontSize: '10px', color: '#64748b' }}>
+        <div style={{ fontSize: '9px', color: '#64748b' }}>
           <span style={{ fontWeight: 600, color: '#1e293b' }}>Automobiel Taxaties</span>
           <span style={{ margin: '0 4px' }}>|</span>
           Leigraaf 160, 6651 GJ Druten
+          <span style={{ margin: '0 4px' }}>|</span>
+          KVK: 95549269
         </div>
-        <div style={{ fontSize: '10px', color: '#64748b' }}>
+        <div style={{ fontSize: '9px', color: '#64748b' }}>
           Pagina 2
         </div>
       </div>

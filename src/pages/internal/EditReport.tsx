@@ -176,6 +176,7 @@ const EditReport = () => {
           rdw_datum_eerste_toelating: reportData.rdw_datum_eerste_toelating || '',
           rdw_datum_eerste_tenaamstelling: reportData.rdw_datum_eerste_tenaamstelling || '',
           rdw_datum_laatste_tenaamstelling: reportData.rdw_datum_laatste_tenaamstelling || '',
+          rdw_kleur: (reportData as any).rdw_kleur || '',
           rdw_brandstof: reportData.rdw_brandstof || '',
           rdw_transmissie: reportData.rdw_transmissie || '',
           rdw_aantal_cilinders: reportData.rdw_aantal_cilinders?.toString() || '',

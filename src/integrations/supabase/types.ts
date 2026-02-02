@@ -55,6 +55,7 @@ export type Database = {
           rdw_fetched_at: string | null
           rdw_handelsbenaming: string | null
           rdw_importvoertuig: boolean | null
+          rdw_kleur: string | null
           rdw_ledig_gewicht: number | null
           rdw_massa_rijklaar: number | null
           rdw_max_massa: number | null
@@ -117,6 +118,7 @@ export type Database = {
           rdw_fetched_at?: string | null
           rdw_handelsbenaming?: string | null
           rdw_importvoertuig?: boolean | null
+          rdw_kleur?: string | null
           rdw_ledig_gewicht?: number | null
           rdw_massa_rijklaar?: number | null
           rdw_max_massa?: number | null
@@ -179,6 +181,7 @@ export type Database = {
           rdw_fetched_at?: string | null
           rdw_handelsbenaming?: string | null
           rdw_importvoertuig?: boolean | null
+          rdw_kleur?: string | null
           rdw_ledig_gewicht?: number | null
           rdw_massa_rijklaar?: number | null
           rdw_max_massa?: number | null

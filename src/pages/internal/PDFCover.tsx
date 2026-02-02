@@ -21,8 +21,8 @@ interface Report {
   customer_city: string | null;
   license_plate: string | null;
   vehicle_title: string | null;
-  vehicle_brand: string | null;
-  vehicle_model: string | null;
+  opbouw_merk: string | null;
+  opbouw_type: string | null;
   inspection_location: string | null;
   inspection_date: string | null;
   inspection_start_time: string | null;
@@ -97,14 +97,19 @@ const PDFCover = () => {
     );
   }
 
-  // Build customer name - format: "MW. M. HART"
+  // Build customer name - format: "DHR. J.P. JANSSEN"
   const customerName = [report.customer_title, report.customer_initials, report.customer_last_name]
     .filter(Boolean)
     .join(' ')
     .toUpperCase() || '-';
 
-  // Use vehicle_title (taxateur vrij veld) for the cover page - NOT brand+model
+  // Use vehicle_title (taxateur vrij veld) for the main vehicle name
   const vehicleDisplay = report.vehicle_title?.toUpperCase() || '-';
+
+  // Build opbouw display: [Opbouw merk] [Opbouw type]
+  const opbouwDisplay = [report.opbouw_merk, report.opbouw_type]
+    .filter(Boolean)
+    .join(' ') || null;
 
   // Cover photo is first image from vehicle_photos array
   const coverPhoto = report.vehicle_photos && report.vehicle_photos.length > 0 
@@ -150,89 +155,98 @@ const PDFCover = () => {
             <h1 style={{ fontSize: '28px', fontWeight: 600, letterSpacing: '-0.025em', color: '#1e293b', textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }}>
               TAXATIERAPPORT
             </h1>
-            <p style={{ fontSize: '14px', color: '#64748b', fontWeight: 400, lineHeight: 1.4, margin: '4px 0 0 0' }}>
+            <p style={{ fontSize: '14px', color: '#64748b', fontWeight: 400, fontStyle: 'italic', lineHeight: 1.4, margin: '4px 0 0 0' }}>
               Volgens artikel 7:960 BW
             </p>
           </div>
 
-          {/* Inzake (Vehicle) */}
+          {/* Inzake (Vehicle Title) */}
           <div style={{ marginBottom: '16px' }}>
             <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
-              Inzake
+              Inzake:
             </p>
-            <p style={{ fontSize: '18px', fontWeight: 600, textTransform: 'uppercase', color: '#1e293b', lineHeight: 1.2, margin: '2px 0 0 0' }}>
+            <p style={{ fontSize: '20px', fontWeight: 600, textTransform: 'uppercase', color: '#1e293b', lineHeight: 1.2, margin: '4px 0 0 0' }}>
               {vehicleDisplay}
             </p>
           </div>
 
           {/* Kenteken */}
-          <div style={{ marginBottom: '16px' }}>
+          <div style={{ marginBottom: '12px' }}>
             <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
-              Kenteken
+              Kenteken:
             </p>
-            <p style={{ fontSize: '18px', fontWeight: 600, color: '#1e293b', lineHeight: 1.2, margin: '2px 0 0 0' }}>
+            <p style={{ fontSize: '16px', fontWeight: 600, color: '#1e293b', lineHeight: 1.2, margin: '2px 0 0 0' }}>
               {report.license_plate || '-'}
             </p>
           </div>
 
           {/* Documentkenmerk */}
-          <div style={{ marginBottom: '24px' }}>
+          <div style={{ marginBottom: '16px' }}>
             <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
-              Documentkenmerk
+              Documentkenmerk:
             </p>
-            <p style={{ fontSize: '18px', fontWeight: 600, color: '#1e293b', lineHeight: 1.2, margin: '2px 0 0 0' }}>
+            <p style={{ fontSize: '16px', fontWeight: 600, color: '#1e293b', lineHeight: 1.2, margin: '2px 0 0 0' }}>
               {report.document_reference || '-'}
             </p>
           </div>
 
+          {/* Opbouw merk + type (if available) */}
+          {opbouwDisplay && (
+            <div style={{ marginBottom: '20px' }}>
+              <p style={{ fontSize: '14px', fontWeight: 600, color: '#1e293b', lineHeight: 1.3, margin: 0 }}>
+                {opbouwDisplay}
+              </p>
+            </div>
+          )}
+
           {/* In opdracht van */}
-          <div style={{ marginBottom: '24px' }}>
+          <div style={{ marginBottom: '20px' }}>
             <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.2, margin: '0 0 4px 0' }}>
-              In opdracht van
+              In opdracht van:
             </p>
-            <p style={{ fontSize: '16px', fontWeight: 600, color: '#1e293b', lineHeight: 1.3, margin: 0 }}>
+            <p style={{ fontSize: '14px', fontWeight: 600, color: '#1e293b', lineHeight: 1.3, margin: 0 }}>
               {customerName}
             </p>
             {report.customer_street && (
-              <p style={{ fontSize: '16px', fontWeight: 600, color: '#1e293b', lineHeight: 1.3, margin: 0 }}>
+              <p style={{ fontSize: '14px', fontWeight: 600, color: '#1e293b', lineHeight: 1.3, margin: 0 }}>
                 {report.customer_street.toUpperCase()}
               </p>
             )}
             {(report.customer_postcode || report.customer_city) && (
-              <p style={{ fontSize: '16px', fontWeight: 600, color: '#1e293b', lineHeight: 1.3, margin: 0 }}>
+              <p style={{ fontSize: '14px', fontWeight: 600, color: '#1e293b', lineHeight: 1.3, margin: 0 }}>
                 {[report.customer_postcode, report.customer_city?.toUpperCase()].filter(Boolean).join(' ')}
               </p>
             )}
           </div>
 
           {/* Inspection Details */}
-          <div style={{ marginBottom: '16px' }}>
-            <p style={{ fontSize: '12px', lineHeight: 1.4, margin: '2px 0' }}>
+          <div style={{ marginBottom: '20px' }}>
+            <p style={{ fontSize: '12px', lineHeight: 1.5, margin: '2px 0' }}>
               <span style={{ color: '#64748b', fontWeight: 500 }}>Opnamedatum:</span>{' '}
               <span style={{ fontWeight: 600, color: '#1e293b' }}>{formatDate(report.inspection_date)}</span>
             </p>
-            <p style={{ fontSize: '12px', lineHeight: 1.4, margin: '2px 0' }}>
+            <p style={{ fontSize: '12px', lineHeight: 1.5, margin: '2px 0' }}>
               <span style={{ color: '#64748b', fontWeight: 500 }}>Aanvangstijd opname:</span>{' '}
               <span style={{ fontWeight: 600, color: '#1e293b' }}>{formatTime(report.inspection_start_time)}</span>
             </p>
-            <p style={{ fontSize: '12px', lineHeight: 1.4, margin: '2px 0' }}>
+            <p style={{ fontSize: '12px', lineHeight: 1.5, margin: '2px 0' }}>
               <span style={{ color: '#64748b', fontWeight: 500 }}>Eindtijd opname:</span>{' '}
               <span style={{ fontWeight: 600, color: '#1e293b' }}>{formatTime(report.inspection_end_time)}</span>
             </p>
-            <p style={{ fontSize: '12px', lineHeight: 1.4, margin: '2px 0' }}>
+            <p style={{ fontSize: '12px', lineHeight: 1.5, margin: '2px 0' }}>
               <span style={{ color: '#64748b', fontWeight: 500 }}>Plaats:</span>{' '}
               <span style={{ fontWeight: 600, color: '#1e293b' }}>{capitalizeFirst(report.inspection_location)}</span>
             </p>
           </div>
 
-          {/* Uitgevoerd door */}
+          {/* Uitgevoerd door - Taxateur info */}
           <div>
-            <p style={{ fontSize: '12px', lineHeight: 1.4, margin: '2px 0' }}>
-              <span style={{ color: '#64748b', fontWeight: 500 }}>Uitgevoerd door:</span>{' '}
-              <span style={{ fontWeight: 600, color: '#1e293b' }}>Erik Elderson</span>
+            <p style={{ fontSize: '14px', fontWeight: 600, color: '#1e293b', lineHeight: 1.4, margin: 0 }}>
+              Erik Elderson
             </p>
-            <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.4, margin: '2px 0' }}>TMV Register-Taxateur</p>
-            <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.4, margin: '2px 0' }}>Register-Taxateur VRT</p>
+            <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.4, margin: '2px 0' }}>
+              Register-Taxateur VRT / TMV
+            </p>
           </div>
         </div>
 
