@@ -27,7 +27,7 @@ const reportSchema = z.object({
   customer_postcode: z.string().optional(),
   customer_city: z.string().optional(),
   license_plate: z.string().min(1, 'Kenteken is verplicht'),
-  vin: z.string().optional(),
+  vin: z.string().min(4, 'VIN moet minimaal 4 tekens bevatten'),
   vehicle_brand: z.string().optional(),
   vehicle_model: z.string().optional(),
   inspection_location: z.string().optional(),
@@ -277,12 +277,19 @@ const NewReport = () => {
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="vin">VIN / Chassisnummer</Label>
+              <Label htmlFor="vin">VIN / Chassisnummer *</Label>
               <Input
                 id="vin"
                 value={formData.vin}
                 onChange={(e) => handleChange('vin', e.target.value)}
+                className={errors.vin ? 'border-destructive' : ''}
               />
+              {errors.vin && (
+                <p className="text-sm text-destructive">{errors.vin}</p>
+              )}
+              <p className="text-xs text-muted-foreground">
+                Minimaal 4 tekens vereist
+              </p>
             </div>
           </CardContent>
         </Card>
