@@ -14,7 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      reports: {
+        Row: {
+          appraised_value: number | null
+          appraised_value_text: string | null
+          client_name: string
+          created_at: string
+          document_reference: string | null
+          general_remarks: string | null
+          id: string
+          inspection_date: string | null
+          inspection_end_time: string | null
+          inspection_location: string | null
+          inspection_start_time: string | null
+          license_plate: string | null
+          opdrachtgever: string | null
+          quality_class: number | null
+          report_number: number
+          updated_at: string
+          user_id: string
+          vin: string | null
+        }
+        Insert: {
+          appraised_value?: number | null
+          appraised_value_text?: string | null
+          client_name: string
+          created_at?: string
+          document_reference?: string | null
+          general_remarks?: string | null
+          id?: string
+          inspection_date?: string | null
+          inspection_end_time?: string | null
+          inspection_location?: string | null
+          inspection_start_time?: string | null
+          license_plate?: string | null
+          opdrachtgever?: string | null
+          quality_class?: number | null
+          report_number?: number
+          updated_at?: string
+          user_id: string
+          vin?: string | null
+        }
+        Update: {
+          appraised_value?: number | null
+          appraised_value_text?: string | null
+          client_name?: string
+          created_at?: string
+          document_reference?: string | null
+          general_remarks?: string | null
+          id?: string
+          inspection_date?: string | null
+          inspection_end_time?: string | null
+          inspection_location?: string | null
+          inspection_start_time?: string | null
+          license_plate?: string | null
+          opdrachtgever?: string | null
+          quality_class?: number | null
+          report_number?: number
+          updated_at?: string
+          user_id?: string
+          vin?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
