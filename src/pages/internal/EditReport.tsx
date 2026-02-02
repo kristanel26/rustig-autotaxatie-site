@@ -19,6 +19,7 @@ import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { ArrowLeft } from 'lucide-react';
 import { normalizeReportFormData, LICENSE_PLATE_REGEX, numberToDutchWords } from '@/lib/normalizers';
+import { validateVin, validateDotCode, validateEmail, validatePhone } from '@/lib/validators';
 import { VehicleInfoForm, VehicleFormData, getInitialVehicleFormData } from '@/components/internal/VehicleInfoForm';
 import { AppraisalFindingsForm, AppraisalFormData, getInitialAppraisalFormData } from '@/components/internal/AppraisalFindingsForm';
 import { PostcodeField } from '@/components/internal/PostcodeField';
@@ -30,8 +31,10 @@ const reportSchema = z.object({
   customer_street: z.string().optional(),
   customer_postcode: z.string().optional(),
   customer_city: z.string().optional(),
+  customer_email: z.string().optional(),
+  customer_phone: z.string().optional(),
   license_plate: z.string().min(1, 'Kenteken is verplicht'),
-  vin: z.string().min(4, 'VIN moet minimaal 4 tekens bevatten'),
+  vin: z.string().min(1, 'Chassisnummer is verplicht'),
   tellerstand: z.string().min(1, 'Tellerstand is verplicht'),
   inspection_location: z.string().optional(),
   inspection_date: z.string().optional(),
@@ -118,6 +121,8 @@ const EditReport = () => {
     customer_street: '',
     customer_postcode: '',
     customer_city: '',
+    customer_email: '',
+    customer_phone: '',
   });
 
   // Vehicle data
@@ -166,6 +171,8 @@ const EditReport = () => {
           customer_street: reportData.customer_street || '',
           customer_postcode: reportData.customer_postcode || '',
           customer_city: reportData.customer_city || '',
+          customer_email: (reportData as any).customer_email || '',
+          customer_phone: (reportData as any).customer_phone || '',
         });
 
         // Pre-fill vehicle data
@@ -239,17 +246,17 @@ const EditReport = () => {
           condition_electrical: (reportData as any).condition_electrical || '',
           condition_electrical_notes: (reportData as any).condition_electrical_notes || '',
           tire_front_left_brand: (reportData as any).tire_front_left_brand || '',
+          tire_front_left_size: (reportData as any).tire_front_left_size || '',
           tire_front_left_dot: (reportData as any).tire_front_left_dot || '',
-          tire_front_left_season: (reportData as any).tire_front_left_season || '',
           tire_front_right_brand: (reportData as any).tire_front_right_brand || '',
+          tire_front_right_size: (reportData as any).tire_front_right_size || '',
           tire_front_right_dot: (reportData as any).tire_front_right_dot || '',
-          tire_front_right_season: (reportData as any).tire_front_right_season || '',
           tire_rear_left_brand: (reportData as any).tire_rear_left_brand || '',
+          tire_rear_left_size: (reportData as any).tire_rear_left_size || '',
           tire_rear_left_dot: (reportData as any).tire_rear_left_dot || '',
-          tire_rear_left_season: (reportData as any).tire_rear_left_season || '',
           tire_rear_right_brand: (reportData as any).tire_rear_right_brand || '',
+          tire_rear_right_size: (reportData as any).tire_rear_right_size || '',
           tire_rear_right_dot: (reportData as any).tire_rear_right_dot || '',
-          tire_rear_right_season: (reportData as any).tire_rear_right_season || '',
           rim_type: (reportData as any).rim_type || '',
           exterior_body: (reportData as any).exterior_body || '',
           exterior_body_notes: (reportData as any).exterior_body_notes || '',
@@ -377,6 +384,52 @@ const EditReport = () => {
       return;
     }
 
+    // Validate VIN (17 characters)
+    const vinValidation = validateVin(vehicleData.vin);
+    if (!vinValidation.valid) {
+      setErrors({ vin: vinValidation.error! });
+      return;
+    }
+
+    // Validate email if provided
+    const emailValidation = validateEmail(customerData.customer_email);
+    if (!emailValidation.valid) {
+      setErrors({ customer_email: emailValidation.error! });
+      return;
+    }
+
+    // Validate phone if provided
+    const phoneValidation = validatePhone(customerData.customer_phone);
+    if (!phoneValidation.valid) {
+      setErrors({ customer_phone: phoneValidation.error! });
+      return;
+    }
+
+    // Validate DOT codes (all 4 tires must have valid 4-digit DOT)
+    const tireFields = [
+      { field: 'tire_front_left_dot', label: 'Linker voorband' },
+      { field: 'tire_front_right_dot', label: 'Rechter voorband' },
+      { field: 'tire_rear_left_dot', label: 'Linker achterband' },
+      { field: 'tire_rear_right_dot', label: 'Rechter achterband' },
+    ];
+    const tireErrors: Record<string, string> = {};
+    for (const tire of tireFields) {
+      const dotValue = appraisalData[tire.field as keyof AppraisalFormData];
+      const dotValidation = validateDotCode(dotValue);
+      if (!dotValidation.valid) {
+        tireErrors[tire.field] = dotValidation.error!;
+      }
+    }
+    if (Object.keys(tireErrors).length > 0) {
+      setErrors(tireErrors);
+      toast({
+        title: 'DOT-codes ongeldig',
+        description: 'Elke band moet een DOT-code van exact 4 cijfers hebben.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -388,6 +441,8 @@ const EditReport = () => {
         customer_street: normalizedData.customer_street || null,
         customer_postcode: normalizedData.customer_postcode || null,
         customer_city: normalizedData.customer_city || null,
+        customer_email: customerData.customer_email || null,
+        customer_phone: customerData.customer_phone || null,
         
         // Vehicle identifiers
         license_plate: normalizedData.license_plate,
@@ -462,17 +517,17 @@ const EditReport = () => {
         
         // Banden
         tire_front_left_brand: appraisalData.tire_front_left_brand || null,
+        tire_front_left_size: appraisalData.tire_front_left_size || null,
         tire_front_left_dot: appraisalData.tire_front_left_dot || null,
-        tire_front_left_season: appraisalData.tire_front_left_season || null,
         tire_front_right_brand: appraisalData.tire_front_right_brand || null,
+        tire_front_right_size: appraisalData.tire_front_right_size || null,
         tire_front_right_dot: appraisalData.tire_front_right_dot || null,
-        tire_front_right_season: appraisalData.tire_front_right_season || null,
         tire_rear_left_brand: appraisalData.tire_rear_left_brand || null,
+        tire_rear_left_size: appraisalData.tire_rear_left_size || null,
         tire_rear_left_dot: appraisalData.tire_rear_left_dot || null,
-        tire_rear_left_season: appraisalData.tire_rear_left_season || null,
         tire_rear_right_brand: appraisalData.tire_rear_right_brand || null,
+        tire_rear_right_size: appraisalData.tire_rear_right_size || null,
         tire_rear_right_dot: appraisalData.tire_rear_right_dot || null,
-        tire_rear_right_season: appraisalData.tire_rear_right_season || null,
         rim_type: appraisalData.rim_type || null,
         
         // Exterieur
@@ -652,8 +707,36 @@ const EditReport = () => {
               onCityChange={(value) => handleCustomerChange('customer_city', value)}
               onStreetChange={(value) => handleCustomerChange('customer_street', value)}
             />
+            <div className="space-y-2">
+              <Label htmlFor="customer_email">E-mailadres (intern gebruik)</Label>
+              <Input
+                id="customer_email"
+                type="email"
+                value={customerData.customer_email}
+                onChange={(e) => handleCustomerChange('customer_email', e.target.value)}
+                placeholder="klant@voorbeeld.nl"
+                className={errors.customer_email ? 'border-destructive' : ''}
+              />
+              {errors.customer_email && (
+                <p className="text-sm text-destructive">{errors.customer_email}</p>
+              )}
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="customer_phone">Telefoonnummer (intern gebruik)</Label>
+              <Input
+                id="customer_phone"
+                type="tel"
+                value={customerData.customer_phone}
+                onChange={(e) => handleCustomerChange('customer_phone', e.target.value)}
+                placeholder="0612345678"
+                className={errors.customer_phone ? 'border-destructive' : ''}
+              />
+              {errors.customer_phone && (
+                <p className="text-sm text-destructive">{errors.customer_phone}</p>
+              )}
+            </div>
             <p className="text-xs text-muted-foreground md:col-span-2">
-              Invoer wordt automatisch netjes opgeslagen.
+              Invoer wordt automatisch netjes opgeslagen. E-mail en telefoon zijn alleen voor intern gebruik en verschijnen niet op het PDF-rapport.
             </p>
           </CardContent>
         </Card>
@@ -671,6 +754,7 @@ const EditReport = () => {
           formData={appraisalData}
           onChange={handleAppraisalChange}
           rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
+          tireErrors={errors}
         />
 
         {/* Inspection Details */}

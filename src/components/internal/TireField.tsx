@@ -1,37 +1,33 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 
 interface TireFieldProps {
   position: string;
   brand: string;
+  size: string;
   dot: string;
-  season: string;
   onBrandChange: (value: string) => void;
+  onSizeChange: (value: string) => void;
   onDotChange: (value: string) => void;
-  onSeasonChange: (value: string) => void;
+  dotError?: string;
 }
 
-const seasonOptions = [
-  { value: 'zomer', label: 'Zomer' },
-  { value: 'winter', label: 'Winter' },
-  { value: 'allseason', label: 'All-season' },
-];
+/**
+ * Validates DOT code: exactly 4 digits required
+ */
+export const validateDotCode = (dot: string): boolean => {
+  return /^\d{4}$/.test(dot);
+};
 
 export const TireField = ({
   position,
   brand,
+  size,
   dot,
-  season,
   onBrandChange,
+  onSizeChange,
   onDotChange,
-  onSeasonChange,
+  dotError,
 }: TireFieldProps) => {
   return (
     <div className="space-y-2 p-3 border rounded-lg bg-muted/30">
@@ -46,27 +42,29 @@ export const TireField = ({
           />
         </div>
         <div className="space-y-1">
-          <Label className="text-xs text-muted-foreground">DOT-code</Label>
+          <Label className="text-xs text-muted-foreground">Bandenmaat</Label>
           <Input
-            value={dot}
-            onChange={(e) => onDotChange(e.target.value)}
-            placeholder="Bijv. 2523"
+            value={size}
+            onChange={(e) => onSizeChange(e.target.value)}
+            placeholder="Bijv. 225/75 R16"
           />
         </div>
         <div className="space-y-1">
-          <Label className="text-xs text-muted-foreground">Seizoen</Label>
-          <Select value={season} onValueChange={onSeasonChange}>
-            <SelectTrigger>
-              <SelectValue placeholder="Type..." />
-            </SelectTrigger>
-            <SelectContent>
-              {seasonOptions.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <Label className="text-xs text-muted-foreground">DOT-code *</Label>
+          <Input
+            value={dot}
+            onChange={(e) => {
+              // Only allow digits, max 4
+              const filtered = e.target.value.replace(/\D/g, '').slice(0, 4);
+              onDotChange(filtered);
+            }}
+            placeholder="4 cijfers"
+            maxLength={4}
+            className={dotError ? 'border-destructive' : ''}
+          />
+          {dotError && (
+            <p className="text-xs text-destructive">{dotError}</p>
+          )}
         </div>
       </div>
     </div>
