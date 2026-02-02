@@ -30,19 +30,19 @@ export interface AppraisalFormData {
   condition_electrical: string;
   condition_electrical_notes: string;
   
-  // Banden
+  // Banden (met bandenmaat en DOT-code)
   tire_front_left_brand: string;
+  tire_front_left_size: string;
   tire_front_left_dot: string;
-  tire_front_left_season: string;
   tire_front_right_brand: string;
+  tire_front_right_size: string;
   tire_front_right_dot: string;
-  tire_front_right_season: string;
   tire_rear_left_brand: string;
+  tire_rear_left_size: string;
   tire_rear_left_dot: string;
-  tire_rear_left_season: string;
   tire_rear_right_brand: string;
+  tire_rear_right_size: string;
   tire_rear_right_dot: string;
-  tire_rear_right_season: string;
   rim_type: string;
   
   // Exterieur
@@ -76,6 +76,7 @@ interface AppraisalFindingsFormProps {
   formData: AppraisalFormData;
   onChange: (field: keyof AppraisalFormData, value: string) => void;
   rdwHandelsbenaming?: string;
+  tireErrors?: Record<string, string>;
 }
 
 export const getInitialAppraisalFormData = (): AppraisalFormData => ({
@@ -93,17 +94,17 @@ export const getInitialAppraisalFormData = (): AppraisalFormData => ({
   condition_electrical: '',
   condition_electrical_notes: '',
   tire_front_left_brand: '',
+  tire_front_left_size: '',
   tire_front_left_dot: '',
-  tire_front_left_season: '',
   tire_front_right_brand: '',
+  tire_front_right_size: '',
   tire_front_right_dot: '',
-  tire_front_right_season: '',
   tire_rear_left_brand: '',
+  tire_rear_left_size: '',
   tire_rear_left_dot: '',
-  tire_rear_left_season: '',
   tire_rear_right_brand: '',
+  tire_rear_right_size: '',
   tire_rear_right_dot: '',
-  tire_rear_right_season: '',
   rim_type: '',
   exterior_body: '',
   exterior_body_notes: '',
@@ -139,6 +140,7 @@ export const AppraisalFindingsForm = ({
   formData,
   onChange,
   rdwHandelsbenaming,
+  tireErrors = {},
 }: AppraisalFindingsFormProps) => {
   return (
     <div className="space-y-6">
@@ -230,40 +232,47 @@ export const AppraisalFindingsForm = ({
             <TireField
               position="Linker voorband"
               brand={formData.tire_front_left_brand}
+              size={formData.tire_front_left_size}
               dot={formData.tire_front_left_dot}
-              season={formData.tire_front_left_season}
               onBrandChange={(v) => onChange('tire_front_left_brand', v)}
+              onSizeChange={(v) => onChange('tire_front_left_size', v)}
               onDotChange={(v) => onChange('tire_front_left_dot', v)}
-              onSeasonChange={(v) => onChange('tire_front_left_season', v)}
+              dotError={tireErrors.tire_front_left_dot}
             />
             <TireField
               position="Rechter voorband"
               brand={formData.tire_front_right_brand}
+              size={formData.tire_front_right_size}
               dot={formData.tire_front_right_dot}
-              season={formData.tire_front_right_season}
               onBrandChange={(v) => onChange('tire_front_right_brand', v)}
+              onSizeChange={(v) => onChange('tire_front_right_size', v)}
               onDotChange={(v) => onChange('tire_front_right_dot', v)}
-              onSeasonChange={(v) => onChange('tire_front_right_season', v)}
+              dotError={tireErrors.tire_front_right_dot}
             />
             <TireField
               position="Linker achterband"
               brand={formData.tire_rear_left_brand}
+              size={formData.tire_rear_left_size}
               dot={formData.tire_rear_left_dot}
-              season={formData.tire_rear_left_season}
               onBrandChange={(v) => onChange('tire_rear_left_brand', v)}
+              onSizeChange={(v) => onChange('tire_rear_left_size', v)}
               onDotChange={(v) => onChange('tire_rear_left_dot', v)}
-              onSeasonChange={(v) => onChange('tire_rear_left_season', v)}
+              dotError={tireErrors.tire_rear_left_dot}
             />
             <TireField
               position="Rechter achterband"
               brand={formData.tire_rear_right_brand}
+              size={formData.tire_rear_right_size}
               dot={formData.tire_rear_right_dot}
-              season={formData.tire_rear_right_season}
               onBrandChange={(v) => onChange('tire_rear_right_brand', v)}
+              onSizeChange={(v) => onChange('tire_rear_right_size', v)}
               onDotChange={(v) => onChange('tire_rear_right_dot', v)}
-              onSeasonChange={(v) => onChange('tire_rear_right_season', v)}
+              dotError={tireErrors.tire_rear_right_dot}
             />
           </div>
+          <p className="text-xs text-muted-foreground">
+            * DOT-code is verplicht (exact 4 cijfers). Voorbeeld: 2523 betekent week 25, jaar 2023.
+          </p>
           <div className="space-y-2">
             <Label htmlFor="rim_type">Type velg</Label>
             <Select value={formData.rim_type} onValueChange={(v) => onChange('rim_type', v)}>

@@ -34,8 +34,10 @@ export type Database = {
           constructievorm: string | null
           created_at: string
           customer_city: string | null
+          customer_email: string | null
           customer_initials: string | null
           customer_last_name: string | null
+          customer_phone: string | null
           customer_postcode: string | null
           customer_street: string | null
           customer_title: string | null
@@ -109,15 +111,19 @@ export type Database = {
           tire_front_left_brand: string | null
           tire_front_left_dot: string | null
           tire_front_left_season: string | null
+          tire_front_left_size: string | null
           tire_front_right_brand: string | null
           tire_front_right_dot: string | null
           tire_front_right_season: string | null
+          tire_front_right_size: string | null
           tire_rear_left_brand: string | null
           tire_rear_left_dot: string | null
           tire_rear_left_season: string | null
+          tire_rear_left_size: string | null
           tire_rear_right_brand: string | null
           tire_rear_right_dot: string | null
           tire_rear_right_season: string | null
+          tire_rear_right_size: string | null
           transmissie: string | null
           updated_at: string
           user_id: string
@@ -146,8 +152,10 @@ export type Database = {
           constructievorm?: string | null
           created_at?: string
           customer_city?: string | null
+          customer_email?: string | null
           customer_initials?: string | null
           customer_last_name?: string | null
+          customer_phone?: string | null
           customer_postcode?: string | null
           customer_street?: string | null
           customer_title?: string | null
@@ -221,15 +229,19 @@ export type Database = {
           tire_front_left_brand?: string | null
           tire_front_left_dot?: string | null
           tire_front_left_season?: string | null
+          tire_front_left_size?: string | null
           tire_front_right_brand?: string | null
           tire_front_right_dot?: string | null
           tire_front_right_season?: string | null
+          tire_front_right_size?: string | null
           tire_rear_left_brand?: string | null
           tire_rear_left_dot?: string | null
           tire_rear_left_season?: string | null
+          tire_rear_left_size?: string | null
           tire_rear_right_brand?: string | null
           tire_rear_right_dot?: string | null
           tire_rear_right_season?: string | null
+          tire_rear_right_size?: string | null
           transmissie?: string | null
           updated_at?: string
           user_id: string
@@ -258,8 +270,10 @@ export type Database = {
           constructievorm?: string | null
           created_at?: string
           customer_city?: string | null
+          customer_email?: string | null
           customer_initials?: string | null
           customer_last_name?: string | null
+          customer_phone?: string | null
           customer_postcode?: string | null
           customer_street?: string | null
           customer_title?: string | null
@@ -333,15 +347,19 @@ export type Database = {
           tire_front_left_brand?: string | null
           tire_front_left_dot?: string | null
           tire_front_left_season?: string | null
+          tire_front_left_size?: string | null
           tire_front_right_brand?: string | null
           tire_front_right_dot?: string | null
           tire_front_right_season?: string | null
+          tire_front_right_size?: string | null
           tire_rear_left_brand?: string | null
           tire_rear_left_dot?: string | null
           tire_rear_left_season?: string | null
+          tire_rear_left_size?: string | null
           tire_rear_right_brand?: string | null
           tire_rear_right_dot?: string | null
           tire_rear_right_season?: string | null
+          tire_rear_right_size?: string | null
           transmissie?: string | null
           updated_at?: string
           user_id?: string
