@@ -28,7 +28,7 @@ const reportSchema = z.object({
   customer_postcode: z.string().optional(),
   customer_city: z.string().optional(),
   license_plate: z.string().min(1, 'Kenteken is verplicht'),
-  vin: z.string().optional(),
+  vin: z.string().min(4, 'VIN moet minimaal 4 tekens bevatten'),
   vehicle_brand: z.string().optional(),
   vehicle_model: z.string().optional(),
   inspection_location: z.string().optional(),
@@ -289,7 +289,7 @@ const EditReport = () => {
           <CardHeader>
             <CardTitle className="text-lg">Rapportgegevens (alleen-lezen)</CardTitle>
           </CardHeader>
-          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <CardContent>
             <div className="space-y-2">
               <Label>Rapportnummer</Label>
               <Input
@@ -297,17 +297,6 @@ const EditReport = () => {
                 disabled
                 className="bg-muted"
               />
-            </div>
-            <div className="space-y-2">
-              <Label>Documentreferentie</Label>
-              <Input
-                value={report.document_reference || ''}
-                disabled
-                className="bg-muted"
-              />
-              <p className="text-xs text-muted-foreground">
-                Wordt automatisch bijgewerkt op basis van andere velden
-              </p>
             </div>
           </CardContent>
         </Card>
@@ -423,12 +412,19 @@ const EditReport = () => {
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="vin">VIN / Chassisnummer</Label>
+              <Label htmlFor="vin">VIN / Chassisnummer *</Label>
               <Input
                 id="vin"
                 value={formData.vin}
                 onChange={(e) => handleChange('vin', e.target.value)}
+                className={errors.vin ? 'border-destructive' : ''}
               />
+              {errors.vin && (
+                <p className="text-sm text-destructive">{errors.vin}</p>
+              )}
+              <p className="text-xs text-muted-foreground">
+                Minimaal 4 tekens vereist
+              </p>
             </div>
           </CardContent>
         </Card>
