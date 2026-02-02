@@ -19,7 +19,6 @@ export type Database = {
           appraised_value: number | null
           appraised_value_text: string | null
           client_name: string | null
-          cover_photo_url: string | null
           created_at: string
           customer_city: string | null
           customer_initials: string | null
@@ -42,13 +41,13 @@ export type Database = {
           user_id: string
           vehicle_brand: string | null
           vehicle_model: string | null
+          vehicle_photos: string[] | null
           vin: string | null
         }
         Insert: {
           appraised_value?: number | null
           appraised_value_text?: string | null
           client_name?: string | null
-          cover_photo_url?: string | null
           created_at?: string
           customer_city?: string | null
           customer_initials?: string | null
@@ -71,13 +70,13 @@ export type Database = {
           user_id: string
           vehicle_brand?: string | null
           vehicle_model?: string | null
+          vehicle_photos?: string[] | null
           vin?: string | null
         }
         Update: {
           appraised_value?: number | null
           appraised_value_text?: string | null
           client_name?: string | null
-          cover_photo_url?: string | null
           created_at?: string
           customer_city?: string | null
           customer_initials?: string | null
@@ -100,6 +99,7 @@ export type Database = {
           user_id?: string
           vehicle_brand?: string | null
           vehicle_model?: string | null
+          vehicle_photos?: string[] | null
           vin?: string | null
         }
         Relationships: []

@@ -21,7 +21,7 @@ interface Report {
   inspection_date: string | null;
   inspection_start_time: string | null;
   inspection_end_time: string | null;
-  cover_photo_url: string | null;
+  vehicle_photos: string[] | null;
 }
 
 const PDFCover = () => {
@@ -206,11 +206,11 @@ const PDFCover = () => {
         </div>
       </div>
 
-      {/* Right Column - 60% - Vehicle Photo */}
+      {/* Right Column - 60% - Vehicle Photo (first photo from vehicle_photos array) */}
       <div className="w-[60%] min-h-screen bg-muted">
-        {report.cover_photo_url ? (
+        {report.vehicle_photos && report.vehicle_photos.length > 0 ? (
           <img
-            src={report.cover_photo_url}
+            src={report.vehicle_photos[0]}
             alt="Voertuig"
             className="w-full h-full object-cover"
           />
