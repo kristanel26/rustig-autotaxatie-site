@@ -75,6 +75,11 @@ const PDFCover = () => {
     return timeString.slice(0, 5) + ' u';
   };
 
+  const capitalizeFirst = (str: string | null) => {
+    if (!str) return '-';
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
@@ -197,7 +202,7 @@ const PDFCover = () => {
           </p>
           <p className="text-sm leading-tight">
             <span className="text-slate-500 font-medium">Plaats:</span>{' '}
-            <span className="font-semibold text-slate-800">{report.inspection_location || '-'}</span>
+            <span className="font-semibold text-slate-800">{capitalizeFirst(report.inspection_location)}</span>
           </p>
         </div>
 
@@ -211,11 +216,8 @@ const PDFCover = () => {
           <p className="text-sm text-slate-500 font-medium leading-tight">Register-Taxateur VRT</p>
         </div>
 
-        {/* Spacer to push footer down */}
-        <div className="flex-grow" />
-
         {/* Footer with Company Details */}
-        <div className="border-t border-slate-300 pt-5 mt-auto">
+        <div className="border-t border-slate-300 pt-4">
           <div className="flex items-center gap-4">
             <img 
               src={logoAutomobiel} 
