@@ -12,8 +12,12 @@ interface Report {
   document_reference: string | null;
   client_name: string;
   opdrachtgever: string | null;
+  customer_title: string | null;
+  customer_initials: string | null;
+  customer_last_name: string | null;
   license_plate: string | null;
   vin: string | null;
+  vehicle_model: string | null;
   inspection_location: string | null;
   inspection_date: string | null;
   inspection_start_time: string | null;
@@ -159,6 +163,18 @@ const ReportDetail = () => {
                   <p className="text-sm text-muted-foreground">Opdrachtgever</p>
                   <p className="font-medium">{report.opdrachtgever || '-'}</p>
                 </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Aanhef</p>
+                  <p className="font-medium">{report.customer_title || '-'}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Naam</p>
+                  <p className="font-medium">
+                    {report.customer_initials || report.customer_last_name 
+                      ? `${report.customer_initials || ''} ${report.customer_last_name || ''}`.trim()
+                      : '-'}
+                  </p>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -173,6 +189,10 @@ const ReportDetail = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-muted-foreground">Voertuigmodel</p>
+                  <p className="font-medium">{report.vehicle_model || '-'}</p>
+                </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Kenteken</p>
                   <p className="font-medium font-mono">{report.license_plate || '-'}</p>

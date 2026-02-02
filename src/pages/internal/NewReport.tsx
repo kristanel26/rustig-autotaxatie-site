@@ -20,10 +20,13 @@ import { z } from 'zod';
 
 const reportSchema = z.object({
   client_name: z.string().trim().min(1, 'Klantnaam is verplicht'),
-  document_reference: z.string().optional(),
   opdrachtgever: z.string().optional(),
+  customer_title: z.string().optional(),
+  customer_initials: z.string().optional(),
+  customer_last_name: z.string().optional(),
   license_plate: z.string().optional(),
   vin: z.string().optional(),
+  vehicle_model: z.string().optional(),
   inspection_location: z.string().optional(),
   inspection_date: z.string().optional(),
   inspection_start_time: z.string().optional(),
@@ -44,8 +47,12 @@ const NewReport = () => {
   const [formData, setFormData] = useState({
     client_name: '',
     opdrachtgever: '',
+    customer_title: '',
+    customer_initials: '',
+    customer_last_name: '',
     license_plate: '',
     vin: '',
+    vehicle_model: '',
     inspection_location: '',
     inspection_date: '',
     inspection_start_time: '',
@@ -90,8 +97,12 @@ const NewReport = () => {
         user_id: user!.id,
         client_name: formData.client_name,
         opdrachtgever: formData.opdrachtgever || null,
+        customer_title: formData.customer_title || null,
+        customer_initials: formData.customer_initials || null,
+        customer_last_name: formData.customer_last_name || null,
         license_plate: formData.license_plate || null,
         vin: formData.vin || null,
+        vehicle_model: formData.vehicle_model || null,
         inspection_location: formData.inspection_location || null,
         inspection_date: formData.inspection_date || null,
         inspection_start_time: formData.inspection_start_time || null,
@@ -151,6 +162,40 @@ const NewReport = () => {
                 onChange={(e) => handleChange('opdrachtgever', e.target.value)}
               />
             </div>
+            <div className="space-y-2">
+              <Label htmlFor="customer_title">Aanhef</Label>
+              <Select
+                value={formData.customer_title}
+                onValueChange={(value) => handleChange('customer_title', value)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecteer aanhef" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Dhr.">Dhr.</SelectItem>
+                  <SelectItem value="Mevr.">Mevr.</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="customer_initials">Voorletters</Label>
+                <Input
+                  id="customer_initials"
+                  value={formData.customer_initials}
+                  onChange={(e) => handleChange('customer_initials', e.target.value)}
+                  placeholder="J.P."
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="customer_last_name">Achternaam</Label>
+                <Input
+                  id="customer_last_name"
+                  value={formData.customer_last_name}
+                  onChange={(e) => handleChange('customer_last_name', e.target.value)}
+                />
+              </div>
+            </div>
           </CardContent>
         </Card>
 
@@ -160,6 +205,15 @@ const NewReport = () => {
             <CardTitle className="text-lg">Voertuiggegevens</CardTitle>
           </CardHeader>
           <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="vehicle_model">Voertuigmodel</Label>
+              <Input
+                id="vehicle_model"
+                value={formData.vehicle_model}
+                onChange={(e) => handleChange('vehicle_model', e.target.value)}
+                placeholder="Bijv. Volkswagen Golf"
+              />
+            </div>
             <div className="space-y-2">
               <Label htmlFor="license_plate">Kenteken</Label>
               <Input
