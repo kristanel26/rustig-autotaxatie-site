@@ -2,3 +2,6 @@ project_id = "dzvjybtofvbxtuagtzng"
 
 [functions.rdw-lookup]
 verify_jwt = false
+
+[functions.postcode-lookup]
+verify_jwt = false
