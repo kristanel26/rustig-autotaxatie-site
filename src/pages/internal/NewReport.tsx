@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
-import { normalizeReportFormData, LICENSE_PLATE_REGEX } from '@/lib/normalizers';
+import { normalizeReportFormData, LICENSE_PLATE_REGEX, numberToDutchWords } from '@/lib/normalizers';
 
 const reportSchema = z.object({
   customer_title: z.string().optional(),
@@ -69,7 +69,21 @@ const NewReport = () => {
   });
 
   const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev) => {
+      const updated = { ...prev, [field]: value };
+      
+      // Auto-generate "waarde in woorden" when appraised_value changes
+      if (field === 'appraised_value') {
+        const numValue = parseFloat(value);
+        if (!isNaN(numValue) && numValue > 0) {
+          updated.appraised_value_text = numberToDutchWords(numValue);
+        } else {
+          updated.appraised_value_text = '';
+        }
+      }
+      
+      return updated;
+    });
     if (errors[field]) {
       setErrors((prev) => {
         const newErrors = { ...prev };
@@ -340,9 +354,14 @@ const NewReport = () => {
               <Input
                 id="appraised_value_text"
                 value={formData.appraised_value_text}
-                onChange={(e) => handleChange('appraised_value_text', e.target.value)}
-                placeholder="Bijvoorbeeld: vijfentwintigduizend euro"
+                readOnly
+                disabled
+                className="bg-muted"
+                placeholder="Wordt automatisch ingevuld"
               />
+              <p className="text-xs text-muted-foreground">
+                Wordt automatisch gegenereerd op basis van de getaxeerde waarde.
+              </p>
             </div>
             <div className="space-y-2">
               <Label htmlFor="quality_class">Kwaliteitsklasse</Label>

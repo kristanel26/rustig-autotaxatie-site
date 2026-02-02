@@ -18,7 +18,7 @@ export type Database = {
         Row: {
           appraised_value: number | null
           appraised_value_text: string | null
-          client_name: string
+          client_name: string | null
           created_at: string
           customer_city: string | null
           customer_initials: string | null
@@ -46,7 +46,7 @@ export type Database = {
         Insert: {
           appraised_value?: number | null
           appraised_value_text?: string | null
-          client_name: string
+          client_name?: string | null
           created_at?: string
           customer_city?: string | null
           customer_initials?: string | null
@@ -74,7 +74,7 @@ export type Database = {
         Update: {
           appraised_value?: number | null
           appraised_value_text?: string | null
-          client_name?: string
+          client_name?: string | null
           created_at?: string
           customer_city?: string | null
           customer_initials?: string | null
