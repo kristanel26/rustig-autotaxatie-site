@@ -10,13 +10,15 @@ interface Report {
   id: string;
   report_number: string;
   document_reference: string | null;
-  client_name: string;
-  opdrachtgever: string | null;
   customer_title: string | null;
   customer_initials: string | null;
   customer_last_name: string | null;
+  customer_street: string | null;
+  customer_postcode: string | null;
+  customer_city: string | null;
   license_plate: string | null;
   vin: string | null;
+  vehicle_brand: string | null;
   vehicle_model: string | null;
   inspection_location: string | null;
   inspection_date: string | null;
@@ -118,6 +120,21 @@ const ReportDetail = () => {
     );
   }
 
+  // Build customer name
+  const customerName = [report.customer_title, report.customer_initials, report.customer_last_name]
+    .filter(Boolean)
+    .join(' ') || '-';
+  
+  // Build customer address
+  const customerAddress = report.customer_street 
+    ? `${report.customer_street}${report.customer_postcode || report.customer_city ? ', ' : ''}${report.customer_postcode || ''} ${report.customer_city || ''}`.trim()
+    : null;
+
+  // Build vehicle display
+  const vehicleDisplay = [report.vehicle_brand, report.vehicle_model]
+    .filter(Boolean)
+    .join(' ') || '-';
+
   return (
     <InternalLayout title={`Rapport #${report.report_number}`}>
       <div className="space-y-6">
@@ -164,26 +181,16 @@ const ReportDetail = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Klantnaam</p>
-                  <p className="font-medium">{report.client_name}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Opdrachtgever</p>
-                  <p className="font-medium">{report.opdrachtgever || '-'}</p>
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Aanhef</p>
-                  <p className="font-medium">{report.customer_title || '-'}</p>
-                </div>
-                <div>
+                <div className="col-span-2">
                   <p className="text-sm text-muted-foreground">Naam</p>
-                  <p className="font-medium">
-                    {report.customer_initials || report.customer_last_name 
-                      ? `${report.customer_initials || ''} ${report.customer_last_name || ''}`.trim()
-                      : '-'}
-                  </p>
+                  <p className="font-medium">{customerName}</p>
                 </div>
+                {customerAddress && (
+                  <div className="col-span-2">
+                    <p className="text-sm text-muted-foreground">Adres</p>
+                    <p className="font-medium">{customerAddress}</p>
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -199,8 +206,8 @@ const ReportDetail = () => {
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm text-muted-foreground">Voertuigmodel</p>
-                  <p className="font-medium">{report.vehicle_model || '-'}</p>
+                  <p className="text-sm text-muted-foreground">Merk / Model</p>
+                  <p className="font-medium">{vehicleDisplay}</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Kenteken</p>
