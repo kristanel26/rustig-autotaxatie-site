@@ -28,6 +28,7 @@ interface Report {
   
   // Taxateur: Transmissie
   transmissie: string | null;
+  
   rdw_aantal_cilinders: number | null;
   rdw_cilinderinhoud: number | null;
   rdw_vermogen_kw: number | null;
