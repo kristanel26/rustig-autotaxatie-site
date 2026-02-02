@@ -25,6 +25,7 @@ import Dashboard from "./pages/internal/Dashboard";
 import Reports from "./pages/internal/Reports";
 import NewReport from "./pages/internal/NewReport";
 import ReportDetail from "./pages/internal/ReportDetail";
+import EditReport from "./pages/internal/EditReport";
 
 const queryClient = new QueryClient();
 
@@ -83,6 +84,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <ReportDetail />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/intern/rapport/:id/bewerken"
+              element={
+                <ProtectedRoute>
+                  <EditReport />
                 </ProtectedRoute>
               }
             />

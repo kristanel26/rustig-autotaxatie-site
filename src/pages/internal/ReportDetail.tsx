@@ -121,11 +121,20 @@ const ReportDetail = () => {
   return (
     <InternalLayout title={`Rapport #${report.report_number}`}>
       <div className="space-y-6">
-        {/* Back Button */}
-        <Button variant="ghost" onClick={() => navigate('/intern/rapporten')}>
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Terug naar overzicht
-        </Button>
+        {/* Action Buttons */}
+        <div className="flex flex-wrap items-center gap-3">
+          <Button variant="ghost" onClick={() => navigate('/intern/rapporten')}>
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Terug naar overzicht
+          </Button>
+          <Button 
+            variant="secondary-action" 
+            onClick={() => navigate(`/intern/rapport/${id}/bewerken`)}
+          >
+            Rapport Bewerken
+            <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
+          </Button>
+        </div>
 
         {/* Report Header */}
         <div className="flex flex-wrap items-center gap-4 pb-4 border-b border-border">
