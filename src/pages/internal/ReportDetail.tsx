@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import InternalLayout from '@/components/internal/InternalLayout';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, Calendar, MapPin, Car, Euro, FileDown } from 'lucide-react';
+import { ArrowLeft, Calendar, MapPin, Car, Euro, FileDown, Loader2 } from 'lucide-react';
+import html2pdf from 'html2pdf.js';
 
 interface Report {
   id: string;
@@ -36,6 +37,7 @@ const ReportDetail = () => {
   const navigate = useNavigate();
   const [report, setReport] = useState<Report | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
   useEffect(() => {
     const fetchReport = async () => {
@@ -108,18 +110,65 @@ const ReportDetail = () => {
     return parts.join('_').replace(/\s+/g, '-') + '.pdf';
   };
 
-  const handlePdfDownload = () => {
-    const pdfUrl = `/intern/pdf/voorblad/${id}`;
-    const filename = generatePdfFilename();
+  const handlePdfDownload = async () => {
+    if (!id || isGeneratingPdf) return;
     
-    // Open PDF in new tab with suggested filename
-    const link = document.createElement('a');
-    link.href = pdfUrl;
-    link.target = '_blank';
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    setIsGeneratingPdf(true);
+    
+    try {
+      // Create a hidden iframe to load the PDF cover page
+      const iframe = document.createElement('iframe');
+      iframe.style.position = 'absolute';
+      iframe.style.left = '-9999px';
+      iframe.style.width = '210mm';
+      iframe.style.height = '297mm';
+      document.body.appendChild(iframe);
+      
+      // Load the PDF cover page in the iframe
+      iframe.src = `/intern/pdf/voorblad/${id}`;
+      
+      await new Promise<void>((resolve, reject) => {
+        iframe.onload = () => {
+          // Wait for images to load
+          setTimeout(resolve, 1500);
+        };
+        iframe.onerror = reject;
+      });
+      
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+      if (!iframeDoc) {
+        throw new Error('Could not access iframe document');
+      }
+      
+      const element = iframeDoc.body;
+      const filename = generatePdfFilename();
+      
+      const opt = {
+        margin: 0,
+        filename: filename,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          logging: false,
+        },
+        jsPDF: { 
+          unit: 'mm', 
+          format: 'a4', 
+          orientation: 'portrait' as const
+        }
+      };
+      
+      await html2pdf().set(opt).from(element).save();
+      
+      // Clean up
+      document.body.removeChild(iframe);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    } finally {
+      setIsGeneratingPdf(false);
+    }
   };
 
   if (loading) {
@@ -182,9 +231,14 @@ const ReportDetail = () => {
           <Button 
             variant="outline" 
             onClick={handlePdfDownload}
+            disabled={isGeneratingPdf}
           >
-            <FileDown className="h-4 w-4 mr-2" />
-            PDF Downloaden
+            {isGeneratingPdf ? (
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+            ) : (
+              <FileDown className="h-4 w-4 mr-2" />
+            )}
+            {isGeneratingPdf ? 'Genereren...' : 'PDF Downloaden'}
           </Button>
           <Button 
             variant="ghost" 
