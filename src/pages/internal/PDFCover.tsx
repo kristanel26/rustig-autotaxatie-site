@@ -114,7 +114,7 @@ const PDFCover = () => {
       <div className="w-[45%] min-h-screen flex flex-col p-8 print:p-6 relative z-10 bg-white">
         
         {/* Register Logos - horizontal row */}
-        <div className="flex items-center gap-3 mb-12">
+        <div className="flex items-center gap-3 mb-10">
           <img src={logoVrt} alt="VRT" className="h-12 w-auto object-contain" />
           <img src={logoHobeon} alt="Hobeon SKO" className="h-12 w-auto object-contain" />
           <img src={logoTmv} alt="TMV" className="h-12 w-auto object-contain" />
@@ -122,7 +122,7 @@ const PDFCover = () => {
         </div>
 
         {/* Title Block */}
-        <div className="mb-10">
+        <div className="mb-8">
           <h1 
             className="text-4xl font-bold tracking-tight text-[#1a365d] uppercase mb-1"
             style={{ fontFamily: 'Georgia, serif' }}
@@ -138,8 +138,8 @@ const PDFCover = () => {
         </div>
 
         {/* Inzake (Vehicle) */}
-        <div className="mb-6">
-          <p className="text-sm text-gray-500 font-normal" style={{ fontFamily: 'system-ui, sans-serif' }}>
+        <div className="mb-5">
+          <p className="text-sm text-gray-500 font-medium" style={{ fontFamily: 'system-ui, sans-serif' }}>
             Inzake
           </p>
           <p 
@@ -151,8 +151,8 @@ const PDFCover = () => {
         </div>
 
         {/* Kenteken */}
-        <div className="mb-6">
-          <p className="text-sm text-gray-500 font-normal" style={{ fontFamily: 'system-ui, sans-serif' }}>
+        <div className="mb-5">
+          <p className="text-sm text-gray-500 font-medium" style={{ fontFamily: 'system-ui, sans-serif' }}>
             Kenteken
           </p>
           <p 
@@ -164,8 +164,8 @@ const PDFCover = () => {
         </div>
 
         {/* Documentkenmerk */}
-        <div className="mb-10">
-          <p className="text-sm text-gray-500 font-normal" style={{ fontFamily: 'system-ui, sans-serif' }}>
+        <div className="mb-8">
+          <p className="text-sm text-gray-500 font-medium" style={{ fontFamily: 'system-ui, sans-serif' }}>
             Documentkenmerk
           </p>
           <p 
@@ -177,8 +177,8 @@ const PDFCover = () => {
         </div>
 
         {/* In opdracht van */}
-        <div className="mb-10">
-          <p className="text-sm text-gray-500 font-normal mb-1" style={{ fontFamily: 'system-ui, sans-serif' }}>
+        <div className="mb-8">
+          <p className="text-sm text-gray-500 font-medium mb-1" style={{ fontFamily: 'system-ui, sans-serif' }}>
             In opdracht van
           </p>
           <p 
@@ -206,21 +206,21 @@ const PDFCover = () => {
         </div>
 
         {/* Inspection Details */}
-        <div className="mb-10 space-y-1" style={{ fontFamily: 'system-ui, sans-serif' }}>
+        <div className="mb-8 space-y-0.5" style={{ fontFamily: 'system-ui, sans-serif' }}>
           <p className="text-sm text-gray-700">
-            <span className="text-gray-500 font-normal">Opnamedatum:</span>{' '}
+            <span className="text-gray-500 font-medium">Opnamedatum:</span>{' '}
             <span className="font-bold text-[#1a365d]">{formatDate(report.inspection_date)}</span>
           </p>
           <p className="text-sm text-gray-700">
-            <span className="text-gray-500 font-normal">Aanvangstijd opname:</span>{' '}
+            <span className="text-gray-500 font-medium">Aanvangstijd opname:</span>{' '}
             <span className="font-bold text-[#1a365d]">{formatTime(report.inspection_start_time)}</span>
           </p>
           <p className="text-sm text-gray-700">
-            <span className="text-gray-500 font-normal">Eindtijd opname:</span>{' '}
+            <span className="text-gray-500 font-medium">Eindtijd opname:</span>{' '}
             <span className="font-bold text-[#1a365d]">{formatTime(report.inspection_end_time)}</span>
           </p>
           <p className="text-sm text-gray-700">
-            <span className="text-gray-500 font-normal">Plaats:</span>{' '}
+            <span className="text-gray-500 font-medium">Plaats:</span>{' '}
             <span className="font-bold text-[#1a365d]">{report.inspection_location || '-'}</span>
           </p>
         </div>
@@ -229,29 +229,37 @@ const PDFCover = () => {
         <div className="flex-grow" />
 
         {/* Uitgevoerd door */}
-        <div className="mb-6" style={{ fontFamily: 'system-ui, sans-serif' }}>
+        <div className="mb-4" style={{ fontFamily: 'system-ui, sans-serif' }}>
           <p className="text-sm text-gray-700">
-            <span className="text-gray-500 font-normal">Uitgevoerd door:</span>{' '}
+            <span className="text-gray-500 font-medium">Uitgevoerd door:</span>{' '}
             <span className="font-bold text-[#1a365d]">Erik Elderson</span>
           </p>
-          <p className="text-sm text-gray-500 font-normal">TMV Register-Taxateur</p>
-          <p className="text-sm text-gray-500 font-normal">Register-Taxateur VRT</p>
+          <p className="text-sm text-gray-500 font-medium">TMV Register-Taxateur</p>
+          <p className="text-sm text-gray-500 font-medium">Register-Taxateur VRT</p>
         </div>
 
         {/* Footer with Company Details */}
-        <div className="border-t border-gray-300 pt-5">
-          <div className="flex items-start gap-4">
+        <div className="border-t border-gray-300 pt-4">
+          <div className="flex items-center gap-4">
             <img 
               src={logoAutomobiel} 
               alt="Automobiel Taxaties" 
-              className="h-16 w-auto flex-shrink-0"
+              className="h-14 w-auto flex-shrink-0"
             />
-            <div className="text-sm text-gray-600 space-y-0.5" style={{ fontFamily: 'system-ui, sans-serif' }}>
-              <p className="font-medium text-[#1a365d]">Automobiel Taxaties</p>
-              <p>Leigraaf 160 | 6651 GJ Druten</p>
-              <p>KVK: 95549269 | BTW: NL003366178B93</p>
-              <p>TMV 33106 | VRT 22-523-M</p>
-              <p>Bankrekening: NL80RABO 0387915680</p>
+            <div className="text-sm text-gray-600 leading-snug" style={{ fontFamily: 'system-ui, sans-serif' }}>
+              <span className="font-semibold text-[#1a365d]">Automobiel Taxaties</span>
+              <span className="mx-1">|</span>
+              <span>Leigraaf 160, 6651 GJ Druten</span>
+              <span className="mx-1">|</span>
+              <span>KVK: 95549269</span>
+              <span className="mx-1">|</span>
+              <span>BTW: NL003366178B93</span>
+              <br />
+              <span>TMV 33106</span>
+              <span className="mx-1">|</span>
+              <span>VRT 22-523-M</span>
+              <span className="mx-1">|</span>
+              <span>Bank: NL80RABO 0387915680</span>
             </div>
           </div>
         </div>
