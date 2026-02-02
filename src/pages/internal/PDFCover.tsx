@@ -109,12 +109,12 @@ const PDFCover = () => {
     : null;
 
   return (
-    <div className="min-h-screen bg-white flex print:flex" style={{ fontFamily: 'Georgia, serif' }}>
+    <div className="min-h-screen bg-white flex print:flex">
       {/* Left Column - ~45% */}
       <div className="w-[45%] min-h-screen flex flex-col p-8 print:p-6 relative z-10 bg-white">
         
         {/* Register Logos - horizontal row */}
-        <div className="flex items-center gap-3 mb-10">
+        <div className="flex items-center gap-3 mb-12">
           <img src={logoVrt} alt="VRT" className="h-12 w-auto object-contain" />
           <img src={logoHobeon} alt="Hobeon SKO" className="h-12 w-auto object-contain" />
           <img src={logoTmv} alt="TMV" className="h-12 w-auto object-contain" />
@@ -122,68 +122,106 @@ const PDFCover = () => {
         </div>
 
         {/* Title Block */}
-        <div className="mb-6">
-          <h1 className="text-4xl font-bold tracking-tight text-[#1a365d] uppercase mb-1">
+        <div className="mb-10">
+          <h1 
+            className="text-4xl font-bold tracking-tight text-[#1a365d] uppercase mb-1"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
             TAXATIERAPPORT
           </h1>
-          <p className="text-base italic text-gray-600">
+          <p 
+            className="text-base text-gray-600 italic"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
             Volgens artikel 7:960 BW
           </p>
         </div>
 
         {/* Inzake (Vehicle) */}
-        <div className="mb-5">
-          <p className="text-sm italic text-gray-600">Inzake:</p>
-          <p className="text-xl font-bold uppercase text-[#1a365d]">
+        <div className="mb-6">
+          <p className="text-sm text-gray-500 font-normal" style={{ fontFamily: 'system-ui, sans-serif' }}>
+            Inzake
+          </p>
+          <p 
+            className="text-xl font-bold uppercase text-[#1a365d]"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
             {vehicleDisplay}
           </p>
         </div>
 
         {/* Kenteken */}
-        <div className="mb-5">
-          <p className="text-sm italic text-gray-600">Kenteken:</p>
-          <p className="text-xl font-bold text-[#1a365d]">
+        <div className="mb-6">
+          <p className="text-sm text-gray-500 font-normal" style={{ fontFamily: 'system-ui, sans-serif' }}>
+            Kenteken
+          </p>
+          <p 
+            className="text-xl font-bold text-[#1a365d]"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
             {report.license_plate || '-'}
           </p>
         </div>
 
         {/* Documentkenmerk */}
-        <div className="mb-8">
-          <p className="text-sm italic text-gray-600">Documentkenmerk:</p>
-          <p className="text-xl font-bold text-[#1a365d]">
+        <div className="mb-10">
+          <p className="text-sm text-gray-500 font-normal" style={{ fontFamily: 'system-ui, sans-serif' }}>
+            Documentkenmerk
+          </p>
+          <p 
+            className="text-xl font-bold text-[#1a365d]"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
             {report.report_number}
           </p>
         </div>
 
         {/* In opdracht van */}
-        <div className="mb-8">
-          <p className="text-sm italic text-gray-600">In opdracht van:</p>
-          <p className="text-lg font-bold text-[#1a365d]">
+        <div className="mb-10">
+          <p className="text-sm text-gray-500 font-normal mb-1" style={{ fontFamily: 'system-ui, sans-serif' }}>
+            In opdracht van
+          </p>
+          <p 
+            className="text-lg font-bold text-[#1a365d]"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
             {customerName}
           </p>
           {report.customer_street && (
-            <p className="text-lg font-bold text-[#1a365d]">{report.customer_street.toUpperCase()}</p>
+            <p 
+              className="text-lg font-bold text-[#1a365d]"
+              style={{ fontFamily: 'Georgia, serif' }}
+            >
+              {report.customer_street.toUpperCase()}
+            </p>
           )}
           {(report.customer_postcode || report.customer_city) && (
-            <p className="text-lg font-bold text-[#1a365d]">
+            <p 
+              className="text-lg font-bold text-[#1a365d]"
+              style={{ fontFamily: 'Georgia, serif' }}
+            >
               {[report.customer_postcode, report.customer_city?.toUpperCase()].filter(Boolean).join(' ')}
             </p>
           )}
         </div>
 
         {/* Inspection Details */}
-        <div className="mb-8 space-y-0.5">
+        <div className="mb-10 space-y-1" style={{ fontFamily: 'system-ui, sans-serif' }}>
           <p className="text-sm text-gray-700">
-            <span className="italic">Opnamedatum:</span> {formatDate(report.inspection_date)}
+            <span className="text-gray-500 font-normal">Opnamedatum:</span>{' '}
+            <span className="font-bold text-[#1a365d]">{formatDate(report.inspection_date)}</span>
           </p>
           <p className="text-sm text-gray-700">
-            <span className="italic">Aanvangstijd opname:</span> {formatTime(report.inspection_start_time)}
+            <span className="text-gray-500 font-normal">Aanvangstijd opname:</span>{' '}
+            <span className="font-bold text-[#1a365d]">{formatTime(report.inspection_start_time)}</span>
           </p>
           <p className="text-sm text-gray-700">
-            <span className="italic">Eindtijd opname:</span> {formatTime(report.inspection_end_time)}
+            <span className="text-gray-500 font-normal">Eindtijd opname:</span>{' '}
+            <span className="font-bold text-[#1a365d]">{formatTime(report.inspection_end_time)}</span>
           </p>
           <p className="text-sm text-gray-700">
-            <span className="italic">Plaats:</span> {report.inspection_location || '-'}
+            <span className="text-gray-500 font-normal">Plaats:</span>{' '}
+            <span className="font-bold text-[#1a365d]">{report.inspection_location || '-'}</span>
           </p>
         </div>
 
@@ -191,26 +229,30 @@ const PDFCover = () => {
         <div className="flex-grow" />
 
         {/* Uitgevoerd door */}
-        <div className="mb-6">
-          <p className="text-sm italic text-gray-700">
-            Uitgevoerd door: <span className="not-italic">Erik Elderson</span>
+        <div className="mb-6" style={{ fontFamily: 'system-ui, sans-serif' }}>
+          <p className="text-sm text-gray-700">
+            <span className="text-gray-500 font-normal">Uitgevoerd door:</span>{' '}
+            <span className="font-bold text-[#1a365d]">Erik Elderson</span>
           </p>
-          <p className="text-sm italic text-gray-700">TMV Register-Taxateur</p>
-          <p className="text-sm italic text-gray-700">Register-Taxateur VRT</p>
+          <p className="text-sm text-gray-500 font-normal">TMV Register-Taxateur</p>
+          <p className="text-sm text-gray-500 font-normal">Register-Taxateur VRT</p>
         </div>
 
         {/* Footer with Company Details */}
-        <div className="border-t border-gray-200 pt-4">
-          <img 
-            src={logoAutomobiel} 
-            alt="Automobiel Taxaties" 
-            className="h-14 w-auto mb-2"
-          />
-          <div className="text-xs text-gray-600 space-y-0 text-center" style={{ maxWidth: '280px' }}>
-            <p>Leigraaf 160 | 6651 GJ Druten</p>
-            <p>KVK: 95549269 | BTW NL003366178B93</p>
-            <p>TMV 33106 | VRT 22-523-M</p>
-            <p>Bankrekening: NL80RABO 0387915680</p>
+        <div className="border-t border-gray-300 pt-5">
+          <div className="flex items-start gap-4">
+            <img 
+              src={logoAutomobiel} 
+              alt="Automobiel Taxaties" 
+              className="h-16 w-auto flex-shrink-0"
+            />
+            <div className="text-sm text-gray-600 space-y-0.5" style={{ fontFamily: 'system-ui, sans-serif' }}>
+              <p className="font-medium text-[#1a365d]">Automobiel Taxaties</p>
+              <p>Leigraaf 160 | 6651 GJ Druten</p>
+              <p>KVK: 95549269 | BTW: NL003366178B93</p>
+              <p>TMV 33106 | VRT 22-523-M</p>
+              <p>Bankrekening: NL80RABO 0387915680</p>
+            </div>
           </div>
         </div>
       </div>
