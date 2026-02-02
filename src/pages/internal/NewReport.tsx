@@ -19,6 +19,7 @@ import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { normalizeReportFormData, LICENSE_PLATE_REGEX, numberToDutchWords } from '@/lib/normalizers';
 import { VehicleInfoForm, VehicleFormData, getInitialVehicleFormData } from '@/components/internal/VehicleInfoForm';
+import { AppraisalFindingsForm, AppraisalFormData, getInitialAppraisalFormData } from '@/components/internal/AppraisalFindingsForm';
 
 const reportSchema = z.object({
   // Customer fields
@@ -69,6 +70,9 @@ const NewReport = () => {
   // Vehicle data (from VehicleInfoForm)
   const [vehicleData, setVehicleData] = useState<VehicleFormData>(getInitialVehicleFormData());
 
+  // Appraisal findings data
+  const [appraisalData, setAppraisalData] = useState<AppraisalFormData>(getInitialAppraisalFormData());
+
   // Inspection data
   const [inspectionData, setInspectionData] = useState({
     inspection_location: '',
@@ -109,6 +113,10 @@ const NewReport = () => {
 
   const handleInspectionChange = (field: string, value: string) => {
     setInspectionData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleAppraisalChange = (field: keyof AppraisalFormData, value: string) => {
+    setAppraisalData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleValuationChange = (field: string, value: string) => {
@@ -241,6 +249,64 @@ const NewReport = () => {
         rdw_data_locked: vehicleData.rdw_data_locked,
         rdw_fetched_at: vehicleData.rdw_data_locked ? new Date().toISOString() : null,
         
+        // Model display name (taxateur override)
+        model_display_name: appraisalData.model_display_name || null,
+        
+        // Technische staat
+        condition_engine: appraisalData.condition_engine || null,
+        condition_engine_notes: appraisalData.condition_engine_notes || null,
+        condition_transmission: appraisalData.condition_transmission || null,
+        condition_transmission_notes: appraisalData.condition_transmission_notes || null,
+        condition_brakes: appraisalData.condition_brakes || null,
+        condition_brakes_notes: appraisalData.condition_brakes_notes || null,
+        condition_suspension: appraisalData.condition_suspension || null,
+        condition_suspension_notes: appraisalData.condition_suspension_notes || null,
+        condition_steering: appraisalData.condition_steering || null,
+        condition_steering_notes: appraisalData.condition_steering_notes || null,
+        condition_electrical: appraisalData.condition_electrical || null,
+        condition_electrical_notes: appraisalData.condition_electrical_notes || null,
+        
+        // Banden
+        tire_front_left_brand: appraisalData.tire_front_left_brand || null,
+        tire_front_left_dot: appraisalData.tire_front_left_dot || null,
+        tire_front_left_season: appraisalData.tire_front_left_season || null,
+        tire_front_right_brand: appraisalData.tire_front_right_brand || null,
+        tire_front_right_dot: appraisalData.tire_front_right_dot || null,
+        tire_front_right_season: appraisalData.tire_front_right_season || null,
+        tire_rear_left_brand: appraisalData.tire_rear_left_brand || null,
+        tire_rear_left_dot: appraisalData.tire_rear_left_dot || null,
+        tire_rear_left_season: appraisalData.tire_rear_left_season || null,
+        tire_rear_right_brand: appraisalData.tire_rear_right_brand || null,
+        tire_rear_right_dot: appraisalData.tire_rear_right_dot || null,
+        tire_rear_right_season: appraisalData.tire_rear_right_season || null,
+        rim_type: appraisalData.rim_type || null,
+        
+        // Exterieur
+        exterior_body: appraisalData.exterior_body || null,
+        exterior_body_notes: appraisalData.exterior_body_notes || null,
+        exterior_paint: appraisalData.exterior_paint || null,
+        exterior_paint_notes: appraisalData.exterior_paint_notes || null,
+        exterior_rubbers: appraisalData.exterior_rubbers || null,
+        exterior_rubbers_notes: appraisalData.exterior_rubbers_notes || null,
+        exterior_windows: appraisalData.exterior_windows || null,
+        exterior_windows_notes: appraisalData.exterior_windows_notes || null,
+        exterior_sealant: appraisalData.exterior_sealant || null,
+        exterior_sealant_notes: appraisalData.exterior_sealant_notes || null,
+        
+        // Interieur
+        interior_upholstery: appraisalData.interior_upholstery || null,
+        interior_upholstery_notes: appraisalData.interior_upholstery_notes || null,
+        interior_dashboard: appraisalData.interior_dashboard || null,
+        interior_dashboard_notes: appraisalData.interior_dashboard_notes || null,
+        interior_floor: appraisalData.interior_floor || null,
+        interior_floor_notes: appraisalData.interior_floor_notes || null,
+        interior_roof: appraisalData.interior_roof || null,
+        interior_roof_notes: appraisalData.interior_roof_notes || null,
+        interior_kitchen: appraisalData.interior_kitchen || null,
+        interior_kitchen_notes: appraisalData.interior_kitchen_notes || null,
+        interior_sanitary: appraisalData.interior_sanitary || null,
+        interior_sanitary_notes: appraisalData.interior_sanitary_notes || null,
+        
         // Inspection data
         inspection_location: inspectionData.inspection_location || null,
         inspection_date: inspectionData.inspection_date || null,
@@ -358,6 +424,13 @@ const NewReport = () => {
           onChange={handleVehicleChange}
           errors={errors}
           isEditMode={false}
+        />
+
+        {/* Appraisal Findings - Taxateursecties */}
+        <AppraisalFindingsForm
+          formData={appraisalData}
+          onChange={handleAppraisalChange}
+          rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
         />
 
         {/* Inspection Details */}

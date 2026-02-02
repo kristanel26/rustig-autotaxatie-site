@@ -19,6 +19,18 @@ export type Database = {
           appraised_value: number | null
           appraised_value_text: string | null
           client_name: string | null
+          condition_brakes: string | null
+          condition_brakes_notes: string | null
+          condition_electrical: string | null
+          condition_electrical_notes: string | null
+          condition_engine: string | null
+          condition_engine_notes: string | null
+          condition_steering: string | null
+          condition_steering_notes: string | null
+          condition_suspension: string | null
+          condition_suspension_notes: string | null
+          condition_transmission: string | null
+          condition_transmission_notes: string | null
           constructievorm: string | null
           created_at: string
           customer_city: string | null
@@ -28,6 +40,16 @@ export type Database = {
           customer_street: string | null
           customer_title: string | null
           document_reference: string | null
+          exterior_body: string | null
+          exterior_body_notes: string | null
+          exterior_paint: string | null
+          exterior_paint_notes: string | null
+          exterior_rubbers: string | null
+          exterior_rubbers_notes: string | null
+          exterior_sealant: string | null
+          exterior_sealant_notes: string | null
+          exterior_windows: string | null
+          exterior_windows_notes: string | null
           gebruik: string | null
           general_remarks: string | null
           id: string
@@ -35,7 +57,20 @@ export type Database = {
           inspection_end_time: string | null
           inspection_location: string | null
           inspection_start_time: string | null
+          interior_dashboard: string | null
+          interior_dashboard_notes: string | null
+          interior_floor: string | null
+          interior_floor_notes: string | null
+          interior_kitchen: string | null
+          interior_kitchen_notes: string | null
+          interior_roof: string | null
+          interior_roof_notes: string | null
+          interior_sanitary: string | null
+          interior_sanitary_notes: string | null
+          interior_upholstery: string | null
+          interior_upholstery_notes: string | null
           license_plate: string | null
+          model_display_name: string | null
           opbouw_merk: string | null
           opbouw_type: string | null
           opdrachtgever: string | null
@@ -65,11 +100,24 @@ export type Database = {
           rdw_voertuigsoort: string | null
           rdw_wielbasis: number | null
           report_number: string
+          rim_type: string | null
           soort_bouw: string | null
           staat_bij_opname: string | null
           stalling: string | null
           tellerstand: number | null
           tellerstand_type: string | null
+          tire_front_left_brand: string | null
+          tire_front_left_dot: string | null
+          tire_front_left_season: string | null
+          tire_front_right_brand: string | null
+          tire_front_right_dot: string | null
+          tire_front_right_season: string | null
+          tire_rear_left_brand: string | null
+          tire_rear_left_dot: string | null
+          tire_rear_left_season: string | null
+          tire_rear_right_brand: string | null
+          tire_rear_right_dot: string | null
+          tire_rear_right_season: string | null
           transmissie: string | null
           updated_at: string
           user_id: string
@@ -83,6 +131,18 @@ export type Database = {
           appraised_value?: number | null
           appraised_value_text?: string | null
           client_name?: string | null
+          condition_brakes?: string | null
+          condition_brakes_notes?: string | null
+          condition_electrical?: string | null
+          condition_electrical_notes?: string | null
+          condition_engine?: string | null
+          condition_engine_notes?: string | null
+          condition_steering?: string | null
+          condition_steering_notes?: string | null
+          condition_suspension?: string | null
+          condition_suspension_notes?: string | null
+          condition_transmission?: string | null
+          condition_transmission_notes?: string | null
           constructievorm?: string | null
           created_at?: string
           customer_city?: string | null
@@ -92,6 +152,16 @@ export type Database = {
           customer_street?: string | null
           customer_title?: string | null
           document_reference?: string | null
+          exterior_body?: string | null
+          exterior_body_notes?: string | null
+          exterior_paint?: string | null
+          exterior_paint_notes?: string | null
+          exterior_rubbers?: string | null
+          exterior_rubbers_notes?: string | null
+          exterior_sealant?: string | null
+          exterior_sealant_notes?: string | null
+          exterior_windows?: string | null
+          exterior_windows_notes?: string | null
           gebruik?: string | null
           general_remarks?: string | null
           id?: string
@@ -99,7 +169,20 @@ export type Database = {
           inspection_end_time?: string | null
           inspection_location?: string | null
           inspection_start_time?: string | null
+          interior_dashboard?: string | null
+          interior_dashboard_notes?: string | null
+          interior_floor?: string | null
+          interior_floor_notes?: string | null
+          interior_kitchen?: string | null
+          interior_kitchen_notes?: string | null
+          interior_roof?: string | null
+          interior_roof_notes?: string | null
+          interior_sanitary?: string | null
+          interior_sanitary_notes?: string | null
+          interior_upholstery?: string | null
+          interior_upholstery_notes?: string | null
           license_plate?: string | null
+          model_display_name?: string | null
           opbouw_merk?: string | null
           opbouw_type?: string | null
           opdrachtgever?: string | null
@@ -129,11 +212,24 @@ export type Database = {
           rdw_voertuigsoort?: string | null
           rdw_wielbasis?: number | null
           report_number: string
+          rim_type?: string | null
           soort_bouw?: string | null
           staat_bij_opname?: string | null
           stalling?: string | null
           tellerstand?: number | null
           tellerstand_type?: string | null
+          tire_front_left_brand?: string | null
+          tire_front_left_dot?: string | null
+          tire_front_left_season?: string | null
+          tire_front_right_brand?: string | null
+          tire_front_right_dot?: string | null
+          tire_front_right_season?: string | null
+          tire_rear_left_brand?: string | null
+          tire_rear_left_dot?: string | null
+          tire_rear_left_season?: string | null
+          tire_rear_right_brand?: string | null
+          tire_rear_right_dot?: string | null
+          tire_rear_right_season?: string | null
           transmissie?: string | null
           updated_at?: string
           user_id: string
@@ -147,6 +243,18 @@ export type Database = {
           appraised_value?: number | null
           appraised_value_text?: string | null
           client_name?: string | null
+          condition_brakes?: string | null
+          condition_brakes_notes?: string | null
+          condition_electrical?: string | null
+          condition_electrical_notes?: string | null
+          condition_engine?: string | null
+          condition_engine_notes?: string | null
+          condition_steering?: string | null
+          condition_steering_notes?: string | null
+          condition_suspension?: string | null
+          condition_suspension_notes?: string | null
+          condition_transmission?: string | null
+          condition_transmission_notes?: string | null
           constructievorm?: string | null
           created_at?: string
           customer_city?: string | null
@@ -156,6 +264,16 @@ export type Database = {
           customer_street?: string | null
           customer_title?: string | null
           document_reference?: string | null
+          exterior_body?: string | null
+          exterior_body_notes?: string | null
+          exterior_paint?: string | null
+          exterior_paint_notes?: string | null
+          exterior_rubbers?: string | null
+          exterior_rubbers_notes?: string | null
+          exterior_sealant?: string | null
+          exterior_sealant_notes?: string | null
+          exterior_windows?: string | null
+          exterior_windows_notes?: string | null
           gebruik?: string | null
           general_remarks?: string | null
           id?: string
@@ -163,7 +281,20 @@ export type Database = {
           inspection_end_time?: string | null
           inspection_location?: string | null
           inspection_start_time?: string | null
+          interior_dashboard?: string | null
+          interior_dashboard_notes?: string | null
+          interior_floor?: string | null
+          interior_floor_notes?: string | null
+          interior_kitchen?: string | null
+          interior_kitchen_notes?: string | null
+          interior_roof?: string | null
+          interior_roof_notes?: string | null
+          interior_sanitary?: string | null
+          interior_sanitary_notes?: string | null
+          interior_upholstery?: string | null
+          interior_upholstery_notes?: string | null
           license_plate?: string | null
+          model_display_name?: string | null
           opbouw_merk?: string | null
           opbouw_type?: string | null
           opdrachtgever?: string | null
@@ -193,11 +324,24 @@ export type Database = {
           rdw_voertuigsoort?: string | null
           rdw_wielbasis?: number | null
           report_number?: string
+          rim_type?: string | null
           soort_bouw?: string | null
           staat_bij_opname?: string | null
           stalling?: string | null
           tellerstand?: number | null
           tellerstand_type?: string | null
+          tire_front_left_brand?: string | null
+          tire_front_left_dot?: string | null
+          tire_front_left_season?: string | null
+          tire_front_right_brand?: string | null
+          tire_front_right_dot?: string | null
+          tire_front_right_season?: string | null
+          tire_rear_left_brand?: string | null
+          tire_rear_left_dot?: string | null
+          tire_rear_left_season?: string | null
+          tire_rear_right_brand?: string | null
+          tire_rear_right_dot?: string | null
+          tire_rear_right_season?: string | null
           transmissie?: string | null
           updated_at?: string
           user_id?: string

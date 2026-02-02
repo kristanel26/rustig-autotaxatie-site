@@ -28,6 +28,7 @@ import ReportDetail from "./pages/internal/ReportDetail";
 import EditReport from "./pages/internal/EditReport";
 import PDFCover from "./pages/internal/PDFCover";
 import PDFVehicleData from "./pages/internal/PDFVehicleData";
+import PDFAppraisalFindings from "./pages/internal/PDFAppraisalFindings";
 
 const queryClient = new QueryClient();
 
@@ -110,6 +111,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <PDFVehicleData />
+              </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/intern/pdf/taxateurbevindingen/:id"
+              element={
+                <ProtectedRoute>
+                  <PDFAppraisalFindings />
                 </ProtectedRoute>
               }
             />
