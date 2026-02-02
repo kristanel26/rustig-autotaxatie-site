@@ -17,6 +17,9 @@ interface Report {
   rdw_handelsbenaming: string | null;
   rdw_voertuigsoort: string | null;
   rdw_carrosserievorm: string | null;
+  
+  // Model display name (taxateur override)
+  model_display_name: string | null;
   rdw_bouwjaar: number | null;
   rdw_datum_eerste_toelating: string | null;
   rdw_datum_eerste_tenaamstelling: string | null;
@@ -189,7 +192,10 @@ const PDFVehicleData = () => {
             <SectionHeader number="1" title="Identificatie (RDW)" />
             <DataRow label="Kenteken" value={report.license_plate || '-'} source="RDW" />
             <DataRow label="Merk" value={report.rdw_merk || '-'} source="RDW" />
-            <DataRow label="Handelsbenaming" value={report.rdw_handelsbenaming || '-'} source="RDW" />
+            <DataRow label="Handelsbenaming (RDW)" value={report.rdw_handelsbenaming || '-'} source="RDW" />
+            {report.model_display_name && (
+              <DataRow label="Model (vastgesteld)" value={report.model_display_name} source="Taxateur" />
+            )}
             <DataRow label="Voertuigsoort" value={report.rdw_voertuigsoort || '-'} source="RDW" />
             <DataRow label="Carrosserievorm" value={report.rdw_carrosserievorm || '-'} source="RDW" />
             <DataRow label="Chassisnummer (VIN)" value={report.vin || '-'} source="RDW" />
