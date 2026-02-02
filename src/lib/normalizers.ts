@@ -1,6 +1,73 @@
 // Text normalization utilities for form fields
 
 /**
+ * Convert a number to Dutch words
+ * Examples: 25000 -> "vijfentwintigduizend euro"
+ */
+export const numberToDutchWords = (value: number): string => {
+  if (value === 0) return 'nul euro';
+  
+  const ones = ['', 'een', 'twee', 'drie', 'vier', 'vijf', 'zes', 'zeven', 'acht', 'negen',
+                'tien', 'elf', 'twaalf', 'dertien', 'veertien', 'vijftien', 'zestien', 
+                'zeventien', 'achttien', 'negentien'];
+  const tens = ['', '', 'twintig', 'dertig', 'veertig', 'vijftig', 'zestig', 'zeventig', 'tachtig', 'negentig'];
+  
+  const convertHundreds = (n: number): string => {
+    if (n === 0) return '';
+    if (n < 20) return ones[n];
+    if (n < 100) {
+      const ten = Math.floor(n / 10);
+      const one = n % 10;
+      if (one === 0) return tens[ten];
+      // Dutch uses "een" before "en" (eenentwintig), but "twee", "drie" etc. with special connector
+      const oneWord = one === 2 || one === 3 ? ones[one].slice(0, -1) + 'ë' : ones[one];
+      return ones[one] + 'en' + tens[ten];
+    }
+    const hundred = Math.floor(n / 100);
+    const rest = n % 100;
+    const hundredWord = hundred === 1 ? 'honderd' : ones[hundred] + 'honderd';
+    return hundredWord + convertHundreds(rest);
+  };
+  
+  const convertThousands = (n: number): string => {
+    if (n === 0) return '';
+    if (n < 1000) return convertHundreds(n);
+    
+    const thousand = Math.floor(n / 1000);
+    const rest = n % 1000;
+    
+    let thousandWord: string;
+    if (thousand === 1) {
+      thousandWord = 'duizend';
+    } else if (thousand < 20) {
+      thousandWord = ones[thousand] + 'duizend';
+    } else {
+      thousandWord = convertHundreds(thousand) + 'duizend';
+    }
+    
+    return thousandWord + convertHundreds(rest);
+  };
+  
+  const convertMillions = (n: number): string => {
+    if (n < 1000000) return convertThousands(n);
+    
+    const million = Math.floor(n / 1000000);
+    const rest = n % 1000000;
+    
+    const millionWord = million === 1 ? 'een miljoen' : convertHundreds(million) + ' miljoen';
+    
+    if (rest === 0) return millionWord;
+    return millionWord + ' ' + convertThousands(rest);
+  };
+  
+  // Handle decimals by rounding to whole euros
+  const wholeValue = Math.round(value);
+  const words = convertMillions(wholeValue);
+  
+  return words + ' euro';
+};
+
+/**
  * Normalize Dutch license plate: remove spaces/hyphens, uppercase, format as XX-XX-XX
  */
 export const normalizeLicensePlate = (value: string): string => {
