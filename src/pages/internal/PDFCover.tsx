@@ -31,14 +31,18 @@ const PDFCover = () => {
 
   useEffect(() => {
     const fetchReport = async () => {
-      if (!id) return;
+      if (!id) {
+        console.error('No report ID provided');
+        setLoading(false);
+        return;
+      }
 
       try {
         const { data, error } = await supabase
           .from('reports')
           .select('*')
           .eq('id', id)
-          .single();
+          .maybeSingle();
 
         if (error) throw error;
         setReport(data);
