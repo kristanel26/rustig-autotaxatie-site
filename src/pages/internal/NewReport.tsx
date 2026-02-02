@@ -18,8 +18,8 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 
-// Format Dutch license plate: remove spaces, uppercase, format as XX-XX-XX
-const formatLicensePlate = (value: string): string => {
+// Normalize Dutch license plate: remove spaces/hyphens, uppercase, format as XX-XX-XX
+const normalizeLicensePlate = (value: string): string => {
   // Remove all spaces and hyphens, convert to uppercase
   const cleaned = value.replace(/[\s-]/g, '').toUpperCase();
   
@@ -41,9 +41,7 @@ const reportSchema = z.object({
   customer_street: z.string().optional(),
   customer_postcode: z.string().optional(),
   customer_city: z.string().optional(),
-  license_plate: z.string()
-    .min(1, 'Kenteken is verplicht')
-    .regex(LICENSE_PLATE_REGEX, 'Kenteken moet worden opgeslagen als 65-PR-VK'),
+  license_plate: z.string().min(1, 'Kenteken is verplicht'),
   vin: z.string().optional(),
   vehicle_brand: z.string().optional(),
   vehicle_model: z.string().optional(),
@@ -100,7 +98,11 @@ const NewReport = () => {
     e.preventDefault();
     setErrors({});
 
-    const result = reportSchema.safeParse(formData);
+    // Normalize license plate before validation
+    const normalizedLicensePlate = normalizeLicensePlate(formData.license_plate);
+    const dataToValidate = { ...formData, license_plate: normalizedLicensePlate };
+
+    const result = reportSchema.safeParse(dataToValidate);
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
       result.error.errors.forEach((err) => {
@@ -109,6 +111,12 @@ const NewReport = () => {
         }
       });
       setErrors(fieldErrors);
+      return;
+    }
+
+    // Validate normalized license plate format
+    if (!LICENSE_PLATE_REGEX.test(normalizedLicensePlate)) {
+      setErrors({ license_plate: 'Ongeldig kenteken' });
       return;
     }
 
@@ -123,7 +131,7 @@ const NewReport = () => {
         customer_street: formData.customer_street || null,
         customer_postcode: formData.customer_postcode || null,
         customer_city: formData.customer_city || null,
-        license_plate: formData.license_plate || null,
+        license_plate: normalizedLicensePlate,
         vin: formData.vin || null,
         vehicle_brand: formData.vehicle_brand || null,
         vehicle_model: formData.vehicle_model || null,
@@ -259,13 +267,13 @@ const NewReport = () => {
               <Input
                 id="license_plate"
                 value={formData.license_plate}
-                onChange={(e) => {
-                  const formatted = formatLicensePlate(e.target.value);
-                  handleChange('license_plate', formatted);
-                }}
+                onChange={(e) => handleChange('license_plate', e.target.value)}
                 placeholder="65-PR-VK"
                 className={errors.license_plate ? 'border-destructive' : ''}
               />
+              <p className="text-xs text-muted-foreground">
+                Wordt automatisch opgeslagen als 65-PR-VK
+              </p>
               {errors.license_plate && (
                 <p className="text-sm text-destructive">{errors.license_plate}</p>
               )}
