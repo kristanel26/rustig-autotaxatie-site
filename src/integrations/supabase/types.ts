@@ -74,6 +74,7 @@ export type Database = {
           vehicle_brand: string | null
           vehicle_model: string | null
           vehicle_photos: string[] | null
+          vehicle_title: string | null
           vin: string | null
         }
         Insert: {
@@ -135,6 +136,7 @@ export type Database = {
           vehicle_brand?: string | null
           vehicle_model?: string | null
           vehicle_photos?: string[] | null
+          vehicle_title?: string | null
           vin?: string | null
         }
         Update: {
@@ -196,6 +198,7 @@ export type Database = {
           vehicle_brand?: string | null
           vehicle_model?: string | null
           vehicle_photos?: string[] | null
+          vehicle_title?: string | null
           vin?: string | null
         }
         Relationships: []
