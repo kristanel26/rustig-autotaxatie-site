@@ -162,7 +162,8 @@ export const normalizeReportFormData = (formData: {
   license_plate: string;
   vehicle_brand: string;
   vehicle_model: string;
-  [key: string]: string;
+  inspection_location?: string;
+  [key: string]: string | undefined;
 }) => {
   return {
     ...formData,
@@ -175,5 +176,6 @@ export const normalizeReportFormData = (formData: {
     license_plate: normalizeLicensePlate(formData.license_plate),
     vehicle_brand: capitalizeWords(formData.vehicle_brand),
     vehicle_model: capitalizeWords(formData.vehicle_model),
+    inspection_location: formData.inspection_location ? capitalizeFirst(formData.inspection_location) : formData.inspection_location,
   };
 };
