@@ -2,7 +2,7 @@
 
 /**
  * Convert a number to Dutch words
- * Examples: 25000 -> "vijfentwintigduizend euro"
+ * Examples: 25000 -> "vijfentwintigduizend euro", 1250 -> "duizend tweehonderdvijftig euro"
  */
 export const numberToDutchWords = (value: number): string => {
   if (value === 0) return 'nul euro';
@@ -12,21 +12,25 @@ export const numberToDutchWords = (value: number): string => {
                 'zeventien', 'achttien', 'negentien'];
   const tens = ['', '', 'twintig', 'dertig', 'veertig', 'vijftig', 'zestig', 'zeventig', 'tachtig', 'negentig'];
   
+  const convertTens = (n: number): string => {
+    if (n < 20) return ones[n];
+    const ten = Math.floor(n / 10);
+    const one = n % 10;
+    if (one === 0) return tens[ten];
+    // Dutch: "eenentwintig", "tweeëntwintig" etc.
+    return ones[one] + 'en' + tens[ten];
+  };
+  
   const convertHundreds = (n: number): string => {
     if (n === 0) return '';
-    if (n < 20) return ones[n];
-    if (n < 100) {
-      const ten = Math.floor(n / 10);
-      const one = n % 10;
-      if (one === 0) return tens[ten];
-      // Dutch uses "een" before "en" (eenentwintig), but "twee", "drie" etc. with special connector
-      const oneWord = one === 2 || one === 3 ? ones[one].slice(0, -1) + 'ë' : ones[one];
-      return ones[one] + 'en' + tens[ten];
-    }
+    if (n < 100) return convertTens(n);
+    
     const hundred = Math.floor(n / 100);
     const rest = n % 100;
     const hundredWord = hundred === 1 ? 'honderd' : ones[hundred] + 'honderd';
-    return hundredWord + convertHundreds(rest);
+    
+    if (rest === 0) return hundredWord;
+    return hundredWord + convertTens(rest);
   };
   
   const convertThousands = (n: number): string => {
@@ -39,13 +43,19 @@ export const numberToDutchWords = (value: number): string => {
     let thousandWord: string;
     if (thousand === 1) {
       thousandWord = 'duizend';
-    } else if (thousand < 20) {
-      thousandWord = ones[thousand] + 'duizend';
+    } else if (thousand < 100) {
+      thousandWord = convertTens(thousand) + 'duizend';
     } else {
       thousandWord = convertHundreds(thousand) + 'duizend';
     }
     
-    return thousandWord + convertHundreds(rest);
+    if (rest === 0) return thousandWord;
+    
+    // Add space after duizend if followed by a number < 100
+    if (rest < 100) {
+      return thousandWord + ' ' + convertHundreds(rest);
+    }
+    return thousandWord + ' ' + convertHundreds(rest);
   };
   
   const convertMillions = (n: number): string => {
