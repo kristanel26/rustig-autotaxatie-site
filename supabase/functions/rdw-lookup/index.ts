@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -15,83 +16,23 @@ interface RDWVoertuig {
   handelsbenaming?: string;
   voertuigsoort?: string;
   inrichting?: string;
-  eerste_kleur?: string;
-  tweede_kleur?: string;
   aantal_cilinders?: string;
   cilinderinhoud?: string;
   massa_ledig_voertuig?: string;
   toegestane_maximum_massa_voertuig?: string;
   massa_rijklaar?: string;
-  maximum_massa_samenstelling?: string;
   aantal_deuren?: string;
-  aantal_wielen?: string;
-  afstand_hart_koppeling_tot_achterzijde_voertuig?: string;
-  afstand_voorzijde_voertuig_tot_hart_koppeling?: string;
   datum_eerste_toelating?: string;
   datum_eerste_tenaamstelling_in_nederland?: string;
   datum_tenaamstelling?: string;
   vervaldatum_apk?: string;
-  datum_eerste_afgifte_nederland?: string;
-  openstaande_terugroepactie_indicator?: string;
-  api_gekentekende_voertuigen_assen?: string;
-  api_gekentekende_voertuigen_brandstof?: string;
-  api_gekentekende_voertuigen_carrosserie?: string;
-  api_gekentekende_voertuigen_carrosserie_specifiek?: string;
-  api_gekentekende_voertuigen_voertuigklasse?: string;
-  europese_voertuigcategorie?: string;
-  europese_voertuigcategorie_toevoeging?: string;
-  europese_uitvoeringcategorie_toevoeging?: string;
-  plaats_chassisnummer?: string;
-  type?: string;
-  type_gasinstallatie?: string;
-  typegoedkeuringsnummer?: string;
-  variant?: string;
-  uitvoering?: string;
-  vermogen_massarijklaar?: string;
-  volgnummer_wijziging_eu_typegoedkeuring?: string;
   wielbasis?: string;
-  export_indicator?: string;
-  wam_verzekerd?: string;
-  maximum_constructiesnelheid_brom_snorfiets?: string;
-  laadvermogen?: string;
-  oplegger_geremd?: string;
-  aanhangwagen_autonoom_geremd?: string;
-  aanhangwagen_middenas_geremd?: string;
-  vermogen_brom_snorfiets?: string;
-  registratie_datum_goedkeuring_afschrijvingsmoment_bpm?: string;
-  registratie_datum_goedkeuring_afschrijvingsmoment_bpm_dt?: string;
-  gem_lading_wrde?: string;
-  aerodynamische_voorziening_of_uitrusting?: string;
-  taxi_indicator?: string;
-  maximum_massa_technisch_maximaal?: string;
-  maximum_trekken_massa_geremd?: string;
-  catalogusprijs?: string;
-  bruto_bpm?: string;
-  zuinigheidslabel?: string;
 }
 
 interface RDWBrandstof {
   kenteken?: string;
   brandstof_omschrijving?: string;
-  brandstof_volgnummer?: string;
-  brandstofverbruik_buiten?: string;
-  brandstofverbruik_gecombineerd?: string;
-  brandstofverbruik_stad?: string;
-  co2_uitstoot_gecombineerd?: string;
-  co2_uitstoot_gewogen?: string;
-  geluidsniveau_rijdend?: string;
-  geluidsniveau_stationair?: string;
   nettomaximumvermogen?: string;
-  nominaal_continu_maximumvermogen?: string;
-  klasse_hybride_elektrisch_voertuig?: string;
-  uitlaatemissieniveau?: string;
-  milieuklasse_eg_goedkeuring_licht?: string;
-  milieuklasse_eg_goedkeuring_zwaar?: string;
-  emissieklasse?: string;
-  emissie_deeltjes_licht?: string;
-  emissie_deeltjes_zwaar?: string;
-  emissie_co2_gecombineerd_wltp?: string;
-  emissie_co2_gewogen_gecombineerd_wltp?: string;
 }
 
 serve(async (req) => {
@@ -101,6 +42,36 @@ serve(async (req) => {
   }
 
   try {
+    // Validate JWT in code
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader?.startsWith('Bearer ')) {
+      console.error('Missing or invalid Authorization header');
+      return new Response(
+        JSON.stringify({ error: 'Niet geautoriseerd' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+    const supabaseAnonKey = Deno.env.get('SUPABASE_ANON_KEY')!;
+    
+    const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+      global: { headers: { Authorization: authHeader } }
+    });
+
+    const token = authHeader.replace('Bearer ', '');
+    const { data: claimsData, error: claimsError } = await supabase.auth.getClaims(token);
+    
+    if (claimsError || !claimsData?.claims) {
+      console.error('JWT validation failed:', claimsError);
+      return new Response(
+        JSON.stringify({ error: 'Ongeldige authenticatie' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    console.log('Authenticated user:', claimsData.claims.sub);
+
     const { kenteken } = await req.json();
 
     if (!kenteken) {
@@ -183,7 +154,6 @@ serve(async (req) => {
 
     // Determine if vehicle is imported
     const isImport = (): boolean => {
-      // If first registration in NL differs from first general registration, it's an import
       if (voertuig.datum_eerste_toelating && voertuig.datum_eerste_tenaamstelling_in_nederland) {
         return voertuig.datum_eerste_toelating !== voertuig.datum_eerste_tenaamstelling_in_nederland;
       }
@@ -212,7 +182,7 @@ serve(async (req) => {
 
       // Sectie 2: Technische hoofdgegevens
       rdw_brandstof: brandstofData?.brandstof_omschrijving || null,
-      rdw_transmissie: null, // Not directly available in RDW open data
+      rdw_transmissie: null,
       rdw_aantal_cilinders: voertuig.aantal_cilinders ? parseInt(voertuig.aantal_cilinders) : null,
       rdw_cilinderinhoud: voertuig.cilinderinhoud ? parseInt(voertuig.cilinderinhoud) : null,
       rdw_vermogen_kw: brandstofData?.nettomaximumvermogen ? parseInt(brandstofData.nettomaximumvermogen) : null,
@@ -230,7 +200,7 @@ serve(async (req) => {
       rdw_importvoertuig: isImport(),
     };
 
-    console.log('Successfully fetched RDW data:', JSON.stringify(rdwData, null, 2));
+    console.log('Successfully fetched RDW data for:', normalizedKenteken);
 
     return new Response(
       JSON.stringify(rdwData),
