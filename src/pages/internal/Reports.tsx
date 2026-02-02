@@ -19,7 +19,9 @@ interface Report {
   id: string;
   report_number: string;
   license_plate: string | null;
-  client_name: string;
+  customer_title: string | null;
+  customer_initials: string | null;
+  customer_last_name: string | null;
   inspection_date: string | null;
 }
 
@@ -34,7 +36,7 @@ const Reports = () => {
       try {
         const { data, error } = await supabase
           .from('reports')
-          .select('id, report_number, license_plate, client_name, inspection_date')
+          .select('id, report_number, license_plate, customer_title, customer_initials, customer_last_name, inspection_date')
           .order('report_number', { ascending: false });
 
         if (error) throw error;
@@ -51,10 +53,14 @@ const Reports = () => {
 
   const filteredReports = reports.filter((report) => {
     const search = searchTerm.toLowerCase();
+    const customerName = [report.customer_title, report.customer_initials, report.customer_last_name]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase();
     return (
       report.report_number.toString().includes(search) ||
       (report.license_plate?.toLowerCase().includes(search) ?? false) ||
-      report.client_name.toLowerCase().includes(search)
+      customerName.includes(search)
     );
   });
 
@@ -96,7 +102,7 @@ const Reports = () => {
               <TableRow>
                 <TableHead className="w-[120px]">Rapportnr.</TableHead>
                 <TableHead>Kenteken</TableHead>
-                <TableHead>Klantnaam</TableHead>
+                <TableHead>Klant</TableHead>
                 <TableHead className="w-[140px]">Inspectiedatum</TableHead>
               </TableRow>
             </TableHeader>
@@ -126,7 +132,11 @@ const Reports = () => {
                       {report.report_number}
                     </TableCell>
                     <TableCell>{report.license_plate || '-'}</TableCell>
-                    <TableCell>{report.client_name}</TableCell>
+                    <TableCell>
+                      {[report.customer_title, report.customer_initials, report.customer_last_name]
+                        .filter(Boolean)
+                        .join(' ') || '-'}
+                    </TableCell>
                     <TableCell>{formatDate(report.inspection_date)}</TableCell>
                   </TableRow>
                 ))

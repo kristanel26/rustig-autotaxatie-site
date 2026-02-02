@@ -20,8 +20,11 @@ export type Database = {
           appraised_value_text: string | null
           client_name: string
           created_at: string
+          customer_city: string | null
           customer_initials: string | null
           customer_last_name: string | null
+          customer_postcode: string | null
+          customer_street: string | null
           customer_title: string | null
           document_reference: string | null
           general_remarks: string | null
@@ -36,6 +39,7 @@ export type Database = {
           report_number: string
           updated_at: string
           user_id: string
+          vehicle_brand: string | null
           vehicle_model: string | null
           vin: string | null
         }
@@ -44,8 +48,11 @@ export type Database = {
           appraised_value_text?: string | null
           client_name: string
           created_at?: string
+          customer_city?: string | null
           customer_initials?: string | null
           customer_last_name?: string | null
+          customer_postcode?: string | null
+          customer_street?: string | null
           customer_title?: string | null
           document_reference?: string | null
           general_remarks?: string | null
@@ -60,6 +67,7 @@ export type Database = {
           report_number: string
           updated_at?: string
           user_id: string
+          vehicle_brand?: string | null
           vehicle_model?: string | null
           vin?: string | null
         }
@@ -68,8 +76,11 @@ export type Database = {
           appraised_value_text?: string | null
           client_name?: string
           created_at?: string
+          customer_city?: string | null
           customer_initials?: string | null
           customer_last_name?: string | null
+          customer_postcode?: string | null
+          customer_street?: string | null
           customer_title?: string | null
           document_reference?: string | null
           general_remarks?: string | null
@@ -84,6 +95,7 @@ export type Database = {
           report_number?: string
           updated_at?: string
           user_id?: string
+          vehicle_brand?: string | null
           vehicle_model?: string | null
           vin?: string | null
         }

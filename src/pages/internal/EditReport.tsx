@@ -36,15 +36,17 @@ const formatLicensePlate = (value: string): string => {
 const LICENSE_PLATE_REGEX = /^[A-Z0-9]{2}-[A-Z0-9]{2}-[A-Z0-9]{2}$/;
 
 const reportSchema = z.object({
-  client_name: z.string().trim().min(1, 'Klantnaam is verplicht'),
-  opdrachtgever: z.string().optional(),
   customer_title: z.string().optional(),
   customer_initials: z.string().optional(),
   customer_last_name: z.string().optional(),
+  customer_street: z.string().optional(),
+  customer_postcode: z.string().optional(),
+  customer_city: z.string().optional(),
   license_plate: z.string()
     .min(1, 'Kenteken is verplicht')
     .regex(LICENSE_PLATE_REGEX, 'Kenteken moet worden opgeslagen als 65-PR-VK'),
   vin: z.string().optional(),
+  vehicle_brand: z.string().optional(),
   vehicle_model: z.string().optional(),
   inspection_location: z.string().optional(),
   inspection_date: z.string().optional(),
@@ -60,13 +62,15 @@ interface Report {
   id: string;
   report_number: string;
   document_reference: string | null;
-  client_name: string;
-  opdrachtgever: string | null;
   customer_title: string | null;
   customer_initials: string | null;
   customer_last_name: string | null;
+  customer_street: string | null;
+  customer_postcode: string | null;
+  customer_city: string | null;
   license_plate: string | null;
   vin: string | null;
+  vehicle_brand: string | null;
   vehicle_model: string | null;
   inspection_location: string | null;
   inspection_date: string | null;
@@ -89,13 +93,15 @@ const EditReport = () => {
   const [report, setReport] = useState<Report | null>(null);
 
   const [formData, setFormData] = useState({
-    client_name: '',
-    opdrachtgever: '',
     customer_title: '',
     customer_initials: '',
     customer_last_name: '',
+    customer_street: '',
+    customer_postcode: '',
+    customer_city: '',
     license_plate: '',
     vin: '',
+    vehicle_brand: '',
     vehicle_model: '',
     inspection_location: '',
     inspection_date: '',
@@ -125,13 +131,15 @@ const EditReport = () => {
         
         // Pre-fill form with existing data
         setFormData({
-          client_name: reportData.client_name || '',
-          opdrachtgever: reportData.opdrachtgever || '',
           customer_title: reportData.customer_title || '',
           customer_initials: reportData.customer_initials || '',
           customer_last_name: reportData.customer_last_name || '',
+          customer_street: reportData.customer_street || '',
+          customer_postcode: reportData.customer_postcode || '',
+          customer_city: reportData.customer_city || '',
           license_plate: reportData.license_plate || '',
           vin: reportData.vin || '',
+          vehicle_brand: reportData.vehicle_brand || '',
           vehicle_model: reportData.vehicle_model || '',
           inspection_location: reportData.inspection_location || '',
           inspection_date: reportData.inspection_date || '',
@@ -190,13 +198,15 @@ const EditReport = () => {
       const { error } = await supabase
         .from('reports')
         .update({
-          client_name: formData.client_name,
-          opdrachtgever: formData.opdrachtgever || null,
           customer_title: formData.customer_title || null,
           customer_initials: formData.customer_initials || null,
           customer_last_name: formData.customer_last_name || null,
+          customer_street: formData.customer_street || null,
+          customer_postcode: formData.customer_postcode || null,
+          customer_city: formData.customer_city || null,
           license_plate: formData.license_plate || null,
           vin: formData.vin || null,
+          vehicle_brand: formData.vehicle_brand || null,
           vehicle_model: formData.vehicle_model || null,
           inspection_location: formData.inspection_location || null,
           inspection_date: formData.inspection_date || null,
@@ -303,26 +313,6 @@ const EditReport = () => {
           </CardHeader>
           <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="client_name">Klantnaam *</Label>
-              <Input
-                id="client_name"
-                value={formData.client_name}
-                onChange={(e) => handleChange('client_name', e.target.value)}
-                className={errors.client_name ? 'border-destructive' : ''}
-              />
-              {errors.client_name && (
-                <p className="text-sm text-destructive">{errors.client_name}</p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="opdrachtgever">Opdrachtgever</Label>
-              <Input
-                id="opdrachtgever"
-                value={formData.opdrachtgever}
-                onChange={(e) => handleChange('opdrachtgever', e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
               <Label htmlFor="customer_title">Aanhef</Label>
               <Select
                 value={formData.customer_title}
@@ -356,6 +346,33 @@ const EditReport = () => {
                 />
               </div>
             </div>
+            <div className="space-y-2 md:col-span-2">
+              <Label htmlFor="customer_street">Straat en huisnummer</Label>
+              <Input
+                id="customer_street"
+                value={formData.customer_street}
+                onChange={(e) => handleChange('customer_street', e.target.value)}
+                placeholder="Hoofdstraat 123"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="customer_postcode">Postcode</Label>
+              <Input
+                id="customer_postcode"
+                value={formData.customer_postcode}
+                onChange={(e) => handleChange('customer_postcode', e.target.value)}
+                placeholder="1234 AB"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="customer_city">Plaats</Label>
+              <Input
+                id="customer_city"
+                value={formData.customer_city}
+                onChange={(e) => handleChange('customer_city', e.target.value)}
+                placeholder="Amsterdam"
+              />
+            </div>
           </CardContent>
         </Card>
 
@@ -366,12 +383,21 @@ const EditReport = () => {
           </CardHeader>
           <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="vehicle_model">Voertuigmodel</Label>
+              <Label htmlFor="vehicle_brand">Merk</Label>
+              <Input
+                id="vehicle_brand"
+                value={formData.vehicle_brand}
+                onChange={(e) => handleChange('vehicle_brand', e.target.value)}
+                placeholder="Bijv. Volkswagen"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="vehicle_model">Model</Label>
               <Input
                 id="vehicle_model"
                 value={formData.vehicle_model}
                 onChange={(e) => handleChange('vehicle_model', e.target.value)}
-                placeholder="Bijv. Volkswagen Golf"
+                placeholder="Bijv. Golf"
               />
             </div>
             <div className="space-y-2">
