@@ -182,27 +182,24 @@ const PDFCover = () => {
         </div>
 
         {/* Inspection Details */}
-        <div className="mb-8 space-y-0.5">
-          <p className="text-sm">
+        <div className="mb-4 space-y-0.5">
+          <p className="text-sm leading-tight">
             <span className="text-slate-500 font-medium">Opnamedatum:</span>{' '}
             <span className="font-semibold text-slate-800">{formatDate(report.inspection_date)}</span>
           </p>
-          <p className="text-sm">
+          <p className="text-sm leading-tight">
             <span className="text-slate-500 font-medium">Aanvangstijd opname:</span>{' '}
             <span className="font-semibold text-slate-800">{formatTime(report.inspection_start_time)}</span>
           </p>
-          <p className="text-sm">
+          <p className="text-sm leading-tight">
             <span className="text-slate-500 font-medium">Eindtijd opname:</span>{' '}
             <span className="font-semibold text-slate-800">{formatTime(report.inspection_end_time)}</span>
           </p>
-          <p className="text-sm">
+          <p className="text-sm leading-tight">
             <span className="text-slate-500 font-medium">Plaats:</span>{' '}
             <span className="font-semibold text-slate-800">{report.inspection_location || '-'}</span>
           </p>
         </div>
-
-        {/* Spacer */}
-        <div className="flex-grow" />
 
         {/* Uitgevoerd door */}
         <div className="mb-4">
