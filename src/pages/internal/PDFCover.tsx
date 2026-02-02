@@ -164,7 +164,7 @@ const PDFCover = () => {
             Documentkenmerk
           </p>
           <p className="text-xl font-semibold text-slate-800 leading-tight">
-            {report.report_number}
+            {report.document_reference || '-'}
           </p>
         </div>
 
