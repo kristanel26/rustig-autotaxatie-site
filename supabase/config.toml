@@ -1,4 +1,4 @@
 project_id = "dzvjybtofvbxtuagtzng"
 
 [functions.rdw-lookup]
-verify_jwt = true
+verify_jwt = false
