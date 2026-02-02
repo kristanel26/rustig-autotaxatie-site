@@ -21,6 +21,7 @@ import { ArrowLeft } from 'lucide-react';
 import { normalizeReportFormData, LICENSE_PLATE_REGEX, numberToDutchWords } from '@/lib/normalizers';
 import { VehicleInfoForm, VehicleFormData, getInitialVehicleFormData } from '@/components/internal/VehicleInfoForm';
 import { AppraisalFindingsForm, AppraisalFormData, getInitialAppraisalFormData } from '@/components/internal/AppraisalFindingsForm';
+import { PostcodeField } from '@/components/internal/PostcodeField';
 
 const reportSchema = z.object({
   customer_title: z.string().optional(),
@@ -643,24 +644,14 @@ const EditReport = () => {
                 placeholder="Hoofdstraat 123"
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="customer_postcode">Postcode</Label>
-              <Input
-                id="customer_postcode"
-                value={customerData.customer_postcode}
-                onChange={(e) => handleCustomerChange('customer_postcode', e.target.value)}
-                placeholder="1234 AB"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="customer_city">Plaats</Label>
-              <Input
-                id="customer_city"
-                value={customerData.customer_city}
-                onChange={(e) => handleCustomerChange('customer_city', e.target.value)}
-                placeholder="Amsterdam"
-              />
-            </div>
+            <PostcodeField
+              postcode={customerData.customer_postcode}
+              city={customerData.customer_city}
+              street={customerData.customer_street}
+              onPostcodeChange={(value) => handleCustomerChange('customer_postcode', value)}
+              onCityChange={(value) => handleCustomerChange('customer_city', value)}
+              onStreetChange={(value) => handleCustomerChange('customer_street', value)}
+            />
             <p className="text-xs text-muted-foreground md:col-span-2">
               Invoer wordt automatisch netjes opgeslagen.
             </p>
