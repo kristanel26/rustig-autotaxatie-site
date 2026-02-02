@@ -21,6 +21,9 @@ export interface VehicleFormData {
   license_plate: string;
   vin: string;
   
+  // Rapporttitel voertuig (vrij veld taxateur - voor PDF cover)
+  vehicle_title: string;
+  
   // Sectie 1: Voertuigidentificatie (RDW)
   rdw_merk: string;
   rdw_handelsbenaming: string;
@@ -79,6 +82,7 @@ interface VehicleInfoFormProps {
 export const getInitialVehicleFormData = (): VehicleFormData => ({
   license_plate: '',
   vin: '',
+  vehicle_title: '',
   rdw_merk: '',
   rdw_handelsbenaming: '',
   rdw_voertuigsoort: '',
@@ -199,6 +203,32 @@ export const VehicleInfoForm = ({
 
   return (
     <div className="space-y-6">
+      {/* Rapporttitel voertuig (vrij veld) */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Rapporttitel voertuig</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-2">
+            <Label htmlFor="vehicle_title">Titel voor PDF-voorpagina *</Label>
+            <Input
+              id="vehicle_title"
+              value={formData.vehicle_title}
+              onChange={(e) => onChange('vehicle_title', e.target.value)}
+              placeholder="Bijv. Dethleffs Globescout, Volkswagen Transporter T6"
+              className={errors.vehicle_title ? 'border-destructive' : ''}
+            />
+            {errors.vehicle_title && (
+              <p className="text-sm text-destructive">{errors.vehicle_title}</p>
+            )}
+            <p className="text-xs text-muted-foreground">
+              Dit is de titel die prominent op de voorpagina van het PDF-rapport verschijnt. 
+              Gebruik een herkenbare benaming (bijv. "Mercedes Sprinter Camper").
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Kenteken + VIN */}
       <Card>
         <CardHeader>

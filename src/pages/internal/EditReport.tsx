@@ -167,6 +167,7 @@ const EditReport = () => {
         setVehicleData({
           license_plate: reportData.license_plate || '',
           vin: reportData.vin || '',
+          vehicle_title: (reportData as any).vehicle_title || '',
           rdw_merk: reportData.rdw_merk || '',
           rdw_handelsbenaming: reportData.rdw_handelsbenaming || '',
           rdw_voertuigsoort: reportData.rdw_voertuigsoort || '',
@@ -329,6 +330,7 @@ const EditReport = () => {
         // Vehicle identifiers
         license_plate: normalizedData.license_plate,
         vin: vehicleData.vin || null,
+        vehicle_title: vehicleData.vehicle_title || null,
         vehicle_brand: vehicleData.rdw_merk || normalizedData.vehicle_brand || null,
         vehicle_model: vehicleData.rdw_handelsbenaming || normalizedData.vehicle_model || null,
         

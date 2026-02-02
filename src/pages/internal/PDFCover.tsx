@@ -20,6 +20,7 @@ interface Report {
   customer_postcode: string | null;
   customer_city: string | null;
   license_plate: string | null;
+  vehicle_title: string | null;
   vehicle_brand: string | null;
   vehicle_model: string | null;
   inspection_location: string | null;
@@ -102,11 +103,8 @@ const PDFCover = () => {
     .join(' ')
     .toUpperCase() || '-';
 
-  // Build vehicle display
-  const vehicleDisplay = [report.vehicle_brand, report.vehicle_model]
-    .filter(Boolean)
-    .join(' ')
-    .toUpperCase() || '-';
+  // Use vehicle_title (taxateur vrij veld) for the cover page - NOT brand+model
+  const vehicleDisplay = report.vehicle_title?.toUpperCase() || '-';
 
   // Cover photo is first image from vehicle_photos array
   const coverPhoto = report.vehicle_photos && report.vehicle_photos.length > 0 

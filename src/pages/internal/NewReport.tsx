@@ -189,6 +189,7 @@ const NewReport = () => {
         // Vehicle identifiers
         license_plate: normalizedData.license_plate,
         vin: vehicleData.vin || null,
+        vehicle_title: vehicleData.vehicle_title || null,
         vehicle_brand: vehicleData.rdw_merk || normalizedData.vehicle_brand || null,
         vehicle_model: vehicleData.rdw_handelsbenaming || normalizedData.vehicle_model || null,
         
