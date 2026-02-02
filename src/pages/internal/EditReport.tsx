@@ -18,22 +18,7 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { ArrowLeft } from 'lucide-react';
-
-// Normalize Dutch license plate: remove spaces/hyphens, uppercase, format as XX-XX-XX
-const normalizeLicensePlate = (value: string): string => {
-  // Remove all spaces and hyphens, convert to uppercase
-  const cleaned = value.replace(/[\s-]/g, '').toUpperCase();
-  
-  // If exactly 6 characters, format as XX-XX-XX
-  if (cleaned.length === 6) {
-    return `${cleaned.slice(0, 2)}-${cleaned.slice(2, 4)}-${cleaned.slice(4, 6)}`;
-  }
-  
-  // Return cleaned value if not 6 characters yet
-  return cleaned;
-};
-
-const LICENSE_PLATE_REGEX = /^[A-Z0-9]{2}-[A-Z0-9]{2}-[A-Z0-9]{2}$/;
+import { normalizeReportFormData, LICENSE_PLATE_REGEX } from '@/lib/normalizers';
 
 const reportSchema = z.object({
   customer_title: z.string().optional(),
@@ -178,11 +163,10 @@ const EditReport = () => {
     e.preventDefault();
     setErrors({});
 
-    // Normalize license plate before validation
-    const normalizedLicensePlate = normalizeLicensePlate(formData.license_plate);
-    const dataToValidate = { ...formData, license_plate: normalizedLicensePlate };
+    // Normalize all fields before validation
+    const normalizedData = normalizeReportFormData(formData);
 
-    const result = reportSchema.safeParse(dataToValidate);
+    const result = reportSchema.safeParse(normalizedData);
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
       result.error.errors.forEach((err) => {
@@ -195,7 +179,7 @@ const EditReport = () => {
     }
 
     // Validate normalized license plate format
-    if (!LICENSE_PLATE_REGEX.test(normalizedLicensePlate)) {
+    if (!LICENSE_PLATE_REGEX.test(normalizedData.license_plate)) {
       setErrors({ license_plate: 'Ongeldig kenteken' });
       return;
     }
@@ -206,16 +190,16 @@ const EditReport = () => {
       const { error } = await supabase
         .from('reports')
         .update({
-          customer_title: formData.customer_title || null,
-          customer_initials: formData.customer_initials || null,
-          customer_last_name: formData.customer_last_name || null,
-          customer_street: formData.customer_street || null,
-          customer_postcode: formData.customer_postcode || null,
-          customer_city: formData.customer_city || null,
-          license_plate: normalizedLicensePlate,
+          customer_title: normalizedData.customer_title || null,
+          customer_initials: normalizedData.customer_initials || null,
+          customer_last_name: normalizedData.customer_last_name || null,
+          customer_street: normalizedData.customer_street || null,
+          customer_postcode: normalizedData.customer_postcode || null,
+          customer_city: normalizedData.customer_city || null,
+          license_plate: normalizedData.license_plate,
           vin: formData.vin || null,
-          vehicle_brand: formData.vehicle_brand || null,
-          vehicle_model: formData.vehicle_model || null,
+          vehicle_brand: normalizedData.vehicle_brand || null,
+          vehicle_model: normalizedData.vehicle_model || null,
           inspection_location: formData.inspection_location || null,
           inspection_date: formData.inspection_date || null,
           inspection_start_time: formData.inspection_start_time || null,
@@ -381,6 +365,9 @@ const EditReport = () => {
                 placeholder="Amsterdam"
               />
             </div>
+            <p className="text-xs text-muted-foreground md:col-span-2">
+              Invoer wordt automatisch netjes opgeslagen.
+            </p>
           </CardContent>
         </Card>
 
@@ -417,9 +404,6 @@ const EditReport = () => {
                 placeholder="65-PR-VK"
                 className={errors.license_plate ? 'border-destructive' : ''}
               />
-              <p className="text-xs text-muted-foreground">
-                Wordt automatisch opgeslagen als 65-PR-VK
-              </p>
               {errors.license_plate && (
                 <p className="text-sm text-destructive">{errors.license_plate}</p>
               )}
