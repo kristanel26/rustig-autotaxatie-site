@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
+
+// Logos
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
-import registerLogos from '@/assets/register-logos.svg';
+import logoVrt from '@/assets/logo-vrt.png';
+import logoHobeon from '@/assets/logo-hobeon.webp';
+import logoTmv from '@/assets/logo-tmv.png';
+import logoFehac from '@/assets/logo-fehac.png';
 
 interface Report {
   id: string;
@@ -86,10 +91,11 @@ const PDFCover = () => {
     );
   }
 
-  // Build customer name
+  // Build customer name - format: "MW. M. HART"
   const customerName = [report.customer_title, report.customer_initials, report.customer_last_name]
     .filter(Boolean)
-    .join(' ') || '-';
+    .join(' ')
+    .toUpperCase() || '-';
 
   // Build vehicle display
   const vehicleDisplay = [report.vehicle_brand, report.vehicle_model]
@@ -97,107 +103,110 @@ const PDFCover = () => {
     .join(' ')
     .toUpperCase() || '-';
 
+  // Cover photo is first image from vehicle_photos array
+  const coverPhoto = report.vehicle_photos && report.vehicle_photos.length > 0 
+    ? report.vehicle_photos[0] 
+    : null;
+
   return (
-    <div className="min-h-screen bg-white flex print:block" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-      {/* Left Column - 40% */}
-      <div className="w-[40%] min-h-screen flex flex-col p-8 print:p-6">
+    <div className="min-h-screen bg-white flex print:flex" style={{ fontFamily: 'Georgia, serif' }}>
+      {/* Left Column - ~45% */}
+      <div className="w-[45%] min-h-screen flex flex-col p-8 print:p-6 relative z-10 bg-white">
         
-        {/* Register Logos */}
-        <div className="mb-8">
-          <img 
-            src={registerLogos} 
-            alt="Register logo's VRT, Hobeon, TMV, FEHAC" 
-            className="h-16 w-auto object-contain"
-          />
+        {/* Register Logos - horizontal row */}
+        <div className="flex items-center gap-3 mb-10">
+          <img src={logoVrt} alt="VRT" className="h-12 w-auto object-contain" />
+          <img src={logoHobeon} alt="Hobeon SKO" className="h-12 w-auto object-contain" />
+          <img src={logoTmv} alt="TMV" className="h-12 w-auto object-contain" />
+          <img src={logoFehac} alt="FEHAC" className="h-12 w-auto object-contain" />
         </div>
 
         {/* Title Block */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-wide text-foreground uppercase">
+        <div className="mb-6">
+          <h1 className="text-4xl font-bold tracking-tight text-[#1a365d] uppercase mb-1">
             TAXATIERAPPORT
           </h1>
-          <p className="text-sm italic text-muted-foreground mt-1">
+          <p className="text-base italic text-gray-600">
             Volgens artikel 7:960 BW
           </p>
         </div>
 
         {/* Inzake (Vehicle) */}
-        <div className="mb-6">
-          <p className="text-sm text-muted-foreground">Inzake:</p>
-          <p className="text-lg font-bold uppercase text-foreground">
+        <div className="mb-5">
+          <p className="text-sm italic text-gray-600">Inzake:</p>
+          <p className="text-xl font-bold uppercase text-[#1a365d]">
             {vehicleDisplay}
           </p>
         </div>
 
-        {/* License Plate & Document Reference */}
-        <div className="mb-6 space-y-3">
-          <div>
-            <p className="text-sm text-muted-foreground">Kenteken:</p>
-            <p className="text-lg font-bold text-foreground font-mono">
-              {report.license_plate || '-'}
-            </p>
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground">Documentkenmerk:</p>
-            <p className="text-lg font-bold text-foreground">
-              {report.report_number}
-            </p>
-          </div>
+        {/* Kenteken */}
+        <div className="mb-5">
+          <p className="text-sm italic text-gray-600">Kenteken:</p>
+          <p className="text-xl font-bold text-[#1a365d]">
+            {report.license_plate || '-'}
+          </p>
         </div>
 
-        {/* Customer Address Block */}
+        {/* Documentkenmerk */}
         <div className="mb-8">
-          <p className="text-sm text-muted-foreground mb-1">In opdracht van:</p>
-          <p className="font-bold text-foreground uppercase">
+          <p className="text-sm italic text-gray-600">Documentkenmerk:</p>
+          <p className="text-xl font-bold text-[#1a365d]">
+            {report.report_number}
+          </p>
+        </div>
+
+        {/* In opdracht van */}
+        <div className="mb-8">
+          <p className="text-sm italic text-gray-600">In opdracht van:</p>
+          <p className="text-lg font-bold text-[#1a365d]">
             {customerName}
           </p>
           {report.customer_street && (
-            <p className="text-foreground">{report.customer_street}</p>
+            <p className="text-lg font-bold text-[#1a365d]">{report.customer_street.toUpperCase()}</p>
           )}
           {(report.customer_postcode || report.customer_city) && (
-            <p className="text-foreground">
-              {[report.customer_postcode, report.customer_city].filter(Boolean).join(' ')}
+            <p className="text-lg font-bold text-[#1a365d]">
+              {[report.customer_postcode, report.customer_city?.toUpperCase()].filter(Boolean).join(' ')}
             </p>
           )}
         </div>
 
         {/* Inspection Details */}
-        <div className="mb-8 text-sm space-y-1">
-          <p className="text-muted-foreground">
-            Opnamedatum: <span className="text-foreground">{formatDate(report.inspection_date)}</span>
+        <div className="mb-8 space-y-0.5">
+          <p className="text-sm text-gray-700">
+            <span className="italic">Opnamedatum:</span> {formatDate(report.inspection_date)}
           </p>
-          <p className="text-muted-foreground">
-            Aanvangstijd opname: <span className="text-foreground">{formatTime(report.inspection_start_time)}</span>
+          <p className="text-sm text-gray-700">
+            <span className="italic">Aanvangstijd opname:</span> {formatTime(report.inspection_start_time)}
           </p>
-          <p className="text-muted-foreground">
-            Eindtijd opname: <span className="text-foreground">{formatTime(report.inspection_end_time)}</span>
+          <p className="text-sm text-gray-700">
+            <span className="italic">Eindtijd opname:</span> {formatTime(report.inspection_end_time)}
           </p>
-          <p className="text-muted-foreground">
-            Plaats: <span className="text-foreground">{report.inspection_location || '-'}</span>
+          <p className="text-sm text-gray-700">
+            <span className="italic">Plaats:</span> {report.inspection_location || '-'}
           </p>
         </div>
 
-        {/* Spacer to push executor and footer to bottom */}
+        {/* Spacer */}
         <div className="flex-grow" />
 
-        {/* Executor Block */}
+        {/* Uitgevoerd door */}
         <div className="mb-6">
-          <p className="text-foreground">
-            <span className="text-muted-foreground">Uitgevoerd door:</span>{' '}
-            <span className="font-bold">Erik Elderson</span>
+          <p className="text-sm italic text-gray-700">
+            Uitgevoerd door: <span className="not-italic">Erik Elderson</span>
           </p>
-          <p className="text-sm text-muted-foreground">TMV Register-Taxateur</p>
-          <p className="text-sm text-muted-foreground">Register-Taxateur VRT</p>
+          <p className="text-sm italic text-gray-700">TMV Register-Taxateur</p>
+          <p className="text-sm italic text-gray-700">Register-Taxateur VRT</p>
         </div>
 
         {/* Footer with Company Details */}
-        <div className="border-t border-border pt-4">
+        <div className="border-t border-gray-200 pt-4">
           <img 
             src={logoAutomobiel} 
             alt="Automobiel Taxaties" 
-            className="h-12 w-auto mb-3"
+            className="h-14 w-auto mb-2"
           />
-          <div className="text-xs text-muted-foreground space-y-0.5">
+          <div className="text-xs text-gray-600 space-y-0 text-center" style={{ maxWidth: '280px' }}>
             <p>Leigraaf 160 | 6651 GJ Druten</p>
             <p>KVK: 95549269 | BTW NL003366178B93</p>
             <p>TMV 33106 | VRT 22-523-M</p>
@@ -206,17 +215,17 @@ const PDFCover = () => {
         </div>
       </div>
 
-      {/* Right Column - 60% - Vehicle Photo (first photo from vehicle_photos array) */}
-      <div className="w-[60%] min-h-screen bg-muted">
-        {report.vehicle_photos && report.vehicle_photos.length > 0 ? (
+      {/* Right Column - ~55% - Vehicle Photo */}
+      <div className="w-[55%] min-h-screen relative">
+        {coverPhoto ? (
           <img
-            src={report.vehicle_photos[0]}
+            src={coverPhoto}
             alt="Voertuig"
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <div className="text-center text-muted-foreground">
+          <div className="w-full h-full flex items-center justify-center bg-gray-100">
+            <div className="text-center text-gray-400">
               <svg
                 className="mx-auto h-24 w-24 mb-4 opacity-50"
                 fill="none"
