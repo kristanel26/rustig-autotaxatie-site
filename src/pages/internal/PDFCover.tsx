@@ -109,7 +109,7 @@ const PDFCover = () => {
     : null;
 
   return (
-    <div className="min-h-screen bg-white flex print:flex">
+    <div className="min-h-screen bg-white flex print:flex font-sans">
       {/* Left Column - ~45% */}
       <div className="w-[45%] min-h-screen flex flex-col p-8 print:p-6 relative z-10 bg-white">
         
@@ -123,105 +123,81 @@ const PDFCover = () => {
 
         {/* Title Block */}
         <div className="mb-8">
-          <h1 
-            className="text-4xl font-bold tracking-tight text-[#1a365d] uppercase mb-1"
-            style={{ fontFamily: 'Georgia, serif' }}
-          >
+          <h1 className="text-4xl font-semibold tracking-tight text-slate-800 uppercase leading-tight">
             TAXATIERAPPORT
           </h1>
-          <p 
-            className="text-base text-gray-600 italic"
-            style={{ fontFamily: 'Georgia, serif' }}
-          >
+          <p className="text-base text-slate-500 font-normal leading-snug">
             Volgens artikel 7:960 BW
           </p>
         </div>
 
         {/* Inzake (Vehicle) */}
         <div className="mb-5">
-          <p className="text-sm text-gray-500 font-medium" style={{ fontFamily: 'system-ui, sans-serif' }}>
+          <p className="text-sm text-slate-500 font-medium leading-tight">
             Inzake
           </p>
-          <p 
-            className="text-xl font-bold uppercase text-[#1a365d]"
-            style={{ fontFamily: 'Georgia, serif' }}
-          >
+          <p className="text-xl font-semibold uppercase text-slate-800 leading-tight">
             {vehicleDisplay}
           </p>
         </div>
 
         {/* Kenteken */}
         <div className="mb-5">
-          <p className="text-sm text-gray-500 font-medium" style={{ fontFamily: 'system-ui, sans-serif' }}>
+          <p className="text-sm text-slate-500 font-medium leading-tight">
             Kenteken
           </p>
-          <p 
-            className="text-xl font-bold text-[#1a365d]"
-            style={{ fontFamily: 'Georgia, serif' }}
-          >
+          <p className="text-xl font-semibold text-slate-800 leading-tight">
             {report.license_plate || '-'}
           </p>
         </div>
 
         {/* Documentkenmerk */}
         <div className="mb-8">
-          <p className="text-sm text-gray-500 font-medium" style={{ fontFamily: 'system-ui, sans-serif' }}>
+          <p className="text-sm text-slate-500 font-medium leading-tight">
             Documentkenmerk
           </p>
-          <p 
-            className="text-xl font-bold text-[#1a365d]"
-            style={{ fontFamily: 'Georgia, serif' }}
-          >
+          <p className="text-xl font-semibold text-slate-800 leading-tight">
             {report.report_number}
           </p>
         </div>
 
         {/* In opdracht van */}
         <div className="mb-8">
-          <p className="text-sm text-gray-500 font-medium mb-1" style={{ fontFamily: 'system-ui, sans-serif' }}>
+          <p className="text-sm text-slate-500 font-medium leading-tight mb-1">
             In opdracht van
           </p>
-          <p 
-            className="text-lg font-bold text-[#1a365d]"
-            style={{ fontFamily: 'Georgia, serif' }}
-          >
+          <p className="text-lg font-semibold text-slate-800 leading-snug">
             {customerName}
           </p>
           {report.customer_street && (
-            <p 
-              className="text-lg font-bold text-[#1a365d]"
-              style={{ fontFamily: 'Georgia, serif' }}
-            >
+            <p className="text-lg font-semibold text-slate-800 leading-snug">
               {report.customer_street.toUpperCase()}
             </p>
           )}
           {(report.customer_postcode || report.customer_city) && (
-            <p 
-              className="text-lg font-bold text-[#1a365d]"
-              style={{ fontFamily: 'Georgia, serif' }}
-            >
+            <p className="text-lg font-semibold text-slate-800 leading-snug">
               {[report.customer_postcode, report.customer_city?.toUpperCase()].filter(Boolean).join(' ')}
             </p>
           )}
         </div>
 
         {/* Inspection Details */}
-        <div className="mb-8 space-y-0.5" style={{ fontFamily: 'system-ui, sans-serif' }}>
-          <p className="text-sm text-gray-700">
-            <span className="text-gray-500 font-medium">Opnamedatum:</span>{' '}
-            <span className="font-bold text-[#1a365d]">{formatDate(report.inspection_date)}</span>
+        <div className="mb-8 space-y-0.5">
+          <p className="text-sm">
+            <span className="text-slate-500 font-medium">Opnamedatum:</span>{' '}
+            <span className="font-semibold text-slate-800">{formatDate(report.inspection_date)}</span>
           </p>
-          <p className="text-sm text-gray-700">
-            <span className="text-gray-500 font-medium">Aanvangstijd opname:</span>{' '}
-            <span className="font-bold text-[#1a365d]">{formatTime(report.inspection_start_time)}</span>
+          <p className="text-sm">
+            <span className="text-slate-500 font-medium">Aanvangstijd opname:</span>{' '}
+            <span className="font-semibold text-slate-800">{formatTime(report.inspection_start_time)}</span>
           </p>
-          <p className="text-sm text-gray-700">
-            <span className="text-gray-500 font-medium">Eindtijd opname:</span>{' '}
-            <span className="font-bold text-[#1a365d]">{formatTime(report.inspection_end_time)}</span>
+          <p className="text-sm">
+            <span className="text-slate-500 font-medium">Eindtijd opname:</span>{' '}
+            <span className="font-semibold text-slate-800">{formatTime(report.inspection_end_time)}</span>
           </p>
-          <p className="text-sm text-gray-700">
-            <span className="text-gray-500 font-medium">Plaats:</span>{' '}
-            <span className="font-bold text-[#1a365d]">{report.inspection_location || '-'}</span>
+          <p className="text-sm">
+            <span className="text-slate-500 font-medium">Plaats:</span>{' '}
+            <span className="font-semibold text-slate-800">{report.inspection_location || '-'}</span>
           </p>
         </div>
 
@@ -229,25 +205,25 @@ const PDFCover = () => {
         <div className="flex-grow" />
 
         {/* Uitgevoerd door */}
-        <div className="mb-4" style={{ fontFamily: 'system-ui, sans-serif' }}>
-          <p className="text-sm text-gray-700">
-            <span className="text-gray-500 font-medium">Uitgevoerd door:</span>{' '}
-            <span className="font-bold text-[#1a365d]">Erik Elderson</span>
+        <div className="mb-4">
+          <p className="text-sm">
+            <span className="text-slate-500 font-medium">Uitgevoerd door:</span>{' '}
+            <span className="font-semibold text-slate-800">Erik Elderson</span>
           </p>
-          <p className="text-sm text-gray-500 font-medium">TMV Register-Taxateur</p>
-          <p className="text-sm text-gray-500 font-medium">Register-Taxateur VRT</p>
+          <p className="text-sm text-slate-500 font-medium leading-snug">TMV Register-Taxateur</p>
+          <p className="text-sm text-slate-500 font-medium leading-snug">Register-Taxateur VRT</p>
         </div>
 
         {/* Footer with Company Details */}
-        <div className="border-t border-gray-300 pt-4">
+        <div className="border-t border-slate-300 pt-4">
           <div className="flex items-center gap-4">
             <img 
               src={logoAutomobiel} 
               alt="Automobiel Taxaties" 
               className="h-14 w-auto flex-shrink-0"
             />
-            <div className="text-sm text-gray-600 leading-snug" style={{ fontFamily: 'system-ui, sans-serif' }}>
-              <span className="font-semibold text-[#1a365d]">Automobiel Taxaties</span>
+            <div className="text-sm text-slate-600 leading-relaxed">
+              <span className="font-semibold text-slate-800">Automobiel Taxaties</span>
               <span className="mx-1">|</span>
               <span>Leigraaf 160, 6651 GJ Druten</span>
               <span className="mx-1">|</span>
