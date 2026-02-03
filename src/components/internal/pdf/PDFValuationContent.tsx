@@ -15,12 +15,16 @@ interface PDFValuationContentProps {
   pageNumber: number;
 }
 
-// Fixed legal text - never changes
-const LEGAL_TEXT = `Dit rapport dient uitsluitend ter bepaling van de waarde voor verzekeringsdoeleinden van het visueel getaxeerde motorvoertuig. De geldigheidsduur van deze taxatie is afhankelijk van uw polisvoorwaarden. Het rapport is beslist géén technische keuring en kan daarom nooit als zodanig worden geïnterpreteerd. Het rapport is niet overdraagbaar en is toepasbaar bij polisvoorwaarden volgens artikel 7:960 BW. De door ons verrichte taxatie houdt geen enkele garantie in tot het realiseren van de vastgestelde waarde bij inruil of verkoop. Onder vervangingswaarde wordt verstaan het bedrag dat nodig is voor het verkrijgen van naar soort, kwaliteit, staat en ouderdom vergelijkbare zaak. Dat op deze taxatie van toepassing zijn de algemene voorwaarden voor Register Makelaars en Register Taxateurs in roerende zaken, leden van de Federatie van Taxateurs, Makelaars en Veilinghouders in roerende zaken, welke voorwaarden zijn gedeponeerd bij de Kamer van Koophandel en Fabrieken voor Amsterdam op 30-06-2005 onder nummer 40530226.`;
+// Fixed legal text - never changes - DO NOT modify, summarize or rewrite this text
+const LEGAL_TEXT = `Dit rapport dient uitsluitend ter bepaling van de waarde voor verzekeringsdoeleinden van het visueel getaxeerde motorvoertuig. De geldigheidsduur van deze taxatie is afhankelijk van uw polisvoorwaarden. Dit rapport is uitdrukkelijk géén technische keuring en kan daarom niet als zodanig worden geïnterpreteerd. Het rapport is niet overdraagbaar en is toepasbaar bij polisvoorwaarden conform artikel 7:960 Burgerlijk Wetboek.
 
-const VALUATION_INTRO = `Uitgaande van de marktsituatie op het moment van de taxatie stelden wij de vervangingswaarde van het hier omschreven voertuig, inclusief accessoires, op:`;
+De door ons verrichte taxatie houdt geen enkele garantie in ten aanzien van het realiseren van de vastgestelde waarde bij inruil of verkoop. Onder vervangingswaarde wordt verstaan het bedrag dat benodigd is voor het verkrijgen van een naar soort, kwaliteit, staat en ouderdom vergelijkbare zaak.
 
-const SIGNING_TEXT = `Ondergetekende, Erik Elderson, Register Taxateur voor motorvoertuigen te Druten, als zodanig erkend en opgenomen in het Register van Makelaars en Taxateurs TMV onder nummer 33106, Register-Taxateur VRT onder nummer 22-523-M, verklaart te zijn benoemd als deskundige.`;
+Op deze taxatie zijn de algemene voorwaarden van toepassing voor Register Makelaars en Register Taxateurs in roerende zaken, leden van de Federatie van Taxateurs, Makelaars en Veilinghouders in roerende zaken. Deze voorwaarden zijn gedeponeerd bij de Kamer van Koophandel en Fabrieken voor Amsterdam op 30 juni 2005 onder nummer 40530226.`;
+
+const VALUATION_INTRO = `Uitgaande van de marktsituatie op het moment van taxeren stellen wij de vervangingswaarde van het hierna omschreven voertuig, inclusief accessoires, vast op het in dit rapport vermelde bedrag.`;
+
+const SIGNING_TEXT = `Ondergetekende, Erik Elderson, Register Taxateur voor motorvoertuigen, gevestigd te Druten, als zodanig opgenomen in het Register van Makelaars en Taxateurs TMV onder nummer 33106 en in het register van de Vereniging van Register Taxateurs (VRT) onder nummer 22-523-M, verklaart dit rapport naar beste weten en kunnen te hebben opgesteld.`;
 
 const PDFValuationContent = ({ report, pageNumber }: PDFValuationContentProps) => {
   const formatCurrency = (value: number | null) => {
