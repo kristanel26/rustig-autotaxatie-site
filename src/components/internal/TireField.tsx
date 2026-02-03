@@ -4,10 +4,12 @@ import { Label } from '@/components/ui/label';
 interface TireFieldProps {
   position: string;
   brand: string;
-  size: string;
+  model: string;
+  profiel: string;
   dot: string;
   onBrandChange: (value: string) => void;
-  onSizeChange: (value: string) => void;
+  onModelChange: (value: string) => void;
+  onProfielChange: (value: string) => void;
   onDotChange: (value: string) => void;
   dotError?: string;
 }
@@ -22,17 +24,19 @@ export const validateDotCode = (dot: string): boolean => {
 export const TireField = ({
   position,
   brand,
-  size,
+  model,
+  profiel,
   dot,
   onBrandChange,
-  onSizeChange,
+  onModelChange,
+  onProfielChange,
   onDotChange,
   dotError,
 }: TireFieldProps) => {
   return (
     <div className="space-y-2 p-3 border rounded-lg bg-muted/30">
       <Label className="font-medium">{position}</Label>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 gap-2">
         <div className="space-y-1">
           <Label className="text-xs text-muted-foreground">Merk</Label>
           <Input
@@ -42,11 +46,19 @@ export const TireField = ({
           />
         </div>
         <div className="space-y-1">
-          <Label className="text-xs text-muted-foreground">Bandenmaat</Label>
+          <Label className="text-xs text-muted-foreground">Model</Label>
           <Input
-            value={size}
-            onChange={(e) => onSizeChange(e.target.value)}
-            placeholder="Bijv. 225/75 R16"
+            value={model}
+            onChange={(e) => onModelChange(e.target.value)}
+            placeholder="Bijv. Pilot Sport 4"
+          />
+        </div>
+        <div className="space-y-1">
+          <Label className="text-xs text-muted-foreground">Profiel (mm)</Label>
+          <Input
+            value={profiel}
+            onChange={(e) => onProfielChange(e.target.value)}
+            placeholder="Optioneel"
           />
         </div>
         <div className="space-y-1">
