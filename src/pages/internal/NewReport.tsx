@@ -25,6 +25,7 @@ import { AppraisalFindingsForm, AppraisalFormData, getInitialAppraisalFormData }
 import { InstallationsForm, InstallationsFormData, getInitialInstallationsFormData } from '@/components/internal/InstallationsForm';
 import { CamperTechForm, CamperTechFormData, getInitialCamperTechFormData } from '@/components/internal/CamperTechForm';
 import { GeneralImpressionForm, GeneralImpressionFormData, getInitialGeneralImpressionFormData } from '@/components/internal/GeneralImpressionForm';
+import { MoistureAndSafetyForm, MoistureAndSafetyFormData, getInitialMoistureAndSafetyFormData } from '@/components/internal/MoistureAndSafetyForm';
 import { PostcodeField } from '@/components/internal/PostcodeField';
 const reportSchema = z.object({
   // Customer fields
@@ -92,6 +93,9 @@ const NewReport = () => {
   // General impression data (Sectie 16)
   const [impressionData, setImpressionData] = useState<GeneralImpressionFormData>(getInitialGeneralImpressionFormData());
 
+  // Moisture and safety data (Vocht & Brand/Gas)
+  const [moistureData, setMoistureData] = useState<MoistureAndSafetyFormData>(getInitialMoistureAndSafetyFormData());
+
   // Inspection data
   const [inspectionData, setInspectionData] = useState({
     inspection_location: '',
@@ -148,6 +152,10 @@ const NewReport = () => {
 
   const handleImpressionChange = (field: keyof GeneralImpressionFormData, value: string) => {
     setImpressionData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleMoistureChange = (field: keyof MoistureAndSafetyFormData, value: string | boolean) => {
+    setMoistureData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleValuationChange = (field: string, value: string) => {
@@ -384,6 +392,7 @@ const NewReport = () => {
         tire_rear_right_profiel: appraisalData.tire_rear_right_profiel || null,
         tire_rear_right_dot: appraisalData.tire_rear_right_dot || null,
         rim_type: appraisalData.rim_type || null,
+        tire_advice: appraisalData.tire_advice || null,
         
         // Exterieur
         exterior_body: appraisalData.exterior_body || null,
@@ -430,10 +439,19 @@ const NewReport = () => {
         
         // Sectie 15: Beveiliging
         security_present: camperTechData.security_present,
+        security_type: camperTechData.security_type || null,
         mechanical_security: camperTechData.mechanical_security || null,
         vehicle_tracking: camperTechData.vehicle_tracking,
         tracking_brand: camperTechData.tracking_brand || null,
         
+        // Vocht (Moisture)
+        moisture_measurement_performed: moistureData.moisture_measurement_performed,
+        moisture_advice: moistureData.moisture_advice || null,
+        
+        // Brand & Gas veiligheid
+        fire_extinguisher: moistureData.fire_extinguisher,
+        gas_detection: moistureData.gas_detection,
+        smoke_detector: moistureData.smoke_detector,
         // Sectie 16: Algemene Indruk
         impression_suspension: impressionData.impression_suspension || null,
         impression_wheels_tires: impressionData.impression_wheels_tires || null,
@@ -608,6 +626,12 @@ const NewReport = () => {
         <GeneralImpressionForm
           formData={impressionData}
           onChange={handleImpressionChange}
+        />
+
+        {/* Vocht & Brand/Gas veiligheid */}
+        <MoistureAndSafetyForm
+          formData={moistureData}
+          onChange={handleMoistureChange}
         />
 
         {/* Inspection Details */}

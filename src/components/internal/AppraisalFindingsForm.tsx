@@ -49,6 +49,7 @@ export interface AppraisalFormData {
   tire_rear_right_profiel: string;
   tire_rear_right_dot: string;
   rim_type: string;
+  tire_advice: string;
   
   // Exterieur
   exterior_body: string;
@@ -116,6 +117,7 @@ export const getInitialAppraisalFormData = (): AppraisalFormData => ({
   tire_rear_right_profiel: '',
   tire_rear_right_dot: '',
   rim_type: '',
+  tire_advice: '',
   exterior_body: '',
   exterior_body_notes: '',
   exterior_paint: '',
@@ -317,6 +319,16 @@ export const AppraisalFindingsForm = ({
             {!formData.rim_type && (
               <p className="text-xs text-destructive">Type velg is verplicht</p>
             )}
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="tire_advice">Advies banden</Label>
+            <Textarea
+              id="tire_advice"
+              value={formData.tire_advice}
+              onChange={(e) => onChange('tire_advice', e.target.value)}
+              placeholder="Eventueel advies met betrekking tot de banden..."
+              rows={2}
+            />
           </div>
         </CardContent>
       </Card>

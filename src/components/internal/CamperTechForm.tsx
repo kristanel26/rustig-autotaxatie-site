@@ -24,6 +24,7 @@ export interface CamperTechFormData {
   
   // Beveiliging (Sectie 15)
   security_present: boolean;
+  security_type: string;
   mechanical_security: string;
   vehicle_tracking: boolean;
   tracking_brand: string;
@@ -45,6 +46,7 @@ export const getInitialCamperTechFormData = (): CamperTechFormData => ({
   onboard_battery: false,
   starter_battery: false,
   security_present: false,
+  security_type: '',
   mechanical_security: '',
   vehicle_tracking: false,
   tracking_brand: '',
@@ -179,6 +181,16 @@ export const CamperTechForm = ({
           
           {formData.security_present && (
             <div className="space-y-4 pl-4 border-l-2 border-muted">
+              <div className="space-y-2">
+                <Label htmlFor="security_type">Beveiliging soort</Label>
+                <Input
+                  id="security_type"
+                  value={formData.security_type}
+                  onChange={(e) => onChange('security_type', e.target.value)}
+                  placeholder="Bijv. Alarm, GPS-tracker, etc."
+                  className="w-full md:w-[250px]"
+                />
+              </div>
               <div className="space-y-2">
                 <Label>Mechanische beveiliging</Label>
                 <Select
