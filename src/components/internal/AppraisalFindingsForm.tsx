@@ -133,7 +133,6 @@ export const getInitialAppraisalFormData = (): AppraisalFormData => ({
 const rimTypeOptions = [
   { value: 'staal', label: 'Staalvelgen' },
   { value: 'lichtmetaal', label: 'Lichtmetalen velgen' },
-  { value: 'gemengd', label: 'Gemengd' },
 ];
 
 export const AppraisalFindingsForm = ({
@@ -274,10 +273,10 @@ export const AppraisalFindingsForm = ({
             * DOT-code is verplicht (exact 4 cijfers). Voorbeeld: 2523 betekent week 25, jaar 2023.
           </p>
           <div className="space-y-2">
-            <Label htmlFor="rim_type">Type velg</Label>
+            <Label htmlFor="rim_type">Type velg *</Label>
             <Select value={formData.rim_type} onValueChange={(v) => onChange('rim_type', v)}>
-              <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder="Selecteer..." />
+              <SelectTrigger className={`w-[200px] ${!formData.rim_type ? 'border-destructive' : ''}`}>
+                <SelectValue placeholder="Selecteer type velg..." />
               </SelectTrigger>
               <SelectContent>
                 {rimTypeOptions.map((option) => (
@@ -287,6 +286,9 @@ export const AppraisalFindingsForm = ({
                 ))}
               </SelectContent>
             </Select>
+            {!formData.rim_type && (
+              <p className="text-xs text-destructive">Type velg is verplicht</p>
+            )}
           </div>
         </CardContent>
       </Card>
