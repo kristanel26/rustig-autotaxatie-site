@@ -19,7 +19,7 @@ import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { ArrowLeft } from 'lucide-react';
 import { normalizeReportFormData, LICENSE_PLATE_REGEX, numberToDutchWords } from '@/lib/normalizers';
-import { validateVin, validateDotCode, validateEmail, validatePhone } from '@/lib/validators';
+import { validateVin, validateEmail, validatePhone } from '@/lib/validators';
 import { qualityClasses } from '@/lib/qualityClasses';
 import { VehicleInfoForm, VehicleFormData, getInitialVehicleFormData } from '@/components/internal/VehicleInfoForm';
 import { AppraisalFindingsForm, AppraisalFormData, getInitialAppraisalFormData } from '@/components/internal/AppraisalFindingsForm';
@@ -562,41 +562,6 @@ const EditReport = () => {
       return;
     }
 
-    // Validate DOT codes (all 4 tires must have valid 4-digit DOT)
-    const tireFields = [
-      { field: 'tire_front_left_dot', label: 'Linker voorband' },
-      { field: 'tire_front_right_dot', label: 'Rechter voorband' },
-      { field: 'tire_rear_left_dot', label: 'Linker achterband' },
-      { field: 'tire_rear_right_dot', label: 'Rechter achterband' },
-    ];
-    const tireErrors: Record<string, string> = {};
-    for (const tire of tireFields) {
-      const dotValue = appraisalData[tire.field as keyof AppraisalFormData];
-      const dotValidation = validateDotCode(dotValue);
-      if (!dotValidation.valid) {
-        tireErrors[tire.field] = dotValidation.error!;
-      }
-    }
-    if (Object.keys(tireErrors).length > 0) {
-      setErrors(tireErrors);
-      toast({
-        title: 'DOT-codes ongeldig',
-        description: 'Elke band moet een DOT-code van exact 4 cijfers hebben.',
-        variant: 'destructive',
-      });
-      return;
-    }
-
-    // Validate rim type (mandatory)
-    if (!appraisalData.rim_type) {
-      toast({
-        title: 'Type velg verplicht',
-        description: 'Selecteer een type velg (Staalvelgen of Lichtmetalen velgen).',
-        variant: 'destructive',
-      });
-      return;
-    }
-
     // Validate quality class (mandatory)
     if (!valuationData.quality_class) {
       toast({
@@ -996,7 +961,6 @@ const EditReport = () => {
           formData={appraisalData}
           onChange={handleAppraisalChange}
           rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
-          tireErrors={errors}
         />
 
         {/* Sectie 13: Leidingen & Installaties */}

@@ -12,15 +12,7 @@ interface TireFieldProps {
   onModelChange: (value: string) => void;
   onProfielChange: (value: string) => void;
   onDotChange: (value: string) => void;
-  dotError?: string;
 }
-
-/**
- * Validates DOT code: exactly 4 digits required
- */
-export const validateDotCode = (dot: string): boolean => {
-  return /^\d{4}$/.test(dot);
-};
 
 export const TireField = ({
   position,
@@ -32,7 +24,6 @@ export const TireField = ({
   onModelChange,
   onProfielChange,
   onDotChange,
-  dotError,
 }: TireFieldProps) => {
   return (
     <div className="space-y-2 p-3 border rounded-lg bg-muted/30">
@@ -63,7 +54,7 @@ export const TireField = ({
           />
         </div>
         <div className="space-y-1">
-          <Label className="text-xs text-muted-foreground">DOT-code *</Label>
+          <Label className="text-xs text-muted-foreground">DOT-code</Label>
           <Input
             value={dot}
             onChange={(e) => {
@@ -73,11 +64,7 @@ export const TireField = ({
             }}
             placeholder="4 cijfers"
             maxLength={4}
-            className={dotError ? 'border-destructive' : ''}
           />
-          {dotError && (
-            <p className="text-xs text-destructive">{dotError}</p>
-          )}
         </div>
       </div>
     </div>

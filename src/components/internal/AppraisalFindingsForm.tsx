@@ -82,7 +82,6 @@ interface AppraisalFindingsFormProps {
   formData: AppraisalFormData;
   onChange: (field: keyof AppraisalFormData, value: string) => void;
   rdwHandelsbenaming?: string;
-  tireErrors?: Record<string, string>;
 }
 
 export const getInitialAppraisalFormData = (): AppraisalFormData => ({
@@ -151,7 +150,6 @@ export const AppraisalFindingsForm = ({
   formData,
   onChange,
   rdwHandelsbenaming,
-  tireErrors = {},
 }: AppraisalFindingsFormProps) => {
   return (
     <div className="space-y-6">
@@ -260,7 +258,6 @@ export const AppraisalFindingsForm = ({
               onModelChange={(v) => onChange('tire_front_left_model', v)}
               onProfielChange={(v) => onChange('tire_front_left_profiel', v)}
               onDotChange={(v) => onChange('tire_front_left_dot', v)}
-              dotError={tireErrors.tire_front_left_dot}
             />
             <TireField
               position="Rechter voorband"
@@ -272,7 +269,6 @@ export const AppraisalFindingsForm = ({
               onModelChange={(v) => onChange('tire_front_right_model', v)}
               onProfielChange={(v) => onChange('tire_front_right_profiel', v)}
               onDotChange={(v) => onChange('tire_front_right_dot', v)}
-              dotError={tireErrors.tire_front_right_dot}
             />
             <TireField
               position="Linker achterband"
@@ -284,7 +280,6 @@ export const AppraisalFindingsForm = ({
               onModelChange={(v) => onChange('tire_rear_left_model', v)}
               onProfielChange={(v) => onChange('tire_rear_left_profiel', v)}
               onDotChange={(v) => onChange('tire_rear_left_dot', v)}
-              dotError={tireErrors.tire_rear_left_dot}
             />
             <TireField
               position="Rechter achterband"
@@ -296,16 +291,15 @@ export const AppraisalFindingsForm = ({
               onModelChange={(v) => onChange('tire_rear_right_model', v)}
               onProfielChange={(v) => onChange('tire_rear_right_profiel', v)}
               onDotChange={(v) => onChange('tire_rear_right_dot', v)}
-              dotError={tireErrors.tire_rear_right_dot}
             />
           </div>
           <p className="text-xs text-muted-foreground">
-            * DOT-code is verplicht (exact 4 cijfers). Voorbeeld: 2523 betekent week 25, jaar 2023.
+            DOT-code bestaat uit 4 cijfers. Voorbeeld: 2523 betekent week 25, jaar 2023.
           </p>
           <div className="space-y-2">
-            <Label htmlFor="rim_type">Type velg *</Label>
+            <Label htmlFor="rim_type">Type velg</Label>
             <Select value={formData.rim_type} onValueChange={(v) => onChange('rim_type', v)}>
-              <SelectTrigger className={`w-[200px] ${!formData.rim_type ? 'border-destructive' : ''}`}>
+              <SelectTrigger className="w-[200px]">
                 <SelectValue placeholder="Selecteer type velg..." />
               </SelectTrigger>
               <SelectContent>
@@ -316,9 +310,6 @@ export const AppraisalFindingsForm = ({
                 ))}
               </SelectContent>
             </Select>
-            {!formData.rim_type && (
-              <p className="text-xs text-destructive">Type velg is verplicht</p>
-            )}
           </div>
           <div className="space-y-2">
             <Label htmlFor="tire_advice">Advies banden</Label>
