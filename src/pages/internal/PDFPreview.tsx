@@ -89,7 +89,7 @@ const PDFPreview = () => {
         {/* Page 2: Valuation (conditional) - right after cover */}
         {hasValuation && (
           <div className="shadow-lg">
-            <PDFValuationContent report={report} pageNumber={valuationPageNumber} />
+            <PDFValuationContent report={report} pageNumber={valuationPageNumber} totalPages={10} />
           </div>
         )}
 
