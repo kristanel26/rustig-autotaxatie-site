@@ -191,22 +191,55 @@ const ReportDetail = () => {
     setIsGeneratingPdf(true);
     
     try {
-      // Create container that is rendered by the browser but not visible to the user.
-      // NOTE: Using `opacity: 0` makes html2canvas render transparent (blank pages).
+      // Create a full-screen overlay to hide the render process from the user
+      const overlay = document.createElement('div');
+      overlay.id = 'pdf-render-overlay';
+      overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: white;
+        z-index: 99998;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: system-ui, sans-serif;
+        font-size: 16px;
+        color: #666;
+      `;
+      overlay.innerHTML = '<div style="text-align:center"><div style="margin-bottom:12px">PDF wordt gegenereerd...</div><div style="width:40px;height:40px;border:3px solid #ddd;border-top-color:#333;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto"></div></div>';
+      
+      // Add spinner animation
+      const style = document.createElement('style');
+      style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+      document.head.appendChild(style);
+      document.body.appendChild(overlay);
+
+      // Create container that is ON-SCREEN so html2canvas can render it
+      // The overlay hides it from the user
       const container = document.createElement('div');
       container.id = 'pdf-render-container';
       container.style.cssText = `
         position: fixed;
         top: 0;
-        left: -10000px;
+        left: 0;
         width: 210mm;
-        z-index: 1;
+        z-index: 99999;
         opacity: 1;
         pointer-events: none;
         background: white;
+        overflow: visible;
       `;
       document.body.appendChild(container);
       containerRef.current = container;
+      
+      // Store overlay for cleanup
+      const cleanupOverlay = () => {
+        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+        if (style.parentNode) style.parentNode.removeChild(style);
+      };
 
       // Create React root and render components
       const root = createRoot(container);
@@ -302,9 +335,13 @@ const ReportDetail = () => {
         await html2pdf().set(opt).from(pdfContent).save();
       }
 
+      cleanupOverlay();
       cleanup();
     } catch (error) {
       console.error('Error generating PDF:', error);
+      // Remove overlay element if it exists
+      const overlayEl = document.getElementById('pdf-render-overlay');
+      if (overlayEl) overlayEl.remove();
       cleanup();
     } finally {
       setIsGeneratingPdf(false);
