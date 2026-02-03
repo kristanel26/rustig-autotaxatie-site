@@ -28,6 +28,7 @@ import { CamperTechForm, CamperTechFormData, getInitialCamperTechFormData } from
 import { GeneralImpressionForm, GeneralImpressionFormData, getInitialGeneralImpressionFormData } from '@/components/internal/GeneralImpressionForm';
 import { MoistureAndSafetyForm, MoistureAndSafetyFormData, getInitialMoistureAndSafetyFormData } from '@/components/internal/MoistureAndSafetyForm';
 import { PostcodeField } from '@/components/internal/PostcodeField';
+import PhotoUploadForm from '@/components/internal/PhotoUploadForm';
 
 const reportSchema = z.object({
   customer_title: z.string().optional(),
@@ -147,6 +148,9 @@ const EditReport = () => {
 
   // Moisture and safety data (Vocht & Brand/Gas)
   const [moistureData, setMoistureData] = useState<MoistureAndSafetyFormData>(getInitialMoistureAndSafetyFormData());
+
+  // Photo collection
+  const [vehiclePhotos, setVehiclePhotos] = useState<string[]>([]);
 
   // Inspection data
   const [inspectionData, setInspectionData] = useState({
@@ -355,6 +359,10 @@ const EditReport = () => {
           smoke_detector: (reportData as any).smoke_detector || false,
         });
 
+        // Pre-fill photos
+        setVehiclePhotos((reportData as any).vehicle_photos || []);
+
+      } catch (error) {
         console.error('Error fetching report:', error);
         toast({
           title: 'Fout bij laden',
@@ -725,6 +733,9 @@ const EditReport = () => {
         appraised_value_text: valuationData.appraised_value_text || null,
         quality_class: valuationData.quality_class || null,
         general_remarks: valuationData.general_remarks || null,
+        
+        // Photos
+        vehicle_photos: vehiclePhotos.length > 0 ? vehiclePhotos : null,
       };
 
       const { error } = await supabase
@@ -937,6 +948,13 @@ const EditReport = () => {
         <MoistureAndSafetyForm
           formData={moistureData}
           onChange={handleMoistureChange}
+        />
+
+        {/* Fotocollectie */}
+        <PhotoUploadForm
+          photos={vehiclePhotos}
+          onChange={setVehiclePhotos}
+          reportId={id}
         />
 
         {/* Inspection Details */}
