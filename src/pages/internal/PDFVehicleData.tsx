@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
+import { getQualityClassByValue } from '@/lib/qualityClasses';
 
 // Logos
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
@@ -62,6 +63,9 @@ interface Report {
   gebruik: string | null;
   stalling: string | null;
   staat_bij_opname: string | null;
+  
+  // Kwaliteitsklasse
+  quality_class: string | null;
 }
 
 const PDFVehicleData = () => {
@@ -275,6 +279,21 @@ const PDFVehicleData = () => {
             <DataRow label="Stalling" value={report.stalling || '-'} source="Taxateur" />
             <DataRow label="Staat bij opname" value={report.staat_bij_opname || '-'} source="Taxateur" />
           </div>
+
+          {/* Sectie 8: Kwaliteitsklasse (Taxateur) */}
+          {report.quality_class && (
+            <div style={{ marginBottom: '16px' }}>
+              <SectionHeader number="8" title="Kwaliteitsklasse (Taxateur)" />
+              <div style={{ padding: '8px 0' }}>
+                <div style={{ fontSize: '12px', fontWeight: 600, color: '#1e293b', marginBottom: '4px' }}>
+                  {report.quality_class}
+                </div>
+                <p style={{ fontSize: '10px', color: '#475569', lineHeight: 1.5, margin: 0 }}>
+                  {getQualityClassByValue(report.quality_class)?.description || ''}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
