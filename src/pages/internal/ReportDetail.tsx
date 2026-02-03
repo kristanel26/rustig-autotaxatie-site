@@ -192,19 +192,20 @@ const ReportDetail = () => {
       const root = createRoot(container);
       rootRef.current = root;
 
-      // Calculate page number for valuation
+      // Calculate page number for valuation (now page 2, right after cover)
       const hasValuation = report.appraised_value && report.appraised_value > 0;
-      const valuationPageNumber = hasValuation ? 4 : 0;
+      const valuationPageNumber = hasValuation ? 2 : 0;
 
       // Render all PDF pages as a single React tree
+      // Order: Cover -> Valuation (if applicable) -> Vehicle Data -> Appraisal Findings -> Photos
       root.render(
         <div id="pdf-content" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'white' }}>
           <PDFCoverContent report={report} />
-          <PDFVehicleDataContent report={report} />
-          <PDFAppraisalFindingsContent report={report} />
           {hasValuation && (
             <PDFValuationContent report={report} pageNumber={valuationPageNumber} />
           )}
+          <PDFVehicleDataContent report={report} />
+          <PDFAppraisalFindingsContent report={report} />
           <PDFPhotosContent report={report} />
         </div>
       );
