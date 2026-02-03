@@ -140,6 +140,7 @@ const EditReport = () => {
 
   // Appraisal findings data
   const [appraisalData, setAppraisalData] = useState<AppraisalFormData>(getInitialAppraisalFormData());
+  const [allTiresSame, setAllTiresSame] = useState(false);
 
   // Installations data (Sectie 13)
   const [installationsData, setInstallationsData] = useState<InstallationsFormData>(getInitialInstallationsFormData());
@@ -436,6 +437,16 @@ const EditReport = () => {
   const handleAppraisalChange = (field: keyof AppraisalFormData, value: string) => {
     setAppraisalData(prev => ({ ...prev, [field]: value }));
     saveField(field, value || null);
+  };
+
+  const handleAppraisalMultipleChange = (fields: Partial<AppraisalFormData>) => {
+    setAppraisalData(prev => ({ ...prev, ...fields }));
+    // Save all fields at once
+    const fieldsToSave: Record<string, unknown> = {};
+    Object.entries(fields).forEach(([key, value]) => {
+      fieldsToSave[key] = value || null;
+    });
+    saveMultipleFields(fieldsToSave);
   };
 
   const handleInstallationsChange = (field: keyof InstallationsFormData, value: string) => {
@@ -960,7 +971,10 @@ const EditReport = () => {
         <AppraisalFindingsForm
           formData={appraisalData}
           onChange={handleAppraisalChange}
+          onMultipleChange={handleAppraisalMultipleChange}
           rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
+          allTiresSame={allTiresSame}
+          onAllTiresSameChange={setAllTiresSame}
         />
 
         {/* Sectie 13: Leidingen & Installaties */}
