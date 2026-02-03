@@ -31,6 +31,8 @@ interface Report {
   quality_class: string | null;
   general_remarks: string | null;
   created_at: string;
+  // Vehicle photos for PDF export
+  vehicle_photos: string[] | null;
   // RDW fields
   rdw_merk: string | null;
   rdw_handelsbenaming: string | null;
@@ -157,6 +159,12 @@ const ReportDetail = () => {
       // Only include valuation page if appraised_value is set
       if (report?.appraised_value && report.appraised_value > 0) {
         pdfPages.push(`/intern/pdf/waarde/${id}`);
+      }
+      
+      // Include photo attachment page if there are photos beyond the cover photo
+      const detailPhotos = report?.vehicle_photos?.slice(1) || [];
+      if (detailPhotos.length > 0) {
+        pdfPages.push(`/intern/pdf/fotos/${id}`);
       }
       
       const filename = generatePdfFilename();

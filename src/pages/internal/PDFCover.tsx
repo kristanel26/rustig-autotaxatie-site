@@ -111,7 +111,7 @@ const PDFCover = () => {
     .filter(Boolean)
     .join(' ') || null;
 
-  // Cover photo is first image from vehicle_photos array
+  // Cover photo is first image from vehicle_photos array - only show if explicitly set
   const coverPhoto = report.vehicle_photos && report.vehicle_photos.length > 0 
     ? report.vehicle_photos[0] 
     : null;
@@ -152,40 +152,50 @@ const PDFCover = () => {
 
           {/* Title Block */}
           <div style={{ marginBottom: '24px' }}>
-            <h1 style={{ fontSize: '28px', fontWeight: 600, letterSpacing: '-0.025em', color: '#1e293b', textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }}>
+            <h1 style={{ fontSize: '28px', fontWeight: 600, letterSpacing: '-0.025em', color: '#000000', textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }}>
               TAXATIERAPPORT
             </h1>
-            <p style={{ fontSize: '14px', color: '#64748b', fontWeight: 400, fontStyle: 'italic', lineHeight: 1.4, margin: '4px 0 0 0' }}>
+            <p style={{ fontSize: '14px', color: '#000000', fontWeight: 400, fontStyle: 'italic', lineHeight: 1.4, margin: '4px 0 0 0' }}>
               Volgens artikel 7:960 BW
             </p>
           </div>
 
           {/* Inzake (Vehicle Title) */}
           <div style={{ marginBottom: '16px' }}>
-            <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
+            <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
               Inzake:
             </p>
-            <p style={{ fontSize: '20px', fontWeight: 600, textTransform: 'uppercase', color: '#1e293b', lineHeight: 1.2, margin: '4px 0 0 0' }}>
+            <p style={{ fontSize: '20px', fontWeight: 600, textTransform: 'uppercase', color: '#000000', lineHeight: 1.2, margin: '4px 0 0 0' }}>
               {vehicleDisplay}
             </p>
           </div>
 
           {/* Kenteken */}
           <div style={{ marginBottom: '12px' }}>
-            <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
+            <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
               Kenteken:
             </p>
-            <p style={{ fontSize: '16px', fontWeight: 600, color: '#1e293b', lineHeight: 1.2, margin: '2px 0 0 0' }}>
+            <p style={{ fontSize: '16px', fontWeight: 600, color: '#000000', lineHeight: 1.2, margin: '2px 0 0 0' }}>
               {report.license_plate || '-'}
+            </p>
+          </div>
+
+          {/* Rapportnummer */}
+          <div style={{ marginBottom: '12px' }}>
+            <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
+              Rapportnummer:
+            </p>
+            <p style={{ fontSize: '16px', fontWeight: 600, color: '#000000', lineHeight: 1.2, margin: '2px 0 0 0' }}>
+              {report.report_number || '-'}
             </p>
           </div>
 
           {/* Documentkenmerk */}
           <div style={{ marginBottom: '16px' }}>
-            <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
+            <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
               Documentkenmerk:
             </p>
-            <p style={{ fontSize: '16px', fontWeight: 600, color: '#1e293b', lineHeight: 1.2, margin: '2px 0 0 0' }}>
+            <p style={{ fontSize: '16px', fontWeight: 600, color: '#000000', lineHeight: 1.2, margin: '2px 0 0 0' }}>
               {report.document_reference || '-'}
             </p>
           </div>
@@ -193,7 +203,7 @@ const PDFCover = () => {
           {/* Opbouw merk + type (if available) */}
           {opbouwDisplay && (
             <div style={{ marginBottom: '20px' }}>
-              <p style={{ fontSize: '14px', fontWeight: 600, color: '#1e293b', lineHeight: 1.3, margin: 0 }}>
+              <p style={{ fontSize: '14px', fontWeight: 600, color: '#000000', lineHeight: 1.3, margin: 0 }}>
                 {opbouwDisplay}
               </p>
             </div>
@@ -201,19 +211,19 @@ const PDFCover = () => {
 
           {/* In opdracht van */}
           <div style={{ marginBottom: '20px' }}>
-            <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.2, margin: '0 0 4px 0' }}>
+            <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.2, margin: '0 0 4px 0' }}>
               In opdracht van:
             </p>
-            <p style={{ fontSize: '14px', fontWeight: 600, color: '#1e293b', lineHeight: 1.3, margin: 0 }}>
+            <p style={{ fontSize: '14px', fontWeight: 600, color: '#000000', lineHeight: 1.3, margin: 0 }}>
               {customerName}
             </p>
             {report.customer_street && (
-              <p style={{ fontSize: '14px', fontWeight: 600, color: '#1e293b', lineHeight: 1.3, margin: 0 }}>
+              <p style={{ fontSize: '14px', fontWeight: 600, color: '#000000', lineHeight: 1.3, margin: 0 }}>
                 {report.customer_street.toUpperCase()}
               </p>
             )}
             {(report.customer_postcode || report.customer_city) && (
-              <p style={{ fontSize: '14px', fontWeight: 600, color: '#1e293b', lineHeight: 1.3, margin: 0 }}>
+              <p style={{ fontSize: '14px', fontWeight: 600, color: '#000000', lineHeight: 1.3, margin: 0 }}>
                 {[report.customer_postcode, report.customer_city?.toUpperCase()].filter(Boolean).join(' ')}
               </p>
             )}
@@ -221,45 +231,45 @@ const PDFCover = () => {
 
           {/* Inspection Details */}
           <div style={{ marginBottom: '20px' }}>
-            <p style={{ fontSize: '12px', lineHeight: 1.5, margin: '2px 0' }}>
-              <span style={{ color: '#64748b', fontWeight: 500 }}>Opnamedatum:</span>{' '}
-              <span style={{ fontWeight: 600, color: '#1e293b' }}>{formatDate(report.inspection_date)}</span>
+            <p style={{ fontSize: '12px', lineHeight: 1.5, margin: '2px 0', color: '#000000' }}>
+              <span style={{ fontWeight: 500 }}>Opnamedatum:</span>{' '}
+              <span style={{ fontWeight: 600 }}>{formatDate(report.inspection_date)}</span>
             </p>
-            <p style={{ fontSize: '12px', lineHeight: 1.5, margin: '2px 0' }}>
-              <span style={{ color: '#64748b', fontWeight: 500 }}>Aanvangstijd opname:</span>{' '}
-              <span style={{ fontWeight: 600, color: '#1e293b' }}>{formatTime(report.inspection_start_time)}</span>
+            <p style={{ fontSize: '12px', lineHeight: 1.5, margin: '2px 0', color: '#000000' }}>
+              <span style={{ fontWeight: 500 }}>Aanvangstijd opname:</span>{' '}
+              <span style={{ fontWeight: 600 }}>{formatTime(report.inspection_start_time)}</span>
             </p>
-            <p style={{ fontSize: '12px', lineHeight: 1.5, margin: '2px 0' }}>
-              <span style={{ color: '#64748b', fontWeight: 500 }}>Eindtijd opname:</span>{' '}
-              <span style={{ fontWeight: 600, color: '#1e293b' }}>{formatTime(report.inspection_end_time)}</span>
+            <p style={{ fontSize: '12px', lineHeight: 1.5, margin: '2px 0', color: '#000000' }}>
+              <span style={{ fontWeight: 500 }}>Eindtijd opname:</span>{' '}
+              <span style={{ fontWeight: 600 }}>{formatTime(report.inspection_end_time)}</span>
             </p>
-            <p style={{ fontSize: '12px', lineHeight: 1.5, margin: '2px 0' }}>
-              <span style={{ color: '#64748b', fontWeight: 500 }}>Plaats:</span>{' '}
-              <span style={{ fontWeight: 600, color: '#1e293b' }}>{capitalizeFirst(report.inspection_location)}</span>
+            <p style={{ fontSize: '12px', lineHeight: 1.5, margin: '2px 0', color: '#000000' }}>
+              <span style={{ fontWeight: 500 }}>Plaats:</span>{' '}
+              <span style={{ fontWeight: 600 }}>{capitalizeFirst(report.inspection_location)}</span>
             </p>
           </div>
 
           {/* Uitgevoerd door - Taxateur info */}
           <div>
-            <p style={{ fontSize: '14px', fontWeight: 600, color: '#1e293b', lineHeight: 1.4, margin: 0 }}>
+            <p style={{ fontSize: '14px', fontWeight: 600, color: '#000000', lineHeight: 1.4, margin: 0 }}>
               Erik Elderson
             </p>
-            <p style={{ fontSize: '12px', color: '#64748b', fontWeight: 500, lineHeight: 1.4, margin: '2px 0' }}>
+            <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.4, margin: '2px 0' }}>
               Register-Taxateur VRT / TMV
             </p>
           </div>
         </div>
 
         {/* Footer with Company Details */}
-        <div style={{ borderTop: '1px solid #cbd5e1', paddingTop: '16px' }}>
+        <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <img 
               src={logoAutomobiel} 
               alt="Automobiel Taxaties" 
               style={{ height: '48px', width: 'auto', flexShrink: 0 }}
             />
-            <div style={{ fontSize: '11px', color: '#475569', lineHeight: 1.5 }}>
-              <span style={{ fontWeight: 600, color: '#1e293b' }}>Automobiel Taxaties</span>
+            <div style={{ fontSize: '11px', color: '#000000', lineHeight: 1.5 }}>
+              <span style={{ fontWeight: 600 }}>Automobiel Taxaties</span>
               <span style={{ margin: '0 4px' }}>|</span>
               <span>Leigraaf 160, 6651 GJ Druten</span>
               <span style={{ margin: '0 4px' }}>|</span>
@@ -296,31 +306,12 @@ const PDFCover = () => {
             }}
           />
         ) : (
+          /* Als geen voorbladfoto is geselecteerd: géén foto tonen - toon lege grijze ruimte */
           <div style={{
             width: '100%',
             height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#f3f4f6',
-          }}>
-            <div style={{ textAlign: 'center', color: '#9ca3af' }}>
-              <svg
-                style={{ margin: '0 auto', height: '96px', width: '96px', opacity: 0.5 }}
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={1}
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              <p style={{ fontSize: '14px', marginTop: '16px' }}>Geen voertuigfoto beschikbaar</p>
-            </div>
-          </div>
+            backgroundColor: '#f8fafc',
+          }} />
         )}
       </div>
     </div>
