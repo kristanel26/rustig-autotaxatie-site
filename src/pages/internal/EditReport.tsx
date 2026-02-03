@@ -23,6 +23,9 @@ import { validateVin, validateDotCode, validateEmail, validatePhone } from '@/li
 import { qualityClasses } from '@/lib/qualityClasses';
 import { VehicleInfoForm, VehicleFormData, getInitialVehicleFormData } from '@/components/internal/VehicleInfoForm';
 import { AppraisalFindingsForm, AppraisalFormData, getInitialAppraisalFormData } from '@/components/internal/AppraisalFindingsForm';
+import { InstallationsForm, InstallationsFormData, getInitialInstallationsFormData } from '@/components/internal/InstallationsForm';
+import { CamperTechForm, CamperTechFormData, getInitialCamperTechFormData } from '@/components/internal/CamperTechForm';
+import { GeneralImpressionForm, GeneralImpressionFormData, getInitialGeneralImpressionFormData } from '@/components/internal/GeneralImpressionForm';
 import { PostcodeField } from '@/components/internal/PostcodeField';
 
 const reportSchema = z.object({
@@ -131,6 +134,15 @@ const EditReport = () => {
 
   // Appraisal findings data
   const [appraisalData, setAppraisalData] = useState<AppraisalFormData>(getInitialAppraisalFormData());
+
+  // Installations data (Sectie 13)
+  const [installationsData, setInstallationsData] = useState<InstallationsFormData>(getInitialInstallationsFormData());
+
+  // Camper tech + security data (Sectie 14-15)
+  const [camperTechData, setCamperTechData] = useState<CamperTechFormData>(getInitialCamperTechFormData());
+
+  // General impression data (Sectie 16)
+  const [impressionData, setImpressionData] = useState<GeneralImpressionFormData>(getInitialGeneralImpressionFormData());
 
   // Inspection data
   const [inspectionData, setInspectionData] = useState({
@@ -288,6 +300,46 @@ const EditReport = () => {
           interior_sanitary_notes: (reportData as any).interior_sanitary_notes || '',
         });
 
+        // Pre-fill installations data (Sectie 13)
+        setInstallationsData({
+          installation_electrical: (reportData as any).installation_electrical || '',
+          installation_water: (reportData as any).installation_water || '',
+          installation_gas: (reportData as any).installation_gas || '',
+          leakage_electrical: (reportData as any).leakage_electrical || '',
+        });
+
+        // Pre-fill camper tech + security data (Sectie 14-15)
+        setCamperTechData({
+          lpg_underbody: (reportData as any).lpg_underbody || false,
+          loose_gas_tanks: (reportData as any).loose_gas_tanks || false,
+          gas_hose_production_date: (reportData as any).gas_hose_production_date || '',
+          pressure_regulator_production_date: (reportData as any).pressure_regulator_production_date || '',
+          voltage: (reportData as any).voltage || '',
+          earth_leakage_switch: (reportData as any).earth_leakage_switch || false,
+          fused: (reportData as any).fused || false,
+          onboard_battery: (reportData as any).onboard_battery || false,
+          starter_battery: (reportData as any).starter_battery || false,
+          security_present: (reportData as any).security_present || false,
+          mechanical_security: (reportData as any).mechanical_security || '',
+          vehicle_tracking: (reportData as any).vehicle_tracking || false,
+          tracking_brand: (reportData as any).tracking_brand || '',
+        });
+
+        // Pre-fill general impression data (Sectie 16)
+        setImpressionData({
+          impression_suspension: (reportData as any).impression_suspension || '',
+          impression_wheels_tires: (reportData as any).impression_wheels_tires || '',
+          impression_steering: (reportData as any).impression_steering || '',
+          impression_brakes: (reportData as any).impression_brakes || '',
+          impression_engine: (reportData as any).impression_engine || '',
+          impression_transmission: (reportData as any).impression_transmission || '',
+          impression_electrical: (reportData as any).impression_electrical || '',
+          impression_body: (reportData as any).impression_body || '',
+          impression_interior: (reportData as any).impression_interior || '',
+          impression_general: (reportData as any).impression_general || '',
+          impression_extras: (reportData as any).impression_extras || '',
+        });
+
       } catch (error) {
         console.error('Error fetching report:', error);
         toast({
@@ -331,6 +383,18 @@ const EditReport = () => {
 
   const handleAppraisalChange = (field: keyof AppraisalFormData, value: string) => {
     setAppraisalData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleInstallationsChange = (field: keyof InstallationsFormData, value: string) => {
+    setInstallationsData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleCamperTechChange = (field: keyof CamperTechFormData, value: string | boolean) => {
+    setCamperTechData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleImpressionChange = (field: keyof GeneralImpressionFormData, value: string) => {
+    setImpressionData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleValuationChange = (field: string, value: string) => {
@@ -587,6 +651,42 @@ const EditReport = () => {
         interior_sanitary: appraisalData.interior_sanitary || null,
         interior_sanitary_notes: appraisalData.interior_sanitary_notes || null,
         
+        // Sectie 13: Leidingen & Installaties
+        installation_electrical: installationsData.installation_electrical || null,
+        installation_water: installationsData.installation_water || null,
+        installation_gas: installationsData.installation_gas || null,
+        leakage_electrical: installationsData.leakage_electrical || null,
+        
+        // Sectie 14: Extra's / Campertechniek
+        lpg_underbody: camperTechData.lpg_underbody,
+        loose_gas_tanks: camperTechData.loose_gas_tanks,
+        gas_hose_production_date: camperTechData.gas_hose_production_date || null,
+        pressure_regulator_production_date: camperTechData.pressure_regulator_production_date || null,
+        voltage: camperTechData.voltage || null,
+        earth_leakage_switch: camperTechData.earth_leakage_switch,
+        fused: camperTechData.fused,
+        onboard_battery: camperTechData.onboard_battery,
+        starter_battery: camperTechData.starter_battery,
+        
+        // Sectie 15: Beveiliging
+        security_present: camperTechData.security_present,
+        mechanical_security: camperTechData.mechanical_security || null,
+        vehicle_tracking: camperTechData.vehicle_tracking,
+        tracking_brand: camperTechData.tracking_brand || null,
+        
+        // Sectie 16: Algemene Indruk
+        impression_suspension: impressionData.impression_suspension || null,
+        impression_wheels_tires: impressionData.impression_wheels_tires || null,
+        impression_steering: impressionData.impression_steering || null,
+        impression_brakes: impressionData.impression_brakes || null,
+        impression_engine: impressionData.impression_engine || null,
+        impression_transmission: impressionData.impression_transmission || null,
+        impression_electrical: impressionData.impression_electrical || null,
+        impression_body: impressionData.impression_body || null,
+        impression_interior: impressionData.impression_interior || null,
+        impression_general: impressionData.impression_general || null,
+        impression_extras: impressionData.impression_extras || null,
+        
         // Inspection data
         inspection_location: inspectionData.inspection_location || null,
         inspection_date: inspectionData.inspection_date || null,
@@ -786,6 +886,24 @@ const EditReport = () => {
           onChange={handleAppraisalChange}
           rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
           tireErrors={errors}
+        />
+
+        {/* Sectie 13: Leidingen & Installaties */}
+        <InstallationsForm
+          formData={installationsData}
+          onChange={handleInstallationsChange}
+        />
+
+        {/* Sectie 14-15: Campertechniek & Beveiliging */}
+        <CamperTechForm
+          formData={camperTechData}
+          onChange={handleCamperTechChange}
+        />
+
+        {/* Sectie 16: Algemene Indruk */}
+        <GeneralImpressionForm
+          formData={impressionData}
+          onChange={handleImpressionChange}
         />
 
         {/* Inspection Details */}

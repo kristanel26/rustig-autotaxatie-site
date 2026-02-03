@@ -42,6 +42,7 @@ export type Database = {
           customer_street: string | null
           customer_title: string | null
           document_reference: string | null
+          earth_leakage_switch: boolean | null
           exterior_body: string | null
           exterior_body_notes: string | null
           exterior_paint: string | null
@@ -52,13 +53,29 @@ export type Database = {
           exterior_sealant_notes: string | null
           exterior_windows: string | null
           exterior_windows_notes: string | null
+          fused: boolean | null
+          gas_hose_production_date: string | null
           gebruik: string | null
           general_remarks: string | null
           id: string
+          impression_body: string | null
+          impression_brakes: string | null
+          impression_electrical: string | null
+          impression_engine: string | null
+          impression_extras: string | null
+          impression_general: string | null
+          impression_interior: string | null
+          impression_steering: string | null
+          impression_suspension: string | null
+          impression_transmission: string | null
+          impression_wheels_tires: string | null
           inspection_date: string | null
           inspection_end_time: string | null
           inspection_location: string | null
           inspection_start_time: string | null
+          installation_electrical: string | null
+          installation_gas: string | null
+          installation_water: string | null
           interior_dashboard: string | null
           interior_dashboard_notes: string | null
           interior_floor: string | null
@@ -71,11 +88,17 @@ export type Database = {
           interior_sanitary_notes: string | null
           interior_upholstery: string | null
           interior_upholstery_notes: string | null
+          leakage_electrical: string | null
           license_plate: string | null
+          loose_gas_tanks: boolean | null
+          lpg_underbody: boolean | null
+          mechanical_security: string | null
           model_display_name: string | null
+          onboard_battery: boolean | null
           opbouw_merk: string | null
           opbouw_type: string | null
           opdrachtgever: string | null
+          pressure_regulator_production_date: string | null
           quality_class: string | null
           rdw_aantal_cilinders: number | null
           rdw_aantal_deuren: number | null
@@ -103,9 +126,11 @@ export type Database = {
           rdw_wielbasis: number | null
           report_number: string
           rim_type: string | null
+          security_present: boolean | null
           soort_bouw: string | null
           staat_bij_opname: string | null
           stalling: string | null
+          starter_battery: boolean | null
           tellerstand: number | null
           tellerstand_type: string | null
           tire_bandenmaat: string | null
@@ -133,6 +158,7 @@ export type Database = {
           tire_rear_right_profiel: string | null
           tire_rear_right_season: string | null
           tire_rear_right_size: string | null
+          tracking_brand: string | null
           transmissie: string | null
           updated_at: string
           user_id: string
@@ -140,7 +166,9 @@ export type Database = {
           vehicle_model: string | null
           vehicle_photos: string[] | null
           vehicle_title: string | null
+          vehicle_tracking: boolean | null
           vin: string | null
+          voltage: string | null
         }
         Insert: {
           appraised_value?: number | null
@@ -169,6 +197,7 @@ export type Database = {
           customer_street?: string | null
           customer_title?: string | null
           document_reference?: string | null
+          earth_leakage_switch?: boolean | null
           exterior_body?: string | null
           exterior_body_notes?: string | null
           exterior_paint?: string | null
@@ -179,13 +208,29 @@ export type Database = {
           exterior_sealant_notes?: string | null
           exterior_windows?: string | null
           exterior_windows_notes?: string | null
+          fused?: boolean | null
+          gas_hose_production_date?: string | null
           gebruik?: string | null
           general_remarks?: string | null
           id?: string
+          impression_body?: string | null
+          impression_brakes?: string | null
+          impression_electrical?: string | null
+          impression_engine?: string | null
+          impression_extras?: string | null
+          impression_general?: string | null
+          impression_interior?: string | null
+          impression_steering?: string | null
+          impression_suspension?: string | null
+          impression_transmission?: string | null
+          impression_wheels_tires?: string | null
           inspection_date?: string | null
           inspection_end_time?: string | null
           inspection_location?: string | null
           inspection_start_time?: string | null
+          installation_electrical?: string | null
+          installation_gas?: string | null
+          installation_water?: string | null
           interior_dashboard?: string | null
           interior_dashboard_notes?: string | null
           interior_floor?: string | null
@@ -198,11 +243,17 @@ export type Database = {
           interior_sanitary_notes?: string | null
           interior_upholstery?: string | null
           interior_upholstery_notes?: string | null
+          leakage_electrical?: string | null
           license_plate?: string | null
+          loose_gas_tanks?: boolean | null
+          lpg_underbody?: boolean | null
+          mechanical_security?: string | null
           model_display_name?: string | null
+          onboard_battery?: boolean | null
           opbouw_merk?: string | null
           opbouw_type?: string | null
           opdrachtgever?: string | null
+          pressure_regulator_production_date?: string | null
           quality_class?: string | null
           rdw_aantal_cilinders?: number | null
           rdw_aantal_deuren?: number | null
@@ -230,9 +281,11 @@ export type Database = {
           rdw_wielbasis?: number | null
           report_number: string
           rim_type?: string | null
+          security_present?: boolean | null
           soort_bouw?: string | null
           staat_bij_opname?: string | null
           stalling?: string | null
+          starter_battery?: boolean | null
           tellerstand?: number | null
           tellerstand_type?: string | null
           tire_bandenmaat?: string | null
@@ -260,6 +313,7 @@ export type Database = {
           tire_rear_right_profiel?: string | null
           tire_rear_right_season?: string | null
           tire_rear_right_size?: string | null
+          tracking_brand?: string | null
           transmissie?: string | null
           updated_at?: string
           user_id: string
@@ -267,7 +321,9 @@ export type Database = {
           vehicle_model?: string | null
           vehicle_photos?: string[] | null
           vehicle_title?: string | null
+          vehicle_tracking?: boolean | null
           vin?: string | null
+          voltage?: string | null
         }
         Update: {
           appraised_value?: number | null
@@ -296,6 +352,7 @@ export type Database = {
           customer_street?: string | null
           customer_title?: string | null
           document_reference?: string | null
+          earth_leakage_switch?: boolean | null
           exterior_body?: string | null
           exterior_body_notes?: string | null
           exterior_paint?: string | null
@@ -306,13 +363,29 @@ export type Database = {
           exterior_sealant_notes?: string | null
           exterior_windows?: string | null
           exterior_windows_notes?: string | null
+          fused?: boolean | null
+          gas_hose_production_date?: string | null
           gebruik?: string | null
           general_remarks?: string | null
           id?: string
+          impression_body?: string | null
+          impression_brakes?: string | null
+          impression_electrical?: string | null
+          impression_engine?: string | null
+          impression_extras?: string | null
+          impression_general?: string | null
+          impression_interior?: string | null
+          impression_steering?: string | null
+          impression_suspension?: string | null
+          impression_transmission?: string | null
+          impression_wheels_tires?: string | null
           inspection_date?: string | null
           inspection_end_time?: string | null
           inspection_location?: string | null
           inspection_start_time?: string | null
+          installation_electrical?: string | null
+          installation_gas?: string | null
+          installation_water?: string | null
           interior_dashboard?: string | null
           interior_dashboard_notes?: string | null
           interior_floor?: string | null
@@ -325,11 +398,17 @@ export type Database = {
           interior_sanitary_notes?: string | null
           interior_upholstery?: string | null
           interior_upholstery_notes?: string | null
+          leakage_electrical?: string | null
           license_plate?: string | null
+          loose_gas_tanks?: boolean | null
+          lpg_underbody?: boolean | null
+          mechanical_security?: string | null
           model_display_name?: string | null
+          onboard_battery?: boolean | null
           opbouw_merk?: string | null
           opbouw_type?: string | null
           opdrachtgever?: string | null
+          pressure_regulator_production_date?: string | null
           quality_class?: string | null
           rdw_aantal_cilinders?: number | null
           rdw_aantal_deuren?: number | null
@@ -357,9 +436,11 @@ export type Database = {
           rdw_wielbasis?: number | null
           report_number?: string
           rim_type?: string | null
+          security_present?: boolean | null
           soort_bouw?: string | null
           staat_bij_opname?: string | null
           stalling?: string | null
+          starter_battery?: boolean | null
           tellerstand?: number | null
           tellerstand_type?: string | null
           tire_bandenmaat?: string | null
@@ -387,6 +468,7 @@ export type Database = {
           tire_rear_right_profiel?: string | null
           tire_rear_right_season?: string | null
           tire_rear_right_size?: string | null
+          tracking_brand?: string | null
           transmissie?: string | null
           updated_at?: string
           user_id?: string
@@ -394,7 +476,9 @@ export type Database = {
           vehicle_model?: string | null
           vehicle_photos?: string[] | null
           vehicle_title?: string | null
+          vehicle_tracking?: boolean | null
           vin?: string | null
+          voltage?: string | null
         }
         Relationships: []
       }
