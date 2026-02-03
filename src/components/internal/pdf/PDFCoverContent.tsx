@@ -124,45 +124,53 @@ const PDFCoverContent = ({ report }: PDFCoverContentProps) => {
             </p>
           </div>
 
-          {/* Inzake (Vehicle Title) */}
-          <div style={{ marginBottom: '16px' }}>
-            <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
-              Inzake:
-            </p>
-            <p style={{ fontSize: '20px', fontWeight: 600, textTransform: 'uppercase', color: '#000000', lineHeight: 1.2, margin: '4px 0 0 0' }}>
-              {vehicleDisplay}
-            </p>
-          </div>
+          {/* Inzake (Vehicle Title) - only show if we have data */}
+          {report.vehicle_title && (
+            <div style={{ marginBottom: '16px' }}>
+              <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
+                Inzake:
+              </p>
+              <p style={{ fontSize: '20px', fontWeight: 600, textTransform: 'uppercase', color: '#000000', lineHeight: 1.2, margin: '4px 0 0 0' }}>
+                {report.vehicle_title.toUpperCase()}
+              </p>
+            </div>
+          )}
 
-          {/* Kenteken */}
-          <div style={{ marginBottom: '12px' }}>
-            <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
-              Kenteken:
-            </p>
-            <p style={{ fontSize: '16px', fontWeight: 600, color: '#000000', lineHeight: 1.2, margin: '2px 0 0 0' }}>
-              {report.license_plate || '-'}
-            </p>
-          </div>
+          {/* Kenteken - only show if we have data */}
+          {report.license_plate && (
+            <div style={{ marginBottom: '12px' }}>
+              <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
+                Kenteken:
+              </p>
+              <p style={{ fontSize: '16px', fontWeight: 600, color: '#000000', lineHeight: 1.2, margin: '2px 0 0 0' }}>
+                {report.license_plate}
+              </p>
+            </div>
+          )}
 
-          {/* Rapportnummer */}
-          <div style={{ marginBottom: '12px' }}>
-            <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
-              Rapportnummer:
-            </p>
-            <p style={{ fontSize: '16px', fontWeight: 600, color: '#000000', lineHeight: 1.2, margin: '2px 0 0 0' }}>
-              {report.report_number || '-'}
-            </p>
-          </div>
+          {/* Rapportnummer - only show if we have data */}
+          {report.report_number && (
+            <div style={{ marginBottom: '12px' }}>
+              <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
+                Rapportnummer:
+              </p>
+              <p style={{ fontSize: '16px', fontWeight: 600, color: '#000000', lineHeight: 1.2, margin: '2px 0 0 0' }}>
+                {report.report_number}
+              </p>
+            </div>
+          )}
 
-          {/* Documentkenmerk */}
-          <div style={{ marginBottom: '16px' }}>
-            <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
-              Documentkenmerk:
-            </p>
-            <p style={{ fontSize: '16px', fontWeight: 600, color: '#000000', lineHeight: 1.2, margin: '2px 0 0 0' }}>
-              {report.document_reference || '-'}
-            </p>
-          </div>
+          {/* Documentkenmerk - only show if we have data */}
+          {report.document_reference && (
+            <div style={{ marginBottom: '16px' }}>
+              <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.2, margin: 0 }}>
+                Documentkenmerk:
+              </p>
+              <p style={{ fontSize: '16px', fontWeight: 600, color: '#000000', lineHeight: 1.2, margin: '2px 0 0 0' }}>
+                {report.document_reference}
+              </p>
+            </div>
+          )}
 
           {/* Opbouw merk + type (if available) */}
           {opbouwDisplay && (
