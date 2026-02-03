@@ -4,6 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 
 // Logos
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
+import { getQualityClassByValue } from '@/lib/qualityClasses';
 
 interface Report {
   id: string;
@@ -24,18 +25,23 @@ interface Report {
   condition_electrical_notes: string | null;
   
   // Banden
+  tire_bandenmaat: string | null;
   tire_front_left_brand: string | null;
+  tire_front_left_model: string | null;
+  tire_front_left_profiel: string | null;
   tire_front_left_dot: string | null;
-  tire_front_left_season: string | null;
   tire_front_right_brand: string | null;
+  tire_front_right_model: string | null;
+  tire_front_right_profiel: string | null;
   tire_front_right_dot: string | null;
-  tire_front_right_season: string | null;
   tire_rear_left_brand: string | null;
+  tire_rear_left_model: string | null;
+  tire_rear_left_profiel: string | null;
   tire_rear_left_dot: string | null;
-  tire_rear_left_season: string | null;
   tire_rear_right_brand: string | null;
+  tire_rear_right_model: string | null;
+  tire_rear_right_profiel: string | null;
   tire_rear_right_dot: string | null;
-  tire_rear_right_season: string | null;
   rim_type: string | null;
   
   // Exterieur
@@ -64,8 +70,45 @@ interface Report {
   interior_sanitary: string | null;
   interior_sanitary_notes: string | null;
   
+  // Sectie 13: Leidingen & Installaties
+  installation_electrical: string | null;
+  installation_water: string | null;
+  installation_gas: string | null;
+  leakage_electrical: string | null;
+  
+  // Sectie 14: Campertechniek
+  lpg_underbody: boolean | null;
+  loose_gas_tanks: boolean | null;
+  gas_hose_production_date: string | null;
+  pressure_regulator_production_date: string | null;
+  voltage: string | null;
+  earth_leakage_switch: boolean | null;
+  fused: boolean | null;
+  onboard_battery: boolean | null;
+  starter_battery: boolean | null;
+  
+  // Sectie 15: Beveiliging
+  security_present: boolean | null;
+  mechanical_security: string | null;
+  vehicle_tracking: boolean | null;
+  tracking_brand: string | null;
+  
+  // Sectie 16: Algemene Indruk
+  impression_suspension: string | null;
+  impression_wheels_tires: string | null;
+  impression_steering: string | null;
+  impression_brakes: string | null;
+  impression_engine: string | null;
+  impression_transmission: string | null;
+  impression_electrical: string | null;
+  impression_body: string | null;
+  impression_interior: string | null;
+  impression_general: string | null;
+  impression_extras: string | null;
+  
   // General
   general_remarks: string | null;
+  quality_class: string | null;
 }
 
 const PDFAppraisalFindings = () => {
@@ -110,21 +153,35 @@ const PDFAppraisalFindings = () => {
     return labels[value] || value;
   };
 
-  const formatSeason = (value: string | null) => {
-    if (!value) return '-';
-    const labels: Record<string, string> = {
-      zomer: 'Zomer',
-      winter: 'Winter',
-      allseason: 'All-season',
-    };
-    return labels[value] || value;
-  };
-
   const formatRimType = (value: string | null) => {
     if (!value) return '-';
     const labels: Record<string, string> = {
       staal: 'Staalvelgen',
       lichtmetaal: 'Lichtmetalen velgen',
+    };
+    return labels[value] || value;
+  };
+
+  const formatBoolean = (value: boolean | null) => {
+    if (value === null || value === undefined) return '-';
+    return value ? 'Ja' : 'Nee';
+  };
+
+  const formatLeakage = (value: string | null) => {
+    if (!value) return '-';
+    const labels: Record<string, string> = {
+      geen_meting: 'Geen meting verricht',
+      geen_lekkage: 'Geen lekkage waargenomen',
+    };
+    return labels[value] || value;
+  };
+
+  const formatMechanicalSecurity = (value: string | null) => {
+    if (!value) return '-';
+    const labels: Record<string, string> = {
+      bearlock: 'Bearlock',
+      construct: 'Construct',
+      anders: 'Anders',
     };
     return labels[value] || value;
   };
@@ -146,33 +203,61 @@ const PDFAppraisalFindings = () => {
   }
 
   const ConditionRow = ({ label, condition, notes }: { label: string; condition: string | null; notes: string | null }) => (
-    <div style={{ display: 'flex', padding: '4px 0', borderBottom: '1px solid #e2e8f0' }}>
-      <span style={{ width: '35%', color: '#64748b', fontSize: '9px', fontWeight: 500 }}>{label}</span>
-      <span style={{ width: '20%', color: '#1e293b', fontSize: '9px', fontWeight: 600 }}>{formatCondition(condition)}</span>
-      <span style={{ width: '45%', color: '#475569', fontSize: '9px' }}>{notes || '-'}</span>
+    <div style={{ display: 'flex', padding: '3px 0', borderBottom: '1px solid #e2e8f0' }}>
+      <span style={{ width: '35%', color: '#64748b', fontSize: '8px', fontWeight: 500 }}>{label}</span>
+      <span style={{ width: '18%', color: '#1e293b', fontSize: '8px', fontWeight: 600 }}>{formatCondition(condition)}</span>
+      <span style={{ width: '47%', color: '#475569', fontSize: '8px' }}>{notes || '-'}</span>
     </div>
   );
 
   const SectionHeader = ({ title }: { title: string }) => (
     <div style={{ 
-      marginBottom: '6px',
-      paddingBottom: '4px',
+      marginBottom: '4px',
+      paddingBottom: '3px',
       borderBottom: '2px solid #1e293b'
     }}>
-      <h3 style={{ fontSize: '11px', fontWeight: 600, color: '#1e293b', margin: 0, textTransform: 'uppercase' }}>
+      <h3 style={{ fontSize: '9px', fontWeight: 600, color: '#1e293b', margin: 0, textTransform: 'uppercase' }}>
         {title}
       </h3>
     </div>
   );
 
-  const TireRow = ({ position, brand, dot, season }: { position: string; brand: string | null; dot: string | null; season: string | null }) => (
-    <div style={{ display: 'flex', padding: '4px 0', borderBottom: '1px solid #e2e8f0' }}>
-      <span style={{ width: '30%', color: '#64748b', fontSize: '9px', fontWeight: 500 }}>{position}</span>
-      <span style={{ width: '25%', color: '#1e293b', fontSize: '9px' }}>{brand || '-'}</span>
-      <span style={{ width: '20%', color: '#1e293b', fontSize: '9px' }}>{dot || '-'}</span>
-      <span style={{ width: '25%', color: '#1e293b', fontSize: '9px' }}>{formatSeason(season)}</span>
+  const TireRow = ({ position, brand, model, profiel, dot }: { position: string; brand: string | null; model: string | null; profiel: string | null; dot: string | null }) => (
+    <div style={{ display: 'flex', padding: '3px 0', borderBottom: '1px solid #e2e8f0' }}>
+      <span style={{ width: '22%', color: '#64748b', fontSize: '8px', fontWeight: 500 }}>{position}</span>
+      <span style={{ width: '22%', color: '#1e293b', fontSize: '8px' }}>{brand || '-'}</span>
+      <span style={{ width: '22%', color: '#1e293b', fontSize: '8px' }}>{model || '-'}</span>
+      <span style={{ width: '17%', color: '#1e293b', fontSize: '8px' }}>{profiel ? `${profiel} mm` : '-'}</span>
+      <span style={{ width: '17%', color: '#1e293b', fontSize: '8px' }}>{dot || '-'}</span>
     </div>
   );
+
+  const DataRow = ({ label, value }: { label: string; value: string }) => (
+    <div style={{ display: 'flex', padding: '3px 0', borderBottom: '1px solid #e2e8f0' }}>
+      <span style={{ width: '50%', color: '#64748b', fontSize: '8px', fontWeight: 500 }}>{label}</span>
+      <span style={{ width: '50%', color: '#1e293b', fontSize: '8px', fontWeight: 600 }}>{value}</span>
+    </div>
+  );
+
+  const qualityClass = getQualityClassByValue(report.quality_class);
+
+  // Check if camper tech sections have any data
+  const hasCamperTechData = report.lpg_underbody || report.loose_gas_tanks || 
+    report.gas_hose_production_date || report.pressure_regulator_production_date ||
+    report.voltage || report.earth_leakage_switch || report.fused || 
+    report.onboard_battery || report.starter_battery;
+
+  const hasInstallationsData = report.installation_electrical || 
+    report.installation_water || report.installation_gas || report.leakage_electrical;
+
+  const hasSecurityData = report.security_present || report.mechanical_security || 
+    report.vehicle_tracking || report.tracking_brand;
+
+  // Check if general impression has any data
+  const hasImpressionData = report.impression_suspension || report.impression_wheels_tires ||
+    report.impression_steering || report.impression_brakes || report.impression_engine ||
+    report.impression_transmission || report.impression_electrical || report.impression_body ||
+    report.impression_interior || report.impression_general || report.impression_extras;
 
   return (
     <div 
@@ -180,33 +265,33 @@ const PDFAppraisalFindings = () => {
       style={{
         width: '210mm',
         minHeight: '297mm',
-        padding: '16px 20px',
+        padding: '14px 18px',
         boxSizing: 'border-box',
         position: 'relative',
       }}
     >
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
         <div>
-          <h1 style={{ fontSize: '16px', fontWeight: 600, color: '#1e293b', margin: 0, textTransform: 'uppercase' }}>TAXATEURBEVINDINGEN</h1>
-          <p style={{ fontSize: '9px', color: '#64748b', margin: '2px 0 0 0' }}>
+          <h1 style={{ fontSize: '14px', fontWeight: 600, color: '#1e293b', margin: 0, textTransform: 'uppercase' }}>TAXATEURBEVINDINGEN</h1>
+          <p style={{ fontSize: '8px', color: '#64748b', margin: '2px 0 0 0' }}>
             Documentkenmerk: {report.document_reference || '-'}
           </p>
         </div>
-        <img src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '32px', width: 'auto' }} />
+        <img src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '28px', width: 'auto' }} />
       </div>
 
       {/* Two-column layout */}
-      <div style={{ display: 'flex', gap: '16px' }}>
+      <div style={{ display: 'flex', gap: '14px' }}>
         {/* Left Column */}
         <div style={{ width: '50%' }}>
           {/* Technische staat */}
-          <div style={{ marginBottom: '14px' }}>
+          <div style={{ marginBottom: '10px' }}>
             <SectionHeader title="Technische staat voertuig" />
-            <div style={{ display: 'flex', padding: '4px 0', borderBottom: '1px solid #cbd5e1', backgroundColor: '#f8fafc' }}>
-              <span style={{ width: '35%', color: '#475569', fontSize: '8px', fontWeight: 600 }}>ONDERDEEL</span>
-              <span style={{ width: '20%', color: '#475569', fontSize: '8px', fontWeight: 600 }}>CONDITIE</span>
-              <span style={{ width: '45%', color: '#475569', fontSize: '8px', fontWeight: 600 }}>OPMERKINGEN</span>
+            <div style={{ display: 'flex', padding: '3px 0', borderBottom: '1px solid #cbd5e1', backgroundColor: '#f8fafc' }}>
+              <span style={{ width: '35%', color: '#475569', fontSize: '7px', fontWeight: 600 }}>ONDERDEEL</span>
+              <span style={{ width: '18%', color: '#475569', fontSize: '7px', fontWeight: 600 }}>CONDITIE</span>
+              <span style={{ width: '47%', color: '#475569', fontSize: '7px', fontWeight: 600 }}>OPMERKINGEN</span>
             </div>
             <ConditionRow label="Motor en aandrijving" condition={report.condition_engine} notes={report.condition_engine_notes} />
             <ConditionRow label="Transmissie" condition={report.condition_transmission} notes={report.condition_transmission_notes} />
@@ -217,34 +302,79 @@ const PDFAppraisalFindings = () => {
           </div>
 
           {/* Banden en wielen */}
-          <div style={{ marginBottom: '14px' }}>
+          <div style={{ marginBottom: '10px' }}>
             <SectionHeader title="Banden en wielen" />
-            <div style={{ display: 'flex', padding: '4px 0', borderBottom: '1px solid #cbd5e1', backgroundColor: '#f8fafc' }}>
-              <span style={{ width: '30%', color: '#475569', fontSize: '8px', fontWeight: 600 }}>POSITIE</span>
-              <span style={{ width: '25%', color: '#475569', fontSize: '8px', fontWeight: 600 }}>MERK</span>
-              <span style={{ width: '20%', color: '#475569', fontSize: '8px', fontWeight: 600 }}>DOT</span>
-              <span style={{ width: '25%', color: '#475569', fontSize: '8px', fontWeight: 600 }}>SEIZOEN</span>
+            <div style={{ display: 'flex', padding: '3px 0', borderBottom: '1px solid #cbd5e1', backgroundColor: '#f8fafc' }}>
+              <span style={{ width: '22%', color: '#475569', fontSize: '7px', fontWeight: 600 }}>POSITIE</span>
+              <span style={{ width: '22%', color: '#475569', fontSize: '7px', fontWeight: 600 }}>MERK</span>
+              <span style={{ width: '22%', color: '#475569', fontSize: '7px', fontWeight: 600 }}>MODEL</span>
+              <span style={{ width: '17%', color: '#475569', fontSize: '7px', fontWeight: 600 }}>PROFIEL</span>
+              <span style={{ width: '17%', color: '#475569', fontSize: '7px', fontWeight: 600 }}>DOT</span>
             </div>
-            <TireRow position="Linker voorband" brand={report.tire_front_left_brand} dot={report.tire_front_left_dot} season={report.tire_front_left_season} />
-            <TireRow position="Rechter voorband" brand={report.tire_front_right_brand} dot={report.tire_front_right_dot} season={report.tire_front_right_season} />
-            <TireRow position="Linker achterband" brand={report.tire_rear_left_brand} dot={report.tire_rear_left_dot} season={report.tire_rear_left_season} />
-            <TireRow position="Rechter achterband" brand={report.tire_rear_right_brand} dot={report.tire_rear_right_dot} season={report.tire_rear_right_season} />
-            <div style={{ display: 'flex', padding: '6px 0' }}>
-              <span style={{ color: '#64748b', fontSize: '9px', fontWeight: 500 }}>Type velg:</span>
-              <span style={{ marginLeft: '8px', color: '#1e293b', fontSize: '9px', fontWeight: 600 }}>{formatRimType(report.rim_type)}</span>
+            <TireRow position="Linker voorband" brand={report.tire_front_left_brand} model={report.tire_front_left_model} profiel={report.tire_front_left_profiel} dot={report.tire_front_left_dot} />
+            <TireRow position="Rechter voorband" brand={report.tire_front_right_brand} model={report.tire_front_right_model} profiel={report.tire_front_right_profiel} dot={report.tire_front_right_dot} />
+            <TireRow position="Linker achterband" brand={report.tire_rear_left_brand} model={report.tire_rear_left_model} profiel={report.tire_rear_left_profiel} dot={report.tire_rear_left_dot} />
+            <TireRow position="Rechter achterband" brand={report.tire_rear_right_brand} model={report.tire_rear_right_model} profiel={report.tire_rear_right_profiel} dot={report.tire_rear_right_dot} />
+            <div style={{ display: 'flex', padding: '4px 0', gap: '16px' }}>
+              <div>
+                <span style={{ color: '#64748b', fontSize: '8px', fontWeight: 500 }}>Bandenmaat: </span>
+                <span style={{ color: '#1e293b', fontSize: '8px', fontWeight: 600 }}>{report.tire_bandenmaat || '-'}</span>
+              </div>
+              <div>
+                <span style={{ color: '#64748b', fontSize: '8px', fontWeight: 500 }}>Type velg: </span>
+                <span style={{ color: '#1e293b', fontSize: '8px', fontWeight: 600 }}>{formatRimType(report.rim_type)}</span>
+              </div>
             </div>
           </div>
+
+          {/* Leidingen & Installaties (Sectie 13) */}
+          {hasInstallationsData && (
+            <div style={{ marginBottom: '10px' }}>
+              <SectionHeader title="Leidingen en installaties" />
+              <DataRow label="Montage elektra" value={formatCondition(report.installation_electrical)} />
+              <DataRow label="Montage water" value={formatCondition(report.installation_water)} />
+              <DataRow label="Montage gas" value={formatCondition(report.installation_gas)} />
+              <DataRow label="Lekkage elektra" value={formatLeakage(report.leakage_electrical)} />
+            </div>
+          )}
+
+          {/* Campertechniek (Sectie 14) */}
+          {hasCamperTechData && (
+            <div style={{ marginBottom: '10px' }}>
+              <SectionHeader title="Extra's / Campertechniek" />
+              <DataRow label="LPG onderbouw" value={formatBoolean(report.lpg_underbody)} />
+              <DataRow label="Losse gastank(s)" value={formatBoolean(report.loose_gas_tanks)} />
+              {report.gas_hose_production_date && <DataRow label="Gasslang productiedatum" value={report.gas_hose_production_date} />}
+              {report.pressure_regulator_production_date && <DataRow label="Drukregelaar productiedatum" value={report.pressure_regulator_production_date} />}
+              {report.voltage && <DataRow label="Voltage" value={report.voltage} />}
+              <DataRow label="Aardlekschakelaar" value={formatBoolean(report.earth_leakage_switch)} />
+              <DataRow label="Gezekerd" value={formatBoolean(report.fused)} />
+              <DataRow label="Boordaccu" value={formatBoolean(report.onboard_battery)} />
+              <DataRow label="Startaccu" value={formatBoolean(report.starter_battery)} />
+            </div>
+          )}
+
+          {/* Beveiliging (Sectie 15) */}
+          {hasSecurityData && (
+            <div style={{ marginBottom: '10px' }}>
+              <SectionHeader title="Beveiliging" />
+              <DataRow label="Beveiliging aanwezig" value={formatBoolean(report.security_present)} />
+              {report.mechanical_security && <DataRow label="Mechanische beveiliging" value={formatMechanicalSecurity(report.mechanical_security)} />}
+              <DataRow label="Voertuigvolgsysteem" value={formatBoolean(report.vehicle_tracking)} />
+              {report.tracking_brand && <DataRow label="Merk volgsysteem" value={report.tracking_brand} />}
+            </div>
+          )}
         </div>
 
         {/* Right Column */}
         <div style={{ width: '50%' }}>
           {/* Exterieur */}
-          <div style={{ marginBottom: '14px' }}>
+          <div style={{ marginBottom: '10px' }}>
             <SectionHeader title="Exterieur" />
-            <div style={{ display: 'flex', padding: '4px 0', borderBottom: '1px solid #cbd5e1', backgroundColor: '#f8fafc' }}>
-              <span style={{ width: '35%', color: '#475569', fontSize: '8px', fontWeight: 600 }}>ONDERDEEL</span>
-              <span style={{ width: '20%', color: '#475569', fontSize: '8px', fontWeight: 600 }}>CONDITIE</span>
-              <span style={{ width: '45%', color: '#475569', fontSize: '8px', fontWeight: 600 }}>OPMERKINGEN</span>
+            <div style={{ display: 'flex', padding: '3px 0', borderBottom: '1px solid #cbd5e1', backgroundColor: '#f8fafc' }}>
+              <span style={{ width: '35%', color: '#475569', fontSize: '7px', fontWeight: 600 }}>ONDERDEEL</span>
+              <span style={{ width: '18%', color: '#475569', fontSize: '7px', fontWeight: 600 }}>CONDITIE</span>
+              <span style={{ width: '47%', color: '#475569', fontSize: '7px', fontWeight: 600 }}>OPMERKINGEN</span>
             </div>
             <ConditionRow label="Carrosserie" condition={report.exterior_body} notes={report.exterior_body_notes} />
             <ConditionRow label="Lakwerk" condition={report.exterior_paint} notes={report.exterior_paint_notes} />
@@ -254,12 +384,12 @@ const PDFAppraisalFindings = () => {
           </div>
 
           {/* Interieur */}
-          <div style={{ marginBottom: '14px' }}>
+          <div style={{ marginBottom: '10px' }}>
             <SectionHeader title="Interieur" />
-            <div style={{ display: 'flex', padding: '4px 0', borderBottom: '1px solid #cbd5e1', backgroundColor: '#f8fafc' }}>
-              <span style={{ width: '35%', color: '#475569', fontSize: '8px', fontWeight: 600 }}>ONDERDEEL</span>
-              <span style={{ width: '20%', color: '#475569', fontSize: '8px', fontWeight: 600 }}>CONDITIE</span>
-              <span style={{ width: '45%', color: '#475569', fontSize: '8px', fontWeight: 600 }}>OPMERKINGEN</span>
+            <div style={{ display: 'flex', padding: '3px 0', borderBottom: '1px solid #cbd5e1', backgroundColor: '#f8fafc' }}>
+              <span style={{ width: '35%', color: '#475569', fontSize: '7px', fontWeight: 600 }}>ONDERDEEL</span>
+              <span style={{ width: '18%', color: '#475569', fontSize: '7px', fontWeight: 600 }}>CONDITIE</span>
+              <span style={{ width: '47%', color: '#475569', fontSize: '7px', fontWeight: 600 }}>OPMERKINGEN</span>
             </div>
             <ConditionRow label="Bekleding" condition={report.interior_upholstery} notes={report.interior_upholstery_notes} />
             <ConditionRow label="Dashboard" condition={report.interior_dashboard} notes={report.interior_dashboard_notes} />
@@ -269,11 +399,46 @@ const PDFAppraisalFindings = () => {
             <ConditionRow label="Sanitair" condition={report.interior_sanitary} notes={report.interior_sanitary_notes} />
           </div>
 
+          {/* Kwaliteitsklasse */}
+          {qualityClass && (
+            <div style={{ marginBottom: '10px' }}>
+              <SectionHeader title="Kwaliteitsklasse" />
+              <div style={{ padding: '6px', backgroundColor: '#f0f9ff', border: '1px solid #0284c7', borderRadius: '4px' }}>
+                <p style={{ fontSize: '10px', fontWeight: 600, color: '#0369a1', margin: '0 0 4px 0' }}>
+                  {qualityClass.label}
+                </p>
+                <p style={{ fontSize: '8px', color: '#0c4a6e', margin: 0, lineHeight: 1.4 }}>
+                  {qualityClass.description}
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Algemene Indruk (Sectie 16) - only if data exists */}
+          {hasImpressionData && (
+            <div style={{ marginBottom: '10px' }}>
+              <SectionHeader title="Algemene indruk" />
+              <div style={{ fontSize: '8px', color: '#1e293b', lineHeight: 1.5 }}>
+                {report.impression_suspension && <p style={{ margin: '2px 0' }}><strong>Wielophanging:</strong> {report.impression_suspension}</p>}
+                {report.impression_wheels_tires && <p style={{ margin: '2px 0' }}><strong>Velgen en banden:</strong> {report.impression_wheels_tires}</p>}
+                {report.impression_steering && <p style={{ margin: '2px 0' }}><strong>Stuurinrichting:</strong> {report.impression_steering}</p>}
+                {report.impression_brakes && <p style={{ margin: '2px 0' }}><strong>Remmen:</strong> {report.impression_brakes}</p>}
+                {report.impression_engine && <p style={{ margin: '2px 0' }}><strong>Motor:</strong> {report.impression_engine}</p>}
+                {report.impression_transmission && <p style={{ margin: '2px 0' }}><strong>Versnellingsbak:</strong> {report.impression_transmission}</p>}
+                {report.impression_electrical && <p style={{ margin: '2px 0' }}><strong>Elektrische installatie:</strong> {report.impression_electrical}</p>}
+                {report.impression_body && <p style={{ margin: '2px 0' }}><strong>Carrosserie:</strong> {report.impression_body}</p>}
+                {report.impression_interior && <p style={{ margin: '2px 0' }}><strong>Interieur:</strong> {report.impression_interior}</p>}
+                {report.impression_general && <p style={{ margin: '2px 0' }}><strong>Algemene staat:</strong> {report.impression_general}</p>}
+                {report.impression_extras && <p style={{ margin: '2px 0' }}><strong>Extra's:</strong> {report.impression_extras}</p>}
+              </div>
+            </div>
+          )}
+
           {/* Bijzonderheden */}
           {report.general_remarks && (
-            <div style={{ marginBottom: '14px' }}>
+            <div style={{ marginBottom: '10px' }}>
               <SectionHeader title="Bijzonderheden / afwijkingen" />
-              <p style={{ fontSize: '9px', color: '#1e293b', lineHeight: 1.5, margin: 0 }}>
+              <p style={{ fontSize: '8px', color: '#1e293b', lineHeight: 1.5, margin: 0 }}>
                 {report.general_remarks}
               </p>
             </div>
@@ -284,23 +449,23 @@ const PDFAppraisalFindings = () => {
       {/* Footer */}
       <div style={{ 
         position: 'absolute', 
-        bottom: '16px', 
-        left: '20px', 
-        right: '20px',
+        bottom: '14px', 
+        left: '18px', 
+        right: '18px',
         borderTop: '1px solid #cbd5e1', 
-        paddingTop: '8px',
+        paddingTop: '6px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <div style={{ fontSize: '8px', color: '#64748b' }}>
+        <div style={{ fontSize: '7px', color: '#64748b' }}>
           <span style={{ fontWeight: 600, color: '#1e293b' }}>Automobiel Taxaties</span>
           <span style={{ margin: '0 4px' }}>|</span>
           Leigraaf 160, 6651 GJ Druten
           <span style={{ margin: '0 4px' }}>|</span>
           KVK: 95549269
         </div>
-        <div style={{ fontSize: '8px', color: '#64748b' }}>
+        <div style={{ fontSize: '7px', color: '#64748b' }}>
           Pagina 3
         </div>
       </div>
