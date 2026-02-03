@@ -80,9 +80,11 @@ const PDFValuationContent = ({ report, pageNumber }: PDFValuationContentProps) =
           <h1 style={{ fontSize: '18px', fontWeight: 600, color: '#000000', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             GETAXEERDE WAARDE
           </h1>
-          <p style={{ fontSize: '10px', color: '#000000', margin: '4px 0 0 0' }}>
-            Documentkenmerk: {report.document_reference || '-'}
-          </p>
+          {report.document_reference && (
+            <p style={{ fontSize: '10px', color: '#000000', margin: '4px 0 0 0' }}>
+              Documentkenmerk: {report.document_reference}
+            </p>
+          )}
         </div>
         <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '40px', width: 'auto' }} />
       </div>
@@ -146,6 +148,28 @@ const PDFValuationContent = ({ report, pageNumber }: PDFValuationContentProps) =
             zegge: {valueInWords}
           </p>
         )}
+
+        {/* Valuation basis summary */}
+        <div style={{ 
+          marginTop: '20px',
+          padding: '12px 16px',
+          backgroundColor: '#f8fafc',
+          borderRadius: '4px',
+        }}>
+          <p style={{ fontSize: '10px', fontWeight: 600, color: '#000000', margin: '0 0 8px 0' }}>
+            Waardebepaling gebaseerd op:
+          </p>
+          <ul style={{ margin: 0, padding: '0 0 0 16px', fontSize: '9px', color: '#000000', lineHeight: 1.8 }}>
+            <li>Visuele inspectie</li>
+            <li>Staat van voertuig</li>
+            <li>Kilometerstand</li>
+            <li>Uitvoering en opbouw</li>
+            <li>Marktvergelijking</li>
+          </ul>
+          <p style={{ fontSize: '10px', fontWeight: 600, color: '#000000', margin: '12px 0 0 0' }}>
+            Waardepeildatum: {formatDateLong(report.inspection_date)}
+          </p>
+        </div>
       </div>
 
       {/* Signing Section */}

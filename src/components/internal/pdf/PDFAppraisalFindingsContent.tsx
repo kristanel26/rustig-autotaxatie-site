@@ -149,13 +149,18 @@ const PDFAppraisalFindingsContent = ({ report }: PDFAppraisalFindingsContentProp
     return labels[value] || value;
   };
 
-  const ConditionRow = ({ label, condition, notes }: { label: string; condition: string | null; notes: string | null }) => (
-    <div style={{ display: 'flex', padding: '3px 0', borderBottom: '1px solid #e2e8f0' }}>
-      <span style={{ width: '35%', color: '#000000', fontSize: '8px', fontWeight: 500 }}>{label}</span>
-      <span style={{ width: '18%', color: '#000000', fontSize: '8px', fontWeight: 600 }}>{formatCondition(condition)}</span>
-      <span style={{ width: '47%', color: '#000000', fontSize: '8px' }}>{notes || '-'}</span>
-    </div>
-  );
+  // ConditionRow - hide empty notes, never show dashes
+  const ConditionRow = ({ label, condition, notes }: { label: string; condition: string | null; notes: string | null }) => {
+    // If no condition set, don't show row at all
+    if (!condition) return null;
+    return (
+      <div style={{ display: 'flex', padding: '3px 0', borderBottom: '1px solid #e2e8f0' }}>
+        <span style={{ width: '35%', color: '#000000', fontSize: '8px', fontWeight: 500 }}>{label}</span>
+        <span style={{ width: '18%', color: '#000000', fontSize: '8px', fontWeight: 600 }}>{formatCondition(condition)}</span>
+        <span style={{ width: '47%', color: '#000000', fontSize: '8px' }}>{notes || ''}</span>
+      </div>
+    );
+  };
 
   const SectionHeader = ({ title }: { title: string }) => (
     <div style={{ 
@@ -179,12 +184,16 @@ const PDFAppraisalFindingsContent = ({ report }: PDFAppraisalFindingsContentProp
     </div>
   );
 
-  const DataRow = ({ label, value }: { label: string; value: string }) => (
-    <div style={{ display: 'flex', padding: '3px 0', borderBottom: '1px solid #e2e8f0' }}>
-      <span style={{ width: '50%', color: '#000000', fontSize: '8px', fontWeight: 500 }}>{label}</span>
-      <span style={{ width: '50%', color: '#000000', fontSize: '8px', fontWeight: 600 }}>{value}</span>
-    </div>
-  );
+  // DataRow - hide if empty, never show dashes
+  const DataRow = ({ label, value }: { label: string; value: string }) => {
+    if (!value || value === '-') return null;
+    return (
+      <div style={{ display: 'flex', padding: '3px 0', borderBottom: '1px solid #e2e8f0' }}>
+        <span style={{ width: '50%', color: '#000000', fontSize: '8px', fontWeight: 500 }}>{label}</span>
+        <span style={{ width: '50%', color: '#000000', fontSize: '8px', fontWeight: 600 }}>{value}</span>
+      </div>
+    );
+  };
 
   const qualityClass = getQualityClassByValue(report.quality_class);
 
@@ -225,9 +234,11 @@ const PDFAppraisalFindingsContent = ({ report }: PDFAppraisalFindingsContentProp
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
         <div>
           <h1 style={{ fontSize: '14px', fontWeight: 600, color: '#000000', margin: 0, textTransform: 'uppercase' }}>TAXATEURBEVINDINGEN</h1>
-          <p style={{ fontSize: '8px', color: '#000000', margin: '2px 0 0 0' }}>
-            Documentkenmerk: {report.document_reference || '-'}
-          </p>
+          {report.document_reference && (
+            <p style={{ fontSize: '8px', color: '#000000', margin: '2px 0 0 0' }}>
+              Documentkenmerk: {report.document_reference}
+            </p>
+          )}
         </div>
         <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '28px', width: 'auto' }} />
       </div>
