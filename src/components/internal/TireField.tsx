@@ -1,5 +1,6 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { TireBrandCombobox } from './TireBrandCombobox';
 
 interface TireFieldProps {
   position: string;
@@ -39,10 +40,10 @@ export const TireField = ({
       <div className="grid grid-cols-2 gap-2">
         <div className="space-y-1">
           <Label className="text-xs text-muted-foreground">Merk</Label>
-          <Input
+          <TireBrandCombobox
             value={brand}
-            onChange={(e) => onBrandChange(e.target.value)}
-            placeholder="Bijv. Michelin"
+            onChange={onBrandChange}
+            placeholder="Selecteer merk..."
           />
         </div>
         <div className="space-y-1">

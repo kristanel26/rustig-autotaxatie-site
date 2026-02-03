@@ -506,6 +506,30 @@ export type Database = {
         }
         Relationships: []
       }
+      tire_brands: {
+        Row: {
+          created_at: string
+          id: string
+          last_used_at: string
+          name: string
+          usage_count: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_used_at?: string
+          name: string
+          usage_count?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_used_at?: string
+          name?: string
+          usage_count?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
