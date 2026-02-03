@@ -5,10 +5,15 @@ import { supabase } from '@/integrations/supabase/client';
 // Logos
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
 
+interface PhotoRotations {
+  [url: string]: number;
+}
+
 interface Report {
   id: string;
   document_reference: string | null;
   vehicle_photos: string[] | null;
+  vehicle_photo_rotations: PhotoRotations | null;
 }
 
 const PDFPhotos = () => {
@@ -26,12 +31,12 @@ const PDFPhotos = () => {
       try {
         const { data, error } = await supabase
           .from('reports')
-          .select('id, document_reference, vehicle_photos')
+          .select('id, document_reference, vehicle_photos, vehicle_photo_rotations')
           .eq('id', id)
           .maybeSingle();
 
         if (error) throw error;
-        setReport(data);
+        setReport(data as Report);
       } catch (error) {
         console.error('Error fetching report:', error);
       } finally {
@@ -52,6 +57,10 @@ const PDFPhotos = () => {
 
   // Get all photos except cover photo (index 0)
   const detailPhotos = report?.vehicle_photos?.slice(1) || [];
+  const rotations = report?.vehicle_photo_rotations || {};
+
+  // Helper to get rotation for a photo
+  const getRotation = (url: string): number => rotations[url] || 0;
 
   // Don't render if no detail photos
   if (!report || detailPhotos.length === 0) {
@@ -118,6 +127,7 @@ const PDFPhotos = () => {
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
+                    transform: getRotation(photo) ? `rotate(${getRotation(photo)}deg)` : undefined,
                   }}
                 />
               </div>

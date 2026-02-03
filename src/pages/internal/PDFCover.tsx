@@ -9,6 +9,10 @@ import logoHobeon from '@/assets/logo-hobeon.webp';
 import logoTmv from '@/assets/logo-tmv.png';
 import logoFehac from '@/assets/logo-fehac.png';
 
+interface PhotoRotations {
+  [url: string]: number;
+}
+
 interface Report {
   id: string;
   report_number: string;
@@ -28,6 +32,7 @@ interface Report {
   inspection_start_time: string | null;
   inspection_end_time: string | null;
   vehicle_photos: string[] | null;
+  vehicle_photo_rotations: PhotoRotations | null;
 }
 
 const PDFCover = () => {
@@ -51,7 +56,7 @@ const PDFCover = () => {
           .maybeSingle();
 
         if (error) throw error;
-        setReport(data);
+        setReport(data as Report);
       } catch (error) {
         console.error('Error fetching report:', error);
       } finally {
@@ -115,6 +120,11 @@ const PDFCover = () => {
   const coverPhoto = report.vehicle_photos && report.vehicle_photos.length > 0 
     ? report.vehicle_photos[0] 
     : null;
+  
+  // Get rotation for cover photo
+  const coverRotation = coverPhoto && report.vehicle_photo_rotations 
+    ? report.vehicle_photo_rotations[coverPhoto] || 0 
+    : 0;
 
   return (
     <div 
@@ -303,6 +313,7 @@ const PDFCover = () => {
               width: '100%',
               height: '100%',
               objectFit: 'cover',
+              transform: coverRotation ? `rotate(${coverRotation}deg)` : undefined,
             }}
           />
         ) : (

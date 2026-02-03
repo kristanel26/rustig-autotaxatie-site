@@ -27,7 +27,7 @@ import { CamperTechForm, CamperTechFormData, getInitialCamperTechFormData } from
 import { GeneralImpressionForm, GeneralImpressionFormData, getInitialGeneralImpressionFormData } from '@/components/internal/GeneralImpressionForm';
 import { MoistureAndSafetyForm, MoistureAndSafetyFormData, getInitialMoistureAndSafetyFormData } from '@/components/internal/MoistureAndSafetyForm';
 import { PostcodeField } from '@/components/internal/PostcodeField';
-import PhotoUploadForm from '@/components/internal/PhotoUploadForm';
+import PhotoUploadForm, { PhotoRotations } from '@/components/internal/PhotoUploadForm';
 const reportSchema = z.object({
   // Customer fields
   customer_title: z.string().optional(),
@@ -99,6 +99,7 @@ const NewReport = () => {
 
   // Photo collection
   const [vehiclePhotos, setVehiclePhotos] = useState<string[]>([]);
+  const [photoRotations, setPhotoRotations] = useState<PhotoRotations>({});
 
   // Inspection data
   const [inspectionData, setInspectionData] = useState({
@@ -483,6 +484,7 @@ const NewReport = () => {
         
         // Photos
         vehicle_photos: vehiclePhotos.length > 0 ? vehiclePhotos : null,
+        vehicle_photo_rotations: Object.keys(photoRotations).length > 0 ? photoRotations : null,
       };
 
       const { error } = await supabase.from('reports').insert([insertData] as any);
@@ -644,7 +646,9 @@ const NewReport = () => {
         {/* Fotocollectie */}
         <PhotoUploadForm
           photos={vehiclePhotos}
+          rotations={photoRotations}
           onChange={setVehiclePhotos}
+          onRotationsChange={setPhotoRotations}
         />
 
         {/* Inspection Details */}

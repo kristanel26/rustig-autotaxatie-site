@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import InternalLayout from '@/components/internal/InternalLayout';
 import { useAuth } from '@/contexts/AuthContext';
@@ -28,7 +28,11 @@ import { CamperTechForm, CamperTechFormData, getInitialCamperTechFormData } from
 import { GeneralImpressionForm, GeneralImpressionFormData, getInitialGeneralImpressionFormData } from '@/components/internal/GeneralImpressionForm';
 import { MoistureAndSafetyForm, MoistureAndSafetyFormData, getInitialMoistureAndSafetyFormData } from '@/components/internal/MoistureAndSafetyForm';
 import { PostcodeField } from '@/components/internal/PostcodeField';
-import PhotoUploadForm from '@/components/internal/PhotoUploadForm';
+import PhotoUploadForm, { PhotoRotations } from '@/components/internal/PhotoUploadForm';
+import { useAutoSave } from '@/hooks/useAutoSave';
+import { SaveStatusIndicator } from '@/components/internal/SaveStatusIndicator';
+import { usePageLeaveProtection } from '@/hooks/usePageLeaveProtection';
+import { UnsavedChangesDialog } from '@/components/internal/UnsavedChangesDialog';
 
 const reportSchema = z.object({
   customer_title: z.string().optional(),
@@ -151,6 +155,7 @@ const EditReport = () => {
 
   // Photo collection
   const [vehiclePhotos, setVehiclePhotos] = useState<string[]>([]);
+  const [photoRotations, setPhotoRotations] = useState<PhotoRotations>({});
 
   // Inspection data
   const [inspectionData, setInspectionData] = useState({
@@ -166,6 +171,19 @@ const EditReport = () => {
     appraised_value_text: '',
     quality_class: '',
     general_remarks: '',
+  });
+
+  // Auto-save hook
+  const { status: saveStatus, hasPendingChanges, saveField, saveMultipleFields, flushSave } = useAutoSave({
+    reportId: id,
+    debounceMs: 800,
+    intervalMs: 20000,
+  });
+
+  // Page leave protection
+  const { isBlocked, proceed, reset } = usePageLeaveProtection({
+    hasUnsavedChanges: hasPendingChanges,
+    onBeforeLeave: flushSave,
   });
 
   useEffect(() => {
@@ -361,6 +379,7 @@ const EditReport = () => {
 
         // Pre-fill photos
         setVehiclePhotos((reportData as any).vehicle_photos || []);
+        setPhotoRotations((reportData as any).vehicle_photo_rotations || {});
 
       } catch (error) {
         console.error('Error fetching report:', error);
@@ -379,6 +398,7 @@ const EditReport = () => {
 
   const handleCustomerChange = (field: string, value: string) => {
     setCustomerData(prev => ({ ...prev, [field]: value }));
+    saveField(field, value || null);
     if (errors[field]) {
       setErrors(prev => {
         const newErrors = { ...prev };
@@ -390,6 +410,15 @@ const EditReport = () => {
 
   const handleVehicleChange = (field: keyof VehicleFormData, value: string | boolean) => {
     setVehicleData(prev => ({ ...prev, [field]: value }));
+    // Convert numeric fields
+    const numericFields = ['rdw_bouwjaar', 'rdw_aantal_cilinders', 'rdw_cilinderinhoud', 'rdw_vermogen_kw', 'rdw_aantal_deuren', 'rdw_wielbasis', 'rdw_ledig_gewicht', 'rdw_massa_rijklaar', 'rdw_max_massa', 'tellerstand'];
+    if (numericFields.includes(field)) {
+      saveField(field, value ? parseInt(value as string) : null);
+    } else if (field === 'rdw_apk_gekeurd' || field === 'rdw_importvoertuig' || field === 'rdw_data_locked') {
+      saveField(field, value === 'true' || value === true);
+    } else {
+      saveField(field, value || null);
+    }
     if (errors[field]) {
       setErrors(prev => {
         const newErrors = { ...prev };
@@ -401,26 +430,32 @@ const EditReport = () => {
 
   const handleInspectionChange = (field: string, value: string) => {
     setInspectionData(prev => ({ ...prev, [field]: value }));
+    saveField(field, value || null);
   };
 
   const handleAppraisalChange = (field: keyof AppraisalFormData, value: string) => {
     setAppraisalData(prev => ({ ...prev, [field]: value }));
+    saveField(field, value || null);
   };
 
   const handleInstallationsChange = (field: keyof InstallationsFormData, value: string) => {
     setInstallationsData(prev => ({ ...prev, [field]: value }));
+    saveField(field, value || null);
   };
 
   const handleCamperTechChange = (field: keyof CamperTechFormData, value: string | boolean) => {
     setCamperTechData(prev => ({ ...prev, [field]: value }));
+    saveField(field, typeof value === 'boolean' ? value : (value || null));
   };
 
   const handleImpressionChange = (field: keyof GeneralImpressionFormData, value: string) => {
     setImpressionData(prev => ({ ...prev, [field]: value }));
+    saveField(field, value || null);
   };
 
   const handleMoistureChange = (field: keyof MoistureAndSafetyFormData, value: string | boolean) => {
     setMoistureData(prev => ({ ...prev, [field]: value }));
+    saveField(field, typeof value === 'boolean' ? value : (value || null));
   };
 
   const handleValuationChange = (field: string, value: string) => {
@@ -431,17 +466,43 @@ const EditReport = () => {
         const numValue = parseFloat(value);
         if (!isNaN(numValue) && numValue > 0) {
           updated.appraised_value_text = numberToDutchWords(numValue);
+          // Save both fields together
+          saveMultipleFields({
+            appraised_value: numValue,
+            appraised_value_text: updated.appraised_value_text,
+          });
         } else {
           updated.appraised_value_text = '';
+          saveMultipleFields({
+            appraised_value: null,
+            appraised_value_text: null,
+          });
         }
+      } else {
+        saveField(field, value || null);
       }
       
       return updated;
     });
   };
 
+  // Handle photo changes with autosave
+  const handlePhotosChange = useCallback((photos: string[]) => {
+    setVehiclePhotos(photos);
+    saveField('vehicle_photos', photos.length > 0 ? photos : null);
+  }, [saveField]);
+
+  const handleRotationsChange = useCallback((rotations: PhotoRotations) => {
+    setPhotoRotations(rotations);
+    saveField('vehicle_photo_rotations', Object.keys(rotations).length > 0 ? rotations : null);
+  }, [saveField]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Flush any pending auto-saves first
+    await flushSave();
+    
     setErrors({});
 
     const combinedData = {
@@ -736,6 +797,7 @@ const EditReport = () => {
         
         // Photos
         vehicle_photos: vehiclePhotos.length > 0 ? vehiclePhotos : null,
+        vehicle_photo_rotations: Object.keys(photoRotations).length > 0 ? photoRotations : null,
       };
 
       const { error } = await supabase
@@ -791,16 +853,27 @@ const EditReport = () => {
 
   return (
     <InternalLayout title={`Rapport ${report.report_number} Bewerken`}>
+      {/* Unsaved changes dialog */}
+      <UnsavedChangesDialog
+        open={isBlocked}
+        onSaveAndLeave={proceed}
+        onLeaveWithoutSaving={proceed}
+        onStay={reset}
+      />
+
       <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
-        {/* Back Button */}
-        <Button 
-          type="button" 
-          variant="ghost" 
-          onClick={() => navigate(`/intern/rapport/${id}`)}
-        >
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Terug naar rapport
-        </Button>
+        {/* Header with Back Button and Save Status */}
+        <div className="flex items-center justify-between">
+          <Button 
+            type="button" 
+            variant="ghost" 
+            onClick={() => navigate(`/intern/rapport/${id}`)}
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Terug naar rapport
+          </Button>
+          <SaveStatusIndicator status={saveStatus} />
+        </div>
 
         {/* Read-only Report Info */}
         <Card>
@@ -953,7 +1026,9 @@ const EditReport = () => {
         {/* Fotocollectie */}
         <PhotoUploadForm
           photos={vehiclePhotos}
-          onChange={setVehiclePhotos}
+          rotations={photoRotations}
+          onChange={handlePhotosChange}
+          onRotationsChange={handleRotationsChange}
           reportId={id}
         />
 
