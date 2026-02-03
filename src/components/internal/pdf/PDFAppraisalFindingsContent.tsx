@@ -229,7 +229,7 @@ const PDFAppraisalFindingsContent = ({ report }: PDFAppraisalFindingsContentProp
             Documentkenmerk: {report.document_reference || '-'}
           </p>
         </div>
-        <img src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '28px', width: 'auto' }} />
+        <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '28px', width: 'auto' }} />
       </div>
 
       {/* Two-column layout */}

@@ -84,7 +84,7 @@ const PDFValuationContent = ({ report, pageNumber }: PDFValuationContentProps) =
             Documentkenmerk: {report.document_reference || '-'}
           </p>
         </div>
-        <img src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '40px', width: 'auto' }} />
+        <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '40px', width: 'auto' }} />
       </div>
 
       {/* Legal Text Block */}
@@ -182,6 +182,7 @@ const PDFValuationContent = ({ report, pageNumber }: PDFValuationContentProps) =
 
         <div style={{ marginTop: '8px' }}>
           <img 
+            crossOrigin="anonymous"
             src={signatureErik} 
             alt="Handtekening Erik Elderson" 
             style={{ 

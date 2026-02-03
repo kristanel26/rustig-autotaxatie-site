@@ -117,7 +117,7 @@ const PDFVehicleDataContent = ({ report }: PDFVehicleDataContentProps) => {
             Documentkenmerk: {report.document_reference || '-'}
           </p>
         </div>
-        <img src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '36px', width: 'auto' }} />
+        <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '36px', width: 'auto' }} />
       </div>
 
       {/* Two-column layout */}
