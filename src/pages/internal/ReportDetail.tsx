@@ -189,36 +189,41 @@ const ReportDetail = () => {
     if (!id || isGeneratingPdf || !report) return;
     
     setIsGeneratingPdf(true);
+
+    let overlayEl: HTMLDivElement | null = null;
+    let overlayStyleEl: HTMLStyleElement | null = null;
+    const removeOverlay = () => {
+      if (overlayEl?.parentNode) overlayEl.parentNode.removeChild(overlayEl);
+      overlayEl = null;
+      if (overlayStyleEl?.parentNode) overlayStyleEl.parentNode.removeChild(overlayStyleEl);
+      overlayStyleEl = null;
+    };
     
     try {
-      // Create a full-screen overlay to hide the render process from the user
-      const overlay = document.createElement('div');
-      overlay.id = 'pdf-render-overlay';
-      overlay.style.cssText = `
+      // Full-screen overlay so you don't see the render container (“ander scherm”)
+      overlayEl = document.createElement('div');
+      overlayEl.id = 'pdf-render-overlay';
+      overlayEl.style.cssText = `
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: white;
-        z-index: 99998;
+        inset: 0;
+        background: hsl(var(--background));
+        z-index: 99999;
         display: flex;
         align-items: center;
         justify-content: center;
         font-family: system-ui, sans-serif;
         font-size: 16px;
-        color: #666;
+        color: hsl(var(--muted-foreground));
       `;
-      overlay.innerHTML = '<div style="text-align:center"><div style="margin-bottom:12px">PDF wordt gegenereerd...</div><div style="width:40px;height:40px;border:3px solid #ddd;border-top-color:#333;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto"></div></div>';
-      
-      // Add spinner animation
-      const style = document.createElement('style');
-      style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
-      document.head.appendChild(style);
-      document.body.appendChild(overlay);
+      overlayEl.innerHTML = '<div style="text-align:center"><div style="margin-bottom:12px">PDF wordt gegenereerd...</div><div style="width:40px;height:40px;border:3px solid hsl(var(--border));border-top-color:hsl(var(--foreground));border-radius:50%;animation:spin 1s linear infinite;margin:0 auto"></div></div>';
 
-      // Create container that is ON-SCREEN so html2canvas can render it
-      // The overlay hides it from the user
+      overlayStyleEl = document.createElement('style');
+      overlayStyleEl.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+      document.head.appendChild(overlayStyleEl);
+      document.body.appendChild(overlayEl);
+
+      // Create container that is ON-SCREEN so html2canvas can render it.
+      // Keep it under the overlay so the user never sees it.
       const container = document.createElement('div');
       container.id = 'pdf-render-container';
       container.style.cssText = `
@@ -226,7 +231,7 @@ const ReportDetail = () => {
         top: 0;
         left: 0;
         width: 210mm;
-        z-index: 99999;
+        z-index: 1;
         opacity: 1;
         pointer-events: none;
         background: white;
@@ -234,12 +239,6 @@ const ReportDetail = () => {
       `;
       document.body.appendChild(container);
       containerRef.current = container;
-      
-      // Store overlay for cleanup
-      const cleanupOverlay = () => {
-        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-        if (style.parentNode) style.parentNode.removeChild(style);
-      };
 
       // Create React root and render components
       const root = createRoot(container);
@@ -303,6 +302,12 @@ const ReportDetail = () => {
         throw new Error('PDF content failed to render');
       }
 
+      console.log('[PDF] ready', {
+        pages: container.querySelectorAll('.pdf-page').length,
+        rect: { w: rect.width, h: rect.height },
+        images: images.length,
+      });
+
       // Final stabilization wait - ensures all CSS is applied and fonts loaded
       await wait(1500);
 
@@ -311,12 +316,12 @@ const ReportDetail = () => {
         filename: generatePdfFilename(),
         image: { type: 'jpeg', quality: 1.0 },
         html2canvas: { 
-          scale: 4, // Higher scale for 300+ DPI print quality
+          // NOTE: scale 4 can cause memory/blank renders on large multi-page docs.
+          // First make it reliable; we can tune quality afterwards.
+          scale: 2,
           useCORS: true,
           allowTaint: false,
           logging: false,
-          width: 794, // A4 width in pixels at 96 DPI
-          windowWidth: 794,
           backgroundColor: '#ffffff',
           imageTimeout: 15000,
           letterRendering: true, // Sharper text rendering
@@ -335,15 +340,16 @@ const ReportDetail = () => {
         await html2pdf().set(opt).from(pdfContent).save();
       }
 
-      cleanupOverlay();
+      console.log('[PDF] saved');
+
+      removeOverlay();
       cleanup();
     } catch (error) {
       console.error('Error generating PDF:', error);
-      // Remove overlay element if it exists
-      const overlayEl = document.getElementById('pdf-render-overlay');
-      if (overlayEl) overlayEl.remove();
+      removeOverlay();
       cleanup();
     } finally {
+      removeOverlay();
       setIsGeneratingPdf(false);
     }
   };
