@@ -101,9 +101,10 @@ interface Report {
 interface PDFAppraisalFindingsContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   report: any;
+  pageNumber?: number;
 }
 
-const PDFAppraisalFindingsContent = ({ report }: PDFAppraisalFindingsContentProps) => {
+const PDFAppraisalFindingsContent = ({ report, pageNumber = 3 }: PDFAppraisalFindingsContentProps) => {
   const formatCondition = (value: string | null) => {
     if (!value) return '-';
     const labels: Record<string, string> = {
@@ -463,7 +464,7 @@ const PDFAppraisalFindingsContent = ({ report }: PDFAppraisalFindingsContentProp
           KVK: 95549269
         </div>
         <div style={{ fontSize: '7px', color: '#000000' }}>
-          Pagina 3
+          Pagina {pageNumber}
         </div>
       </div>
     </div>
