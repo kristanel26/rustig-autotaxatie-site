@@ -29,6 +29,7 @@ import EditReport from "./pages/internal/EditReport";
 import PDFCover from "./pages/internal/PDFCover";
 import PDFVehicleData from "./pages/internal/PDFVehicleData";
 import PDFAppraisalFindings from "./pages/internal/PDFAppraisalFindings";
+import PDFValuation from "./pages/internal/PDFValuation";
 
 const queryClient = new QueryClient();
 
@@ -119,6 +120,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <PDFAppraisalFindings />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/intern/pdf/waarde/:id"
+              element={
+                <ProtectedRoute>
+                  <PDFValuation />
                 </ProtectedRoute>
               }
             />

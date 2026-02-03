@@ -28,7 +28,7 @@ interface Report {
   inspection_end_time: string | null;
   appraised_value: number | null;
   appraised_value_text: string | null;
-  quality_class: number | null;
+  quality_class: string | null;
   general_remarks: string | null;
   created_at: string;
   // RDW fields
@@ -123,16 +123,9 @@ const ReportDetail = () => {
     return suffix ? `${value.toLocaleString('nl-NL')} ${suffix}` : value.toLocaleString('nl-NL');
   };
 
-  const getQualityClassLabel = (value: number | null) => {
+  const getQualityClassLabel = (value: string | null) => {
     if (value === null) return '-';
-    const labels: Record<number, string> = {
-      1: '1 - Uitstekend',
-      2: '2 - Goed',
-      3: '3 - Gemiddeld',
-      4: '4 - Matig',
-      5: '5 - Slecht',
-    };
-    return labels[value] || String(value);
+    return value;
   };
 
   const generatePdfFilename = () => {
@@ -154,28 +147,18 @@ const ReportDetail = () => {
     setIsGeneratingPdf(true);
     
     try {
-      const iframe = document.createElement('iframe');
-      iframe.style.position = 'absolute';
-      iframe.style.left = '-9999px';
-      iframe.style.width = '210mm';
-      iframe.style.height = '297mm';
-      document.body.appendChild(iframe);
+      // Define all PDF pages to include
+      const pdfPages = [
+        `/intern/pdf/voorblad/${id}`,
+        `/intern/pdf/voertuiggegevens/${id}`,
+        `/intern/pdf/taxateurbevindingen/${id}`,
+      ];
       
-      iframe.src = `/intern/pdf/voorblad/${id}`;
-      
-      await new Promise<void>((resolve, reject) => {
-        iframe.onload = () => {
-          setTimeout(resolve, 1500);
-        };
-        iframe.onerror = reject;
-      });
-      
-      const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
-      if (!iframeDoc) {
-        throw new Error('Could not access iframe document');
+      // Only include valuation page if appraised_value is set
+      if (report?.appraised_value && report.appraised_value > 0) {
+        pdfPages.push(`/intern/pdf/waarde/${id}`);
       }
       
-      const element = iframeDoc.body;
       const filename = generatePdfFilename();
       
       const opt = {
@@ -195,9 +178,51 @@ const ReportDetail = () => {
         }
       };
       
-      await html2pdf().set(opt).from(element).save();
+      // Create a container for all pages
+      const container = document.createElement('div');
+      container.style.position = 'absolute';
+      container.style.left = '-9999px';
+      document.body.appendChild(container);
       
-      document.body.removeChild(iframe);
+      // Load each page and add to container
+      for (let i = 0; i < pdfPages.length; i++) {
+        const iframe = document.createElement('iframe');
+        iframe.style.width = '210mm';
+        iframe.style.height = '297mm';
+        iframe.style.border = 'none';
+        iframe.src = pdfPages[i];
+        container.appendChild(iframe);
+        
+        // Wait for iframe to load
+        await new Promise<void>((resolve, reject) => {
+          iframe.onload = () => {
+            setTimeout(resolve, 1500);
+          };
+          iframe.onerror = reject;
+        });
+        
+        // Clone content from iframe to container
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
+        if (iframeDoc) {
+          const pageContent = iframeDoc.body.firstElementChild?.cloneNode(true) as HTMLElement;
+          if (pageContent) {
+            // Add page break styling
+            if (i < pdfPages.length - 1) {
+              pageContent.style.pageBreakAfter = 'always';
+            }
+            container.appendChild(pageContent);
+          }
+        }
+        
+        // Remove the iframe after extracting content
+        container.removeChild(iframe);
+      }
+      
+      // Generate PDF from combined container
+      await html2pdf().set(opt).from(container).save();
+      
+      // Cleanup
+      document.body.removeChild(container);
     } catch (error) {
       console.error('Error generating PDF:', error);
     } finally {
