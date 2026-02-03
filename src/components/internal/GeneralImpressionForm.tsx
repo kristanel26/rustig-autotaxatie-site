@@ -21,18 +21,23 @@ interface GeneralImpressionFormProps {
   onChange: (field: keyof GeneralImpressionFormData, value: string) => void;
 }
 
+// Default texts for new reports - editable by taxateur
+const defaultImpressionTexts: GeneralImpressionFormData = {
+  impression_suspension: 'De wielophanging verkeert voor zover waarneembaar in een goede staat. Geen afwijkingen waargenomen.',
+  impression_wheels_tires: 'De stalen velgen/banden set verkeert in een goede staat. Geen afwijkingen/schades waargenomen. Banden zijn nieuw.',
+  impression_steering: 'De stuurinrichting verkeert in een redelijk onderhouden staat. Geen afwijkingen/schades waargenomen.',
+  impression_brakes: 'De reminrichting verkeert voor zover waarneembaar in een redelijk onderhouden staat. Geen afwijkingen/schades waargenomen.',
+  impression_engine: 'De motor verkeert voor zover waarneembaar in een goed werkende staat. Geen afwijkingen/schades waargenomen.',
+  impression_transmission: 'De handgeschakelde versnellingsbak en de aandrijving verkeren voor zover waarneembaar in een goede staat. Geen afwijkingen/schades waargenomen.',
+  impression_electrical: 'De elektrische installatie verkeert voor zover waarneembaar in een goed functionerende staat. Alles functioneert naar behoren.',
+  impression_body: 'De carrosserie verkeert in een nette staat. Geen bijzonderheden, afwijkingen of schades waargenomen.',
+  impression_interior: 'Het interieur van de passagiersruimte verkeert in een nette en complete staat. Woon- en slaapgedeelte verkeert in een nette staat.',
+  impression_general: 'Dit voertuig verkeert in een nette / goede staat.',
+  impression_extras: 'N.v.t.',
+};
+
 export const getInitialGeneralImpressionFormData = (): GeneralImpressionFormData => ({
-  impression_suspension: '',
-  impression_wheels_tires: '',
-  impression_steering: '',
-  impression_brakes: '',
-  impression_engine: '',
-  impression_transmission: '',
-  impression_electrical: '',
-  impression_body: '',
-  impression_interior: '',
-  impression_general: '',
-  impression_extras: '',
+  ...defaultImpressionTexts,
 });
 
 const impressionFields = [
@@ -70,8 +75,9 @@ export const GeneralImpressionForm = ({
                 id={field.key}
                 value={formData[field.key]}
                 onChange={(e) => onChange(field.key, e.target.value)}
-                rows={2}
+                rows={3}
                 placeholder={`Beschrijf ${field.label.toLowerCase()}...`}
+                className="text-foreground"
               />
             </div>
           ))}
