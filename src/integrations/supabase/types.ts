@@ -171,6 +171,7 @@ export type Database = {
           user_id: string
           vehicle_brand: string | null
           vehicle_model: string | null
+          vehicle_photo_rotations: Json | null
           vehicle_photos: string[] | null
           vehicle_title: string | null
           vehicle_tracking: boolean | null
@@ -333,6 +334,7 @@ export type Database = {
           user_id: string
           vehicle_brand?: string | null
           vehicle_model?: string | null
+          vehicle_photo_rotations?: Json | null
           vehicle_photos?: string[] | null
           vehicle_title?: string | null
           vehicle_tracking?: boolean | null
@@ -495,6 +497,7 @@ export type Database = {
           user_id?: string
           vehicle_brand?: string | null
           vehicle_model?: string | null
+          vehicle_photo_rotations?: Json | null
           vehicle_photos?: string[] | null
           vehicle_title?: string | null
           vehicle_tracking?: boolean | null
