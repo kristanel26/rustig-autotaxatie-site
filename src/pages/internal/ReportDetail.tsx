@@ -1,12 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import InternalLayout from '@/components/internal/InternalLayout';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Calendar, MapPin, Car, Euro, FileDown, Loader2, Lock, Gauge, Wrench, Home } from 'lucide-react';
+import { ArrowLeft, Calendar, MapPin, Car, Euro, FileDown, Loader2, Lock, Gauge, Wrench, Home, Eye } from 'lucide-react';
 import html2pdf from 'html2pdf.js';
+import { createRoot } from 'react-dom/client';
+
+// PDF Content Components
+import PDFCoverContent from '@/components/internal/pdf/PDFCoverContent';
+import PDFVehicleDataContent from '@/components/internal/pdf/PDFVehicleDataContent';
+import PDFAppraisalFindingsContent from '@/components/internal/pdf/PDFAppraisalFindingsContent';
+import PDFValuationContent from '@/components/internal/pdf/PDFValuationContent';
+import PDFPhotosContent from '@/components/internal/pdf/PDFPhotosContent';
 
 interface Report {
   id: string;
@@ -130,6 +138,9 @@ const ReportDetail = () => {
     return value;
   };
 
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const rootRef = useRef<ReturnType<typeof createRoot> | null>(null);
+
   const generatePdfFilename = () => {
     if (!report) return 'Taxatierapport.pdf';
     
@@ -143,100 +154,101 @@ const ReportDetail = () => {
     return parts.join('_').replace(/\s+/g, '-') + '.pdf';
   };
 
+  const cleanup = () => {
+    if (rootRef.current) {
+      rootRef.current.unmount();
+      rootRef.current = null;
+    }
+    if (containerRef.current && document.body.contains(containerRef.current)) {
+      document.body.removeChild(containerRef.current);
+      containerRef.current = null;
+    }
+  };
+
   const handlePdfDownload = async () => {
-    if (!id || isGeneratingPdf) return;
+    if (!id || isGeneratingPdf || !report) return;
     
     setIsGeneratingPdf(true);
     
     try {
-      // Define all PDF pages to include
-      const pdfPages = [
-        `/intern/pdf/voorblad/${id}`,
-        `/intern/pdf/voertuiggegevens/${id}`,
-        `/intern/pdf/taxateurbevindingen/${id}`,
-      ];
-      
-      // Only include valuation page if appraised_value is set
-      if (report?.appraised_value && report.appraised_value > 0) {
-        pdfPages.push(`/intern/pdf/waarde/${id}`);
-      }
-      
-      // Include photo attachment page if there are photos beyond the cover photo
-      const detailPhotos = report?.vehicle_photos?.slice(1) || [];
-      if (detailPhotos.length > 0) {
-        pdfPages.push(`/intern/pdf/fotos/${id}`);
-      }
-      
-      const filename = generatePdfFilename();
-      
+      // Create hidden container for PDF content
+      const container = document.createElement('div');
+      container.style.position = 'absolute';
+      container.style.left = '-9999px';
+      container.style.top = '0';
+      container.style.width = '210mm';
+      container.className = 'pdf-render-container';
+      document.body.appendChild(container);
+      containerRef.current = container;
+
+      // Create React root and render components
+      const root = createRoot(container);
+      rootRef.current = root;
+
+      // Calculate page number for valuation
+      const hasValuation = report.appraised_value && report.appraised_value > 0;
+      const valuationPageNumber = hasValuation ? 4 : 0;
+
+      // Render all PDF pages as a single React tree
+      root.render(
+        <div id="pdf-content" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
+          <PDFCoverContent report={report} />
+          <PDFVehicleDataContent report={report} />
+          <PDFAppraisalFindingsContent report={report} />
+          {hasValuation && (
+            <PDFValuationContent report={report} pageNumber={valuationPageNumber} />
+          )}
+          <PDFPhotosContent report={report} />
+        </div>
+      );
+
+      // Wait for React to render and images to load
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
       const opt = {
         margin: 0,
-        filename: filename,
+        filename: generatePdfFilename(),
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { 
           scale: 2,
           useCORS: true,
           allowTaint: true,
           logging: false,
+          windowWidth: 794, // A4 width in pixels at 96 DPI
         },
         jsPDF: { 
           unit: 'mm', 
           format: 'a4', 
           orientation: 'portrait' as const
-        }
+        },
+        pagebreak: { mode: ['css', 'legacy'], before: '.pdf-page', avoid: ['img'] }
       };
-      
-      // Create a container for all pages
-      const container = document.createElement('div');
-      container.style.position = 'absolute';
-      container.style.left = '-9999px';
-      document.body.appendChild(container);
-      
-      // Load each page and add to container
-      for (let i = 0; i < pdfPages.length; i++) {
-        const iframe = document.createElement('iframe');
-        iframe.style.width = '210mm';
-        iframe.style.height = '297mm';
-        iframe.style.border = 'none';
-        iframe.src = pdfPages[i];
-        container.appendChild(iframe);
-        
-        // Wait for iframe to load
-        await new Promise<void>((resolve, reject) => {
-          iframe.onload = () => {
-            setTimeout(resolve, 1500);
-          };
-          iframe.onerror = reject;
-        });
-        
-        // Clone content from iframe to container
-        const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
-        if (iframeDoc) {
-          const pageContent = iframeDoc.body.firstElementChild?.cloneNode(true) as HTMLElement;
-          if (pageContent) {
-            // Add page break styling
-            if (i < pdfPages.length - 1) {
-              pageContent.style.pageBreakAfter = 'always';
-            }
-            container.appendChild(pageContent);
-          }
-        }
-        
-        // Remove the iframe after extracting content
-        container.removeChild(iframe);
+
+      const pdfContent = container.querySelector('#pdf-content');
+      if (pdfContent) {
+        await html2pdf().set(opt).from(pdfContent).save();
       }
-      
-      // Generate PDF from combined container
-      await html2pdf().set(opt).from(container).save();
-      
-      // Cleanup
-      document.body.removeChild(container);
+
+      cleanup();
     } catch (error) {
       console.error('Error generating PDF:', error);
+      cleanup();
     } finally {
       setIsGeneratingPdf(false);
     }
   };
+
+  const handlePdfPreview = () => {
+    if (!id) return;
+    window.open(`/intern/pdf/preview/${id}`, '_blank');
+  };
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      cleanup();
+    };
+  }, []);
 
   if (loading) {
     return (
@@ -309,8 +321,9 @@ const ReportDetail = () => {
           </Button>
           <Button 
             variant="ghost" 
-            onClick={() => window.open(`/intern/pdf/voorblad/${id}`, '_blank')}
+            onClick={handlePdfPreview}
           >
+            <Eye className="h-4 w-4 mr-2" />
             PDF Bekijken
           </Button>
         </div>

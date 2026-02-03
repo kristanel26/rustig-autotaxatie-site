@@ -31,6 +31,7 @@ import PDFVehicleData from "./pages/internal/PDFVehicleData";
 import PDFAppraisalFindings from "./pages/internal/PDFAppraisalFindings";
 import PDFValuation from "./pages/internal/PDFValuation";
 import PDFPhotos from "./pages/internal/PDFPhotos";
+import PDFPreview from "./pages/internal/PDFPreview";
 
 const queryClient = new QueryClient();
 
@@ -137,6 +138,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <PDFPhotos />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/intern/pdf/preview/:id"
+              element={
+                <ProtectedRoute>
+                  <PDFPreview />
                 </ProtectedRoute>
               }
             />
