@@ -13,6 +13,8 @@ import {
 } from '@/components/ui/select';
 import { ConditionField } from './ConditionField';
 import { TireField } from './TireField';
+import { AIExtractButton, PhotoType } from './AIExtractButton';
+import type { PhotoTypes } from './PhotoUploadForm';
 
 export interface AppraisalFormData {
   // Model display name
@@ -87,6 +89,10 @@ interface AppraisalFindingsFormProps {
   rdwHandelsbenaming?: string;
   allTiresSame?: boolean;
   onAllTiresSameChange?: (value: boolean) => void;
+  // AI extraction props
+  photos?: string[];
+  photoTypes?: PhotoTypes;
+  reportId?: string;
 }
 
 export const getInitialAppraisalFormData = (): AppraisalFormData => ({
@@ -158,7 +164,20 @@ export const AppraisalFindingsForm = ({
   rdwHandelsbenaming,
   allTiresSame = false,
   onAllTiresSameChange,
+  photos = [],
+  photoTypes = {},
+  reportId = '',
 }: AppraisalFindingsFormProps) => {
+  // Handler for AI tire extraction results
+  const handleTireAIAccept = (fieldKey: string, value: string) => {
+    if (fieldKey === 'tire_size') {
+      onChange('tire_bandenmaat', value);
+    } else if (fieldKey === 'tire_dot') {
+      // Apply to first tire DOT field
+      onChange('tire_front_left_dot', value);
+    }
+  };
+
   // Sync other tires when first tire changes and allTiresSame is enabled
   const handleFirstTireChange = useCallback((
     field: 'brand' | 'model' | 'profiel' | 'dot',
@@ -310,6 +329,20 @@ export const AppraisalFindingsForm = ({
                 Alle banden zijn gelijk
               </Label>
             </div>
+            {/* AI Extraction Button for tires */}
+            {photos.length > 0 && reportId && (
+              <div className="pt-6">
+                <AIExtractButton
+                  section="banden"
+                  label="Lees bandenmaat en DOT"
+                  photoTypes={['band_voor_links', 'band_voor_rechts', 'band_achter_links', 'band_achter_rechts']}
+                  photos={photos}
+                  photoTypeMap={photoTypes}
+                  onAccept={handleTireAIAccept}
+                  reportId={reportId}
+                />
+              </div>
+            )}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <TireField

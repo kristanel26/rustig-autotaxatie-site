@@ -27,7 +27,7 @@ import { CamperTechForm, CamperTechFormData, getInitialCamperTechFormData } from
 import { GeneralImpressionForm, GeneralImpressionFormData, getInitialGeneralImpressionFormData } from '@/components/internal/GeneralImpressionForm';
 import { MoistureAndSafetyForm, MoistureAndSafetyFormData, getInitialMoistureAndSafetyFormData } from '@/components/internal/MoistureAndSafetyForm';
 import { PostcodeField } from '@/components/internal/PostcodeField';
-import PhotoUploadForm, { PhotoRotations } from '@/components/internal/PhotoUploadForm';
+import PhotoUploadForm, { PhotoRotations, PhotoTypes } from '@/components/internal/PhotoUploadForm';
 const reportSchema = z.object({
   // Customer fields
   customer_title: z.string().optional(),
@@ -101,6 +101,7 @@ const NewReport = () => {
   // Photo collection
   const [vehiclePhotos, setVehiclePhotos] = useState<string[]>([]);
   const [photoRotations, setPhotoRotations] = useState<PhotoRotations>({});
+  const [photoTypes, setPhotoTypes] = useState<PhotoTypes>({});
 
   // Inspection data
   const [inspectionData, setInspectionData] = useState({
@@ -579,6 +580,8 @@ const NewReport = () => {
           onChange={handleVehicleChange}
           errors={errors}
           isEditMode={false}
+          photos={vehiclePhotos}
+          photoTypes={photoTypes}
         />
 
         {/* Appraisal Findings - Taxateursecties */}
@@ -589,6 +592,8 @@ const NewReport = () => {
           rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
           allTiresSame={allTiresSame}
           onAllTiresSameChange={setAllTiresSame}
+          photos={vehiclePhotos}
+          photoTypes={photoTypes}
         />
 
         {/* Sectie 13: Leidingen & Installaties */}
@@ -619,8 +624,10 @@ const NewReport = () => {
         <PhotoUploadForm
           photos={vehiclePhotos}
           rotations={photoRotations}
+          photoTypes={photoTypes}
           onChange={setVehiclePhotos}
           onRotationsChange={setPhotoRotations}
+          onPhotoTypesChange={setPhotoTypes}
         />
 
         {/* Inspection Details */}

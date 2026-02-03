@@ -59,7 +59,10 @@ export function AIExtractButton({
     return photoType && photoTypes.includes(photoType);
   });
 
-  const relevantPhotoTypes = relevantPhotos.map(url => photoTypeMap[url]);
+  // Filter out undefined photo types
+  const relevantPhotoTypes = relevantPhotos
+    .map(url => photoTypeMap[url])
+    .filter((type): type is PhotoType => type !== undefined);
 
   const handleExtract = async () => {
     if (relevantPhotos.length === 0) {
@@ -127,13 +130,14 @@ export function AIExtractButton({
 
     // Store the accepted result in the database
     try {
-      const relevantPhoto = sourcePhotos[0] || '';
-      const photoType = photoTypeMap[relevantPhoto] || photoTypes[0];
+      const relevantPhoto = sourcePhotos[0] || relevantPhotos[0] || '';
+      // Get the actual photo type from the map, not from the required types array
+      const photoType = relevantPhoto ? (photoTypeMap[relevantPhoto] || null) : null;
 
       await supabase.from('photo_extract_results').insert({
         report_id: reportId,
-        photo_url: relevantPhoto,
-        photo_type: photoType,
+        photo_url: relevantPhoto || '',
+        photo_type: photoType || 'unknown',
         section,
         field_key: result.field_key,
         proposed_value: result.proposed_value,

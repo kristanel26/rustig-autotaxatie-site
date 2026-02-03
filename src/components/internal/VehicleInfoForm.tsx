@@ -15,6 +15,8 @@ import { Badge } from '@/components/ui/badge';
 import { Loader2, Search, Lock } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { AIExtractButton, PhotoType } from './AIExtractButton';
+import type { PhotoTypes } from './PhotoUploadForm';
 
 export interface VehicleFormData {
   // Identifiers
@@ -80,6 +82,10 @@ interface VehicleInfoFormProps {
   onChange: (field: keyof VehicleFormData, value: string | boolean) => void;
   errors?: Record<string, string>;
   isEditMode?: boolean;
+  // AI extraction props
+  photos?: string[];
+  photoTypes?: PhotoTypes;
+  reportId?: string;
 }
 
 export const getInitialVehicleFormData = (): VehicleFormData => ({
@@ -125,6 +131,9 @@ export const VehicleInfoForm = ({
   onChange,
   errors = {},
   isEditMode = false,
+  photos = [],
+  photoTypes = {},
+  reportId = '',
 }: VehicleInfoFormProps) => {
   const { toast } = useToast();
   const [isFetchingRDW, setIsFetchingRDW] = useState(false);
@@ -197,6 +206,22 @@ export const VehicleInfoForm = ({
   };
 
   const rdwLocked = formData.rdw_data_locked;
+
+  // Handler for AI extraction results - vehicle identification
+  const handleVehicleAIAccept = (fieldKey: string, value: string) => {
+    if (fieldKey === 'license_plate') {
+      onChange('license_plate', value);
+    } else if (fieldKey === 'vin') {
+      onChange('vin', value);
+    }
+  };
+
+  // Handler for AI extraction results - tellerstand
+  const handleTellerstandAIAccept = (fieldKey: string, value: string) => {
+    if (fieldKey === 'tellerstand') {
+      onChange('tellerstand', value);
+    }
+  };
 
   const RDWBadge = () => (
     <Badge variant="secondary" className="ml-2 text-xs">
@@ -285,6 +310,21 @@ export const VehicleInfoForm = ({
               )}
             </div>
           </div>
+
+          {/* AI Extraction Button for vehicle identification */}
+          {photos.length > 0 && reportId && (
+            <div className="pt-2">
+              <AIExtractButton
+                section="voertuigidentificatie"
+                label="Haal kenteken en VIN uit foto's"
+                photoTypes={['kenteken', 'vin_typeplaat', 'vin_ruit']}
+                photos={photos}
+                photoTypeMap={photoTypes}
+                onAccept={handleVehicleAIAccept}
+                reportId={reportId}
+              />
+            </div>
+          )}
 
           {/* Sectie 1: RDW Voertuigidentificatie */}
           {rdwLocked && (
@@ -506,6 +546,21 @@ export const VehicleInfoForm = ({
               </Select>
             </div>
           </div>
+
+          {/* AI Extraction Button for tellerstand */}
+          {photos.length > 0 && reportId && (
+            <div className="pt-2">
+              <AIExtractButton
+                section="tellerstand"
+                label="Haal tellerstand uit dashboardfoto"
+                photoTypes={['dashboard']}
+                photos={photos}
+                photoTypeMap={photoTypes}
+                onAccept={handleTellerstandAIAccept}
+                reportId={reportId}
+              />
+            </div>
+          )}
         </CardContent>
       </Card>
 
