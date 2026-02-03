@@ -43,6 +43,7 @@ interface Report {
   tire_rear_right_profiel: string | null;
   tire_rear_right_dot: string | null;
   rim_type: string | null;
+  tire_advice: string | null;
   
   // Exterieur
   exterior_body: string | null;
@@ -89,9 +90,19 @@ interface Report {
   
   // Sectie 15: Beveiliging
   security_present: boolean | null;
+  security_type: string | null;
   mechanical_security: string | null;
   vehicle_tracking: boolean | null;
   tracking_brand: string | null;
+  
+  // Vocht (Moisture)
+  moisture_measurement_performed: boolean | null;
+  moisture_advice: string | null;
+  
+  // Brand & Gas veiligheid
+  fire_extinguisher: boolean | null;
+  gas_detection: boolean | null;
+  smoke_detector: boolean | null;
   
   // Sectie 16: Algemene Indruk
   impression_suspension: string | null;
@@ -250,8 +261,14 @@ const PDFAppraisalFindings = () => {
   const hasInstallationsData = report.installation_electrical || 
     report.installation_water || report.installation_gas || report.leakage_electrical;
 
-  const hasSecurityData = report.security_present || report.mechanical_security || 
-    report.vehicle_tracking || report.tracking_brand;
+  const hasSecurityData = report.security_present || report.security_type || 
+    report.mechanical_security || report.vehicle_tracking || report.tracking_brand;
+
+  // Check if moisture data exists
+  const hasMoistureData = report.moisture_measurement_performed || report.moisture_advice;
+
+  // Check if fire/gas safety data exists
+  const hasFireSafetyData = report.fire_extinguisher || report.gas_detection || report.smoke_detector;
 
   // Check if general impression has any data
   const hasImpressionData = report.impression_suspension || report.impression_wheels_tires ||
@@ -325,6 +342,12 @@ const PDFAppraisalFindings = () => {
                 <span style={{ color: '#1e293b', fontSize: '8px', fontWeight: 600 }}>{formatRimType(report.rim_type)}</span>
               </div>
             </div>
+            {report.tire_advice && (
+              <div style={{ marginTop: '4px', padding: '4px', backgroundColor: '#f8fafc', borderRadius: '2px' }}>
+                <span style={{ color: '#64748b', fontSize: '7px', fontWeight: 500 }}>Advies: </span>
+                <span style={{ color: '#1e293b', fontSize: '8px' }}>{report.tire_advice}</span>
+              </div>
+            )}
           </div>
 
           {/* Leidingen & Installaties (Sectie 13) */}
@@ -359,9 +382,29 @@ const PDFAppraisalFindings = () => {
             <div style={{ marginBottom: '10px' }}>
               <SectionHeader title="Beveiliging" />
               <DataRow label="Beveiliging aanwezig" value={formatBoolean(report.security_present)} />
+              {report.security_type && <DataRow label="Beveiliging soort" value={report.security_type} />}
               {report.mechanical_security && <DataRow label="Mechanische beveiliging" value={formatMechanicalSecurity(report.mechanical_security)} />}
               <DataRow label="Voertuigvolgsysteem" value={formatBoolean(report.vehicle_tracking)} />
               {report.tracking_brand && <DataRow label="Merk volgsysteem" value={report.tracking_brand} />}
+            </div>
+          )}
+
+          {/* Vocht */}
+          {hasMoistureData && (
+            <div style={{ marginBottom: '10px' }}>
+              <SectionHeader title="Vocht" />
+              <DataRow label="Vochtmeting verricht" value={formatBoolean(report.moisture_measurement_performed)} />
+              {report.moisture_advice && <DataRow label="Advies vochtinwerking" value={report.moisture_advice} />}
+            </div>
+          )}
+
+          {/* Brand- en gasveiligheid */}
+          {hasFireSafetyData && (
+            <div style={{ marginBottom: '10px' }}>
+              <SectionHeader title="Brand- en gasveiligheid" />
+              <DataRow label="Brandblusapparaat" value={formatBoolean(report.fire_extinguisher)} />
+              <DataRow label="Gasdetectie" value={formatBoolean(report.gas_detection)} />
+              <DataRow label="Rookmelder" value={formatBoolean(report.smoke_detector)} />
             </div>
           )}
         </div>

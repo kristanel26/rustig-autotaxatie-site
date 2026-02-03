@@ -53,7 +53,9 @@ export type Database = {
           exterior_sealant_notes: string | null
           exterior_windows: string | null
           exterior_windows_notes: string | null
+          fire_extinguisher: boolean | null
           fused: boolean | null
+          gas_detection: boolean | null
           gas_hose_production_date: string | null
           gebruik: string | null
           general_remarks: string | null
@@ -94,6 +96,8 @@ export type Database = {
           lpg_underbody: boolean | null
           mechanical_security: string | null
           model_display_name: string | null
+          moisture_advice: string | null
+          moisture_measurement_performed: boolean | null
           onboard_battery: boolean | null
           opbouw_merk: string | null
           opbouw_type: string | null
@@ -127,12 +131,15 @@ export type Database = {
           report_number: string
           rim_type: string | null
           security_present: boolean | null
+          security_type: string | null
+          smoke_detector: boolean | null
           soort_bouw: string | null
           staat_bij_opname: string | null
           stalling: string | null
           starter_battery: boolean | null
           tellerstand: number | null
           tellerstand_type: string | null
+          tire_advice: string | null
           tire_bandenmaat: string | null
           tire_front_left_brand: string | null
           tire_front_left_dot: string | null
@@ -208,7 +215,9 @@ export type Database = {
           exterior_sealant_notes?: string | null
           exterior_windows?: string | null
           exterior_windows_notes?: string | null
+          fire_extinguisher?: boolean | null
           fused?: boolean | null
+          gas_detection?: boolean | null
           gas_hose_production_date?: string | null
           gebruik?: string | null
           general_remarks?: string | null
@@ -249,6 +258,8 @@ export type Database = {
           lpg_underbody?: boolean | null
           mechanical_security?: string | null
           model_display_name?: string | null
+          moisture_advice?: string | null
+          moisture_measurement_performed?: boolean | null
           onboard_battery?: boolean | null
           opbouw_merk?: string | null
           opbouw_type?: string | null
@@ -282,12 +293,15 @@ export type Database = {
           report_number: string
           rim_type?: string | null
           security_present?: boolean | null
+          security_type?: string | null
+          smoke_detector?: boolean | null
           soort_bouw?: string | null
           staat_bij_opname?: string | null
           stalling?: string | null
           starter_battery?: boolean | null
           tellerstand?: number | null
           tellerstand_type?: string | null
+          tire_advice?: string | null
           tire_bandenmaat?: string | null
           tire_front_left_brand?: string | null
           tire_front_left_dot?: string | null
@@ -363,7 +377,9 @@ export type Database = {
           exterior_sealant_notes?: string | null
           exterior_windows?: string | null
           exterior_windows_notes?: string | null
+          fire_extinguisher?: boolean | null
           fused?: boolean | null
+          gas_detection?: boolean | null
           gas_hose_production_date?: string | null
           gebruik?: string | null
           general_remarks?: string | null
@@ -404,6 +420,8 @@ export type Database = {
           lpg_underbody?: boolean | null
           mechanical_security?: string | null
           model_display_name?: string | null
+          moisture_advice?: string | null
+          moisture_measurement_performed?: boolean | null
           onboard_battery?: boolean | null
           opbouw_merk?: string | null
           opbouw_type?: string | null
@@ -437,12 +455,15 @@ export type Database = {
           report_number?: string
           rim_type?: string | null
           security_present?: boolean | null
+          security_type?: string | null
+          smoke_detector?: boolean | null
           soort_bouw?: string | null
           staat_bij_opname?: string | null
           stalling?: string | null
           starter_battery?: boolean | null
           tellerstand?: number | null
           tellerstand_type?: string | null
+          tire_advice?: string | null
           tire_bandenmaat?: string | null
           tire_front_left_brand?: string | null
           tire_front_left_dot?: string | null
