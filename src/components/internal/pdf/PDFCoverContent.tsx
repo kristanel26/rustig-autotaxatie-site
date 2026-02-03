@@ -108,10 +108,10 @@ const PDFCoverContent = ({ report }: PDFCoverContentProps) => {
         <div>
           {/* Register Logos - horizontal row */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '32px' }}>
-            <img src={logoVrt} alt="VRT" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
-            <img src={logoHobeon} alt="Hobeon SKO" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
-            <img src={logoTmv} alt="TMV" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
-            <img src={logoFehac} alt="FEHAC" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
+            <img crossOrigin="anonymous" src={logoVrt} alt="VRT" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
+            <img crossOrigin="anonymous" src={logoHobeon} alt="Hobeon SKO" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
+            <img crossOrigin="anonymous" src={logoTmv} alt="TMV" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
+            <img crossOrigin="anonymous" src={logoFehac} alt="FEHAC" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
           </div>
 
           {/* Title Block */}
@@ -228,6 +228,7 @@ const PDFCoverContent = ({ report }: PDFCoverContentProps) => {
         <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <img 
+              crossOrigin="anonymous"
               src={logoAutomobiel} 
               alt="Automobiel Taxaties" 
               style={{ height: '48px', width: 'auto', flexShrink: 0 }}
@@ -261,6 +262,7 @@ const PDFCoverContent = ({ report }: PDFCoverContentProps) => {
       >
         {coverPhoto ? (
           <img
+            crossOrigin="anonymous"
             src={coverPhoto}
             alt="Voertuig"
             style={{

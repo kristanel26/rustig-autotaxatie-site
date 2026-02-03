@@ -171,17 +171,17 @@ const ReportDetail = () => {
     setIsGeneratingPdf(true);
     
     try {
-      // Create container that is visible but off-viewport (not display:none or left:-9999px)
-      // This ensures proper CSS layout calculation
+      // Create container that is rendered by the browser but not visible to the user.
+      // NOTE: Using `opacity: 0` makes html2canvas render transparent (blank pages).
       const container = document.createElement('div');
       container.id = 'pdf-render-container';
       container.style.cssText = `
         position: fixed;
-        top: 0;
+        top: 110vh;
         left: 0;
         width: 210mm;
-        z-index: -9999;
-        opacity: 0;
+        z-index: 1;
+        opacity: 1;
         pointer-events: none;
         background: white;
       `;
@@ -233,7 +233,7 @@ const ReportDetail = () => {
         html2canvas: { 
           scale: 2,
           useCORS: true,
-          allowTaint: true,
+          allowTaint: false,
           logging: false,
           width: 794, // A4 width in pixels at 96 DPI
           windowWidth: 794,
@@ -244,7 +244,9 @@ const ReportDetail = () => {
           format: 'a4', 
           orientation: 'portrait' as const
         },
-        pagebreak: { mode: ['css', 'legacy'], before: '.pdf-page', avoid: ['img'] }
+        // Rely on CSS `page-break-after` in the templates; forcing `before: .pdf-page`
+        // can introduce extra blank pages.
+        pagebreak: { mode: ['css', 'legacy'] }
       };
 
       const pdfContent = container.querySelector('#pdf-content');

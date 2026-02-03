@@ -61,7 +61,7 @@ const PDFPhotosContent = ({ report }: PDFPhotosContentProps) => {
                 Documentkenmerk: {report.document_reference || '-'}
               </p>
             </div>
-            <img src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '32px', width: 'auto' }} />
+            <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '32px', width: 'auto' }} />
           </div>
 
           {/* Photo Grid - 2 columns x 3 rows */}
@@ -83,6 +83,7 @@ const PDFPhotosContent = ({ report }: PDFPhotosContentProps) => {
                 }}
               >
                 <img
+                  crossOrigin="anonymous"
                   src={photo}
                   alt={`Voertuigfoto ${(pageIndex * photosPerPage) + photoIndex + 2}`}
                   style={{
