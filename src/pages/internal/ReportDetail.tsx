@@ -204,7 +204,7 @@ const ReportDetail = () => {
         <div id="pdf-content" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'white' }}>
           <PDFCoverContent report={report} />
           {hasValuation && (
-            <PDFValuationContent report={report} pageNumber={valuationPageNumber} />
+            <PDFValuationContent report={report} pageNumber={valuationPageNumber} totalPages={10} />
           )}
           <PDFVehicleDataContent report={report} pageNumber={vehicleDataPageNumber} />
           <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPageNumber} />
