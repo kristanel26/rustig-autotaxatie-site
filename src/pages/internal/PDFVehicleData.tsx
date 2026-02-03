@@ -142,10 +142,10 @@ const PDFVehicleData = () => {
 
   const DataRow = ({ label, value, source }: { label: string; value: string; source?: string }) => (
     <div style={{ display: 'flex', padding: '5px 0', borderBottom: '1px solid #e2e8f0' }}>
-      <span style={{ width: '45%', color: '#64748b', fontSize: '10px', fontWeight: 500 }}>{label}</span>
-      <span style={{ width: '40%', color: '#1e293b', fontSize: '10px', fontWeight: 600 }}>{value}</span>
+      <span style={{ width: '45%', color: '#000000', fontSize: '10px', fontWeight: 500 }}>{label}</span>
+      <span style={{ width: '40%', color: '#000000', fontSize: '10px', fontWeight: 600 }}>{value}</span>
       {source && (
-        <span style={{ width: '15%', color: '#94a3b8', fontSize: '9px', fontWeight: 400, textAlign: 'right' }}>{source}</span>
+        <span style={{ width: '15%', color: '#000000', fontSize: '9px', fontWeight: 400, textAlign: 'right', opacity: 0.7 }}>{source}</span>
       )}
     </div>
   );
@@ -157,9 +157,9 @@ const PDFVehicleData = () => {
       gap: '8px',
       marginBottom: '8px',
       paddingBottom: '6px',
-      borderBottom: '2px solid #1e293b'
+      borderBottom: '2px solid #000000'
     }}>
-      <h3 style={{ fontSize: '12px', fontWeight: 600, color: '#1e293b', margin: 0 }}>
+      <h3 style={{ fontSize: '12px', fontWeight: 600, color: '#000000', margin: 0 }}>
         {number}. {title}
       </h3>
     </div>
@@ -179,8 +179,8 @@ const PDFVehicleData = () => {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
         <div>
-          <h1 style={{ fontSize: '18px', fontWeight: 600, color: '#1e293b', margin: 0, textTransform: 'uppercase' }}>VOERTUIGGEGEVENS</h1>
-          <p style={{ fontSize: '10px', color: '#64748b', margin: '2px 0 0 0' }}>
+          <h1 style={{ fontSize: '18px', fontWeight: 600, color: '#000000', margin: 0, textTransform: 'uppercase' }}>VOERTUIGGEGEVENS</h1>
+          <p style={{ fontSize: '10px', color: '#000000', margin: '2px 0 0 0' }}>
             Documentkenmerk: {report.document_reference || '-'}
           </p>
         </div>
@@ -285,10 +285,10 @@ const PDFVehicleData = () => {
             <div style={{ marginBottom: '16px' }}>
               <SectionHeader number="8" title="Kwaliteitsklasse (Taxateur)" />
               <div style={{ padding: '8px 0' }}>
-                <div style={{ fontSize: '12px', fontWeight: 600, color: '#1e293b', marginBottom: '4px' }}>
+                <div style={{ fontSize: '12px', fontWeight: 600, color: '#000000', marginBottom: '4px' }}>
                   {report.quality_class}
                 </div>
-                <p style={{ fontSize: '10px', color: '#475569', lineHeight: 1.5, margin: 0 }}>
+                <p style={{ fontSize: '10px', color: '#000000', lineHeight: 1.5, margin: 0 }}>
                   {getQualityClassByValue(report.quality_class)?.description || ''}
                 </p>
               </div>
@@ -303,20 +303,20 @@ const PDFVehicleData = () => {
         bottom: '20px', 
         left: '24px', 
         right: '24px',
-        borderTop: '1px solid #cbd5e1', 
+        borderTop: '1px solid #e2e8f0', 
         paddingTop: '10px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <div style={{ fontSize: '9px', color: '#64748b' }}>
-          <span style={{ fontWeight: 600, color: '#1e293b' }}>Automobiel Taxaties</span>
+        <div style={{ fontSize: '9px', color: '#000000' }}>
+          <span style={{ fontWeight: 600 }}>Automobiel Taxaties</span>
           <span style={{ margin: '0 4px' }}>|</span>
           Leigraaf 160, 6651 GJ Druten
           <span style={{ margin: '0 4px' }}>|</span>
           KVK: 95549269
         </div>
-        <div style={{ fontSize: '9px', color: '#64748b' }}>
+        <div style={{ fontSize: '9px', color: '#000000' }}>
           Pagina 2
         </div>
       </div>

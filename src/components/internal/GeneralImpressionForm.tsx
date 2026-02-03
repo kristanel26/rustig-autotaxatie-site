@@ -21,19 +21,19 @@ interface GeneralImpressionFormProps {
   onChange: (field: keyof GeneralImpressionFormData, value: string) => void;
 }
 
-// Default texts for new reports - editable by taxateur
+// Default texts for new reports - editable by taxateur (exact per specificatie)
 const defaultImpressionTexts: GeneralImpressionFormData = {
   impression_suspension: 'De wielophanging verkeert voor zover waarneembaar in een goede staat. Geen afwijkingen waargenomen.',
-  impression_wheels_tires: 'De stalen velgen/banden set verkeert in een goede staat. Geen afwijkingen/schades waargenomen. Banden zijn nieuw.',
-  impression_steering: 'De stuurinrichting verkeert in een redelijk onderhouden staat. Geen afwijkingen/schades waargenomen.',
-  impression_brakes: 'De reminrichting verkeert voor zover waarneembaar in een redelijk onderhouden staat. Geen afwijkingen/schades waargenomen.',
-  impression_engine: 'De motor verkeert voor zover waarneembaar in een goed werkende staat. Geen afwijkingen/schades waargenomen.',
-  impression_transmission: 'De handgeschakelde versnellingsbak en de aandrijving verkeren voor zover waarneembaar in een goede staat. Geen afwijkingen/schades waargenomen.',
+  impression_wheels_tires: 'De stalen velgen/banden set verkeert in een goede staat. Geen afwijkingen of schades waargenomen. Banden zijn nieuw.',
+  impression_steering: 'De stuurinrichting verkeert in een redelijk onderhouden staat. Geen afwijkingen of schades waargenomen.',
+  impression_brakes: 'De reminrichting verkeert voor zover waarneembaar in een redelijk onderhouden staat. Geen afwijkingen of schades waargenomen.',
+  impression_engine: 'De motor verkeert voor zover waarneembaar in een goed werkende staat. Geen afwijkingen of schades waargenomen.',
+  impression_transmission: 'De handgeschakelde versnellingsbak en de aandrijving verkeren voor zover waarneembaar in een goede staat. Geen afwijkingen of schades waargenomen.',
   impression_electrical: 'De elektrische installatie verkeert voor zover waarneembaar in een goed functionerende staat. Alles functioneert naar behoren.',
   impression_body: 'De carrosserie verkeert in een nette staat. Geen bijzonderheden, afwijkingen of schades waargenomen.',
   impression_interior: 'Het interieur van de passagiersruimte verkeert in een nette en complete staat. Woon- en slaapgedeelte verkeert in een nette staat.',
-  impression_general: 'Dit voertuig verkeert in een nette / goede staat.',
-  impression_extras: 'N.v.t.',
+  impression_general: 'Dit voertuig verkeert in een goede staat.',
+  impression_extras: '',
 };
 
 export const getInitialGeneralImpressionFormData = (): GeneralImpressionFormData => ({
