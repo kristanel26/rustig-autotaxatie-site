@@ -28,7 +28,7 @@ import { CamperTechForm, CamperTechFormData, getInitialCamperTechFormData } from
 import { GeneralImpressionForm, GeneralImpressionFormData, getInitialGeneralImpressionFormData } from '@/components/internal/GeneralImpressionForm';
 import { MoistureAndSafetyForm, MoistureAndSafetyFormData, getInitialMoistureAndSafetyFormData } from '@/components/internal/MoistureAndSafetyForm';
 import { PostcodeField } from '@/components/internal/PostcodeField';
-import PhotoUploadForm, { PhotoRotations } from '@/components/internal/PhotoUploadForm';
+import PhotoUploadForm, { PhotoRotations, PhotoTypes } from '@/components/internal/PhotoUploadForm';
 import { useAutoSave } from '@/hooks/useAutoSave';
 import { SaveStatusIndicator } from '@/components/internal/SaveStatusIndicator';
 import { usePageLeaveProtection } from '@/hooks/usePageLeaveProtection';
@@ -157,6 +157,7 @@ const EditReport = () => {
   // Photo collection
   const [vehiclePhotos, setVehiclePhotos] = useState<string[]>([]);
   const [photoRotations, setPhotoRotations] = useState<PhotoRotations>({});
+  const [photoTypes, setPhotoTypes] = useState<PhotoTypes>({});
 
   // Inspection data
   const [inspectionData, setInspectionData] = useState({
@@ -381,6 +382,8 @@ const EditReport = () => {
         // Pre-fill photos
         setVehiclePhotos((reportData as any).vehicle_photos || []);
         setPhotoRotations((reportData as any).vehicle_photo_rotations || {});
+        // photo_types is stored in the photo_types JSON column
+        setPhotoTypes((reportData as any).photo_types || {});
 
       } catch (error) {
         console.error('Error fetching report:', error);
@@ -506,6 +509,11 @@ const EditReport = () => {
   const handleRotationsChange = useCallback((rotations: PhotoRotations) => {
     setPhotoRotations(rotations);
     saveField('vehicle_photo_rotations', Object.keys(rotations).length > 0 ? rotations : null);
+  }, [saveField]);
+
+  const handlePhotoTypesChange = useCallback((types: PhotoTypes) => {
+    setPhotoTypes(types);
+    saveField('photo_types', Object.keys(types).length > 0 ? types : null);
   }, [saveField]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -965,6 +973,9 @@ const EditReport = () => {
           onChange={handleVehicleChange}
           errors={errors}
           isEditMode={true}
+          photos={vehiclePhotos}
+          photoTypes={photoTypes}
+          reportId={id}
         />
 
         {/* Appraisal Findings - Taxateursecties */}
@@ -975,6 +986,9 @@ const EditReport = () => {
           rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
           allTiresSame={allTiresSame}
           onAllTiresSameChange={setAllTiresSame}
+          photos={vehiclePhotos}
+          photoTypes={photoTypes}
+          reportId={id}
         />
 
         {/* Sectie 13: Leidingen & Installaties */}
@@ -1005,8 +1019,10 @@ const EditReport = () => {
         <PhotoUploadForm
           photos={vehiclePhotos}
           rotations={photoRotations}
+          photoTypes={photoTypes}
           onChange={handlePhotosChange}
           onRotationsChange={handleRotationsChange}
+          onPhotoTypesChange={handlePhotoTypesChange}
           reportId={id}
         />
 

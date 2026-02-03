@@ -26,7 +26,7 @@ Analyseer de foto's en extraheer ALLEEN:
 1. Kenteken (Nederlands kentekenformaat zoals XX-XX-XX of X-XXX-XX)
 2. VIN/Chassisnummer (17 karakters, letters en cijfers)
 
-Antwoord ALLEEN in dit exacte JSON formaat:
+Antwoord uitsluitend met JSON, zonder extra tekst. Gebruik dit exacte formaat:
 {
   "results": [
     {
@@ -61,7 +61,7 @@ BELANGRIJK:
 - De kilometerteller toont meestal het grootste getal
 - Negeer brandstofmeters, snelheidsmeters en andere displays
 
-Antwoord ALLEEN in dit exacte JSON formaat:
+Antwoord uitsluitend met JSON, zonder extra tekst. Gebruik dit exacte formaat:
 {
   "results": [
     {
@@ -291,11 +291,20 @@ serve(async (req) => {
       );
     }
 
-    // Parse JSON from response (handle markdown code blocks)
+    // Parse JSON from response (handle markdown code blocks and extra text)
     let jsonContent = content;
+    
+    // First try to extract JSON from markdown code blocks
     const jsonMatch = content.match(/```(?:json)?\s*([\s\S]*?)```/);
     if (jsonMatch) {
       jsonContent = jsonMatch[1].trim();
+    } else {
+      // Fallback: find the first { to the last } as valid JSON
+      const firstBrace = content.indexOf('{');
+      const lastBrace = content.lastIndexOf('}');
+      if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+        jsonContent = content.substring(firstBrace, lastBrace + 1);
+      }
     }
 
     try {
@@ -313,7 +322,7 @@ serve(async (req) => {
         { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     } catch (parseError) {
-      console.error('Failed to parse AI response:', parseError);
+      console.error('Failed to parse AI response:', parseError, 'Content:', jsonContent);
       return new Response(
         JSON.stringify({ 
           error: 'Kon AI-antwoord niet verwerken',
