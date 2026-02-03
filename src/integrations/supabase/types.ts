@@ -14,6 +14,59 @@ export type Database = {
   }
   public: {
     Tables: {
+      photo_extract_results: {
+        Row: {
+          accepted: boolean
+          confidence: number
+          created_at: string
+          field_key: string
+          id: string
+          photo_type: string
+          photo_url: string
+          proposed_value: string | null
+          raw_text: string | null
+          report_id: string
+          section: string
+          status: string
+        }
+        Insert: {
+          accepted?: boolean
+          confidence: number
+          created_at?: string
+          field_key: string
+          id?: string
+          photo_type: string
+          photo_url: string
+          proposed_value?: string | null
+          raw_text?: string | null
+          report_id: string
+          section: string
+          status: string
+        }
+        Update: {
+          accepted?: boolean
+          confidence?: number
+          created_at?: string
+          field_key?: string
+          id?: string
+          photo_type?: string
+          photo_url?: string
+          proposed_value?: string | null
+          raw_text?: string | null
+          report_id?: string
+          section?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "photo_extract_results_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reports: {
         Row: {
           appraised_value: number | null
@@ -102,6 +155,7 @@ export type Database = {
           opbouw_merk: string | null
           opbouw_type: string | null
           opdrachtgever: string | null
+          photo_types: Json | null
           pressure_regulator_production_date: string | null
           quality_class: string | null
           rdw_aantal_cilinders: number | null
@@ -265,6 +319,7 @@ export type Database = {
           opbouw_merk?: string | null
           opbouw_type?: string | null
           opdrachtgever?: string | null
+          photo_types?: Json | null
           pressure_regulator_production_date?: string | null
           quality_class?: string | null
           rdw_aantal_cilinders?: number | null
@@ -428,6 +483,7 @@ export type Database = {
           opbouw_merk?: string | null
           opbouw_type?: string | null
           opdrachtgever?: string | null
+          photo_types?: Json | null
           pressure_regulator_production_date?: string | null
           quality_class?: string | null
           rdw_aantal_cilinders?: number | null

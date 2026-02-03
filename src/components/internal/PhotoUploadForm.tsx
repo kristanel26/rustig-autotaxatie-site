@@ -23,6 +23,8 @@ import {
   rectSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { PhotoTypeTag } from './PhotoTypeTag';
+import type { PhotoType } from './AIExtractButton';
 
 // Rotation values: 0, 90, 180, 270
 export type PhotoRotation = 0 | 90 | 180 | 270;
@@ -31,11 +33,17 @@ export interface PhotoRotations {
   [url: string]: PhotoRotation;
 }
 
+export interface PhotoTypes {
+  [url: string]: PhotoType;
+}
+
 interface PhotoUploadFormProps {
   photos: string[];
   rotations: PhotoRotations;
+  photoTypes?: PhotoTypes;
   onChange: (photos: string[]) => void;
   onRotationsChange: (rotations: PhotoRotations) => void;
+  onPhotoTypesChange?: (types: PhotoTypes) => void;
   reportId?: string;
 }
 
@@ -44,10 +52,12 @@ interface SortablePhotoItemProps {
   index: number;
   isCover: boolean;
   rotation: PhotoRotation;
+  photoType: PhotoType | undefined;
   onSetCover: () => void;
   onDelete: () => void;
   onRotateRight: () => void;
   onRotateLeft: () => void;
+  onPhotoTypeChange: (type: PhotoType | undefined) => void;
   isDeleting: boolean;
 }
 
@@ -56,10 +66,12 @@ const SortablePhotoItem = ({
   index, 
   isCover, 
   rotation,
+  photoType,
   onSetCover, 
   onDelete,
   onRotateRight,
   onRotateLeft,
+  onPhotoTypeChange,
   isDeleting 
 }: SortablePhotoItemProps) => {
   const {
@@ -114,10 +126,17 @@ const SortablePhotoItem = ({
         />
       </div>
 
+      {/* Photo type tag dropdown */}
+      <PhotoTypeTag
+        photoUrl={url}
+        currentType={photoType}
+        onTypeChange={(_, type) => onPhotoTypeChange(type)}
+      />
+
       {/* Actions overlay */}
-      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100">
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100 pointer-events-none">
         {/* Rotation buttons */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 pointer-events-auto">
           <Button
             type="button"
             variant="secondary"
@@ -141,7 +160,7 @@ const SortablePhotoItem = ({
         </div>
 
         {/* Other actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 pointer-events-auto">
           {!isCover && (
             <Button
               type="button"
@@ -177,8 +196,10 @@ const SortablePhotoItem = ({
 const PhotoUploadForm = ({ 
   photos, 
   rotations, 
+  photoTypes = {},
   onChange, 
-  onRotationsChange, 
+  onRotationsChange,
+  onPhotoTypesChange,
   reportId 
 }: PhotoUploadFormProps) => {
   const { user } = useAuth();
@@ -201,6 +222,23 @@ const PhotoUploadForm = ({
   const getRotation = useCallback((url: string): PhotoRotation => {
     return rotations[url] || 0;
   }, [rotations]);
+
+  // Get photo type for a URL
+  const getPhotoType = useCallback((url: string): PhotoType | undefined => {
+    return photoTypes[url];
+  }, [photoTypes]);
+
+  // Handle photo type change
+  const handlePhotoTypeChange = useCallback((url: string, type: PhotoType | undefined) => {
+    if (!onPhotoTypesChange) return;
+    const newTypes = { ...photoTypes };
+    if (type) {
+      newTypes[url] = type;
+    } else {
+      delete newTypes[url];
+    }
+    onPhotoTypesChange(newTypes);
+  }, [photoTypes, onPhotoTypesChange]);
 
   // Rotate photo right (clockwise)
   const handleRotateRight = useCallback((url: string) => {
@@ -440,10 +478,12 @@ const PhotoUploadForm = ({
                     index={index}
                     isCover={index === 0}
                     rotation={getRotation(url)}
+                    photoType={getPhotoType(url)}
                     onSetCover={() => handleSetCover(index)}
                     onDelete={() => handleDelete(index)}
                     onRotateRight={() => handleRotateRight(url)}
                     onRotateLeft={() => handleRotateLeft(url)}
+                    onPhotoTypeChange={(type) => handlePhotoTypeChange(url, type)}
                     isDeleting={deletingUrl === url}
                   />
                 ))}

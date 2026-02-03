@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.postcode-lookup]
 verify_jwt = false
+
+[functions.extract-photo-data]
+verify_jwt = false
