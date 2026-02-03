@@ -125,7 +125,6 @@ const PDFAppraisalFindings = () => {
     const labels: Record<string, string> = {
       staal: 'Staalvelgen',
       lichtmetaal: 'Lichtmetalen velgen',
-      gemengd: 'Gemengd',
     };
     return labels[value] || value;
   };

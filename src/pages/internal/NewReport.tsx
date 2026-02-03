@@ -233,6 +233,16 @@ const NewReport = () => {
       return;
     }
 
+    // Validate rim type (mandatory)
+    if (!appraisalData.rim_type) {
+      toast({
+        title: 'Type velg verplicht',
+        description: 'Selecteer een type velg (Staalvelgen of Lichtmetalen velgen).',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
