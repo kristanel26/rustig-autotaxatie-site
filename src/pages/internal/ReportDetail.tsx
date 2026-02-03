@@ -165,6 +165,26 @@ const ReportDetail = () => {
     }
   };
 
+  const wait = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
+
+  const waitForFonts = async () => {
+    const anyDocument = document as unknown as { fonts?: { ready?: Promise<unknown> } };
+    if (!anyDocument.fonts?.ready) return;
+    // Never block forever on font loading
+    await Promise.race([anyDocument.fonts.ready, wait(3000)]);
+  };
+
+  const waitForStablePdfPages = async (container: HTMLElement) => {
+    // Wait until the number of rendered pages is stable for 2 consecutive checks
+    let lastCount = -1;
+    for (let i = 0; i < 15; i++) {
+      const count = container.querySelectorAll('.pdf-page').length;
+      if (count > 0 && count === lastCount) return;
+      lastCount = count;
+      await wait(200);
+    }
+  };
+
   const handlePdfDownload = async () => {
     if (!id || isGeneratingPdf || !report) return;
     
@@ -177,8 +197,8 @@ const ReportDetail = () => {
       container.id = 'pdf-render-container';
       container.style.cssText = `
         position: fixed;
-        top: 110vh;
-        left: 0;
+        top: 0;
+        left: -10000px;
         width: 210mm;
         z-index: 1;
         opacity: 1;
@@ -212,18 +232,17 @@ const ReportDetail = () => {
         </div>
       );
 
-      // Wait for React to fully render the content
-      // Use requestAnimationFrame to ensure DOM is painted
-      await new Promise<void>(resolve => {
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            resolve();
-          });
-        });
-      });
+      // Wait for React to paint the DOM
+      await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
 
-      // Initial wait for React hydration
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Give layout/CSS a moment to settle
+      await wait(500);
+
+      // Wait until the PDF pages are actually present and stable
+      await waitForStablePdfPages(container);
+
+      // Ensure fonts are ready before rasterization
+      await waitForFonts();
 
       // Wait for all images to load with timeout
       const images = container.querySelectorAll('img');
@@ -245,13 +264,14 @@ const ReportDetail = () => {
 
       // Verify content is actually rendered (not empty)
       const pdfContentCheck = container.querySelector('#pdf-content');
-      if (!pdfContentCheck || pdfContentCheck.children.length === 0) {
+      const rect = pdfContentCheck?.getBoundingClientRect();
+      if (!pdfContentCheck || pdfContentCheck.children.length === 0 || !rect || rect.width === 0 || rect.height === 0) {
         console.error('PDF content is empty after render');
         throw new Error('PDF content failed to render');
       }
 
       // Final stabilization wait - ensures all CSS is applied and fonts loaded
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await wait(1500);
 
       const opt = {
         margin: 0,
