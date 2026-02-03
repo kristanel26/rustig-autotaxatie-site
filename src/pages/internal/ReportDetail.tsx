@@ -192,9 +192,11 @@ const ReportDetail = () => {
       const root = createRoot(container);
       rootRef.current = root;
 
-      // Calculate page number for valuation (now page 2, right after cover)
+      // Calculate page numbers dynamically based on content
       const hasValuation = report.appraised_value && report.appraised_value > 0;
       const valuationPageNumber = hasValuation ? 2 : 0;
+      const vehicleDataPageNumber = hasValuation ? 3 : 2;
+      const appraisalFindingsPageNumber = hasValuation ? 4 : 3;
 
       // Render all PDF pages as a single React tree
       // Order: Cover -> Valuation (if applicable) -> Vehicle Data -> Appraisal Findings -> Photos
@@ -204,8 +206,8 @@ const ReportDetail = () => {
           {hasValuation && (
             <PDFValuationContent report={report} pageNumber={valuationPageNumber} />
           )}
-          <PDFVehicleDataContent report={report} />
-          <PDFAppraisalFindingsContent report={report} />
+          <PDFVehicleDataContent report={report} pageNumber={vehicleDataPageNumber} />
+          <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPageNumber} />
           <PDFPhotosContent report={report} />
         </div>
       );
@@ -230,24 +232,25 @@ const ReportDetail = () => {
       const opt = {
         margin: 0,
         filename: generatePdfFilename(),
-        image: { type: 'jpeg', quality: 0.98 },
+        image: { type: 'jpeg', quality: 1.0 },
         html2canvas: { 
-          scale: 2,
+          scale: 4, // Higher scale for 300+ DPI print quality
           useCORS: true,
           allowTaint: false,
           logging: false,
           width: 794, // A4 width in pixels at 96 DPI
           windowWidth: 794,
           backgroundColor: '#ffffff',
+          imageTimeout: 15000,
+          letterRendering: true, // Sharper text rendering
         },
         jsPDF: { 
           unit: 'mm', 
           format: 'a4', 
-          orientation: 'portrait' as const
+          orientation: 'portrait' as const,
+          compress: true,
         },
-        // Rely on CSS `page-break-after` in the templates; forcing `before: .pdf-page`
-        // can introduce extra blank pages.
-        pagebreak: { mode: ['css', 'legacy'] }
+        pagebreak: { mode: 'css', avoid: '.no-break' }
       };
 
       const pdfContent = container.querySelector('#pdf-content');

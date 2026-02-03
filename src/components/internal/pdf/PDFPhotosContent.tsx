@@ -71,30 +71,41 @@ const PDFPhotosContent = ({ report }: PDFPhotosContentProps) => {
             gap: '12px',
             marginBottom: '20px',
           }}>
-            {pagePhotos.map((photo, photoIndex) => (
-              <div 
-                key={photoIndex}
-                style={{
-                  aspectRatio: '4/3',
-                  overflow: 'hidden',
-                  borderRadius: '4px',
-                  border: '1px solid #e2e8f0',
-                  backgroundColor: '#f8fafc',
-                }}
-              >
-                <img
-                  crossOrigin="anonymous"
-                  src={photo}
-                  alt={`Voertuigfoto ${(pageIndex * photosPerPage) + photoIndex + 2}`}
+            {pagePhotos.map((photo, photoIndex) => {
+              const rotation = getRotation(photo);
+              // For 90/270 degree rotations, swap dimensions mentally for proper fit
+              const isRotated90or270 = rotation === 90 || rotation === 270;
+              
+              return (
+                <div 
+                  key={photoIndex}
                   style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    transform: getRotation(photo) ? `rotate(${getRotation(photo)}deg)` : undefined,
+                    aspectRatio: '4/3',
+                    overflow: 'hidden',
+                    borderRadius: '4px',
+                    border: '1px solid #e2e8f0',
+                    backgroundColor: '#f8fafc',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                   }}
-                />
-              </div>
-            ))}
+                >
+                  <img
+                    crossOrigin="anonymous"
+                    src={photo}
+                    alt={`Voertuigfoto ${(pageIndex * photosPerPage) + photoIndex + 2}`}
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                      width: isRotated90or270 ? 'auto' : '100%',
+                      height: isRotated90or270 ? '100%' : 'auto',
+                      objectFit: 'contain', // Never stretch, preserve aspect ratio
+                      transform: rotation ? `rotate(${rotation}deg)` : undefined,
+                    }}
+                  />
+                </div>
+              );
+            })}
           </div>
 
           {/* Footer */}

@@ -45,9 +45,10 @@ interface Report {
 interface PDFVehicleDataContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   report: any;
+  pageNumber?: number;
 }
 
-const PDFVehicleDataContent = ({ report }: PDFVehicleDataContentProps) => {
+const PDFVehicleDataContent = ({ report, pageNumber = 2 }: PDFVehicleDataContentProps) => {
   const formatDate = (dateString: string | null) => {
     if (!dateString) return '-';
     return new Date(dateString).toLocaleDateString('nl-NL', {
@@ -247,7 +248,7 @@ const PDFVehicleDataContent = ({ report }: PDFVehicleDataContentProps) => {
           KVK: 95549269
         </div>
         <div style={{ fontSize: '9px', color: '#000000' }}>
-          Pagina 2
+          Pagina {pageNumber}
         </div>
       </div>
     </div>

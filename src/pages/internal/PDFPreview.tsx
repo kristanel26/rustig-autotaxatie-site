@@ -72,6 +72,8 @@ const PDFPreview = () => {
 
   const hasValuation = report.appraised_value && report.appraised_value > 0;
   const valuationPageNumber = hasValuation ? 2 : 0;
+  const vehicleDataPageNumber = hasValuation ? 3 : 2;
+  const appraisalFindingsPageNumber = hasValuation ? 4 : 3;
 
   return (
     <div 
@@ -93,12 +95,12 @@ const PDFPreview = () => {
 
         {/* Page 3: Vehicle Data */}
         <div className="shadow-lg">
-          <PDFVehicleDataContent report={report} />
+          <PDFVehicleDataContent report={report} pageNumber={vehicleDataPageNumber} />
         </div>
 
         {/* Page 4: Appraisal Findings */}
         <div className="shadow-lg">
-          <PDFAppraisalFindingsContent report={report} />
+          <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPageNumber} />
         </div>
 
         {/* Photo Annex (conditional) */}

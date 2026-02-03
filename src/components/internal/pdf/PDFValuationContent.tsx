@@ -151,22 +151,22 @@ const PDFValuationContent = ({ report, pageNumber }: PDFValuationContentProps) =
 
         {/* Valuation basis summary */}
         <div style={{ 
-          marginTop: '20px',
-          padding: '12px 16px',
+          marginTop: '24px',
+          padding: '16px 20px',
           backgroundColor: '#f8fafc',
           borderRadius: '4px',
         }}>
-          <p style={{ fontSize: '10px', fontWeight: 600, color: '#000000', margin: '0 0 8px 0' }}>
-            Waardebepaling gebaseerd op:
+          <p style={{ fontSize: '11px', fontWeight: 600, color: '#000000', margin: '0 0 10px 0' }}>
+            De waardebepaling is gebaseerd op:
           </p>
-          <ul style={{ margin: 0, padding: '0 0 0 16px', fontSize: '9px', color: '#000000', lineHeight: 1.8 }}>
-            <li>Visuele inspectie</li>
-            <li>Staat van voertuig</li>
-            <li>Kilometerstand</li>
-            <li>Uitvoering en opbouw</li>
-            <li>Marktvergelijking</li>
+          <ul style={{ margin: 0, padding: '0 0 0 20px', fontSize: '10px', color: '#000000', lineHeight: 2.0 }}>
+            <li>Visuele inspectie van het voertuig</li>
+            <li>Algemene staat en conditie</li>
+            <li>Kilometerstand op het moment van opname</li>
+            <li>Uitvoering, opbouw en accessoires</li>
+            <li>Vergelijking met actuele marktprijzen</li>
           </ul>
-          <p style={{ fontSize: '10px', fontWeight: 600, color: '#000000', margin: '12px 0 0 0' }}>
+          <p style={{ fontSize: '11px', fontWeight: 600, color: '#000000', margin: '16px 0 0 0' }}>
             Waardepeildatum: {formatDateLong(report.inspection_date)}
           </p>
         </div>
@@ -204,15 +204,15 @@ const PDFValuationContent = ({ report, pageNumber }: PDFValuationContentProps) =
           </p>
         </div>
 
-        <div style={{ marginTop: '8px' }}>
+        <div style={{ marginTop: '12px' }}>
           <img 
             crossOrigin="anonymous"
             src={signatureErik} 
             alt="Handtekening Erik Elderson" 
             style={{ 
-              height: '80px', 
+              height: '30mm', // Fixed mm size for consistent print output
               width: 'auto',
-              maxWidth: '200px',
+              maxWidth: '80mm',
             }} 
           />
         </div>
