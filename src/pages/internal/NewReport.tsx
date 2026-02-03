@@ -84,6 +84,7 @@ const NewReport = () => {
 
   // Appraisal findings data
   const [appraisalData, setAppraisalData] = useState<AppraisalFormData>(getInitialAppraisalFormData());
+  const [allTiresSame, setAllTiresSame] = useState(false);
 
   // Installations data (Sectie 13)
   const [installationsData, setInstallationsData] = useState<InstallationsFormData>(getInitialInstallationsFormData());
@@ -145,6 +146,10 @@ const NewReport = () => {
 
   const handleAppraisalChange = (field: keyof AppraisalFormData, value: string) => {
     setAppraisalData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleAppraisalMultipleChange = (fields: Partial<AppraisalFormData>) => {
+    setAppraisalData(prev => ({ ...prev, ...fields }));
   };
 
   const handleInstallationsChange = (field: keyof InstallationsFormData, value: string) => {
@@ -580,7 +585,10 @@ const NewReport = () => {
         <AppraisalFindingsForm
           formData={appraisalData}
           onChange={handleAppraisalChange}
+          onMultipleChange={handleAppraisalMultipleChange}
           rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
+          allTiresSame={allTiresSame}
+          onAllTiresSameChange={setAllTiresSame}
         />
 
         {/* Sectie 13: Leidingen & Installaties */}

@@ -1,7 +1,9 @@
+import { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Switch } from '@/components/ui/switch';
 import {
   Select,
   SelectContent,
@@ -81,7 +83,10 @@ export interface AppraisalFormData {
 interface AppraisalFindingsFormProps {
   formData: AppraisalFormData;
   onChange: (field: keyof AppraisalFormData, value: string) => void;
+  onMultipleChange?: (fields: Partial<AppraisalFormData>) => void;
   rdwHandelsbenaming?: string;
+  allTiresSame?: boolean;
+  onAllTiresSameChange?: (value: boolean) => void;
 }
 
 export const getInitialAppraisalFormData = (): AppraisalFormData => ({
@@ -149,8 +154,55 @@ const rimTypeOptions = [
 export const AppraisalFindingsForm = ({
   formData,
   onChange,
+  onMultipleChange,
   rdwHandelsbenaming,
+  allTiresSame = false,
+  onAllTiresSameChange,
 }: AppraisalFindingsFormProps) => {
+  // Sync other tires when first tire changes and allTiresSame is enabled
+  const handleFirstTireChange = useCallback((
+    field: 'brand' | 'model' | 'profiel' | 'dot',
+    value: string
+  ) => {
+    const fieldMap = {
+      brand: ['tire_front_left_brand', 'tire_front_right_brand', 'tire_rear_left_brand', 'tire_rear_right_brand'],
+      model: ['tire_front_left_model', 'tire_front_right_model', 'tire_rear_left_model', 'tire_rear_right_model'],
+      profiel: ['tire_front_left_profiel', 'tire_front_right_profiel', 'tire_rear_left_profiel', 'tire_rear_right_profiel'],
+      dot: ['tire_front_left_dot', 'tire_front_right_dot', 'tire_rear_left_dot', 'tire_rear_right_dot'],
+    };
+    
+    if (allTiresSame && onMultipleChange) {
+      const updates: Partial<AppraisalFormData> = {};
+      fieldMap[field].forEach(f => {
+        updates[f as keyof AppraisalFormData] = value;
+      });
+      onMultipleChange(updates);
+    } else {
+      onChange(fieldMap[field][0] as keyof AppraisalFormData, value);
+    }
+  }, [allTiresSame, onChange, onMultipleChange]);
+
+  // When allTiresSame is toggled on, copy first tire to all others
+  const handleAllTiresSameToggle = useCallback((checked: boolean) => {
+    if (checked && onMultipleChange) {
+      onMultipleChange({
+        tire_front_right_brand: formData.tire_front_left_brand,
+        tire_front_right_model: formData.tire_front_left_model,
+        tire_front_right_profiel: formData.tire_front_left_profiel,
+        tire_front_right_dot: formData.tire_front_left_dot,
+        tire_rear_left_brand: formData.tire_front_left_brand,
+        tire_rear_left_model: formData.tire_front_left_model,
+        tire_rear_left_profiel: formData.tire_front_left_profiel,
+        tire_rear_left_dot: formData.tire_front_left_dot,
+        tire_rear_right_brand: formData.tire_front_left_brand,
+        tire_rear_right_model: formData.tire_front_left_model,
+        tire_rear_right_profiel: formData.tire_front_left_profiel,
+        tire_rear_right_dot: formData.tire_front_left_dot,
+      });
+    }
+    onAllTiresSameChange?.(checked);
+  }, [formData, onMultipleChange, onAllTiresSameChange]);
+
   return (
     <div className="space-y-6">
       {/* Model display name */}
@@ -237,15 +289,27 @@ export const AppraisalFindingsForm = ({
           <CardTitle className="text-lg">Banden en wielen</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="tire_bandenmaat">Bandenmaat</Label>
-            <Input
-              id="tire_bandenmaat"
-              value={formData.tire_bandenmaat}
-              onChange={(e) => onChange('tire_bandenmaat', e.target.value)}
-              placeholder="Bijv. 225/45R16"
-              className="w-[200px]"
-            />
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="tire_bandenmaat">Bandenmaat</Label>
+              <Input
+                id="tire_bandenmaat"
+                value={formData.tire_bandenmaat}
+                onChange={(e) => onChange('tire_bandenmaat', e.target.value)}
+                placeholder="Bijv. 225/45R16"
+                className="w-[200px]"
+              />
+            </div>
+            <div className="flex items-center space-x-3 pt-6">
+              <Switch
+                id="all_tires_same"
+                checked={allTiresSame}
+                onCheckedChange={handleAllTiresSameToggle}
+              />
+              <Label htmlFor="all_tires_same" className="cursor-pointer">
+                Alle banden zijn gelijk
+              </Label>
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <TireField
@@ -254,10 +318,10 @@ export const AppraisalFindingsForm = ({
               model={formData.tire_front_left_model}
               profiel={formData.tire_front_left_profiel}
               dot={formData.tire_front_left_dot}
-              onBrandChange={(v) => onChange('tire_front_left_brand', v)}
-              onModelChange={(v) => onChange('tire_front_left_model', v)}
-              onProfielChange={(v) => onChange('tire_front_left_profiel', v)}
-              onDotChange={(v) => onChange('tire_front_left_dot', v)}
+              onBrandChange={(v) => handleFirstTireChange('brand', v)}
+              onModelChange={(v) => handleFirstTireChange('model', v)}
+              onProfielChange={(v) => handleFirstTireChange('profiel', v)}
+              onDotChange={(v) => handleFirstTireChange('dot', v)}
             />
             <TireField
               position="Rechter voorband"
@@ -269,6 +333,8 @@ export const AppraisalFindingsForm = ({
               onModelChange={(v) => onChange('tire_front_right_model', v)}
               onProfielChange={(v) => onChange('tire_front_right_profiel', v)}
               onDotChange={(v) => onChange('tire_front_right_dot', v)}
+              isLinked={allTiresSame}
+              disabled={allTiresSame}
             />
             <TireField
               position="Linker achterband"
@@ -280,6 +346,8 @@ export const AppraisalFindingsForm = ({
               onModelChange={(v) => onChange('tire_rear_left_model', v)}
               onProfielChange={(v) => onChange('tire_rear_left_profiel', v)}
               onDotChange={(v) => onChange('tire_rear_left_dot', v)}
+              isLinked={allTiresSame}
+              disabled={allTiresSame}
             />
             <TireField
               position="Rechter achterband"
@@ -291,6 +359,8 @@ export const AppraisalFindingsForm = ({
               onModelChange={(v) => onChange('tire_rear_right_model', v)}
               onProfielChange={(v) => onChange('tire_rear_right_profiel', v)}
               onDotChange={(v) => onChange('tire_rear_right_dot', v)}
+              isLinked={allTiresSame}
+              disabled={allTiresSame}
             />
           </div>
           <p className="text-xs text-muted-foreground">
