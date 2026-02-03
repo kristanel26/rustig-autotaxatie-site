@@ -171,13 +171,20 @@ const ReportDetail = () => {
     setIsGeneratingPdf(true);
     
     try {
-      // Create hidden container for PDF content
+      // Create container that is visible but off-viewport (not display:none or left:-9999px)
+      // This ensures proper CSS layout calculation
       const container = document.createElement('div');
-      container.style.position = 'absolute';
-      container.style.left = '-9999px';
-      container.style.top = '0';
-      container.style.width = '210mm';
-      container.className = 'pdf-render-container';
+      container.id = 'pdf-render-container';
+      container.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 210mm;
+        z-index: -9999;
+        opacity: 0;
+        pointer-events: none;
+        background: white;
+      `;
       document.body.appendChild(container);
       containerRef.current = container;
 
@@ -191,7 +198,7 @@ const ReportDetail = () => {
 
       // Render all PDF pages as a single React tree
       root.render(
-        <div id="pdf-content" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
+        <div id="pdf-content" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'white' }}>
           <PDFCoverContent report={report} />
           <PDFVehicleDataContent report={report} />
           <PDFAppraisalFindingsContent report={report} />
@@ -202,8 +209,22 @@ const ReportDetail = () => {
         </div>
       );
 
-      // Wait for React to render and images to load
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Wait for React to render
+      await new Promise(resolve => setTimeout(resolve, 500));
+
+      // Wait for all images to load
+      const images = container.querySelectorAll('img');
+      const imagePromises = Array.from(images).map(img => {
+        if (img.complete) return Promise.resolve();
+        return new Promise<void>((resolve) => {
+          img.onload = () => resolve();
+          img.onerror = () => resolve(); // Don't fail on missing images
+        });
+      });
+      await Promise.all(imagePromises);
+      
+      // Additional wait for rendering to complete
+      await new Promise(resolve => setTimeout(resolve, 500));
 
       const opt = {
         margin: 0,
@@ -214,7 +235,9 @@ const ReportDetail = () => {
           useCORS: true,
           allowTaint: true,
           logging: false,
-          windowWidth: 794, // A4 width in pixels at 96 DPI
+          width: 794, // A4 width in pixels at 96 DPI
+          windowWidth: 794,
+          backgroundColor: '#ffffff',
         },
         jsPDF: { 
           unit: 'mm', 
