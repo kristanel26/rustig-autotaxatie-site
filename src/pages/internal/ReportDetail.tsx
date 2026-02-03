@@ -212,22 +212,46 @@ const ReportDetail = () => {
         </div>
       );
 
-      // Wait for React to render
-      await new Promise(resolve => setTimeout(resolve, 500));
+      // Wait for React to fully render the content
+      // Use requestAnimationFrame to ensure DOM is painted
+      await new Promise<void>(resolve => {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            resolve();
+          });
+        });
+      });
 
-      // Wait for all images to load
+      // Initial wait for React hydration
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // Wait for all images to load with timeout
       const images = container.querySelectorAll('img');
       const imagePromises = Array.from(images).map(img => {
-        if (img.complete) return Promise.resolve();
+        if (img.complete && img.naturalHeight > 0) return Promise.resolve();
         return new Promise<void>((resolve) => {
-          img.onload = () => resolve();
-          img.onerror = () => resolve(); // Don't fail on missing images
+          const timeout = setTimeout(() => resolve(), 10000); // 10s timeout per image
+          img.onload = () => {
+            clearTimeout(timeout);
+            resolve();
+          };
+          img.onerror = () => {
+            clearTimeout(timeout);
+            resolve(); // Don't fail on missing images
+          };
         });
       });
       await Promise.all(imagePromises);
-      
-      // Additional wait for rendering to complete
-      await new Promise(resolve => setTimeout(resolve, 500));
+
+      // Verify content is actually rendered (not empty)
+      const pdfContentCheck = container.querySelector('#pdf-content');
+      if (!pdfContentCheck || pdfContentCheck.children.length === 0) {
+        console.error('PDF content is empty after render');
+        throw new Error('PDF content failed to render');
+      }
+
+      // Final stabilization wait - ensures all CSS is applied and fonts loaded
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
       const opt = {
         margin: 0,
