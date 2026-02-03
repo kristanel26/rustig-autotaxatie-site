@@ -76,7 +76,7 @@ export type Database = {
           opbouw_merk: string | null
           opbouw_type: string | null
           opdrachtgever: string | null
-          quality_class: number | null
+          quality_class: string | null
           rdw_aantal_cilinders: number | null
           rdw_aantal_deuren: number | null
           rdw_apk_gekeurd: boolean | null
@@ -203,7 +203,7 @@ export type Database = {
           opbouw_merk?: string | null
           opbouw_type?: string | null
           opdrachtgever?: string | null
-          quality_class?: number | null
+          quality_class?: string | null
           rdw_aantal_cilinders?: number | null
           rdw_aantal_deuren?: number | null
           rdw_apk_gekeurd?: boolean | null
@@ -330,7 +330,7 @@ export type Database = {
           opbouw_merk?: string | null
           opbouw_type?: string | null
           opdrachtgever?: string | null
-          quality_class?: number | null
+          quality_class?: string | null
           rdw_aantal_cilinders?: number | null
           rdw_aantal_deuren?: number | null
           rdw_apk_gekeurd?: boolean | null

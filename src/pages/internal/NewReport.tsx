@@ -19,6 +19,7 @@ import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { normalizeReportFormData, LICENSE_PLATE_REGEX, numberToDutchWords } from '@/lib/normalizers';
 import { validateVin, validateDotCode, validateEmail, validatePhone } from '@/lib/validators';
+import { qualityClasses } from '@/lib/qualityClasses';
 import { VehicleInfoForm, VehicleFormData, getInitialVehicleFormData } from '@/components/internal/VehicleInfoForm';
 import { AppraisalFindingsForm, AppraisalFormData, getInitialAppraisalFormData } from '@/components/internal/AppraisalFindingsForm';
 import { PostcodeField } from '@/components/internal/PostcodeField';
@@ -233,6 +234,16 @@ const NewReport = () => {
       return;
     }
 
+    // Validate quality class (mandatory)
+    if (!valuationData.quality_class) {
+      toast({
+        title: 'Kwaliteitsklasse verplicht',
+        description: 'Selecteer een kwaliteitsklasse voor het voertuig.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     // Validate rim type (mandatory)
     if (!appraisalData.rim_type) {
       toast({
@@ -386,7 +397,7 @@ const NewReport = () => {
         // Valuation data
         appraised_value: valuationData.appraised_value ? parseFloat(valuationData.appraised_value) : null,
         appraised_value_text: valuationData.appraised_value_text || null,
-        quality_class: valuationData.quality_class ? parseInt(valuationData.quality_class) : null,
+        quality_class: valuationData.quality_class || null,
         general_remarks: valuationData.general_remarks || null,
       };
 
@@ -598,23 +609,31 @@ const NewReport = () => {
                 Wordt automatisch gegenereerd.
               </p>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="quality_class">Kwaliteitsklasse</Label>
+            <div className="space-y-2 md:col-span-2">
+              <Label htmlFor="quality_class">Kwaliteitsklasse *</Label>
               <Select
                 value={valuationData.quality_class}
                 onValueChange={(value) => handleValuationChange('quality_class', value)}
               >
-                <SelectTrigger>
-                  <SelectValue placeholder="Selecteer klasse" />
+                <SelectTrigger className={!valuationData.quality_class ? 'border-destructive' : ''}>
+                  <SelectValue placeholder="Selecteer kwaliteitsklasse..." />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="1">1 - Uitstekend</SelectItem>
-                  <SelectItem value="2">2 - Goed</SelectItem>
-                  <SelectItem value="3">3 - Gemiddeld</SelectItem>
-                  <SelectItem value="4">4 - Matig</SelectItem>
-                  <SelectItem value="5">5 - Slecht</SelectItem>
+                  {qualityClasses.map((qc) => (
+                    <SelectItem key={qc.value} value={qc.value}>
+                      {qc.label}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
+              {!valuationData.quality_class && (
+                <p className="text-xs text-destructive">Kwaliteitsklasse is verplicht</p>
+              )}
+              {valuationData.quality_class && (
+                <p className="text-sm text-muted-foreground mt-2">
+                  {qualityClasses.find((qc) => qc.value === valuationData.quality_class)?.description}
+                </p>
+              )}
             </div>
           </CardContent>
         </Card>
