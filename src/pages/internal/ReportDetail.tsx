@@ -185,45 +185,35 @@ const ReportDetail = () => {
     }
   };
 
+  const normalizePdfPagesForExport = (container: HTMLElement) => {
+    // Prevent "extra blank pages" caused by double page-break logic.
+    // We force every PDF page wrapper to be exactly A4 and remove explicit breaks.
+    const pages = Array.from(container.querySelectorAll<HTMLElement>('.pdf-page'));
+    pages.forEach((page) => {
+      page.style.width = '210mm';
+      page.style.height = '297mm';
+      page.style.minHeight = '0';
+      page.style.boxSizing = 'border-box';
+      page.style.overflow = 'hidden';
+
+      // Remove break directives (we rely on fixed A4 height instead)
+      page.style.pageBreakAfter = 'auto';
+      page.style.pageBreakBefore = 'auto';
+      (page.style as any).breakAfter = 'auto';
+      (page.style as any).breakBefore = 'auto';
+    });
+
+    console.log('[PDF] normalized pages', { count: pages.length });
+  };
+
   const handlePdfDownload = async () => {
     if (!id || isGeneratingPdf || !report) return;
     
     setIsGeneratingPdf(true);
-
-    let overlayEl: HTMLDivElement | null = null;
-    let overlayStyleEl: HTMLStyleElement | null = null;
-    const removeOverlay = () => {
-      if (overlayEl?.parentNode) overlayEl.parentNode.removeChild(overlayEl);
-      overlayEl = null;
-      if (overlayStyleEl?.parentNode) overlayStyleEl.parentNode.removeChild(overlayStyleEl);
-      overlayStyleEl = null;
-    };
     
     try {
-      // Full-screen overlay so you don't see the render container (“ander scherm”)
-      overlayEl = document.createElement('div');
-      overlayEl.id = 'pdf-render-overlay';
-      overlayEl.style.cssText = `
-        position: fixed;
-        inset: 0;
-        background: hsl(var(--background));
-        z-index: 99999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: system-ui, sans-serif;
-        font-size: 16px;
-        color: hsl(var(--muted-foreground));
-      `;
-      overlayEl.innerHTML = '<div style="text-align:center"><div style="margin-bottom:12px">PDF wordt gegenereerd...</div><div style="width:40px;height:40px;border:3px solid hsl(var(--border));border-top-color:hsl(var(--foreground));border-radius:50%;animation:spin 1s linear infinite;margin:0 auto"></div></div>';
-
-      overlayStyleEl = document.createElement('style');
-      overlayStyleEl.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
-      document.head.appendChild(overlayStyleEl);
-      document.body.appendChild(overlayEl);
-
       // Create container that is ON-SCREEN so html2canvas can render it.
-      // Keep it under the overlay so the user never sees it.
+      // Keep it behind the app UI so it doesn't show as a separate screen.
       const container = document.createElement('div');
       container.id = 'pdf-render-container';
       container.style.cssText = `
@@ -231,7 +221,7 @@ const ReportDetail = () => {
         top: 0;
         left: 0;
         width: 210mm;
-        z-index: 1;
+        z-index: -1;
         opacity: 1;
         pointer-events: none;
         background: white;
@@ -272,6 +262,9 @@ const ReportDetail = () => {
 
       // Wait until the PDF pages are actually present and stable
       await waitForStablePdfPages(container);
+
+      // Normalize all pdf pages before rasterization/export
+      normalizePdfPagesForExport(container);
 
       // Ensure fonts are ready before rasterization
       await waitForFonts();
@@ -342,14 +335,11 @@ const ReportDetail = () => {
 
       console.log('[PDF] saved');
 
-      removeOverlay();
       cleanup();
     } catch (error) {
       console.error('Error generating PDF:', error);
-      removeOverlay();
       cleanup();
     } finally {
-      removeOverlay();
       setIsGeneratingPdf(false);
     }
   };
