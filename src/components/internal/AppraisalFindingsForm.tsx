@@ -30,18 +30,23 @@ export interface AppraisalFormData {
   condition_electrical: string;
   condition_electrical_notes: string;
   
-  // Banden (met bandenmaat en DOT-code)
+  // Banden en wielen
+  tire_bandenmaat: string;
   tire_front_left_brand: string;
-  tire_front_left_size: string;
+  tire_front_left_model: string;
+  tire_front_left_profiel: string;
   tire_front_left_dot: string;
   tire_front_right_brand: string;
-  tire_front_right_size: string;
+  tire_front_right_model: string;
+  tire_front_right_profiel: string;
   tire_front_right_dot: string;
   tire_rear_left_brand: string;
-  tire_rear_left_size: string;
+  tire_rear_left_model: string;
+  tire_rear_left_profiel: string;
   tire_rear_left_dot: string;
   tire_rear_right_brand: string;
-  tire_rear_right_size: string;
+  tire_rear_right_model: string;
+  tire_rear_right_profiel: string;
   tire_rear_right_dot: string;
   rim_type: string;
   
@@ -93,17 +98,22 @@ export const getInitialAppraisalFormData = (): AppraisalFormData => ({
   condition_steering_notes: '',
   condition_electrical: '',
   condition_electrical_notes: '',
+  tire_bandenmaat: '',
   tire_front_left_brand: '',
-  tire_front_left_size: '',
+  tire_front_left_model: '',
+  tire_front_left_profiel: '',
   tire_front_left_dot: '',
   tire_front_right_brand: '',
-  tire_front_right_size: '',
+  tire_front_right_model: '',
+  tire_front_right_profiel: '',
   tire_front_right_dot: '',
   tire_rear_left_brand: '',
-  tire_rear_left_size: '',
+  tire_rear_left_model: '',
+  tire_rear_left_profiel: '',
   tire_rear_left_dot: '',
   tire_rear_right_brand: '',
-  tire_rear_right_size: '',
+  tire_rear_right_model: '',
+  tire_rear_right_profiel: '',
   tire_rear_right_dot: '',
   rim_type: '',
   exterior_body: '',
@@ -227,44 +237,62 @@ export const AppraisalFindingsForm = ({
           <CardTitle className="text-lg">Banden en wielen</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="tire_bandenmaat">Bandenmaat</Label>
+            <Input
+              id="tire_bandenmaat"
+              value={formData.tire_bandenmaat}
+              onChange={(e) => onChange('tire_bandenmaat', e.target.value)}
+              placeholder="Bijv. 225/45R16"
+              className="w-[200px]"
+            />
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <TireField
               position="Linker voorband"
               brand={formData.tire_front_left_brand}
-              size={formData.tire_front_left_size}
+              model={formData.tire_front_left_model}
+              profiel={formData.tire_front_left_profiel}
               dot={formData.tire_front_left_dot}
               onBrandChange={(v) => onChange('tire_front_left_brand', v)}
-              onSizeChange={(v) => onChange('tire_front_left_size', v)}
+              onModelChange={(v) => onChange('tire_front_left_model', v)}
+              onProfielChange={(v) => onChange('tire_front_left_profiel', v)}
               onDotChange={(v) => onChange('tire_front_left_dot', v)}
               dotError={tireErrors.tire_front_left_dot}
             />
             <TireField
               position="Rechter voorband"
               brand={formData.tire_front_right_brand}
-              size={formData.tire_front_right_size}
+              model={formData.tire_front_right_model}
+              profiel={formData.tire_front_right_profiel}
               dot={formData.tire_front_right_dot}
               onBrandChange={(v) => onChange('tire_front_right_brand', v)}
-              onSizeChange={(v) => onChange('tire_front_right_size', v)}
+              onModelChange={(v) => onChange('tire_front_right_model', v)}
+              onProfielChange={(v) => onChange('tire_front_right_profiel', v)}
               onDotChange={(v) => onChange('tire_front_right_dot', v)}
               dotError={tireErrors.tire_front_right_dot}
             />
             <TireField
               position="Linker achterband"
               brand={formData.tire_rear_left_brand}
-              size={formData.tire_rear_left_size}
+              model={formData.tire_rear_left_model}
+              profiel={formData.tire_rear_left_profiel}
               dot={formData.tire_rear_left_dot}
               onBrandChange={(v) => onChange('tire_rear_left_brand', v)}
-              onSizeChange={(v) => onChange('tire_rear_left_size', v)}
+              onModelChange={(v) => onChange('tire_rear_left_model', v)}
+              onProfielChange={(v) => onChange('tire_rear_left_profiel', v)}
               onDotChange={(v) => onChange('tire_rear_left_dot', v)}
               dotError={tireErrors.tire_rear_left_dot}
             />
             <TireField
               position="Rechter achterband"
               brand={formData.tire_rear_right_brand}
-              size={formData.tire_rear_right_size}
+              model={formData.tire_rear_right_model}
+              profiel={formData.tire_rear_right_profiel}
               dot={formData.tire_rear_right_dot}
               onBrandChange={(v) => onChange('tire_rear_right_brand', v)}
-              onSizeChange={(v) => onChange('tire_rear_right_size', v)}
+              onModelChange={(v) => onChange('tire_rear_right_model', v)}
+              onProfielChange={(v) => onChange('tire_rear_right_profiel', v)}
               onDotChange={(v) => onChange('tire_rear_right_dot', v)}
               dotError={tireErrors.tire_rear_right_dot}
             />

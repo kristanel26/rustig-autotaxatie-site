@@ -108,20 +108,29 @@ export type Database = {
           stalling: string | null
           tellerstand: number | null
           tellerstand_type: string | null
+          tire_bandenmaat: string | null
           tire_front_left_brand: string | null
           tire_front_left_dot: string | null
+          tire_front_left_model: string | null
+          tire_front_left_profiel: string | null
           tire_front_left_season: string | null
           tire_front_left_size: string | null
           tire_front_right_brand: string | null
           tire_front_right_dot: string | null
+          tire_front_right_model: string | null
+          tire_front_right_profiel: string | null
           tire_front_right_season: string | null
           tire_front_right_size: string | null
           tire_rear_left_brand: string | null
           tire_rear_left_dot: string | null
+          tire_rear_left_model: string | null
+          tire_rear_left_profiel: string | null
           tire_rear_left_season: string | null
           tire_rear_left_size: string | null
           tire_rear_right_brand: string | null
           tire_rear_right_dot: string | null
+          tire_rear_right_model: string | null
+          tire_rear_right_profiel: string | null
           tire_rear_right_season: string | null
           tire_rear_right_size: string | null
           transmissie: string | null
@@ -226,20 +235,29 @@ export type Database = {
           stalling?: string | null
           tellerstand?: number | null
           tellerstand_type?: string | null
+          tire_bandenmaat?: string | null
           tire_front_left_brand?: string | null
           tire_front_left_dot?: string | null
+          tire_front_left_model?: string | null
+          tire_front_left_profiel?: string | null
           tire_front_left_season?: string | null
           tire_front_left_size?: string | null
           tire_front_right_brand?: string | null
           tire_front_right_dot?: string | null
+          tire_front_right_model?: string | null
+          tire_front_right_profiel?: string | null
           tire_front_right_season?: string | null
           tire_front_right_size?: string | null
           tire_rear_left_brand?: string | null
           tire_rear_left_dot?: string | null
+          tire_rear_left_model?: string | null
+          tire_rear_left_profiel?: string | null
           tire_rear_left_season?: string | null
           tire_rear_left_size?: string | null
           tire_rear_right_brand?: string | null
           tire_rear_right_dot?: string | null
+          tire_rear_right_model?: string | null
+          tire_rear_right_profiel?: string | null
           tire_rear_right_season?: string | null
           tire_rear_right_size?: string | null
           transmissie?: string | null
@@ -344,20 +362,29 @@ export type Database = {
           stalling?: string | null
           tellerstand?: number | null
           tellerstand_type?: string | null
+          tire_bandenmaat?: string | null
           tire_front_left_brand?: string | null
           tire_front_left_dot?: string | null
+          tire_front_left_model?: string | null
+          tire_front_left_profiel?: string | null
           tire_front_left_season?: string | null
           tire_front_left_size?: string | null
           tire_front_right_brand?: string | null
           tire_front_right_dot?: string | null
+          tire_front_right_model?: string | null
+          tire_front_right_profiel?: string | null
           tire_front_right_season?: string | null
           tire_front_right_size?: string | null
           tire_rear_left_brand?: string | null
           tire_rear_left_dot?: string | null
+          tire_rear_left_model?: string | null
+          tire_rear_left_profiel?: string | null
           tire_rear_left_season?: string | null
           tire_rear_left_size?: string | null
           tire_rear_right_brand?: string | null
           tire_rear_right_dot?: string | null
+          tire_rear_right_model?: string | null
+          tire_rear_right_profiel?: string | null
           tire_rear_right_season?: string | null
           tire_rear_right_size?: string | null
           transmissie?: string | null
