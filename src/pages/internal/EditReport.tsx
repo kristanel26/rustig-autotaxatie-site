@@ -29,6 +29,7 @@ import { GeneralImpressionForm, GeneralImpressionFormData, getInitialGeneralImpr
 import { MoistureAndSafetyForm, MoistureAndSafetyFormData, getInitialMoistureAndSafetyFormData } from '@/components/internal/MoistureAndSafetyForm';
 import { PostcodeField } from '@/components/internal/PostcodeField';
 import PhotoUploadForm, { PhotoRotations, PhotoTypes } from '@/components/internal/PhotoUploadForm';
+import { AutoExtractProvider } from '@/components/internal/AutoExtractContext';
 import { useAutoSave } from '@/hooks/useAutoSave';
 import { SaveStatusIndicator } from '@/components/internal/SaveStatusIndicator';
 import { usePageLeaveProtection } from '@/hooks/usePageLeaveProtection';
@@ -892,16 +893,17 @@ const EditReport = () => {
   }
 
   return (
-    <InternalLayout title={`Rapport ${report.report_number} Bewerken`}>
-      {/* Unsaved changes dialog */}
-      <UnsavedChangesDialog
-        open={isBlocked}
-        onSaveAndLeave={proceed}
-        onLeaveWithoutSaving={proceed}
-        onStay={reset}
-      />
+    <AutoExtractProvider>
+      <InternalLayout title={`Rapport ${report.report_number} Bewerken`}>
+        {/* Unsaved changes dialog */}
+        <UnsavedChangesDialog
+          open={isBlocked}
+          onSaveAndLeave={proceed}
+          onLeaveWithoutSaving={proceed}
+          onStay={reset}
+        />
 
-      <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
+        <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
         {/* Header with Back Button and Save Status */}
         <div className="flex items-center justify-between">
           <Button 
@@ -1087,6 +1089,7 @@ const EditReport = () => {
             onRotationsChange={handleRotationsChange}
             onPhotoTypesChange={handlePhotoTypesChange}
             reportId={id}
+            reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
           />
         )}
 
@@ -1149,6 +1152,7 @@ const EditReport = () => {
             onRotationsChange={handleRotationsChange}
             onPhotoTypesChange={handlePhotoTypesChange}
             reportId={id}
+            reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
           />
         )}
 
@@ -1304,8 +1308,9 @@ const EditReport = () => {
             Annuleren
           </Button>
         </div>
-      </form>
-    </InternalLayout>
+        </form>
+      </InternalLayout>
+    </AutoExtractProvider>
   );
 };
 
