@@ -14,7 +14,7 @@ interface ExtractionResult {
 }
 
 interface ExtractRequest {
-  section: 'voertuigidentificatie' | 'tellerstand' | 'banden' | 'massa' | 'gasinstallatie';
+  section: 'voertuigidentificatie' | 'tellerstand' | 'banden' | 'massa' | 'gasinstallatie' | 'transmissie';
   photo_urls: string[];
   photo_types: string[];
 }
@@ -83,15 +83,16 @@ Analyseer de foto('s) en extraheer ALLE zichtbare bandinformatie per band.
 LET OP: Elke foto is getagged met een positie (band_voor_links, band_voor_rechts, band_achter_links, band_achter_rechts).
 Extraheer per foto de volgende gegevens:
 
-1. BANDENMERK - Zoek naar de merknaam op de zijwand (bijv. Michelin, Continental, Pirelli, Hankook, Bridgestone)
-   BELANGRIJK: Het merk staat altijd groot op de zijwand. Negeer:
+1. BANDENMERK - Zoek naar de merknaam op de zijwand (bijv. Michelin, Continental, Pirelli, Hankook, Bridgestone, Goodyear, Dunlop, Vredestein, Firestone, BF Goodrich, Yokohama, Toyo, Kumho, Falken, Nexen, Cooper, General Tire, Nokian, Uniroyal, Kleber)
+   BELANGRIJK: Het merk staat altijd GROOT op de zijwand van de band zelf. Negeer:
    - Velgmerken (die staan op de velg, niet op de band)
    - Voertuigmerken
    - Mascotte namen (zoals "Bibendum" voor Michelin)
+   - Tekst op de velg of wiel
    
-2. MODEL - Het type/model van de band (bijv. "Pilot Sport 4", "CrossClimate+", "Primacy 4")
+2. MODEL - Het type/model van de band (bijv. "Pilot Sport 4", "CrossClimate+", "Primacy 4", "EcoContact 6", "WinterContact")
 
-3. BANDENMAAT - Formaat zoals "215/70 R15 C" of "225/45 R17"
+3. BANDENMAAT - Formaat zoals "215/70 R15 C" of "225/45 R17 94W"
 
 4. DOT-CODE - De 4 cijfers na "DOT" die productieweek/jaar aangeven (bijv. "2521" = week 25, jaar 2021)
 
@@ -138,7 +139,8 @@ Antwoord ALLEEN in dit exacte JSON formaat:
 Regels:
 - DOT-code is ALTIJD exact 4 cijfers
 - Bandenmaat volgt het formaat: breedte/hoogte R diameter [loadindex/speedrating]
-- Als het merk niet duidelijk leesbaar is, gebruik status "ontbreekt" - GEEN gokken
+- Als het merk niet duidelijk leesbaar is op de BAND ZELF, gebruik status "ontbreekt" - GEEN gokken
+- Kijk specifiek naar de ZIJWAND van de band, niet naar de velg
 - Geef per foto resultaten met de juiste positie-prefix
 - Als je meerdere foto's analyseert, geef resultaten voor elke positie apart`,
 
@@ -218,7 +220,39 @@ Antwoord ALLEEN in dit exacte JSON formaat:
   ]
 }
 
-BELANGRIJK: Maak GEEN aannames over veiligheid of compliance. Rapporteer alleen wat je ziet.`
+BELANGRIJK: Maak GEEN aannames over veiligheid of compliance. Rapporteer alleen wat je ziet.`,
+
+  transmissie: `Je bent een expert in het herkennen van voertuigtransmissie-types op basis van interieurfotos.
+Analyseer de foto en bepaal of het voertuig een handgeschakelde of automatische transmissie heeft.
+
+METHODE 1 - PEDALEN (meest betrouwbaar):
+- 3 pedalen (koppeling, rem, gas) = handgeschakeld
+- 2 pedalen (rem, gas) = automaat
+
+METHODE 2 - VERSNELLINGSPOOK (als pedalen niet zichtbaar):
+- Schakelpatroon met cijfers in H-vorm (1-2-3-4-5-R) = handgeschakeld
+- Letters P-R-N-D of + en - voor tiptronic = automaat
+- Drukknop of draaiknop = automaat
+
+Antwoord ALLEEN in dit exacte JSON formaat:
+{
+  "results": [
+    {
+      "field_key": "transmissie",
+      "proposed_value": "handgeschakeld|automaat",
+      "status": "zeker|waarschijnlijk|ontbreekt",
+      "confidence": 0-100,
+      "raw_text": "beschrijving van wat je ziet (bijv. '3 pedalen zichtbaar' of 'PRND op pook')"
+    }
+  ]
+}
+
+Regels:
+- Pedalen tellen is ALTIJD de meest betrouwbare methode
+- Als je 3 pedalen ziet, is het ALTIJD handgeschakeld
+- Als je 2 pedalen ziet, is het ALTIJD automaat
+- Bij twijfel, gebruik status "waarschijnlijk" met lagere confidence
+- Als je geen pedalen of pook kunt zien, gebruik status "ontbreekt"`
 };
 
 serve(async (req) => {

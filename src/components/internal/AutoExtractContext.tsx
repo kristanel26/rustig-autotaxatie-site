@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import type { PhotoType, ExtractSection } from './photoTypes';
-import { PHOTO_TYPE_TO_SECTION } from './photoTypes';
+import { PHOTO_TYPE_TO_SECTION, EXTRACTION_FIELD_MAPPINGS } from './photoTypes';
 
 export interface ExtractionResult {
   field_key: string;
@@ -20,6 +20,7 @@ export interface PendingSuggestion {
   photoUrl: string;
   photoType: PhotoType;
   section: ExtractSection;
+  source?: string; // e.g., "Pedalen" or "Versnellingspook"
 }
 
 interface AutoExtractContextValue {
@@ -32,6 +33,9 @@ interface AutoExtractContextValue {
   acceptSuggestion: (fieldKey: string) => string | null;
   dismissSuggestion: (fieldKey: string) => void;
   clearAllSuggestions: () => void;
+  
+  // Callbacks for auto-apply
+  onAutoApply: (callback: (fieldKey: string, value: string, source?: string) => void) => void;
   
   // Report context
   setReportId: (id: string) => void;
@@ -55,6 +59,7 @@ export function AutoExtractProvider({ children }: AutoExtractProviderProps) {
   const [isExtracting, setIsExtracting] = useState(false);
   const [pendingSuggestions, setPendingSuggestions] = useState<Record<string, PendingSuggestion>>({});
   const [reportId, setReportId] = useState<string>('');
+  const [autoApplyCallback, setAutoApplyCallback] = useState<((fieldKey: string, value: string, source?: string) => void) | null>(null);
 
   // Map photo type to tire position prefix
   const getTirePositionPrefix = (photoType: PhotoType): string | null => {
@@ -67,6 +72,15 @@ export function AutoExtractProvider({ children }: AutoExtractProviderProps) {
     }
   };
 
+  // Get source label for transmissie
+  const getTransmissieSource = (photoType: PhotoType): string => {
+    switch (photoType) {
+      case 'voetenruimte_pedalen': return 'Pedalen';
+      case 'versnellingspook': return 'Versnellingspook';
+      default: return photoType;
+    }
+  };
+
   const triggerExtraction = useCallback(async (
     photoUrl: string,
     photoType: PhotoType,
@@ -75,7 +89,7 @@ export function AutoExtractProvider({ children }: AutoExtractProviderProps) {
   ) => {
     const section = PHOTO_TYPE_TO_SECTION[photoType];
     
-    // No extraction for purely visual photo types
+    // No extraction for photo types without a section
     if (!section) {
       return;
     }
@@ -84,7 +98,6 @@ export function AutoExtractProvider({ children }: AutoExtractProviderProps) {
 
     try {
       // Find all photos of the same or related types for this section
-      // For example, for VIN we might want both vin_typeplaat and vin_ruit
       const sectionPhotoTypes = Object.entries(PHOTO_TYPE_TO_SECTION)
         .filter(([_, s]) => s === section)
         .map(([t]) => t as PhotoType);
@@ -121,44 +134,57 @@ export function AutoExtractProvider({ children }: AutoExtractProviderProps) {
       }
 
       if (data.error) {
-        // Don't show error toast for empty results - just skip silently
         console.log('Extraction returned no data:', data.error);
         return;
       }
 
       const results: ExtractionResult[] = data.results || [];
 
-      // Convert results to pending suggestions
-      const newSuggestions: Record<string, PendingSuggestion> = {};
-      
-      // Track if we found tire brand for feedback
+      // Track stats
       let foundTireBrand = false;
       let hadTirePhoto = section === 'banden';
+      let autoAppliedCount = 0;
+      const manualSuggestions: Record<string, PendingSuggestion> = {};
       
       results.forEach(result => {
         if (result.status !== 'ontbreekt' && result.proposed_value) {
-          // For tire extraction, ensure the field_key uses the correct position prefix
           let finalFieldKey = result.field_key;
+          let source: string | undefined;
           
-          // If this is a tire result and doesn't have a position prefix, add one based on the photo
+          // For tire extraction, ensure the field_key uses the correct position prefix
           if (section === 'banden') {
             const positionPrefix = getTirePositionPrefix(photoType);
             
-            // Handle generic tire_size - use it globally
             if (result.field_key === 'tire_size') {
               finalFieldKey = 'tire_bandenmaat';
-            }
-            // Handle tire_dot without position - add position from photo type
-            else if (result.field_key === 'tire_dot' && positionPrefix) {
+            } else if (result.field_key === 'tire_dot' && positionPrefix) {
               finalFieldKey = `${positionPrefix}dot`;
             }
-            // Check if brand was found
+            
             if (result.field_key.includes('brand') && result.proposed_value) {
               foundTireBrand = true;
             }
           }
           
-          newSuggestions[finalFieldKey] = {
+          // For transmissie, track the source
+          if (section === 'transmissie') {
+            source = getTransmissieSource(photoType);
+            
+            // Check if we already have a higher priority source
+            const existingSuggestion = pendingSuggestions['transmissie'];
+            if (existingSuggestion) {
+              // Pedalen is higher priority than Versnellingspook
+              if (existingSuggestion.source === 'Pedalen' && source === 'Versnellingspook') {
+                return; // Skip, pedalen is already set
+              }
+              // Use the one with higher confidence if same source type
+              if (existingSuggestion.confidence >= result.confidence) {
+                return; // Skip, existing is better
+              }
+            }
+          }
+          
+          const suggestion: PendingSuggestion = {
             fieldKey: finalFieldKey,
             proposedValue: result.proposed_value,
             confidence: result.confidence,
@@ -166,25 +192,64 @@ export function AutoExtractProvider({ children }: AutoExtractProviderProps) {
             photoUrl,
             photoType,
             section,
+            source,
           };
+          
+          // Auto-apply if confidence >= 85% and we have a callback
+          if (result.confidence >= 85 && autoApplyCallback) {
+            autoApplyCallback(finalFieldKey, result.proposed_value, source);
+            autoAppliedCount++;
+            
+            // Store in database
+            if (reportId) {
+              supabase.from('photo_extract_results').insert({
+                report_id: reportId,
+                photo_url: photoUrl,
+                photo_type: photoType,
+                section,
+                field_key: finalFieldKey,
+                proposed_value: result.proposed_value,
+                status: result.status,
+                confidence: result.confidence,
+                accepted: true,
+              }).then(({ error }) => {
+                if (error) console.error('Failed to store extraction result:', error);
+              });
+            }
+          } else {
+            manualSuggestions[finalFieldKey] = suggestion;
+          }
         }
       });
 
-      if (Object.keys(newSuggestions).length > 0) {
+      // Update pending suggestions (for values that weren't auto-applied)
+      if (Object.keys(manualSuggestions).length > 0) {
         setPendingSuggestions(prev => ({
           ...prev,
-          ...newSuggestions,
+          ...manualSuggestions,
         }));
+      }
 
-        // Show toast with summary
-        const count = Object.keys(newSuggestions).length;
-        toast.success(`${count} waarde${count > 1 ? 's' : ''} gevonden`, {
-          description: 'Bekijk de suggesties bij de velden',
-        });
+      // Show appropriate toast
+      const totalFound = autoAppliedCount + Object.keys(manualSuggestions).length;
+      if (totalFound > 0) {
+        if (autoAppliedCount > 0 && Object.keys(manualSuggestions).length > 0) {
+          toast.success(`${autoAppliedCount} waarde(s) automatisch overgenomen`, {
+            description: `${Object.keys(manualSuggestions).length} suggestie(s) wachten op bevestiging`,
+          });
+        } else if (autoAppliedCount > 0) {
+          toast.success(`${autoAppliedCount} waarde(s) automatisch overgenomen`, {
+            description: 'Velden zijn bijgewerkt',
+          });
+        } else {
+          toast.success(`${totalFound} waarde(s) gevonden`, {
+            description: 'Bekijk de suggesties bij de velden',
+          });
+        }
       }
       
       // Show feedback if tire photo but no brand found
-      if (hadTirePhoto && !foundTireBrand && Object.keys(newSuggestions).length > 0) {
+      if (hadTirePhoto && !foundTireBrand && totalFound > 0) {
         toast.info('Bandenmerk niet herkend', {
           description: 'Tip: maak een close-up van de zijwand met merk + DOT in beeld',
           duration: 5000,
@@ -196,7 +261,7 @@ export function AutoExtractProvider({ children }: AutoExtractProviderProps) {
     } finally {
       setIsExtracting(false);
     }
-  }, []);
+  }, [autoApplyCallback, pendingSuggestions, reportId]);
 
   const acceptSuggestion = useCallback((fieldKey: string): string | null => {
     const suggestion = pendingSuggestions[fieldKey];
@@ -241,6 +306,10 @@ export function AutoExtractProvider({ children }: AutoExtractProviderProps) {
     setPendingSuggestions({});
   }, []);
 
+  const onAutoApply = useCallback((callback: (fieldKey: string, value: string, source?: string) => void) => {
+    setAutoApplyCallback(() => callback);
+  }, []);
+
   return (
     <AutoExtractContext.Provider
       value={{
@@ -250,6 +319,7 @@ export function AutoExtractProvider({ children }: AutoExtractProviderProps) {
         acceptSuggestion,
         dismissSuggestion,
         clearAllSuggestions,
+        onAutoApply,
         setReportId,
       }}
     >
