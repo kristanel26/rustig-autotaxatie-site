@@ -29,6 +29,7 @@ import { GeneralImpressionForm, GeneralImpressionFormData, getInitialGeneralImpr
 import { MoistureAndSafetyForm, MoistureAndSafetyFormData, getInitialMoistureAndSafetyFormData } from '@/components/internal/MoistureAndSafetyForm';
 import { PostcodeField } from '@/components/internal/PostcodeField';
 import PhotoUploadForm, { PhotoRotations, PhotoTypes } from '@/components/internal/PhotoUploadForm';
+import { AutoExtractProvider } from '@/components/internal/AutoExtractContext';
 import { ReportTypeSelector, ReportType } from '@/components/internal/ReportTypeSelector';
 import {
   WevValueForm,
@@ -630,20 +631,21 @@ const NewReport = () => {
   }
 
   return (
-    <InternalLayout title={getReportTitle()}>
-      <div className="mb-4">
-        <Button 
-          variant="ghost" 
-          size="sm" 
-          onClick={() => setReportType(null)}
-          className="flex items-center gap-2"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Ander rapporttype kiezen
-        </Button>
-      </div>
-      
-      <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
+    <AutoExtractProvider>
+      <InternalLayout title={getReportTitle()}>
+        <div className="mb-4">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            onClick={() => setReportType(null)}
+            className="flex items-center gap-2"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Ander rapporttype kiezen
+          </Button>
+        </div>
+        
+        <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
         {/* Customer Information */}
         <Card>
           <CardHeader>
@@ -783,6 +785,7 @@ const NewReport = () => {
             onChange={setVehiclePhotos}
             onRotationsChange={setPhotoRotations}
             onPhotoTypesChange={setPhotoTypes}
+            reportType={reportType}
           />
         )}
 
@@ -837,6 +840,7 @@ const NewReport = () => {
             onChange={setVehiclePhotos}
             onRotationsChange={setPhotoRotations}
             onPhotoTypesChange={setPhotoTypes}
+            reportType={reportType}
           />
         )}
 
@@ -909,6 +913,7 @@ const NewReport = () => {
             onChange={setVehiclePhotos}
             onRotationsChange={setPhotoRotations}
             onPhotoTypesChange={setPhotoTypes}
+            reportType={reportType}
           />
         )}
 
@@ -1075,8 +1080,9 @@ const NewReport = () => {
             Annuleren
           </Button>
         </div>
-      </form>
-    </InternalLayout>
+        </form>
+      </InternalLayout>
+    </AutoExtractProvider>
   );
 };
 

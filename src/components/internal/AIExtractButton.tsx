@@ -4,20 +4,11 @@ import { Sparkles, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { AIExtractResultsDialog } from './AIExtractResultsDialog';
+import type { PhotoType, ExtractSection } from './photoTypes';
 
-export type PhotoType = 
-  | 'kenteken' 
-  | 'dashboard' 
-  | 'vin_typeplaat' 
-  | 'vin_ruit'
-  | 'band_voor_links' 
-  | 'band_voor_rechts' 
-  | 'band_achter_links' 
-  | 'band_achter_rechts'
-  | 'typeplaat_massa' 
-  | 'gasinstallatie';
-
-export type Section = 'voertuigidentificatie' | 'tellerstand' | 'banden' | 'massa' | 'gasinstallatie';
+// Re-export for backwards compatibility
+export type { PhotoType } from './photoTypes';
+export type Section = ExtractSection;
 
 export interface ExtractionResult {
   field_key: string;
@@ -28,7 +19,7 @@ export interface ExtractionResult {
 }
 
 interface AIExtractButtonProps {
-  section: Section;
+  section: ExtractSection;
   label: string;
   photoTypes: PhotoType[];
   photos: string[];

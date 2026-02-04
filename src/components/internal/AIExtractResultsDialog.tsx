@@ -8,18 +8,19 @@ import {
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Check, AlertTriangle, HelpCircle, X } from 'lucide-react';
-import type { ExtractionResult, Section } from './AIExtractButton';
+import type { ExtractionResult } from './AIExtractButton';
+import type { ExtractSection } from './photoTypes';
 
 interface AIExtractResultsDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   results: ExtractionResult[];
   sourcePhotos: string[];
-  section: Section;
+  section: ExtractSection;
   onAccept: (result: ExtractionResult) => void;
 }
 
-const SECTION_TITLES: Record<Section, string> = {
+const SECTION_TITLES: Record<ExtractSection, string> = {
   voertuigidentificatie: 'Voertuigidentificatie',
   tellerstand: 'Tellerstand',
   banden: 'Banden en Wielen',

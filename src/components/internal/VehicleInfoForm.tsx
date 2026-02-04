@@ -15,9 +15,11 @@ import { Badge } from '@/components/ui/badge';
 import { Loader2, Search, Lock } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { AIExtractButton, PhotoType } from './AIExtractButton';
+import { AIExtractButton } from './AIExtractButton';
 import { ColorCombobox } from './ColorCombobox';
+import { FieldSuggestion } from './FieldSuggestion';
 import type { PhotoTypes } from './PhotoUploadForm';
+import type { PhotoType, ReportType } from './photoTypes';
 
 export interface VehicleFormData {
   // Identifiers
@@ -297,6 +299,10 @@ export const VehicleInfoForm = ({
               {errors.license_plate && (
                 <p className="text-sm text-destructive">{errors.license_plate}</p>
               )}
+              <FieldSuggestion 
+                fieldKey="license_plate" 
+                onAccept={(value) => onChange('license_plate', value)} 
+              />
               <p className="text-xs text-muted-foreground">
                 Klik op zoeken om RDW data automatisch op te halen
               </p>
@@ -313,6 +319,10 @@ export const VehicleInfoForm = ({
               {errors.vin && (
                 <p className="text-sm text-destructive">{errors.vin}</p>
               )}
+              <FieldSuggestion 
+                fieldKey="vin" 
+                onAccept={(value) => onChange('vin', value)} 
+              />
             </div>
           </div>
 
@@ -540,6 +550,10 @@ export const VehicleInfoForm = ({
               {errors.tellerstand && (
                 <p className="text-sm text-destructive">{errors.tellerstand}</p>
               )}
+              <FieldSuggestion 
+                fieldKey="tellerstand" 
+                onAccept={(value) => onChange('tellerstand', value)} 
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="tellerstand_type">Eenheid</Label>

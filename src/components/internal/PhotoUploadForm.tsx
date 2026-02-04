@@ -24,7 +24,8 @@ import {
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { PhotoTypeTag } from './PhotoTypeTag';
-import type { PhotoType } from './AIExtractButton';
+import { useAutoExtract } from './AutoExtractContext';
+import type { PhotoType, ReportType } from './photoTypes';
 
 // Rotation values: 0, 90, 180, 270
 export type PhotoRotation = 0 | 90 | 180 | 270;
@@ -45,6 +46,7 @@ interface PhotoUploadFormProps {
   onRotationsChange: (rotations: PhotoRotations) => void;
   onPhotoTypesChange?: (types: PhotoTypes) => void;
   reportId?: string;
+  reportType?: ReportType | null;
 }
 
 interface SortablePhotoItemProps {
@@ -59,6 +61,8 @@ interface SortablePhotoItemProps {
   onRotateLeft: () => void;
   onPhotoTypeChange: (type: PhotoType | undefined) => void;
   isDeleting: boolean;
+  reportType?: ReportType | null;
+  isExtracting?: boolean;
 }
 
 const SortablePhotoItem = ({ 
@@ -72,7 +76,9 @@ const SortablePhotoItem = ({
   onRotateRight,
   onRotateLeft,
   onPhotoTypeChange,
-  isDeleting 
+  isDeleting,
+  reportType,
+  isExtracting,
 }: SortablePhotoItemProps) => {
   const {
     attributes,
@@ -131,6 +137,8 @@ const SortablePhotoItem = ({
         photoUrl={url}
         currentType={photoType}
         onTypeChange={(_, type) => onPhotoTypeChange(type)}
+        reportType={reportType}
+        isExtracting={isExtracting}
       />
 
       {/* Actions overlay */}
@@ -200,12 +208,16 @@ const PhotoUploadForm = ({
   onChange, 
   onRotationsChange,
   onPhotoTypesChange,
-  reportId 
+  reportId,
+  reportType = null,
 }: PhotoUploadFormProps) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [isUploading, setIsUploading] = useState(false);
   const [deletingUrl, setDeletingUrl] = useState<string | null>(null);
+  
+  // Auto-extract context
+  const { isExtracting, triggerExtraction } = useAutoExtract();
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -228,17 +240,20 @@ const PhotoUploadForm = ({
     return photoTypes[url];
   }, [photoTypes]);
 
-  // Handle photo type change
+  // Handle photo type change - triggers auto-extraction
   const handlePhotoTypeChange = useCallback((url: string, type: PhotoType | undefined) => {
     if (!onPhotoTypesChange) return;
+    
     const newTypes = { ...photoTypes };
     if (type) {
       newTypes[url] = type;
+      // Trigger auto-extraction when a tag is selected
+      triggerExtraction(url, type, photos, newTypes);
     } else {
       delete newTypes[url];
     }
     onPhotoTypesChange(newTypes);
-  }, [photoTypes, onPhotoTypesChange]);
+  }, [photoTypes, onPhotoTypesChange, photos, triggerExtraction]);
 
   // Rotate photo right (clockwise)
   const handleRotateRight = useCallback((url: string) => {
@@ -419,7 +434,7 @@ const PhotoUploadForm = ({
         {/* Instructions */}
         <div className="text-sm text-muted-foreground space-y-1">
           <p>Upload hier de foto's van het voertuig.</p>
-          <p>Je kunt onbeperkt foto's toevoegen en roteren indien nodig.</p>
+          <p>Tag foto's om automatisch gegevens te extraheren (bijv. kenteken, km-stand).</p>
           <p>Eén foto kan worden vastgezet als voorblad.</p>
         </div>
 
@@ -458,7 +473,7 @@ const PhotoUploadForm = ({
             </Button>
           </div>
           <p className="text-xs text-muted-foreground mt-2">
-            Hover over een foto om te roteren of als voorbladfoto in te stellen.
+            Kies een tag bij een foto om automatisch gegevens te laten extraheren.
           </p>
         </div>
 
@@ -485,6 +500,8 @@ const PhotoUploadForm = ({
                     onRotateLeft={() => handleRotateLeft(url)}
                     onPhotoTypeChange={(type) => handlePhotoTypeChange(url, type)}
                     isDeleting={deletingUrl === url}
+                    reportType={reportType}
+                    isExtracting={isExtracting}
                   />
                 ))}
               </div>
