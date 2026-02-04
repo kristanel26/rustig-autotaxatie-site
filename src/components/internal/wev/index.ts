@@ -13,3 +13,6 @@ export type { WevAdjustmentsData } from './WevAdjustmentsForm';
 
 export { WevConclusionForm, getInitialWevConclusionData } from './WevConclusionForm';
 export type { WevConclusionData } from './WevConclusionForm';
+
+export { WevDocumentUploadForm } from './WevDocumentUploadForm';
+export type { WevDocument, DocumentType } from './WevDocumentUploadForm';
