@@ -67,6 +67,456 @@ export type Database = {
           },
         ]
       }
+      report_attachments: {
+        Row: {
+          attachment_type: string
+          created_at: string
+          extracted_retail_value: number | null
+          extracted_source_reference: string | null
+          extracted_trade_in_value: number | null
+          file_name: string
+          file_url: string
+          id: string
+          report_id: string
+          uploaded_at: string
+        }
+        Insert: {
+          attachment_type: string
+          created_at?: string
+          extracted_retail_value?: number | null
+          extracted_source_reference?: string | null
+          extracted_trade_in_value?: number | null
+          file_name: string
+          file_url: string
+          id?: string
+          report_id: string
+          uploaded_at?: string
+        }
+        Update: {
+          attachment_type?: string
+          created_at?: string
+          extracted_retail_value?: number | null
+          extracted_source_reference?: string | null
+          extracted_trade_in_value?: number | null
+          file_name?: string
+          file_url?: string
+          id?: string
+          report_id?: string
+          uploaded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_attachments_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_client: {
+        Row: {
+          city: string | null
+          created_at: string
+          email_internal: string | null
+          first_name: string | null
+          house_number: string | null
+          id: string
+          initials: string | null
+          last_name: string
+          phone_internal: string | null
+          postal_code: string | null
+          report_id: string
+          salutation: string | null
+          street: string | null
+          updated_at: string
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          email_internal?: string | null
+          first_name?: string | null
+          house_number?: string | null
+          id?: string
+          initials?: string | null
+          last_name: string
+          phone_internal?: string | null
+          postal_code?: string | null
+          report_id: string
+          salutation?: string | null
+          street?: string | null
+          updated_at?: string
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          email_internal?: string | null
+          first_name?: string | null
+          house_number?: string | null
+          id?: string
+          initials?: string | null
+          last_name?: string
+          phone_internal?: string | null
+          postal_code?: string | null
+          report_id?: string
+          salutation?: string | null
+          street?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_client_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: true
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_comparables: {
+        Row: {
+          asking_price: number | null
+          created_at: string
+          id: string
+          mileage: number | null
+          notes: string | null
+          report_id: string
+          sort_order: number | null
+          source: string | null
+          title: string
+          updated_at: string
+          url: string | null
+          year: number | null
+        }
+        Insert: {
+          asking_price?: number | null
+          created_at?: string
+          id?: string
+          mileage?: number | null
+          notes?: string | null
+          report_id: string
+          sort_order?: number | null
+          source?: string | null
+          title: string
+          updated_at?: string
+          url?: string | null
+          year?: number | null
+        }
+        Update: {
+          asking_price?: number | null
+          created_at?: string
+          id?: string
+          mileage?: number | null
+          notes?: string | null
+          report_id?: string
+          sort_order?: number | null
+          source?: string | null
+          title?: string
+          updated_at?: string
+          url?: string | null
+          year?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_comparables_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_condition_sections: {
+        Row: {
+          condition_rating: string | null
+          created_at: string
+          id: string
+          notes: string | null
+          report_id: string
+          section_key: string
+          updated_at: string
+        }
+        Insert: {
+          condition_rating?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          report_id: string
+          section_key: string
+          updated_at?: string
+        }
+        Update: {
+          condition_rating?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          report_id?: string
+          section_key?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_condition_sections_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_inspection: {
+        Row: {
+          created_at: string
+          end_time: string | null
+          id: string
+          inspection_date: string | null
+          inspection_location: string | null
+          report_id: string
+          start_time: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          end_time?: string | null
+          id?: string
+          inspection_date?: string | null
+          inspection_location?: string | null
+          report_id: string
+          start_time?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          end_time?: string | null
+          id?: string
+          inspection_date?: string | null
+          inspection_location?: string | null
+          report_id?: string
+          start_time?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_inspection_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: true
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_market: {
+        Row: {
+          created_at: string
+          final_value: number
+          id: string
+          report_id: string
+          retail_value: number
+          source: string | null
+          trade_in_value: number
+          updated_at: string
+          vat_margin_type: string
+          wev_calculated_avg: number | null
+        }
+        Insert: {
+          created_at?: string
+          final_value: number
+          id?: string
+          report_id: string
+          retail_value: number
+          source?: string | null
+          trade_in_value: number
+          updated_at?: string
+          vat_margin_type: string
+          wev_calculated_avg?: number | null
+        }
+        Update: {
+          created_at?: string
+          final_value?: number
+          id?: string
+          report_id?: string
+          retail_value?: number
+          source?: string | null
+          trade_in_value?: number
+          updated_at?: string
+          vat_margin_type?: string
+          wev_calculated_avg?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_market_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: true
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_media_photos: {
+        Row: {
+          created_at: string
+          file_name: string
+          file_url: string
+          id: string
+          is_cover: boolean | null
+          report_id: string
+          rotation_degrees: number | null
+          sort_order: number | null
+          uploaded_at: string
+        }
+        Insert: {
+          created_at?: string
+          file_name: string
+          file_url: string
+          id?: string
+          is_cover?: boolean | null
+          report_id: string
+          rotation_degrees?: number | null
+          sort_order?: number | null
+          uploaded_at?: string
+        }
+        Update: {
+          created_at?: string
+          file_name?: string
+          file_url?: string
+          id?: string
+          is_cover?: boolean | null
+          report_id?: string
+          rotation_degrees?: number | null
+          sort_order?: number | null
+          uploaded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_media_photos_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_valuation_narratives: {
+        Row: {
+          corrections_motivation: string
+          created_at: string
+          final_motivation: string
+          general_remarks: string | null
+          id: string
+          max_bandwidth: number
+          min_bandwidth: number
+          report_id: string
+          updated_at: string
+        }
+        Insert: {
+          corrections_motivation: string
+          created_at?: string
+          final_motivation: string
+          general_remarks?: string | null
+          id?: string
+          max_bandwidth: number
+          min_bandwidth: number
+          report_id: string
+          updated_at?: string
+        }
+        Update: {
+          corrections_motivation?: string
+          created_at?: string
+          final_motivation?: string
+          general_remarks?: string | null
+          id?: string
+          max_bandwidth?: number
+          min_bandwidth?: number
+          report_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_valuation_narratives_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: true
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_vehicle: {
+        Row: {
+          body_type: string | null
+          build_year: number | null
+          color: string | null
+          created_at: string
+          cylinders: number | null
+          engine_cc: number | null
+          first_registration_date: string | null
+          fuel_type: string | null
+          id: string
+          license_plate: string | null
+          make: string | null
+          model: string | null
+          odometer_unit: string | null
+          odometer_value: number | null
+          power_kw: number | null
+          report_id: string
+          transmission_type: string | null
+          trim: string | null
+          updated_at: string
+          vin: string | null
+        }
+        Insert: {
+          body_type?: string | null
+          build_year?: number | null
+          color?: string | null
+          created_at?: string
+          cylinders?: number | null
+          engine_cc?: number | null
+          first_registration_date?: string | null
+          fuel_type?: string | null
+          id?: string
+          license_plate?: string | null
+          make?: string | null
+          model?: string | null
+          odometer_unit?: string | null
+          odometer_value?: number | null
+          power_kw?: number | null
+          report_id: string
+          transmission_type?: string | null
+          trim?: string | null
+          updated_at?: string
+          vin?: string | null
+        }
+        Update: {
+          body_type?: string | null
+          build_year?: number | null
+          color?: string | null
+          created_at?: string
+          cylinders?: number | null
+          engine_cc?: number | null
+          first_registration_date?: string | null
+          fuel_type?: string | null
+          id?: string
+          license_plate?: string | null
+          make?: string | null
+          model?: string | null
+          odometer_unit?: string | null
+          odometer_value?: number | null
+          power_kw?: number | null
+          report_id?: string
+          transmission_type?: string | null
+          trim?: string | null
+          updated_at?: string
+          vin?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_vehicle_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: true
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reports: {
         Row: {
           appraised_value: number | null
@@ -186,16 +636,19 @@ export type Database = {
           rdw_vermogen_kw: number | null
           rdw_voertuigsoort: string | null
           rdw_wielbasis: number | null
+          ready_at: string | null
           report_number: string
           report_type: string | null
           rim_type: string | null
           security_present: boolean | null
           security_type: string | null
+          signed_at: string | null
           smoke_detector: boolean | null
           soort_bouw: string | null
           staat_bij_opname: string | null
           stalling: string | null
           starter_battery: boolean | null
+          status: string | null
           tellerstand: number | null
           tellerstand_type: string | null
           tire_advice: string | null
@@ -384,16 +837,19 @@ export type Database = {
           rdw_vermogen_kw?: number | null
           rdw_voertuigsoort?: string | null
           rdw_wielbasis?: number | null
+          ready_at?: string | null
           report_number: string
           report_type?: string | null
           rim_type?: string | null
           security_present?: boolean | null
           security_type?: string | null
+          signed_at?: string | null
           smoke_detector?: boolean | null
           soort_bouw?: string | null
           staat_bij_opname?: string | null
           stalling?: string | null
           starter_battery?: boolean | null
+          status?: string | null
           tellerstand?: number | null
           tellerstand_type?: string | null
           tire_advice?: string | null
@@ -582,16 +1038,19 @@ export type Database = {
           rdw_vermogen_kw?: number | null
           rdw_voertuigsoort?: string | null
           rdw_wielbasis?: number | null
+          ready_at?: string | null
           report_number?: string
           report_type?: string | null
           rim_type?: string | null
           security_present?: boolean | null
           security_type?: string | null
+          signed_at?: string | null
           smoke_detector?: boolean | null
           soort_bouw?: string | null
           staat_bij_opname?: string | null
           stalling?: string | null
           starter_battery?: boolean | null
+          status?: string | null
           tellerstand?: number | null
           tellerstand_type?: string | null
           tire_advice?: string | null
