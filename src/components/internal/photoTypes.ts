@@ -21,7 +21,7 @@ export type PhotoType =
 export type ReportType = 'camper' | 'wev' | 'klassieker';
 
 // Extraction section mapping - which section to extract for each photo type
-export type ExtractSection = 'voertuigidentificatie' | 'tellerstand' | 'banden' | 'massa' | 'gasinstallatie';
+export type ExtractSection = 'voertuigidentificatie' | 'tellerstand' | 'banden' | 'massa' | 'gasinstallatie' | 'transmissie';
 
 export const PHOTO_TYPE_TO_SECTION: Record<PhotoType, ExtractSection | null> = {
   kenteken: 'voertuigidentificatie',
@@ -34,9 +34,9 @@ export const PHOTO_TYPE_TO_SECTION: Record<PhotoType, ExtractSection | null> = {
   band_achter_rechts: 'banden',
   typeplaat_massa: 'massa',
   gasinstallatie: 'gasinstallatie',
-  // New klassieker types - no extraction (visual only for now)
-  voetenruimte_pedalen: null,
-  versnellingspook: null,
+  // Klassieker types - transmissie extraction
+  voetenruimte_pedalen: 'transmissie',
+  versnellingspook: 'transmissie',
 };
 
 // Labels shown in UI - can differ per report type
@@ -122,6 +122,9 @@ export const EXTRACTION_FIELD_MAPPINGS: Record<string, FieldMapping> = {
   
   // Tellerstand
   tellerstand: { fieldKey: 'tellerstand', formSection: 'vehicle', displayLabel: 'Kilometerstand' },
+  
+  // Transmissie
+  transmissie: { fieldKey: 'transmissie', formSection: 'vehicle', displayLabel: 'Transmissie' },
   
   // Tire data - global
   tire_size: { fieldKey: 'tire_bandenmaat', formSection: 'appraisal', displayLabel: 'Bandenmaat' },
