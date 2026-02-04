@@ -31,22 +31,12 @@ import { PostcodeField } from '@/components/internal/PostcodeField';
 import PhotoUploadForm, { PhotoRotations, PhotoTypes } from '@/components/internal/PhotoUploadForm';
 import { ReportTypeSelector, ReportType } from '@/components/internal/ReportTypeSelector';
 import {
-  WevValuationContextForm,
-  WevValuationContextData,
-  getInitialWevValuationContextData,
+  WevValueForm,
+  WevValueData,
+  getInitialWevValueData,
   WevAutotelexDataForm,
   WevAutotelexData,
   getInitialWevAutotelexData,
-  WevComparablesForm,
-  WevComparablesData,
-  WevComparable,
-  getInitialWevComparablesData,
-  WevAdjustmentsForm,
-  WevAdjustmentsData,
-  getInitialWevAdjustmentsData,
-  WevConclusionForm,
-  WevConclusionData,
-  getInitialWevConclusionData,
   WevDocumentUploadForm,
 } from '@/components/internal/wev';
 
@@ -144,12 +134,9 @@ const NewReport = () => {
     general_remarks: '',
   });
 
-  // WEV valuation data (new structure)
-  const [wevContextData, setWevContextData] = useState<WevValuationContextData>(getInitialWevValuationContextData());
+  // WEV valuation data (simplified - single value, no bandwidth)
   const [wevAutotelexData, setWevAutotelexData] = useState<WevAutotelexData>(getInitialWevAutotelexData());
-  const [wevComparablesData, setWevComparablesData] = useState<WevComparablesData>(getInitialWevComparablesData());
-  const [wevAdjustmentsData, setWevAdjustmentsData] = useState<WevAdjustmentsData>(getInitialWevAdjustmentsData());
-  const [wevConclusionData, setWevConclusionData] = useState<WevConclusionData>(getInitialWevConclusionData());
+  const [wevValueData, setWevValueData] = useState<WevValueData>(getInitialWevValueData());
 
   const handleCustomerChange = (field: string, value: string) => {
     setCustomerData(prev => ({ ...prev, [field]: value }));
@@ -201,24 +188,12 @@ const NewReport = () => {
     setMoistureData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleWevContextChange = (field: keyof WevValuationContextData, value: string) => {
-    setWevContextData(prev => ({ ...prev, [field]: value }));
-  };
-
   const handleWevAutotelexChange = (field: keyof WevAutotelexData, value: string | boolean) => {
     setWevAutotelexData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleWevComparablesChange = (comparables: WevComparable[]) => {
-    setWevComparablesData({ wev_comparables: comparables });
-  };
-
-  const handleWevAdjustmentsChange = (field: keyof WevAdjustmentsData, value: string) => {
-    setWevAdjustmentsData(prev => ({ ...prev, [field]: value }));
-  };
-
-  const handleWevConclusionChange = (field: keyof WevConclusionData, value: string) => {
-    setWevConclusionData(prev => ({ ...prev, [field]: value }));
+  const handleWevValueChange = (field: keyof WevValueData, value: string) => {
+    setWevValueData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleValuationChange = (field: string, value: string) => {
@@ -313,28 +288,12 @@ const NewReport = () => {
       return;
     }
 
-    // Validate WEV-specific fields
+    // Validate WEV-specific fields (simplified - only eindwaarde required)
     if (reportType === 'wev') {
-      if (!wevContextData.wev_peildatum) {
-        toast({
-          title: 'Peildatum verplicht',
-          description: 'Vul een peildatum in voor de WEV-waardebepaling.',
-          variant: 'destructive',
-        });
-        return;
-      }
-      if (wevComparablesData.wev_comparables.length < 3) {
-        toast({
-          title: 'Vergelijkingsobjecten verplicht',
-          description: 'Voeg minimaal 3 vergelijkingsobjecten toe.',
-          variant: 'destructive',
-        });
-        return;
-      }
-      if (!wevConclusionData.wev_eindwaarde) {
+      if (!wevValueData.wev_eindwaarde) {
         toast({
           title: 'Eindwaarde verplicht',
-          description: 'Vul de eindwaarde WEV in.',
+          description: 'Vul de WEV-eindwaarde in.',
           variant: 'destructive',
         });
         return;
@@ -545,15 +504,9 @@ const NewReport = () => {
         } : {}),
         general_remarks: valuationData.general_remarks || null,
         
-        // WEV valuation data (only for wev)
+        // WEV valuation data (simplified - only for wev)
         ...(reportType === 'wev' ? {
-          // Context
-          wev_peildatum: wevContextData.wev_peildatum || null,
-          wev_reden_peildatum: wevContextData.wev_reden_peildatum || null,
-          wev_doel_taxatie: wevContextData.wev_doel_taxatie || null,
-          wev_marktsegment: wevContextData.wev_marktsegment || null,
-          wev_doelgroep: wevContextData.wev_doelgroep || null,
-          // Autotelex data
+          // Autotelex/market data
           wev_btw_of_marge: wevAutotelexData.wev_btw_of_marge || null,
           wev_btw_marge_override_motivatie: wevAutotelexData.wev_btw_marge_override_motivatie || null,
           wev_handelsinkoopwaarde_autotelex: wevAutotelexData.wev_handelsinkoopwaarde_autotelex ? parseFloat(wevAutotelexData.wev_handelsinkoopwaarde_autotelex) : null,
@@ -564,19 +517,8 @@ const NewReport = () => {
           wev_definitief: wevAutotelexData.wev_definitief ? parseFloat(wevAutotelexData.wev_definitief) : null,
           wev_override_actief: wevAutotelexData.wev_override_actief,
           wev_override_redenering: wevAutotelexData.wev_override_redenering || null,
-          // Comparables
-          wev_comparables: wevComparablesData.wev_comparables,
-          // Adjustments
-          wev_correcties_motivatie: wevAdjustmentsData.wev_correcties_motivatie || null,
-          wev_km_stand_correctie: wevAdjustmentsData.wev_km_stand_correctie || null,
-          wev_staat_correctie: wevAdjustmentsData.wev_staat_correctie || null,
-          wev_schade_correctie: wevAdjustmentsData.wev_schade_correctie || null,
-          wev_originaliteit_correctie: wevAdjustmentsData.wev_originaliteit_correctie || null,
-          // Conclusion
-          wev_bandbreedte_min: wevConclusionData.wev_bandbreedte_min ? parseFloat(wevConclusionData.wev_bandbreedte_min) : null,
-          wev_bandbreedte_max: wevConclusionData.wev_bandbreedte_max ? parseFloat(wevConclusionData.wev_bandbreedte_max) : null,
-          wev_eindwaarde: wevConclusionData.wev_eindwaarde ? parseFloat(wevConclusionData.wev_eindwaarde) : null,
-          wev_motivatie_eindwaarde: wevConclusionData.wev_motivatie_eindwaarde || null,
+          // Final WEV value (single value, no bandwidth)
+          wev_eindwaarde: wevValueData.wev_eindwaarde ? parseFloat(wevValueData.wev_eindwaarde) : null,
         } : {}),
         
         // Photos
@@ -896,30 +838,18 @@ const NewReport = () => {
           </Card>
         )}
 
-        {/* WEV Valuation - only for WEV (new multi-screen structure) */}
+        {/* WEV Valuation - simplified (market data + single value) */}
         {isWevReport && (
           <>
-            <WevValuationContextForm
-              data={wevContextData}
-              onChange={handleWevContextChange}
-            />
             <WevAutotelexDataForm
               data={wevAutotelexData}
               onChange={handleWevAutotelexChange}
             />
-            <WevComparablesForm
-              data={wevComparablesData}
-              onChange={handleWevComparablesChange}
+            <WevValueForm
+              data={wevValueData}
+              onChange={handleWevValueChange}
             />
-            <WevAdjustmentsForm
-              data={wevAdjustmentsData}
-              onChange={handleWevAdjustmentsChange}
-            />
-            <WevConclusionForm
-              data={wevConclusionData}
-              onChange={handleWevConclusionChange}
-              wevDefinitief={wevAutotelexData.wev_definitief}
-            />
+            <WevDocumentUploadForm reportId="" />
           </>
         )}
 

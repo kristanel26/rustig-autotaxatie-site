@@ -42,7 +42,7 @@ const PDFWevValuationContent = ({ report, pageNumber, totalPages }: PDFWevValuat
     });
   };
 
-  // Don't render if no WEV data
+  // Don't render if no WEV data - use wev_eindwaarde as primary, wev_definitief as fallback
   const eindwaarde = report.wev_eindwaarde || report.wev_definitief;
   if (!eindwaarde || eindwaarde <= 0) {
     return null;
