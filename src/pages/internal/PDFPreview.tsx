@@ -18,6 +18,7 @@ interface PhotoRotations {
 type ReportData = Record<string, any> & {
   id: string;
   report_number: string;
+  report_type: string | null;
   document_reference: string | null;
   appraised_value: number | null;
   wev_definitief: number | null;
@@ -72,9 +73,14 @@ const PDFPreview = () => {
     );
   }
 
-  // Determine which valuations are present
-  const hasStandardValuation = report.appraised_value && report.appraised_value > 0;
-  const hasWevValuation = report.wev_definitief && report.wev_definitief > 0;
+  // Determine report type and which valuations are present
+  const reportType = report.report_type || 'camper';
+  const isCamperReport = reportType === 'camper';
+  const isWevReport = reportType === 'wev';
+  
+  // Show valuations based on report type
+  const hasStandardValuation = isCamperReport && report.appraised_value && report.appraised_value > 0;
+  const hasWevValuation = isWevReport && report.wev_definitief && report.wev_definitief > 0;
   
   // Calculate page numbers dynamically
   let currentPage = 1; // Cover is page 1
