@@ -16,6 +16,7 @@ import { Loader2, Search, Lock } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { AIExtractButton, PhotoType } from './AIExtractButton';
+import { ColorCombobox } from './ColorCombobox';
 import type { PhotoTypes } from './PhotoUploadForm';
 
 export interface VehicleFormData {
@@ -367,8 +368,14 @@ export const VehicleInfoForm = ({
                   <Input value={formData.rdw_datum_laatste_tenaamstelling} readOnly disabled className="bg-muted" />
                 </div>
                 <div className="space-y-2">
-                  <Label>Kleur</Label>
-                  <Input value={formData.rdw_kleur || '-'} readOnly disabled className="bg-muted" />
+                  <Label>Kleur (bewerkbaar)</Label>
+                  <ColorCombobox
+                    value={formData.rdw_kleur}
+                    onChange={(value) => onChange('rdw_kleur', value)}
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Selecteer of voeg een nieuwe kleur toe
+                  </p>
                 </div>
               </div>
             </div>
