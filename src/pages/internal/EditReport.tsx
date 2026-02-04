@@ -44,6 +44,14 @@ import {
   WevDocumentUploadForm,
 } from '@/components/internal/wev';
 import { ReportCompletenessCheck } from '@/components/internal/ReportCompletenessCheck';
+import {
+  KlassiekerGeneralImpressionForm,
+  KlassiekerImpressionFormData,
+  getInitialKlassiekerImpressionFormData,
+  KlassiekerValueForm,
+  KlassiekerValueData,
+  getInitialKlassiekerValueData,
+} from '@/components/internal/klassieker';
 
 const reportSchema = z.object({
   customer_title: z.string().optional(),
@@ -160,8 +168,14 @@ const EditReport = () => {
   // Camper tech + security data (Sectie 14-15)
   const [camperTechData, setCamperTechData] = useState<CamperTechFormData>(getInitialCamperTechFormData());
 
-  // General impression data (Sectie 16)
+  // General impression data (Sectie 16) - for camper
   const [impressionData, setImpressionData] = useState<GeneralImpressionFormData>(getInitialGeneralImpressionFormData());
+
+  // Klassieker-specific impression data (with default texts + stalling)
+  const [klassiekerImpressionData, setKlassiekerImpressionData] = useState<KlassiekerImpressionFormData>(getInitialKlassiekerImpressionFormData());
+
+  // Klassieker-specific valuation data
+  const [klassiekerValueData, setKlassiekerValueData] = useState<KlassiekerValueData>(getInitialKlassiekerValueData());
 
   // Moisture and safety data (Vocht & Brand/Gas)
   const [moistureData, setMoistureData] = useState<MoistureAndSafetyFormData>(getInitialMoistureAndSafetyFormData());
@@ -179,7 +193,7 @@ const EditReport = () => {
     inspection_end_time: '',
   });
 
-  // Valuation data
+  // Valuation data (for camper)
   const [valuationData, setValuationData] = useState({
     appraised_value: '',
     appraised_value_text: '',
@@ -218,14 +232,16 @@ const EditReport = () => {
     rdw_data_locked: vehicleData.rdw_data_locked,
     // Inspection data
     ...inspectionData,
-    // Valuation data
+    // Valuation data (for camper)
     ...valuationData,
+    // Klassieker valuation data
+    ...klassiekerValueData,
     // WEV data
     ...wevAutotelexData,
     ...wevValueData,
     // Photos
     vehicle_photos: vehiclePhotos,
-  }), [customerData, vehicleData, inspectionData, valuationData, wevAutotelexData, wevValueData, vehiclePhotos]);
+  }), [customerData, vehicleData, inspectionData, valuationData, klassiekerValueData, wevAutotelexData, wevValueData, vehiclePhotos]);
 
   useEffect(() => {
     const fetchReport = async () => {
@@ -394,7 +410,11 @@ const EditReport = () => {
           tracking_brand: (reportData as any).tracking_brand || '',
         });
 
-        // Pre-fill general impression data (Sectie 16)
+        // Pre-fill general impression data (Sectie 16) - for camper
+        // For klassieker, use defaults if fields are empty (new report)
+        const isKlassieker = reportData.report_type === 'klassieker';
+        const defaultKlassiekerImpressions = getInitialKlassiekerImpressionFormData();
+        
         setImpressionData({
           impression_suspension: (reportData as any).impression_suspension || '',
           impression_wheels_tires: (reportData as any).impression_wheels_tires || '',
@@ -407,6 +427,44 @@ const EditReport = () => {
           impression_interior: (reportData as any).impression_interior || '',
           impression_general: (reportData as any).impression_general || '',
           impression_extras: (reportData as any).impression_extras || '',
+        });
+
+        // Pre-fill klassieker-specific impression data with defaults for new reports
+        // Only use defaults if this is a klassieker AND the fields are empty (new report)
+        const hasExistingKlassiekerData = (reportData as any).impression_suspension || 
+          (reportData as any).impression_wheels_tires || (reportData as any).impression_general;
+        
+        setKlassiekerImpressionData({
+          impression_suspension: (reportData as any).impression_suspension || 
+            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_suspension : ''),
+          impression_wheels_tires: (reportData as any).impression_wheels_tires || 
+            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_wheels_tires : ''),
+          impression_steering: (reportData as any).impression_steering || 
+            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_steering : ''),
+          impression_brakes: (reportData as any).impression_brakes || 
+            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_brakes : ''),
+          impression_engine: (reportData as any).impression_engine || 
+            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_engine : ''),
+          impression_transmission: (reportData as any).impression_transmission || 
+            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_transmission : ''),
+          impression_electrical: (reportData as any).impression_electrical || 
+            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_electrical : ''),
+          impression_body: (reportData as any).impression_body || 
+            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_body : ''),
+          impression_interior: (reportData as any).impression_interior || 
+            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_interior : ''),
+          impression_general: (reportData as any).impression_general || 
+            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_general : ''),
+          impression_extras: (reportData as any).impression_extras || '',
+          stalling: (reportData as any).stalling || 
+            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.stalling : ''),
+        });
+
+        // Pre-fill klassieker-specific valuation data
+        setKlassiekerValueData({
+          appraised_value: (reportData as any).appraised_value?.toString() || '',
+          appraised_value_text: (reportData as any).appraised_value_text || '',
+          quality_class: (reportData as any).quality_class?.toString() || '',
         });
 
         // Pre-fill moisture and safety data
@@ -525,6 +583,40 @@ const EditReport = () => {
     setImpressionData(prev => ({ ...prev, [field]: value }));
     saveField(field, value || null);
   };
+
+  // Handler for klassieker impression changes (with stalling field)
+  const handleKlassiekerImpressionChange = useCallback((field: keyof KlassiekerImpressionFormData, value: string) => {
+    setKlassiekerImpressionData(prev => ({ ...prev, [field]: value }));
+    saveField(field, value || null);
+  }, [saveField]);
+
+  // Handler for klassieker valuation changes
+  const handleKlassiekerValueChange = useCallback((field: keyof KlassiekerValueData, value: string) => {
+    setKlassiekerValueData(prev => {
+      const updated = { ...prev, [field]: value };
+      
+      if (field === 'appraised_value') {
+        const numValue = parseFloat(value);
+        if (!isNaN(numValue) && numValue > 0) {
+          updated.appraised_value_text = numberToDutchWords(numValue);
+          saveMultipleFields({
+            appraised_value: numValue,
+            appraised_value_text: updated.appraised_value_text,
+          });
+        } else {
+          updated.appraised_value_text = '';
+          saveMultipleFields({
+            appraised_value: null,
+            appraised_value_text: null,
+          });
+        }
+      } else {
+        saveField(field, value || null);
+      }
+      
+      return updated;
+    });
+  }, [saveField, saveMultipleFields]);
 
   const handleMoistureChange = (field: keyof MoistureAndSafetyFormData, value: string | boolean) => {
     setMoistureData(prev => ({ ...prev, [field]: value }));
@@ -1059,6 +1151,37 @@ const EditReport = () => {
           </CardContent>
         </Card>
 
+        {/* ============================================ */}
+        {/* KLASSIEKER WORKFLOW - Specifieke volgorde:   */}
+        {/* 1. Rapportgegevens (al boven)                 */}
+        {/* 2. Klantgegevens (al boven)                   */}
+        {/* 3. Fotocollectie (direct na klant!)           */}
+        {/* 4. Voertuigidentificatie                      */}
+        {/* 5. Inspectiegegevens                          */}
+        {/* 6. Kilometerstand (in VehicleInfoForm)        */}
+        {/* 7. Banden en wielen (in AppraisalFindingsForm)*/}
+        {/* 8. Algemene indruk                            */}
+        {/* 9. Kwaliteitsklasse                           */}
+        {/* 10. Waardevaststelling                        */}
+        {/* 11. Ondertekening                             */}
+        {/* ============================================ */}
+
+        {/* KLASSIEKER: Fotocollectie DIRECT NA Klantgegevens (vóór voertuig!) */}
+        {report.report_type === 'klassieker' && (
+          <div id="section-fotos">
+            <PhotoUploadForm
+              photos={vehiclePhotos}
+              rotations={photoRotations}
+              photoTypes={photoTypes}
+              onChange={handlePhotosChange}
+              onRotationsChange={handleRotationsChange}
+              onPhotoTypesChange={handlePhotoTypesChange}
+              reportId={id}
+              reportType="klassieker"
+            />
+          </div>
+        )}
+
         {/* Vehicle Information - 7 Secties */}
         <div id="section-voertuig">
           <VehicleInfoForm
@@ -1072,6 +1195,71 @@ const EditReport = () => {
             reportId={id}
           />
         </div>
+
+        {/* KLASSIEKER: Inspectiegegevens */}
+        {report.report_type === 'klassieker' && (
+          <Card id="section-inspectie">
+            <CardHeader>
+              <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
+            </CardHeader>
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="inspection_date">Datum opname *</Label>
+                <Input
+                  id="inspection_date"
+                  type="date"
+                  value={inspectionData.inspection_date}
+                  onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="inspection_location">Plaats opname *</Label>
+                <Input
+                  id="inspection_location"
+                  value={inspectionData.inspection_location}
+                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
+                  placeholder="bijv. Druten"
+                />
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* KLASSIEKER: Banden en wielen (alleen dit onderdeel van AppraisalFindingsForm) */}
+        {report.report_type === 'klassieker' && (
+          <AppraisalFindingsForm
+            formData={appraisalData}
+            onChange={handleAppraisalChange}
+            onMultipleChange={handleAppraisalMultipleChange}
+            rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
+            allTiresSame={allTiresSame}
+            onAllTiresSameChange={setAllTiresSame}
+            reportType="klassieker"
+            photos={vehiclePhotos}
+            photoTypes={photoTypes}
+            reportId={id}
+          />
+        )}
+
+        {/* KLASSIEKER: Algemene indruk met standaardteksten */}
+        {report.report_type === 'klassieker' && (
+          <div id="section-indruk">
+            <KlassiekerGeneralImpressionForm
+              formData={klassiekerImpressionData}
+              onChange={handleKlassiekerImpressionChange}
+            />
+          </div>
+        )}
+
+        {/* KLASSIEKER: Kwaliteitsklasse + Waardevaststelling */}
+        {report.report_type === 'klassieker' && (
+          <div id="section-waarde">
+            <KlassiekerValueForm
+              data={klassiekerValueData}
+              onChange={handleKlassiekerValueChange}
+            />
+          </div>
+        )}
 
         {/* WEV: Inspectiegegevens direct na voertuig (kantoorvoorbereiding) */}
         {report.report_type === 'wev' && (
@@ -1134,19 +1322,21 @@ const EditReport = () => {
           <WevDocumentUploadForm reportId={id || ''} />
         )}
 
-        {/* Appraisal Findings - Taxateursecties */}
-        <AppraisalFindingsForm
-          formData={appraisalData}
-          onChange={handleAppraisalChange}
-          onMultipleChange={handleAppraisalMultipleChange}
-          rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
-          allTiresSame={allTiresSame}
-          onAllTiresSameChange={setAllTiresSame}
-          reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
-          photos={vehiclePhotos}
-          photoTypes={photoTypes}
-          reportId={id}
-        />
+        {/* WEV + Camper: Appraisal Findings - Taxateursecties */}
+        {(report.report_type === 'wev' || report.report_type === 'camper' || !report.report_type) && report.report_type !== 'klassieker' && (
+          <AppraisalFindingsForm
+            formData={appraisalData}
+            onChange={handleAppraisalChange}
+            onMultipleChange={handleAppraisalMultipleChange}
+            rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
+            allTiresSame={allTiresSame}
+            onAllTiresSameChange={setAllTiresSame}
+            reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
+            photos={vehiclePhotos}
+            photoTypes={photoTypes}
+            reportId={id}
+          />
+        )}
 
         {/* Sectie 13: Leidingen & Installaties - only for camper */}
         {(report.report_type === 'camper' || !report.report_type) && (
@@ -1164,11 +1354,13 @@ const EditReport = () => {
           />
         )}
 
-        {/* Sectie 16: Algemene Indruk */}
-        <GeneralImpressionForm
-          formData={impressionData}
-          onChange={handleImpressionChange}
-        />
+        {/* Sectie 16: Algemene Indruk - only for camper (klassieker has its own above) */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <GeneralImpressionForm
+            formData={impressionData}
+            onChange={handleImpressionChange}
+          />
+        )}
 
         {/* Vocht & Brand/Gas veiligheid - only for camper */}
         {(report.report_type === 'camper' || !report.report_type) && (
@@ -1178,7 +1370,7 @@ const EditReport = () => {
           />
         )}
 
-        {/* Fotocollectie - only for camper (WEV has it earlier) */}
+        {/* Fotocollectie - only for camper (WEV and Klassieker have it earlier) */}
         {(report.report_type === 'camper' || !report.report_type) && (
           <PhotoUploadForm
             photos={vehiclePhotos}
