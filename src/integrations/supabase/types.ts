@@ -235,6 +235,14 @@ export type Database = {
           vehicle_tracking: boolean | null
           vin: string | null
           voltage: string | null
+          wev_berekend: number | null
+          wev_bron_waardes: string | null
+          wev_definitief: number | null
+          wev_handelsinkoopwaarde_autotelex: number | null
+          wev_override_actief: boolean | null
+          wev_override_redenering: string | null
+          wev_peildatum: string | null
+          wev_verkoopwaarde_autotelex: number | null
         }
         Insert: {
           appraised_value?: number | null
@@ -403,6 +411,14 @@ export type Database = {
           vehicle_tracking?: boolean | null
           vin?: string | null
           voltage?: string | null
+          wev_berekend?: number | null
+          wev_bron_waardes?: string | null
+          wev_definitief?: number | null
+          wev_handelsinkoopwaarde_autotelex?: number | null
+          wev_override_actief?: boolean | null
+          wev_override_redenering?: string | null
+          wev_peildatum?: string | null
+          wev_verkoopwaarde_autotelex?: number | null
         }
         Update: {
           appraised_value?: number | null
@@ -571,6 +587,14 @@ export type Database = {
           vehicle_tracking?: boolean | null
           vin?: string | null
           voltage?: string | null
+          wev_berekend?: number | null
+          wev_bron_waardes?: string | null
+          wev_definitief?: number | null
+          wev_handelsinkoopwaarde_autotelex?: number | null
+          wev_override_actief?: boolean | null
+          wev_override_redenering?: string | null
+          wev_peildatum?: string | null
+          wev_verkoopwaarde_autotelex?: number | null
         }
         Relationships: []
       }

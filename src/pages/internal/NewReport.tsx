@@ -28,6 +28,7 @@ import { GeneralImpressionForm, GeneralImpressionFormData, getInitialGeneralImpr
 import { MoistureAndSafetyForm, MoistureAndSafetyFormData, getInitialMoistureAndSafetyFormData } from '@/components/internal/MoistureAndSafetyForm';
 import { PostcodeField } from '@/components/internal/PostcodeField';
 import PhotoUploadForm, { PhotoRotations, PhotoTypes } from '@/components/internal/PhotoUploadForm';
+import { WevValuationForm, WevFormData, getInitialWevFormData } from '@/components/internal/WevValuationForm';
 const reportSchema = z.object({
   // Customer fields
   customer_title: z.string().optional(),
@@ -119,6 +120,9 @@ const NewReport = () => {
     general_remarks: '',
   });
 
+  // WEV valuation data
+  const [wevData, setWevData] = useState<WevFormData>(getInitialWevFormData());
+
   const handleCustomerChange = (field: string, value: string) => {
     setCustomerData(prev => ({ ...prev, [field]: value }));
     if (errors[field]) {
@@ -167,6 +171,10 @@ const NewReport = () => {
 
   const handleMoistureChange = (field: keyof MoistureAndSafetyFormData, value: string | boolean) => {
     setMoistureData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleWevChange = (field: keyof WevFormData, value: string | boolean) => {
+    setWevData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleValuationChange = (field: string, value: string) => {
@@ -453,6 +461,16 @@ const NewReport = () => {
         quality_class: valuationData.quality_class || null,
         general_remarks: valuationData.general_remarks || null,
         
+        // WEV valuation data
+        wev_handelsinkoopwaarde_autotelex: wevData.wev_handelsinkoopwaarde_autotelex ? parseFloat(wevData.wev_handelsinkoopwaarde_autotelex) : null,
+        wev_verkoopwaarde_autotelex: wevData.wev_verkoopwaarde_autotelex ? parseFloat(wevData.wev_verkoopwaarde_autotelex) : null,
+        wev_bron_waardes: wevData.wev_bron_waardes || 'Autotelex',
+        wev_peildatum: wevData.wev_peildatum || null,
+        wev_berekend: wevData.wev_berekend ? parseFloat(wevData.wev_berekend) : null,
+        wev_definitief: wevData.wev_definitief ? parseFloat(wevData.wev_definitief) : null,
+        wev_override_actief: wevData.wev_override_actief,
+        wev_override_redenering: wevData.wev_override_redenering || null,
+        
         // Photos
         vehicle_photos: vehiclePhotos.length > 0 ? vehiclePhotos : null,
         vehicle_photo_rotations: Object.keys(photoRotations).length > 0 ? photoRotations : null,
@@ -734,6 +752,12 @@ const NewReport = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* WEV Valuation */}
+        <WevValuationForm
+          data={wevData}
+          onChange={handleWevChange}
+        />
 
         {/* Remarks */}
         <Card>

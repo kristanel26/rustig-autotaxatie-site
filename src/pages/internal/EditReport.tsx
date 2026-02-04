@@ -33,6 +33,7 @@ import { useAutoSave } from '@/hooks/useAutoSave';
 import { SaveStatusIndicator } from '@/components/internal/SaveStatusIndicator';
 import { usePageLeaveProtection } from '@/hooks/usePageLeaveProtection';
 import { UnsavedChangesDialog } from '@/components/internal/UnsavedChangesDialog';
+import { WevValuationForm, WevFormData, getInitialWevFormData } from '@/components/internal/WevValuationForm';
 
 const reportSchema = z.object({
   customer_title: z.string().optional(),
@@ -174,6 +175,9 @@ const EditReport = () => {
     quality_class: '',
     general_remarks: '',
   });
+
+  // WEV valuation data
+  const [wevData, setWevData] = useState<WevFormData>(getInitialWevFormData());
 
   // Auto-save hook
   const { status: saveStatus, hasPendingChanges, saveField, saveMultipleFields, flushSave } = useAutoSave({
@@ -385,6 +389,18 @@ const EditReport = () => {
         // photo_types is stored in the photo_types JSON column
         setPhotoTypes((reportData as any).photo_types || {});
 
+        // Pre-fill WEV valuation data
+        setWevData({
+          wev_handelsinkoopwaarde_autotelex: (reportData as any).wev_handelsinkoopwaarde_autotelex?.toString() || '',
+          wev_verkoopwaarde_autotelex: (reportData as any).wev_verkoopwaarde_autotelex?.toString() || '',
+          wev_bron_waardes: (reportData as any).wev_bron_waardes || 'Autotelex',
+          wev_peildatum: (reportData as any).wev_peildatum || '',
+          wev_berekend: (reportData as any).wev_berekend?.toString() || '',
+          wev_definitief: (reportData as any).wev_definitief?.toString() || '',
+          wev_override_actief: (reportData as any).wev_override_actief || false,
+          wev_override_redenering: (reportData as any).wev_override_redenering || '',
+        });
+
       } catch (error) {
         console.error('Error fetching report:', error);
         toast({
@@ -500,7 +516,25 @@ const EditReport = () => {
     });
   };
 
-  // Handle photo changes with autosave
+  // Handle WEV changes with autosave
+  const handleWevChange = useCallback((field: keyof WevFormData, value: string | boolean) => {
+    setWevData(prev => {
+      const updated = { ...prev, [field]: value };
+      
+      // For numeric fields, parse and save
+      const numericFields = ['wev_handelsinkoopwaarde_autotelex', 'wev_verkoopwaarde_autotelex', 'wev_berekend', 'wev_definitief'];
+      if (numericFields.includes(field)) {
+        const numValue = parseFloat(value as string);
+        saveField(field, !isNaN(numValue) ? numValue : null);
+      } else if (field === 'wev_override_actief') {
+        saveField(field, value as boolean);
+      } else {
+        saveField(field, value || null);
+      }
+      
+      return updated;
+    });
+  }, [saveField]);
   const handlePhotosChange = useCallback((photos: string[]) => {
     setVehiclePhotos(photos);
     saveField('vehicle_photos', photos.length > 0 ? photos : null);
@@ -1127,6 +1161,12 @@ const EditReport = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* WEV Valuation */}
+        <WevValuationForm
+          data={wevData}
+          onChange={handleWevChange}
+        />
 
         {/* Remarks */}
         <Card>

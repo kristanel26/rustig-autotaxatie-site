@@ -44,6 +44,10 @@
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
+    /* Warning - amber/yellow for non-blocking warnings */
+    --warning: 38 92% 50%;
+    --warning-foreground: 38 100% 15%;
+
     --border: 210 20% 90%;
     --input: 210 20% 90%;
     --ring: 175 45% 40%;
@@ -83,6 +87,8 @@
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
+    --warning: 38 80% 45%;
+    --warning-foreground: 38 90% 90%;
     --border: 215 25% 20%;
     --input: 215 25% 20%;
     --ring: 175 45% 50%;
