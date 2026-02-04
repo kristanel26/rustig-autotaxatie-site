@@ -264,6 +264,82 @@ export type Database = {
           },
         ]
       }
+      report_deliveries: {
+        Row: {
+          created_at: string
+          email_provider_message_id: string | null
+          error_message: string | null
+          id: string
+          report_id: string
+          sent_at: string
+          sent_to_email: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          email_provider_message_id?: string | null
+          error_message?: string | null
+          id?: string
+          report_id: string
+          sent_at?: string
+          sent_to_email: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          email_provider_message_id?: string | null
+          error_message?: string | null
+          id?: string
+          report_id?: string
+          sent_at?: string
+          sent_to_email?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_deliveries_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_downloads: {
+        Row: {
+          created_at: string
+          downloaded_at: string
+          id: string
+          ip_address: string | null
+          report_id: string
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string
+          downloaded_at?: string
+          id?: string
+          ip_address?: string | null
+          report_id: string
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string
+          downloaded_at?: string
+          id?: string
+          ip_address?: string | null
+          report_id?: string
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_downloads_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       report_inspection: {
         Row: {
           created_at: string
@@ -389,6 +465,41 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "report_media_photos_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_share_tokens: {
+        Row: {
+          created_at: string
+          expires_at: string | null
+          id: string
+          report_id: string
+          revoked_at: string | null
+          token: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          report_id: string
+          revoked_at?: string | null
+          token: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          report_id?: string
+          revoked_at?: string | null
+          token?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_share_tokens_report_id_fkey"
             columns: ["report_id"]
             isOneToOne: false
             referencedRelation: "reports"
@@ -545,6 +656,7 @@ export type Database = {
           customer_street: string | null
           customer_title: string | null
           document_reference: string | null
+          download_count: number | null
           earth_leakage_switch: boolean | null
           exterior_body: string | null
           exterior_body_notes: string | null
@@ -557,6 +669,7 @@ export type Database = {
           exterior_windows: string | null
           exterior_windows_notes: string | null
           fire_extinguisher: boolean | null
+          first_downloaded_at: string | null
           fused: boolean | null
           gas_detection: boolean | null
           gas_hose_production_date: string | null
@@ -597,6 +710,7 @@ export type Database = {
           interior_sanitary_notes: string | null
           interior_upholstery: string | null
           interior_upholstery_notes: string | null
+          last_downloaded_at: string | null
           leakage_electrical: string | null
           license_plate: string | null
           loose_gas_tanks: boolean | null
@@ -637,11 +751,14 @@ export type Database = {
           rdw_voertuigsoort: string | null
           rdw_wielbasis: number | null
           ready_at: string | null
+          reminder_due_date: string | null
+          reminder_sent_at: string | null
           report_number: string
           report_type: string | null
           rim_type: string | null
           security_present: boolean | null
           security_type: string | null
+          sent_at: string | null
           signed_at: string | null
           smoke_detector: boolean | null
           soort_bouw: string | null
@@ -746,6 +863,7 @@ export type Database = {
           customer_street?: string | null
           customer_title?: string | null
           document_reference?: string | null
+          download_count?: number | null
           earth_leakage_switch?: boolean | null
           exterior_body?: string | null
           exterior_body_notes?: string | null
@@ -758,6 +876,7 @@ export type Database = {
           exterior_windows?: string | null
           exterior_windows_notes?: string | null
           fire_extinguisher?: boolean | null
+          first_downloaded_at?: string | null
           fused?: boolean | null
           gas_detection?: boolean | null
           gas_hose_production_date?: string | null
@@ -798,6 +917,7 @@ export type Database = {
           interior_sanitary_notes?: string | null
           interior_upholstery?: string | null
           interior_upholstery_notes?: string | null
+          last_downloaded_at?: string | null
           leakage_electrical?: string | null
           license_plate?: string | null
           loose_gas_tanks?: boolean | null
@@ -838,11 +958,14 @@ export type Database = {
           rdw_voertuigsoort?: string | null
           rdw_wielbasis?: number | null
           ready_at?: string | null
+          reminder_due_date?: string | null
+          reminder_sent_at?: string | null
           report_number: string
           report_type?: string | null
           rim_type?: string | null
           security_present?: boolean | null
           security_type?: string | null
+          sent_at?: string | null
           signed_at?: string | null
           smoke_detector?: boolean | null
           soort_bouw?: string | null
@@ -947,6 +1070,7 @@ export type Database = {
           customer_street?: string | null
           customer_title?: string | null
           document_reference?: string | null
+          download_count?: number | null
           earth_leakage_switch?: boolean | null
           exterior_body?: string | null
           exterior_body_notes?: string | null
@@ -959,6 +1083,7 @@ export type Database = {
           exterior_windows?: string | null
           exterior_windows_notes?: string | null
           fire_extinguisher?: boolean | null
+          first_downloaded_at?: string | null
           fused?: boolean | null
           gas_detection?: boolean | null
           gas_hose_production_date?: string | null
@@ -999,6 +1124,7 @@ export type Database = {
           interior_sanitary_notes?: string | null
           interior_upholstery?: string | null
           interior_upholstery_notes?: string | null
+          last_downloaded_at?: string | null
           leakage_electrical?: string | null
           license_plate?: string | null
           loose_gas_tanks?: boolean | null
@@ -1039,11 +1165,14 @@ export type Database = {
           rdw_voertuigsoort?: string | null
           rdw_wielbasis?: number | null
           ready_at?: string | null
+          reminder_due_date?: string | null
+          reminder_sent_at?: string | null
           report_number?: string
           report_type?: string | null
           rim_type?: string | null
           security_present?: boolean | null
           security_type?: string | null
+          sent_at?: string | null
           signed_at?: string | null
           smoke_detector?: boolean | null
           soort_bouw?: string | null
