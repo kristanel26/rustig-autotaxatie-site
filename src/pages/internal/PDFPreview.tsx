@@ -7,6 +7,7 @@ import PDFCoverContent from '@/components/internal/pdf/PDFCoverContent';
 import PDFVehicleDataContent from '@/components/internal/pdf/PDFVehicleDataContent';
 import PDFAppraisalFindingsContent from '@/components/internal/pdf/PDFAppraisalFindingsContent';
 import PDFValuationContent from '@/components/internal/pdf/PDFValuationContent';
+import PDFWevValuationContent from '@/components/internal/pdf/PDFWevValuationContent';
 import PDFPhotosContent from '@/components/internal/pdf/PDFPhotosContent';
 
 interface PhotoRotations {
@@ -19,6 +20,7 @@ type ReportData = Record<string, any> & {
   report_number: string;
   document_reference: string | null;
   appraised_value: number | null;
+  wev_definitief: number | null;
   vehicle_photos: string[] | null;
   vehicle_photo_rotations: PhotoRotations | null;
 };
@@ -70,10 +72,17 @@ const PDFPreview = () => {
     );
   }
 
-  const hasValuation = report.appraised_value && report.appraised_value > 0;
-  const valuationPageNumber = hasValuation ? 2 : 0;
-  const vehicleDataPageNumber = hasValuation ? 3 : 2;
-  const appraisalFindingsPageNumber = hasValuation ? 4 : 3;
+  // Determine which valuations are present
+  const hasStandardValuation = report.appraised_value && report.appraised_value > 0;
+  const hasWevValuation = report.wev_definitief && report.wev_definitief > 0;
+  
+  // Calculate page numbers dynamically
+  let currentPage = 1; // Cover is page 1
+  
+  const standardValuationPage = hasStandardValuation ? ++currentPage : 0;
+  const wevValuationPage = hasWevValuation ? ++currentPage : 0;
+  const vehicleDataPage = ++currentPage;
+  const appraisalFindingsPage = ++currentPage;
 
   return (
     <div 
@@ -86,21 +95,28 @@ const PDFPreview = () => {
           <PDFCoverContent report={report} />
         </div>
 
-        {/* Page 2: Valuation (conditional) - right after cover */}
-        {hasValuation && (
+        {/* Standard Valuation (conditional) */}
+        {hasStandardValuation && (
           <div className="shadow-lg">
-            <PDFValuationContent report={report} pageNumber={valuationPageNumber} totalPages={10} />
+            <PDFValuationContent report={report} pageNumber={standardValuationPage} totalPages={10} />
           </div>
         )}
 
-        {/* Page 3: Vehicle Data */}
+        {/* WEV Valuation (conditional) */}
+        {hasWevValuation && (
+          <div className="shadow-lg">
+            <PDFWevValuationContent report={report} pageNumber={wevValuationPage} totalPages={10} />
+          </div>
+        )}
+
+        {/* Vehicle Data */}
         <div className="shadow-lg">
-          <PDFVehicleDataContent report={report} pageNumber={vehicleDataPageNumber} />
+          <PDFVehicleDataContent report={report} pageNumber={vehicleDataPage} />
         </div>
 
-        {/* Page 4: Appraisal Findings */}
+        {/* Appraisal Findings */}
         <div className="shadow-lg">
-          <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPageNumber} />
+          <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPage} />
         </div>
 
         {/* Photo Annex (conditional) */}
