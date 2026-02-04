@@ -236,13 +236,34 @@ export type Database = {
           vehicle_tracking: boolean | null
           vin: string | null
           voltage: string | null
+          wev_autotelex_lookup_timestamp: string | null
+          wev_bandbreedte_max: number | null
+          wev_bandbreedte_min: number | null
           wev_berekend: number | null
           wev_bron_waardes: string | null
+          wev_btw_marge_override_motivatie: string | null
+          wev_btw_of_marge: string | null
+          wev_comparables: Json | null
+          wev_correcties_motivatie: string | null
           wev_definitief: number | null
+          wev_doel_taxatie: string | null
+          wev_doelgroep: string | null
+          wev_eindwaarde: number | null
+          wev_finalized_at: string | null
           wev_handelsinkoopwaarde_autotelex: number | null
+          wev_km_stand_correctie: string | null
+          wev_locked: boolean | null
+          wev_manual_source_note: string | null
+          wev_marktsegment: string | null
+          wev_motivatie_eindwaarde: string | null
+          wev_originaliteit_correctie: string | null
           wev_override_actief: boolean | null
           wev_override_redenering: string | null
           wev_peildatum: string | null
+          wev_reden_peildatum: string | null
+          wev_schade_correctie: string | null
+          wev_staat_correctie: string | null
+          wev_status: string | null
           wev_verkoopwaarde_autotelex: number | null
         }
         Insert: {
@@ -413,13 +434,34 @@ export type Database = {
           vehicle_tracking?: boolean | null
           vin?: string | null
           voltage?: string | null
+          wev_autotelex_lookup_timestamp?: string | null
+          wev_bandbreedte_max?: number | null
+          wev_bandbreedte_min?: number | null
           wev_berekend?: number | null
           wev_bron_waardes?: string | null
+          wev_btw_marge_override_motivatie?: string | null
+          wev_btw_of_marge?: string | null
+          wev_comparables?: Json | null
+          wev_correcties_motivatie?: string | null
           wev_definitief?: number | null
+          wev_doel_taxatie?: string | null
+          wev_doelgroep?: string | null
+          wev_eindwaarde?: number | null
+          wev_finalized_at?: string | null
           wev_handelsinkoopwaarde_autotelex?: number | null
+          wev_km_stand_correctie?: string | null
+          wev_locked?: boolean | null
+          wev_manual_source_note?: string | null
+          wev_marktsegment?: string | null
+          wev_motivatie_eindwaarde?: string | null
+          wev_originaliteit_correctie?: string | null
           wev_override_actief?: boolean | null
           wev_override_redenering?: string | null
           wev_peildatum?: string | null
+          wev_reden_peildatum?: string | null
+          wev_schade_correctie?: string | null
+          wev_staat_correctie?: string | null
+          wev_status?: string | null
           wev_verkoopwaarde_autotelex?: number | null
         }
         Update: {
@@ -590,13 +632,34 @@ export type Database = {
           vehicle_tracking?: boolean | null
           vin?: string | null
           voltage?: string | null
+          wev_autotelex_lookup_timestamp?: string | null
+          wev_bandbreedte_max?: number | null
+          wev_bandbreedte_min?: number | null
           wev_berekend?: number | null
           wev_bron_waardes?: string | null
+          wev_btw_marge_override_motivatie?: string | null
+          wev_btw_of_marge?: string | null
+          wev_comparables?: Json | null
+          wev_correcties_motivatie?: string | null
           wev_definitief?: number | null
+          wev_doel_taxatie?: string | null
+          wev_doelgroep?: string | null
+          wev_eindwaarde?: number | null
+          wev_finalized_at?: string | null
           wev_handelsinkoopwaarde_autotelex?: number | null
+          wev_km_stand_correctie?: string | null
+          wev_locked?: boolean | null
+          wev_manual_source_note?: string | null
+          wev_marktsegment?: string | null
+          wev_motivatie_eindwaarde?: string | null
+          wev_originaliteit_correctie?: string | null
           wev_override_actief?: boolean | null
           wev_override_redenering?: string | null
           wev_peildatum?: string | null
+          wev_reden_peildatum?: string | null
+          wev_schade_correctie?: string | null
+          wev_staat_correctie?: string | null
+          wev_status?: string | null
           wev_verkoopwaarde_autotelex?: number | null
         }
         Relationships: []

@@ -29,8 +29,25 @@ import { GeneralImpressionForm, GeneralImpressionFormData, getInitialGeneralImpr
 import { MoistureAndSafetyForm, MoistureAndSafetyFormData, getInitialMoistureAndSafetyFormData } from '@/components/internal/MoistureAndSafetyForm';
 import { PostcodeField } from '@/components/internal/PostcodeField';
 import PhotoUploadForm, { PhotoRotations, PhotoTypes } from '@/components/internal/PhotoUploadForm';
-import { WevValuationForm, WevFormData, getInitialWevFormData } from '@/components/internal/WevValuationForm';
 import { ReportTypeSelector, ReportType } from '@/components/internal/ReportTypeSelector';
+import {
+  WevValuationContextForm,
+  WevValuationContextData,
+  getInitialWevValuationContextData,
+  WevAutotelexDataForm,
+  WevAutotelexData,
+  getInitialWevAutotelexData,
+  WevComparablesForm,
+  WevComparablesData,
+  WevComparable,
+  getInitialWevComparablesData,
+  WevAdjustmentsForm,
+  WevAdjustmentsData,
+  getInitialWevAdjustmentsData,
+  WevConclusionForm,
+  WevConclusionData,
+  getInitialWevConclusionData,
+} from '@/components/internal/wev';
 
 const reportSchema = z.object({
   // Customer fields
@@ -126,8 +143,12 @@ const NewReport = () => {
     general_remarks: '',
   });
 
-  // WEV valuation data
-  const [wevData, setWevData] = useState<WevFormData>(getInitialWevFormData());
+  // WEV valuation data (new structure)
+  const [wevContextData, setWevContextData] = useState<WevValuationContextData>(getInitialWevValuationContextData());
+  const [wevAutotelexData, setWevAutotelexData] = useState<WevAutotelexData>(getInitialWevAutotelexData());
+  const [wevComparablesData, setWevComparablesData] = useState<WevComparablesData>(getInitialWevComparablesData());
+  const [wevAdjustmentsData, setWevAdjustmentsData] = useState<WevAdjustmentsData>(getInitialWevAdjustmentsData());
+  const [wevConclusionData, setWevConclusionData] = useState<WevConclusionData>(getInitialWevConclusionData());
 
   const handleCustomerChange = (field: string, value: string) => {
     setCustomerData(prev => ({ ...prev, [field]: value }));
@@ -179,8 +200,24 @@ const NewReport = () => {
     setMoistureData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleWevChange = (field: keyof WevFormData, value: string | boolean) => {
-    setWevData(prev => ({ ...prev, [field]: value }));
+  const handleWevContextChange = (field: keyof WevValuationContextData, value: string) => {
+    setWevContextData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleWevAutotelexChange = (field: keyof WevAutotelexData, value: string | boolean) => {
+    setWevAutotelexData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleWevComparablesChange = (comparables: WevComparable[]) => {
+    setWevComparablesData({ wev_comparables: comparables });
+  };
+
+  const handleWevAdjustmentsChange = (field: keyof WevAdjustmentsData, value: string) => {
+    setWevAdjustmentsData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleWevConclusionChange = (field: keyof WevConclusionData, value: string) => {
+    setWevConclusionData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleValuationChange = (field: string, value: string) => {
@@ -277,10 +314,26 @@ const NewReport = () => {
 
     // Validate WEV-specific fields
     if (reportType === 'wev') {
-      if (!wevData.wev_peildatum) {
+      if (!wevContextData.wev_peildatum) {
         toast({
           title: 'Peildatum verplicht',
           description: 'Vul een peildatum in voor de WEV-waardebepaling.',
+          variant: 'destructive',
+        });
+        return;
+      }
+      if (wevComparablesData.wev_comparables.length < 3) {
+        toast({
+          title: 'Vergelijkingsobjecten verplicht',
+          description: 'Voeg minimaal 3 vergelijkingsobjecten toe.',
+          variant: 'destructive',
+        });
+        return;
+      }
+      if (!wevConclusionData.wev_eindwaarde) {
+        toast({
+          title: 'Eindwaarde verplicht',
+          description: 'Vul de eindwaarde WEV in.',
           variant: 'destructive',
         });
         return;
@@ -493,14 +546,36 @@ const NewReport = () => {
         
         // WEV valuation data (only for wev)
         ...(reportType === 'wev' ? {
-          wev_handelsinkoopwaarde_autotelex: wevData.wev_handelsinkoopwaarde_autotelex ? parseFloat(wevData.wev_handelsinkoopwaarde_autotelex) : null,
-          wev_verkoopwaarde_autotelex: wevData.wev_verkoopwaarde_autotelex ? parseFloat(wevData.wev_verkoopwaarde_autotelex) : null,
-          wev_bron_waardes: wevData.wev_bron_waardes || 'Autotelex',
-          wev_peildatum: wevData.wev_peildatum || null,
-          wev_berekend: wevData.wev_berekend ? parseFloat(wevData.wev_berekend) : null,
-          wev_definitief: wevData.wev_definitief ? parseFloat(wevData.wev_definitief) : null,
-          wev_override_actief: wevData.wev_override_actief,
-          wev_override_redenering: wevData.wev_override_redenering || null,
+          // Context
+          wev_peildatum: wevContextData.wev_peildatum || null,
+          wev_reden_peildatum: wevContextData.wev_reden_peildatum || null,
+          wev_doel_taxatie: wevContextData.wev_doel_taxatie || null,
+          wev_marktsegment: wevContextData.wev_marktsegment || null,
+          wev_doelgroep: wevContextData.wev_doelgroep || null,
+          // Autotelex data
+          wev_btw_of_marge: wevAutotelexData.wev_btw_of_marge || null,
+          wev_btw_marge_override_motivatie: wevAutotelexData.wev_btw_marge_override_motivatie || null,
+          wev_handelsinkoopwaarde_autotelex: wevAutotelexData.wev_handelsinkoopwaarde_autotelex ? parseFloat(wevAutotelexData.wev_handelsinkoopwaarde_autotelex) : null,
+          wev_verkoopwaarde_autotelex: wevAutotelexData.wev_verkoopwaarde_autotelex ? parseFloat(wevAutotelexData.wev_verkoopwaarde_autotelex) : null,
+          wev_bron_waardes: wevAutotelexData.wev_bron_waardes || 'Autotelex',
+          wev_manual_source_note: wevAutotelexData.wev_manual_source_note || null,
+          wev_berekend: wevAutotelexData.wev_berekend ? parseFloat(wevAutotelexData.wev_berekend) : null,
+          wev_definitief: wevAutotelexData.wev_definitief ? parseFloat(wevAutotelexData.wev_definitief) : null,
+          wev_override_actief: wevAutotelexData.wev_override_actief,
+          wev_override_redenering: wevAutotelexData.wev_override_redenering || null,
+          // Comparables
+          wev_comparables: wevComparablesData.wev_comparables,
+          // Adjustments
+          wev_correcties_motivatie: wevAdjustmentsData.wev_correcties_motivatie || null,
+          wev_km_stand_correctie: wevAdjustmentsData.wev_km_stand_correctie || null,
+          wev_staat_correctie: wevAdjustmentsData.wev_staat_correctie || null,
+          wev_schade_correctie: wevAdjustmentsData.wev_schade_correctie || null,
+          wev_originaliteit_correctie: wevAdjustmentsData.wev_originaliteit_correctie || null,
+          // Conclusion
+          wev_bandbreedte_min: wevConclusionData.wev_bandbreedte_min ? parseFloat(wevConclusionData.wev_bandbreedte_min) : null,
+          wev_bandbreedte_max: wevConclusionData.wev_bandbreedte_max ? parseFloat(wevConclusionData.wev_bandbreedte_max) : null,
+          wev_eindwaarde: wevConclusionData.wev_eindwaarde ? parseFloat(wevConclusionData.wev_eindwaarde) : null,
+          wev_motivatie_eindwaarde: wevConclusionData.wev_motivatie_eindwaarde || null,
         } : {}),
         
         // Photos
@@ -818,12 +893,31 @@ const NewReport = () => {
           </Card>
         )}
 
-        {/* WEV Valuation - only for WEV */}
+        {/* WEV Valuation - only for WEV (new multi-screen structure) */}
         {isWevReport && (
-          <WevValuationForm
-            data={wevData}
-            onChange={handleWevChange}
-          />
+          <>
+            <WevValuationContextForm
+              data={wevContextData}
+              onChange={handleWevContextChange}
+            />
+            <WevAutotelexDataForm
+              data={wevAutotelexData}
+              onChange={handleWevAutotelexChange}
+            />
+            <WevComparablesForm
+              data={wevComparablesData}
+              onChange={handleWevComparablesChange}
+            />
+            <WevAdjustmentsForm
+              data={wevAdjustmentsData}
+              onChange={handleWevAdjustmentsChange}
+            />
+            <WevConclusionForm
+              data={wevConclusionData}
+              onChange={handleWevConclusionChange}
+              wevDefinitief={wevAutotelexData.wev_definitief}
+            />
+          </>
         )}
 
         {/* Remarks */}
