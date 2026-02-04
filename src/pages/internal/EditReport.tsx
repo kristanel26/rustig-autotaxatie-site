@@ -31,7 +31,7 @@ import { PostcodeField } from '@/components/internal/PostcodeField';
 import PhotoUploadForm, { PhotoRotations, PhotoTypes } from '@/components/internal/PhotoUploadForm';
 import { AutoExtractProvider } from '@/components/internal/AutoExtractContext';
 import { useAutoSave } from '@/hooks/useAutoSave';
-import { SaveStatusIndicator } from '@/components/internal/SaveStatusIndicator';
+import { StickyAutoSaveBar } from '@/components/internal/StickyAutoSaveBar';
 import { usePageLeaveProtection } from '@/hooks/usePageLeaveProtection';
 import { UnsavedChangesDialog } from '@/components/internal/UnsavedChangesDialog';
 import {
@@ -191,7 +191,7 @@ const EditReport = () => {
   const [wevValueData, setWevValueData] = useState<WevValueData>(getInitialWevValueData());
 
   // Auto-save hook
-  const { status: saveStatus, hasPendingChanges, saveField, saveMultipleFields, flushSave } = useAutoSave({
+  const { status: saveStatus, lastSavedAt, hasPendingChanges, saveField, saveMultipleFields, flushSave } = useAutoSave({
     reportId: id,
     debounceMs: 800,
     intervalMs: 20000,
@@ -903,9 +903,17 @@ const EditReport = () => {
           onStay={reset}
         />
 
+        {/* Sticky AutoSave Bar */}
+        <StickyAutoSaveBar
+          status={saveStatus}
+          lastSavedAt={lastSavedAt}
+          hasPendingChanges={hasPendingChanges}
+          onSaveNow={() => flushSave()}
+        />
+
         <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
-        {/* Header with Back Button and Save Status */}
-        <div className="flex items-center justify-between">
+        {/* Header with Back Button */}
+        <div className="flex items-center">
           <Button 
             type="button" 
             variant="ghost" 
@@ -914,7 +922,6 @@ const EditReport = () => {
             <ArrowLeft className="h-4 w-4 mr-2" />
             Terug naar rapport
           </Button>
-          <SaveStatusIndicator status={saveStatus} />
         </div>
 
         {/* Read-only Report Info */}
