@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Caravan, FileSpreadsheet, Car } from 'lucide-react';
 
-export type ReportType = 'camper' | 'wev' | 'classic';
+export type ReportType = 'camper' | 'wev' | 'klassieker';
 
 interface ReportTypeOption {
   value: ReportType;
@@ -26,11 +26,11 @@ const reportTypeOptions: ReportTypeOption[] = [
     icon: <FileSpreadsheet className="h-8 w-8" />,
   },
   {
-    value: 'classic',
+    value: 'klassieker',
     label: 'Klassiekertaxatie',
-    description: 'Taxatie voor oldtimers en youngtimers met specifieke waardebegrippen. (Binnenkort beschikbaar)',
+    description: 'Verzekeringstaxatie voor oldtimers en youngtimers. Eén vervangingswaarde, geen WEV-berekening.',
     icon: <Car className="h-8 w-8" />,
-    disabled: true,
+    disabled: false,
   },
 ];
 

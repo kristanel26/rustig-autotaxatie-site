@@ -8,6 +8,7 @@ import PDFVehicleDataContent from '@/components/internal/pdf/PDFVehicleDataConte
 import PDFAppraisalFindingsContent from '@/components/internal/pdf/PDFAppraisalFindingsContent';
 import PDFValuationContent from '@/components/internal/pdf/PDFValuationContent';
 import PDFWevValuationContent from '@/components/internal/pdf/PDFWevValuationContent';
+import PDFKlassiekerValuationContent from '@/components/internal/pdf/PDFKlassiekerValuationContent';
 import PDFPhotosContent from '@/components/internal/pdf/PDFPhotosContent';
 
 interface PhotoRotations {
@@ -77,18 +78,21 @@ const PDFPreview = () => {
   const reportType = report.report_type || 'camper';
   const isCamperReport = reportType === 'camper';
   const isWevReport = reportType === 'wev';
+  const isKlassiekerReport = reportType === 'klassieker';
   
   // Show valuations based on report type
   const hasStandardValuation = isCamperReport && report.appraised_value && report.appraised_value > 0;
   const hasWevValuation = isWevReport && (report.wev_eindwaarde || report.wev_definitief) && ((report.wev_eindwaarde || report.wev_definitief) > 0);
+  const hasKlassiekerValuation = isKlassiekerReport && report.appraised_value && report.appraised_value > 0;
   
   // Calculate page numbers dynamically
   let currentPage = 1; // Cover is page 1
   
   const standardValuationPage = hasStandardValuation ? ++currentPage : 0;
   const wevValuationPage = hasWevValuation ? ++currentPage : 0;
+  const klassiekerValuationPage = hasKlassiekerValuation ? ++currentPage : 0;
   const vehicleDataPage = ++currentPage;
-  const appraisalFindingsPage = ++currentPage;
+  const appraisalFindingsPage = !isKlassiekerReport ? ++currentPage : 0;
 
   return (
     <div 
@@ -101,17 +105,24 @@ const PDFPreview = () => {
           <PDFCoverContent report={report} />
         </div>
 
-        {/* Standard Valuation (conditional) */}
+        {/* Standard Valuation (camper) */}
         {hasStandardValuation && (
           <div className="shadow-lg">
             <PDFValuationContent report={report} pageNumber={standardValuationPage} totalPages={10} />
           </div>
         )}
 
-        {/* WEV Valuation (conditional) */}
+        {/* WEV Valuation */}
         {hasWevValuation && (
           <div className="shadow-lg">
             <PDFWevValuationContent report={report} pageNumber={wevValuationPage} totalPages={10} />
+          </div>
+        )}
+
+        {/* Klassieker Valuation */}
+        {hasKlassiekerValuation && (
+          <div className="shadow-lg">
+            <PDFKlassiekerValuationContent report={report} pageNumber={klassiekerValuationPage} totalPages={10} />
           </div>
         )}
 
@@ -120,10 +131,12 @@ const PDFPreview = () => {
           <PDFVehicleDataContent report={report} pageNumber={vehicleDataPage} />
         </div>
 
-        {/* Appraisal Findings */}
-        <div className="shadow-lg">
-          <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPage} />
-        </div>
+        {/* Appraisal Findings (not for klassieker - they use general impression in PDF) */}
+        {!isKlassiekerReport && (
+          <div className="shadow-lg">
+            <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPage} />
+          </div>
+        )}
 
         {/* Photo Annex (conditional) */}
         <PDFPhotosContent report={report} />
