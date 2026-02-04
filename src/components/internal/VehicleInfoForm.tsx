@@ -83,6 +83,7 @@ interface VehicleInfoFormProps {
   onChange: (field: keyof VehicleFormData, value: string | boolean) => void;
   errors?: Record<string, string>;
   isEditMode?: boolean;
+  reportType?: 'camper' | 'wev' | 'classic' | null;
   // AI extraction props
   photos?: string[];
   photoTypes?: PhotoTypes;
@@ -132,10 +133,13 @@ export const VehicleInfoForm = ({
   onChange,
   errors = {},
   isEditMode = false,
+  reportType = 'camper',
   photos = [],
   photoTypes = {},
   reportId = '',
 }: VehicleInfoFormProps) => {
+  // Determine if camper-specific sections should be shown
+  const isCamperReport = reportType === 'camper' || reportType === null;
   const { toast } = useToast();
   const [isFetchingRDW, setIsFetchingRDW] = useState(false);
 
@@ -571,112 +575,116 @@ export const VehicleInfoForm = ({
         </CardContent>
       </Card>
 
-      {/* Sectie 6: Opbouw en constructie (Taxateur) */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Opbouw en Constructie</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="soort_bouw">Soort bouw</Label>
-              <Select
-                value={formData.soort_bouw}
-                onValueChange={(value) => onChange('soort_bouw', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Selecteer..." />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="fabrieksbouw">Fabrieksbouw</SelectItem>
-                  <SelectItem value="zelfbouw">Zelfbouw</SelectItem>
-                </SelectContent>
-              </Select>
+      {/* Sectie 6: Opbouw en constructie (Taxateur) - only for camper */}
+      {isCamperReport && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Opbouw en Constructie</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="soort_bouw">Soort bouw</Label>
+                <Select
+                  value={formData.soort_bouw}
+                  onValueChange={(value) => onChange('soort_bouw', value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecteer..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="fabrieksbouw">Fabrieksbouw</SelectItem>
+                    <SelectItem value="zelfbouw">Zelfbouw</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="opbouw_merk">Opbouw merk</Label>
+                <Input
+                  id="opbouw_merk"
+                  value={formData.opbouw_merk}
+                  onChange={(e) => onChange('opbouw_merk', e.target.value)}
+                  placeholder="Bijv. Dethleffs"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="opbouw_type">Opbouw type</Label>
+                <Input
+                  id="opbouw_type"
+                  value={formData.opbouw_type}
+                  onChange={(e) => onChange('opbouw_type', e.target.value)}
+                  placeholder="Bijv. Globescout"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="constructievorm">Constructievorm</Label>
+                <Input
+                  id="constructievorm"
+                  value={formData.constructievorm}
+                  onChange={(e) => onChange('constructievorm', e.target.value)}
+                />
+              </div>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="opbouw_merk">Opbouw merk</Label>
-              <Input
-                id="opbouw_merk"
-                value={formData.opbouw_merk}
-                onChange={(e) => onChange('opbouw_merk', e.target.value)}
-                placeholder="Bijv. Dethleffs"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="opbouw_type">Opbouw type</Label>
-              <Input
-                id="opbouw_type"
-                value={formData.opbouw_type}
-                onChange={(e) => onChange('opbouw_type', e.target.value)}
-                placeholder="Bijv. Globescout"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="constructievorm">Constructievorm</Label>
-              <Input
-                id="constructievorm"
-                value={formData.constructievorm}
-                onChange={(e) => onChange('constructievorm', e.target.value)}
-              />
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      )}
 
-      {/* Sectie 7: Gebruik en stalling (Taxateur) */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Gebruik en Stalling</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="gebruik">Gebruik</Label>
-              <Select
-                value={formData.gebruik}
-                onValueChange={(value) => onChange('gebruik', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Selecteer..." />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="recreatief">Recreatief</SelectItem>
-                  <SelectItem value="verhuur">Verhuur</SelectItem>
-                </SelectContent>
-              </Select>
+      {/* Sectie 7: Gebruik en stalling (Taxateur) - only for camper */}
+      {isCamperReport && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Gebruik en Stalling</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="gebruik">Gebruik</Label>
+                <Select
+                  value={formData.gebruik}
+                  onValueChange={(value) => onChange('gebruik', value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecteer..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="recreatief">Recreatief</SelectItem>
+                    <SelectItem value="verhuur">Verhuur</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="stalling">Stalling</Label>
+                <Select
+                  value={formData.stalling}
+                  onValueChange={(value) => onChange('stalling', value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecteer..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="binnen">Binnen</SelectItem>
+                    <SelectItem value="buiten">Buiten</SelectItem>
+                    <SelectItem value="onbekend">Onbekend</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="staat_bij_opname">Staat bij opname</Label>
+                <Textarea
+                  id="staat_bij_opname"
+                  value={formData.staat_bij_opname}
+                  onChange={(e) => onChange('staat_bij_opname', e.target.value)}
+                  placeholder="Feitelijke constatering van de staat van het voertuig..."
+                  rows={3}
+                />
+                <p className="text-xs text-muted-foreground">
+                  Beschrijf de feitelijke staat, geen oordeel
+                </p>
+              </div>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="stalling">Stalling</Label>
-              <Select
-                value={formData.stalling}
-                onValueChange={(value) => onChange('stalling', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Selecteer..." />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="binnen">Binnen</SelectItem>
-                  <SelectItem value="buiten">Buiten</SelectItem>
-                  <SelectItem value="onbekend">Onbekend</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="space-y-2 md:col-span-2">
-              <Label htmlFor="staat_bij_opname">Staat bij opname</Label>
-              <Textarea
-                id="staat_bij_opname"
-                value={formData.staat_bij_opname}
-                onChange={(e) => onChange('staat_bij_opname', e.target.value)}
-                placeholder="Feitelijke constatering van de staat van het voertuig..."
-                rows={3}
-              />
-              <p className="text-xs text-muted-foreground">
-                Beschrijf de feitelijke staat, geen oordeel
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 };
