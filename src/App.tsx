@@ -23,6 +23,7 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/internal/Login";
 import Dashboard from "./pages/internal/Dashboard";
 import Reports from "./pages/internal/Reports";
+import Reminders from "./pages/internal/Reminders";
 import NewReport from "./pages/internal/NewReport";
 import ReportDetail from "./pages/internal/ReportDetail";
 import EditReport from "./pages/internal/EditReport";
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: "/intern/rapporten",
     element: <ProtectedRoute><Reports /></ProtectedRoute>,
+  },
+  {
+    path: "/intern/herinneringen",
+    element: <ProtectedRoute><Reminders /></ProtectedRoute>,
   },
   {
     path: "/intern/nieuw-rapport",

@@ -7,7 +7,8 @@ import {
   FilePlus, 
   LogOut,
   Menu,
-  X
+  X,
+  Bell
 } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -31,6 +32,7 @@ const InternalLayout: React.FC<InternalLayoutProps> = ({ children, title }) => {
   const navItems = [
     { path: '/intern/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/intern/rapporten', label: 'Rapporten', icon: FileText },
+    { path: '/intern/herinneringen', label: 'Herinneringen', icon: Bell },
     { path: '/intern/nieuw-rapport', label: 'Nieuw Rapport', icon: FilePlus },
   ];
 
