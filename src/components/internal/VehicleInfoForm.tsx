@@ -83,7 +83,7 @@ interface VehicleInfoFormProps {
   onChange: (field: keyof VehicleFormData, value: string | boolean) => void;
   errors?: Record<string, string>;
   isEditMode?: boolean;
-  reportType?: 'camper' | 'wev' | 'classic' | null;
+  reportType?: 'camper' | 'wev' | 'klassieker' | null;
   // AI extraction props
   photos?: string[];
   photoTypes?: PhotoTypes;

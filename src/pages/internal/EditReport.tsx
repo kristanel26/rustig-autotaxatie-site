@@ -1029,7 +1029,7 @@ const EditReport = () => {
           onChange={handleVehicleChange}
           errors={errors}
           isEditMode={true}
-          reportType={report.report_type as 'camper' | 'wev' | 'classic' | null}
+          reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
           photos={vehiclePhotos}
           photoTypes={photoTypes}
           reportId={id}
@@ -1103,7 +1103,7 @@ const EditReport = () => {
           rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
           allTiresSame={allTiresSame}
           onAllTiresSameChange={setAllTiresSame}
-          reportType={report.report_type as 'camper' | 'wev' | 'classic' | null}
+          reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
           photos={vehiclePhotos}
           photoTypes={photoTypes}
           reportId={id}

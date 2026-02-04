@@ -89,7 +89,7 @@ interface AppraisalFindingsFormProps {
   rdwHandelsbenaming?: string;
   allTiresSame?: boolean;
   onAllTiresSameChange?: (value: boolean) => void;
-  reportType?: 'camper' | 'wev' | 'classic' | null;
+  reportType?: 'camper' | 'wev' | 'klassieker' | null;
   // AI extraction props
   photos?: string[];
   photoTypes?: PhotoTypes;
