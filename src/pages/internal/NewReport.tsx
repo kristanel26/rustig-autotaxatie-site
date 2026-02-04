@@ -730,6 +730,7 @@ const NewReport = () => {
           onChange={handleVehicleChange}
           errors={errors}
           isEditMode={false}
+          reportType={reportType}
           photos={vehiclePhotos}
           photoTypes={photoTypes}
         />
@@ -742,6 +743,7 @@ const NewReport = () => {
           rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
           allTiresSame={allTiresSame}
           onAllTiresSameChange={setAllTiresSame}
+          reportType={reportType}
           photos={vehiclePhotos}
           photoTypes={photoTypes}
         />

@@ -89,6 +89,7 @@ interface AppraisalFindingsFormProps {
   rdwHandelsbenaming?: string;
   allTiresSame?: boolean;
   onAllTiresSameChange?: (value: boolean) => void;
+  reportType?: 'camper' | 'wev' | 'classic' | null;
   // AI extraction props
   photos?: string[];
   photoTypes?: PhotoTypes;
@@ -164,10 +165,13 @@ export const AppraisalFindingsForm = ({
   rdwHandelsbenaming,
   allTiresSame = false,
   onAllTiresSameChange,
+  reportType = 'camper',
   photos = [],
   photoTypes = {},
   reportId = '',
 }: AppraisalFindingsFormProps) => {
+  // Determine if camper-specific sections should be shown
+  const isCamperReport = reportType === 'camper' || reportType === null;
   // Handler for AI tire extraction results
   const handleTireAIAccept = (fieldKey: string, value: string) => {
     if (fieldKey === 'tire_size') {
@@ -514,22 +518,27 @@ export const AppraisalFindingsForm = ({
             onConditionChange={(v) => onChange('interior_roof', v)}
             onNotesChange={(v) => onChange('interior_roof_notes', v)}
           />
-          <ConditionField
-            id="interior_kitchen"
-            label="Keuken"
-            conditionValue={formData.interior_kitchen}
-            notesValue={formData.interior_kitchen_notes}
-            onConditionChange={(v) => onChange('interior_kitchen', v)}
-            onNotesChange={(v) => onChange('interior_kitchen_notes', v)}
-          />
-          <ConditionField
-            id="interior_sanitary"
-            label="Sanitair"
-            conditionValue={formData.interior_sanitary}
-            notesValue={formData.interior_sanitary_notes}
-            onConditionChange={(v) => onChange('interior_sanitary', v)}
-            onNotesChange={(v) => onChange('interior_sanitary_notes', v)}
-          />
+          {/* Camper-specific interior fields */}
+          {isCamperReport && (
+            <>
+              <ConditionField
+                id="interior_kitchen"
+                label="Keuken"
+                conditionValue={formData.interior_kitchen}
+                notesValue={formData.interior_kitchen_notes}
+                onConditionChange={(v) => onChange('interior_kitchen', v)}
+                onNotesChange={(v) => onChange('interior_kitchen_notes', v)}
+              />
+              <ConditionField
+                id="interior_sanitary"
+                label="Sanitair"
+                conditionValue={formData.interior_sanitary}
+                notesValue={formData.interior_sanitary_notes}
+                onConditionChange={(v) => onChange('interior_sanitary', v)}
+                onNotesChange={(v) => onChange('interior_sanitary_notes', v)}
+              />
+            </>
+          )}
         </CardContent>
       </Card>
     </div>
