@@ -80,7 +80,7 @@ const PDFPreview = () => {
   
   // Show valuations based on report type
   const hasStandardValuation = isCamperReport && report.appraised_value && report.appraised_value > 0;
-  const hasWevValuation = isWevReport && report.wev_definitief && report.wev_definitief > 0;
+  const hasWevValuation = isWevReport && (report.wev_eindwaarde || report.wev_definitief) && ((report.wev_eindwaarde || report.wev_definitief) > 0);
   
   // Calculate page numbers dynamically
   let currentPage = 1; // Cover is page 1
