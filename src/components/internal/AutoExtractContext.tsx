@@ -56,6 +56,17 @@ export function AutoExtractProvider({ children }: AutoExtractProviderProps) {
   const [pendingSuggestions, setPendingSuggestions] = useState<Record<string, PendingSuggestion>>({});
   const [reportId, setReportId] = useState<string>('');
 
+  // Map photo type to tire position prefix
+  const getTirePositionPrefix = (photoType: PhotoType): string | null => {
+    switch (photoType) {
+      case 'band_voor_links': return 'tire_front_left_';
+      case 'band_voor_rechts': return 'tire_front_right_';
+      case 'band_achter_links': return 'tire_rear_left_';
+      case 'band_achter_rechts': return 'tire_rear_right_';
+      default: return null;
+    }
+  };
+
   const triggerExtraction = useCallback(async (
     photoUrl: string,
     photoType: PhotoType,
@@ -120,10 +131,35 @@ export function AutoExtractProvider({ children }: AutoExtractProviderProps) {
       // Convert results to pending suggestions
       const newSuggestions: Record<string, PendingSuggestion> = {};
       
+      // Track if we found tire brand for feedback
+      let foundTireBrand = false;
+      let hadTirePhoto = section === 'banden';
+      
       results.forEach(result => {
         if (result.status !== 'ontbreekt' && result.proposed_value) {
-          newSuggestions[result.field_key] = {
-            fieldKey: result.field_key,
+          // For tire extraction, ensure the field_key uses the correct position prefix
+          let finalFieldKey = result.field_key;
+          
+          // If this is a tire result and doesn't have a position prefix, add one based on the photo
+          if (section === 'banden') {
+            const positionPrefix = getTirePositionPrefix(photoType);
+            
+            // Handle generic tire_size - use it globally
+            if (result.field_key === 'tire_size') {
+              finalFieldKey = 'tire_bandenmaat';
+            }
+            // Handle tire_dot without position - add position from photo type
+            else if (result.field_key === 'tire_dot' && positionPrefix) {
+              finalFieldKey = `${positionPrefix}dot`;
+            }
+            // Check if brand was found
+            if (result.field_key.includes('brand') && result.proposed_value) {
+              foundTireBrand = true;
+            }
+          }
+          
+          newSuggestions[finalFieldKey] = {
+            fieldKey: finalFieldKey,
             proposedValue: result.proposed_value,
             confidence: result.confidence,
             status: result.status,
@@ -144,6 +180,14 @@ export function AutoExtractProvider({ children }: AutoExtractProviderProps) {
         const count = Object.keys(newSuggestions).length;
         toast.success(`${count} waarde${count > 1 ? 's' : ''} gevonden`, {
           description: 'Bekijk de suggesties bij de velden',
+        });
+      }
+      
+      // Show feedback if tire photo but no brand found
+      if (hadTirePhoto && !foundTireBrand && Object.keys(newSuggestions).length > 0) {
+        toast.info('Bandenmerk niet herkend', {
+          description: 'Tip: maak een close-up van de zijwand met merk + DOT in beeld',
+          duration: 5000,
         });
       }
 

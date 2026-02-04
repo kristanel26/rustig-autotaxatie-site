@@ -123,9 +123,33 @@ export const EXTRACTION_FIELD_MAPPINGS: Record<string, FieldMapping> = {
   // Tellerstand
   tellerstand: { fieldKey: 'tellerstand', formSection: 'vehicle', displayLabel: 'Kilometerstand' },
   
-  // Tire data (per position)
+  // Tire data - global
   tire_size: { fieldKey: 'tire_bandenmaat', formSection: 'appraisal', displayLabel: 'Bandenmaat' },
-  tire_dot: { fieldKey: 'tire_front_left_dot', formSection: 'appraisal', displayLabel: 'DOT-code' },
+  tire_bandenmaat: { fieldKey: 'tire_bandenmaat', formSection: 'appraisal', displayLabel: 'Bandenmaat' },
+  
+  // Tire data per position - Front Left
+  tire_front_left_brand: { fieldKey: 'tire_front_left_brand', formSection: 'appraisal', displayLabel: 'Merk LV' },
+  tire_front_left_model: { fieldKey: 'tire_front_left_model', formSection: 'appraisal', displayLabel: 'Model LV' },
+  tire_front_left_dot: { fieldKey: 'tire_front_left_dot', formSection: 'appraisal', displayLabel: 'DOT LV' },
+  tire_front_left_profiel: { fieldKey: 'tire_front_left_profiel', formSection: 'appraisal', displayLabel: 'Profiel LV' },
+  
+  // Tire data per position - Front Right
+  tire_front_right_brand: { fieldKey: 'tire_front_right_brand', formSection: 'appraisal', displayLabel: 'Merk RV' },
+  tire_front_right_model: { fieldKey: 'tire_front_right_model', formSection: 'appraisal', displayLabel: 'Model RV' },
+  tire_front_right_dot: { fieldKey: 'tire_front_right_dot', formSection: 'appraisal', displayLabel: 'DOT RV' },
+  tire_front_right_profiel: { fieldKey: 'tire_front_right_profiel', formSection: 'appraisal', displayLabel: 'Profiel RV' },
+  
+  // Tire data per position - Rear Left
+  tire_rear_left_brand: { fieldKey: 'tire_rear_left_brand', formSection: 'appraisal', displayLabel: 'Merk LA' },
+  tire_rear_left_model: { fieldKey: 'tire_rear_left_model', formSection: 'appraisal', displayLabel: 'Model LA' },
+  tire_rear_left_dot: { fieldKey: 'tire_rear_left_dot', formSection: 'appraisal', displayLabel: 'DOT LA' },
+  tire_rear_left_profiel: { fieldKey: 'tire_rear_left_profiel', formSection: 'appraisal', displayLabel: 'Profiel LA' },
+  
+  // Tire data per position - Rear Right
+  tire_rear_right_brand: { fieldKey: 'tire_rear_right_brand', formSection: 'appraisal', displayLabel: 'Merk RA' },
+  tire_rear_right_model: { fieldKey: 'tire_rear_right_model', formSection: 'appraisal', displayLabel: 'Model RA' },
+  tire_rear_right_dot: { fieldKey: 'tire_rear_right_dot', formSection: 'appraisal', displayLabel: 'DOT RA' },
+  tire_rear_right_profiel: { fieldKey: 'tire_rear_right_profiel', formSection: 'appraisal', displayLabel: 'Profiel RA' },
   
   // Massa
   max_massa: { fieldKey: 'rdw_max_massa', formSection: 'vehicle', displayLabel: 'Toegestane max massa' },

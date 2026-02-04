@@ -172,13 +172,34 @@ export const AppraisalFindingsForm = ({
 }: AppraisalFindingsFormProps) => {
   // Determine if camper-specific sections should be shown
   const isCamperReport = reportType === 'camper' || reportType === null;
-  // Handler for AI tire extraction results
+  // Handler for AI tire extraction results - now handles all tire fields
   const handleTireAIAccept = (fieldKey: string, value: string) => {
-    if (fieldKey === 'tire_size') {
+    // Map generic field keys to form fields
+    if (fieldKey === 'tire_size' || fieldKey === 'tire_bandenmaat') {
       onChange('tire_bandenmaat', value);
     } else if (fieldKey === 'tire_dot') {
-      // Apply to first tire DOT field
+      // Legacy: Apply to first tire DOT field
       onChange('tire_front_left_dot', value);
+    } else if (fieldKey.startsWith('tire_front_left_') || 
+               fieldKey.startsWith('tire_front_right_') ||
+               fieldKey.startsWith('tire_rear_left_') ||
+               fieldKey.startsWith('tire_rear_right_')) {
+      // Direct tire position fields (brand, model, dot, profiel)
+      const formField = fieldKey as keyof AppraisalFormData;
+      if (formField in formData) {
+        // If all tires same is enabled and it's the first tire, sync to all
+        if (allTiresSame && fieldKey.startsWith('tire_front_left_') && onMultipleChange) {
+          const suffix = fieldKey.replace('tire_front_left_', '');
+          onMultipleChange({
+            [`tire_front_left_${suffix}`]: value,
+            [`tire_front_right_${suffix}`]: value,
+            [`tire_rear_left_${suffix}`]: value,
+            [`tire_rear_right_${suffix}`]: value,
+          } as Partial<AppraisalFormData>);
+        } else {
+          onChange(formField, value);
+        }
+      }
     }
   };
 
@@ -338,7 +359,7 @@ export const AppraisalFindingsForm = ({
               <div className="pt-6">
                 <AIExtractButton
                   section="banden"
-                  label="Lees bandenmaat en DOT"
+                  label="Lees bandeninfo"
                   photoTypes={['band_voor_links', 'band_voor_rechts', 'band_achter_links', 'band_achter_rechts']}
                   photos={photos}
                   photoTypeMap={photoTypes}
