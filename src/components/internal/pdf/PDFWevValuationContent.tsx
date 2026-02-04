@@ -1,5 +1,6 @@
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
 import signatureErik from '@/assets/signature-erik-elderson.svg';
+import { numberToDutchWords } from '@/lib/normalizers';
 
 interface PDFWevValuationContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -8,10 +9,12 @@ interface PDFWevValuationContentProps {
   totalPages: number;
 }
 
-// Fixed legal text for WEV - DO NOT modify
-const LEGAL_TEXT = `Dit rapport dient uitsluitend ter bepaling van de Waarde in het Economisch Verkeer (WEV) van het visueel getaxeerde motorvoertuig. De vastgestelde waarde betreft een momentopname op de datum van taxatie en kan dienen als onderbouwing bij fiscale verantwoording. Het rapport is beslist géén technische keuring en kan daarom nooit als zodanig worden geïnterpreteerd. Het rapport is niet overdraagbaar. De door ons verrichte taxatie houdt geen enkele garantie in tot het realiseren van de vastgestelde waarde bij inruil of verkoop. Dat op deze taxatie van toepassing zijn de algemene voorwaarden voor Register Makelaars en Register Taxateurs in roerende zaken, leden van de Federatie van Taxateurs, Makelaars en Veilinghouders in roerende zaken, welke voorwaarden zijn gedeponeerd bij de Kamer van Koophandel en Fabrieken voor Amsterdam op 30-06-2005 onder nummer 40530226.`;
-
-const SIGNING_TEXT = `Ondergetekende, Erik Elderson, Register Taxateur voor motorvoertuigen te Druten, als zodanig erkend en opgenomen in het Register van Makelaars en Taxateurs TMV onder nummer 33106, Register-Taxateur VRT onder nummer 22-523-M, verklaart te zijn benoemd als deskundige.`;
+// Fixed legal constants for WEV reports - DO NOT modify
+const TAXATEUR_NAAM = 'Erik Elderson';
+const TAXATEUR_REGISTRATIE = 'TMV 33106 en VRT 22-523-M';
+const KVK_NUMMER = '94aborgen623';
+const VESTIGINGSADRES = 'Maasdijk 25, 6651 KM te Druten';
+const VESTIGINGSPLAATS = 'Druten';
 
 const PDFWevValuationContent = ({ report, pageNumber, totalPages }: PDFWevValuationContentProps) => {
   const formatCurrency = (value: number | null) => {
@@ -22,15 +25,6 @@ const PDFWevValuationContent = ({ report, pageNumber, totalPages }: PDFWevValuat
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(value);
-  };
-
-  const formatDate = (dateString: string | null) => {
-    if (!dateString) return null;
-    return new Date(dateString).toLocaleDateString('nl-NL', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    });
   };
 
   const formatDateLong = (dateString: string | null) => {
@@ -49,16 +43,16 @@ const PDFWevValuationContent = ({ report, pageNumber, totalPages }: PDFWevValuat
   };
 
   // Don't render if no WEV data
-  if (!report.wev_definitief || report.wev_definitief <= 0) {
+  const eindwaarde = report.wev_eindwaarde || report.wev_definitief;
+  if (!eindwaarde || eindwaarde <= 0) {
     return null;
   }
 
-  const handelsinkoopwaarde = formatCurrency(report.wev_handelsinkoopwaarde_autotelex);
-  const verkoopwaarde = formatCurrency(report.wev_verkoopwaarde_autotelex);
-  const wevBerekend = formatCurrency(report.wev_berekend);
-  const wevDefinitief = formatCurrency(report.wev_definitief);
-  const peildatum = formatDate(report.wev_peildatum);
-  const bron = report.wev_bron_waardes || 'Autotelex';
+  const eindwaardeFormatted = formatCurrency(eindwaarde);
+  const eindwaardeTekst = numberToDutchWords(eindwaarde);
+  const datumOpname = formatDateLong(report.inspection_date);
+  const plaatsOpname = report.inspection_location || VESTIGINGSPLAATS;
+  const datumRapportGereed = formatDateLong(report.wev_finalized_at || new Date().toISOString());
 
   return (
     <div 
@@ -80,103 +74,77 @@ const PDFWevValuationContent = ({ report, pageNumber, totalPages }: PDFWevValuat
         <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '40px', width: 'auto' }} />
       </div>
 
-      {/* Legal Text */}
-      <p style={{ 
-        fontSize: '10px', 
-        color: '#000000', 
-        lineHeight: 1.8, 
+      {/* Taxateur declaration */}
+      <div style={{ marginBottom: '20px' }}>
+        <p style={{ fontSize: '10px', color: '#000000', lineHeight: 1.8, margin: '0 0 8px 0' }}>
+          Ondergetekende,
+        </p>
+        <p style={{ fontSize: '10px', color: '#000000', lineHeight: 1.8, margin: '0 0 4px 0', fontWeight: 600 }}>
+          {TAXATEUR_NAAM}
+        </p>
+        <p style={{ fontSize: '10px', color: '#000000', lineHeight: 1.8, margin: '0 0 8px 0' }}>
+          Register Taxateur
+        </p>
+        <p style={{ fontSize: '10px', color: '#000000', lineHeight: 1.8, margin: '0 0 16px 0', textAlign: 'justify' }}>
+          Gecertificeerd door Stichting Hobéon SKO Certificatie, conform de Regeling SRZ, onder nummers {TAXATEUR_REGISTRATIE}.
+          Ingeschreven als registertaxateur motorvoertuigen, gevestigd aan {VESTIGINGSADRES}, en ingeschreven in het handelsregister van de Kamer van Koophandel onder nummer {KVK_NUMMER}.
+        </p>
+      </div>
+
+      {/* In aanmerking nemende */}
+      <div style={{ marginBottom: '20px' }}>
+        <p style={{ fontSize: '10px', color: '#000000', lineHeight: 1.8, margin: '0 0 8px 0', fontWeight: 600 }}>
+          In aanmerking nemende:
+        </p>
+        <p style={{ fontSize: '10px', color: '#000000', lineHeight: 1.8, margin: '0 0 16px 0', textAlign: 'justify' }}>
+          Dat ondergetekende van de opdrachtgever opdracht heeft ontvangen om het bovenvermelde motorvoertuig op te nemen en te waarderen naar Waarde in het Economisch Verkeer en dat hij aan dit voertuig de navolgende waarde toekent.
+        </p>
+      </div>
+
+      {/* Waarde block */}
+      <div style={{ 
         marginBottom: '20px',
-        textAlign: 'justify',
+        padding: '12px 16px',
+        backgroundColor: '#f8f9fa',
+        borderLeft: '3px solid #000000',
       }}>
-        {LEGAL_TEXT}
+        <p style={{ fontSize: '12px', color: '#000000', margin: '0 0 4px 0', fontWeight: 600 }}>
+          Waarde in het Economisch Verkeer: {eindwaardeFormatted}
+        </p>
+        <p style={{ fontSize: '10px', color: '#000000', margin: 0, fontStyle: 'italic' }}>
+          Zegge: {eindwaardeTekst}
+        </p>
+      </div>
+
+      {/* Signing declaration */}
+      <p style={{ fontSize: '10px', color: '#000000', lineHeight: 1.8, margin: '0 0 16px 0' }}>
+        Aldus gedaan naar beste kennis en wetenschap en getekend te {VESTIGINGSPLAATS}, op {datumRapportGereed}.
       </p>
 
-      {/* Valuation Introduction */}
-      <p style={{ 
-        fontSize: '10px', 
-        color: '#000000', 
-        lineHeight: 1.8, 
-        marginBottom: '16px',
-      }}>
-        De Waarde in het Economisch Verkeer is vastgesteld als het rekenkundig gemiddelde van de handelsinkoopwaarde en de verkoopwaarde, gebaseerd op marktgegevens uit {bron}{peildatum && <>, peildatum {peildatum}</>}.
-      </p>
-
-      {/* Value breakdown table */}
-      <table style={{ 
-        width: '100%', 
-        borderCollapse: 'collapse', 
-        marginBottom: '20px',
-        fontSize: '10px',
-      }}>
-        <tbody>
-          {handelsinkoopwaarde && (
-            <tr>
-              <td style={{ padding: '6px 0', color: '#000000' }}>Handelsinkoopwaarde:</td>
-              <td style={{ padding: '6px 0', color: '#000000', textAlign: 'right', fontWeight: 500 }}>{handelsinkoopwaarde}</td>
-            </tr>
-          )}
-          {verkoopwaarde && (
-            <tr>
-              <td style={{ padding: '6px 0', color: '#000000' }}>Verkoopwaarde:</td>
-              <td style={{ padding: '6px 0', color: '#000000', textAlign: 'right', fontWeight: 500 }}>{verkoopwaarde}</td>
-            </tr>
-          )}
-          {wevBerekend && (
-            <tr>
-              <td style={{ padding: '6px 0', color: '#000000' }}>WEV berekend:</td>
-              <td style={{ padding: '6px 0', color: '#000000', textAlign: 'right', fontWeight: 500 }}>{wevBerekend}</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-
-      {/* Final WEV Value */}
-      <p style={{ 
-        fontSize: '14px', 
-        fontWeight: 700, 
-        color: '#000000', 
-        marginBottom: '16px',
-      }}>
-        WEV definitief: {wevDefinitief}
-      </p>
-
-      {/* Override reasoning if present */}
-      {report.wev_override_actief && report.wev_override_redenering && (
-        <div style={{ marginBottom: '20px' }}>
-          <p style={{ 
-            fontSize: '10px', 
-            color: '#000000', 
-            lineHeight: 1.8,
-            fontStyle: 'italic',
-          }}>
-            Afwijking van de berekende waarde: {report.wev_override_redenering}
-          </p>
-        </div>
-      )}
-
-      {/* Signing Text */}
-      <p style={{ 
-        fontSize: '10px', 
-        color: '#000000', 
-        lineHeight: 1.8, 
-        marginBottom: '20px',
-        marginTop: '24px',
-        textAlign: 'justify',
-      }}>
-        {SIGNING_TEXT}
-      </p>
-
-      {/* Date line */}
-      <p style={{ 
-        fontSize: '10px', 
-        color: '#000000', 
-        marginBottom: '24px',
-      }}>
-        Aldus, naar beste weten en kunnen opgemaakt te Druten, {formatDateLong(report.inspection_date)}
-      </p>
+      {/* Legal terms */}
+      <div style={{ marginBottom: '16px' }}>
+        <p style={{ fontSize: '9px', color: '#000000', lineHeight: 1.8, margin: '0 0 8px 0', textAlign: 'justify' }}>
+          Op deze taxatie zijn van toepassing de algemene voorwaarden voor Register Makelaars en Register Taxateurs in roerende zaken, leden van de Federatie van Taxateurs, Makelaars en Veilinghouders in roerende zaken. Deze voorwaarden zijn gedeponeerd bij de Kamer van Koophandel en Fabrieken voor Amsterdam op 30 juni 2005 onder nummer 40530226.
+        </p>
+        <p style={{ fontSize: '9px', color: '#000000', lineHeight: 1.8, margin: '0 0 8px 0', textAlign: 'justify' }}>
+          Deze taxatie en de bijbehorende rapportage vormen nadrukkelijk geen technische keuring en kunnen nooit als zodanig worden geïnterpreteerd.
+        </p>
+        <p style={{ fontSize: '9px', color: '#000000', lineHeight: 1.8, margin: '0 0 8px 0', textAlign: 'justify' }}>
+          Dit rapport dient uitsluitend ter bepaling van de Waarde in het Economisch Verkeer.
+        </p>
+        <p style={{ fontSize: '9px', color: '#000000', lineHeight: 1.8, margin: '0 0 8px 0', textAlign: 'justify' }}>
+          De taxateur heeft het voertuig op {datumOpname}, zijnde de waardepeildatum, opgenomen en getaxeerd na onderzoek te {plaatsOpname}.
+        </p>
+        <p style={{ fontSize: '9px', color: '#000000', lineHeight: 1.8, margin: '0 0 8px 0', textAlign: 'justify' }}>
+          Deze taxatie houdt geen enkele garantie in met betrekking tot het realiseren van de vastgestelde waarde bij inruil of verkoop.
+        </p>
+        <p style={{ fontSize: '9px', color: '#000000', lineHeight: 1.8, margin: 0, textAlign: 'justify' }}>
+          Onder Waarde in het Economisch Verkeer wordt verstaan het bedrag dat, bij aanbieding ten verkoop op de voor de zaak meest geschikte wijze en na de beste voorbereiding, door de meest biedende gegadigde zou zijn besteed dan wel door de verkoper zou zijn ontvangen.
+        </p>
+      </div>
 
       {/* Signature block */}
-      <div style={{ marginBottom: '16px' }}>
+      <div style={{ marginTop: '24px' }}>
         <p style={{ fontSize: '10px', color: '#000000', margin: '0 0 8px 0' }}>
           Hoogachtend,
         </p>
@@ -184,7 +152,7 @@ const PDFWevValuationContent = ({ report, pageNumber, totalPages }: PDFWevValuat
           Automobiel Taxaties
         </p>
         <p style={{ fontSize: '10px', color: '#000000', fontWeight: 600, margin: '0 0 12px 0' }}>
-          Erik Elderson
+          {TAXATEUR_NAAM}
         </p>
         <img 
           crossOrigin="anonymous"
