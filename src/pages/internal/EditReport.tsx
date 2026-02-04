@@ -1035,6 +1035,66 @@ const EditReport = () => {
           reportId={id}
         />
 
+        {/* WEV: Inspectiegegevens direct na voertuig (kantoorvoorbereiding) */}
+        {report.report_type === 'wev' && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
+            </CardHeader>
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="inspection_location">Plaats opname *</Label>
+                <Input
+                  id="inspection_location"
+                  value={inspectionData.inspection_location}
+                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
+                  placeholder="bijv. Druten"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="inspection_date">Datum opname *</Label>
+                <Input
+                  id="inspection_date"
+                  type="date"
+                  value={inspectionData.inspection_date}
+                  onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="wev_peildatum">Peildatum</Label>
+                <Input
+                  id="wev_peildatum"
+                  type="date"
+                  value={inspectionData.inspection_date}
+                  disabled
+                  className="bg-muted"
+                />
+                <p className="text-xs text-muted-foreground">
+                  Peildatum is gelijk aan datum opname
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* WEV: Fotocollectie vóór technische staat */}
+        {report.report_type === 'wev' && (
+          <PhotoUploadForm
+            photos={vehiclePhotos}
+            rotations={photoRotations}
+            photoTypes={photoTypes}
+            onChange={handlePhotosChange}
+            onRotationsChange={handleRotationsChange}
+            onPhotoTypesChange={handlePhotoTypesChange}
+            reportId={id}
+          />
+        )}
+
+        {/* WEV: Taxatiebestanden vóór technische staat */}
+        {report.report_type === 'wev' && (
+          <WevDocumentUploadForm reportId={id || ''} />
+        )}
+
         {/* Appraisal Findings - Taxateursecties */}
         <AppraisalFindingsForm
           formData={appraisalData}
@@ -1079,62 +1139,66 @@ const EditReport = () => {
           />
         )}
 
-        {/* Fotocollectie */}
-        <PhotoUploadForm
-          photos={vehiclePhotos}
-          rotations={photoRotations}
-          photoTypes={photoTypes}
-          onChange={handlePhotosChange}
-          onRotationsChange={handleRotationsChange}
-          onPhotoTypesChange={handlePhotoTypesChange}
-          reportId={id}
-        />
+        {/* Fotocollectie - only for camper (WEV has it earlier) */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <PhotoUploadForm
+            photos={vehiclePhotos}
+            rotations={photoRotations}
+            photoTypes={photoTypes}
+            onChange={handlePhotosChange}
+            onRotationsChange={handleRotationsChange}
+            onPhotoTypesChange={handlePhotoTypesChange}
+            reportId={id}
+          />
+        )}
 
-        {/* Inspection Details */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
-          </CardHeader>
-          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2 md:col-span-2">
-              <Label htmlFor="inspection_location">Inspectielocatie</Label>
-              <Input
-                id="inspection_location"
-                value={inspectionData.inspection_location}
-                onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="inspection_date">Inspectiedatum</Label>
-              <Input
-                id="inspection_date"
-                type="date"
-                value={inspectionData.inspection_date}
-                onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
-              />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="inspection_start_time">Starttijd</Label>
+        {/* Camper: Inspection Details */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
+            </CardHeader>
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="inspection_location">Inspectielocatie</Label>
                 <Input
-                  id="inspection_start_time"
-                  type="time"
-                  value={inspectionData.inspection_start_time}
-                  onChange={(e) => handleInspectionChange('inspection_start_time', e.target.value)}
+                  id="inspection_location"
+                  value={inspectionData.inspection_location}
+                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="inspection_end_time">Eindtijd</Label>
+                <Label htmlFor="inspection_date">Inspectiedatum</Label>
                 <Input
-                  id="inspection_end_time"
-                  type="time"
-                  value={inspectionData.inspection_end_time}
-                  onChange={(e) => handleInspectionChange('inspection_end_time', e.target.value)}
+                  id="inspection_date"
+                  type="date"
+                  value={inspectionData.inspection_date}
+                  onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
                 />
               </div>
-            </div>
-          </CardContent>
-        </Card>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="inspection_start_time">Starttijd</Label>
+                  <Input
+                    id="inspection_start_time"
+                    type="time"
+                    value={inspectionData.inspection_start_time}
+                    onChange={(e) => handleInspectionChange('inspection_start_time', e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="inspection_end_time">Eindtijd</Label>
+                  <Input
+                    id="inspection_end_time"
+                    type="time"
+                    value={inspectionData.inspection_end_time}
+                    onChange={(e) => handleInspectionChange('inspection_end_time', e.target.value)}
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Valuation - only for camper */}
         {(report.report_type === 'camper' || !report.report_type) && (
@@ -1194,7 +1258,7 @@ const EditReport = () => {
           </Card>
         )}
 
-        {/* WEV Valuation - simplified (market data + single value) */}
+        {/* WEV Valuation - marktgegevens + eindwaarde */}
         {report.report_type === 'wev' && (
           <>
             <WevAutotelexDataForm
@@ -1205,7 +1269,6 @@ const EditReport = () => {
               data={wevValueData}
               onChange={handleWevValueChange}
             />
-            <WevDocumentUploadForm reportId={id || ''} />
           </>
         )}
 
