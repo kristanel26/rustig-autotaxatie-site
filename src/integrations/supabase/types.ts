@@ -112,6 +112,8 @@ export type Database = {
           gas_hose_production_date: string | null
           gebruik: string | null
           general_remarks: string | null
+          herinnering_status: string | null
+          herinnering_verzonden_op: string | null
           id: string
           impression_body: string | null
           impression_brakes: string | null
@@ -276,6 +278,8 @@ export type Database = {
           gas_hose_production_date?: string | null
           gebruik?: string | null
           general_remarks?: string | null
+          herinnering_status?: string | null
+          herinnering_verzonden_op?: string | null
           id?: string
           impression_body?: string | null
           impression_brakes?: string | null
@@ -440,6 +444,8 @@ export type Database = {
           gas_hose_production_date?: string | null
           gebruik?: string | null
           general_remarks?: string | null
+          herinnering_status?: string | null
+          herinnering_verzonden_op?: string | null
           id?: string
           impression_body?: string | null
           impression_brakes?: string | null
