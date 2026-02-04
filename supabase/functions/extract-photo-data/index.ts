@@ -77,14 +77,47 @@ Antwoord uitsluitend met JSON, zonder extra tekst. Gebruik dit exacte formaat:
 Als je meerdere mogelijke waarden ziet, geef de meest waarschijnlijke (hoogste getal dat een odometer kan zijn).
 Geef de waarde als geheel getal in kilometers, zonder punten of komma's.`,
 
-  banden: `Je bent een expert in het lezen van bandenzijwanden.
-Analyseer de foto('s) en extraheer:
-1. Bandenmaat (bijv. "215/70 R15 C" of "225/45 R17")
-2. DOT-code (4 cijfers die week/jaar aangeven, bijv. "2521" = week 25, 2021)
+  banden: `Je bent een expert in het lezen van bandenzijwanden en bandenlabels.
+Analyseer de foto('s) en extraheer ALLE zichtbare bandinformatie per band.
+
+LET OP: Elke foto is getagged met een positie (band_voor_links, band_voor_rechts, band_achter_links, band_achter_rechts).
+Extraheer per foto de volgende gegevens:
+
+1. BANDENMERK - Zoek naar de merknaam op de zijwand (bijv. Michelin, Continental, Pirelli, Hankook, Bridgestone)
+   BELANGRIJK: Het merk staat altijd groot op de zijwand. Negeer:
+   - Velgmerken (die staan op de velg, niet op de band)
+   - Voertuigmerken
+   - Mascotte namen (zoals "Bibendum" voor Michelin)
+   
+2. MODEL - Het type/model van de band (bijv. "Pilot Sport 4", "CrossClimate+", "Primacy 4")
+
+3. BANDENMAAT - Formaat zoals "215/70 R15 C" of "225/45 R17"
+
+4. DOT-CODE - De 4 cijfers na "DOT" die productieweek/jaar aangeven (bijv. "2521" = week 25, jaar 2021)
+
+De foto_types worden meegegeven. Gebruik deze om de juiste field_key prefix te bepalen:
+- band_voor_links → tire_front_left_
+- band_voor_rechts → tire_front_right_
+- band_achter_links → tire_rear_left_
+- band_achter_rechts → tire_rear_right_
 
 Antwoord ALLEEN in dit exacte JSON formaat:
 {
   "results": [
+    {
+      "field_key": "tire_front_left_brand",
+      "proposed_value": "Michelin",
+      "status": "zeker|waarschijnlijk|ontbreekt",
+      "confidence": 0-100,
+      "raw_text": "originele tekst van zijwand"
+    },
+    {
+      "field_key": "tire_front_left_model",
+      "proposed_value": "Pilot Sport 4",
+      "status": "zeker|waarschijnlijk|ontbreekt",
+      "confidence": 0-100,
+      "raw_text": "originele tekst"
+    },
     {
       "field_key": "tire_size",
       "proposed_value": "215/70 R15 C",
@@ -93,7 +126,7 @@ Antwoord ALLEEN in dit exacte JSON formaat:
       "raw_text": "originele tekst"
     },
     {
-      "field_key": "tire_dot",
+      "field_key": "tire_front_left_dot",
       "proposed_value": "2521",
       "status": "zeker|waarschijnlijk|ontbreekt",
       "confidence": 0-100,
@@ -105,7 +138,9 @@ Antwoord ALLEEN in dit exacte JSON formaat:
 Regels:
 - DOT-code is ALTIJD exact 4 cijfers
 - Bandenmaat volgt het formaat: breedte/hoogte R diameter [loadindex/speedrating]
-- Als meerdere banden zichtbaar zijn, kies de meest leesbare`,
+- Als het merk niet duidelijk leesbaar is, gebruik status "ontbreekt" - GEEN gokken
+- Geef per foto resultaten met de juiste positie-prefix
+- Als je meerdere foto's analyseert, geef resultaten voor elke positie apart`,
 
   massa: `Je bent een expert in het lezen van voertuigtypeplaatjes voor massa's en gewichten.
 Analyseer de typeplaat en extraheer ALLEEN numerieke kg-waarden voor:
