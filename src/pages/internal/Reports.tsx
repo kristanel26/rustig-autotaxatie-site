@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search, FilePlus } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Badge } from '@/components/ui/badge';
 
 interface Report {
   id: string;
@@ -23,7 +24,37 @@ interface Report {
   customer_initials: string | null;
   customer_last_name: string | null;
   inspection_date: string | null;
+  herinnering_status: string | null;
+  herinnering_verzonden_op: string | null;
 }
+
+const getStatusBadge = (status: string | null, verzondenOp: string | null) => {
+  switch (status) {
+    case 'verzonden':
+      return (
+        <div className="flex flex-col gap-0.5">
+          <Badge className="bg-emerald-500/15 text-emerald-700 border-emerald-500/20 hover:bg-emerald-500/15 text-xs">
+            Verzonden
+          </Badge>
+          {verzondenOp && (
+            <span className="text-xs text-muted-foreground">
+              {new Date(verzondenOp).toLocaleDateString('nl-NL', {
+                day: 'numeric',
+                month: 'short',
+              })}
+            </span>
+          )}
+        </div>
+      );
+    case 'mislukt':
+      return <Badge variant="destructive" className="text-xs">Mislukt</Badge>;
+    case 'niet_meer_van_toepassing':
+      return <Badge variant="secondary" className="text-xs">N.v.t.</Badge>;
+    case 'gepland':
+    default:
+      return <Badge variant="outline" className="text-xs">Gepland</Badge>;
+  }
+};
 
 const Reports = () => {
   const [reports, setReports] = useState<Report[]>([]);
@@ -36,7 +67,7 @@ const Reports = () => {
       try {
         const { data, error } = await supabase
           .from('reports')
-          .select('id, report_number, license_plate, customer_title, customer_initials, customer_last_name, inspection_date')
+          .select('id, report_number, license_plate, customer_title, customer_initials, customer_last_name, inspection_date, herinnering_status, herinnering_verzonden_op')
           .order('report_number', { ascending: false });
 
         if (error) throw error;
@@ -104,12 +135,13 @@ const Reports = () => {
                 <TableHead>Kenteken</TableHead>
                 <TableHead>Klant</TableHead>
                 <TableHead className="w-[140px]">Inspectiedatum</TableHead>
+                <TableHead className="w-[120px]">Herinnering</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {loading ? (
                 <TableRow>
-                  <TableCell colSpan={4} className="text-center py-8">
+                  <TableCell colSpan={5} className="text-center py-8">
                     <div className="flex items-center justify-center">
                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
                     </div>
@@ -117,7 +149,7 @@ const Reports = () => {
                 </TableRow>
               ) : filteredReports.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={4} className="text-center py-8 text-muted-foreground">
+                  <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
                     {searchTerm ? 'Geen rapporten gevonden' : 'Nog geen rapporten'}
                   </TableCell>
                 </TableRow>
@@ -138,6 +170,7 @@ const Reports = () => {
                         .join(' ') || '-'}
                     </TableCell>
                     <TableCell>{formatDate(report.inspection_date)}</TableCell>
+                    <TableCell>{getStatusBadge(report.herinnering_status, report.herinnering_verzonden_op)}</TableCell>
                   </TableRow>
                 ))
               )}
