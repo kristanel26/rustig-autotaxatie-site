@@ -60,6 +60,7 @@ const reportSchema = z.object({
 interface Report {
   id: string;
   report_number: string;
+  report_type: string | null;
   document_reference: string | null;
   customer_title: string | null;
   customer_initials: string | null;
@@ -1025,17 +1026,21 @@ const EditReport = () => {
           reportId={id}
         />
 
-        {/* Sectie 13: Leidingen & Installaties */}
-        <InstallationsForm
-          formData={installationsData}
-          onChange={handleInstallationsChange}
-        />
+        {/* Sectie 13: Leidingen & Installaties - only for camper */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <InstallationsForm
+            formData={installationsData}
+            onChange={handleInstallationsChange}
+          />
+        )}
 
-        {/* Sectie 14-15: Campertechniek & Beveiliging */}
-        <CamperTechForm
-          formData={camperTechData}
-          onChange={handleCamperTechChange}
-        />
+        {/* Sectie 14-15: Campertechniek & Beveiliging - only for camper */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <CamperTechForm
+            formData={camperTechData}
+            onChange={handleCamperTechChange}
+          />
+        )}
 
         {/* Sectie 16: Algemene Indruk */}
         <GeneralImpressionForm
@@ -1043,11 +1048,13 @@ const EditReport = () => {
           onChange={handleImpressionChange}
         />
 
-        {/* Vocht & Brand/Gas veiligheid */}
-        <MoistureAndSafetyForm
-          formData={moistureData}
-          onChange={handleMoistureChange}
-        />
+        {/* Vocht & Brand/Gas veiligheid - only for camper */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <MoistureAndSafetyForm
+            formData={moistureData}
+            onChange={handleMoistureChange}
+          />
+        )}
 
         {/* Fotocollectie */}
         <PhotoUploadForm
@@ -1106,67 +1113,71 @@ const EditReport = () => {
           </CardContent>
         </Card>
 
-        {/* Valuation */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Waardebepaling</CardTitle>
-          </CardHeader>
-          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="appraised_value">Getaxeerde waarde (€)</Label>
-              <Input
-                id="appraised_value"
-                type="number"
-                step="0.01"
-                value={valuationData.appraised_value}
-                onChange={(e) => handleValuationChange('appraised_value', e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="appraised_value_text">Waarde in woorden</Label>
-              <Input
-                id="appraised_value_text"
-                value={valuationData.appraised_value_text}
-                readOnly
-                disabled
-                className="bg-muted"
-                placeholder="Wordt automatisch ingevuld"
-              />
-            </div>
-            <div className="space-y-2 md:col-span-2">
-              <Label htmlFor="quality_class">Kwaliteitsklasse *</Label>
-              <Select
-                value={valuationData.quality_class}
-                onValueChange={(value) => handleValuationChange('quality_class', value)}
-              >
-                <SelectTrigger className={!valuationData.quality_class ? 'border-destructive' : ''}>
-                  <SelectValue placeholder="Selecteer kwaliteitsklasse..." />
-                </SelectTrigger>
-                <SelectContent>
-                  {qualityClasses.map((qc) => (
-                    <SelectItem key={qc.value} value={qc.value}>
-                      {qc.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              {!valuationData.quality_class && (
-                <p className="text-xs text-destructive">Kwaliteitsklasse is verplicht</p>
-              )}
-              {valuationData.quality_class && (
-                <p className="text-sm text-muted-foreground mt-2">
-                  {qualityClasses.find((qc) => qc.value === valuationData.quality_class)?.description}
-                </p>
-              )}
-            </div>
-          </CardContent>
-        </Card>
+        {/* Valuation - only for camper */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Waardebepaling</CardTitle>
+            </CardHeader>
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="appraised_value">Getaxeerde waarde (€)</Label>
+                <Input
+                  id="appraised_value"
+                  type="number"
+                  step="0.01"
+                  value={valuationData.appraised_value}
+                  onChange={(e) => handleValuationChange('appraised_value', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="appraised_value_text">Waarde in woorden</Label>
+                <Input
+                  id="appraised_value_text"
+                  value={valuationData.appraised_value_text}
+                  readOnly
+                  disabled
+                  className="bg-muted"
+                  placeholder="Wordt automatisch ingevuld"
+                />
+              </div>
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="quality_class">Kwaliteitsklasse *</Label>
+                <Select
+                  value={valuationData.quality_class}
+                  onValueChange={(value) => handleValuationChange('quality_class', value)}
+                >
+                  <SelectTrigger className={!valuationData.quality_class ? 'border-destructive' : ''}>
+                    <SelectValue placeholder="Selecteer kwaliteitsklasse..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {qualityClasses.map((qc) => (
+                      <SelectItem key={qc.value} value={qc.value}>
+                        {qc.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {!valuationData.quality_class && (
+                  <p className="text-xs text-destructive">Kwaliteitsklasse is verplicht</p>
+                )}
+                {valuationData.quality_class && (
+                  <p className="text-sm text-muted-foreground mt-2">
+                    {qualityClasses.find((qc) => qc.value === valuationData.quality_class)?.description}
+                  </p>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
-        {/* WEV Valuation */}
-        <WevValuationForm
-          data={wevData}
-          onChange={handleWevChange}
-        />
+        {/* WEV Valuation - only for WEV */}
+        {report.report_type === 'wev' && (
+          <WevValuationForm
+            data={wevData}
+            onChange={handleWevChange}
+          />
+        )}
 
         {/* Remarks */}
         <Card>

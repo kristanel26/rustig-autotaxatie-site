@@ -187,6 +187,7 @@ export type Database = {
           rdw_voertuigsoort: string | null
           rdw_wielbasis: number | null
           report_number: string
+          report_type: string | null
           rim_type: string | null
           security_present: boolean | null
           security_type: string | null
@@ -363,6 +364,7 @@ export type Database = {
           rdw_voertuigsoort?: string | null
           rdw_wielbasis?: number | null
           report_number: string
+          report_type?: string | null
           rim_type?: string | null
           security_present?: boolean | null
           security_type?: string | null
@@ -539,6 +541,7 @@ export type Database = {
           rdw_voertuigsoort?: string | null
           rdw_wielbasis?: number | null
           report_number?: string
+          report_type?: string | null
           rim_type?: string | null
           security_present?: boolean | null
           security_type?: string | null

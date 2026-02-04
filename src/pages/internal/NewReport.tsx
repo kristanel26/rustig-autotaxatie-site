@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
+import { ArrowLeft } from 'lucide-react';
 import { normalizeReportFormData, LICENSE_PLATE_REGEX, numberToDutchWords } from '@/lib/normalizers';
 import { validateVin, validateEmail, validatePhone } from '@/lib/validators';
 import { qualityClasses } from '@/lib/qualityClasses';
@@ -29,6 +30,8 @@ import { MoistureAndSafetyForm, MoistureAndSafetyFormData, getInitialMoistureAnd
 import { PostcodeField } from '@/components/internal/PostcodeField';
 import PhotoUploadForm, { PhotoRotations, PhotoTypes } from '@/components/internal/PhotoUploadForm';
 import { WevValuationForm, WevFormData, getInitialWevFormData } from '@/components/internal/WevValuationForm';
+import { ReportTypeSelector, ReportType } from '@/components/internal/ReportTypeSelector';
+
 const reportSchema = z.object({
   // Customer fields
   customer_title: z.string().optional(),
@@ -67,6 +70,9 @@ const NewReport = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  
+  // Report type selection (step 1)
+  const [reportType, setReportType] = useState<ReportType | null>(null);
 
   // Customer data
   const [customerData, setCustomerData] = useState({
@@ -259,8 +265,8 @@ const NewReport = () => {
       return;
     }
 
-    // Validate quality class (mandatory)
-    if (!valuationData.quality_class) {
+    // Validate quality class (mandatory for camper, optional for WEV)
+    if (reportType === 'camper' && !valuationData.quality_class) {
       toast({
         title: 'Kwaliteitsklasse verplicht',
         description: 'Selecteer een kwaliteitsklasse voor het voertuig.',
@@ -269,11 +275,24 @@ const NewReport = () => {
       return;
     }
 
+    // Validate WEV-specific fields
+    if (reportType === 'wev') {
+      if (!wevData.wev_peildatum) {
+        toast({
+          title: 'Peildatum verplicht',
+          description: 'Vul een peildatum in voor de WEV-waardebepaling.',
+          variant: 'destructive',
+        });
+        return;
+      }
+    }
+
     setIsSubmitting(true);
 
     try {
       const insertData = {
         user_id: user!.id,
+        report_type: reportType,
         
         // Customer data
         customer_title: normalizedData.customer_title || null,
@@ -325,11 +344,13 @@ const NewReport = () => {
         tellerstand: vehicleData.tellerstand ? parseInt(vehicleData.tellerstand) : null,
         tellerstand_type: vehicleData.tellerstand_type || 'km',
         
-        // Sectie 6: Opbouw/constructie (Taxateur)
-        soort_bouw: vehicleData.soort_bouw || null,
-        opbouw_merk: vehicleData.opbouw_merk || null,
-        opbouw_type: vehicleData.opbouw_type || null,
-        constructievorm: vehicleData.constructievorm || null,
+        // Sectie 6: Opbouw/constructie (Taxateur) - only for camper
+        ...(reportType === 'camper' ? {
+          soort_bouw: vehicleData.soort_bouw || null,
+          opbouw_merk: vehicleData.opbouw_merk || null,
+          opbouw_type: vehicleData.opbouw_type || null,
+          constructievorm: vehicleData.constructievorm || null,
+        } : {}),
         
         // Sectie 7: Gebruik/stalling (Taxateur)
         gebruik: vehicleData.gebruik || null,
@@ -399,27 +420,33 @@ const NewReport = () => {
         interior_floor_notes: appraisalData.interior_floor_notes || null,
         interior_roof: appraisalData.interior_roof || null,
         interior_roof_notes: appraisalData.interior_roof_notes || null,
-        interior_kitchen: appraisalData.interior_kitchen || null,
-        interior_kitchen_notes: appraisalData.interior_kitchen_notes || null,
-        interior_sanitary: appraisalData.interior_sanitary || null,
-        interior_sanitary_notes: appraisalData.interior_sanitary_notes || null,
+        ...(reportType === 'camper' ? {
+          interior_kitchen: appraisalData.interior_kitchen || null,
+          interior_kitchen_notes: appraisalData.interior_kitchen_notes || null,
+          interior_sanitary: appraisalData.interior_sanitary || null,
+          interior_sanitary_notes: appraisalData.interior_sanitary_notes || null,
+        } : {}),
         
-        // Sectie 13: Leidingen & Installaties
-        installation_electrical: installationsData.installation_electrical || null,
-        installation_water: installationsData.installation_water || null,
-        installation_gas: installationsData.installation_gas || null,
-        leakage_electrical: installationsData.leakage_electrical || null,
+        // Sectie 13: Leidingen & Installaties (only for camper)
+        ...(reportType === 'camper' ? {
+          installation_electrical: installationsData.installation_electrical || null,
+          installation_water: installationsData.installation_water || null,
+          installation_gas: installationsData.installation_gas || null,
+          leakage_electrical: installationsData.leakage_electrical || null,
+        } : {}),
         
-        // Sectie 14: Extra's / Campertechniek
-        lpg_underbody: camperTechData.lpg_underbody,
-        loose_gas_tanks: camperTechData.loose_gas_tanks,
-        gas_hose_production_date: camperTechData.gas_hose_production_date || null,
-        pressure_regulator_production_date: camperTechData.pressure_regulator_production_date || null,
-        voltage: camperTechData.voltage || null,
-        earth_leakage_switch: camperTechData.earth_leakage_switch,
-        fused: camperTechData.fused,
-        onboard_battery: camperTechData.onboard_battery,
-        starter_battery: camperTechData.starter_battery,
+        // Sectie 14: Extra's / Campertechniek (only for camper)
+        ...(reportType === 'camper' ? {
+          lpg_underbody: camperTechData.lpg_underbody,
+          loose_gas_tanks: camperTechData.loose_gas_tanks,
+          gas_hose_production_date: camperTechData.gas_hose_production_date || null,
+          pressure_regulator_production_date: camperTechData.pressure_regulator_production_date || null,
+          voltage: camperTechData.voltage || null,
+          earth_leakage_switch: camperTechData.earth_leakage_switch,
+          fused: camperTechData.fused,
+          onboard_battery: camperTechData.onboard_battery,
+          starter_battery: camperTechData.starter_battery,
+        } : {}),
         
         // Sectie 15: Beveiliging
         security_present: camperTechData.security_present,
@@ -428,14 +455,15 @@ const NewReport = () => {
         vehicle_tracking: camperTechData.vehicle_tracking,
         tracking_brand: camperTechData.tracking_brand || null,
         
-        // Vocht (Moisture)
-        moisture_measurement_performed: moistureData.moisture_measurement_performed,
-        moisture_advice: moistureData.moisture_advice || null,
+        // Vocht (Moisture) - only for camper
+        ...(reportType === 'camper' ? {
+          moisture_measurement_performed: moistureData.moisture_measurement_performed,
+          moisture_advice: moistureData.moisture_advice || null,
+          fire_extinguisher: moistureData.fire_extinguisher,
+          gas_detection: moistureData.gas_detection,
+          smoke_detector: moistureData.smoke_detector,
+        } : {}),
         
-        // Brand & Gas veiligheid
-        fire_extinguisher: moistureData.fire_extinguisher,
-        gas_detection: moistureData.gas_detection,
-        smoke_detector: moistureData.smoke_detector,
         // Sectie 16: Algemene Indruk
         impression_suspension: impressionData.impression_suspension || null,
         impression_wheels_tires: impressionData.impression_wheels_tires || null,
@@ -455,21 +483,25 @@ const NewReport = () => {
         inspection_start_time: inspectionData.inspection_start_time || null,
         inspection_end_time: inspectionData.inspection_end_time || null,
         
-        // Valuation data
-        appraised_value: valuationData.appraised_value ? parseFloat(valuationData.appraised_value) : null,
-        appraised_value_text: valuationData.appraised_value_text || null,
-        quality_class: valuationData.quality_class || null,
+        // Valuation data (only for camper)
+        ...(reportType === 'camper' ? {
+          appraised_value: valuationData.appraised_value ? parseFloat(valuationData.appraised_value) : null,
+          appraised_value_text: valuationData.appraised_value_text || null,
+          quality_class: valuationData.quality_class || null,
+        } : {}),
         general_remarks: valuationData.general_remarks || null,
         
-        // WEV valuation data
-        wev_handelsinkoopwaarde_autotelex: wevData.wev_handelsinkoopwaarde_autotelex ? parseFloat(wevData.wev_handelsinkoopwaarde_autotelex) : null,
-        wev_verkoopwaarde_autotelex: wevData.wev_verkoopwaarde_autotelex ? parseFloat(wevData.wev_verkoopwaarde_autotelex) : null,
-        wev_bron_waardes: wevData.wev_bron_waardes || 'Autotelex',
-        wev_peildatum: wevData.wev_peildatum || null,
-        wev_berekend: wevData.wev_berekend ? parseFloat(wevData.wev_berekend) : null,
-        wev_definitief: wevData.wev_definitief ? parseFloat(wevData.wev_definitief) : null,
-        wev_override_actief: wevData.wev_override_actief,
-        wev_override_redenering: wevData.wev_override_redenering || null,
+        // WEV valuation data (only for wev)
+        ...(reportType === 'wev' ? {
+          wev_handelsinkoopwaarde_autotelex: wevData.wev_handelsinkoopwaarde_autotelex ? parseFloat(wevData.wev_handelsinkoopwaarde_autotelex) : null,
+          wev_verkoopwaarde_autotelex: wevData.wev_verkoopwaarde_autotelex ? parseFloat(wevData.wev_verkoopwaarde_autotelex) : null,
+          wev_bron_waardes: wevData.wev_bron_waardes || 'Autotelex',
+          wev_peildatum: wevData.wev_peildatum || null,
+          wev_berekend: wevData.wev_berekend ? parseFloat(wevData.wev_berekend) : null,
+          wev_definitief: wevData.wev_definitief ? parseFloat(wevData.wev_definitief) : null,
+          wev_override_actief: wevData.wev_override_actief,
+          wev_override_redenering: wevData.wev_override_redenering || null,
+        } : {}),
         
         // Photos
         vehicle_photos: vehiclePhotos.length > 0 ? vehiclePhotos : null,
@@ -498,8 +530,33 @@ const NewReport = () => {
     }
   };
 
+  // Helper to determine if we're showing camper-specific sections
+  const isCamperReport = reportType === 'camper';
+  const isWevReport = reportType === 'wev';
+
+  // If no report type selected, show the selector
+  if (!reportType) {
+    return (
+      <InternalLayout title="Nieuwe Taxatie">
+        <ReportTypeSelector onSelect={setReportType} />
+      </InternalLayout>
+    );
+  }
+
   return (
-    <InternalLayout title="Nieuw Rapport">
+    <InternalLayout title={reportType === 'camper' ? 'Nieuwe Campertaxatie' : 'Nieuwe WEV-taxatie'}>
+      <div className="mb-4">
+        <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={() => setReportType(null)}
+          className="flex items-center gap-2"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Ander rapporttype kiezen
+        </Button>
+      </div>
+      
       <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
         {/* Customer Information */}
         <Card>
@@ -614,17 +671,21 @@ const NewReport = () => {
           photoTypes={photoTypes}
         />
 
-        {/* Sectie 13: Leidingen & Installaties */}
-        <InstallationsForm
-          formData={installationsData}
-          onChange={handleInstallationsChange}
-        />
+        {/* Sectie 13: Leidingen & Installaties - only for camper */}
+        {isCamperReport && (
+          <InstallationsForm
+            formData={installationsData}
+            onChange={handleInstallationsChange}
+          />
+        )}
 
-        {/* Sectie 14-15: Campertechniek & Beveiliging */}
-        <CamperTechForm
-          formData={camperTechData}
-          onChange={handleCamperTechChange}
-        />
+        {/* Sectie 14-15: Campertechniek & Beveiliging - only for camper */}
+        {isCamperReport && (
+          <CamperTechForm
+            formData={camperTechData}
+            onChange={handleCamperTechChange}
+          />
+        )}
 
         {/* Sectie 16: Algemene Indruk */}
         <GeneralImpressionForm
@@ -632,11 +693,13 @@ const NewReport = () => {
           onChange={handleImpressionChange}
         />
 
-        {/* Vocht & Brand/Gas veiligheid */}
-        <MoistureAndSafetyForm
-          formData={moistureData}
-          onChange={handleMoistureChange}
-        />
+        {/* Vocht & Brand/Gas veiligheid - only for camper */}
+        {isCamperReport && (
+          <MoistureAndSafetyForm
+            formData={moistureData}
+            onChange={handleMoistureChange}
+          />
+        )}
 
         {/* Fotocollectie */}
         <PhotoUploadForm
@@ -694,70 +757,74 @@ const NewReport = () => {
           </CardContent>
         </Card>
 
-        {/* Valuation */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Waardebepaling</CardTitle>
-          </CardHeader>
-          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="appraised_value">Getaxeerde waarde (€)</Label>
-              <Input
-                id="appraised_value"
-                type="number"
-                step="0.01"
-                value={valuationData.appraised_value}
-                onChange={(e) => handleValuationChange('appraised_value', e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="appraised_value_text">Waarde in woorden</Label>
-              <Input
-                id="appraised_value_text"
-                value={valuationData.appraised_value_text}
-                readOnly
-                disabled
-                className="bg-muted"
-                placeholder="Wordt automatisch ingevuld"
-              />
-              <p className="text-xs text-muted-foreground">
-                Wordt automatisch gegenereerd.
-              </p>
-            </div>
-            <div className="space-y-2 md:col-span-2">
-              <Label htmlFor="quality_class">Kwaliteitsklasse *</Label>
-              <Select
-                value={valuationData.quality_class}
-                onValueChange={(value) => handleValuationChange('quality_class', value)}
-              >
-                <SelectTrigger className={!valuationData.quality_class ? 'border-destructive' : ''}>
-                  <SelectValue placeholder="Selecteer kwaliteitsklasse..." />
-                </SelectTrigger>
-                <SelectContent>
-                  {qualityClasses.map((qc) => (
-                    <SelectItem key={qc.value} value={qc.value}>
-                      {qc.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              {!valuationData.quality_class && (
-                <p className="text-xs text-destructive">Kwaliteitsklasse is verplicht</p>
-              )}
-              {valuationData.quality_class && (
-                <p className="text-sm text-muted-foreground mt-2">
-                  {qualityClasses.find((qc) => qc.value === valuationData.quality_class)?.description}
+        {/* Valuation - only for camper */}
+        {isCamperReport && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Waardebepaling</CardTitle>
+            </CardHeader>
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="appraised_value">Getaxeerde waarde (€)</Label>
+                <Input
+                  id="appraised_value"
+                  type="number"
+                  step="0.01"
+                  value={valuationData.appraised_value}
+                  onChange={(e) => handleValuationChange('appraised_value', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="appraised_value_text">Waarde in woorden</Label>
+                <Input
+                  id="appraised_value_text"
+                  value={valuationData.appraised_value_text}
+                  readOnly
+                  disabled
+                  className="bg-muted"
+                  placeholder="Wordt automatisch ingevuld"
+                />
+                <p className="text-xs text-muted-foreground">
+                  Wordt automatisch gegenereerd.
                 </p>
-              )}
-            </div>
-          </CardContent>
-        </Card>
+              </div>
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="quality_class">Kwaliteitsklasse *</Label>
+                <Select
+                  value={valuationData.quality_class}
+                  onValueChange={(value) => handleValuationChange('quality_class', value)}
+                >
+                  <SelectTrigger className={!valuationData.quality_class ? 'border-destructive' : ''}>
+                    <SelectValue placeholder="Selecteer kwaliteitsklasse..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {qualityClasses.map((qc) => (
+                      <SelectItem key={qc.value} value={qc.value}>
+                        {qc.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {!valuationData.quality_class && (
+                  <p className="text-xs text-destructive">Kwaliteitsklasse is verplicht</p>
+                )}
+                {valuationData.quality_class && (
+                  <p className="text-sm text-muted-foreground mt-2">
+                    {qualityClasses.find((qc) => qc.value === valuationData.quality_class)?.description}
+                  </p>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
-        {/* WEV Valuation */}
-        <WevValuationForm
-          data={wevData}
-          onChange={handleWevChange}
-        />
+        {/* WEV Valuation - only for WEV */}
+        {isWevReport && (
+          <WevValuationForm
+            data={wevData}
+            onChange={handleWevChange}
+          />
+        )}
 
         {/* Remarks */}
         <Card>
