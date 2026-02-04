@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import InternalLayout from '@/components/internal/InternalLayout';
 import { useAuth } from '@/contexts/AuthContext';
@@ -43,6 +43,7 @@ import {
   getInitialWevAutotelexData,
   WevDocumentUploadForm,
 } from '@/components/internal/wev';
+import { ReportCompletenessCheck } from '@/components/internal/ReportCompletenessCheck';
 
 const reportSchema = z.object({
   customer_title: z.string().optional(),
@@ -202,6 +203,29 @@ const EditReport = () => {
     hasUnsavedChanges: hasPendingChanges,
     onBeforeLeave: flushSave,
   });
+
+  // Combine all data for completeness check
+  const completenessData = useMemo(() => ({
+    // Customer data
+    ...customerData,
+    // Vehicle data
+    ...vehicleData,
+    license_plate: vehicleData.license_plate,
+    vin: vehicleData.vin,
+    rdw_merk: vehicleData.rdw_merk,
+    rdw_bouwjaar: vehicleData.rdw_bouwjaar,
+    tellerstand: vehicleData.tellerstand,
+    rdw_data_locked: vehicleData.rdw_data_locked,
+    // Inspection data
+    ...inspectionData,
+    // Valuation data
+    ...valuationData,
+    // WEV data
+    ...wevAutotelexData,
+    ...wevValueData,
+    // Photos
+    vehicle_photos: vehiclePhotos,
+  }), [customerData, vehicleData, inspectionData, valuationData, wevAutotelexData, wevValueData, vehiclePhotos]);
 
   useEffect(() => {
     const fetchReport = async () => {
@@ -911,41 +935,44 @@ const EditReport = () => {
           onSaveNow={() => flushSave()}
         />
 
-        <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
-        {/* Header with Back Button */}
-        <div className="flex items-center">
-          <Button 
-            type="button" 
-            variant="ghost" 
-            onClick={() => navigate(`/intern/rapport/${id}`)}
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Terug naar rapport
-          </Button>
-        </div>
-
-        {/* Read-only Report Info */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Rapportgegevens (alleen-lezen)</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <Label>Rapportnummer</Label>
-              <Input
-                value={report.report_number}
-                disabled
-                className="bg-muted"
-              />
+        {/* Main content with completeness sidebar */}
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Form content */}
+          <form onSubmit={handleSubmit} className="space-y-6 flex-1 max-w-4xl">
+            {/* Header with Back Button */}
+            <div className="flex items-center">
+              <Button 
+                type="button" 
+                variant="ghost" 
+                onClick={() => navigate(`/intern/rapport/${id}`)}
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Terug naar rapport
+              </Button>
             </div>
-          </CardContent>
-        </Card>
 
-        {/* Customer Information */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Klantgegevens</CardTitle>
-          </CardHeader>
+            {/* Read-only Report Info */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Rapportgegevens (alleen-lezen)</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  <Label>Rapportnummer</Label>
+                  <Input
+                    value={report.report_number}
+                    disabled
+                    className="bg-muted"
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Customer Information */}
+            <Card id="section-klant">
+              <CardHeader>
+                <CardTitle className="text-lg">Klantgegevens</CardTitle>
+              </CardHeader>
           <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="customer_title">Aanhef</Label>
@@ -1033,16 +1060,18 @@ const EditReport = () => {
         </Card>
 
         {/* Vehicle Information - 7 Secties */}
-        <VehicleInfoForm
-          formData={vehicleData}
-          onChange={handleVehicleChange}
-          errors={errors}
-          isEditMode={true}
-          reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
-          photos={vehiclePhotos}
-          photoTypes={photoTypes}
-          reportId={id}
-        />
+        <div id="section-voertuig">
+          <VehicleInfoForm
+            formData={vehicleData}
+            onChange={handleVehicleChange}
+            errors={errors}
+            isEditMode={true}
+            reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
+            photos={vehiclePhotos}
+            photoTypes={photoTypes}
+            reportId={id}
+          />
+        </div>
 
         {/* WEV: Inspectiegegevens direct na voertuig (kantoorvoorbereiding) */}
         {report.report_type === 'wev' && (
@@ -1315,7 +1344,18 @@ const EditReport = () => {
             Annuleren
           </Button>
         </div>
-        </form>
+          </form>
+
+          {/* Completeness Sidebar - sticky on desktop */}
+          <aside className="lg:w-80 lg:flex-shrink-0">
+            <div className="lg:sticky lg:top-16">
+              <ReportCompletenessCheck
+                reportType={report.report_type}
+                data={completenessData}
+              />
+            </div>
+          </aside>
+        </div>
       </InternalLayout>
     </AutoExtractProvider>
   );
