@@ -22,7 +22,7 @@ const reportTypeOptions: ReportTypeOption[] = [
   {
     value: 'wev',
     label: 'WEV-taxatie',
-    description: 'Waarde in het Economisch Verkeer bepaling voor fiscale doeleinden, zakelijk-privé overgang of bedrijfsbeëindiging.',
+    description: 'Algemene voertuigwaardebepaling (Waarde in het Economisch Verkeer) voor fiscale doeleinden, zakelijk-privé overgang of bedrijfsbeëindiging.',
     icon: <FileSpreadsheet className="h-8 w-8" />,
   },
   {

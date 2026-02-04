@@ -47,6 +47,7 @@ import {
   WevConclusionForm,
   WevConclusionData,
   getInitialWevConclusionData,
+  WevDocumentUploadForm,
 } from '@/components/internal/wev';
 
 const reportSchema = z.object({

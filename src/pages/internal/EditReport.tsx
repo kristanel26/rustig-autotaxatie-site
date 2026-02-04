@@ -50,6 +50,7 @@ import {
   WevConclusionForm,
   WevConclusionData,
   getInitialWevConclusionData,
+  WevDocumentUploadForm,
 } from '@/components/internal/wev';
 
 const reportSchema = z.object({
@@ -1269,6 +1270,7 @@ const EditReport = () => {
               onChange={handleWevConclusionChange}
               wevDefinitief={wevAutotelexData.wev_definitief}
             />
+            <WevDocumentUploadForm reportId={id || ''} />
           </>
         )}
 
