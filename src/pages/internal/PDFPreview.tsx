@@ -85,6 +85,19 @@ const PDFPreview = () => {
   const hasWevValuation = isWevReport && (report.wev_eindwaarde || report.wev_definitief) && ((report.wev_eindwaarde || report.wev_definitief) > 0);
   const hasKlassiekerValuation = isKlassiekerReport && report.appraised_value && report.appraised_value > 0;
   
+  // Calculate total pages dynamically
+  let totalPagesCount = 1; // Cover
+  if (hasStandardValuation) totalPagesCount++;
+  if (hasWevValuation) totalPagesCount++;
+  if (hasKlassiekerValuation) totalPagesCount++;
+  totalPagesCount++; // Vehicle data
+  if (!isKlassiekerReport) totalPagesCount++; // Appraisal findings
+  
+  // Photo pages
+  const detailPhotos = report.vehicle_photos?.slice(1) || [];
+  const photoPages = Math.ceil(detailPhotos.length / 6);
+  totalPagesCount += photoPages;
+
   // Calculate page numbers dynamically
   let currentPage = 1; // Cover is page 1
   
@@ -93,53 +106,61 @@ const PDFPreview = () => {
   const klassiekerValuationPage = hasKlassiekerValuation ? ++currentPage : 0;
   const vehicleDataPage = ++currentPage;
   const appraisalFindingsPage = !isKlassiekerReport ? ++currentPage : 0;
+  const photoStartPage = currentPage + 1;
 
   return (
     <div 
       className="bg-muted min-h-screen py-4"
-      style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+      style={{ fontFamily: 'Helvetica, Arial, sans-serif' }}
     >
-      <div className="max-w-[210mm] mx-auto space-y-4">
+      {/* Fixed A4 viewport container - prevents layout reflow */}
+      <div 
+        className="max-w-[210mm] mx-auto space-y-4"
+        style={{ 
+          width: '210mm',
+          // Ensure stable layout by setting explicit dimensions
+        }}
+      >
         {/* Page 1: Cover */}
-        <div className="shadow-lg">
+        <div className="shadow-lg" style={{ width: '210mm', height: '297mm', overflow: 'hidden' }}>
           <PDFCoverContent report={report} />
         </div>
 
         {/* Standard Valuation (camper) */}
         {hasStandardValuation && (
-          <div className="shadow-lg">
-            <PDFValuationContent report={report} pageNumber={standardValuationPage} totalPages={10} />
+          <div className="shadow-lg" style={{ width: '210mm', minHeight: '297mm' }}>
+            <PDFValuationContent report={report} pageNumber={standardValuationPage} totalPages={totalPagesCount} />
           </div>
         )}
 
         {/* WEV Valuation */}
         {hasWevValuation && (
-          <div className="shadow-lg">
-            <PDFWevValuationContent report={report} pageNumber={wevValuationPage} totalPages={10} />
+          <div className="shadow-lg" style={{ width: '210mm', minHeight: '297mm' }}>
+            <PDFWevValuationContent report={report} pageNumber={wevValuationPage} totalPages={totalPagesCount} />
           </div>
         )}
 
         {/* Klassieker Valuation */}
         {hasKlassiekerValuation && (
-          <div className="shadow-lg">
-            <PDFKlassiekerValuationContent report={report} pageNumber={klassiekerValuationPage} totalPages={10} />
+          <div className="shadow-lg" style={{ width: '210mm', minHeight: '297mm' }}>
+            <PDFKlassiekerValuationContent report={report} pageNumber={klassiekerValuationPage} totalPages={totalPagesCount} />
           </div>
         )}
 
         {/* Vehicle Data */}
-        <div className="shadow-lg">
-          <PDFVehicleDataContent report={report} pageNumber={vehicleDataPage} />
+        <div className="shadow-lg" style={{ width: '210mm', minHeight: '297mm' }}>
+          <PDFVehicleDataContent report={report} pageNumber={vehicleDataPage} totalPages={totalPagesCount} />
         </div>
 
         {/* Appraisal Findings (not for klassieker - they use general impression in PDF) */}
         {!isKlassiekerReport && (
-          <div className="shadow-lg">
+          <div className="shadow-lg" style={{ width: '210mm', minHeight: '297mm' }}>
             <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPage} />
           </div>
         )}
 
         {/* Photo Annex (conditional) */}
-        <PDFPhotosContent report={report} />
+        <PDFPhotosContent report={report} startPageNumber={photoStartPage} totalPages={totalPagesCount} />
       </div>
     </div>
   );

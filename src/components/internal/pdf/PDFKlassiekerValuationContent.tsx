@@ -69,30 +69,31 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
 
   return (
     <div 
-      className="bg-white font-sans pdf-page"
+      className="bg-white pdf-page"
       style={{
         width: '210mm',
         minHeight: '297mm',
-        padding: '24px 28px',
+        padding: '28px 32px',
         boxSizing: 'border-box',
         position: 'relative',
         pageBreakAfter: 'always',
+        fontFamily: 'Helvetica, Arial, sans-serif',
       }}
     >
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '18px', fontWeight: 700, color: '#000000', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '32px' }}>
+        <h1 style={{ fontSize: '20px', fontWeight: 700, color: '#000000', margin: 0, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
           WAARDEVASTSTELLING
         </h1>
-        <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '40px', width: 'auto' }} />
+        <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '44px', width: 'auto' }} />
       </div>
 
       {/* Legal Text */}
       <p style={{ 
-        fontSize: '10px', 
+        fontSize: '11px', 
         color: '#000000', 
-        lineHeight: 1.8, 
-        marginBottom: '20px',
+        lineHeight: 1.7, 
+        marginBottom: '28px',
         textAlign: 'justify',
       }}>
         {LEGAL_TEXT}
@@ -100,11 +101,11 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
 
       {/* Quality Class if present */}
       {qualityClass && (
-        <div style={{ marginBottom: '20px' }}>
-          <p style={{ fontSize: '10px', fontWeight: 600, color: '#000000', marginBottom: '4px' }}>
+        <div style={{ marginBottom: '28px' }}>
+          <p style={{ fontSize: '12px', fontWeight: 600, color: '#000000', marginBottom: '6px' }}>
             Kwaliteitsklasse: {qualityClass.label}
           </p>
-          <p style={{ fontSize: '10px', color: '#000000', lineHeight: 1.6 }}>
+          <p style={{ fontSize: '11px', color: '#000000', lineHeight: 1.6 }}>
             {qualityClass.description}
           </p>
         </div>
@@ -112,41 +113,41 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
 
       {/* Value Introduction */}
       <p style={{ 
-        fontSize: '10px', 
+        fontSize: '11px', 
         color: '#000000', 
-        lineHeight: 1.8, 
-        marginBottom: '12px',
+        lineHeight: 1.7, 
+        marginBottom: '16px',
       }}>
         {VALUE_INTRO}
       </p>
 
       {/* Value - bold, prominent */}
       <p style={{ 
-        fontSize: '14px', 
+        fontSize: '16px', 
         fontWeight: 700, 
         color: '#000000', 
-        marginBottom: '8px',
+        marginBottom: '10px',
       }}>
         {formattedValue} (inclusief BTW)
       </p>
       
       {valueInWords && (
         <p style={{ 
-          fontSize: '10px', 
+          fontSize: '11px', 
           color: '#000000', 
-          marginBottom: '24px',
+          marginBottom: '32px',
         }}>
           zegge: {valueInWords}
         </p>
       )}
 
       {/* Signing Section */}
-      <div style={{ marginTop: '32px', whiteSpace: 'pre-line' }}>
+      <div style={{ marginTop: '40px', whiteSpace: 'pre-line' }}>
         <p style={{ 
-          fontSize: '10px', 
+          fontSize: '11px', 
           color: '#000000', 
           lineHeight: 1.8,
-          marginBottom: '20px',
+          marginBottom: '24px',
         }}>
           {SIGNING_TEXT}
         </p>
@@ -154,43 +155,43 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
 
       {/* Date and location */}
       <p style={{ 
-        fontSize: '10px', 
+        fontSize: '11px', 
         color: '#000000', 
-        marginBottom: '24px',
+        marginBottom: '28px',
       }}>
         Aldus opgemaakt te Druten, {formatDateLong(report.inspection_date)}
       </p>
 
       {/* Signature */}
-      <div style={{ marginBottom: '16px' }}>
+      <div style={{ marginBottom: '20px' }}>
         <img 
           crossOrigin="anonymous"
           src={signatureErik} 
           alt="Handtekening Erik Elderson" 
           style={{ 
-            height: '25mm',
+            height: '30mm',
             width: 'auto',
-            maxWidth: '70mm',
+            maxWidth: '75mm',
           }} 
         />
       </div>
 
-      {/* Footer with page number */}
+      {/* Footer with page number and paraaf */}
       <div style={{ 
         position: 'absolute', 
-        bottom: '24px', 
-        left: '28px', 
-        right: '28px',
+        bottom: '28px', 
+        left: '32px', 
+        right: '32px',
         borderTop: '1px solid #e2e8f0', 
-        paddingTop: '12px',
+        paddingTop: '14px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <div style={{ fontSize: '9px', color: '#000000' }}>
+        <div style={{ fontSize: '10px', color: '#000000' }}>
           Pagina {pageNumber} van {totalPages}
         </div>
-        <div style={{ fontSize: '9px', color: '#000000' }}>
+        <div style={{ fontSize: '10px', color: '#000000' }}>
           Paraaf: ________________
         </div>
       </div>

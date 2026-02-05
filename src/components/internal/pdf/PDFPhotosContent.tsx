@@ -9,14 +9,17 @@ interface Report {
   document_reference: string | null;
   vehicle_photos: string[] | null;
   vehicle_photo_rotations: PhotoRotations | null;
+  report_type: string | null;
 }
 
 interface PDFPhotosContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   report: any;
+  startPageNumber?: number;
+  totalPages?: number;
 }
 
-const PDFPhotosContent = ({ report }: PDFPhotosContentProps) => {
+const PDFPhotosContent = ({ report, startPageNumber = 4, totalPages = 10 }: PDFPhotosContentProps) => {
   // Get all photos except cover photo (index 0)
   const detailPhotos = report?.vehicle_photos?.slice(1) || [];
   const rotations = report?.vehicle_photo_rotations || {};
@@ -41,40 +44,39 @@ const PDFPhotosContent = ({ report }: PDFPhotosContentProps) => {
       {pages.map((pagePhotos, pageIndex) => (
         <div 
           key={pageIndex}
-          className="bg-white font-sans pdf-page"
+          className="bg-white pdf-page"
           style={{
             width: '210mm',
             minHeight: '297mm',
-            padding: '18px 20px',
+            padding: '22px 24px',
             boxSizing: 'border-box',
             position: 'relative',
             pageBreakAfter: pageIndex < pages.length - 1 ? 'always' : 'auto',
+            fontFamily: 'Helvetica, Arial, sans-serif',
           }}
         >
           {/* Header */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
             <div>
-              <h1 style={{ fontSize: '16px', fontWeight: 600, color: '#000000', margin: 0, textTransform: 'uppercase' }}>
+              <h1 style={{ fontSize: '18px', fontWeight: 600, color: '#000000', margin: 0, textTransform: 'uppercase' }}>
                 FOTOBIJLAGE
               </h1>
-              <p style={{ fontSize: '9px', color: '#000000', margin: '2px 0 0 0' }}>
-                Documentkenmerk: {report.document_reference || '-'}
+              <p style={{ fontSize: '10px', color: '#000000', margin: '4px 0 0 0' }}>
+                Documentkenmerk: {report.document_reference || '–'}
               </p>
             </div>
-            <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '32px', width: 'auto' }} />
+            <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '36px', width: 'auto' }} />
           </div>
 
           {/* Photo Grid - 2 columns x 3 rows */}
           <div style={{ 
             display: 'grid', 
             gridTemplateColumns: 'repeat(2, 1fr)', 
-            gap: '12px',
-            marginBottom: '20px',
+            gap: '14px',
+            marginBottom: '24px',
           }}>
             {pagePhotos.map((photo, photoIndex) => {
               const rotation = getRotation(photo);
-              // For 90/270 degree rotations, swap dimensions mentally for proper fit
-              const isRotated90or270 = rotation === 90 || rotation === 270;
               
               return (
                 <div 
@@ -82,7 +84,7 @@ const PDFPhotosContent = ({ report }: PDFPhotosContentProps) => {
                   style={{
                     aspectRatio: '4/3',
                     overflow: 'hidden',
-                    borderRadius: '4px',
+                    borderRadius: '6px',
                     border: '1px solid #e2e8f0',
                     backgroundColor: '#f8fafc',
                     display: 'flex',
@@ -97,8 +99,6 @@ const PDFPhotosContent = ({ report }: PDFPhotosContentProps) => {
                     style={{
                       maxWidth: '100%',
                       maxHeight: '100%',
-                      width: isRotated90or270 ? 'auto' : '100%',
-                      height: isRotated90or270 ? '100%' : 'auto',
                       objectFit: 'contain', // Never stretch, preserve aspect ratio
                       transform: rotation ? `rotate(${rotation}deg)` : undefined,
                     }}
@@ -108,27 +108,32 @@ const PDFPhotosContent = ({ report }: PDFPhotosContentProps) => {
             })}
           </div>
 
-          {/* Footer */}
+          {/* Footer with paraaf */}
           <div style={{ 
             position: 'absolute', 
-            bottom: '14px', 
-            left: '20px', 
-            right: '20px',
+            bottom: '18px', 
+            left: '24px', 
+            right: '24px',
             borderTop: '1px solid #e2e8f0', 
-            paddingTop: '8px',
+            paddingTop: '10px',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center'
           }}>
-            <div style={{ fontSize: '8px', color: '#000000' }}>
+            <div style={{ fontSize: '9px', color: '#000000' }}>
               <span style={{ fontWeight: 600 }}>Automobiel Taxaties</span>
               <span style={{ margin: '0 4px' }}>|</span>
               Leigraaf 160, 6651 GJ Druten
               <span style={{ margin: '0 4px' }}>|</span>
               KVK: 95549269
             </div>
-            <div style={{ fontSize: '8px', color: '#000000' }}>
-              Fotobijlage {pageIndex + 1}
+            <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+              <div style={{ fontSize: '9px', color: '#000000' }}>
+                Fotobijlage {pageIndex + 1}
+              </div>
+              <div style={{ fontSize: '9px', color: '#000000' }}>
+                Paraaf: ________________
+              </div>
             </div>
           </div>
         </div>
