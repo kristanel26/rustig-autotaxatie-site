@@ -99,6 +99,9 @@ export default {
         'card-hover': 'var(--card-shadow-hover)',
         'button': 'var(--button-shadow)',
       },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
