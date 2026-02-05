@@ -1,9 +1,4 @@
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
-import logoVrt from '@/assets/logo-vrt.png';
-import logoHobeon from '@/assets/logo-hobeon.webp';
-import logoTmv from '@/assets/logo-tmv.png';
-import logoFehac from '@/assets/logo-fehac.png';
-import signatureErik from '@/assets/signature-erik-elderson.svg';
 
 interface PhotoRotations {
   [url: string]: number;
@@ -30,6 +25,9 @@ interface Report {
   vehicle_photos: string[] | null;
   vehicle_photo_rotations: PhotoRotations | null;
   report_type: string | null;
+  rdw_merk: string | null;
+  rdw_handelsbenaming: string | null;
+  vin: string | null;
 }
 
 interface PDFCoverContentProps {
@@ -48,9 +46,13 @@ const extractSequentialNumber = (reportNumber: string | null): string => {
   return reportNumber;
 };
 
+// Helper to get meldcode (last 4 chars of VIN)
+const getMeldcode = (vin: string | null): string | null => {
+  if (!vin || vin.length < 4) return null;
+  return vin.slice(-4).toUpperCase();
+};
+
 const PDFCoverContent = ({ report }: PDFCoverContentProps) => {
-  const isKlassiekerReport = report.report_type === 'klassieker';
-  
   const formatDate = (dateString: string | null) => {
     if (!dateString) return '–';
     return new Date(dateString).toLocaleDateString('nl-NL', {
@@ -65,26 +67,12 @@ const PDFCoverContent = ({ report }: PDFCoverContentProps) => {
     return timeString.slice(0, 5) + ' u';
   };
 
-  const capitalizeFirst = (str: string | null) => {
-    if (!str) return '–';
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-  };
-
-  // Build customer name - format: "DHR. J.P. JANSSEN"
+  // Build customer name - format: "Dhr. J.P. Janssen"
   const customerName = [report.customer_title, report.customer_initials, report.customer_last_name]
     .filter(Boolean)
-    .join(' ')
-    .toUpperCase() || '–';
+    .join(' ') || '–';
 
-  // Use vehicle_title (taxateur vrij veld) for the main vehicle name
-  const vehicleDisplay = report.vehicle_title?.toUpperCase() || '–';
-
-  // Build opbouw display: [Opbouw merk] [Opbouw type]
-  const opbouwDisplay = [report.opbouw_merk, report.opbouw_type]
-    .filter(Boolean)
-    .join(' ') || null;
-
-  // Cover photo is first image from vehicle_photos array - only show if explicitly set
+  // Cover photo is first image from vehicle_photos array
   const coverPhoto = report.vehicle_photos && report.vehicle_photos.length > 0 
     ? report.vehicle_photos[0] 
     : null;
@@ -94,8 +82,13 @@ const PDFCoverContent = ({ report }: PDFCoverContentProps) => {
     ? report.vehicle_photo_rotations[coverPhoto] || 0 
     : 0;
 
-  // For klassieker: use contain instead of cover to prevent distortion
-  const photoObjectFit = isKlassiekerReport ? 'contain' : 'cover';
+  // Get meldcode from VIN
+  const meldcode = getMeldcode(report.vin);
+
+  // Build vehicle display from RDW data or vehicle_title
+  const vehicleDisplay = report.vehicle_title || 
+    [report.rdw_merk, report.rdw_handelsbenaming].filter(Boolean).join(' ') || 
+    '–';
 
   return (
     <div 
@@ -107,210 +100,235 @@ const PDFCoverContent = ({ report }: PDFCoverContentProps) => {
         position: 'relative',
         overflow: 'hidden',
         pageBreakAfter: 'always',
-        fontFamily: 'Helvetica, Arial, sans-serif',
+        fontFamily: '"Source Sans Pro", "Inter", -apple-system, BlinkMacSystemFont, sans-serif',
       }}
     >
-      {/* Left Column - 45% */}
+      {/* Left Column - 50% text content */}
       <div 
         style={{
-          width: '45%',
+          width: '50%',
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          padding: '28px',
+          padding: '25mm 20mm 20mm 25mm',
           boxSizing: 'border-box',
           backgroundColor: 'white',
         }}
       >
-        {/* Content wrapper */}
+        {/* Main Content */}
         <div>
-          {/* Register Logos - horizontal row */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '36px' }}>
-            <img crossOrigin="anonymous" src={logoVrt} alt="VRT" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
-            <img crossOrigin="anonymous" src={logoHobeon} alt="Hobeon SKO" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
-            <img crossOrigin="anonymous" src={logoTmv} alt="TMV" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
-            <img crossOrigin="anonymous" src={logoFehac} alt="FEHAC" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
+          {/* Header - Company name */}
+          <div style={{ marginBottom: '8mm' }}>
+            <h2 style={{ 
+              fontSize: '18pt', 
+              fontWeight: 600, 
+              color: '#1a1a1a', 
+              margin: 0,
+              letterSpacing: '-0.01em',
+            }}>
+              Automobiel Taxaties
+            </h2>
+            <p style={{ 
+              fontSize: '10pt', 
+              color: '#666666', 
+              margin: '2mm 0 0 0',
+              fontWeight: 400,
+            }}>
+              Automobiel taxaties
+            </p>
           </div>
 
           {/* Title Block */}
-          <div style={{ marginBottom: '28px' }}>
-            <h1 style={{ fontSize: '30px', fontWeight: 600, letterSpacing: '-0.02em', color: '#000000', textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }}>
-              TAXATIERAPPORT
+          <div style={{ marginBottom: '10mm' }}>
+            <h1 style={{ 
+              fontSize: '22pt', 
+              fontWeight: 600, 
+              color: '#000000', 
+              margin: 0,
+              letterSpacing: '-0.02em',
+            }}>
+              Taxatierapport
             </h1>
-            <p style={{ fontSize: '14px', color: '#000000', fontWeight: 400, fontStyle: 'italic', lineHeight: 1.5, margin: '6px 0 0 0' }}>
-              Volgens artikel 7:960 BW
+          </div>
+
+          {/* Information Blocks */}
+          <div style={{ marginBottom: '8mm' }}>
+            <p style={{ fontSize: '11pt', color: '#666666', fontWeight: 500, margin: '0 0 1mm 0' }}>
+              Object
+            </p>
+            <p style={{ fontSize: '12pt', fontWeight: 600, color: '#1a1a1a', margin: 0 }}>
+              {vehicleDisplay}
             </p>
           </div>
 
-          {/* Inzake (Vehicle Title) - only show if we have data */}
-          {report.vehicle_title && (
-            <div style={{ marginBottom: '20px' }}>
-              <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.4, margin: 0 }}>
-                Inzake:
+          {report.rdw_merk && (
+            <div style={{ marginBottom: '6mm' }}>
+              <p style={{ fontSize: '11pt', color: '#666666', fontWeight: 500, margin: '0 0 1mm 0' }}>
+                Merk
               </p>
-              <p style={{ fontSize: '20px', fontWeight: 600, textTransform: 'uppercase', color: '#000000', lineHeight: 1.3, margin: '4px 0 0 0' }}>
-                {report.vehicle_title.toUpperCase()}
-              </p>
-            </div>
-          )}
-
-          {/* Kenteken - only show if we have data */}
-          {report.license_plate && (
-            <div style={{ marginBottom: '14px' }}>
-              <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.4, margin: 0 }}>
-                Kenteken:
-              </p>
-              <p style={{ fontSize: '17px', fontWeight: 600, color: '#000000', lineHeight: 1.3, margin: '2px 0 0 0' }}>
-                {report.license_plate}
+              <p style={{ fontSize: '12pt', fontWeight: 600, color: '#1a1a1a', margin: 0 }}>
+                {report.rdw_merk}
               </p>
             </div>
           )}
 
-          {/* Rapportnummer - show sequential number only */}
-          {report.report_number && (
-            <div style={{ marginBottom: '14px' }}>
-              <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.4, margin: 0 }}>
-                Rapportnummer:
+          {report.rdw_handelsbenaming && (
+            <div style={{ marginBottom: '6mm' }}>
+              <p style={{ fontSize: '11pt', color: '#666666', fontWeight: 500, margin: '0 0 1mm 0' }}>
+                Model
               </p>
-              <p style={{ fontSize: '17px', fontWeight: 600, color: '#000000', lineHeight: 1.3, margin: '2px 0 0 0' }}>
-                {extractSequentialNumber(report.report_number)}
-              </p>
-            </div>
-          )}
-
-          {/* Documentkenmerk - only show if we have data */}
-          {report.document_reference && (
-            <div style={{ marginBottom: '18px' }}>
-              <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.4, margin: 0 }}>
-                Documentkenmerk:
-              </p>
-              <p style={{ fontSize: '17px', fontWeight: 600, color: '#000000', lineHeight: 1.3, margin: '2px 0 0 0' }}>
-                {report.document_reference}
+              <p style={{ fontSize: '12pt', fontWeight: 600, color: '#1a1a1a', margin: 0 }}>
+                {report.rdw_handelsbenaming}
               </p>
             </div>
           )}
 
-          {/* Opbouw merk + type (if available) */}
-          {opbouwDisplay && (
-            <div style={{ marginBottom: '22px' }}>
-              <p style={{ fontSize: '15px', fontWeight: 600, color: '#000000', lineHeight: 1.4, margin: 0 }}>
-                {opbouwDisplay}
+          {meldcode && (
+            <div style={{ marginBottom: '6mm' }}>
+              <p style={{ fontSize: '11pt', color: '#666666', fontWeight: 500, margin: '0 0 1mm 0' }}>
+                Meldcode
+              </p>
+              <p style={{ fontSize: '12pt', fontWeight: 600, color: '#1a1a1a', margin: 0 }}>
+                {meldcode}
               </p>
             </div>
           )}
 
-          {/* In opdracht van */}
-          <div style={{ marginBottom: '24px' }}>
-            <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.4, margin: '0 0 6px 0' }}>
-              In opdracht van:
+          {/* Opdrachtgever */}
+          <div style={{ marginBottom: '8mm', marginTop: '4mm' }}>
+            <p style={{ fontSize: '11pt', color: '#666666', fontWeight: 500, margin: '0 0 1mm 0' }}>
+              Opdrachtgever
             </p>
-            <p style={{ fontSize: '15px', fontWeight: 600, color: '#000000', lineHeight: 1.4, margin: 0 }}>
+            <p style={{ fontSize: '12pt', fontWeight: 600, color: '#1a1a1a', margin: 0 }}>
               {customerName}
             </p>
             {report.customer_street && (
-              <p style={{ fontSize: '15px', fontWeight: 600, color: '#000000', lineHeight: 1.4, margin: 0 }}>
-                {report.customer_street.toUpperCase()}
+              <p style={{ fontSize: '11pt', fontWeight: 500, color: '#1a1a1a', margin: '1mm 0 0 0' }}>
+                {report.customer_street}
               </p>
             )}
             {(report.customer_postcode || report.customer_city) && (
-              <p style={{ fontSize: '15px', fontWeight: 600, color: '#000000', lineHeight: 1.4, margin: 0 }}>
-                {[report.customer_postcode, report.customer_city?.toUpperCase()].filter(Boolean).join(' ')}
+              <p style={{ fontSize: '11pt', fontWeight: 500, color: '#1a1a1a', margin: '1mm 0 0 0' }}>
+                {[report.customer_postcode, report.customer_city].filter(Boolean).join(' ')}
               </p>
             )}
           </div>
 
-          {/* Inspection Details */}
-          <div style={{ marginBottom: '24px' }}>
-            <p style={{ fontSize: '12px', lineHeight: 1.7, margin: '3px 0', color: '#000000' }}>
-              <span style={{ fontWeight: 500 }}>Opnamedatum:</span>{' '}
-              <span style={{ fontWeight: 600 }}>{formatDate(report.inspection_date)}</span>
+          {/* Rapportnummer */}
+          <div style={{ marginBottom: '8mm' }}>
+            <p style={{ fontSize: '11pt', color: '#666666', fontWeight: 500, margin: '0 0 1mm 0' }}>
+              Rapportnummer
             </p>
-            <p style={{ fontSize: '12px', lineHeight: 1.7, margin: '3px 0', color: '#000000' }}>
-              <span style={{ fontWeight: 500 }}>Aanvangstijd opname:</span>{' '}
-              <span style={{ fontWeight: 600 }}>{formatTime(report.inspection_start_time)}</span>
-            </p>
-            <p style={{ fontSize: '12px', lineHeight: 1.7, margin: '3px 0', color: '#000000' }}>
-              <span style={{ fontWeight: 500 }}>Eindtijd opname:</span>{' '}
-              <span style={{ fontWeight: 600 }}>{formatTime(report.inspection_end_time)}</span>
-            </p>
-            <p style={{ fontSize: '12px', lineHeight: 1.7, margin: '3px 0', color: '#000000' }}>
-              <span style={{ fontWeight: 500 }}>Plaats:</span>{' '}
-              <span style={{ fontWeight: 600 }}>{capitalizeFirst(report.inspection_location)}</span>
+            <p style={{ fontSize: '12pt', fontWeight: 600, color: '#1a1a1a', margin: 0 }}>
+              {extractSequentialNumber(report.report_number)}
             </p>
           </div>
 
-          {/* Uitgevoerd door - Taxateur info */}
-          <div>
-            <p style={{ fontSize: '15px', fontWeight: 600, color: '#000000', lineHeight: 1.5, margin: 0 }}>
+          {/* Inspection Details */}
+          <div style={{ marginTop: '6mm' }}>
+            <p style={{ fontSize: '10.5pt', lineHeight: 1.7, margin: '2mm 0', color: '#1a1a1a' }}>
+              <span style={{ fontWeight: 500, color: '#666666' }}>Opnamedatum:</span>{' '}
+              <span style={{ fontWeight: 600 }}>{formatDate(report.inspection_date)}</span>
+            </p>
+            <p style={{ fontSize: '10.5pt', lineHeight: 1.7, margin: '2mm 0', color: '#1a1a1a' }}>
+              <span style={{ fontWeight: 500, color: '#666666' }}>Aanvang opname:</span>{' '}
+              <span style={{ fontWeight: 600 }}>{formatTime(report.inspection_start_time)}</span>
+            </p>
+            <p style={{ fontSize: '10.5pt', lineHeight: 1.7, margin: '2mm 0', color: '#1a1a1a' }}>
+              <span style={{ fontWeight: 500, color: '#666666' }}>Eindtijd opname:</span>{' '}
+              <span style={{ fontWeight: 600 }}>{formatTime(report.inspection_end_time)}</span>
+            </p>
+            <p style={{ fontSize: '10.5pt', lineHeight: 1.7, margin: '2mm 0', color: '#1a1a1a' }}>
+              <span style={{ fontWeight: 500, color: '#666666' }}>Plaats:</span>{' '}
+              <span style={{ fontWeight: 600 }}>Druten</span>
+            </p>
+          </div>
+
+          {/* Taxateur Signature */}
+          <div style={{ marginTop: '10mm' }}>
+            <p style={{ fontSize: '12pt', fontWeight: 600, color: '#1a1a1a', margin: 0 }}>
               Erik Elderson
             </p>
-            <p style={{ fontSize: '12px', color: '#000000', fontWeight: 500, lineHeight: 1.5, margin: '3px 0' }}>
-              Register-Taxateur VRT / TMV
+            <p style={{ fontSize: '10.5pt', color: '#666666', fontWeight: 500, margin: '2mm 0 0 0' }}>
+              Register-taxateur VRT / TMV
             </p>
           </div>
         </div>
 
-        {/* Footer with Company Details */}
-        <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '18px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        {/* Footer - Company Details */}
+        <div style={{ 
+          borderTop: '1px solid #e5e5e5', 
+          paddingTop: '4mm',
+          marginTop: 'auto',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '4mm' }}>
             <img 
               crossOrigin="anonymous"
               src={logoAutomobiel} 
               alt="Automobiel Taxaties" 
-              style={{ height: '48px', width: 'auto', flexShrink: 0 }}
+              style={{ height: '12mm', width: 'auto', flexShrink: 0 }}
             />
-            <div style={{ fontSize: '11px', color: '#000000', lineHeight: 1.6 }}>
-              <span style={{ fontWeight: 600 }}>Automobiel Taxaties</span>
-              <span style={{ margin: '0 4px' }}>|</span>
-              <span>Leigraaf 160, 6651 GJ Druten</span>
-              <span style={{ margin: '0 4px' }}>|</span>
-              <span>KVK: 95549269</span>
-              <span style={{ margin: '0 4px' }}>|</span>
-              <span>BTW: NL003366178B93</span>
-              <br />
-              <span>TMV 33106</span>
-              <span style={{ margin: '0 4px' }}>|</span>
-              <span>VRT 22-523-M</span>
-              <span style={{ margin: '0 4px' }}>|</span>
-              <span>Bank: NL80RABO 0387915680</span>
+            <div style={{ fontSize: '8.5pt', color: '#666666', lineHeight: 1.6 }}>
+              <p style={{ margin: 0 }}>
+                <span style={{ fontWeight: 600, color: '#1a1a1a' }}>Automobiel Taxaties</span>
+              </p>
+              <p style={{ margin: '1mm 0 0 0' }}>
+                Leigraaf 160, 6651 GJ Druten
+              </p>
+              <p style={{ margin: '1mm 0 0 0' }}>
+                KvK: 95549269 | IBAN: NL80RABO0387915680 | BTW: NL003366178B93
+              </p>
             </div>
           </div>
+          <p style={{ 
+            fontSize: '9pt', 
+            color: '#999999', 
+            margin: '4mm 0 0 0',
+            textAlign: 'left',
+          }}>
+            Pagina 1 van X
+          </p>
         </div>
       </div>
 
-      {/* Right Column - 55% - Vehicle Photo */}
+      {/* Right Column - 50% - Vehicle Photo */}
       <div 
         style={{
-          width: '55%',
+          width: '50%',
           height: '100%',
-          position: 'relative',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#f8fafc',
+          padding: '25mm 20mm 20mm 10mm',
+          boxSizing: 'border-box',
+          backgroundColor: 'white',
         }}
       >
-        {coverPhoto ? (
-          <img
-            crossOrigin="anonymous"
-            src={coverPhoto}
-            alt="Voertuig"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: photoObjectFit as 'contain' | 'cover',
-              transform: coverRotation ? `rotate(${coverRotation}deg)` : undefined,
-            }}
-          />
-        ) : (
-          /* Als geen voorbladfoto is geselecteerd: géén foto tonen - toon lege grijze ruimte */
-          <div style={{
-            width: '100%',
-            height: '100%',
-            backgroundColor: '#f8fafc',
-          }} />
-        )}
+        {/* Fixed photo frame: approx 90x60mm, centered */}
+        <div style={{
+          width: '90mm',
+          height: '60mm',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          border: coverPhoto ? 'none' : '1px solid #e5e5e5',
+          backgroundColor: '#fafafa',
+        }}>
+          {coverPhoto ? (
+            <img
+              crossOrigin="anonymous"
+              src={coverPhoto}
+              alt="Voertuig"
+              style={{
+                maxWidth: '100%',
+                maxHeight: '100%',
+                objectFit: 'contain',
+                transform: coverRotation ? `rotate(${coverRotation}deg)` : undefined,
+              }}
+            />
+          ) : null}
+        </div>
       </div>
     </div>
   );
