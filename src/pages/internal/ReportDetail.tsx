@@ -15,10 +15,12 @@ import PDFVehicleDataContent from '@/components/internal/pdf/PDFVehicleDataConte
 import PDFAppraisalFindingsContent from '@/components/internal/pdf/PDFAppraisalFindingsContent';
 import PDFValuationContent from '@/components/internal/pdf/PDFValuationContent';
 import PDFPhotosContent from '@/components/internal/pdf/PDFPhotosContent';
+import PDFKlassiekerValuationContent from '@/components/internal/pdf/PDFKlassiekerValuationContent';
 
 interface Report {
   id: string;
   report_number: string;
+  report_type: string | null;
   document_reference: string | null;
   customer_title: string | null;
   customer_initials: string | null;
@@ -206,53 +208,80 @@ const ReportDetail = () => {
     console.log('[PDF] normalized pages', { count: pages.length });
   };
 
-  const handlePdfDownload = async () => {
-    if (!id || isGeneratingPdf || !report) return;
-    
-    setIsGeneratingPdf(true);
-    
-    try {
-      // Create container that is ON-SCREEN so html2canvas can render it.
-      // Keep it behind the app UI so it doesn't show as a separate screen.
-      const container = document.createElement('div');
-      container.id = 'pdf-render-container';
-      container.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 210mm;
-        z-index: -1;
-        opacity: 1;
-        pointer-events: none;
-        background: white;
-        overflow: visible;
-      `;
-      document.body.appendChild(container);
-      containerRef.current = container;
+   const handlePdfDownload = async () => {
+     if (!id || isGeneratingPdf || !report) return;
+     
+     setIsGeneratingPdf(true);
+     
+     try {
+       // Create container that is ON-SCREEN so html2canvas can render it.
+       // Keep it behind the app UI so it doesn't show as a separate screen.
+       const container = document.createElement('div');
+       container.id = 'pdf-render-container';
+       container.style.cssText = `
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 210mm;
+         z-index: -1;
+         opacity: 1;
+         pointer-events: none;
+         background: white;
+         overflow: visible;
+       `;
+       document.body.appendChild(container);
+       containerRef.current = container;
 
-      // Create React root and render components
-      const root = createRoot(container);
-      rootRef.current = root;
+       // Create React root and render components
+       const root = createRoot(container);
+       rootRef.current = root;
 
-      // Calculate page numbers dynamically based on content
-      const hasValuation = report.appraised_value && report.appraised_value > 0;
-      const valuationPageNumber = hasValuation ? 2 : 0;
-      const vehicleDataPageNumber = hasValuation ? 3 : 2;
-      const appraisalFindingsPageNumber = hasValuation ? 4 : 3;
+       // Handle klassieker reports separately
+       const isKlassiekerReport = report.report_type === 'klassieker';
+       
+       if (isKlassiekerReport) {
+         // Klassieker: Cover -> Valuation (if applicable) -> Vehicle Data -> Photos
+         // Calculate page numbers dynamically
+         const hasValuation = report.appraised_value && report.appraised_value > 0;
+         let currentPage = 1; // Cover
+         const valuationPage = hasValuation ? ++currentPage : 0;
+         const vehicleDataPage = ++currentPage;
+         const photoStartPage = currentPage + 1;
+         
+         // Calculate total pages
+         const detailPhotos = (report.vehicle_photos || []).slice(1);
+         const photoPages = Math.ceil(detailPhotos.length / 6);
+         const totalPages = currentPage + photoPages;
 
-      // Render all PDF pages as a single React tree
-      // Order: Cover -> Valuation (if applicable) -> Vehicle Data -> Appraisal Findings -> Photos
-      root.render(
-        <div id="pdf-content" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'white' }}>
-          <PDFCoverContent report={report} />
-          {hasValuation && (
-            <PDFValuationContent report={report} pageNumber={valuationPageNumber} totalPages={10} />
-          )}
-          <PDFVehicleDataContent report={report} pageNumber={vehicleDataPageNumber} />
-          <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPageNumber} />
-          <PDFPhotosContent report={report} />
-        </div>
-      );
+         root.render(
+           <div id="pdf-content" style={{ fontFamily: 'Helvetica, Arial, sans-serif', background: 'white' }}>
+             <PDFCoverContent report={report} />
+             {hasValuation && (
+               <PDFKlassiekerValuationContent report={report} pageNumber={valuationPage} totalPages={totalPages} />
+             )}
+             <PDFVehicleDataContent report={report} pageNumber={vehicleDataPage} totalPages={totalPages} />
+             <PDFPhotosContent report={report} startPageNumber={photoStartPage} totalPages={totalPages} />
+           </div>
+         );
+       } else {
+         // Camper/WEV: Cover -> Valuation (if applicable) -> Vehicle Data -> Appraisal Findings -> Photos
+         const hasValuation = report.appraised_value && report.appraised_value > 0;
+         const valuationPageNumber = hasValuation ? 2 : 0;
+         const vehicleDataPageNumber = hasValuation ? 3 : 2;
+         const appraisalFindingsPageNumber = hasValuation ? 4 : 3;
+
+         root.render(
+           <div id="pdf-content" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'white' }}>
+             <PDFCoverContent report={report} />
+             {hasValuation && (
+               <PDFValuationContent report={report} pageNumber={valuationPageNumber} totalPages={10} />
+             )}
+             <PDFVehicleDataContent report={report} pageNumber={vehicleDataPageNumber} totalPages={10} />
+             <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPageNumber} />
+             <PDFPhotosContent report={report} />
+           </div>
+         );
+       }
 
       // Wait for React to paint the DOM
       await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
