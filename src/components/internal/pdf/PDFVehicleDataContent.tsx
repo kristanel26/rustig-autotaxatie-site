@@ -40,17 +40,21 @@ interface Report {
   stalling: string | null;
   staat_bij_opname: string | null;
   quality_class: string | null;
+  report_type: string | null;
 }
 
 interface PDFVehicleDataContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   report: any;
   pageNumber?: number;
+  totalPages?: number;
 }
 
-const PDFVehicleDataContent = ({ report, pageNumber = 2 }: PDFVehicleDataContentProps) => {
+const PDFVehicleDataContent = ({ report, pageNumber = 2, totalPages = 10 }: PDFVehicleDataContentProps) => {
+  const isKlassiekerReport = report.report_type === 'klassieker';
+  
   const formatDate = (dateString: string | null) => {
-    if (!dateString) return '-';
+    if (!dateString) return '–';
     return new Date(dateString).toLocaleDateString('nl-NL', {
       day: 'numeric',
       month: 'long',
@@ -59,28 +63,29 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2 }: PDFVehicleDataContent
   };
 
   const formatBoolean = (value: boolean | null) => {
-    if (value === null || value === undefined) return '-';
+    if (value === null || value === undefined) return '–';
     return value ? 'Ja' : 'Nee';
   };
 
   const formatNumber = (value: number | null, suffix?: string) => {
-    if (value === null || value === undefined) return '-';
+    if (value === null || value === undefined) return '–';
     return suffix ? `${value.toLocaleString('nl-NL')} ${suffix}` : value.toLocaleString('nl-NL');
   };
 
   const getMeldcode = (vin: string | null) => {
-    if (!vin || vin.length < 4) return '-';
+    if (!vin || vin.length < 4) return '–';
     return vin.slice(-4).toUpperCase();
   };
 
-  // DataRow without source column - hide empty values
+  // DataRow - show dash for empty values (klassieker requirement)
   const DataRow = ({ label, value }: { label: string; value: string }) => {
-    // Don't render if value is empty or just a dash
-    if (!value || value === '-') return null;
+    const displayValue = (!value || value === '-' || value === '') ? '–' : value;
+    // For non-klassieker: hide empty rows (original behavior)
+    if (!isKlassiekerReport && displayValue === '–') return null;
     return (
-      <div style={{ display: 'flex', padding: '5px 0', borderBottom: '1px solid #e2e8f0' }}>
-        <span style={{ width: '50%', color: '#000000', fontSize: '10px', fontWeight: 500 }}>{label}</span>
-        <span style={{ width: '50%', color: '#000000', fontSize: '10px', fontWeight: 600 }}>{value}</span>
+      <div style={{ display: 'flex', padding: '6px 0', borderBottom: '1px solid #e2e8f0' }}>
+        <span style={{ width: '50%', color: '#000000', fontSize: '11px', fontWeight: 500 }}>{label}</span>
+        <span style={{ width: '50%', color: '#000000', fontSize: '11px', fontWeight: 600 }}>{displayValue}</span>
       </div>
     );
   };
@@ -90,11 +95,11 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2 }: PDFVehicleDataContent
       display: 'flex', 
       alignItems: 'center', 
       gap: '8px',
-      marginBottom: '8px',
-      paddingBottom: '6px',
+      marginBottom: '10px',
+      paddingBottom: '8px',
       borderBottom: '2px solid #000000'
     }}>
-      <h3 style={{ fontSize: '12px', fontWeight: 600, color: '#000000', margin: 0 }}>
+      <h3 style={{ fontSize: '13px', fontWeight: 600, color: '#000000', margin: 0 }}>
         {number}. {title}
       </h3>
     </div>
@@ -102,35 +107,36 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2 }: PDFVehicleDataContent
 
   return (
     <div 
-      className="bg-white font-sans pdf-page"
+      className="bg-white pdf-page"
       style={{
         width: '210mm',
         minHeight: '297mm',
-        padding: '20px 24px',
+        padding: '24px 28px',
         boxSizing: 'border-box',
         position: 'relative',
         pageBreakAfter: 'always',
+        fontFamily: 'Helvetica, Arial, sans-serif',
       }}
     >
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '28px' }}>
         <div>
-          <h1 style={{ fontSize: '18px', fontWeight: 600, color: '#000000', margin: 0, textTransform: 'uppercase' }}>VOERTUIGGEGEVENS</h1>
+          <h1 style={{ fontSize: '20px', fontWeight: 600, color: '#000000', margin: 0, textTransform: 'uppercase' }}>VOERTUIGGEGEVENS</h1>
           {report.document_reference && (
-            <p style={{ fontSize: '10px', color: '#000000', margin: '2px 0 0 0' }}>
+            <p style={{ fontSize: '11px', color: '#000000', margin: '4px 0 0 0' }}>
               Documentkenmerk: {report.document_reference}
             </p>
           )}
         </div>
-        <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '36px', width: 'auto' }} />
+        <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '40px', width: 'auto' }} />
       </div>
 
       {/* Two-column layout */}
-      <div style={{ display: 'flex', gap: '20px' }}>
+      <div style={{ display: 'flex', gap: '24px' }}>
         {/* Left Column */}
         <div style={{ width: '50%' }}>
           {/* Sectie 1: Identificatie */}
-          <div style={{ marginBottom: '16px' }}>
+          <div style={{ marginBottom: '22px' }}>
             <SectionHeader number="1" title="Identificatie" />
             <DataRow label="Kenteken" value={report.license_plate || ''} />
             <DataRow label="Merk" value={report.rdw_merk || ''} />
@@ -148,7 +154,7 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2 }: PDFVehicleDataContent
           </div>
 
           {/* Sectie 2: Technische hoofdgegevens */}
-          <div style={{ marginBottom: '16px' }}>
+          <div style={{ marginBottom: '22px' }}>
             <SectionHeader number="2" title="Technische hoofdgegevens" />
             <DataRow label="Brandstof" value={report.rdw_brandstof || ''} />
             <DataRow 
@@ -163,7 +169,7 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2 }: PDFVehicleDataContent
           </div>
 
           {/* Sectie 3: Massa en gewichten */}
-          <div style={{ marginBottom: '16px' }}>
+          <div style={{ marginBottom: '22px' }}>
             <SectionHeader number="3" title="Massa en gewichten" />
             <DataRow label="Ledig gewicht" value={formatNumber(report.rdw_ledig_gewicht, 'kg')} />
             <DataRow label="Massa rijklaar" value={formatNumber(report.rdw_massa_rijklaar, 'kg')} />
@@ -174,7 +180,7 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2 }: PDFVehicleDataContent
         {/* Right Column */}
         <div style={{ width: '50%' }}>
           {/* Sectie 4: Keuring en status */}
-          <div style={{ marginBottom: '16px' }}>
+          <div style={{ marginBottom: '22px' }}>
             <SectionHeader number="4" title="Keuring en status" />
             <DataRow label="APK gekeurd" value={formatBoolean(report.rdw_apk_gekeurd)} />
             <DataRow label="APK vervaldatum" value={formatDate(report.rdw_apk_vervaldatum)} />
@@ -182,7 +188,7 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2 }: PDFVehicleDataContent
           </div>
 
           {/* Sectie 5: Tellerstand */}
-          <div style={{ marginBottom: '16px' }}>
+          <div style={{ marginBottom: '22px' }}>
             <SectionHeader number="5" title="Tellerstand" />
             <DataRow 
               label="Tellerstand" 
@@ -195,7 +201,7 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2 }: PDFVehicleDataContent
           </div>
 
           {/* Sectie 6: Opbouw en constructie */}
-          <div style={{ marginBottom: '16px' }}>
+          <div style={{ marginBottom: '22px' }}>
             <SectionHeader number="6" title="Opbouw en constructie" />
             <DataRow label="Soort bouw" value={report.soort_bouw || ''} />
             <DataRow label="Opbouw merk" value={report.opbouw_merk || ''} />
@@ -204,7 +210,7 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2 }: PDFVehicleDataContent
           </div>
 
           {/* Sectie 7: Gebruik en stalling */}
-          <div style={{ marginBottom: '16px' }}>
+          <div style={{ marginBottom: '22px' }}>
             <SectionHeader number="7" title="Gebruik en stalling" />
             <DataRow label="Gebruik" value={report.gebruik || ''} />
             <DataRow label="Stalling" value={report.stalling || ''} />
@@ -213,14 +219,14 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2 }: PDFVehicleDataContent
 
           {/* Sectie 8: Kwaliteitsklasse */}
           {report.quality_class && (
-            <div style={{ marginBottom: '16px' }}>
+            <div style={{ marginBottom: '22px' }}>
               <SectionHeader number="8" title="Kwaliteitsklasse" />
-              <div style={{ padding: '8px 0' }}>
-                <div style={{ fontSize: '12px', fontWeight: 600, color: '#000000', marginBottom: '4px' }}>
+              <div style={{ padding: '10px 0' }}>
+                <div style={{ fontSize: '13px', fontWeight: 600, color: '#000000', marginBottom: '6px' }}>
                   {report.quality_class}
                 </div>
-                <p style={{ fontSize: '10px', color: '#000000', lineHeight: 1.5, margin: 0 }}>
-                  {getQualityClassByValue(report.quality_class)?.description || ''}
+                <p style={{ fontSize: '11px', color: '#000000', lineHeight: 1.6, margin: 0 }}>
+                  {getQualityClassByValue(report.quality_class)?.description || '–'}
                 </p>
               </div>
             </div>
@@ -228,27 +234,32 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2 }: PDFVehicleDataContent
         </div>
       </div>
 
-      {/* Footer */}
+      {/* Footer with paraaf */}
       <div style={{ 
         position: 'absolute', 
-        bottom: '20px', 
-        left: '24px', 
-        right: '24px',
+        bottom: '24px', 
+        left: '28px', 
+        right: '28px',
         borderTop: '1px solid #e2e8f0', 
-        paddingTop: '10px',
+        paddingTop: '12px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <div style={{ fontSize: '9px', color: '#000000' }}>
+        <div style={{ fontSize: '10px', color: '#000000' }}>
           <span style={{ fontWeight: 600 }}>Automobiel Taxaties</span>
           <span style={{ margin: '0 4px' }}>|</span>
           Leigraaf 160, 6651 GJ Druten
           <span style={{ margin: '0 4px' }}>|</span>
           KVK: 95549269
         </div>
-        <div style={{ fontSize: '9px', color: '#000000' }}>
-          Pagina {pageNumber}
+        <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+          <div style={{ fontSize: '10px', color: '#000000' }}>
+            Pagina {pageNumber} van {totalPages}
+          </div>
+          <div style={{ fontSize: '10px', color: '#000000' }}>
+            Paraaf: ________________
+          </div>
         </div>
       </div>
     </div>
