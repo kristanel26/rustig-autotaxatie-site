@@ -32,13 +32,17 @@ export interface VehicleFormData {
   // Sectie 1: Voertuigidentificatie (RDW)
   rdw_merk: string;
   rdw_handelsbenaming: string;
+  // Custom handelsbenaming (editable by taxateur)
+  handelsbenaming_custom: string;
   rdw_voertuigsoort: string;
   rdw_carrosserievorm: string;
   rdw_bouwjaar: string;
   rdw_datum_eerste_toelating: string;
   rdw_datum_eerste_tenaamstelling: string;
   rdw_datum_laatste_tenaamstelling: string;
+  // Color fields - split into base color and paint type
   rdw_kleur: string;
+  kleur_laksoort: string; // 'uni' | 'metallic' | ''
 
   // Sectie 2: Technische hoofdgegevens (RDW)
   rdw_brandstof: string;
@@ -98,6 +102,7 @@ export const getInitialVehicleFormData = (): VehicleFormData => ({
   vehicle_title: '',
   rdw_merk: '',
   rdw_handelsbenaming: '',
+  handelsbenaming_custom: '',
   rdw_voertuigsoort: '',
   rdw_carrosserievorm: '',
   rdw_bouwjaar: '',
@@ -105,6 +110,7 @@ export const getInitialVehicleFormData = (): VehicleFormData => ({
   rdw_datum_eerste_tenaamstelling: '',
   rdw_datum_laatste_tenaamstelling: '',
   rdw_kleur: '',
+  kleur_laksoort: '',
   rdw_brandstof: '',
   transmissie: '',
   rdw_aantal_cilinders: '',
@@ -251,15 +257,32 @@ export const VehicleInfoForm = ({
               id="vehicle_title"
               value={formData.vehicle_title}
               onChange={(e) => onChange('vehicle_title', e.target.value)}
-              placeholder="Bijv. Dethleffs Globescout, Volkswagen Transporter T6"
+              placeholder={
+                formData.rdw_merk && formData.rdw_handelsbenaming
+                  ? `${formData.rdw_merk} ${formData.handelsbenaming_custom || formData.rdw_handelsbenaming}`
+                  : 'Bijv. Mercedes 300 SL Gullwing'
+              }
               className={errors.vehicle_title ? 'border-destructive' : ''}
             />
             {errors.vehicle_title && (
               <p className="text-sm text-destructive">{errors.vehicle_title}</p>
             )}
+            {!formData.vehicle_title && formData.rdw_merk && formData.rdw_handelsbenaming && (
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  const suggestedTitle = `${formData.rdw_merk} ${formData.handelsbenaming_custom || formData.rdw_handelsbenaming}`;
+                  onChange('vehicle_title', suggestedTitle);
+                }}
+                className="mt-1"
+              >
+                Overnemen: {formData.rdw_merk} {formData.handelsbenaming_custom || formData.rdw_handelsbenaming}
+              </Button>
+            )}
             <p className="text-xs text-muted-foreground">
-              Dit is de titel die prominent op de voorpagina van het PDF-rapport verschijnt. 
-              Gebruik een herkenbare benaming (bijv. "Mercedes Sprinter Camper").
+              Dit is de titel die prominent op de voorpagina van het PDF-rapport verschijnt.
             </p>
           </div>
         </CardContent>
@@ -314,7 +337,8 @@ export const VehicleInfoForm = ({
                 value={formData.vin}
                 onChange={(e) => onChange('vin', e.target.value.toUpperCase())}
                 className={errors.vin ? 'border-destructive' : ''}
-                placeholder="Minimaal 4 tekens"
+                placeholder="Exact 17 tekens"
+                maxLength={17}
               />
               {errors.vin && (
                 <p className="text-sm text-destructive">{errors.vin}</p>
@@ -332,7 +356,7 @@ export const VehicleInfoForm = ({
               <AIExtractButton
                 section="voertuigidentificatie"
                 label="Haal kenteken en VIN uit foto's"
-                photoTypes={['kenteken', 'vin_typeplaat', 'vin_ruit']}
+                photoTypes={['kenteken', 'vin', 'vin_typeplaat', 'vin_ruit']}
                 photos={photos}
                 photoTypeMap={photoTypes}
                 onAccept={handleVehicleAIAccept}
@@ -350,12 +374,21 @@ export const VehicleInfoForm = ({
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="space-y-2">
-                  <Label>Merk</Label>
+                  <Label>Merk (RDW)</Label>
                   <Input value={formData.rdw_merk} readOnly disabled className="bg-muted" />
                 </div>
                 <div className="space-y-2">
                   <Label>Handelsbenaming / Model</Label>
-                  <Input value={formData.rdw_handelsbenaming} readOnly disabled className="bg-muted" />
+                  <Input 
+                    value={formData.handelsbenaming_custom || formData.rdw_handelsbenaming} 
+                    onChange={(e) => onChange('handelsbenaming_custom', e.target.value)}
+                    placeholder={formData.rdw_handelsbenaming || 'Bijv. 911 Carrera'}
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    {formData.rdw_handelsbenaming && formData.handelsbenaming_custom !== formData.rdw_handelsbenaming 
+                      ? `RDW: ${formData.rdw_handelsbenaming}` 
+                      : 'Pas aan indien afwijkend van RDW'}
+                  </p>
                 </div>
                 <div className="space-y-2">
                   <Label>Voertuigsoort</Label>
@@ -379,16 +412,31 @@ export const VehicleInfoForm = ({
                 </div>
                 <div className="space-y-2">
                   <Label>Datum laatste tenaamstelling</Label>
-                  <Input value={formData.rdw_datum_laatste_tenaamstelling} readOnly disabled className="bg-muted" />
+                  <Input value={formData.rdw_datum_laatste_tenaamstelling || '-'} readOnly disabled className="bg-muted" />
                 </div>
                 <div className="space-y-2">
-                  <Label>Kleur (bewerkbaar)</Label>
+                  <Label>Kleur</Label>
                   <ColorCombobox
                     value={formData.rdw_kleur}
                     onChange={(value) => onChange('rdw_kleur', value)}
                   />
+                </div>
+                <div className="space-y-2">
+                  <Label>Laksoort</Label>
+                  <Select
+                    value={formData.kleur_laksoort}
+                    onValueChange={(value) => onChange('kleur_laksoort', value)}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecteer laksoort..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="uni">Uni</SelectItem>
+                      <SelectItem value="metallic">Metallic</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <p className="text-xs text-muted-foreground">
-                    Selecteer of voeg een nieuwe kleur toe
+                    Kies UNI of Metallic
                   </p>
                 </div>
               </div>
@@ -460,6 +508,13 @@ export const VehicleInfoForm = ({
             {errors.transmissie && (
               <p className="text-sm text-destructive">{errors.transmissie}</p>
             )}
+            <FieldSuggestion 
+              fieldKey="transmissie" 
+              onAccept={(value) => onChange('transmissie', value)} 
+            />
+            <p className="text-xs text-muted-foreground">
+              Kan automatisch worden herkend uit foto's met de tag "Transmissie"
+            </p>
           </div>
         </CardContent>
       </Card>

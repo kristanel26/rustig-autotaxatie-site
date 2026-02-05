@@ -1,13 +1,18 @@
 /**
  * Validates VIN (Chassisnummer): exactly 17 alphanumeric characters
+ * Only validates when a value is provided - empty is allowed for drafts
  */
-export const validateVin = (vin: string): { valid: boolean; error?: string } => {
+export const validateVin = (vin: string, required: boolean = true): { valid: boolean; error?: string } => {
   if (!vin || vin.trim() === '') {
-    return { valid: false, error: 'Chassisnummer is verplicht' };
+    if (required) {
+      return { valid: false, error: 'Chassisnummer is verplicht' };
+    }
+    return { valid: true };
   }
   
   const cleaned = vin.replace(/\s/g, '').toUpperCase();
   
+  // VIN must be exactly 17 characters
   if (cleaned.length !== 17) {
     return { valid: false, error: `Chassisnummer moet exact 17 tekens zijn (nu: ${cleaned.length})` };
   }

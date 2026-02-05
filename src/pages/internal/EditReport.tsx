@@ -205,11 +205,11 @@ const EditReport = () => {
   const [wevAutotelexData, setWevAutotelexData] = useState<WevAutotelexData>(getInitialWevAutotelexData());
   const [wevValueData, setWevValueData] = useState<WevValueData>(getInitialWevValueData());
 
-  // Auto-save hook
+  // Auto-save hook - 10 second interval for better reliability
   const { status: saveStatus, lastSavedAt, hasPendingChanges, saveField, saveMultipleFields, flushSave } = useAutoSave({
     reportId: id,
     debounceMs: 800,
-    intervalMs: 20000,
+    intervalMs: 10000, // Changed from 20000 to 10000 (10 seconds)
   });
 
   // Page leave protection
@@ -278,6 +278,7 @@ const EditReport = () => {
           vehicle_title: (reportData as any).vehicle_title || '',
           rdw_merk: reportData.rdw_merk || '',
           rdw_handelsbenaming: reportData.rdw_handelsbenaming || '',
+          handelsbenaming_custom: (reportData as any).handelsbenaming_custom || '',
           rdw_voertuigsoort: reportData.rdw_voertuigsoort || '',
           rdw_carrosserievorm: reportData.rdw_carrosserievorm || '',
           rdw_bouwjaar: reportData.rdw_bouwjaar?.toString() || '',
@@ -285,6 +286,7 @@ const EditReport = () => {
           rdw_datum_eerste_tenaamstelling: reportData.rdw_datum_eerste_tenaamstelling || '',
           rdw_datum_laatste_tenaamstelling: reportData.rdw_datum_laatste_tenaamstelling || '',
           rdw_kleur: (reportData as any).rdw_kleur || '',
+          kleur_laksoort: (reportData as any).kleur_laksoort || '',
           rdw_brandstof: reportData.rdw_brandstof || '',
           transmissie: (reportData as any).transmissie || '',
           rdw_aantal_cilinders: reportData.rdw_aantal_cilinders?.toString() || '',
@@ -754,8 +756,12 @@ const EditReport = () => {
       return;
     }
 
-    // Validate quality class (mandatory)
-    if (!valuationData.quality_class) {
+    // Validate quality class only for final submission (camper/klassieker)
+    const reportType = report?.report_type;
+    const needsQualityClass = reportType === 'camper' || reportType === 'klassieker';
+    const qualityClassValue = reportType === 'klassieker' ? klassiekerValueData.quality_class : valuationData.quality_class;
+    
+    if (needsQualityClass && !qualityClassValue) {
       toast({
         title: 'Kwaliteitsklasse verplicht',
         description: 'Selecteer een kwaliteitsklasse voor het voertuig.',

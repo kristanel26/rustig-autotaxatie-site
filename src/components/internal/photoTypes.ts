@@ -4,9 +4,10 @@
 export type PhotoType =
   // Common types (shared across report types)
   | 'kenteken'
-  | 'vin_typeplaat'
-  | 'vin_ruit'
-  | 'dashboard'  // internal key - displayed as "Km-stand" in UI for klassieker
+  | 'vin'  // Combined VIN tag (replaces vin_typeplaat and vin_ruit)
+  | 'vin_typeplaat'  // Legacy - still supported but mapped to 'vin'
+  | 'vin_ruit'       // Legacy - still supported but mapped to 'vin'
+  | 'dashboard'      // internal key - displayed as "Km-stand" in UI
   | 'band_voor_links'
   | 'band_voor_rechts'
   | 'band_achter_links'
@@ -14,9 +15,8 @@ export type PhotoType =
   | 'typeplaat_massa'
   // Camper-specific
   | 'gasinstallatie'
-  // Klassieker-specific
-  | 'voetenruimte_pedalen'
-  | 'versnellingspook';
+  // Klassieker-specific - transmissie
+  | 'transmissie';  // Single tag for transmission (replaces pedalen/pook)
 
 export type ReportType = 'camper' | 'wev' | 'klassieker';
 
@@ -25,8 +25,9 @@ export type ExtractSection = 'voertuigidentificatie' | 'tellerstand' | 'banden' 
 
 export const PHOTO_TYPE_TO_SECTION: Record<PhotoType, ExtractSection | null> = {
   kenteken: 'voertuigidentificatie',
-  vin_typeplaat: 'voertuigidentificatie',
-  vin_ruit: 'voertuigidentificatie',
+  vin: 'voertuigidentificatie',
+  vin_typeplaat: 'voertuigidentificatie',  // Legacy
+  vin_ruit: 'voertuigidentificatie',       // Legacy
   dashboard: 'tellerstand',
   band_voor_links: 'banden',
   band_voor_rechts: 'banden',
@@ -34,40 +35,36 @@ export const PHOTO_TYPE_TO_SECTION: Record<PhotoType, ExtractSection | null> = {
   band_achter_rechts: 'banden',
   typeplaat_massa: 'massa',
   gasinstallatie: 'gasinstallatie',
-  // Klassieker types - transmissie extraction
-  voetenruimte_pedalen: 'transmissie',
-  versnellingspook: 'transmissie',
+  transmissie: 'transmissie',
 };
 
 // Labels shown in UI - can differ per report type
 export const PHOTO_TYPE_LABELS: Record<PhotoType, string> = {
   kenteken: 'Kenteken',
-  dashboard: 'Km-stand', // Was "Dashboard" - now shown as "Km-stand" 
-  vin_typeplaat: 'VIN Typeplaat',
-  vin_ruit: 'VIN Ruit',
+  vin: 'VIN / Chassisnummer',
+  vin_typeplaat: 'VIN Typeplaat',   // Legacy
+  vin_ruit: 'VIN Ruit',              // Legacy
+  dashboard: 'Km-stand',
   band_voor_links: 'Band LV',
   band_voor_rechts: 'Band RV',
   band_achter_links: 'Band LA',
   band_achter_rechts: 'Band RA',
   typeplaat_massa: 'Typeplaat Massa',
   gasinstallatie: 'Gasinstallatie',
-  voetenruimte_pedalen: 'Voetenruimte/Pedalen',
-  versnellingspook: 'Versnellingspook',
+  transmissie: 'Transmissie',
 };
 
 // Which photo types are available per report type
 export const PHOTO_TYPES_BY_REPORT: Record<ReportType, PhotoType[]> = {
   klassieker: [
     'kenteken',
-    'vin_typeplaat',
-    'vin_ruit',
-    'dashboard',  // shows as "Km-stand"
+    'vin',              // Simplified single VIN tag
+    'dashboard',        // shows as "Km-stand"
     'band_voor_links',
     'band_voor_rechts',
     'band_achter_links',
     'band_achter_rechts',
-    'voetenruimte_pedalen',
-    'versnellingspook',
+    'transmissie',      // Single transmissie tag
   ],
   camper: [
     'kenteken',

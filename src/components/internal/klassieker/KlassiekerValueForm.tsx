@@ -58,7 +58,7 @@ export const KlassiekerValueForm = ({ data, onChange }: KlassiekerValueFormProps
             value={data.quality_class}
             onValueChange={(value) => onChange('quality_class', value)}
           >
-            <SelectTrigger className={!data.quality_class ? 'border-destructive' : ''}>
+            <SelectTrigger>
               <SelectValue placeholder="Selecteer kwaliteitsklasse..." />
             </SelectTrigger>
             <SelectContent>
@@ -69,9 +69,9 @@ export const KlassiekerValueForm = ({ data, onChange }: KlassiekerValueFormProps
               ))}
             </SelectContent>
           </Select>
-          {!data.quality_class && (
-            <p className="text-xs text-destructive">Kwaliteitsklasse is verplicht</p>
-          )}
+          <p className="text-xs text-muted-foreground">
+            Verplicht bij het afronden van het rapport
+          </p>
           {data.quality_class && (
             <p className="text-sm text-muted-foreground mt-2">
               {qualityClasses.find((qc) => qc.value === data.quality_class)?.description}
