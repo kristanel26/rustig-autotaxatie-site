@@ -31,7 +31,7 @@ export function PhotoTypeTag({
   const availableTypes = getPhotoTypesForReport(reportType);
 
   return (
-    <div className="absolute bottom-1 left-1 right-1">
+    <div className="absolute bottom-1 left-1 right-1 z-50">
       <Select
         value={currentType || 'none'}
         onValueChange={(value) => {
@@ -39,7 +39,9 @@ export function PhotoTypeTag({
         }}
         disabled={isExtracting}
       >
-        <SelectTrigger className="h-6 text-xs bg-background/90 backdrop-blur-sm border-0 shadow-sm">
+        <SelectTrigger className="h-7 text-xs bg-background/95 backdrop-blur-sm border shadow-sm hover:bg-background focus:ring-2 focus:ring-primary"
+          onClick={(e) => e.stopPropagation()}
+        >
           {isExtracting ? (
             <Loader2 className="h-3 w-3 mr-1 flex-shrink-0 animate-spin" />
           ) : (

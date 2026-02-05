@@ -75,8 +75,7 @@ export function AutoExtractProvider({ children }: AutoExtractProviderProps) {
   // Get source label for transmissie
   const getTransmissieSource = (photoType: PhotoType): string => {
     switch (photoType) {
-      case 'voetenruimte_pedalen': return 'Pedalen';
-      case 'versnellingspook': return 'Versnellingspook';
+      case 'transmissie': return 'Transmissie';
       default: return photoType;
     }
   };
