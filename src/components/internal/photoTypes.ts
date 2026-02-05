@@ -13,6 +13,9 @@ export type PhotoType =
   | 'band_achter_links'
   | 'band_achter_rechts'
   | 'typeplaat_massa'
+  // DOT code tags - for extracting tire DOT codes
+  | 'dot_voor'       // DOT code front tires
+  | 'dot_achter'     // DOT code rear tires
   // Camper-specific
   | 'gasinstallatie'
   // Klassieker-specific - transmissie
@@ -34,6 +37,8 @@ export const PHOTO_TYPE_TO_SECTION: Record<PhotoType, ExtractSection | null> = {
   band_achter_links: 'banden',
   band_achter_rechts: 'banden',
   typeplaat_massa: 'massa',
+  dot_voor: 'banden',
+  dot_achter: 'banden',
   gasinstallatie: 'gasinstallatie',
   transmissie: 'transmissie',
 };
@@ -50,6 +55,8 @@ export const PHOTO_TYPE_LABELS: Record<PhotoType, string> = {
   band_achter_links: 'Band LA',
   band_achter_rechts: 'Band RA',
   typeplaat_massa: 'Typeplaat Massa',
+  dot_voor: 'DOT-code voor',
+  dot_achter: 'DOT-code achter',
   gasinstallatie: 'Gasinstallatie',
   transmissie: 'Transmissie',
 };
@@ -64,6 +71,8 @@ export const PHOTO_TYPES_BY_REPORT: Record<ReportType, PhotoType[]> = {
     'band_voor_rechts',
     'band_achter_links',
     'band_achter_rechts',
+    'dot_voor',         // DOT-code front tires
+    'dot_achter',       // DOT-code rear tires
     'transmissie',      // Single transmissie tag
   ],
   camper: [
@@ -150,6 +159,14 @@ export const EXTRACTION_FIELD_MAPPINGS: Record<string, FieldMapping> = {
   tire_rear_right_model: { fieldKey: 'tire_rear_right_model', formSection: 'appraisal', displayLabel: 'Model RA' },
   tire_rear_right_dot: { fieldKey: 'tire_rear_right_dot', formSection: 'appraisal', displayLabel: 'DOT RA' },
   tire_rear_right_profiel: { fieldKey: 'tire_rear_right_profiel', formSection: 'appraisal', displayLabel: 'Profiel RA' },
+  
+  // DOT code extractions from dot_voor and dot_achter tags
+  // dot_voor fills both front tire DOT codes
+  dot_front_left: { fieldKey: 'tire_front_left_dot', formSection: 'appraisal', displayLabel: 'DOT LV' },
+  dot_front_right: { fieldKey: 'tire_front_right_dot', formSection: 'appraisal', displayLabel: 'DOT RV' },
+  // dot_achter fills both rear tire DOT codes
+  dot_rear_left: { fieldKey: 'tire_rear_left_dot', formSection: 'appraisal', displayLabel: 'DOT LA' },
+  dot_rear_right: { fieldKey: 'tire_rear_right_dot', formSection: 'appraisal', displayLabel: 'DOT RA' },
   
   // Massa
   max_massa: { fieldKey: 'rdw_max_massa', formSection: 'vehicle', displayLabel: 'Toegestane max massa' },
