@@ -18,7 +18,7 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { ArrowLeft } from 'lucide-react';
-import { normalizeReportFormData, LICENSE_PLATE_REGEX, numberToDutchWords } from '@/lib/normalizers';
+import { normalizeReportFormData, LICENSE_PLATE_REGEX, numberToDutchWords, normalizeInitials, capitalizeFirst } from '@/lib/normalizers';
 import { validateVin, validateEmail, validatePhone } from '@/lib/validators';
 import { qualityClasses } from '@/lib/qualityClasses';
 import { VehicleInfoForm, VehicleFormData, getInitialVehicleFormData } from '@/components/internal/VehicleInfoForm';
@@ -96,7 +96,7 @@ interface Report {
   inspection_end_time: string | null;
   appraised_value: number | null;
   appraised_value_text: string | null;
-  quality_class: number | null;
+  quality_class: string | null;
   general_remarks: string | null;
   // RDW fields
   rdw_merk: string | null;
@@ -324,7 +324,7 @@ const EditReport = () => {
         setValuationData({
           appraised_value: reportData.appraised_value?.toString() || '',
           appraised_value_text: reportData.appraised_value_text || '',
-          quality_class: reportData.quality_class?.toString() || '',
+          quality_class: reportData.quality_class || '',
           general_remarks: reportData.general_remarks || '',
         });
 
@@ -466,7 +466,7 @@ const EditReport = () => {
         setKlassiekerValueData({
           appraised_value: (reportData as any).appraised_value?.toString() || '',
           appraised_value_text: (reportData as any).appraised_value_text || '',
-          quality_class: (reportData as any).quality_class?.toString() || '',
+          quality_class: (reportData as any).quality_class || '',
         });
 
         // Pre-fill moisture and safety data
@@ -520,8 +520,18 @@ const EditReport = () => {
   }, [id, toast]);
 
   const handleCustomerChange = (field: string, value: string) => {
-    setCustomerData(prev => ({ ...prev, [field]: value }));
-    saveField(field, value || null);
+    // Apply normalization based on field
+    let normalizedValue = value;
+    if (field === 'customer_initials') {
+      normalizedValue = normalizeInitials(value);
+    } else if (field === 'customer_last_name') {
+      normalizedValue = capitalizeFirst(value);
+    } else if (field === 'customer_city') {
+      normalizedValue = capitalizeFirst(value);
+    }
+    
+    setCustomerData(prev => ({ ...prev, [field]: normalizedValue }));
+    saveField(field, normalizedValue || null);
     if (errors[field]) {
       setErrors(prev => {
         const newErrors = { ...prev };
@@ -552,8 +562,14 @@ const EditReport = () => {
   };
 
   const handleInspectionChange = (field: string, value: string) => {
-    setInspectionData(prev => ({ ...prev, [field]: value }));
-    saveField(field, value || null);
+    // Apply normalization for inspection_location
+    let normalizedValue = value;
+    if (field === 'inspection_location') {
+      normalizedValue = capitalizeFirst(value);
+    }
+    
+    setInspectionData(prev => ({ ...prev, [field]: normalizedValue }));
+    saveField(field, normalizedValue || null);
   };
 
   const handleAppraisalChange = (field: keyof AppraisalFormData, value: string) => {
@@ -1208,7 +1224,7 @@ const EditReport = () => {
             <CardHeader>
               <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
             </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="inspection_date">Datum opname *</Label>
                 <Input
@@ -1217,6 +1233,21 @@ const EditReport = () => {
                   value={inspectionData.inspection_date}
                   onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
                 />
+                {!inspectionData.inspection_date && (
+                  <p className="text-xs text-destructive">Verplicht veld</p>
+                )}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="inspection_start_time">Opnametijd *</Label>
+                <Input
+                  id="inspection_start_time"
+                  type="time"
+                  value={inspectionData.inspection_start_time}
+                  onChange={(e) => handleInspectionChange('inspection_start_time', e.target.value)}
+                />
+                {!inspectionData.inspection_start_time && (
+                  <p className="text-xs text-destructive">Verplicht veld</p>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="inspection_location">Plaats opname *</Label>
@@ -1226,6 +1257,9 @@ const EditReport = () => {
                   onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
                   placeholder="bijv. Druten"
                 />
+                {!inspectionData.inspection_location && (
+                  <p className="text-xs text-destructive">Verplicht veld</p>
+                )}
               </div>
             </CardContent>
           </Card>

@@ -78,6 +78,7 @@ export const klassiekerChecklist: ChecklistItem[] = [
     requirements: [
       { field: 'inspection_location', condition: 'filled', label: 'Plaats opname' },
       { field: 'inspection_date', condition: 'filled', label: 'Datum opname' },
+      { field: 'inspection_start_time', condition: 'filled', label: 'Opnametijd' },
     ],
   },
   {
