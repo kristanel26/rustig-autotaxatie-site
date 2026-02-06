@@ -91,32 +91,32 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         <div style={{ 
           display: 'flex', 
           alignItems: 'center',
-          gap: '5mm',
-          marginBottom: '14mm',
+          gap: '6mm',
+          marginBottom: '18mm',
         }}>
           <img 
             crossOrigin="anonymous"
             src={logoVrt} 
             alt="VRT" 
-            style={{ height: '9mm', width: 'auto' }}
+            style={{ height: '9.8mm', width: 'auto' }}
           />
           <img 
             crossOrigin="anonymous"
             src={logoHobeon} 
             alt="Hobéon" 
-            style={{ height: '9mm', width: 'auto' }}
+            style={{ height: '9.8mm', width: 'auto' }}
           />
           <img 
             crossOrigin="anonymous"
             src={logoTmv} 
             alt="TMV" 
-            style={{ height: '9mm', width: 'auto' }}
+            style={{ height: '9.8mm', width: 'auto' }}
           />
           <img 
             crossOrigin="anonymous"
             src={logoFehac} 
             alt="FEHAC" 
-            style={{ height: '9mm', width: 'auto' }}
+            style={{ height: '9.8mm', width: 'auto' }}
           />
         </div>
 
@@ -260,7 +260,7 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
             {/* Separator */}
             <div style={{ 
               borderTop: '1px solid #d0d0d0', 
-              margin: '5mm 0',
+              margin: '7mm 0',
               width: '70mm',
             }} />
 
@@ -359,7 +359,7 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
             {/* Separator */}
             <div style={{ 
               borderTop: '1px solid #d0d0d0', 
-              margin: '5mm 0',
+              margin: '7mm 0',
               width: '70mm',
             }} />
 
@@ -457,8 +457,9 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         {/* ===== FOOTER ===== */}
         <div style={{ 
           borderTop: '1px solid #d0d0d0', 
-          paddingTop: '6mm',
+          paddingTop: '8mm',
           marginTop: 'auto',
+          paddingBottom: '18mm',
         }}>
           {/* Company Logo - left aligned with main text margin */}
           <img 
