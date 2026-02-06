@@ -1,4 +1,7 @@
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
+import logoTmv from '@/assets/logo-tmv.png';
+import logoVrt from '@/assets/logo-vrt.png';
+import logoFehac from '@/assets/logo-fehac.png';
 
 interface PDFCoverContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -31,12 +34,6 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
     return reportNumber;
   };
 
-  // Get meldcode (last 4 chars of VIN)
-  const getMeldcode = (vin: string | null): string | null => {
-    if (!vin || vin.length < 4) return null;
-    return vin.slice(-4).toUpperCase();
-  };
-
   // Build customer name
   const customerName = [report.customer_title, report.customer_initials, report.customer_last_name]
     .filter(Boolean)
@@ -56,8 +53,6 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
     ? report.vehicle_photo_rotations[coverPhoto] || 0 
     : 0;
 
-  const meldcode = getMeldcode(report.vin);
-
   // Extract inspection data
   const inspectionDate = report.inspection_date ? formatDate(report.inspection_date) : '–';
   const startTime = report.inspection_start_time ? formatTime(report.inspection_start_time) : '–';
@@ -76,17 +71,17 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         overflow: 'hidden',
         pageBreakAfter: 'always',
         fontFamily: '"Inter", "Source Sans Pro", -apple-system, BlinkMacSystemFont, sans-serif',
-        padding: '25mm',
+        padding: '20mm 25mm',
         boxSizing: 'border-box',
         fontSize: '10.5pt',
         color: '#1a1a1a',
-        lineHeight: 1.4,
+        lineHeight: 1.5,
       }}
     >
-      {/* ===== HEADER: LOGO & TITLE (CENTERED) ===== */}
+      {/* ===== HEADER: LOGO & TITLE ===== */}
       <div style={{ 
         textAlign: 'center', 
-        marginBottom: '12mm',
+        marginBottom: '8mm',
       }}>
         {/* Logo */}
         <img 
@@ -94,27 +89,37 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
           src={logoAutomobiel} 
           alt="Automobiel Taxaties" 
           style={{ 
-            maxWidth: '60mm', 
+            maxWidth: '55mm', 
             height: 'auto',
-            marginBottom: '6mm',
+            marginBottom: '5mm',
           }}
         />
         
         {/* Title */}
         <h1 style={{ 
-          fontSize: '18pt', 
+          fontSize: '20pt', 
           fontWeight: 600, 
           color: '#000000', 
           margin: '0 0 2mm 0',
-          letterSpacing: '0',
+          letterSpacing: '0.5px',
         }}>
           Taxatierapport
         </h1>
         
-        {/* Subtitle */}
+        {/* Report Type */}
         <p style={{ 
-          fontSize: '9.5pt', 
-          color: '#555555', 
+          fontSize: '11pt', 
+          fontWeight: 500,
+          color: '#333333', 
+          margin: '0 0 1mm 0',
+        }}>
+          Klassieke taxatie (verzekering)
+        </p>
+        
+        {/* Legal Reference */}
+        <p style={{ 
+          fontSize: '9pt', 
+          color: '#666666', 
           margin: 0,
           fontWeight: 400,
         }}>
@@ -122,20 +127,20 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         </p>
       </div>
 
-      {/* ===== VEHICLE PHOTO FRAME (CENTERED) ===== */}
+      {/* ===== VEHICLE PHOTO FRAME ===== */}
       <div style={{ 
         display: 'flex', 
         justifyContent: 'center', 
-        marginBottom: '10mm',
+        marginBottom: '8mm',
       }}>
         <div style={{
-          width: '60mm',
-          height: '40mm',
+          width: '70mm',
+          height: '45mm',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          border: '1px solid #d0d0d0',
-          backgroundColor: '#ffffff',
+          border: '1px solid #cccccc',
+          backgroundColor: '#fafafa',
           overflow: 'hidden',
           flexShrink: 0,
         }}>
@@ -151,288 +156,190 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
                 transform: coverRotation ? `rotate(${coverRotation}deg)` : undefined,
               }}
             />
-          ) : null}
+          ) : (
+            <span style={{ color: '#999999', fontSize: '9pt' }}>Geen foto</span>
+          )}
         </div>
       </div>
 
-      {/* ===== REPORT INFORMATION BLOCK (LEFT-ALIGNED) ===== */}
+      {/* ===== REPORT INFORMATION BLOCKS ===== */}
       <div style={{ 
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        gap: '6mm',
+        gap: '4mm',
         fontSize: '10.5pt',
-        lineHeight: 1.4,
+        lineHeight: 1.5,
       }}>
         
-        {/* Inzake (Object) */}
-        <div>
+        {/* Rapportkop Section */}
+        <div style={{ 
+          borderBottom: '1px solid #e0e0e0', 
+          paddingBottom: '4mm',
+          marginBottom: '2mm',
+        }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <tbody>
+              <tr>
+                <td style={{ width: '35%', fontWeight: 600, paddingBottom: '2mm', verticalAlign: 'top' }}>Rapportnummer:</td>
+                <td style={{ paddingBottom: '2mm', verticalAlign: 'top' }}>{extractSequentialNumber(report.report_number)}</td>
+              </tr>
+              <tr>
+                <td style={{ fontWeight: 600, paddingBottom: '2mm', verticalAlign: 'top' }}>Voertuig:</td>
+                <td style={{ paddingBottom: '2mm', verticalAlign: 'top' }}>{vehicleDisplay}</td>
+              </tr>
+              <tr>
+                <td style={{ fontWeight: 600, paddingBottom: '2mm', verticalAlign: 'top' }}>Kenteken:</td>
+                <td style={{ paddingBottom: '2mm', verticalAlign: 'top' }}>{report.license_plate || '–'}</td>
+              </tr>
+              <tr>
+                <td style={{ fontWeight: 600, verticalAlign: 'top' }}>Documentkenmerk:</td>
+                <td style={{ verticalAlign: 'top' }}>{report.document_reference || '–'}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        {/* Opdrachtgever Section */}
+        <div style={{ 
+          borderBottom: '1px solid #e0e0e0', 
+          paddingBottom: '4mm',
+          marginBottom: '2mm',
+        }}>
           <p style={{ 
             fontSize: '10.5pt', 
             fontWeight: 600, 
             color: '#1a1a1a', 
-            margin: '0 0 0.5mm 0',
+            margin: '0 0 2mm 0',
           }}>
-            Inzake:
+            Opdrachtgever:
           </p>
-          <p style={{ 
-            fontSize: '10.5pt', 
-            fontWeight: 400, 
-            color: '#1a1a1a', 
-            margin: 0,
-          }}>
-            {vehicleDisplay}
+          <p style={{ margin: '0 0 1mm 0' }}>{customerName}</p>
+          <p style={{ margin: '0 0 1mm 0' }}>{report.customer_street || '–'}</p>
+          <p style={{ margin: 0 }}>
+            {[report.customer_postcode, report.customer_city].filter(Boolean).join(' ') || '–'}
           </p>
         </div>
 
-        {/* Kenteken */}
-         <div>
-            <p style={{ 
-              fontSize: '10.5pt', 
-              fontWeight: 600, 
-              color: '#1a1a1a', 
-              margin: '0 0 0.5mm 0',
-            }}>
-              Kenteken:
-            </p>
-            <p style={{ 
-              fontSize: '10.5pt', 
-              fontWeight: 400, 
-              color: '#1a1a1a', 
-              margin: 0,
-            }}>
-              {report.license_plate || '–'}
-            </p>
-          </div>
-
-        {/* Rapportnummer */}
-        <div>
+        {/* Inspectiegegevens Section */}
+        <div style={{ 
+          borderBottom: '1px solid #e0e0e0', 
+          paddingBottom: '4mm',
+          marginBottom: '2mm',
+        }}>
           <p style={{ 
             fontSize: '10.5pt', 
             fontWeight: 600, 
             color: '#1a1a1a', 
-            margin: '0 0 0.5mm 0',
+            margin: '0 0 2mm 0',
           }}>
-            Rapportnummer:
+            Inspectiegegevens:
           </p>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <tbody>
+              <tr>
+                <td style={{ width: '35%', paddingBottom: '1mm', verticalAlign: 'top' }}>Opnamedatum:</td>
+                <td style={{ paddingBottom: '1mm', verticalAlign: 'top' }}>{inspectionDate}</td>
+              </tr>
+              <tr>
+                <td style={{ paddingBottom: '1mm', verticalAlign: 'top' }}>Aanvangstijd:</td>
+                <td style={{ paddingBottom: '1mm', verticalAlign: 'top' }}>{startTime}</td>
+              </tr>
+              <tr>
+                <td style={{ paddingBottom: '1mm', verticalAlign: 'top' }}>Eindtijd:</td>
+                <td style={{ paddingBottom: '1mm', verticalAlign: 'top' }}>{endTime}</td>
+              </tr>
+              <tr>
+                <td style={{ verticalAlign: 'top' }}>Plaats van opname:</td>
+                <td style={{ verticalAlign: 'top' }}>{inspectionLocation}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        {/* Uitvoering Section */}
+        <div style={{ marginBottom: '4mm' }}>
           <p style={{ 
             fontSize: '10.5pt', 
-            fontWeight: 400, 
+            fontWeight: 600, 
             color: '#1a1a1a', 
-            margin: 0,
+            margin: '0 0 2mm 0',
           }}>
-            {extractSequentialNumber(report.report_number)}
+            Rapport uitgevoerd door:
+          </p>
+          <p style={{ margin: '0 0 1mm 0', fontWeight: 500 }}>Erik Elderson</p>
+          <p style={{ margin: '0 0 0.5mm 0', fontSize: '9.5pt', color: '#444444' }}>
+            TMV Register-Taxateur (nr. 33106)
+          </p>
+          <p style={{ margin: 0, fontSize: '9.5pt', color: '#444444' }}>
+            Register-Taxateur VRT (nr. 22-523-M)
           </p>
         </div>
-
-         {/* Documentkenmerk */}
-         <div>
-            <p style={{ 
-              fontSize: '10.5pt', 
-              fontWeight: 600, 
-              color: '#1a1a1a', 
-              margin: '0 0 0.5mm 0',
-            }}>
-              Documentkenmerk:
-            </p>
-            <p style={{ 
-              fontSize: '10.5pt', 
-              fontWeight: 400, 
-              color: '#1a1a1a', 
-              margin: 0,
-            }}>
-              {report.document_reference || '–'}
-            </p>
-          </div>
-
-         {/* In opdracht van (Customer) */}
-         <div>
-           <p style={{ 
-             fontSize: '10.5pt', 
-             fontWeight: 600, 
-             color: '#1a1a1a', 
-             margin: '0 0 0.5mm 0',
-           }}>
-             In opdracht van:
-           </p>
-           <p style={{ 
-             fontSize: '10.5pt', 
-             fontWeight: 400, 
-             color: '#1a1a1a', 
-             margin: '0 0 0.5mm 0',
-           }}>
-             {customerName}
-           </p>
-           <p style={{ 
-             fontSize: '10.5pt', 
-             fontWeight: 400, 
-             color: '#1a1a1a', 
-             margin: '0 0 0.5mm 0',
-           }}>
-             {report.customer_street || '–'}
-           </p>
-           <p style={{ 
-             fontSize: '10.5pt', 
-             fontWeight: 400, 
-             color: '#1a1a1a', 
-             margin: 0,
-           }}>
-             {[report.customer_postcode, report.customer_city].filter(Boolean).join(' ') || '–'}
-           </p>
-         </div>
-
-        {/* Inspection Data (Mandatory block) */}
-        <div style={{ marginTop: '2mm' }}>
-          <div style={{ marginBottom: '0.5mm' }}>
-            <p style={{ 
-              fontSize: '10.5pt', 
-              fontWeight: 600, 
-              color: '#1a1a1a', 
-              margin: '0 0 0.5mm 0',
-            }}>
-              Opnamedatum:
-            </p>
-            <p style={{ 
-              fontSize: '10.5pt', 
-              fontWeight: 400, 
-              color: '#1a1a1a', 
-              margin: 0,
-            }}>
-              {inspectionDate}
-            </p>
-          </div>
-
-          <div style={{ marginBottom: '0.5mm' }}>
-            <p style={{ 
-              fontSize: '10.5pt', 
-              fontWeight: 600, 
-              color: '#1a1a1a', 
-              margin: '0 0 0.5mm 0',
-            }}>
-              Aanvangstijd:
-            </p>
-            <p style={{ 
-              fontSize: '10.5pt', 
-              fontWeight: 400, 
-              color: '#1a1a1a', 
-              margin: 0,
-            }}>
-              {startTime}
-            </p>
-          </div>
-
-          <div style={{ marginBottom: '0.5mm' }}>
-            <p style={{ 
-              fontSize: '10.5pt', 
-              fontWeight: 600, 
-              color: '#1a1a1a', 
-              margin: '0 0 0.5mm 0',
-            }}>
-              Eindtijd:
-            </p>
-            <p style={{ 
-              fontSize: '10.5pt', 
-              fontWeight: 400, 
-              color: '#1a1a1a', 
-              margin: 0,
-            }}>
-              {endTime}
-            </p>
-          </div>
-
-          <div>
-            <p style={{ 
-              fontSize: '10.5pt', 
-              fontWeight: 600, 
-              color: '#1a1a1a', 
-              margin: '0 0 0.5mm 0',
-            }}>
-              Plaats:
-            </p>
-            <p style={{ 
-              fontSize: '10.5pt', 
-              fontWeight: 400, 
-              color: '#1a1a1a', 
-              margin: 0,
-            }}>
-              {inspectionLocation}
-            </p>
-          </div>
-        </div>
-
-         {/* Executed by / Taxateur block */}
-         <div style={{ marginTop: '3mm', borderTop: '1px solid #d0d0d0', paddingTop: '3mm' }}>
-           <p style={{ 
-             fontSize: '10.5pt', 
-             fontWeight: 600, 
-             color: '#1a1a1a', 
-             margin: '0 0 1mm 0',
-           }}>
-             Rapport uitgevoerd door:
-           </p>
-           <p style={{ 
-             fontSize: '10.5pt', 
-             fontWeight: 400, 
-             color: '#1a1a1a', 
-             margin: '0 0 0.5mm 0',
-           }}>
-             Erik Elderson
-           </p>
-           <p style={{ 
-             fontSize: '9.5pt', 
-             fontWeight: 400, 
-             color: '#1a1a1a', 
-             margin: '0 0 0.5mm 0',
-           }}>
-             TMV Register-Taxateur
-           </p>
-           <p style={{ 
-             fontSize: '9.5pt', 
-             fontWeight: 400, 
-             color: '#1a1a1a', 
-             margin: 0,
-           }}>
-             Register-Taxateur VRT
-           </p>
-         </div>
       </div>
 
-       {/* ===== FOOTER (FIXED AT BOTTOM) ===== */}
-       <div style={{ 
-         borderTop: '1px solid #d0d0d0', 
-         paddingTop: '5mm',
-         marginTop: 'auto',
-       }}>
-         <div style={{ textAlign: 'center', fontSize: '8.5pt', color: '#1a1a1a', marginBottom: '3mm' }}>
-           <p style={{ margin: '0 0 0.5mm 0', fontWeight: 600 }}>
-             Automobiel Taxaties
-           </p>
-           <p style={{ margin: '0 0 0.5mm 0' }}>
-             Leigraaf 160 | 6651 GJ Druten
-           </p>
-         </div>
+      {/* ===== FOOTER WITH LOGOS & COMPANY DETAILS ===== */}
+      <div style={{ 
+        borderTop: '1px solid #cccccc', 
+        paddingTop: '5mm',
+        marginTop: 'auto',
+      }}>
+        {/* Federation Logos */}
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center',
+          gap: '8mm',
+          marginBottom: '4mm',
+        }}>
+          <img 
+            crossOrigin="anonymous"
+            src={logoTmv} 
+            alt="TMV" 
+            style={{ height: '12mm', width: 'auto' }}
+          />
+          <img 
+            crossOrigin="anonymous"
+            src={logoVrt} 
+            alt="VRT" 
+            style={{ height: '12mm', width: 'auto' }}
+          />
+          <img 
+            crossOrigin="anonymous"
+            src={logoFehac} 
+            alt="FEHAC" 
+            style={{ height: '12mm', width: 'auto' }}
+          />
+        </div>
 
-         <div style={{ textAlign: 'center', fontSize: '7.5pt', color: '#1a1a1a', marginBottom: '2mm' }}>
-           <p style={{ margin: '0 0 0.5mm 0' }}>
-             KvK: 95549269
-           </p>
-           <p style={{ margin: '0 0 0.5mm 0' }}>
-             BTW: NL003366178B93
-           </p>
-           <p style={{ margin: 0 }}>
-             IBAN: NL80RABO 0387915680
-           </p>
-         </div>
+        {/* Company Details */}
+        <div style={{ textAlign: 'center', fontSize: '8.5pt', color: '#1a1a1a' }}>
+          <p style={{ margin: '0 0 1mm 0', fontWeight: 600 }}>
+            Automobiel Taxaties
+          </p>
+          <p style={{ margin: '0 0 0.5mm 0' }}>
+            Leigraaf 160
+          </p>
+          <p style={{ margin: '0 0 2mm 0' }}>
+            6651 GJ Druten
+          </p>
+          <p style={{ margin: '0 0 0.5mm 0' }}>
+            KvK: 95549269
+          </p>
+          <p style={{ margin: '0 0 0.5mm 0' }}>
+            IBAN: NL80RABO 0387915680
+          </p>
+          <p style={{ margin: '0 0 2mm 0' }}>
+            BTW: NL003366178B93
+          </p>
+        </div>
 
-         <div style={{ textAlign: 'center', fontSize: '7.5pt', color: '#1a1a1a' }}>
-           <p style={{ margin: '0 0 0.5mm 0' }}>
-             TMV: 33106 | VRT: 22-523-M
-           </p>
-           <p style={{ margin: 0, color: '#555555' }}>
-             Pagina 1 van {totalPages}
-           </p>
-         </div>
-       </div>
+        {/* Page Number */}
+        <div style={{ textAlign: 'center', fontSize: '8pt', color: '#666666' }}>
+          <p style={{ margin: 0 }}>
+            Pagina 1 van {totalPages}
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
