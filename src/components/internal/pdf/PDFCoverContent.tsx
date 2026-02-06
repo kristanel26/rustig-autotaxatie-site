@@ -255,8 +255,8 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
             <div>
               <p style={labelStyle}>Uitgevoerd door</p>
               <p style={valueStyle}>Erik Elderson</p>
-              <p style={valueSmallerStyle}>TMV Register-Taxateur (nr. 33106)</p>
-              <p style={valueSmallerStyle}>Register-Taxateur VRT (nr. 22-523-M)</p>
+              <p style={valueSmallerStyle}>TMV Register-Taxateur</p>
+              <p style={valueSmallerStyle}>Register-Taxateur VRT</p>
             </div>
           </div>
 
