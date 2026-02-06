@@ -456,53 +456,55 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
 
         {/* ===== FOOTER BLOCK ===== */}
         <div style={{ 
-          borderTop: '1px solid #d0d0d0', 
-          paddingTop: '10mm',
+          borderTop: '0.5pt solid #c0c0c0', 
+          paddingTop: '6mm',
           marginTop: 'auto',
-          paddingBottom: '20mm',
+          paddingBottom: '18mm',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
         }}>
-          {/* Logo */}
-          <img 
-            crossOrigin="anonymous"
-            src={logoAutomobiel} 
-            alt="Automobiel Taxaties" 
-            style={{ 
-              maxWidth: '35mm', 
-              height: 'auto',
-              marginBottom: '4mm',
-              display: 'block',
-            }}
-          />
+          {/* Left: Logo + Company Details */}
+          <div>
+            {/* Logo */}
+            <img 
+              crossOrigin="anonymous"
+              src={logoAutomobiel} 
+              alt="Automobiel Taxaties" 
+              style={{ 
+                maxWidth: '32mm', 
+                height: 'auto',
+                marginBottom: '3mm',
+                display: 'block',
+              }}
+            />
 
-          {/* Company Details - Normal body text */}
-          <div style={{ 
-            fontSize: '8pt', 
-            color: '#1a1a1a',
-            lineHeight: 1.6,
-          }}>
-            <p style={{ margin: 0 }}>
-              Automobiel Taxaties
-            </p>
-            <p style={{ margin: '0.5mm 0 0 0' }}>
-              Leigraaf 160, 6651 GJ Druten
-            </p>
-            <p style={{ margin: '1mm 0 0 0' }}>
-              KvK: 95549269 · BTW: NL003366178B93
-            </p>
-            <p style={{ margin: '0.5mm 0 0 0' }}>
-              TMV: 33106 · VRT: 22-523-M
-            </p>
-            <p style={{ margin: '0.5mm 0 0 0' }}>
-              Bank: NL80 RABO 0387 9156 80
-            </p>
+            {/* Company Details */}
+            <div style={{ 
+              fontSize: '9pt', 
+              color: '#1a1a1a',
+              lineHeight: 1.25,
+            }}>
+              <p style={{ margin: 0, fontWeight: 500 }}>
+                Automobiel Taxaties
+              </p>
+              <p style={{ margin: '1mm 0 0 0' }}>
+                Leigraaf 160, 6651 GJ Druten
+              </p>
+              <p style={{ margin: '1mm 0 0 0' }}>
+                KvK: 95549269 · BTW: NL003366178B93
+              </p>
+              <p style={{ margin: '1mm 0 0 0' }}>
+                IBAN: NL80RABO 0387915680
+              </p>
+            </div>
           </div>
 
-          {/* Page Number */}
+          {/* Right: Page Number */}
           <p style={{ 
-            marginTop: '6mm',
-            fontSize: '8pt', 
-            color: '#666666',
-            margin: '6mm 0 0 0',
+            fontSize: '9pt', 
+            color: '#1a1a1a',
+            margin: 0,
           }}>
             Pagina 1 van {totalPages}
           </p>
