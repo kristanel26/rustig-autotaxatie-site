@@ -74,39 +74,34 @@ const PDFPreview = () => {
     );
   }
 
-  // Determine report type and which valuations are present
+  // Determine report type
   const reportType = report.report_type || 'camper';
   const isCamperReport = reportType === 'camper';
   const isWevReport = reportType === 'wev';
   const isKlassiekerReport = reportType === 'klassieker';
   
-  // Show valuations based on report type
-  // Klassieker valuation page ALWAYS renders (contains fixed legal text)
-  const hasStandardValuation = isCamperReport && report.appraised_value && report.appraised_value > 0;
-  const hasWevValuation = isWevReport && (report.wev_eindwaarde || report.wev_definitief) && ((report.wev_eindwaarde || report.wev_definitief) > 0);
+  // ARCHITECTURE: Waardevaststelling is ALWAYS page 2, regardless of report type or value
+  // Page 2 never renders conditionally based on hasValue checks
+  const showValuationPage = true; // Always render
   
   // Calculate total pages dynamically
+  // FIXED SEQUENCE: Cover → Waardevaststelling → Vehicle Data → Appraisal Findings (if not klassieker) → Photos
   let totalPagesCount = 1; // Cover
-  if (hasStandardValuation) totalPagesCount++;
-  if (hasWevValuation) totalPagesCount++;
-  if (isKlassiekerReport) totalPagesCount++; // Always count klassieker valuation page
+  totalPagesCount++; // Waardevaststelling is always page 2
   totalPagesCount++; // Vehicle data
-  if (!isKlassiekerReport) totalPagesCount++; // Appraisal findings
+  if (!isKlassiekerReport) totalPagesCount++; // Appraisal findings (not for klassieker)
   
   // Photo pages
   const detailPhotos = report.vehicle_photos?.slice(1) || [];
   const photoPages = Math.ceil(detailPhotos.length / 6);
   totalPagesCount += photoPages;
 
-  // Calculate page numbers dynamically
-  let currentPage = 1; // Cover is page 1
-  
-  const standardValuationPage = hasStandardValuation ? ++currentPage : 0;
-  const wevValuationPage = hasWevValuation ? ++currentPage : 0;
-  const klassiekerValuationPage = isKlassiekerReport ? ++currentPage : 0; // Always page 2 for klassieker
-  const vehicleDataPage = ++currentPage;
-  const appraisalFindingsPage = !isKlassiekerReport ? ++currentPage : 0;
-  const photoStartPage = currentPage + 1;
+  // Calculate page numbers - fixed sequence
+  const coverPage = 1;
+  const valuationPage = 2; // ALWAYS page 2
+  const vehicleDataPage = 3;
+  const appraisalFindingsPage = !isKlassiekerReport ? 4 : 0;
+  const photoStartPage = !isKlassiekerReport ? 5 : 4;
 
   return (
     <div 
@@ -126,40 +121,43 @@ const PDFPreview = () => {
           <PDFCoverContent report={report} />
         </div>
 
-        {/* Standard Valuation (camper) */}
-        {hasStandardValuation && (
-          <div className="shadow-lg" style={{ width: '210mm', minHeight: '297mm' }}>
-            <PDFValuationContent report={report} pageNumber={standardValuationPage} totalPages={totalPagesCount} />
-          </div>
+        {/* Page 2: Waardevaststelling - ALWAYS renders, never conditional */}
+        {showValuationPage && (
+          <>
+            {/* Render appropriate valuation component based on report type */}
+            {isCamperReport && (
+              <div className="shadow-lg" style={{ width: '210mm', height: '297mm' }}>
+                <PDFValuationContent report={report} pageNumber={valuationPage} totalPages={totalPagesCount} />
+              </div>
+            )}
+            
+            {isWevReport && (
+              <div className="shadow-lg" style={{ width: '210mm', height: '297mm' }}>
+                <PDFWevValuationContent report={report} pageNumber={valuationPage} totalPages={totalPagesCount} />
+              </div>
+            )}
+            
+            {isKlassiekerReport && (
+              <div className="shadow-lg" style={{ width: '210mm', height: '297mm' }}>
+                <PDFKlassiekerValuationContent report={report} pageNumber={valuationPage} totalPages={totalPagesCount} />
+              </div>
+            )}
+          </>
         )}
 
-        {/* WEV Valuation */}
-        {hasWevValuation && (
-          <div className="shadow-lg" style={{ width: '210mm', minHeight: '297mm' }}>
-            <PDFWevValuationContent report={report} pageNumber={wevValuationPage} totalPages={totalPagesCount} />
-          </div>
-        )}
-
-        {/* Klassieker Valuation - ALWAYS renders for klassieker reports */}
-        {isKlassiekerReport && (
-          <div className="shadow-lg" style={{ width: '210mm', height: '297mm' }}>
-            <PDFKlassiekerValuationContent report={report} pageNumber={klassiekerValuationPage} totalPages={totalPagesCount} />
-          </div>
-        )}
-
-        {/* Vehicle Data */}
+        {/* Page 3: Vehicle Data */}
         <div className="shadow-lg" style={{ width: '210mm', minHeight: '297mm' }}>
           <PDFVehicleDataContent report={report} pageNumber={vehicleDataPage} totalPages={totalPagesCount} />
         </div>
 
-        {/* Appraisal Findings (not for klassieker - they use general impression in PDF) */}
+        {/* Page 4: Appraisal Findings (only for non-klassieker reports) */}
         {!isKlassiekerReport && (
           <div className="shadow-lg" style={{ width: '210mm', minHeight: '297mm' }}>
             <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPage} />
           </div>
         )}
 
-        {/* Photo Annex (conditional) */}
+        {/* Photo Annex (starting after appraisal findings) */}
         <PDFPhotosContent report={report} startPageNumber={photoStartPage} totalPages={totalPagesCount} />
       </div>
     </div>
