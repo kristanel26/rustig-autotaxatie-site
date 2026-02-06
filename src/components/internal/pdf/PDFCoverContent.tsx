@@ -63,8 +63,8 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
   // Typography styles
   const labelStyle: React.CSSProperties = {
     margin: 0,
-    fontWeight: 400,
-    color: '#666666',
+    fontWeight: 500,
+    color: '#000000',
     fontSize: '8pt',
     textTransform: 'uppercase',
     letterSpacing: '0.5px',
@@ -79,8 +79,8 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
 
   const valueSmallerStyle: React.CSSProperties = {
     margin: '0.5mm 0 0 0',
-    fontWeight: 400,
-    color: '#1a1a1a',
+    fontWeight: 500,
+    color: '#000000',
     fontSize: '10pt',
   };
 
@@ -319,8 +319,9 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
               />
               <div style={{ 
                 fontSize: '8.5pt', 
-                color: '#1a1a1a',
-                lineHeight: 1.3,
+                color: '#000000',
+                lineHeight: 1.4,
+                fontWeight: 500,
               }}>
                 <p style={{ margin: 0, fontWeight: 500 }}>
                   Automobiel Taxaties
