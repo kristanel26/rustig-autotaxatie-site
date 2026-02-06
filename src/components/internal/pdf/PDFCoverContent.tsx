@@ -73,18 +73,7 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         lineHeight: 1.55,
       }}
     >
-      {/* ===== SUBTLE RIGHT BACKGROUND ===== */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          width: '70mm',
-          height: '100%',
-          background: '#f7f8f9',
-          zIndex: 0,
-        }}
-      />
+      {/* ===== NO BACKGROUND - Clean white ===== */}
 
       {/* ===== MAIN CONTENT AREA ===== */}
       <div
@@ -374,8 +363,8 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
               width: '70mm',
             }} />
 
-            {/* Uitgevoerd door */}
-            <div>
+            {/* Uitgevoerd door - geen streepjes */}
+            <div style={{ marginTop: '2mm' }}>
               <p style={{ 
                 margin: 0, 
                 fontWeight: 500, 
@@ -395,15 +384,15 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
                 Erik Elderson
               </p>
               <p style={{ 
-                margin: '1mm 0 0 0', 
-                color: '#333333',
+                margin: '2mm 0 0 0', 
+                color: '#1a1a1a',
                 fontSize: '9pt',
               }}>
                 TMV Register-Taxateur (nr. 33106)
               </p>
               <p style={{ 
-                margin: '0.5mm 0 0 0', 
-                color: '#333333',
+                margin: '1mm 0 0 0', 
+                color: '#1a1a1a',
                 fontSize: '9pt',
               }}>
                 Register-Taxateur VRT (nr. 22-523-M)
@@ -411,38 +400,42 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
             </div>
           </div>
 
-          {/* ===== RIGHT: PHOTO FRAME ===== */}
+          {/* ===== RIGHT: HORIZONTAL PHOTO FRAME (4:3) ===== */}
           <div style={{ 
-            width: '55mm',
+            width: '62mm',
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
-            paddingTop: '8mm',
+            alignItems: 'flex-start',
+            paddingTop: '0mm',
           }}>
-            <div style={{
-              width: '52mm',
-              height: '65mm', // 4:5 aspect ratio
-              backgroundColor: '#ffffff',
-              border: '1px solid #c0c0c0',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              overflow: 'hidden',
-              flexShrink: 0,
-            }}>
-              {coverPhoto ? (
+            {coverPhoto ? (
+              <div style={{
+                width: '60mm',
+                height: '45mm', // 4:3 landscape
+                overflow: 'hidden',
+                flexShrink: 0,
+              }}>
                 <img
                   crossOrigin="anonymous"
                   src={coverPhoto}
                   alt="Voertuig"
                   style={{
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    objectFit: 'contain',
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
                     transform: coverRotation ? `rotate(${coverRotation}deg)` : undefined,
                   }}
                 />
-              ) : (
+              </div>
+            ) : (
+              <div style={{
+                width: '60mm',
+                height: '45mm',
+                backgroundColor: '#f5f5f5',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
                 <span style={{ 
                   color: '#888888', 
                   fontSize: '9pt',
@@ -450,15 +443,15 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
                 }}>
                   Geen foto
                 </span>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
 
         {/* ===== FOOTER ===== */}
         <div style={{ 
-          borderTop: '1px solid #c0c0c0', 
-          paddingTop: '8mm',
+          borderTop: '1px solid #d0d0d0', 
+          paddingTop: '6mm',
           marginTop: 'auto',
         }}>
           {/* Company Logo */}
@@ -467,31 +460,35 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
             src={logoAutomobiel} 
             alt="Automobiel Taxaties" 
             style={{ 
-              maxWidth: '42mm', 
+              maxWidth: '38mm', 
               height: 'auto',
-              marginBottom: '4mm',
+              marginBottom: '3mm',
             }}
           />
 
-          {/* Company Details - Two columns */}
+          {/* Company Details - Compact single line layout */}
           <div style={{ 
-            display: 'flex',
-            gap: '15mm',
-            fontSize: '8pt', 
-            color: '#222222',
-            lineHeight: 1.55,
+            fontSize: '7.5pt', 
+            color: '#333333',
+            lineHeight: 1.5,
           }}>
-            <div>
-              <p style={{ margin: 0, fontWeight: 600 }}>Automobiel Taxaties</p>
-              <p style={{ margin: '1mm 0 0 0' }}>Leigraaf 160</p>
-              <p style={{ margin: '0.5mm 0 0 0' }}>6651 GJ Druten</p>
-            </div>
-            <div>
-              <p style={{ margin: 0 }}>KvK: 95549269</p>
-              <p style={{ margin: '0.5mm 0 0 0' }}>BTW: NL003366178B93</p>
-              <p style={{ margin: '0.5mm 0 0 0' }}>TMV: 33106 · VRT: 22-523-M</p>
-              <p style={{ margin: '0.5mm 0 0 0' }}>Bank: NL80RABO0387915680</p>
-            </div>
+            <p style={{ margin: 0 }}>
+              <span style={{ fontWeight: 600 }}>Automobiel Taxaties</span>
+              <span style={{ margin: '0 2mm' }}>·</span>
+              Leigraaf 160, 6651 GJ Druten
+            </p>
+            <p style={{ margin: '1mm 0 0 0' }}>
+              KvK: 95549269
+              <span style={{ margin: '0 2mm' }}>·</span>
+              BTW: NL003366178B93
+              <span style={{ margin: '0 2mm' }}>·</span>
+              TMV: 33106
+              <span style={{ margin: '0 2mm' }}>·</span>
+              VRT: 22-523-M
+            </p>
+            <p style={{ margin: '1mm 0 0 0' }}>
+              Bank: NL80 RABO 0387 9156 80
+            </p>
           </div>
 
           {/* Page Number */}
