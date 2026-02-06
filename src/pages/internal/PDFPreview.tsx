@@ -81,15 +81,15 @@ const PDFPreview = () => {
   const isKlassiekerReport = reportType === 'klassieker';
   
   // Show valuations based on report type
+  // Klassieker valuation page ALWAYS renders (contains fixed legal text)
   const hasStandardValuation = isCamperReport && report.appraised_value && report.appraised_value > 0;
   const hasWevValuation = isWevReport && (report.wev_eindwaarde || report.wev_definitief) && ((report.wev_eindwaarde || report.wev_definitief) > 0);
-  const hasKlassiekerValuation = isKlassiekerReport && report.appraised_value && report.appraised_value > 0;
   
   // Calculate total pages dynamically
   let totalPagesCount = 1; // Cover
   if (hasStandardValuation) totalPagesCount++;
   if (hasWevValuation) totalPagesCount++;
-  if (hasKlassiekerValuation) totalPagesCount++;
+  if (isKlassiekerReport) totalPagesCount++; // Always count klassieker valuation page
   totalPagesCount++; // Vehicle data
   if (!isKlassiekerReport) totalPagesCount++; // Appraisal findings
   
@@ -103,7 +103,7 @@ const PDFPreview = () => {
   
   const standardValuationPage = hasStandardValuation ? ++currentPage : 0;
   const wevValuationPage = hasWevValuation ? ++currentPage : 0;
-  const klassiekerValuationPage = hasKlassiekerValuation ? ++currentPage : 0;
+  const klassiekerValuationPage = isKlassiekerReport ? ++currentPage : 0; // Always page 2 for klassieker
   const vehicleDataPage = ++currentPage;
   const appraisalFindingsPage = !isKlassiekerReport ? ++currentPage : 0;
   const photoStartPage = currentPage + 1;
@@ -140,9 +140,9 @@ const PDFPreview = () => {
           </div>
         )}
 
-        {/* Klassieker Valuation */}
-        {hasKlassiekerValuation && (
-          <div className="shadow-lg" style={{ width: '210mm', minHeight: '297mm' }}>
+        {/* Klassieker Valuation - ALWAYS renders for klassieker reports */}
+        {isKlassiekerReport && (
+          <div className="shadow-lg" style={{ width: '210mm', height: '297mm' }}>
             <PDFKlassiekerValuationContent report={report} pageNumber={klassiekerValuationPage} totalPages={totalPagesCount} />
           </div>
         )}
