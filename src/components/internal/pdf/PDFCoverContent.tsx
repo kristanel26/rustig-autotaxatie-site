@@ -186,8 +186,7 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         </div>
 
         {/* Kenteken */}
-        {report.license_plate && (
-          <div>
+         <div>
             <p style={{ 
               fontSize: '10.5pt', 
               fontWeight: 600, 
@@ -202,10 +201,9 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
               color: '#1a1a1a', 
               margin: 0,
             }}>
-              {report.license_plate}
+              {report.license_plate || '–'}
             </p>
           </div>
-        )}
 
         {/* Rapportnummer */}
         <div>
@@ -227,9 +225,8 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
           </p>
         </div>
 
-        {/* Documentkenmerk */}
-        {report.document_reference && (
-          <div>
+         {/* Documentkenmerk */}
+         <div>
             <p style={{ 
               fontSize: '10.5pt', 
               fontWeight: 600, 
@@ -244,50 +241,45 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
               color: '#1a1a1a', 
               margin: 0,
             }}>
-              {report.document_reference}
+              {report.document_reference || '–'}
             </p>
           </div>
-        )}
 
-        {/* In opdracht van (Customer) */}
-        <div>
-          <p style={{ 
-            fontSize: '10.5pt', 
-            fontWeight: 600, 
-            color: '#1a1a1a', 
-            margin: '0 0 0.5mm 0',
-          }}>
-            In opdracht van:
-          </p>
-          <p style={{ 
-            fontSize: '10.5pt', 
-            fontWeight: 400, 
-            color: '#1a1a1a', 
-            margin: '0 0 0.5mm 0',
-          }}>
-            {customerName}
-          </p>
-          {report.customer_street && (
-            <p style={{ 
-              fontSize: '10.5pt', 
-              fontWeight: 400, 
-              color: '#1a1a1a', 
-              margin: '0 0 0.5mm 0',
-            }}>
-              {report.customer_street}
-            </p>
-          )}
-          {(report.customer_postcode || report.customer_city) && (
-            <p style={{ 
-              fontSize: '10.5pt', 
-              fontWeight: 400, 
-              color: '#1a1a1a', 
-              margin: 0,
-            }}>
-              {[report.customer_postcode, report.customer_city].filter(Boolean).join(' ')}
-            </p>
-          )}
-        </div>
+         {/* In opdracht van (Customer) */}
+         <div>
+           <p style={{ 
+             fontSize: '10.5pt', 
+             fontWeight: 600, 
+             color: '#1a1a1a', 
+             margin: '0 0 0.5mm 0',
+           }}>
+             In opdracht van:
+           </p>
+           <p style={{ 
+             fontSize: '10.5pt', 
+             fontWeight: 400, 
+             color: '#1a1a1a', 
+             margin: '0 0 0.5mm 0',
+           }}>
+             {customerName}
+           </p>
+           <p style={{ 
+             fontSize: '10.5pt', 
+             fontWeight: 400, 
+             color: '#1a1a1a', 
+             margin: '0 0 0.5mm 0',
+           }}>
+             {report.customer_street || '–'}
+           </p>
+           <p style={{ 
+             fontSize: '10.5pt', 
+             fontWeight: 400, 
+             color: '#1a1a1a', 
+             margin: 0,
+           }}>
+             {[report.customer_postcode, report.customer_city].filter(Boolean).join(' ') || '–'}
+           </p>
+         </div>
 
         {/* Inspection Data (Mandatory block) */}
         <div style={{ marginTop: '2mm' }}>
@@ -368,67 +360,79 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
           </div>
         </div>
 
-        {/* Executed by / Taxateur block */}
-        <div style={{ marginTop: '3mm', borderTop: '1px solid #d0d0d0', paddingTop: '3mm' }}>
-          <p style={{ 
-            fontSize: '10.5pt', 
-            fontWeight: 600, 
-            color: '#1a1a1a', 
-            margin: '0 0 1mm 0',
-          }}>
-            Uitgevoerd door:
-          </p>
-          <p style={{ 
-            fontSize: '10.5pt', 
-            fontWeight: 400, 
-            color: '#1a1a1a', 
-            margin: '0 0 0.5mm 0',
-          }}>
-            Erik Elderson
-          </p>
-          <p style={{ 
-            fontSize: '9.5pt', 
-            fontWeight: 400, 
-            color: '#1a1a1a', 
-            margin: 0,
-          }}>
-            Register-Taxateur TMV / VRT
-          </p>
-        </div>
+         {/* Executed by / Taxateur block */}
+         <div style={{ marginTop: '3mm', borderTop: '1px solid #d0d0d0', paddingTop: '3mm' }}>
+           <p style={{ 
+             fontSize: '10.5pt', 
+             fontWeight: 600, 
+             color: '#1a1a1a', 
+             margin: '0 0 1mm 0',
+           }}>
+             Rapport uitgevoerd door:
+           </p>
+           <p style={{ 
+             fontSize: '10.5pt', 
+             fontWeight: 400, 
+             color: '#1a1a1a', 
+             margin: '0 0 0.5mm 0',
+           }}>
+             Erik Elderson
+           </p>
+           <p style={{ 
+             fontSize: '9.5pt', 
+             fontWeight: 400, 
+             color: '#1a1a1a', 
+             margin: '0 0 0.5mm 0',
+           }}>
+             TMV Register-Taxateur
+           </p>
+           <p style={{ 
+             fontSize: '9.5pt', 
+             fontWeight: 400, 
+             color: '#1a1a1a', 
+             margin: 0,
+           }}>
+             Register-Taxateur VRT
+           </p>
+         </div>
       </div>
 
-      {/* ===== FOOTER (FIXED AT BOTTOM) ===== */}
-      <div style={{ 
-        borderTop: '1px solid #d0d0d0', 
-        paddingTop: '5mm',
-        marginTop: 'auto',
-        textAlign: 'center',
-        fontSize: '8.5pt',
-        color: '#555555',
-      }}>
-        <p style={{ 
-          margin: '0 0 1mm 0',
-          fontWeight: 600,
-        }}>
-          Automobiel Taxaties
-        </p>
-        <p style={{ 
-          margin: '0 0 0.5mm 0',
-        }}>
-          Leigraaf 160 | 6651 GJ Druten
-        </p>
-        <p style={{ 
-          margin: '0 0 1mm 0',
-        }}>
-          KVK: 95549269 | BTW: NL003366178B93 | IBAN: NL80RABO 0387915680
-        </p>
-        <p style={{ 
-          margin: 0,
-          color: '#555555',
-        }}>
-          Pagina 1 van {totalPages}
-        </p>
-      </div>
+       {/* ===== FOOTER (FIXED AT BOTTOM) ===== */}
+       <div style={{ 
+         borderTop: '1px solid #d0d0d0', 
+         paddingTop: '5mm',
+         marginTop: 'auto',
+       }}>
+         <div style={{ textAlign: 'center', fontSize: '8.5pt', color: '#1a1a1a', marginBottom: '3mm' }}>
+           <p style={{ margin: '0 0 0.5mm 0', fontWeight: 600 }}>
+             Automobiel Taxaties
+           </p>
+           <p style={{ margin: '0 0 0.5mm 0' }}>
+             Leigraaf 160 | 6651 GJ Druten
+           </p>
+         </div>
+
+         <div style={{ textAlign: 'center', fontSize: '7.5pt', color: '#1a1a1a', marginBottom: '2mm' }}>
+           <p style={{ margin: '0 0 0.5mm 0' }}>
+             KvK: 95549269
+           </p>
+           <p style={{ margin: '0 0 0.5mm 0' }}>
+             BTW: NL003366178B93
+           </p>
+           <p style={{ margin: 0 }}>
+             IBAN: NL80RABO 0387915680
+           </p>
+         </div>
+
+         <div style={{ textAlign: 'center', fontSize: '7.5pt', color: '#1a1a1a' }}>
+           <p style={{ margin: '0 0 0.5mm 0' }}>
+             TMV: 33106 | VRT: 22-523-M
+           </p>
+           <p style={{ margin: 0, color: '#555555' }}>
+             Pagina 1 van {totalPages}
+           </p>
+         </div>
+       </div>
     </div>
   );
 };
