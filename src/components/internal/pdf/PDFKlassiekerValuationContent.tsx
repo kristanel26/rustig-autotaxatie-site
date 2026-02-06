@@ -1,6 +1,5 @@
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
 import signatureErik from '@/assets/signature-erik-elderson.svg';
-import { qualityClasses } from '@/lib/qualityClasses';
 
 interface PDFKlassiekerValuationContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -9,21 +8,13 @@ interface PDFKlassiekerValuationContentProps {
   totalPages: number;
 }
 
-// Fixed legal text for klassieker insurance valuation - DO NOT modify
-const LEGAL_TEXT = `Dit rapport dient uitsluitend ter bepaling van de waarde voor verzekeringsdoeleinden van het visueel getaxeerde motorvoertuig. De geldigheid van deze taxatie is afhankelijk van uw polisvoorwaarden. Het rapport is beslist géén technische keuring en kan daarom nooit als zodanig worden geïnterpreteerd.`;
+// LOCKED TEXT - DO NOT MODIFY
+// These texts are exact copies from the original report and must remain unchanged
+const LEGAL_TEXT_BLOCK_1 = `Dit rapport dient uitsluitend ter bepaling van de waarde voor verzekeringsdoeleinden van het visueel getaxeerde motorvoertuig. De geldigheidsduur van deze taxatie is afhankelijk van uw polisvoorwaarden. Het rapport is beslist géén technische keuring en kan daarom nooit als zodanig worden geïnterpreteerd. Het rapport is niet overdraagbaar en is toepasbaar bij polisvoorwaarden volgens artikel 7:960 B.W. De door ons verrichte taxatie houdt geen enkele garantie in tot het realiseren van de vastgestelde waarde bij inruil of verkoop. Onder vervangingswaarde wordt verstaan het bedrag dat nodig is voor het verkrijgen van naar soort, kwaliteit, staat en ouderdom vergelijkbare zaak. Dat op deze taxatie van toepassing zijn de algemene voorwaarden voor Register Makelaars en Register Taxateurs in roerende zaken, leden van de Federatie van Taxateurs, Makelaars en Veilinghouders in roerende zaken, welke voorwaarden zijn gedeponeerd bij de Kamer van Koophandel en Fabrieken voor Amsterdam op 30-06-2005 onder nummer 40530226.`;
 
-const VALUE_INTRO = `De vervangingswaarde van het hier omschreven voertuig, inclusief accessoires, bedraagt:`;
+const VALUE_INTRO = `Uitgaande van de marktsituatie op het moment van de taxatie stelden wij de vervangingswaarde van het hier omschreven voertuig, inclusief accessoires, op`;
 
-const SIGNING_TEXT = `Ondergetekende,
-
-Erik Elderson
-Register Taxateur motorvoertuigen
-Gecertificeerd door Stichting Hobéon SKO Certificatie
-TMV 33106 en VRT 22-523-M
-
-Vestigingsadres:
-Leigraaf 160
-6651 GY Druten`;
+const EXPERT_DECLARATION = `Ondergetekende, Erik Elderson, Register Taxateur voor motorvoertuigen te Druten, als zodanig erkend en opgenomen in het Register van Makelaars en Taxateurs TMV onder nummer 33106, Register-Taxateur VRT onder nummer 22-523-M, verklaart te zijn benoemd als deskundige.`;
 
 const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKlassiekerValuationContentProps) => {
   const formatCurrency = (value: number | null) => {
@@ -44,15 +35,12 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
         year: 'numeric',
       });
     }
-    return new Date(dateString).toLocaleDateString('nl-NL', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    });
-  };
-
-  const capitalizeFirst = (str: string) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    return new Date(dateString).toLocaleDateString('nl-NL',
+      {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      });
   };
 
   // Don't render if no value
@@ -61,11 +49,16 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
   }
 
   const formattedValue = formatCurrency(report.appraised_value);
-  const valueInWords = report.appraised_value_text 
-    ? capitalizeFirst(report.appraised_value_text)
-    : '';
-  
-  const qualityClass = qualityClasses.find(qc => qc.value === report.quality_class);
+  const valueInWords = report.appraised_value_text || '';
+
+  // Typography styles matching page 1
+  const bodyTextStyle: React.CSSProperties = {
+    fontSize: '10pt',
+    fontWeight: 500,
+    color: '#000000',
+    lineHeight: 1.6,
+    textAlign: 'justify',
+  };
 
   return (
     <div 
@@ -73,7 +66,7 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
       style={{
         width: '210mm',
         minHeight: '297mm',
-        padding: '28px 32px',
+        padding: '20mm 20mm 20mm 25mm',
         boxSizing: 'border-box',
         position: 'relative',
         pageBreakAfter: 'always',
@@ -81,89 +74,110 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
       }}
     >
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '20px', fontWeight: 700, color: '#000000', margin: 0, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10mm' }}>
+        <h1 style={{ 
+          fontSize: '16pt', 
+          fontWeight: 700, 
+          color: '#000000', 
+          margin: 0, 
+          textTransform: 'uppercase', 
+          letterSpacing: '0.04em' 
+        }}>
           WAARDEVASTSTELLING
         </h1>
-        <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '44px', width: 'auto' }} />
+        <img 
+          crossOrigin="anonymous" 
+          src={logoAutomobiel} 
+          alt="Automobiel Taxaties" 
+          style={{ height: '14mm', width: 'auto' }} 
+        />
       </div>
 
-      {/* Legal Text */}
+      {/* Legal Text Block 1 */}
       <p style={{ 
-        fontSize: '11px', 
-        color: '#000000', 
-        lineHeight: 1.7, 
-        marginBottom: '28px',
-        textAlign: 'justify',
+        ...bodyTextStyle,
+        marginBottom: '8mm',
       }}>
-        {LEGAL_TEXT}
+        {LEGAL_TEXT_BLOCK_1}
       </p>
-
-      {/* Quality Class if present */}
-      {qualityClass && (
-        <div style={{ marginBottom: '28px' }}>
-          <p style={{ fontSize: '12px', fontWeight: 600, color: '#000000', marginBottom: '6px' }}>
-            Kwaliteitsklasse: {qualityClass.label}
-          </p>
-          <p style={{ fontSize: '11px', color: '#000000', lineHeight: 1.6 }}>
-            {qualityClass.description}
-          </p>
-        </div>
-      )}
 
       {/* Value Introduction */}
       <p style={{ 
-        fontSize: '11px', 
-        color: '#000000', 
-        lineHeight: 1.7, 
-        marginBottom: '16px',
+        ...bodyTextStyle,
+        marginBottom: '6mm',
       }}>
         {VALUE_INTRO}
       </p>
 
-      {/* Value - bold, prominent */}
-      <p style={{ 
-        fontSize: '16px', 
-        fontWeight: 700, 
-        color: '#000000', 
-        marginBottom: '10px',
-      }}>
-        {formattedValue} (inclusief BTW)
-      </p>
-      
-      {valueInWords && (
+      {/* Value Block */}
+      <div style={{ marginBottom: '8mm' }}>
         <p style={{ 
-          fontSize: '11px', 
+          fontSize: '14pt', 
+          fontWeight: 700, 
           color: '#000000', 
-          marginBottom: '32px',
+          margin: '0 0 2mm 0',
         }}>
-          zegge: {valueInWords}
+          {formattedValue} (inclusief BTW)
         </p>
-      )}
+        {valueInWords && (
+          <p style={{ 
+            fontSize: '10pt',
+            fontWeight: 500,
+            color: '#000000',
+            margin: 0,
+          }}>
+            zegge: {valueInWords} 00/Euro
+          </p>
+        )}
+      </div>
 
-      {/* Signing Section */}
-      <div style={{ marginTop: '40px', whiteSpace: 'pre-line' }}>
+      {/* Expert Declaration */}
+      <p style={{ 
+        ...bodyTextStyle,
+        marginBottom: '10mm',
+      }}>
+        {EXPERT_DECLARATION}
+      </p>
+
+      {/* Closing */}
+      <div style={{ marginBottom: '6mm' }}>
         <p style={{ 
-          fontSize: '11px', 
-          color: '#000000', 
-          lineHeight: 1.8,
-          marginBottom: '24px',
+          ...bodyTextStyle,
+          marginBottom: '6mm',
         }}>
-          {SIGNING_TEXT}
+          Aldus, naar beste weten en kunnen opgemaakt te Druten, {formatDateLong(report.inspection_date)}.
+        </p>
+        
+        <p style={{ 
+          fontSize: '10pt',
+          fontWeight: 500,
+          color: '#000000',
+          margin: '0 0 4mm 0',
+        }}>
+          Hoogachtend,
+        </p>
+        
+        <p style={{ 
+          fontSize: '10pt',
+          fontWeight: 500,
+          color: '#000000',
+          margin: '0 0 2mm 0',
+        }}>
+          Automobiel Taxaties
+        </p>
+        
+        <p style={{ 
+          fontSize: '10pt',
+          fontWeight: 700,
+          color: '#000000',
+          margin: 0,
+        }}>
+          Erik Elderson
         </p>
       </div>
 
-      {/* Date and location */}
-      <p style={{ 
-        fontSize: '11px', 
-        color: '#000000', 
-        marginBottom: '28px',
-      }}>
-        Aldus opgemaakt te Druten, {formatDateLong(report.inspection_date)}
-      </p>
-
       {/* Signature */}
-      <div style={{ marginBottom: '20px' }}>
+      <div style={{ marginTop: '6mm' }}>
         <img 
           crossOrigin="anonymous"
           src={signatureErik} 
@@ -179,19 +193,25 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
       {/* Footer with page number and paraaf */}
       <div style={{ 
         position: 'absolute', 
-        bottom: '28px', 
-        left: '32px', 
-        right: '32px',
-        borderTop: '1px solid #e2e8f0', 
-        paddingTop: '14px',
+        bottom: '20mm', 
+        left: '25mm', 
+        right: '20mm',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <div style={{ fontSize: '10px', color: '#000000' }}>
+        <div style={{ 
+          fontSize: '9pt', 
+          fontWeight: 500,
+          color: '#000000' 
+        }}>
           Pagina {pageNumber} van {totalPages}
         </div>
-        <div style={{ fontSize: '10px', color: '#000000' }}>
+        <div style={{ 
+          fontSize: '9pt', 
+          fontWeight: 500,
+          color: '#000000' 
+        }}>
           Paraaf: ________________
         </div>
       </div>
@@ -200,3 +220,4 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
 };
 
 export default PDFKlassiekerValuationContent;
+
