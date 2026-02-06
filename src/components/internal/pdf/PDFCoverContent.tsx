@@ -172,12 +172,13 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         {/* ===== TWO-COLUMN CONTENT AREA ===== */}
         <div style={{ 
           display: 'flex',
-          gap: '10mm',
+          gap: '12mm',
           flex: 1,
+          alignItems: 'flex-start',
         }}>
           {/* LEFT COLUMN: Data blocks */}
           <div style={{ 
-            width: '55%',
+            flex: 1,
             display: 'flex',
             flexDirection: 'column',
           }}>
@@ -261,13 +262,13 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
 
           {/* RIGHT COLUMN: Vehicle photo */}
           <div style={{ 
-            width: '45%',
+            width: '280px',
             display: 'flex',
             alignItems: 'flex-start',
           }}>
             <div style={{
               width: '100%',
-              height: '90mm',
+              aspectRatio: '4 / 3',
               overflow: 'hidden',
             }}>
               {coverPhoto ? (
@@ -297,7 +298,6 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         <div style={{ 
           marginTop: 'auto',
           paddingTop: '10mm',
-          borderTop: '0.5pt solid #e0e0e0',
         }}>
           <div style={{
             display: 'flex',
