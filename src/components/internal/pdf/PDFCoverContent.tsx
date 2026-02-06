@@ -363,41 +363,47 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
               width: '70mm',
             }} />
 
-            {/* Uitgevoerd door - geen streepjes */}
-            <div style={{ marginTop: '2mm' }}>
-              <p style={{ 
-                margin: 0, 
-                fontWeight: 500, 
-                color: '#333333',
-                fontSize: '9pt',
-                textTransform: 'uppercase',
-                letterSpacing: '0.3px',
-              }}>
-                Uitgevoerd door
-              </p>
-              <p style={{ 
-                margin: '2mm 0 0 0', 
-                fontWeight: 600,
-                color: '#000000',
-                fontSize: '11pt',
-              }}>
-                Erik Elderson
-              </p>
-              <p style={{ 
-                margin: '2mm 0 0 0', 
-                color: '#1a1a1a',
-                fontSize: '9pt',
-              }}>
-                TMV Register-Taxateur (nr. 33106)
-              </p>
-              <p style={{ 
-                margin: '1mm 0 0 0', 
-                color: '#1a1a1a',
-                fontSize: '9pt',
-              }}>
-                Register-Taxateur VRT (nr. 22-523-M)
-              </p>
-            </div>
+             {/* Uitgevoerd door */}
+             <div style={{ marginTop: '2mm' }}>
+               <p style={{ 
+                 margin: 0, 
+                 fontWeight: 500, 
+                 color: '#333333',
+                 fontSize: '9pt',
+                 textTransform: 'uppercase',
+                 letterSpacing: '0.3px',
+               }}>
+                 Uitgevoerd door
+               </p>
+               <p style={{ 
+                 margin: '2mm 0 0 0', 
+                 fontWeight: 600,
+                 color: '#000000',
+                 fontSize: '11pt',
+               }}>
+                 Erik Elderson
+               </p>
+               <p style={{ 
+                 margin: '2mm 0 0 0', 
+                 color: '#1a1a1a',
+                 fontSize: '9pt',
+               }}>
+                 TMV Register-Taxateur (nr. 33106)
+               </p>
+               <p style={{ 
+                 margin: '1mm 0 0 0', 
+                 color: '#1a1a1a',
+                 fontSize: '9pt',
+               }}>
+                 Register-Taxateur VRT (nr. 22-523-M)
+               </p>
+               {/* Horizontal line AFTER text with 8-12mm whitespace */}
+               <div style={{ 
+                 borderTop: '1px solid #d0d0d0', 
+                 margin: '10mm 0 0 0',
+                 width: '70mm',
+               }} />
+             </div>
           </div>
 
           {/* ===== RIGHT: HORIZONTAL PHOTO FRAME (4:3) ===== */}
@@ -454,19 +460,20 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
           paddingTop: '6mm',
           marginTop: 'auto',
         }}>
-          {/* Company Logo */}
+          {/* Company Logo - left aligned with main text margin */}
           <img 
             crossOrigin="anonymous"
             src={logoAutomobiel} 
             alt="Automobiel Taxaties" 
             style={{ 
-              maxWidth: '38mm', 
+              maxWidth: '35mm', 
               height: 'auto',
               marginBottom: '3mm',
+              display: 'block',
             }}
           />
 
-          {/* Company Details - Compact single line layout */}
+          {/* Company Details - left aligned */}
           <div style={{ 
             fontSize: '7.5pt', 
             color: '#333333',
