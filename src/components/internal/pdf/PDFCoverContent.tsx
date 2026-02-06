@@ -454,14 +454,14 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
           </div>
         </div>
 
-        {/* ===== FOOTER ===== */}
+        {/* ===== FOOTER BLOCK ===== */}
         <div style={{ 
           borderTop: '1px solid #d0d0d0', 
-          paddingTop: '8mm',
+          paddingTop: '10mm',
           marginTop: 'auto',
-          paddingBottom: '18mm',
+          paddingBottom: '20mm',
         }}>
-          {/* Company Logo - left aligned with main text margin */}
+          {/* Logo */}
           <img 
             crossOrigin="anonymous"
             src={logoAutomobiel} 
@@ -469,46 +469,43 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
             style={{ 
               maxWidth: '35mm', 
               height: 'auto',
-              marginBottom: '3mm',
+              marginBottom: '4mm',
               display: 'block',
             }}
           />
 
-          {/* Company Details - left aligned */}
+          {/* Company Details - Normal body text */}
           <div style={{ 
-            fontSize: '7.5pt', 
-            color: '#333333',
-            lineHeight: 1.5,
+            fontSize: '8pt', 
+            color: '#1a1a1a',
+            lineHeight: 1.6,
           }}>
             <p style={{ margin: 0 }}>
-              <span style={{ fontWeight: 600 }}>Automobiel Taxaties</span>
-              <span style={{ margin: '0 2mm' }}>·</span>
+              Automobiel Taxaties
+            </p>
+            <p style={{ margin: '0.5mm 0 0 0' }}>
               Leigraaf 160, 6651 GJ Druten
             </p>
             <p style={{ margin: '1mm 0 0 0' }}>
-              KvK: 95549269
-              <span style={{ margin: '0 2mm' }}>·</span>
-              BTW: NL003366178B93
-              <span style={{ margin: '0 2mm' }}>·</span>
-              TMV: 33106
-              <span style={{ margin: '0 2mm' }}>·</span>
-              VRT: 22-523-M
+              KvK: 95549269 · BTW: NL003366178B93
             </p>
-            <p style={{ margin: '1mm 0 0 0' }}>
+            <p style={{ margin: '0.5mm 0 0 0' }}>
+              TMV: 33106 · VRT: 22-523-M
+            </p>
+            <p style={{ margin: '0.5mm 0 0 0' }}>
               Bank: NL80 RABO 0387 9156 80
             </p>
           </div>
 
           {/* Page Number */}
-          <div style={{ 
-            marginTop: '5mm',
+          <p style={{ 
+            marginTop: '6mm',
             fontSize: '8pt', 
-            color: '#555555',
+            color: '#666666',
+            margin: '6mm 0 0 0',
           }}>
-            <p style={{ margin: 0 }}>
-              Pagina 1 van {totalPages}
-            </p>
-          </div>
+            Pagina 1 van {totalPages}
+          </p>
         </div>
       </div>
     </div>
