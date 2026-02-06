@@ -43,13 +43,12 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
       });
   };
 
-  // Don't render if no value
-  if (!report.appraised_value || report.appraised_value <= 0) {
-    return null;
-  }
+  // ALWAYS render this page - it contains fixed legal text
+  // If no value yet, show placeholder
 
-  const formattedValue = formatCurrency(report.appraised_value);
-  const valueInWords = report.appraised_value_text || '';
+  const hasValue = report.appraised_value && report.appraised_value > 0;
+  const formattedValue = hasValue ? formatCurrency(report.appraised_value) : '€ ___________';
+  const valueInWords = hasValue ? (report.appraised_value_text || '') : '___________';
 
   // Typography styles matching page 1
   const bodyTextStyle: React.CSSProperties = {
@@ -66,7 +65,9 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
       style={{
         width: '210mm',
         minHeight: '297mm',
+        height: '297mm',
         padding: '20mm 20mm 20mm 25mm',
+        pageBreakBefore: 'always',
         boxSizing: 'border-box',
         position: 'relative',
         pageBreakAfter: 'always',
