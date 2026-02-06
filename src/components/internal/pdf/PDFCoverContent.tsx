@@ -13,7 +13,7 @@ interface PDFCoverContentProps {
 const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
   // Helpers
   const formatDate = (dateString: string | null) => {
-    if (!dateString) return '–';
+    if (!dateString) return null;
     return new Date(dateString).toLocaleDateString('nl-NL', {
       day: 'numeric',
       month: 'long',
@@ -22,23 +22,29 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
   };
 
   const formatTime = (timeString: string | null) => {
-    if (!timeString) return '–';
+    if (!timeString) return null;
     return timeString.slice(0, 5) + ' uur';
+  };
+
+  // Capitalize first letter
+  const capitalizeFirst = (str: string | null) => {
+    if (!str) return null;
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
 
   // Build customer name
   const customerName = [report.customer_title, report.customer_initials, report.customer_last_name]
     .filter(Boolean)
-    .join(' ') || '–';
+    .join(' ') || null;
 
   // Customer address
-  const customerAddress = report.customer_street || '–';
-  const customerCity = [report.customer_postcode, report.customer_city].filter(Boolean).join(' ') || '–';
+  const customerAddress = report.customer_street || null;
+  const customerCity = [report.customer_postcode, report.customer_city].filter(Boolean).join(' ') || null;
 
   // Vehicle display title
   const vehicleDisplay = report.vehicle_title || 
     [report.rdw_merk, report.rdw_handelsbenaming].filter(Boolean).join(' ') || 
-    '–';
+    null;
 
   // Cover photo
   const coverPhoto = report.vehicle_photos && report.vehicle_photos.length > 0 
@@ -50,10 +56,36 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
     : 0;
 
   // Extract inspection data
-  const inspectionDate = report.inspection_date ? formatDate(report.inspection_date) : '–';
-  const startTime = report.inspection_start_time ? formatTime(report.inspection_start_time) : '–';
-  const endTime = report.inspection_end_time ? formatTime(report.inspection_end_time) : '–';
-  const inspectionLocation = report.inspection_location || '–';
+  const inspectionDate = report.inspection_date ? formatDate(report.inspection_date) : null;
+  const startTime = report.inspection_start_time ? formatTime(report.inspection_start_time) : null;
+  const endTime = report.inspection_end_time ? formatTime(report.inspection_end_time) : 'nog niet ingevuld';
+  const inspectionLocation = capitalizeFirst(report.inspection_location);
+
+  // Shared styles
+  const labelStyle: React.CSSProperties = {
+    margin: 0,
+    fontWeight: 400,
+    color: '#555555',
+    fontSize: '8pt',
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px',
+  };
+
+  const valueStyle: React.CSSProperties = {
+    margin: '1mm 0 0 0',
+    fontWeight: 600,
+    color: '#000000',
+    fontSize: '11pt',
+  };
+
+  const valueSmallerStyle: React.CSSProperties = {
+    margin: '0.5mm 0 0 0',
+    fontWeight: 400,
+    color: '#1a1a1a',
+    fontSize: '10pt',
+  };
+
+  const blockSpacing = '9mm';
 
   return (
     <div 
@@ -61,8 +93,6 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
       style={{
         width: '210mm',
         height: '297mm',
-        display: 'flex',
-        flexDirection: 'column',
         position: 'relative',
         overflow: 'hidden',
         pageBreakAfter: 'always',
@@ -70,64 +100,62 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         boxSizing: 'border-box',
         fontSize: '10pt',
         color: '#1a1a1a',
-        lineHeight: 1.55,
+        lineHeight: 1.5,
       }}
     >
-      {/* ===== NO BACKGROUND - Clean white ===== */}
-
-      {/* ===== MAIN CONTENT AREA ===== */}
+      {/* Main content area with fixed margins */}
       <div
         style={{
-          position: 'relative',
-          zIndex: 1,
-          padding: '20mm 22mm 18mm 28mm',
+          position: 'absolute',
+          top: '20mm',
+          left: '25mm',
+          right: '20mm',
+          bottom: '20mm',
           display: 'flex',
           flexDirection: 'column',
-          height: '100%',
-          boxSizing: 'border-box',
         }}
       >
         {/* ===== TOP: FEDERATION LOGOS ===== */}
         <div style={{ 
           display: 'flex', 
           alignItems: 'center',
-          gap: '6mm',
-          marginBottom: '18mm',
+          gap: '5mm',
+          marginBottom: '10mm',
         }}>
           <img 
             crossOrigin="anonymous"
             src={logoVrt} 
             alt="VRT" 
-            style={{ height: '9.8mm', width: 'auto' }}
+            style={{ height: '16mm', width: 'auto' }}
           />
           <img 
             crossOrigin="anonymous"
             src={logoHobeon} 
             alt="Hobéon" 
-            style={{ height: '9.8mm', width: 'auto' }}
+            style={{ height: '16mm', width: 'auto' }}
           />
           <img 
             crossOrigin="anonymous"
             src={logoTmv} 
             alt="TMV" 
-            style={{ height: '9.8mm', width: 'auto' }}
+            style={{ height: '16mm', width: 'auto' }}
           />
           <img 
             crossOrigin="anonymous"
             src={logoFehac} 
             alt="FEHAC" 
-            style={{ height: '9.8mm', width: 'auto' }}
+            style={{ height: '16mm', width: 'auto' }}
           />
         </div>
 
-        {/* ===== MAIN TITLE ===== */}
-        <div style={{ marginBottom: '16mm' }}>
+        {/* ===== TITLE BLOCK ===== */}
+        <div style={{ marginBottom: '12mm' }}>
           <h1 style={{ 
-            fontSize: '26pt', 
+            fontSize: '24pt', 
             fontWeight: 700, 
             color: '#000000', 
             margin: 0,
-            letterSpacing: '0.5px',
+            letterSpacing: '0.3px',
             textTransform: 'uppercase',
           }}>
             Taxatierapport
@@ -142,367 +170,168 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
           </p>
         </div>
 
-        {/* ===== TWO COLUMN LAYOUT ===== */}
-        <div style={{ 
-          display: 'flex',
-          flex: 1,
-          gap: '12mm',
-        }}>
-          {/* ===== LEFT INFORMATION COLUMN ===== */}
-          <div style={{ 
-            flex: 1,
-            maxWidth: '95mm',
-            fontSize: '10pt',
-            lineHeight: 1.6,
-          }}>
+        {/* ===== CONTENT BLOCKS ===== */}
+        <div style={{ flex: 1 }}>
+          {/* Block 1: Rapportgegevens */}
+          <div style={{ marginBottom: blockSpacing }}>
             {/* Inzake */}
-            <div style={{ marginBottom: '5mm' }}>
-              <p style={{ 
-                margin: 0, 
-                fontWeight: 500, 
-                color: '#333333',
-                fontSize: '9pt',
-                textTransform: 'uppercase',
-                letterSpacing: '0.3px',
-              }}>
-                Inzake
-              </p>
-              <p style={{ 
-                margin: '1mm 0 0 0', 
-                fontWeight: 600,
-                color: '#000000',
-                fontSize: '11pt',
-              }}>
-                {vehicleDisplay}
+            <div style={{ marginBottom: '4mm' }}>
+              <p style={labelStyle}>Inzake</p>
+              <p style={valueStyle}>
+                {vehicleDisplay || 'nog niet ingevuld'}
               </p>
             </div>
 
             {/* Kenteken */}
-            <div style={{ marginBottom: '5mm' }}>
-              <p style={{ 
-                margin: 0, 
-                fontWeight: 500, 
-                color: '#333333',
-                fontSize: '9pt',
-                textTransform: 'uppercase',
-                letterSpacing: '0.3px',
-              }}>
-                Kenteken
-              </p>
-              <p style={{ 
-                margin: '1mm 0 0 0', 
-                fontWeight: 600,
-                color: '#000000',
-                fontSize: '11pt',
-              }}>
-                {report.license_plate || '–'}
+            <div style={{ marginBottom: '4mm' }}>
+              <p style={labelStyle}>Kenteken</p>
+              <p style={valueStyle}>
+                {report.license_plate || 'nog niet ingevuld'}
               </p>
             </div>
 
             {/* Documentkenmerk */}
-            <div style={{ marginBottom: '5mm' }}>
-              <p style={{ 
-                margin: 0, 
-                fontWeight: 500, 
-                color: '#333333',
-                fontSize: '9pt',
-                textTransform: 'uppercase',
-                letterSpacing: '0.3px',
-              }}>
-                Documentkenmerk
-              </p>
-              <p style={{ 
-                margin: '1mm 0 0 0', 
-                fontWeight: 600,
-                color: '#000000',
-                fontSize: '11pt',
-              }}>
-                {report.report_number || '–'}
+            <div>
+              <p style={labelStyle}>Documentkenmerk</p>
+              <p style={valueStyle}>
+                {report.document_reference || 'nog niet ingevuld'}
               </p>
             </div>
-
-            {/* In opdracht van */}
-            <div style={{ marginBottom: '7mm' }}>
-              <p style={{ 
-                margin: 0, 
-                fontWeight: 500, 
-                color: '#333333',
-                fontSize: '9pt',
-                textTransform: 'uppercase',
-                letterSpacing: '0.3px',
-              }}>
-                In opdracht van
-              </p>
-              <p style={{ 
-                margin: '1mm 0 0 0', 
-                fontWeight: 600,
-                color: '#000000',
-                fontSize: '11pt',
-              }}>
-                {customerName}
-              </p>
-              <p style={{ 
-                margin: '0.5mm 0 0 0', 
-                color: '#1a1a1a',
-                fontSize: '10pt',
-              }}>
-                {customerAddress}
-              </p>
-              <p style={{ 
-                margin: '0.5mm 0 0 0', 
-                color: '#1a1a1a',
-                fontSize: '10pt',
-              }}>
-                {customerCity}
-              </p>
-            </div>
-
-            {/* Separator */}
-            <div style={{ 
-              borderTop: '1px solid #d0d0d0', 
-              margin: '7mm 0',
-              width: '70mm',
-            }} />
-
-            {/* Opnamedatum */}
-            <div style={{ marginBottom: '3.5mm' }}>
-              <p style={{ 
-                margin: 0, 
-                fontWeight: 500, 
-                color: '#333333',
-                fontSize: '9pt',
-                textTransform: 'uppercase',
-                letterSpacing: '0.3px',
-              }}>
-                Opnamedatum
-              </p>
-              <p style={{ 
-                margin: '1mm 0 0 0', 
-                fontWeight: 600,
-                color: '#000000',
-                fontSize: '10pt',
-              }}>
-                {inspectionDate}
-              </p>
-            </div>
-
-            {/* Tijden op één regel */}
-            <div style={{ 
-              display: 'flex', 
-              gap: '10mm',
-              marginBottom: '3.5mm',
-            }}>
-              <div>
-                <p style={{ 
-                  margin: 0, 
-                  fontWeight: 500, 
-                  color: '#333333',
-                  fontSize: '9pt',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.3px',
-                }}>
-                  Aanvang
-                </p>
-                <p style={{ 
-                  margin: '1mm 0 0 0', 
-                  fontWeight: 600,
-                  color: '#000000',
-                  fontSize: '10pt',
-                }}>
-                  {startTime}
-                </p>
-              </div>
-              <div>
-                <p style={{ 
-                  margin: 0, 
-                  fontWeight: 500, 
-                  color: '#333333',
-                  fontSize: '9pt',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.3px',
-                }}>
-                  Einde
-                </p>
-                <p style={{ 
-                  margin: '1mm 0 0 0', 
-                  fontWeight: 600,
-                  color: '#000000',
-                  fontSize: '10pt',
-                }}>
-                  {endTime}
-                </p>
-              </div>
-            </div>
-
-            {/* Plaats */}
-            <div style={{ marginBottom: '7mm' }}>
-              <p style={{ 
-                margin: 0, 
-                fontWeight: 500, 
-                color: '#333333',
-                fontSize: '9pt',
-                textTransform: 'uppercase',
-                letterSpacing: '0.3px',
-              }}>
-                Plaats van opname
-              </p>
-              <p style={{ 
-                margin: '1mm 0 0 0', 
-                fontWeight: 600,
-                color: '#000000',
-                fontSize: '10pt',
-              }}>
-                {inspectionLocation}
-              </p>
-            </div>
-
-            {/* Separator */}
-            <div style={{ 
-              borderTop: '1px solid #d0d0d0', 
-              margin: '7mm 0',
-              width: '70mm',
-            }} />
-
-             {/* Uitgevoerd door */}
-             <div style={{ marginTop: '2mm' }}>
-               <p style={{ 
-                 margin: 0, 
-                 fontWeight: 500, 
-                 color: '#333333',
-                 fontSize: '9pt',
-                 textTransform: 'uppercase',
-                 letterSpacing: '0.3px',
-               }}>
-                 Uitgevoerd door
-               </p>
-               <p style={{ 
-                 margin: '2mm 0 0 0', 
-                 fontWeight: 600,
-                 color: '#000000',
-                 fontSize: '11pt',
-               }}>
-                 Erik Elderson
-               </p>
-               <p style={{ 
-                 margin: '2mm 0 0 0', 
-                 color: '#1a1a1a',
-                 fontSize: '9pt',
-               }}>
-                 TMV Register-Taxateur (nr. 33106)
-               </p>
-               <p style={{ 
-                 margin: '1mm 0 0 0', 
-                 color: '#1a1a1a',
-                 fontSize: '9pt',
-               }}>
-                 Register-Taxateur VRT (nr. 22-523-M)
-               </p>
-               {/* Horizontal line AFTER text with 8-12mm whitespace */}
-               <div style={{ 
-                 borderTop: '1px solid #d0d0d0', 
-                 margin: '10mm 0 0 0',
-                 width: '70mm',
-               }} />
-             </div>
           </div>
 
-          {/* ===== RIGHT: HORIZONTAL PHOTO FRAME (4:3) ===== */}
-          <div style={{ 
-            width: '62mm',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            paddingTop: '0mm',
+          {/* Block 2: Opdrachtgever */}
+          <div style={{ marginBottom: blockSpacing }}>
+            <p style={labelStyle}>In opdracht van</p>
+            <p style={valueStyle}>
+              {customerName || 'nog niet ingevuld'}
+            </p>
+            {customerAddress && (
+              <p style={valueSmallerStyle}>{customerAddress}</p>
+            )}
+            {customerCity && (
+              <p style={valueSmallerStyle}>{customerCity}</p>
+            )}
+          </div>
+
+          {/* Block 3: Inspectiegegevens */}
+          <div style={{ marginBottom: blockSpacing }}>
+            <div style={{ marginBottom: '3mm' }}>
+              <p style={labelStyle}>Opnamedatum</p>
+              <p style={{ ...valueStyle, fontSize: '10pt' }}>
+                {inspectionDate || 'nog niet ingevuld'}
+              </p>
+            </div>
+
+            <div style={{ marginBottom: '3mm' }}>
+              <p style={labelStyle}>Aanvangstijd</p>
+              <p style={{ ...valueStyle, fontSize: '10pt' }}>
+                {startTime || 'nog niet ingevuld'}
+              </p>
+            </div>
+
+            <div style={{ marginBottom: '3mm' }}>
+              <p style={labelStyle}>Eindtijd</p>
+              <p style={{ ...valueStyle, fontSize: '10pt' }}>
+                {endTime}
+              </p>
+            </div>
+
+            <div>
+              <p style={labelStyle}>Plaats van opname</p>
+              <p style={{ ...valueStyle, fontSize: '10pt' }}>
+                {inspectionLocation || 'nog niet ingevuld'}
+              </p>
+            </div>
+          </div>
+
+          {/* Block 4: Uitgevoerd door */}
+          <div style={{ marginBottom: blockSpacing }}>
+            <p style={labelStyle}>Uitgevoerd door</p>
+            <p style={valueStyle}>Erik Elderson</p>
+            <p style={valueSmallerStyle}>TMV Register-Taxateur (nr. 33106)</p>
+            <p style={valueSmallerStyle}>Register-Taxateur VRT (nr. 22-523-M)</p>
+          </div>
+
+          {/* ===== VEHICLE PHOTO ===== */}
+          <div style={{
+            width: '100%',
+            maxWidth: '165mm', // Full content width
+            height: '70mm',
+            overflow: 'hidden',
+            marginTop: '4mm',
           }}>
             {coverPhoto ? (
-              <div style={{
-                width: '60mm',
-                height: '45mm', // 4:3 landscape
-                overflow: 'hidden',
-                flexShrink: 0,
-              }}>
-                <img
-                  crossOrigin="anonymous"
-                  src={coverPhoto}
-                  alt="Voertuig"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    transform: coverRotation ? `rotate(${coverRotation}deg)` : undefined,
-                  }}
-                />
-              </div>
+              <img
+                crossOrigin="anonymous"
+                src={coverPhoto}
+                alt="Voertuig"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  transform: coverRotation ? `rotate(${coverRotation}deg)` : undefined,
+                }}
+              />
             ) : (
               <div style={{
-                width: '60mm',
-                height: '45mm',
-                backgroundColor: '#f5f5f5',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-                <span style={{ 
-                  color: '#888888', 
-                  fontSize: '9pt',
-                  fontStyle: 'italic',
-                }}>
-                  Geen foto
-                </span>
-              </div>
+                width: '100%',
+                height: '100%',
+                backgroundColor: '#f0f0f0',
+              }} />
             )}
           </div>
         </div>
 
-        {/* ===== FOOTER BLOCK ===== */}
+        {/* ===== FOOTER - Fixed at bottom ===== */}
         <div style={{ 
-          borderTop: '0.5pt solid #c0c0c0', 
-          paddingTop: '6mm',
           marginTop: 'auto',
-          paddingBottom: '18mm',
+          paddingTop: '10mm',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'flex-end',
         }}>
           {/* Left: Logo + Company Details */}
           <div>
-            {/* Logo */}
             <img 
               crossOrigin="anonymous"
               src={logoAutomobiel} 
               alt="Automobiel Taxaties" 
               style={{ 
-                maxWidth: '32mm', 
-                height: 'auto',
+                height: '12mm',
+                width: 'auto',
                 marginBottom: '3mm',
                 display: 'block',
               }}
             />
-
-            {/* Company Details */}
             <div style={{ 
-              fontSize: '9pt', 
+              fontSize: '8.5pt', 
               color: '#1a1a1a',
               lineHeight: 1.25,
             }}>
               <p style={{ margin: 0, fontWeight: 500 }}>
                 Automobiel Taxaties
               </p>
-              <p style={{ margin: '1mm 0 0 0' }}>
+              <p style={{ margin: '0.5mm 0 0 0' }}>
                 Leigraaf 160, 6651 GJ Druten
               </p>
-              <p style={{ margin: '1mm 0 0 0' }}>
-                KvK: 95549269 · BTW: NL003366178B93
+              <p style={{ margin: '0.5mm 0 0 0' }}>
+                KvK: 95549269
               </p>
-              <p style={{ margin: '1mm 0 0 0' }}>
-                IBAN: NL80RABO 0387915680
+              <p style={{ margin: '0.5mm 0 0 0' }}>
+                BTW: NL003366178B93
+              </p>
+              <p style={{ margin: '0.5mm 0 0 0' }}>
+                TMV: 33106 · VRT: 22-523-M
+              </p>
+              <p style={{ margin: '0.5mm 0 0 0' }}>
+                Bank: NL80 RABO 0387 9156 80
               </p>
             </div>
           </div>
 
           {/* Right: Page Number */}
           <p style={{ 
-            fontSize: '9pt', 
+            fontSize: '8.5pt', 
             color: '#1a1a1a',
             margin: 0,
           }}>
