@@ -354,7 +354,7 @@ const ReportDetail = () => {
         html2canvas: { 
           // NOTE: scale 4 can cause memory/blank renders on large multi-page docs.
           // First make it reliable; we can tune quality afterwards.
-          scale: 2,
+          scale: 3,
           useCORS: true,
           allowTaint: false,
           logging: false,
