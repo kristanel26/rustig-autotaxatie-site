@@ -1,0 +1,1 @@
+ALTER TABLE public.reports ADD COLUMN kleur_laksoort text;
