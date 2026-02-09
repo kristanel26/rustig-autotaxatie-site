@@ -182,11 +182,12 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
           src={signatureErik} 
           alt="Handtekening Erik Elderson" 
           style={{ 
-            height: '60mm',
+            height: '80mm',
             width: 'auto',
-            maxWidth: '130mm',
+            maxWidth: '160mm',
             display: 'block',
-            marginTop: '0',
+            marginTop: '-4mm',
+            marginLeft: '-5mm',
           }} 
         />
       </div>
@@ -199,7 +200,7 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
         right: '20mm',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'flex-end'
+        alignItems: 'center'
       }}>
         <div style={{ 
           fontSize: '9pt', 
@@ -208,29 +209,23 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
         }}>
           Pagina {pageNumber} van {totalPages}
         </div>
-        <div style={{ 
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-end',
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '2mm' }}>
-            <span style={{ 
-              fontSize: '9pt', 
-              fontWeight: 500,
-              color: '#000000',
-            }}>
-              Paraaf
-            </span>
-            <img 
-              crossOrigin="anonymous"
-              src={signatureErik} 
-              alt="Paraaf" 
-              style={{ 
-                height: '16mm',
-                width: 'auto',
-              }} 
-            />
-          </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '3mm' }}>
+          <span style={{ 
+            fontSize: '9pt', 
+            fontWeight: 500,
+            color: '#000000',
+          }}>
+            Paraaf
+          </span>
+          <img 
+            crossOrigin="anonymous"
+            src={signatureErik} 
+            alt="Paraaf" 
+            style={{ 
+              height: '20mm',
+              width: 'auto',
+            }} 
+          />
         </div>
       </div>
     </div>
