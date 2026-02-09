@@ -148,7 +148,7 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
           ...bodyTextStyle,
           marginBottom: '6mm',
         }}>
-          Aldus, naar beste weten en kunnen opgemaakt te Druten, {formatDateLong(report.inspection_date)}.
+          Aldus, naar beste weten en kunnen opgemaakt te Druten, {formatDateLong(null)}.
         </p>
         
         <p style={{ 
@@ -186,9 +186,9 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
           src={signatureErik} 
           alt="Handtekening Erik Elderson" 
           style={{ 
-            height: '65mm',
+            height: '70mm',
             width: 'auto',
-            maxWidth: '110mm',
+            maxWidth: '120mm',
           }} 
         />
       </div>

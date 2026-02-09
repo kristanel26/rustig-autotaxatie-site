@@ -1,4 +1,5 @@
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
+import signatureErik from '@/assets/signature-erik-elderson.svg';
 import { getQualityClassByValue } from '@/lib/qualityClasses';
 
 interface Report {
@@ -463,8 +464,14 @@ const PDFAppraisalFindingsContent = ({ report, pageNumber = 3 }: PDFAppraisalFin
           <span style={{ margin: '0 4px' }}>|</span>
           KVK: 95549269
         </div>
-        <div style={{ fontSize: '7px', color: '#000000' }}>
-          Pagina {pageNumber}
+        <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-end' }}>
+          <div style={{ fontSize: '7px', color: '#000000' }}>
+            Pagina {pageNumber}
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0mm' }}>
+            <span style={{ fontSize: '8px', fontWeight: 600, color: '#000000', marginBottom: '1mm' }}>Paraaf</span>
+            <img crossOrigin="anonymous" src={signatureErik} alt="Paraaf" style={{ height: '14mm', width: 'auto' }} />
+          </div>
         </div>
       </div>
     </div>
