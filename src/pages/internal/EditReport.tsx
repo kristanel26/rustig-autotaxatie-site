@@ -968,10 +968,16 @@ const EditReport = () => {
         inspection_start_time: inspectionData.inspection_start_time || null,
         inspection_end_time: inspectionData.inspection_end_time || null,
         
-        // Valuation data
-        appraised_value: valuationData.appraised_value ? parseFloat(valuationData.appraised_value) : null,
-        appraised_value_text: valuationData.appraised_value_text || null,
-        quality_class: valuationData.quality_class || null,
+        // Valuation data - use klassieker-specific data when applicable
+        appraised_value: report?.report_type === 'klassieker'
+          ? (klassiekerValueData.appraised_value ? parseFloat(klassiekerValueData.appraised_value) : null)
+          : (valuationData.appraised_value ? parseFloat(valuationData.appraised_value) : null),
+        appraised_value_text: report?.report_type === 'klassieker'
+          ? (klassiekerValueData.appraised_value_text || null)
+          : (valuationData.appraised_value_text || null),
+        quality_class: report?.report_type === 'klassieker'
+          ? (klassiekerValueData.quality_class || null)
+          : (valuationData.quality_class || null),
         general_remarks: valuationData.general_remarks || null,
         
         // Photos
