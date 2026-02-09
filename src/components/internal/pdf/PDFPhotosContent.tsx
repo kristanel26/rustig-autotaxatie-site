@@ -21,8 +21,8 @@ interface PDFPhotosContentProps {
 }
 
 const PDFPhotosContent = ({ report, startPageNumber = 4, totalPages = 10 }: PDFPhotosContentProps) => {
-  // Get all photos except cover photo (index 0), filter out empty/blank URLs
-  const detailPhotos = (report?.vehicle_photos?.slice(1) || []).filter((url: string) => url && url.trim() !== '');
+  // Get all photos including cover photo, filter out empty/blank URLs
+  const detailPhotos = (report?.vehicle_photos || []).filter((url: string) => url && url.trim() !== '');
   const rotations = report?.vehicle_photo_rotations || {};
 
   // Helper to get rotation for a photo
