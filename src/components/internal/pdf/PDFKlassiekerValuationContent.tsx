@@ -176,17 +176,18 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
           Erik Elderson
         </p>
         
-        {/* Signature - directly under Erik Elderson name */}
+        {/* Signature - directly under Erik Elderson name, overlapping slightly like a real signature */}
         <img 
           crossOrigin="anonymous"
           src={signatureErik} 
           alt="Handtekening Erik Elderson" 
           style={{ 
-            height: '50mm',
+            height: '60mm',
             width: 'auto',
-            maxWidth: '120mm',
+            maxWidth: '140mm',
             display: 'block',
-            marginTop: '2mm',
+            marginTop: '-6mm',
+            marginLeft: '-3mm',
           }} 
         />
       </div>
