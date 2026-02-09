@@ -52,10 +52,10 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
 
   // Typography styles matching page 1
   const bodyTextStyle: React.CSSProperties = {
-    fontSize: '10pt',
+    fontSize: '11pt',
     fontWeight: 500,
     color: '#000000',
-    lineHeight: 1.6,
+    lineHeight: 1.7,
     textAlign: 'justify',
   };
 
@@ -184,9 +184,9 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
           src={signatureErik} 
           alt="Handtekening Erik Elderson" 
           style={{ 
-            height: '30mm',
+            height: '45mm',
             width: 'auto',
-            maxWidth: '75mm',
+            maxWidth: '90mm',
           }} 
         />
       </div>
@@ -199,7 +199,7 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
         right: '20mm',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'flex-end'
       }}>
         <div style={{ 
           fontSize: '9pt', 
@@ -209,11 +209,27 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
           Pagina {pageNumber} van {totalPages}
         </div>
         <div style={{ 
-          fontSize: '9pt', 
-          fontWeight: 500,
-          color: '#000000' 
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-end',
+          gap: '1mm',
         }}>
-          Paraaf: ________________
+          <img 
+            crossOrigin="anonymous"
+            src={signatureErik} 
+            alt="Paraaf" 
+            style={{ 
+              height: '12mm',
+              width: 'auto',
+            }} 
+          />
+          <span style={{ 
+            fontSize: '8pt', 
+            fontWeight: 500,
+            color: '#000000' 
+          }}>
+            Paraaf
+          </span>
         </div>
       </div>
     </div>

@@ -98,7 +98,7 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
         boxSizing: 'border-box',
         fontSize: '10pt',
-        color: '#1a1a1a',
+        color: '#000000',
         lineHeight: 1.5,
       }}
     >
@@ -161,9 +161,9 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
           </h1>
           <p style={{ 
             fontSize: '10pt', 
-            color: '#444444', 
+            color: '#000000', 
             margin: '2mm 0 0 0',
-            fontWeight: 400,
+            fontWeight: 500,
           }}>
             Volgens artikel 7:960 BW
           </p>
@@ -344,7 +344,7 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
             {/* Right: Page Number */}
             <p style={{ 
               fontSize: '8.5pt', 
-              color: '#1a1a1a',
+              color: '#000000',
               margin: 0,
             }}>
               Pagina 1 van {totalPages}

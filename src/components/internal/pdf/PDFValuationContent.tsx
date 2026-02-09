@@ -77,9 +77,10 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
 
       {/* Legal Text - plain paragraph, no background */}
       <p style={{ 
-        fontSize: '10px', 
+        fontSize: '11pt', 
         color: '#000000', 
-        lineHeight: 1.8, 
+        fontWeight: 500,
+        lineHeight: 1.7, 
         marginBottom: '20px',
         textAlign: 'justify',
       }}>
@@ -88,9 +89,10 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
 
       {/* Valuation Introduction + Value on same flow */}
       <p style={{ 
-        fontSize: '10px', 
+        fontSize: '11pt', 
         color: '#000000', 
-        lineHeight: 1.8, 
+        fontWeight: 500,
+        lineHeight: 1.7, 
         marginBottom: '20px',
       }}>
         {VALUATION_INTRO}
@@ -98,7 +100,7 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
 
       {/* Value - simple bold text, no colored block */}
       <p style={{ 
-        fontSize: '14px', 
+        fontSize: '14pt', 
         fontWeight: 700, 
         color: '#000000', 
         marginBottom: '20px',
@@ -108,9 +110,10 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
 
       {/* Signing Text */}
       <p style={{ 
-        fontSize: '10px', 
+        fontSize: '11pt', 
         color: '#000000', 
-        lineHeight: 1.8, 
+        fontWeight: 500,
+        lineHeight: 1.7, 
         marginBottom: '20px',
         textAlign: 'justify',
       }}>
@@ -119,8 +122,9 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
 
       {/* Date line */}
       <p style={{ 
-        fontSize: '10px', 
+        fontSize: '11pt', 
         color: '#000000', 
+        fontWeight: 500,
         marginBottom: '24px',
       }}>
         Aldus, naar beste weten en kunnen opgemaakt te Druten, {formatDateLong(report.inspection_date)}
@@ -128,13 +132,13 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
 
       {/* Signature block */}
       <div style={{ marginBottom: '16px' }}>
-        <p style={{ fontSize: '10px', color: '#000000', margin: '0 0 8px 0' }}>
+        <p style={{ fontSize: '11pt', color: '#000000', fontWeight: 500, margin: '0 0 8px 0' }}>
           Hoogachtend,
         </p>
-        <p style={{ fontSize: '10px', color: '#000000', fontWeight: 600, margin: '0 0 2px 0' }}>
+        <p style={{ fontSize: '11pt', color: '#000000', fontWeight: 600, margin: '0 0 2px 0' }}>
           Automobiel Taxaties
         </p>
-        <p style={{ fontSize: '10px', color: '#000000', fontWeight: 600, margin: '0 0 12px 0' }}>
+        <p style={{ fontSize: '11pt', color: '#000000', fontWeight: 700, margin: '0 0 4mm 0' }}>
           Erik Elderson
         </p>
         <img 
@@ -142,30 +146,48 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
           src={signatureErik} 
           alt="Handtekening Erik Elderson" 
           style={{ 
-            height: '25mm',
+            height: '45mm',
             width: 'auto',
-            maxWidth: '70mm',
+            maxWidth: '90mm',
           }} 
         />
       </div>
 
-      {/* Footer with page number and paraaf space */}
+      {/* Footer with page number and paraaf */}
       <div style={{ 
         position: 'absolute', 
-        bottom: '24px', 
-        left: '28px', 
-        right: '28px',
-        borderTop: '1px solid #e2e8f0', 
-        paddingTop: '12px',
+        bottom: '20mm', 
+        left: '25mm', 
+        right: '20mm',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'flex-end'
       }}>
-        <div style={{ fontSize: '9px', color: '#000000' }}>
+        <div style={{ fontSize: '9pt', fontWeight: 500, color: '#000000' }}>
           Pagina {pageNumber} van {totalPages}
         </div>
-        <div style={{ fontSize: '9px', color: '#000000' }}>
-          Paraaf: ________________
+        <div style={{ 
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-end',
+          gap: '1mm',
+        }}>
+          <img 
+            crossOrigin="anonymous"
+            src={signatureErik} 
+            alt="Paraaf" 
+            style={{ 
+              height: '12mm',
+              width: 'auto',
+            }} 
+          />
+          <span style={{ 
+            fontSize: '8pt', 
+            fontWeight: 500,
+            color: '#000000' 
+          }}>
+            Paraaf
+          </span>
         </div>
       </div>
     </div>
