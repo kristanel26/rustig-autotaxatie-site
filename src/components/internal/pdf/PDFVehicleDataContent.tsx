@@ -259,12 +259,12 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2, totalPages = 10 }: PDFV
           KVK: 95549269
         </div>
         <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-end' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+            <img crossOrigin="anonymous" src={signatureErik} alt="Paraaf" style={{ height: '14mm', width: 'auto' }} />
+            <span style={{ fontSize: '9px', fontWeight: 500, color: '#000000', marginTop: '1mm' }}>Paraaf</span>
+          </div>
           <div style={{ fontSize: '10px', color: '#000000', fontWeight: 500 }}>
             Pagina {pageNumber} van {totalPages}
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
-            <span style={{ fontSize: '9px', fontWeight: 500, color: '#000000' }}>Paraaf</span>
-            <img crossOrigin="anonymous" src={signatureErik} alt="Paraaf" style={{ height: '16mm', width: 'auto' }} />
           </div>
         </div>
       </div>
