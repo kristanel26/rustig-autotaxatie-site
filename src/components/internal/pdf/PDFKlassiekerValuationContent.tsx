@@ -53,10 +53,12 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
   // Typography styles matching page 1
   const bodyTextStyle: React.CSSProperties = {
     fontSize: '11pt',
-    fontWeight: 500,
+    fontWeight: 600,
     color: '#000000',
     lineHeight: 1.7,
     textAlign: 'justify',
+    WebkitFontSmoothing: 'none' as unknown as string,
+    MozOsxFontSmoothing: 'unset' as unknown as string,
   };
 
   return (
@@ -114,7 +116,7 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
       <div style={{ marginBottom: '8mm' }}>
         <p style={{ 
           fontSize: '14pt', 
-          fontWeight: 700, 
+          fontWeight: 800, 
           color: '#000000', 
           margin: '0 0 2mm 0',
         }}>
@@ -123,7 +125,7 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
         {valueInWords && (
           <p style={{ 
             fontSize: '10pt',
-            fontWeight: 500,
+            fontWeight: 600,
             color: '#000000',
             margin: 0,
           }}>
@@ -151,7 +153,7 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
         
         <p style={{ 
           fontSize: '10pt',
-          fontWeight: 500,
+          fontWeight: 600,
           color: '#000000',
           margin: '0 0 4mm 0',
         }}>
@@ -160,7 +162,7 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
         
         <p style={{ 
           fontSize: '10pt',
-          fontWeight: 500,
+          fontWeight: 600,
           color: '#000000',
           margin: '0 0 2mm 0',
         }}>
@@ -168,8 +170,8 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
         </p>
         
         <p style={{ 
-          fontSize: '10pt',
-          fontWeight: 700,
+          fontSize: '11pt',
+          fontWeight: 800,
           color: '#000000',
           margin: 0,
         }}>
@@ -177,16 +179,16 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
         </p>
       </div>
 
-      {/* Signature */}
-      <div style={{ marginTop: '6mm' }}>
+      {/* Signature - directly under Erik Elderson name */}
+      <div style={{ marginTop: '2mm' }}>
         <img 
           crossOrigin="anonymous"
           src={signatureErik} 
           alt="Handtekening Erik Elderson" 
           style={{ 
-            height: '45mm',
+            height: '55mm',
             width: 'auto',
-            maxWidth: '90mm',
+            maxWidth: '100mm',
           }} 
         />
       </div>
@@ -203,7 +205,7 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
       }}>
         <div style={{ 
           fontSize: '9pt', 
-          fontWeight: 500,
+          fontWeight: 600,
           color: '#000000' 
         }}>
           Pagina {pageNumber} van {totalPages}
@@ -219,13 +221,13 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
             src={signatureErik} 
             alt="Paraaf" 
             style={{ 
-              height: '12mm',
+              height: '18mm',
               width: 'auto',
             }} 
           />
           <span style={{ 
             fontSize: '8pt', 
-            fontWeight: 500,
+            fontWeight: 600,
             color: '#000000' 
           }}>
             Paraaf
