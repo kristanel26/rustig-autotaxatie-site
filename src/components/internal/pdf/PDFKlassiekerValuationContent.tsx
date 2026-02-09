@@ -182,11 +182,11 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
           src={signatureErik} 
           alt="Handtekening Erik Elderson" 
           style={{ 
-            height: '60mm',
+            height: '80mm',
             width: 'auto',
-            maxWidth: '140mm',
+            maxWidth: '160mm',
             display: 'block',
-            marginTop: '-6mm',
+            marginTop: '-8mm',
             marginLeft: '-3mm',
           }} 
         />

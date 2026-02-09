@@ -350,7 +350,7 @@ const ReportDetail = () => {
       const opt = {
         margin: 0,
         filename: generatePdfFilename(),
-        image: { type: 'jpeg', quality: 1.0 },
+        image: { type: 'png' },
         html2canvas: { 
           // NOTE: scale 4 can cause memory/blank renders on large multi-page docs.
           // First make it reliable; we can tune quality afterwards.
