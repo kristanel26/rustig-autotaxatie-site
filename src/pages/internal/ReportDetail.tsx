@@ -16,6 +16,7 @@ import PDFAppraisalFindingsContent from '@/components/internal/pdf/PDFAppraisalF
 import PDFValuationContent from '@/components/internal/pdf/PDFValuationContent';
 import PDFPhotosContent from '@/components/internal/pdf/PDFPhotosContent';
 import PDFKlassiekerValuationContent from '@/components/internal/pdf/PDFKlassiekerValuationContent';
+import PDFWevValuationContent from '@/components/internal/pdf/PDFWevValuationContent';
 
 interface Report {
   id: string;
@@ -236,52 +237,65 @@ const ReportDetail = () => {
        const root = createRoot(container);
        rootRef.current = root;
 
-       // Handle klassieker reports separately
-       const isKlassiekerReport = report.report_type === 'klassieker';
-       
-       if (isKlassiekerReport) {
-         // Klassieker: Cover -> Valuation (if applicable) -> Vehicle Data -> Photos
-         // Calculate page numbers dynamically
-         const hasValuation = report.appraised_value && report.appraised_value > 0;
-         let currentPage = 1; // Cover
-         const valuationPage = hasValuation ? ++currentPage : 0;
-         const vehicleDataPage = ++currentPage;
-         const photoStartPage = currentPage + 1;
-         
-         // Calculate total pages
-         const detailPhotos = (report.vehicle_photos || []).slice(1);
-         const photoPages = Math.ceil(detailPhotos.length / 6);
-         const totalPages = currentPage + photoPages;
+        // Determine report type
+        const isKlassiekerReport = report.report_type === 'klassieker';
+        const isWevReport = report.report_type === 'wev';
+        
+        // ARCHITECTURE: Waardevaststelling is ALWAYS page 2, never conditional
+        // Fixed page sequence: Cover(1) → Waardevaststelling(2) → VehicleData(3) → ...
+        const valuationPage = 2;
+        const vehicleDataPage = 3;
+        
+        if (isKlassiekerReport) {
+          // Klassieker: Cover → Waardevaststelling → Vehicle Data → Photos
+          const photoStartPage = 4;
+          const detailPhotos = (report.vehicle_photos || []).slice(1);
+          const photoPages = Math.ceil(detailPhotos.length / 6);
+          const totalPages = 3 + photoPages;
 
-         root.render(
-           <div id="pdf-content" style={{ fontFamily: 'Helvetica, Arial, sans-serif', background: 'white' }}>
-             <PDFCoverContent report={report} />
-             {hasValuation && (
-               <PDFKlassiekerValuationContent report={report} pageNumber={valuationPage} totalPages={totalPages} />
-             )}
-             <PDFVehicleDataContent report={report} pageNumber={vehicleDataPage} totalPages={totalPages} />
-             <PDFPhotosContent report={report} startPageNumber={photoStartPage} totalPages={totalPages} />
-           </div>
-         );
-       } else {
-         // Camper/WEV: Cover -> Valuation (if applicable) -> Vehicle Data -> Appraisal Findings -> Photos
-         const hasValuation = report.appraised_value && report.appraised_value > 0;
-         const valuationPageNumber = hasValuation ? 2 : 0;
-         const vehicleDataPageNumber = hasValuation ? 3 : 2;
-         const appraisalFindingsPageNumber = hasValuation ? 4 : 3;
+          root.render(
+            <div id="pdf-content" style={{ fontFamily: 'Helvetica, Arial, sans-serif', background: 'white' }}>
+              <PDFCoverContent report={report} />
+              <PDFKlassiekerValuationContent report={report} pageNumber={valuationPage} totalPages={totalPages} />
+              <PDFVehicleDataContent report={report} pageNumber={vehicleDataPage} totalPages={totalPages} />
+              <PDFPhotosContent report={report} startPageNumber={photoStartPage} totalPages={totalPages} />
+            </div>
+          );
+        } else if (isWevReport) {
+          // WEV: Cover → Waardevaststelling → Vehicle Data → Appraisal Findings → Photos
+          const appraisalFindingsPage = 4;
+          const photoStartPage = 5;
+          const detailPhotos = (report.vehicle_photos || []).slice(1);
+          const photoPages = Math.ceil(detailPhotos.length / 6);
+          const totalPages = 4 + photoPages;
 
-         root.render(
-           <div id="pdf-content" style={{ fontFamily: 'Inter, system-ui, sans-serif', background: 'white' }}>
-             <PDFCoverContent report={report} />
-             {hasValuation && (
-               <PDFValuationContent report={report} pageNumber={valuationPageNumber} totalPages={10} />
-             )}
-             <PDFVehicleDataContent report={report} pageNumber={vehicleDataPageNumber} totalPages={10} />
-             <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPageNumber} />
-             <PDFPhotosContent report={report} />
-           </div>
-         );
-       }
+          root.render(
+            <div id="pdf-content" style={{ fontFamily: 'Helvetica, Arial, sans-serif', background: 'white' }}>
+              <PDFCoverContent report={report} />
+              <PDFWevValuationContent report={report} pageNumber={valuationPage} totalPages={totalPages} />
+              <PDFVehicleDataContent report={report} pageNumber={vehicleDataPage} totalPages={totalPages} />
+              <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPage} />
+              <PDFPhotosContent report={report} startPageNumber={photoStartPage} totalPages={totalPages} />
+            </div>
+          );
+        } else {
+          // Camper: Cover → Waardevaststelling → Vehicle Data → Appraisal Findings → Photos
+          const appraisalFindingsPage = 4;
+          const photoStartPage = 5;
+          const detailPhotos = (report.vehicle_photos || []).slice(1);
+          const photoPages = Math.ceil(detailPhotos.length / 6);
+          const totalPages = 4 + photoPages;
+
+          root.render(
+            <div id="pdf-content" style={{ fontFamily: 'Helvetica, Arial, sans-serif', background: 'white' }}>
+              <PDFCoverContent report={report} />
+              <PDFValuationContent report={report} pageNumber={valuationPage} totalPages={totalPages} />
+              <PDFVehicleDataContent report={report} pageNumber={vehicleDataPage} totalPages={totalPages} />
+              <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPage} />
+              <PDFPhotosContent report={report} startPageNumber={photoStartPage} totalPages={totalPages} />
+            </div>
+          );
+        }
 
       // Wait for React to paint the DOM
       await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
