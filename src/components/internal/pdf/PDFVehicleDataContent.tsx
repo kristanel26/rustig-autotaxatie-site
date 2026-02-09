@@ -200,27 +200,31 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2, totalPages = 10 }: PDFV
             />
           </div>
 
-          {/* Sectie 6: Opbouw en constructie */}
-          <div style={{ marginBottom: '22px' }}>
-            <SectionHeader number="6" title="Opbouw en constructie" />
-            <DataRow label="Soort bouw" value={report.soort_bouw || ''} />
-            <DataRow label="Opbouw merk" value={report.opbouw_merk || ''} />
-            <DataRow label="Opbouw type" value={report.opbouw_type || ''} />
-            <DataRow label="Constructievorm" value={report.constructievorm || ''} />
-          </div>
+          {/* Sectie 6: Opbouw en constructie (not for klassieker) */}
+          {!isKlassiekerReport && (
+            <div style={{ marginBottom: '22px' }}>
+              <SectionHeader number="6" title="Opbouw en constructie" />
+              <DataRow label="Soort bouw" value={report.soort_bouw || ''} />
+              <DataRow label="Opbouw merk" value={report.opbouw_merk || ''} />
+              <DataRow label="Opbouw type" value={report.opbouw_type || ''} />
+              <DataRow label="Constructievorm" value={report.constructievorm || ''} />
+            </div>
+          )}
 
-          {/* Sectie 7: Gebruik en stalling */}
-          <div style={{ marginBottom: '22px' }}>
-            <SectionHeader number="7" title="Gebruik en stalling" />
-            <DataRow label="Gebruik" value={report.gebruik || ''} />
-            <DataRow label="Stalling" value={report.stalling || ''} />
-            <DataRow label="Staat bij opname" value={report.staat_bij_opname || ''} />
-          </div>
+          {/* Sectie 7: Gebruik en stalling (not for klassieker) */}
+          {!isKlassiekerReport && (
+            <div style={{ marginBottom: '22px' }}>
+              <SectionHeader number={isKlassiekerReport ? "6" : "7"} title="Gebruik en stalling" />
+              <DataRow label="Gebruik" value={report.gebruik || ''} />
+              <DataRow label="Stalling" value={report.stalling || ''} />
+              <DataRow label="Staat bij opname" value={report.staat_bij_opname || ''} />
+            </div>
+          )}
 
-          {/* Sectie 8: Kwaliteitsklasse */}
+          {/* Sectie 8 (or 6 for klassieker): Kwaliteitsklasse */}
           {report.quality_class && (
             <div style={{ marginBottom: '22px' }}>
-              <SectionHeader number="8" title="Kwaliteitsklasse" />
+              <SectionHeader number={isKlassiekerReport ? "6" : "8"} title="Kwaliteitsklasse" />
               <div style={{ padding: '10px 0' }}>
                 <div style={{ fontSize: '13px', fontWeight: 600, color: '#000000', marginBottom: '6px' }}>
                   {report.quality_class}
