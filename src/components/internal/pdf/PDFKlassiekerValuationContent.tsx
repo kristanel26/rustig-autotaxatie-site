@@ -182,11 +182,11 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
           src={signatureErik} 
           alt="Handtekening Erik Elderson" 
           style={{ 
-            height: '45mm',
+            height: '60mm',
             width: 'auto',
             maxWidth: '130mm',
             display: 'block',
-            marginTop: '-1mm',
+            marginTop: '0',
           }} 
         />
       </div>
@@ -213,23 +213,24 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
           flexDirection: 'column',
           alignItems: 'flex-end',
         }}>
-          <img 
-            crossOrigin="anonymous"
-            src={signatureErik} 
-            alt="Paraaf" 
-            style={{ 
-              height: '14mm',
-              width: 'auto',
-            }} 
-          />
-          <span style={{ 
-            fontSize: '9pt', 
-            fontWeight: 500,
-            color: '#000000',
-            marginTop: '1mm',
-          }}>
-            Paraaf
-          </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2mm' }}>
+            <span style={{ 
+              fontSize: '9pt', 
+              fontWeight: 500,
+              color: '#000000',
+            }}>
+              Paraaf
+            </span>
+            <img 
+              crossOrigin="anonymous"
+              src={signatureErik} 
+              alt="Paraaf" 
+              style={{ 
+                height: '16mm',
+                width: 'auto',
+              }} 
+            />
+          </div>
         </div>
       </div>
     </div>
