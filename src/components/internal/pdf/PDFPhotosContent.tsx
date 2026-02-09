@@ -21,8 +21,8 @@ interface PDFPhotosContentProps {
 }
 
 const PDFPhotosContent = ({ report, startPageNumber = 4, totalPages = 10 }: PDFPhotosContentProps) => {
-  // Get all photos except cover photo (index 0)
-  const detailPhotos = report?.vehicle_photos?.slice(1) || [];
+  // Get all photos except cover photo (index 0), filter out empty/blank URLs
+  const detailPhotos = (report?.vehicle_photos?.slice(1) || []).filter((url: string) => url && url.trim() !== '');
   const rotations = report?.vehicle_photo_rotations || {};
 
   // Helper to get rotation for a photo
@@ -52,7 +52,7 @@ const PDFPhotosContent = ({ report, startPageNumber = 4, totalPages = 10 }: PDFP
             padding: '22px 24px',
             boxSizing: 'border-box',
             position: 'relative',
-            pageBreakAfter: pageIndex < pages.length - 1 ? 'always' : 'auto',
+            pageBreakAfter: pageIndex < pages.length - 1 ? 'always' : undefined,
             fontFamily: 'Helvetica, Arial, sans-serif',
           }}
         >
@@ -129,11 +129,11 @@ const PDFPhotosContent = ({ report, startPageNumber = 4, totalPages = 10 }: PDFP
               KVK: 95549269
             </div>
             <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-end' }}>
-              <div style={{ fontSize: '9px', color: '#000000' }}>
+              <div style={{ fontSize: '9px', color: '#000000', fontWeight: 500 }}>
                 Fotobijlage {pageIndex + 1}
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0mm' }}>
-                <span style={{ fontSize: '8px', fontWeight: 600, color: '#000000', marginBottom: '1mm' }}>Paraaf</span>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                <span style={{ fontSize: '8px', fontWeight: 500, color: '#000000' }}>Paraaf</span>
                 <img crossOrigin="anonymous" src={signatureErik} alt="Paraaf" style={{ height: '14mm', width: 'auto' }} />
               </div>
             </div>

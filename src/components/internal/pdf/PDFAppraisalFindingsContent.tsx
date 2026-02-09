@@ -465,11 +465,11 @@ const PDFAppraisalFindingsContent = ({ report, pageNumber = 3 }: PDFAppraisalFin
           KVK: 95549269
         </div>
         <div style={{ display: 'flex', gap: '20px', alignItems: 'flex-end' }}>
-          <div style={{ fontSize: '7px', color: '#000000' }}>
+          <div style={{ fontSize: '7px', color: '#000000', fontWeight: 500 }}>
             Pagina {pageNumber}
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0mm' }}>
-            <span style={{ fontSize: '8px', fontWeight: 600, color: '#000000', marginBottom: '1mm' }}>Paraaf</span>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+            <span style={{ fontSize: '8px', fontWeight: 500, color: '#000000' }}>Paraaf</span>
             <img crossOrigin="anonymous" src={signatureErik} alt="Paraaf" style={{ height: '14mm', width: 'auto' }} />
           </div>
         </div>
