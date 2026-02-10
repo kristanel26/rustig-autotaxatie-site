@@ -1,17 +1,6 @@
+import { Page, View, Text, Image } from '@react-pdf/renderer';
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
 import signatureErik from '@/assets/signature-erik-elderson.svg';
-
-interface PhotoRotations {
-  [url: string]: number;
-}
-
-interface Report {
-  id: string;
-  document_reference: string | null;
-  vehicle_photos: string[] | null;
-  vehicle_photo_rotations: PhotoRotations | null;
-  report_type: string | null;
-}
 
 interface PDFPhotosContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -21,19 +10,12 @@ interface PDFPhotosContentProps {
 }
 
 const PDFPhotosContent = ({ report, startPageNumber = 4, totalPages = 10 }: PDFPhotosContentProps) => {
-  // Get all photos including cover photo, filter out empty/blank URLs
   const detailPhotos = (report?.vehicle_photos || []).filter((url: string) => url && url.trim() !== '');
-  const rotations = report?.vehicle_photo_rotations || {};
 
-  // Helper to get rotation for a photo
-  const getRotation = (url: string): number => rotations[url] || 0;
-
-  // Don't render if no detail photos
   if (detailPhotos.length === 0) {
     return null;
   }
 
-  // Split photos into pages (6 photos per page for a 2x3 grid)
   const photosPerPage = 6;
   const pages: string[][] = [];
   for (let i = 0; i < detailPhotos.length; i += photosPerPage) {
@@ -43,100 +25,76 @@ const PDFPhotosContent = ({ report, startPageNumber = 4, totalPages = 10 }: PDFP
   return (
     <>
       {pages.map((pagePhotos, pageIndex) => (
-        <div 
-          key={pageIndex}
-          className="bg-white pdf-page"
-          style={{
-            width: '210mm',
-            minHeight: '297mm',
-            padding: '22px 24px',
-            boxSizing: 'border-box',
-            position: 'relative',
-            pageBreakAfter: pageIndex < pages.length - 1 ? 'always' : undefined,
-            fontFamily: 'Helvetica, Arial, sans-serif',
-          }}
-        >
+        <Page key={pageIndex} size="A4" style={{ padding: '22 24', fontFamily: 'Helvetica', position: 'relative' }}>
           {/* Header */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
-            <div>
-              <h1 style={{ fontSize: '18px', fontWeight: 600, color: '#000000', margin: 0, textTransform: 'uppercase' }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
+            <View>
+              <Text style={{ fontSize: 18, fontFamily: 'Helvetica-Bold', color: '#000000', textTransform: 'uppercase' }}>
                 FOTOBIJLAGE
-              </h1>
-              <p style={{ fontSize: '10px', color: '#000000', margin: '4px 0 0 0' }}>
+              </Text>
+              <Text style={{ fontSize: 10, color: '#000000', marginTop: 4 }}>
                 Documentkenmerk: {report.document_reference || '–'}
-              </p>
-            </div>
-            <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '36px', width: 'auto' }} />
-          </div>
+              </Text>
+            </View>
+            <Image src={logoAutomobiel} style={{ height: 36, width: 'auto' }} />
+          </View>
 
-          {/* Photo Grid - 2 columns x 3 rows */}
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(2, 1fr)', 
-            gap: '14px',
-            marginBottom: '24px',
-          }}>
-            {pagePhotos.map((photo, photoIndex) => {
-              const rotation = getRotation(photo);
-              
-              return (
-                <div 
-                  key={photoIndex}
+          {/* Photo Grid - 2 columns x 3 rows using flexbox */}
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12, marginBottom: 20 }}>
+            {pagePhotos.map((photo: string, photoIndex: number) => (
+              <View
+                key={photoIndex}
+                style={{
+                  width: '48%',
+                  height: 200,
+                  borderWidth: 1,
+                  borderColor: '#e2e8f0',
+                  backgroundColor: '#f8fafc',
+                  overflow: 'hidden',
+                  borderRadius: 4,
+                }}
+              >
+                <Image
+                  src={photo}
                   style={{
-                    aspectRatio: '4/3',
-                    overflow: 'hidden',
-                    borderRadius: '6px',
-                    border: '1px solid #e2e8f0',
-                    backgroundColor: '#f8fafc',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
                   }}
-                >
-                  <img
-                    crossOrigin="anonymous"
-                    src={photo}
-                    alt={`Voertuigfoto ${(pageIndex * photosPerPage) + photoIndex + 2}`}
-                    style={{
-                      maxWidth: '100%',
-                      maxHeight: '100%',
-                      objectFit: 'contain', // Never stretch, preserve aspect ratio
-                      transform: rotation ? `rotate(${rotation}deg)` : undefined,
-                    }}
-                  />
-                </div>
-              );
-            })}
-          </div>
+                />
+              </View>
+            ))}
+          </View>
 
-          {/* Footer with paraaf */}
-          <div style={{ 
-            position: 'absolute', 
-            bottom: '18px', 
-            left: '24px', 
-            right: '24px',
-            borderTop: '1px solid #e2e8f0', 
-            paddingTop: '10px',
-            display: 'flex',
+          {/* Footer */}
+          <View style={{
+            position: 'absolute',
+            bottom: 18,
+            left: 24,
+            right: 24,
+            borderTopWidth: 1,
+            borderTopColor: '#e2e8f0',
+            paddingTop: 8,
+            flexDirection: 'row',
             justifyContent: 'space-between',
-            alignItems: 'center'
+            alignItems: 'center',
           }}>
-            <div style={{ fontSize: '9px', color: '#000000' }}>
-              <span style={{ fontWeight: 600 }}>Automobiel Taxaties</span>
-              <span style={{ margin: '0 4px' }}>|</span>
-              Leigraaf 160, 6651 GJ Druten
-              <span style={{ margin: '0 4px' }}>|</span>
-              KVK: 95549269
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4mm' }}>
-              <span style={{ fontSize: '8px', fontWeight: 500, color: '#000000' }}>Paraaf</span>
-              <img crossOrigin="anonymous" src={signatureErik} alt="Paraaf" style={{ height: '20mm', width: 'auto' }} />
-              <span style={{ fontSize: '9px', color: '#000000', fontWeight: 500, marginLeft: '4mm' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={{ fontSize: 9, fontFamily: 'Helvetica-Bold', color: '#000000' }}>Automobiel Taxaties</Text>
+              <Text style={{ fontSize: 9, color: '#000000', marginHorizontal: 4 }}>|</Text>
+              <Text style={{ fontSize: 9, color: '#000000' }}>Leigraaf 160, 6651 GJ Druten</Text>
+              <Text style={{ fontSize: 9, color: '#000000', marginHorizontal: 4 }}>|</Text>
+              <Text style={{ fontSize: 9, color: '#000000' }}>KVK: 95549269</Text>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+              <Text style={{ fontSize: 8, color: '#000000' }}>Paraaf</Text>
+              <Image src={signatureErik} style={{ height: 57, width: 'auto' }} />
+              <Text style={{ fontSize: 9, color: '#000000', marginLeft: 8 }}>
                 Fotobijlage {pageIndex + 1}
-              </span>
-            </div>
-          </div>
-        </div>
+              </Text>
+            </View>
+          </View>
+        </Page>
       ))}
     </>
   );

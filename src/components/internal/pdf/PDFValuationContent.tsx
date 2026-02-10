@@ -1,3 +1,4 @@
+import { Page, View, Text, Image } from '@react-pdf/renderer';
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
 import signatureErik from '@/assets/signature-erik-elderson.svg';
 
@@ -28,24 +29,13 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
 
   const formatDateLong = (dateString: string | null) => {
     if (!dateString) {
-      return new Date().toLocaleDateString('nl-NL', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-      });
+      return new Date().toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
     }
-    return new Date(dateString).toLocaleDateString('nl-NL', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    });
+    return new Date(dateString).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
   };
 
-  const capitalizeFirst = (str: string) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
+  const capitalizeFirst = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
-  // ALWAYS render — never return null. Use placeholders for missing data.
   const hasValue = report.appraised_value && report.appraised_value > 0;
   const formattedValue = hasValue ? formatCurrency(report.appraised_value) : '€ ___________';
   const valueInWords = hasValue 
@@ -53,141 +43,67 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
     : '___________';
 
   return (
-    <div 
-      className="bg-white font-sans pdf-page"
-      style={{
-        width: '210mm',
-        minHeight: '297mm',
-        padding: '24px 28px',
-        boxSizing: 'border-box',
-        position: 'relative',
-        pageBreakAfter: 'always',
-      }}
-    >
+    <Page size="A4" style={{ padding: '24 28', fontFamily: 'Helvetica', position: 'relative' }}>
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '18px', fontWeight: 700, color: '#000000', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 }}>
+        <Text style={{ fontSize: 18, fontFamily: 'Helvetica-Bold', color: '#000000', textTransform: 'uppercase', letterSpacing: 0.5 }}>
           GETAXEERDE WAARDE
-        </h1>
-        <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '40px', width: 'auto' }} />
-      </div>
+        </Text>
+        <Image src={logoAutomobiel} style={{ height: 40, width: 'auto' }} />
+      </View>
 
-      {/* Legal Text - plain paragraph, no background */}
-      <p style={{ 
-        fontSize: '11pt', 
-        color: '#000000', 
-        fontWeight: 500,
-        lineHeight: 1.7, 
-        marginBottom: '20px',
-        textAlign: 'justify',
-      }}>
+      {/* Legal Text */}
+      <Text style={{ fontSize: 11, color: '#000000', lineHeight: 1.7, marginBottom: 20, textAlign: 'justify' }}>
         {LEGAL_TEXT}
-      </p>
+      </Text>
 
-      {/* Valuation Introduction + Value on same flow */}
-      <p style={{ 
-        fontSize: '11pt', 
-        color: '#000000', 
-        fontWeight: 500,
-        lineHeight: 1.7, 
-        marginBottom: '20px',
-      }}>
+      {/* Valuation Introduction */}
+      <Text style={{ fontSize: 11, color: '#000000', lineHeight: 1.7, marginBottom: 20 }}>
         {VALUATION_INTRO}
-      </p>
+      </Text>
 
-      {/* Value - simple bold text, no colored block */}
-      <p style={{ 
-        fontSize: '14pt', 
-        fontWeight: 700, 
-        color: '#000000', 
-        marginBottom: '20px',
-      }}>
-        {formattedValue} (inclusief BTW) {valueInWords && <>zegge: {valueInWords}{hasValue ? '' : ''}</>}
-      </p>
+      {/* Value */}
+      <Text style={{ fontSize: 14, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 20 }}>
+        {formattedValue} (inclusief BTW) {valueInWords ? `zegge: ${valueInWords}` : ''}
+      </Text>
 
       {/* Signing Text */}
-      <p style={{ 
-        fontSize: '11pt', 
-        color: '#000000', 
-        fontWeight: 500,
-        lineHeight: 1.7, 
-        marginBottom: '20px',
-        textAlign: 'justify',
-      }}>
+      <Text style={{ fontSize: 11, color: '#000000', lineHeight: 1.7, marginBottom: 20, textAlign: 'justify' }}>
         {SIGNING_TEXT}
-      </p>
+      </Text>
 
       {/* Date line */}
-      <p style={{ 
-        fontSize: '11pt', 
-        color: '#000000', 
-        fontWeight: 500,
-        marginBottom: '24px',
-      }}>
+      <Text style={{ fontSize: 11, color: '#000000', marginBottom: 24 }}>
         Aldus, naar beste weten en kunnen opgemaakt te Druten, {formatDateLong(report.inspection_date)}
-      </p>
+      </Text>
 
       {/* Signature block */}
-      <div style={{ marginBottom: '16px' }}>
-        <p style={{ fontSize: '11pt', color: '#000000', fontWeight: 500, margin: '0 0 8px 0' }}>
-          Hoogachtend,
-        </p>
-        <p style={{ fontSize: '11pt', color: '#000000', fontWeight: 600, margin: '0 0 2px 0' }}>
-          Automobiel Taxaties
-        </p>
-        <p style={{ fontSize: '11pt', color: '#000000', fontWeight: 700, margin: '0 0 4mm 0' }}>
-          Erik Elderson
-        </p>
-        <img 
-          crossOrigin="anonymous"
-          src={signatureErik} 
-          alt="Handtekening Erik Elderson" 
-          style={{ 
-            height: '45mm',
-            width: 'auto',
-            maxWidth: '90mm',
-          }} 
-        />
-      </div>
+      <View style={{ marginBottom: 16 }}>
+        <Text style={{ fontSize: 11, color: '#000000', marginBottom: 8 }}>Hoogachtend,</Text>
+        <Text style={{ fontSize: 11, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 2 }}>Automobiel Taxaties</Text>
+        <Text style={{ fontSize: 11, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 11 }}>Erik Elderson</Text>
+        <Image src={signatureErik} style={{ height: 128, width: 'auto', maxWidth: 255 }} />
+      </View>
 
-      {/* Footer with page number and paraaf */}
-      <div style={{ 
-        position: 'absolute', 
-        bottom: '20mm', 
-        left: '25mm', 
-        right: '20mm',
-        display: 'flex',
+      {/* Footer */}
+      <View style={{
+        position: 'absolute',
+        bottom: 56,
+        left: 71,
+        right: 56,
+        flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
       }}>
-        <div style={{ fontSize: '9pt', fontWeight: 500, color: '#000000' }}>
+        <Text style={{ fontSize: 9, color: '#000000' }}>
           Pagina {pageNumber} van {totalPages}
-        </div>
-        <div style={{ 
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-end',
-          gap: '1mm',
-        }}>
-          <img 
-            crossOrigin="anonymous"
-            src={signatureErik} 
-            alt="Paraaf" 
-            style={{ 
-              height: '12mm',
-              width: 'auto',
-            }} 
-          />
-          <span style={{ 
-            fontSize: '8pt', 
-            fontWeight: 500,
-            color: '#000000' 
-          }}>
-            Paraaf
-          </span>
-        </div>
-      </div>
-    </div>
+        </Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
+          <Image src={signatureErik} style={{ height: 34, width: 'auto' }} />
+          <Text style={{ fontSize: 8, color: '#000000' }}>Paraaf</Text>
+        </View>
+      </View>
+    </Page>
   );
 };
 

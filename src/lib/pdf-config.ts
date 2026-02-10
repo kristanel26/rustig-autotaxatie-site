@@ -4,18 +4,18 @@
  * Defines the FIXED page sequence for each report type.
  * Pages are NEVER conditional — they always render.
  * Missing data = placeholders inside the page component.
+ * 
+ * NOTE: Using direct imports (not lazy) because @react-pdf/renderer
+ * requires synchronous component resolution within <Document>.
  */
 
-import { lazy } from 'react';
-
-// Lazy imports for page components
-const PDFCoverContent = lazy(() => import('@/components/internal/pdf/PDFCoverContent'));
-const PDFValuationContent = lazy(() => import('@/components/internal/pdf/PDFValuationContent'));
-const PDFWevValuationContent = lazy(() => import('@/components/internal/pdf/PDFWevValuationContent'));
-const PDFKlassiekerValuationContent = lazy(() => import('@/components/internal/pdf/PDFKlassiekerValuationContent'));
-const PDFVehicleDataContent = lazy(() => import('@/components/internal/pdf/PDFVehicleDataContent'));
-const PDFAppraisalFindingsContent = lazy(() => import('@/components/internal/pdf/PDFAppraisalFindingsContent'));
-const PDFPhotosContent = lazy(() => import('@/components/internal/pdf/PDFPhotosContent'));
+import PDFCoverContent from '@/components/internal/pdf/PDFCoverContent';
+import PDFValuationContent from '@/components/internal/pdf/PDFValuationContent';
+import PDFWevValuationContent from '@/components/internal/pdf/PDFWevValuationContent';
+import PDFKlassiekerValuationContent from '@/components/internal/pdf/PDFKlassiekerValuationContent';
+import PDFVehicleDataContent from '@/components/internal/pdf/PDFVehicleDataContent';
+import PDFAppraisalFindingsContent from '@/components/internal/pdf/PDFAppraisalFindingsContent';
+import PDFPhotosContent from '@/components/internal/pdf/PDFPhotosContent';
 
 export type ReportType = 'camper' | 'wev' | 'klassieker';
 
@@ -24,15 +24,11 @@ export interface PageDefinition {
   id: string;
   /** React component to render this page */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  component: React.LazyExoticComponent<React.ComponentType<any>>;
+  component: React.ComponentType<any>;
   /** Whether this page can produce multiple physical pages (e.g. photo annex) */
   isMultiPage?: boolean;
 }
 
-/**
- * Klassieker report: Cover → Valuation → Vehicle Data → Photos
- * No appraisal findings page for klassieker.
- */
 export const KLASSIEKER_PAGES: PageDefinition[] = [
   { id: 'cover', component: PDFCoverContent },
   { id: 'valuation', component: PDFKlassiekerValuationContent },
@@ -40,9 +36,6 @@ export const KLASSIEKER_PAGES: PageDefinition[] = [
   { id: 'photos', component: PDFPhotosContent, isMultiPage: true },
 ];
 
-/**
- * Camper report: Cover → Valuation → Vehicle Data → Appraisal Findings → Photos
- */
 export const CAMPER_PAGES: PageDefinition[] = [
   { id: 'cover', component: PDFCoverContent },
   { id: 'valuation', component: PDFValuationContent },
@@ -51,9 +44,6 @@ export const CAMPER_PAGES: PageDefinition[] = [
   { id: 'photos', component: PDFPhotosContent, isMultiPage: true },
 ];
 
-/**
- * WEV report: Cover → Valuation → Vehicle Data → Appraisal Findings → Photos
- */
 export const WEV_PAGES: PageDefinition[] = [
   { id: 'cover', component: PDFCoverContent },
   { id: 'valuation', component: PDFWevValuationContent },
@@ -62,9 +52,6 @@ export const WEV_PAGES: PageDefinition[] = [
   { id: 'photos', component: PDFPhotosContent, isMultiPage: true },
 ];
 
-/**
- * Get the page registry for a given report type.
- */
 export function getPageRegistry(reportType: ReportType | string | null): PageDefinition[] {
   switch (reportType) {
     case 'klassieker':

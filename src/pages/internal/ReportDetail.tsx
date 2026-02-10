@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import InternalLayout from '@/components/internal/InternalLayout';
 import { supabase } from '@/integrations/supabase/client';
@@ -6,17 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Calendar, MapPin, Car, Euro, FileDown, Loader2, Lock, Gauge, Wrench, Home, Eye } from 'lucide-react';
-import html2pdf from 'html2pdf.js';
-import { createRoot } from 'react-dom/client';
-
-// PDF Content Components
-import PDFCoverContent from '@/components/internal/pdf/PDFCoverContent';
-import PDFVehicleDataContent from '@/components/internal/pdf/PDFVehicleDataContent';
-import PDFAppraisalFindingsContent from '@/components/internal/pdf/PDFAppraisalFindingsContent';
-import PDFValuationContent from '@/components/internal/pdf/PDFValuationContent';
-import PDFPhotosContent from '@/components/internal/pdf/PDFPhotosContent';
-import PDFKlassiekerValuationContent from '@/components/internal/pdf/PDFKlassiekerValuationContent';
-import PDFWevValuationContent from '@/components/internal/pdf/PDFWevValuationContent';
+import { pdf } from '@react-pdf/renderer';
+import PdfRenderer from '@/components/internal/pdf/PdfRenderer';
 
 interface Report {
   id: string;
@@ -141,250 +132,15 @@ const ReportDetail = () => {
     return value;
   };
 
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const rootRef = useRef<ReturnType<typeof createRoot> | null>(null);
-
   const generatePdfFilename = () => {
     if (!report) return 'Taxatierapport.pdf';
-    
     const parts = [
       'Taxatierapport',
       report.document_reference || '',
       report.license_plate || '',
       [report.vehicle_brand, report.vehicle_model].filter(Boolean).join('-')
     ].filter(Boolean);
-    
     return parts.join('_').replace(/\s+/g, '-') + '.pdf';
-  };
-
-  const cleanup = () => {
-    if (rootRef.current) {
-      rootRef.current.unmount();
-      rootRef.current = null;
-    }
-    if (containerRef.current && document.body.contains(containerRef.current)) {
-      document.body.removeChild(containerRef.current);
-      containerRef.current = null;
-    }
-  };
-
-  const wait = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
-
-  const waitForFonts = async () => {
-    const anyDocument = document as unknown as { fonts?: { ready?: Promise<unknown> } };
-    if (!anyDocument.fonts?.ready) return;
-    // Never block forever on font loading
-    await Promise.race([anyDocument.fonts.ready, wait(3000)]);
-  };
-
-  const waitForStablePdfPages = async (container: HTMLElement) => {
-    // Wait until the number of rendered pages is stable for 2 consecutive checks
-    let lastCount = -1;
-    for (let i = 0; i < 15; i++) {
-      const count = container.querySelectorAll('.pdf-page').length;
-      if (count > 0 && count === lastCount) return;
-      lastCount = count;
-      await wait(200);
-    }
-  };
-
-  const normalizePdfPagesForExport = (container: HTMLElement) => {
-    // Prevent "extra blank pages" caused by double page-break logic.
-    // We force every PDF page wrapper to be exactly A4 and remove explicit breaks.
-    const pages = Array.from(container.querySelectorAll<HTMLElement>('.pdf-page'));
-    pages.forEach((page) => {
-      page.style.width = '210mm';
-      page.style.height = '297mm';
-      page.style.minHeight = '0';
-      page.style.boxSizing = 'border-box';
-      page.style.overflow = 'hidden';
-
-      // Remove break directives (we rely on fixed A4 height instead)
-      page.style.pageBreakAfter = 'auto';
-      page.style.pageBreakBefore = 'auto';
-      (page.style as any).breakAfter = 'auto';
-      (page.style as any).breakBefore = 'auto';
-    });
-
-    console.log('[PDF] normalized pages', { count: pages.length });
-  };
-
-   const handlePdfDownload = async () => {
-     if (!id || isGeneratingPdf || !report) return;
-     
-     setIsGeneratingPdf(true);
-     
-     try {
-       // Create container that is ON-SCREEN so html2canvas can render it.
-       // Keep it behind the app UI so it doesn't show as a separate screen.
-       const container = document.createElement('div');
-       container.id = 'pdf-render-container';
-       container.style.cssText = `
-         position: fixed;
-         top: 0;
-         left: 0;
-         width: 210mm;
-         z-index: -1;
-         opacity: 1;
-         pointer-events: none;
-         background: white;
-         overflow: visible;
-       `;
-       document.body.appendChild(container);
-       containerRef.current = container;
-
-       // Create React root and render components
-       const root = createRoot(container);
-       rootRef.current = root;
-
-        // Determine report type
-        const isKlassiekerReport = report.report_type === 'klassieker';
-        const isWevReport = report.report_type === 'wev';
-        
-        // ARCHITECTURE: Waardevaststelling is ALWAYS page 2, never conditional
-        // Fixed page sequence: Cover(1) → Waardevaststelling(2) → VehicleData(3) → ...
-        const valuationPage = 2;
-        const vehicleDataPage = 3;
-        
-        if (isKlassiekerReport) {
-          // Klassieker: Cover → Waardevaststelling → Vehicle Data → Photos
-          const photoStartPage = 4;
-          const detailPhotos = (report.vehicle_photos || []).slice(1);
-          const photoPages = Math.ceil(detailPhotos.length / 6);
-          const totalPages = 3 + photoPages;
-
-          root.render(
-            <div id="pdf-content" style={{ fontFamily: 'Helvetica, Arial, sans-serif', background: 'white' }}>
-              <PDFCoverContent report={report} />
-              <PDFKlassiekerValuationContent report={report} pageNumber={valuationPage} totalPages={totalPages} />
-              <PDFVehicleDataContent report={report} pageNumber={vehicleDataPage} totalPages={totalPages} />
-              <PDFPhotosContent report={report} startPageNumber={photoStartPage} totalPages={totalPages} />
-            </div>
-          );
-        } else if (isWevReport) {
-          // WEV: Cover → Waardevaststelling → Vehicle Data → Appraisal Findings → Photos
-          const appraisalFindingsPage = 4;
-          const photoStartPage = 5;
-          const detailPhotos = (report.vehicle_photos || []).slice(1);
-          const photoPages = Math.ceil(detailPhotos.length / 6);
-          const totalPages = 4 + photoPages;
-
-          root.render(
-            <div id="pdf-content" style={{ fontFamily: 'Helvetica, Arial, sans-serif', background: 'white' }}>
-              <PDFCoverContent report={report} />
-              <PDFWevValuationContent report={report} pageNumber={valuationPage} totalPages={totalPages} />
-              <PDFVehicleDataContent report={report} pageNumber={vehicleDataPage} totalPages={totalPages} />
-              <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPage} />
-              <PDFPhotosContent report={report} startPageNumber={photoStartPage} totalPages={totalPages} />
-            </div>
-          );
-        } else {
-          // Camper: Cover → Waardevaststelling → Vehicle Data → Appraisal Findings → Photos
-          const appraisalFindingsPage = 4;
-          const photoStartPage = 5;
-          const detailPhotos = (report.vehicle_photos || []).slice(1);
-          const photoPages = Math.ceil(detailPhotos.length / 6);
-          const totalPages = 4 + photoPages;
-
-          root.render(
-            <div id="pdf-content" style={{ fontFamily: 'Helvetica, Arial, sans-serif', background: 'white' }}>
-              <PDFCoverContent report={report} />
-              <PDFValuationContent report={report} pageNumber={valuationPage} totalPages={totalPages} />
-              <PDFVehicleDataContent report={report} pageNumber={vehicleDataPage} totalPages={totalPages} />
-              <PDFAppraisalFindingsContent report={report} pageNumber={appraisalFindingsPage} />
-              <PDFPhotosContent report={report} startPageNumber={photoStartPage} totalPages={totalPages} />
-            </div>
-          );
-        }
-
-      // Wait for React to paint the DOM
-      await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
-
-      // Give layout/CSS a moment to settle
-      await wait(500);
-
-      // Wait until the PDF pages are actually present and stable
-      await waitForStablePdfPages(container);
-
-      // Normalize all pdf pages before rasterization/export
-      normalizePdfPagesForExport(container);
-
-      // Ensure fonts are ready before rasterization
-      await waitForFonts();
-
-      // Wait for all images to load with timeout
-      const images = container.querySelectorAll('img');
-      const imagePromises = Array.from(images).map(img => {
-        if (img.complete && img.naturalHeight > 0) return Promise.resolve();
-        return new Promise<void>((resolve) => {
-          const timeout = setTimeout(() => resolve(), 10000); // 10s timeout per image
-          img.onload = () => {
-            clearTimeout(timeout);
-            resolve();
-          };
-          img.onerror = () => {
-            clearTimeout(timeout);
-            resolve(); // Don't fail on missing images
-          };
-        });
-      });
-      await Promise.all(imagePromises);
-
-      // Verify content is actually rendered (not empty)
-      const pdfContentCheck = container.querySelector('#pdf-content');
-      const rect = pdfContentCheck?.getBoundingClientRect();
-      if (!pdfContentCheck || pdfContentCheck.children.length === 0 || !rect || rect.width === 0 || rect.height === 0) {
-        console.error('PDF content is empty after render');
-        throw new Error('PDF content failed to render');
-      }
-
-      console.log('[PDF] ready', {
-        pages: container.querySelectorAll('.pdf-page').length,
-        rect: { w: rect.width, h: rect.height },
-        images: images.length,
-      });
-
-      // Final stabilization wait - ensures all CSS is applied and fonts loaded
-      await wait(1500);
-
-      const opt = {
-        margin: 0,
-        filename: generatePdfFilename(),
-        image: { type: 'png' },
-        html2canvas: { 
-          // NOTE: scale 4 can cause memory/blank renders on large multi-page docs.
-          // First make it reliable; we can tune quality afterwards.
-          scale: 3,
-          useCORS: true,
-          allowTaint: false,
-          logging: false,
-          backgroundColor: '#ffffff',
-          imageTimeout: 15000,
-          letterRendering: true, // Sharper text rendering
-        },
-        jsPDF: { 
-          unit: 'mm', 
-          format: 'a4', 
-          orientation: 'portrait' as const,
-          compress: true,
-        },
-        pagebreak: { mode: 'css', avoid: '.no-break' }
-      };
-
-      const pdfContent = container.querySelector('#pdf-content');
-      if (pdfContent) {
-        await html2pdf().set(opt).from(pdfContent).save();
-      }
-
-      console.log('[PDF] saved');
-
-      cleanup();
-    } catch (error) {
-      console.error('Error generating PDF:', error);
-      cleanup();
-    } finally {
-      setIsGeneratingPdf(false);
-    }
   };
 
   const handlePdfPreview = () => {
@@ -392,12 +148,23 @@ const ReportDetail = () => {
     window.open(`/intern/pdf/preview/${id}`, '_blank');
   };
 
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      cleanup();
-    };
-  }, []);
+  const handlePdfDownload = async () => {
+    if (!id || isGeneratingPdf || !report) return;
+    setIsGeneratingPdf(true);
+    try {
+      const blob = await pdf(<PdfRenderer report={report as Record<string, any>} />).toBlob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = generatePdfFilename();
+      link.click();
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    } finally {
+      setIsGeneratingPdf(false);
+    }
+  };
 
   if (loading) {
     return (

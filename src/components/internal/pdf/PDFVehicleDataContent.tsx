@@ -1,48 +1,7 @@
+import { Page, View, Text, Image } from '@react-pdf/renderer';
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
 import signatureErik from '@/assets/signature-erik-elderson.svg';
 import { getQualityClassByValue } from '@/lib/qualityClasses';
-
-interface Report {
-  id: string;
-  report_number: string;
-  document_reference: string | null;
-  license_plate: string | null;
-  vin: string | null;
-  rdw_merk: string | null;
-  rdw_handelsbenaming: string | null;
-  rdw_voertuigsoort: string | null;
-  rdw_carrosserievorm: string | null;
-  model_display_name: string | null;
-  rdw_bouwjaar: number | null;
-  rdw_datum_eerste_toelating: string | null;
-  rdw_datum_eerste_tenaamstelling: string | null;
-  rdw_datum_laatste_tenaamstelling: string | null;
-  rdw_kleur: string | null;
-  rdw_brandstof: string | null;
-  transmissie: string | null;
-  rdw_aantal_cilinders: number | null;
-  rdw_cilinderinhoud: number | null;
-  rdw_vermogen_kw: number | null;
-  rdw_aantal_deuren: number | null;
-  rdw_wielbasis: number | null;
-  rdw_ledig_gewicht: number | null;
-  rdw_massa_rijklaar: number | null;
-  rdw_max_massa: number | null;
-  rdw_apk_gekeurd: boolean | null;
-  rdw_apk_vervaldatum: string | null;
-  rdw_importvoertuig: boolean | null;
-  tellerstand: number | null;
-  tellerstand_type: string | null;
-  soort_bouw: string | null;
-  opbouw_merk: string | null;
-  opbouw_type: string | null;
-  constructievorm: string | null;
-  gebruik: string | null;
-  stalling: string | null;
-  staat_bij_opname: string | null;
-  quality_class: string | null;
-  report_type: string | null;
-}
 
 interface PDFVehicleDataContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -53,14 +12,10 @@ interface PDFVehicleDataContentProps {
 
 const PDFVehicleDataContent = ({ report, pageNumber = 2, totalPages = 10 }: PDFVehicleDataContentProps) => {
   const isKlassiekerReport = report.report_type === 'klassieker';
-  
+
   const formatDate = (dateString: string | null) => {
     if (!dateString) return '–';
-    return new Date(dateString).toLocaleDateString('nl-NL', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    });
+    return new Date(dateString).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
   };
 
   const formatBoolean = (value: boolean | null) => {
@@ -78,66 +33,47 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2, totalPages = 10 }: PDFV
     return vin.slice(-4).toUpperCase();
   };
 
-  // DataRow - show dash for empty values (klassieker requirement)
   const DataRow = ({ label, value }: { label: string; value: string }) => {
     const displayValue = (!value || value === '-' || value === '') ? '–' : value;
-    // For non-klassieker: hide empty rows (original behavior)
     if (!isKlassiekerReport && displayValue === '–') return null;
     return (
-      <div style={{ display: 'flex', padding: '6px 0', borderBottom: '1px solid #e2e8f0' }}>
-        <span style={{ width: '50%', color: '#000000', fontSize: '11px', fontWeight: 500 }}>{label}</span>
-        <span style={{ width: '50%', color: '#000000', fontSize: '11px', fontWeight: 600 }}>{displayValue}</span>
-      </div>
+      <View style={{ flexDirection: 'row', paddingVertical: 4, borderBottomWidth: 1, borderBottomColor: '#e2e8f0' }}>
+        <Text style={{ width: '50%', color: '#000000', fontSize: 9, fontFamily: 'Helvetica' }}>{label}</Text>
+        <Text style={{ width: '50%', color: '#000000', fontSize: 9, fontFamily: 'Helvetica-Bold' }}>{displayValue}</Text>
+      </View>
     );
   };
 
   const SectionHeader = ({ number, title }: { number: string; title: string }) => (
-    <div style={{ 
-      display: 'flex', 
-      alignItems: 'center', 
-      gap: '8px',
-      marginBottom: '10px',
-      paddingBottom: '8px',
-      borderBottom: '2px solid #000000'
-    }}>
-      <h3 style={{ fontSize: '13px', fontWeight: 600, color: '#000000', margin: 0 }}>
+    <View style={{ marginBottom: 8, paddingBottom: 5, borderBottomWidth: 2, borderBottomColor: '#000000' }}>
+      <Text style={{ fontSize: 11, fontFamily: 'Helvetica-Bold', color: '#000000' }}>
         {number}. {title}
-      </h3>
-    </div>
+      </Text>
+    </View>
   );
 
+  const qualityClass = getQualityClassByValue(report.quality_class);
+
   return (
-    <div 
-      className="bg-white pdf-page"
-      style={{
-        width: '210mm',
-        minHeight: '297mm',
-        padding: '24px 28px',
-        boxSizing: 'border-box',
-        position: 'relative',
-        pageBreakAfter: 'always',
-        fontFamily: 'Helvetica, Arial, sans-serif',
-      }}
-    >
+    <Page size="A4" style={{ padding: '24 28', fontFamily: 'Helvetica', position: 'relative' }}>
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '28px' }}>
-        <div>
-          <h1 style={{ fontSize: '20px', fontWeight: 600, color: '#000000', margin: 0, textTransform: 'uppercase' }}>VOERTUIGGEGEVENS</h1>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
+        <View>
+          <Text style={{ fontSize: 16, fontFamily: 'Helvetica-Bold', color: '#000000', textTransform: 'uppercase' }}>VOERTUIGGEGEVENS</Text>
           {report.document_reference && (
-            <p style={{ fontSize: '11px', color: '#000000', margin: '4px 0 0 0' }}>
+            <Text style={{ fontSize: 9, color: '#000000', marginTop: 4 }}>
               Documentkenmerk: {report.document_reference}
-            </p>
+            </Text>
           )}
-        </div>
-        <img crossOrigin="anonymous" src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '40px', width: 'auto' }} />
-      </div>
+        </View>
+        <Image src={logoAutomobiel} style={{ height: 36, width: 'auto' }} />
+      </View>
 
       {/* Two-column layout */}
-      <div style={{ display: 'flex', gap: '24px' }}>
+      <View style={{ flexDirection: 'row', gap: 20 }}>
         {/* Left Column */}
-        <div style={{ width: '50%' }}>
-          {/* Sectie 1: Identificatie */}
-          <div style={{ marginBottom: '22px' }}>
+        <View style={{ width: '50%' }}>
+          <View style={{ marginBottom: 16 }}>
             <SectionHeader number="1" title="Identificatie" />
             <DataRow label="Kenteken" value={report.license_plate || ''} />
             <DataRow label="Merk" value={report.rdw_merk || ''} />
@@ -152,121 +88,106 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2, totalPages = 10 }: PDFV
             <DataRow label="Datum eerste tenaamstelling" value={formatDate(report.rdw_datum_eerste_tenaamstelling)} />
             <DataRow label="Datum laatste tenaamstelling" value={formatDate(report.rdw_datum_laatste_tenaamstelling)} />
             <DataRow label="Kleur" value={report.rdw_kleur || ''} />
-          </div>
+          </View>
 
-          {/* Sectie 2: Technische hoofdgegevens */}
-          <div style={{ marginBottom: '22px' }}>
+          <View style={{ marginBottom: 16 }}>
             <SectionHeader number="2" title="Technische hoofdgegevens" />
             <DataRow label="Brandstof" value={report.rdw_brandstof || ''} />
-            <DataRow 
-              label="Transmissie" 
-              value={report.transmissie === 'handgeschakeld' ? 'Handgeschakeld' : report.transmissie === 'automaat' ? 'Automaat' : ''} 
-            />
+            <DataRow label="Transmissie" value={report.transmissie === 'handgeschakeld' ? 'Handgeschakeld' : report.transmissie === 'automaat' ? 'Automaat' : ''} />
             <DataRow label="Aantal cilinders" value={formatNumber(report.rdw_aantal_cilinders)} />
             <DataRow label="Cilinderinhoud (cc)" value={formatNumber(report.rdw_cilinderinhoud, 'cc')} />
             <DataRow label="Vermogen (kW)" value={formatNumber(report.rdw_vermogen_kw, 'kW')} />
             <DataRow label="Aantal deuren" value={formatNumber(report.rdw_aantal_deuren)} />
             <DataRow label="Wielbasis" value={formatNumber(report.rdw_wielbasis, 'mm')} />
-          </div>
+          </View>
 
-          {/* Sectie 3: Massa en gewichten */}
-          <div style={{ marginBottom: '22px' }}>
+          <View style={{ marginBottom: 16 }}>
             <SectionHeader number="3" title="Massa en gewichten" />
             <DataRow label="Ledig gewicht" value={formatNumber(report.rdw_ledig_gewicht, 'kg')} />
             <DataRow label="Massa rijklaar" value={formatNumber(report.rdw_massa_rijklaar, 'kg')} />
             <DataRow label="Toegestane max. massa" value={formatNumber(report.rdw_max_massa, 'kg')} />
-          </div>
-        </div>
+          </View>
+        </View>
 
         {/* Right Column */}
-        <div style={{ width: '50%' }}>
-          {/* Sectie 4: Keuring en status */}
-          <div style={{ marginBottom: '22px' }}>
+        <View style={{ width: '50%' }}>
+          <View style={{ marginBottom: 16 }}>
             <SectionHeader number="4" title="Keuring en status" />
             <DataRow label="APK gekeurd" value={formatBoolean(report.rdw_apk_gekeurd)} />
             <DataRow label="APK vervaldatum" value={formatDate(report.rdw_apk_vervaldatum)} />
             <DataRow label="Importvoertuig" value={formatBoolean(report.rdw_importvoertuig)} />
-          </div>
+          </View>
 
-          {/* Sectie 5: Tellerstand */}
-          <div style={{ marginBottom: '22px' }}>
+          <View style={{ marginBottom: 16 }}>
             <SectionHeader number="5" title="Tellerstand" />
-            <DataRow 
-              label="Tellerstand" 
-              value={report.tellerstand ? `${report.tellerstand.toLocaleString('nl-NL')}` : ''} 
-            />
-            <DataRow 
-              label="Tellerstand type" 
-              value={report.tellerstand_type === 'km' ? 'Kilometer (km)' : report.tellerstand_type === 'miles' ? 'Miles' : ''} 
-            />
-          </div>
+            <DataRow label="Tellerstand" value={report.tellerstand ? `${report.tellerstand.toLocaleString('nl-NL')}` : ''} />
+            <DataRow label="Tellerstand type" value={report.tellerstand_type === 'km' ? 'Kilometer (km)' : report.tellerstand_type === 'miles' ? 'Miles' : ''} />
+          </View>
 
-          {/* Sectie 6: Opbouw en constructie (not for klassieker) */}
           {!isKlassiekerReport && (
-            <div style={{ marginBottom: '22px' }}>
+            <View style={{ marginBottom: 16 }}>
               <SectionHeader number="6" title="Opbouw en constructie" />
               <DataRow label="Soort bouw" value={report.soort_bouw || ''} />
               <DataRow label="Opbouw merk" value={report.opbouw_merk || ''} />
               <DataRow label="Opbouw type" value={report.opbouw_type || ''} />
               <DataRow label="Constructievorm" value={report.constructievorm || ''} />
-            </div>
+            </View>
           )}
 
-          {/* Sectie 7: Gebruik en stalling (not for klassieker) */}
           {!isKlassiekerReport && (
-            <div style={{ marginBottom: '22px' }}>
-              <SectionHeader number={isKlassiekerReport ? "6" : "7"} title="Gebruik en stalling" />
+            <View style={{ marginBottom: 16 }}>
+              <SectionHeader number="7" title="Gebruik en stalling" />
               <DataRow label="Gebruik" value={report.gebruik || ''} />
               <DataRow label="Stalling" value={report.stalling || ''} />
               <DataRow label="Staat bij opname" value={report.staat_bij_opname || ''} />
-            </div>
+            </View>
           )}
 
-          {/* Sectie 8 (or 6 for klassieker): Kwaliteitsklasse */}
-          {report.quality_class && (
-            <div style={{ marginBottom: '22px' }}>
+          {report.quality_class && qualityClass && (
+            <View style={{ marginBottom: 16 }}>
               <SectionHeader number={isKlassiekerReport ? "6" : "8"} title="Kwaliteitsklasse" />
-              <div style={{ padding: '10px 0' }}>
-                <div style={{ fontSize: '13px', fontWeight: 600, color: '#000000', marginBottom: '6px' }}>
+              <View style={{ paddingVertical: 8 }}>
+                <Text style={{ fontSize: 11, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 4 }}>
                   {report.quality_class}
-                </div>
-                <p style={{ fontSize: '11px', color: '#000000', lineHeight: 1.6, margin: 0 }}>
-                  {getQualityClassByValue(report.quality_class)?.description || '–'}
-                </p>
-              </div>
-            </div>
+                </Text>
+                <Text style={{ fontSize: 9, color: '#000000', lineHeight: 1.6 }}>
+                  {qualityClass.description || '–'}
+                </Text>
+              </View>
+            </View>
           )}
-        </div>
-      </div>
+        </View>
+      </View>
 
-      {/* Footer with paraaf */}
-      <div style={{ 
-        position: 'absolute', 
-        bottom: '24px', 
-        left: '28px', 
-        right: '28px',
-        borderTop: '1px solid #e2e8f0', 
-        paddingTop: '12px',
-        display: 'flex',
+      {/* Footer */}
+      <View style={{
+        position: 'absolute',
+        bottom: 24,
+        left: 28,
+        right: 28,
+        borderTopWidth: 1,
+        borderTopColor: '#e2e8f0',
+        paddingTop: 8,
+        flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
       }}>
-        <div style={{ fontSize: '10px', color: '#000000' }}>
-          <span style={{ fontWeight: 600 }}>Automobiel Taxaties</span>
-          <span style={{ margin: '0 4px' }}>|</span>
-          Leigraaf 160, 6651 GJ Druten
-          <span style={{ margin: '0 4px' }}>|</span>
-          KVK: 95549269
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '4mm' }}>
-          <span style={{ fontSize: '9px', fontWeight: 500, color: '#000000' }}>Paraaf</span>
-          <img crossOrigin="anonymous" src={signatureErik} alt="Paraaf" style={{ height: '20mm', width: 'auto' }} />
-          <span style={{ fontSize: '10px', color: '#000000', fontWeight: 500, marginLeft: '4mm' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={{ fontSize: 8, fontFamily: 'Helvetica-Bold', color: '#000000' }}>Automobiel Taxaties</Text>
+          <Text style={{ fontSize: 8, color: '#000000', marginHorizontal: 4 }}>|</Text>
+          <Text style={{ fontSize: 8, color: '#000000' }}>Leigraaf 160, 6651 GJ Druten</Text>
+          <Text style={{ fontSize: 8, color: '#000000', marginHorizontal: 4 }}>|</Text>
+          <Text style={{ fontSize: 8, color: '#000000' }}>KVK: 95549269</Text>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+          <Text style={{ fontSize: 8, color: '#000000' }}>Paraaf</Text>
+          <Image src={signatureErik} style={{ height: 57, width: 'auto' }} />
+          <Text style={{ fontSize: 8, color: '#000000', marginLeft: 8 }}>
             Pagina {pageNumber} van {totalPages}
-          </span>
-        </div>
-      </div>
-    </div>
+          </Text>
+        </View>
+      </View>
+    </Page>
   );
 };
 
