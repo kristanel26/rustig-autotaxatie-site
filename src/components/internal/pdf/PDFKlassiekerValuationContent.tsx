@@ -1,3 +1,4 @@
+import { Page, View, Text, Image } from '@react-pdf/renderer';
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
 import signatureErik from '@/assets/signature-erik-elderson.svg';
 
@@ -9,7 +10,6 @@ interface PDFKlassiekerValuationContentProps {
 }
 
 // LOCKED TEXT - DO NOT MODIFY
-// These texts are exact copies from the original report and must remain unchanged
 const LEGAL_TEXT_BLOCK_1 = `Dit rapport dient uitsluitend ter bepaling van de waarde voor verzekeringsdoeleinden van het visueel getaxeerde motorvoertuig. De geldigheidsduur van deze taxatie is afhankelijk van uw polisvoorwaarden. Het rapport is beslist géén technische keuring en kan daarom nooit als zodanig worden geïnterpreteerd. Het rapport is niet overdraagbaar en is toepasbaar bij polisvoorwaarden volgens artikel 7:960 B.W. De door ons verrichte taxatie houdt geen enkele garantie in tot het realiseren van de vastgestelde waarde bij inruil of verkoop. Onder vervangingswaarde wordt verstaan het bedrag dat nodig is voor het verkrijgen van naar soort, kwaliteit, staat en ouderdom vergelijkbare zaak. Dat op deze taxatie van toepassing zijn de algemene voorwaarden voor Register Makelaars en Register Taxateurs in roerende zaken, leden van de Federatie van Taxateurs, Makelaars en Veilinghouders in roerende zaken, welke voorwaarden zijn gedeponeerd bij de Kamer van Koophandel en Fabrieken voor Amsterdam op 30-06-2005 onder nummer 40530226.`;
 
 const VALUE_INTRO = `Uitgaande van de marktsituatie op het moment van de taxatie stelden wij de vervangingswaarde van het hier omschreven voertuig, inclusief accessoires, op`;
@@ -29,208 +29,97 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
 
   const formatDateLong = (dateString: string | null) => {
     if (!dateString) {
-      return new Date().toLocaleDateString('nl-NL', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-      });
+      return new Date().toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
     }
-    return new Date(dateString).toLocaleDateString('nl-NL',
-      {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-      });
+    return new Date(dateString).toLocaleDateString('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' });
   };
-
-  // ALWAYS render this page - it contains fixed legal text
-  // If no value yet, show placeholder
 
   const hasValue = report.appraised_value && report.appraised_value > 0;
   const formattedValue = hasValue ? formatCurrency(report.appraised_value) : '€ ___________';
   const valueInWords = hasValue ? (report.appraised_value_text || '') : '___________';
 
-  // Typography styles matching page 1
-  const bodyTextStyle: React.CSSProperties = {
-    fontSize: '11pt',
-    fontWeight: 500,
-    color: '#000000',
-    lineHeight: 1.7,
-    textAlign: 'justify',
-  };
-
   return (
-    <div 
-      className="bg-white pdf-page"
-      style={{
-        width: '210mm',
-        minHeight: '297mm',
-        height: '297mm',
-        padding: '20mm 20mm 20mm 25mm',
-        pageBreakBefore: 'always',
-        boxSizing: 'border-box',
-        position: 'relative',
-        pageBreakAfter: 'always',
-        fontFamily: 'Helvetica, Arial, sans-serif',
-      }}
-    >
+    <Page size="A4" style={{
+      paddingTop: 56,
+      paddingBottom: 56,
+      paddingLeft: 71,
+      paddingRight: 56,
+      fontFamily: 'Helvetica',
+      position: 'relative',
+    }}>
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10mm' }}>
-        <h1 style={{ 
-          fontSize: '16pt', 
-          fontWeight: 700, 
-          color: '#000000', 
-          margin: 0, 
-          textTransform: 'uppercase', 
-          letterSpacing: '0.04em' 
-        }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 28 }}>
+        <Text style={{ fontSize: 16, fontFamily: 'Helvetica-Bold', color: '#000000', textTransform: 'uppercase', letterSpacing: 0.4 }}>
           WAARDEVASTSTELLING
-        </h1>
-        <img 
-          crossOrigin="anonymous" 
-          src={logoAutomobiel} 
-          alt="Automobiel Taxaties" 
-          style={{ height: '14mm', width: 'auto' }} 
-        />
-      </div>
+        </Text>
+        <Image src={logoAutomobiel} style={{ height: 40, width: 'auto' }} />
+      </View>
 
-      {/* Legal Text Block 1 */}
-      <p style={{ 
-        ...bodyTextStyle,
-        marginBottom: '8mm',
-      }}>
+      {/* Legal Text */}
+      <Text style={{ fontSize: 11, color: '#000000', lineHeight: 1.7, textAlign: 'justify', marginBottom: 22 }}>
         {LEGAL_TEXT_BLOCK_1}
-      </p>
+      </Text>
 
       {/* Value Introduction */}
-      <p style={{ 
-        ...bodyTextStyle,
-        marginBottom: '6mm',
-      }}>
+      <Text style={{ fontSize: 11, color: '#000000', lineHeight: 1.7, marginBottom: 17 }}>
         {VALUE_INTRO}
-      </p>
+      </Text>
 
       {/* Value Block */}
-      <div style={{ marginBottom: '8mm' }}>
-        <p style={{ 
-          fontSize: '14pt', 
-          fontWeight: 800, 
-          color: '#000000', 
-          margin: '0 0 2mm 0',
-        }}>
+      <View style={{ marginBottom: 22 }}>
+        <Text style={{ fontSize: 14, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 6 }}>
           {formattedValue} (inclusief BTW)
-        </p>
-        {valueInWords && (
-          <p style={{ 
-            fontSize: '10pt',
-            fontWeight: 600,
-            color: '#000000',
-            margin: 0,
-          }}>
+        </Text>
+        {valueInWords ? (
+          <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000' }}>
             zegge: {valueInWords} 00/Euro
-          </p>
-        )}
-      </div>
+          </Text>
+        ) : null}
+      </View>
 
       {/* Expert Declaration */}
-      <p style={{ 
-        ...bodyTextStyle,
-        marginBottom: '10mm',
-      }}>
+      <Text style={{ fontSize: 11, color: '#000000', lineHeight: 1.7, textAlign: 'justify', marginBottom: 28 }}>
         {EXPERT_DECLARATION}
-      </p>
+      </Text>
 
       {/* Closing */}
-      <div style={{ marginBottom: '6mm' }}>
-        <p style={{ 
-          ...bodyTextStyle,
-          marginBottom: '6mm',
-        }}>
+      <View style={{ marginBottom: 17 }}>
+        <Text style={{ fontSize: 11, color: '#000000', lineHeight: 1.7, marginBottom: 17 }}>
           Aldus, naar beste weten en kunnen opgemaakt te Druten, {formatDateLong(null)}.
-        </p>
-        
-        <p style={{ 
-          fontSize: '10pt',
-          fontWeight: 600,
-          color: '#000000',
-          margin: '0 0 4mm 0',
-        }}>
+        </Text>
+        <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 11 }}>
           Hoogachtend,
-        </p>
-        
-        <p style={{ 
-          fontSize: '10pt',
-          fontWeight: 600,
-          color: '#000000',
-          margin: '0 0 2mm 0',
-        }}>
+        </Text>
+        <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 6 }}>
           Automobiel Taxaties
-        </p>
-        
-        <p style={{ 
-          fontSize: '11pt',
-          fontWeight: 700,
-          color: '#000000',
-          margin: 0,
-        }}>
+        </Text>
+        <Text style={{ fontSize: 11, fontFamily: 'Helvetica-Bold', color: '#000000' }}>
           Erik Elderson
-        </p>
-        
-        {/* Signature - directly under Erik Elderson name, overlapping slightly like a real signature */}
-        <img 
-          crossOrigin="anonymous"
-          src={signatureErik} 
-          alt="Handtekening Erik Elderson" 
-          style={{ 
-            height: '80mm',
-            width: 'auto',
-            maxWidth: '160mm',
-            display: 'block',
-            marginTop: '-8mm',
-            marginLeft: '-3mm',
-          }} 
-        />
-      </div>
+        </Text>
+        {/* Signature - directly under name */}
+        <Image src={signatureErik} style={{ height: 227, width: 'auto', maxWidth: 454, marginTop: -22, marginLeft: -8 }} />
+      </View>
 
-      {/* Footer with page number and paraaf */}
-      <div style={{ 
-        position: 'absolute', 
-        bottom: '20mm', 
-        left: '25mm', 
-        right: '20mm',
-        display: 'flex',
+      {/* Footer */}
+      <View style={{
+        position: 'absolute',
+        bottom: 56,
+        left: 71,
+        right: 56,
+        flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
       }}>
-        <div style={{ 
-          fontSize: '9pt', 
-          fontWeight: 500,
-          color: '#000000' 
-        }}>
+        <Text style={{ fontSize: 9, color: '#000000' }}>
           Pagina {pageNumber} van {totalPages}
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '3mm' }}>
-          <span style={{ 
-            fontSize: '9pt', 
-            fontWeight: 500,
-            color: '#000000',
-          }}>
-            Paraaf
-          </span>
-          <img 
-            crossOrigin="anonymous"
-            src={signatureErik} 
-            alt="Paraaf" 
-            style={{ 
-              height: '20mm',
-              width: 'auto',
-            }} 
-          />
-        </div>
-      </div>
-    </div>
+        </Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+          <Text style={{ fontSize: 9, color: '#000000' }}>Paraaf</Text>
+          <Image src={signatureErik} style={{ height: 57, width: 'auto' }} />
+        </View>
+      </View>
+    </Page>
   );
 };
 
 export default PDFKlassiekerValuationContent;
-

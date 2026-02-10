@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
+import { PDFViewer } from '@react-pdf/renderer';
 import PdfRenderer from '@/components/internal/pdf/PdfRenderer';
 
 interface PhotoRotations {
@@ -66,8 +67,13 @@ const PDFPreview = () => {
     );
   }
 
-  // Single unified renderer — no manual page logic
-  return <PdfRenderer report={report} />;
+  return (
+    <div style={{ width: '100vw', height: '100vh' }}>
+      <PDFViewer width="100%" height="100%" style={{ border: 'none' }} showToolbar={true}>
+        <PdfRenderer report={report} />
+      </PDFViewer>
+    </div>
+  );
 };
 
 export default PDFPreview;
