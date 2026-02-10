@@ -42,14 +42,12 @@ const PDFWevValuationContent = ({ report, pageNumber, totalPages }: PDFWevValuat
     });
   };
 
-  // Don't render if no WEV data - use wev_eindwaarde as primary, wev_definitief as fallback
+  // ALWAYS render — never return null. Use placeholders for missing data.
   const eindwaarde = report.wev_eindwaarde || report.wev_definitief;
-  if (!eindwaarde || eindwaarde <= 0) {
-    return null;
-  }
+  const hasValue = eindwaarde && eindwaarde > 0;
 
-  const eindwaardeFormatted = formatCurrency(eindwaarde);
-  const eindwaardeTekst = numberToDutchWords(eindwaarde);
+  const eindwaardeFormatted = hasValue ? formatCurrency(eindwaarde) : '€ ___________';
+  const eindwaardeTekst = hasValue ? numberToDutchWords(eindwaarde) : '___________';
   const datumOpname = formatDateLong(report.inspection_date);
   const plaatsOpname = report.inspection_location || VESTIGINGSPLAATS;
   const datumRapportGereed = formatDateLong(report.wev_finalized_at || new Date().toISOString());

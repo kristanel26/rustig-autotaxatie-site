@@ -45,15 +45,12 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  // Don't render if no value
-  if (!report.appraised_value || report.appraised_value <= 0) {
-    return null;
-  }
-
-  const formattedValue = formatCurrency(report.appraised_value);
-  const valueInWords = report.appraised_value_text 
-    ? capitalizeFirst(report.appraised_value_text)
-    : '';
+  // ALWAYS render — never return null. Use placeholders for missing data.
+  const hasValue = report.appraised_value && report.appraised_value > 0;
+  const formattedValue = hasValue ? formatCurrency(report.appraised_value) : '€ ___________';
+  const valueInWords = hasValue 
+    ? (report.appraised_value_text ? capitalizeFirst(report.appraised_value_text) : '')
+    : '___________';
 
   return (
     <div 
@@ -105,7 +102,7 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
         color: '#000000', 
         marginBottom: '20px',
       }}>
-        {formattedValue} (inclusief BTW) {valueInWords && <>zegge: {valueInWords}</>}
+        {formattedValue} (inclusief BTW) {valueInWords && <>zegge: {valueInWords}{hasValue ? '' : ''}</>}
       </p>
 
       {/* Signing Text */}
