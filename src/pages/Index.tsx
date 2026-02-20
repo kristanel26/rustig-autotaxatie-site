@@ -230,6 +230,8 @@ const Index = () => {
                 <li><Link to="/bpm-taxatie" className="hover:text-foreground transition-colors">BPM-taxaties</Link></li>
                 <li><Link to="/camper-taxatie" className="hover:text-foreground transition-colors">Verzekeringstaxaties</Link></li>
                 <li><Link to="/wev-taxatie" className="hover:text-foreground transition-colors">WEV-taxatie</Link></li>
+                <li><Link to="/faq" className="hover:text-foreground transition-colors">Veelgestelde vragen</Link></li>
+                <li><Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link></li>
               </ul>
             </div>
             <div>

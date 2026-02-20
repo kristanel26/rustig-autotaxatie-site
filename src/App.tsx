@@ -17,6 +17,8 @@ import BpmMotorTaxatie from "./pages/BpmMotorTaxatie";
 import BpmCamperTaxatie from "./pages/BpmCamperTaxatie";
 import WevTaxatie from "./pages/WevTaxatie";
 import VerzekeringstaxatieInfo from "./pages/VerzekeringstaxatieInfo";
+import Contact from "./pages/Contact";
+import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 
 // Internal pages
@@ -50,6 +52,8 @@ const router = createBrowserRouter([
   { path: "/bpm-camper-taxatie", element: <BpmCamperTaxatie /> },
   { path: "/wev-taxatie", element: <WevTaxatie /> },
   { path: "/verzekeringstaxatie-info", element: <VerzekeringstaxatieInfo /> },
+  { path: "/contact", element: <Contact /> },
+  { path: "/faq", element: <FAQ /> },
   
   // Internal routes - Login is public
   { path: "/intern/login", element: <Login /> },
