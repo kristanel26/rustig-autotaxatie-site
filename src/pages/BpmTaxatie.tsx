@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
+import SiteHeader from "@/components/SiteHeader";
 import { Users, FileText, Shield, ClipboardCheck, List, AlertTriangle } from "lucide-react";
 
 const BpmTaxatie = () => {
@@ -12,6 +13,7 @@ const BpmTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SiteHeader />
       <LandingHero
         subtitle="BPM-taxatie"
         title="BPM-taxatie bij import van voertuigen"

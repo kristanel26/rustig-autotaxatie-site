@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
+import SiteHeader from "@/components/SiteHeader";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
@@ -14,6 +15,7 @@ const BpmCamperTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SiteHeader />
       <LandingHero
         subtitle="BPM-TAXATIE CAMPER"
         title="Zorgvuldig vastgestelde BPM bij import van een camper"

@@ -3,6 +3,7 @@ import LandingHero from "@/components/LandingHero";
 import FeatureBlock from "@/components/FeatureBlock";
 import IntakeForm from "@/components/IntakeForm";
 import TrustIndicators from "@/components/TrustIndicators";
+import SiteHeader from "@/components/SiteHeader";
 import { Calculator, FileSearch, Clock } from "lucide-react";
 
 const BpmVoorbereiding = () => {
@@ -21,20 +22,21 @@ const BpmVoorbereiding = () => {
     },
     {
       icon: FileSearch,
-      title: "Grondige voertuiganalyse",
+      title: "Voertuig analyse",
       description:
-        "We analyseren het complete voertuig: staat, uitrusting, kilometerstand en marktwaarde. Zo krijg je een realistisch beeld.",
+        "We analyseren het voertuig op basis van merk, model, bouwjaar, brandstof en meer om de juiste BPM te bepalen.",
     },
     {
       icon: Clock,
-      title: "Snel en duidelijk",
+      title: "Snelle doorlooptijd",
       description:
-        "Binnen 48 uur heb je een compleet overzicht met alle kosten. Zo kun je een weloverwogen beslissing nemen.",
+        "Binnen 24 uur ontvang je een duidelijk overzicht van de verwachte BPM-kosten voor jouw importvoertuig.",
     },
   ];
 
   return (
     <div className="min-h-screen bg-background">
+      <SiteHeader />
       <LandingHero
         subtitle="BPM voorbereiding"
         title="Weet wat je gaat betalen vóórdat je koopt"
@@ -63,7 +65,7 @@ const BpmVoorbereiding = () => {
 
       <footer className="py-8 px-6 border-t border-border">
         <div className="container-wide text-center text-sm text-muted-foreground">
-          <p>© 2024 Automobiel Taxaties. Alle rechten voorbehouden.</p>
+          <p>© {new Date().getFullYear()} Automobiel Taxaties. Alle rechten voorbehouden.</p>
         </div>
       </footer>
     </div>
