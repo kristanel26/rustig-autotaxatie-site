@@ -2,35 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap');
 
 @layer base {
   :root {
     /* Professional deep blue - trust & expertise */
     --background: 0 0% 100%;
-    --foreground: 215 25% 17%;
+    --foreground: 215 30% 14%;
 
     /* Cards with subtle warmth */
-    --card: 210 20% 98%;
-    --card-foreground: 215 25% 17%;
+    --card: 210 25% 98%;
+    --card-foreground: 215 30% 14%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 17%;
+    --popover-foreground: 215 30% 14%;
 
     /* Deep navy primary - authority */
-    --primary: 215 50% 23%;
+    --primary: 215 55% 20%;
     --primary-foreground: 0 0% 100%;
 
     /* Light blue-gray secondary */
-    --secondary: 210 20% 96%;
-    --secondary-foreground: 215 25% 17%;
+    --secondary: 210 25% 95%;
+    --secondary-foreground: 215 30% 14%;
 
     /* Muted tones */
-    --muted: 210 15% 94%;
-    --muted-foreground: 215 15% 45%;
+    --muted: 210 18% 93%;
+    --muted-foreground: 215 15% 46%;
 
     /* Teal accent for CTAs - warm but professional */
-    --accent: 175 45% 40%;
+    --accent: 175 50% 38%;
     --accent-foreground: 0 0% 100%;
 
     /* CTA Orange - primary action color */
@@ -44,21 +44,23 @@
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Warning - amber/yellow for non-blocking warnings */
+    /* Warning */
     --warning: 38 92% 50%;
     --warning-foreground: 38 100% 15%;
 
-    --border: 210 20% 90%;
-    --input: 210 20% 90%;
-    --ring: 175 45% 40%;
+    --border: 210 22% 89%;
+    --input: 210 22% 89%;
+    --ring: 175 50% 38%;
 
     --radius: 0.75rem;
 
-    /* Custom tokens */
-    --hero-gradient: linear-gradient(135deg, hsl(215 50% 23%) 0%, hsl(215 45% 30%) 100%);
-    --card-shadow: 0 4px 20px -4px hsl(215 25% 17% / 0.08);
-    --card-shadow-hover: 0 8px 30px -4px hsl(215 25% 17% / 0.12);
-    --button-shadow: 0 4px 14px -2px hsl(175 45% 40% / 0.35);
+    /* Enhanced custom tokens */
+    --hero-gradient: linear-gradient(145deg, hsl(215 55% 18%) 0%, hsl(215 50% 25%) 40%, hsl(210 45% 30%) 100%);
+    --hero-gradient-overlay: radial-gradient(ellipse at 30% 0%, hsl(175 50% 38% / 0.15) 0%, transparent 60%);
+    --card-shadow: 0 1px 3px hsl(215 30% 14% / 0.04), 0 4px 20px -4px hsl(215 30% 14% / 0.06);
+    --card-shadow-hover: 0 4px 12px hsl(215 30% 14% / 0.06), 0 12px 40px -8px hsl(215 30% 14% / 0.1);
+    --button-shadow: 0 4px 14px -2px hsl(21 100% 56% / 0.4);
+    --section-glow: radial-gradient(ellipse at 50% 0%, hsl(175 50% 38% / 0.05) 0%, transparent 70%);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -114,24 +116,40 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight text-foreground;
+    @apply font-bold tracking-tight text-foreground;
+  }
+
+  /* Display headings get the serif font */
+  .heading-display {
+    font-family: 'DM Serif Display', serif;
+    letter-spacing: -0.02em;
   }
 }
 
 @layer components {
   .hero-section {
     background: var(--hero-gradient);
+    position: relative;
+  }
+
+  .hero-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--hero-gradient-overlay);
+    pointer-events: none;
   }
 
   .card-elevated {
-    @apply bg-card rounded-xl;
+    @apply bg-card rounded-xl border border-border/50;
     box-shadow: var(--card-shadow);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease;
   }
 
   .card-elevated:hover {
     box-shadow: var(--card-shadow-hover);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    border-color: hsl(var(--accent) / 0.2);
   }
 
   .section-padding {
@@ -149,6 +167,48 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Glass morphism header */
+  .glass-header {
+    @apply backdrop-blur-xl border-b;
+    background: hsl(var(--background) / 0.85);
+    border-color: hsl(var(--border) / 0.5);
+  }
+
+  /* Section with subtle glow */
+  .section-glow {
+    position: relative;
+  }
+
+  .section-glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--section-glow);
+    pointer-events: none;
+  }
+
+  /* Step number badges */
+  .step-badge {
+    @apply w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-lg;
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(215 50% 30%) 100%);
+    color: hsl(var(--primary-foreground));
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
+  }
+
+  /* Accent line decoration */
+  .accent-line {
+    @apply w-12 h-1 rounded-full;
+    background: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--cta)));
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(175 50% 50%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
 
 @layer utilities {
@@ -157,7 +217,13 @@
   }
 
   .animate-slide-up {
-    animation: slideUp 0.6s ease-out forwards;
+    animation: slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
   }
 
   @keyframes fadeIn {
@@ -172,11 +238,22 @@
   @keyframes slideUp {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(30px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
     }
   }
 }
