@@ -1,7 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
-import { Phone, Mail, Menu, X } from "lucide-react";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Phone, Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -14,13 +13,33 @@ const navLinks = [
 
 const SiteHeader = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="py-4 px-6 md:px-8 border-b border-border bg-background sticky top-0 z-50">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "glass-header py-3"
+          : "bg-transparent py-4 border-b border-transparent"
+      } px-6 md:px-8`}
+    >
       <div className="container-wide flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold text-foreground hover:text-foreground/80 transition-colors">
-          Automobiel Taxaties
+        <Link to="/" className="flex items-center gap-2 group">
+          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+            <span className="text-primary-foreground font-bold text-sm">AT</span>
+          </div>
+          <span className={`text-lg font-bold transition-colors ${
+            scrolled ? "text-foreground" : "text-primary-foreground"
+          } group-hover:opacity-80`}>
+            Automobiel Taxaties
+          </span>
         </Link>
 
         {/* Desktop nav */}
@@ -29,10 +48,14 @@ const SiteHeader = () => {
             <Link
               key={link.href}
               to={link.href}
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                 location.pathname === link.href
-                  ? "text-foreground bg-secondary"
-                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                  ? scrolled
+                    ? "text-foreground bg-secondary"
+                    : "text-primary-foreground bg-white/15"
+                  : scrolled
+                    ? "text-muted-foreground hover:text-foreground hover:bg-secondary/80"
+                    : "text-primary-foreground/70 hover:text-primary-foreground hover:bg-white/10"
               }`}
             >
               {link.label}
@@ -40,8 +63,15 @@ const SiteHeader = () => {
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center gap-4 text-sm text-muted-foreground">
-          <a href="tel:+31854832461" className="flex items-center gap-2 hover:text-foreground transition-colors">
+        <div className="hidden md:flex items-center gap-4">
+          <a
+            href="tel:+31854832461"
+            className={`flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200 ${
+              scrolled
+                ? "text-muted-foreground hover:text-foreground hover:bg-secondary/80"
+                : "text-primary-foreground/70 hover:text-primary-foreground hover:bg-white/10"
+            }`}
+          >
             <Phone className="w-4 h-4" />
             085 483 2461
           </a>
@@ -49,7 +79,9 @@ const SiteHeader = () => {
 
         {/* Mobile menu button */}
         <button
-          className="lg:hidden p-2 text-muted-foreground hover:text-foreground"
+          className={`lg:hidden p-2 rounded-lg transition-colors ${
+            scrolled ? "text-muted-foreground hover:text-foreground" : "text-primary-foreground/70 hover:text-primary-foreground"
+          }`}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Menu"
         >
@@ -59,13 +91,13 @@ const SiteHeader = () => {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <nav className="lg:hidden mt-4 pb-4 border-t border-border pt-4 space-y-1">
+        <nav className="lg:hidden mt-4 pb-4 border-t border-border/50 pt-4 space-y-1 bg-background rounded-b-xl">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               to={link.href}
               onClick={() => setMobileOpen(false)}
-              className={`block px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                 location.pathname === link.href
                   ? "text-foreground bg-secondary"
                   : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
@@ -74,14 +106,13 @@ const SiteHeader = () => {
               {link.label}
             </Link>
           ))}
-          <div className="pt-3 px-4 space-y-2 text-sm text-muted-foreground">
-            <a href="tel:+31854832461" className="flex items-center gap-2 hover:text-foreground transition-colors">
+          <div className="pt-3 px-4">
+            <a
+              href="tel:+31854832461"
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
               <Phone className="w-4 h-4" />
               085 483 2461
-            </a>
-            <a href="mailto:erik@automobieltaxaties.nl" className="flex items-center gap-2 hover:text-foreground transition-colors">
-              <Mail className="w-4 h-4" />
-              erik@automobieltaxaties.nl
             </a>
           </div>
         </nav>

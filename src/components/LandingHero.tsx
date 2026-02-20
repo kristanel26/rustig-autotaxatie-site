@@ -20,26 +20,37 @@ const LandingHero = ({
 }: LandingHeroProps) => {
   return (
     <section className="hero-section min-h-[85vh] flex items-center relative overflow-hidden">
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 opacity-5">
+      {/* Subtle dot pattern */}
+      <div className="absolute inset-0 opacity-[0.04]">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
-            backgroundSize: "40px 40px",
+            backgroundImage: `radial-gradient(circle at 1.5px 1.5px, white 1px, transparent 0)`,
+            backgroundSize: "32px 32px",
           }}
         />
       </div>
 
+      {/* Decorative glow orbs */}
+      <div className="absolute top-20 right-[10%] w-[500px] h-[500px] rounded-full opacity-[0.08]"
+        style={{ background: 'radial-gradient(circle, hsl(175 50% 50%) 0%, transparent 70%)' }}
+      />
+      <div className="absolute bottom-20 left-[5%] w-[300px] h-[300px] rounded-full opacity-[0.06]"
+        style={{ background: 'radial-gradient(circle, hsl(21 100% 56%) 0%, transparent 70%)' }}
+      />
+
       <div className="container-wide w-full px-6 md:px-8 py-16 md:py-24 relative z-10">
         <div className="max-w-3xl">
-          <p className="text-accent-foreground/80 font-medium mb-4 animate-fade-in uppercase tracking-wider text-sm">
-            {subtitle}
-          </p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight animate-slide-up text-balance">
+          <div className="flex items-center gap-3 mb-6 animate-fade-in">
+            <div className="accent-line" />
+            <p className="text-accent-foreground/90 font-semibold uppercase tracking-widest text-xs">
+              {subtitle}
+            </p>
+          </div>
+          <h1 className="heading-display text-4xl md:text-5xl lg:text-6xl text-primary-foreground mb-6 leading-[1.1] animate-slide-up text-balance">
             {title}
           </h1>
-          <div className="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-2xl animate-slide-up leading-relaxed" style={{ animationDelay: "100ms" }}>
+          <div className="text-lg md:text-xl text-primary-foreground/75 mb-10 max-w-2xl animate-slide-up leading-relaxed" style={{ animationDelay: "100ms" }}>
             {description}
           </div>
           <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: "200ms" }}>

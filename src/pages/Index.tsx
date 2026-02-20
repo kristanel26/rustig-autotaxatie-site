@@ -10,9 +10,10 @@ const services = [
     icon: Calculator,
     title: "BPM-taxatie bij import",
     description:
-      "Importeer je een voertuig en heb je een BPM-taxatie nodig? Wij maken een zorgvuldig onderbouwd taxatierapport dat je kunt gebruiken bij je BPM-aangifte. Helder, controleerbaar en passend bij het voertuig.",
+      "Importeer je een voertuig en heb je een BPM-taxatie nodig? Wij maken een zorgvuldig onderbouwd taxatierapport dat je kunt gebruiken bij je BPM-aangifte.",
     href: "/bpm-taxatie",
     cta: "Meer over BPM-taxatie",
+    accent: "from-blue-500/10 to-blue-600/5",
   },
   {
     icon: Caravan,
@@ -21,6 +22,7 @@ const services = [
       "Wil je je voertuig goed verzekeren? Met een officiële verzekeringstaxatie leg je de juiste waarde vast, zodat je bij schade of diefstal weet waar je aan toe bent.",
     href: "/verzekeringstaxatie-info",
     cta: "Meer over verzekeringstaxatie",
+    accent: "from-teal-500/10 to-teal-600/5",
     subLinks: [
       { label: "Camper", href: "/camper-taxatie" },
       { label: "Oldtimer", href: "/oldtimer-taxatie" },
@@ -36,6 +38,7 @@ const services = [
       "Een objectieve waardebepaling van je voertuig voor zakelijke of fiscale doeleinden. De WEV-taxatie geeft inzicht in de waarde op een specifiek moment.",
     href: "/wev-taxatie",
     cta: "Meer over WEV-taxatie",
+    accent: "from-amber-500/10 to-amber-600/5",
   },
 ];
 
@@ -45,24 +48,37 @@ const Index = () => {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="hero-section py-20 md:py-32 px-6 md:px-8">
-        <div className="container-wide">
+      <section className="hero-section py-24 md:py-36 px-6 md:px-8 relative overflow-hidden">
+        {/* Dot pattern */}
+        <div className="absolute inset-0 opacity-[0.04]">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 1.5px 1.5px, white 1px, transparent 0)`,
+            backgroundSize: "32px 32px",
+          }} />
+        </div>
+
+        {/* Glow orbs */}
+        <div className="absolute top-10 right-[10%] w-[500px] h-[500px] rounded-full opacity-[0.08]"
+          style={{ background: 'radial-gradient(circle, hsl(175 50% 50%) 0%, transparent 70%)' }}
+        />
+        <div className="absolute bottom-10 left-[5%] w-[300px] h-[300px] rounded-full opacity-[0.06]"
+          style={{ background: 'radial-gradient(circle, hsl(21 100% 56%) 0%, transparent 70%)' }}
+        />
+
+        <div className="container-wide relative z-10">
           <div className="max-w-3xl">
-            <p className="text-accent-foreground/80 font-medium mb-4 animate-fade-in uppercase tracking-wider text-sm">
-              Met meer dan 15 jaar ervaring in voertuigtaxaties
-            </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight animate-slide-up text-balance">
-              Onafhankelijke voertuigwaarderingen
+            <div className="flex items-center gap-3 mb-6 animate-fade-in">
+              <div className="accent-line" />
+              <p className="text-accent-foreground/90 font-semibold uppercase tracking-widest text-xs">
+                Meer dan 15 jaar ervaring
+              </p>
+            </div>
+            <h2 className="heading-display text-4xl md:text-5xl lg:text-6xl text-primary-foreground mb-6 leading-[1.1] animate-slide-up text-balance">
+              Onafhankelijke voertuig­waarderingen
             </h2>
-            <div className="text-lg md:text-xl text-primary-foreground/80 mb-10 animate-slide-up leading-relaxed max-w-2xl space-y-4" style={{ animationDelay: "100ms" }}>
+            <div className="text-lg md:text-xl text-primary-foreground/75 mb-10 animate-slide-up leading-relaxed max-w-2xl space-y-4" style={{ animationDelay: "100ms" }}>
               <p>
-                Automobiel Taxaties is een onafhankelijk taxatiebureau voor voertuigen.
-              </p>
-              <p>
-                We ondersteunen ondernemers en particulieren met zorgvuldig onderbouwde taxaties voor BPM, verzekering en fiscale waarderingen.
-              </p>
-              <p>
-                We kijken rustig en zorgvuldig naar het voertuig en alles wat de waarde beïnvloedt. Dat resulteert in een helder taxatierapport dat past bij het doel waarvoor je het nodig hebt.
+                Automobiel Taxaties is een onafhankelijk taxatiebureau. We ondersteunen ondernemers en particulieren met zorgvuldig onderbouwde taxaties voor BPM, verzekering en fiscale waarderingen.
               </p>
             </div>
             <a href="#diensten" className="inline-block animate-slide-up" style={{ animationDelay: "200ms" }}>
@@ -72,45 +88,56 @@ const Index = () => {
             </a>
           </div>
         </div>
+
+        {/* Wave */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" preserveAspectRatio="none">
+            <path d="M0 120L48 110C96 100 192 80 288 70C384 60 480 60 576 65C672 70 768 80 864 85C960 90 1056 90 1152 85C1248 80 1344 70 1392 65L1440 60V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0Z" fill="hsl(var(--background))" />
+          </svg>
+        </div>
       </section>
 
       {/* Services */}
-      <section id="diensten" className="section-padding bg-background scroll-mt-8">
-        <div className="container-wide">
-        <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
-            Onze diensten
-          </h2>
-        </div>
+      <section id="diensten" className="section-padding bg-background scroll-mt-8 section-glow relative">
+        <div className="container-wide relative z-10">
+          <div className="text-center mb-14 md:mb-20">
+            <div className="accent-line mx-auto mb-4" />
+            <h2 className="heading-display text-3xl md:text-4xl lg:text-5xl mb-4 text-balance">
+              Onze diensten
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+              Professionele taxaties voor elke situatie
+            </p>
+          </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {services.map((service, index) => (
               <div
                 key={index}
-                className="card-elevated p-8 flex flex-col animate-slide-up"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="card-elevated p-8 flex flex-col animate-slide-up group"
+                style={{ animationDelay: `${index * 120}ms` }}
               >
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-accent/10 mb-6 self-start">
+                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ${service.accent} mb-6 self-start border border-border/50 group-hover:scale-110 transition-transform duration-300`}>
                   <service.icon className="w-7 h-7 text-accent" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
+                <h3 className="text-xl font-bold mb-3">{service.title}</h3>
                 <p className="text-muted-foreground leading-relaxed mb-6 flex-grow">
                   {service.description}
                 </p>
                 <Link to={service.href}>
-                  <Button variant="subtle" className="w-full justify-between group">
+                  <Button variant="secondary-action" className="w-full justify-between group/btn">
                     {service.cta}
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
                 {service.subLinks && (
-                  <div className="mt-4 pt-4 border-t border-border">
-                    <div className="flex flex-wrap gap-2">
+                  <div className="mt-4 pt-4 border-t border-border/50">
+                    <div className="flex flex-wrap gap-x-3 gap-y-1">
                       {service.subLinks.map((subLink, subIndex) => (
                         <Link
                           key={subIndex}
                           to={subLink.href}
-                          className="text-sm text-muted-foreground hover:text-foreground transition-colors hover:underline"
+                          className="text-sm text-muted-foreground hover:text-accent transition-colors hover:underline underline-offset-2"
                         >
                           {subLink.label}
                         </Link>
@@ -125,43 +152,45 @@ const Index = () => {
       </section>
 
       {/* Trust indicators */}
-      <section className="section-padding bg-secondary/30">
+      <section className="section-padding bg-secondary/40">
         <div className="container-wide">
           <TrustIndicators />
         </div>
       </section>
 
       {/* About section */}
-      <section className="section-padding bg-background">
-        <div className="container-wide">
+      <section className="section-padding bg-background section-glow relative overflow-hidden">
+        <div className="container-wide relative z-10">
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-            <div>
+            <div className="relative">
+              <div className="absolute -inset-4 bg-gradient-to-br from-accent/10 to-transparent rounded-3xl blur-2xl" />
               <img
                 src={erikPhoto}
                 alt="Erik Elderson – eigenaar Automobiel Taxaties"
-                className="rounded-2xl w-full max-w-md mx-auto shadow-lg"
+                className="relative rounded-2xl w-full max-w-md mx-auto shadow-xl"
                 loading="lazy"
               />
             </div>
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance">
+              <div className="accent-line mb-4" />
+              <h2 className="heading-display text-3xl md:text-4xl mb-3 text-balance">
                 Erik Elderson
               </h2>
-              <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">
+              <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-6">
                 Eigenaar · Notarieel Beëdigd TMV Register-Taxateur · Register-Taxateur VRT
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+              <p className="text-lg text-muted-foreground leading-relaxed mb-4">
                 Automobiel Taxaties werkt onafhankelijk en met meer dan 15 jaar ervaring in voertuigwaarderingen. Ik neem de tijd om een voertuig goed te bekijken en leg vast wat écht van invloed is op de waarde.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">
                 Geen aannames, geen haastwerk. Zo ontvang je een duidelijk en zorgvuldig opgesteld taxatierapport waar je op kunt vertrouwen.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href="tel:+31654994978" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+                <a href="tel:+31650694978" className="flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors">
                   <Phone className="w-4 h-4" />
                   +31(0)6 506 949 78
                 </a>
-                <a href="mailto:erik@automobieltaxaties.nl" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+                <a href="mailto:erik@automobieltaxaties.nl" className="flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors">
                   <Mail className="w-4 h-4" />
                   erik@automobieltaxaties.nl
                 </a>
@@ -172,13 +201,19 @@ const Index = () => {
       </section>
 
       {/* CTA section */}
-      <section className="section-padding bg-primary">
-        <div className="container-narrow text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-foreground text-balance">
+      <section className="hero-section py-20 md:py-28 px-6 md:px-8 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 1.5px 1.5px, white 1px, transparent 0)`,
+            backgroundSize: "32px 32px",
+          }} />
+        </div>
+        <div className="container-narrow text-center relative z-10">
+          <h2 className="heading-display text-3xl md:text-4xl mb-4 text-primary-foreground text-balance">
             Vragen of een taxatie nodig?
           </h2>
-          <p className="text-lg text-primary-foreground/80 mb-8 max-w-xl mx-auto">
-            Neem contact op om je situatie te bespreken. 
+          <p className="text-lg text-primary-foreground/70 mb-10 max-w-xl mx-auto">
+            Neem contact op om je situatie te bespreken.
             We kijken graag mee welke taxatie bij jouw vraag past.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -188,47 +223,52 @@ const Index = () => {
                 085 483 2461
               </Button>
             </a>
-            <a href="mailto:erik@automobieltaxaties.nl">
-              <Button variant="subtle" size="xl" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
+            <Link to="/contact">
+              <Button variant="subtle" size="xl" className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10">
                 <Mail className="w-5 h-5 mr-2" />
-                Stuur een mail
+                Contactpagina
               </Button>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-border">
+      <footer className="py-12 px-6 border-t border-border bg-secondary/20">
         <div className="container-wide">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="font-semibold mb-4">Automobiel Taxaties</h3>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
+                  <span className="text-primary-foreground font-bold text-xs">AT</span>
+                </div>
+                <h3 className="font-bold">Automobiel Taxaties</h3>
+              </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Al meer dan 15 jaar jouw betrouwbare partner voor professionele voertuigtaxaties in Nederland.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Diensten</h3>
+              <h3 className="font-bold mb-4">Diensten</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link to="/bpm-taxatie" className="hover:text-foreground transition-colors">BPM-taxaties</Link></li>
-                <li><Link to="/camper-taxatie" className="hover:text-foreground transition-colors">Verzekeringstaxaties</Link></li>
-                <li><Link to="/wev-taxatie" className="hover:text-foreground transition-colors">WEV-taxatie</Link></li>
-                <li><Link to="/faq" className="hover:text-foreground transition-colors">Veelgestelde vragen</Link></li>
-                <li><Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link></li>
+                <li><Link to="/bpm-taxatie" className="hover:text-accent transition-colors">BPM-taxaties</Link></li>
+                <li><Link to="/verzekeringstaxatie-info" className="hover:text-accent transition-colors">Verzekeringstaxaties</Link></li>
+                <li><Link to="/wev-taxatie" className="hover:text-accent transition-colors">WEV-taxatie</Link></li>
+                <li><Link to="/faq" className="hover:text-accent transition-colors">Veelgestelde vragen</Link></li>
+                <li><Link to="/contact" className="hover:text-accent transition-colors">Contact</Link></li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4">Contact</h3>
+              <h3 className="font-bold mb-4">Contact</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                 <a href="tel:+31854832461" className="hover:text-foreground transition-colors flex items-center gap-2">
+                  <a href="tel:+31854832461" className="hover:text-accent transition-colors flex items-center gap-2">
                     <Phone className="w-4 h-4" />
                     085 483 2461
                   </a>
                 </li>
                 <li>
-                  <a href="mailto:erik@automobieltaxaties.nl" className="hover:text-foreground transition-colors flex items-center gap-2">
+                  <a href="mailto:erik@automobieltaxaties.nl" className="hover:text-accent transition-colors flex items-center gap-2">
                     <Mail className="w-4 h-4" />
                     erik@automobieltaxaties.nl
                   </a>

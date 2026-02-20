@@ -9,17 +9,25 @@ const Contact = () => {
     <div className="min-h-screen bg-background">
       <SiteHeader />
 
-      {/* Hero */}
-      <section className="hero-section py-16 md:py-24 px-6 md:px-8">
-        <div className="container-wide">
-          <Link to="/" className="inline-flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground transition-colors mb-6">
+      <section className="hero-section py-16 md:py-24 px-6 md:px-8 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 1.5px 1.5px, white 1px, transparent 0)`,
+            backgroundSize: "32px 32px",
+          }} />
+        </div>
+        <div className="container-wide relative z-10">
+          <Link to="/" className="inline-flex items-center gap-2 text-primary-foreground/60 hover:text-primary-foreground transition-colors mb-6">
             <ArrowLeft className="w-4 h-4" />
             Terug naar home
           </Link>
-          <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-4">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="accent-line" />
+          </div>
+          <h1 className="heading-display text-4xl md:text-5xl text-primary-foreground mb-4">
             Contact
           </h1>
-          <p className="text-lg text-primary-foreground/80 max-w-2xl">
+          <p className="text-lg text-primary-foreground/70 max-w-2xl">
             Heb je een vraag over een taxatie of wil je weten welke dienst bij jouw situatie past? Neem gerust contact op. We denken graag met je mee.
           </p>
         </div>

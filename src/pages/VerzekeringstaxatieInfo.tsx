@@ -171,7 +171,7 @@ const VerzekeringstaxatieInfo = () => {
 
             <div className="space-y-8">
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
+                <div className="step-badge flex-shrink-0">
                   1
                 </div>
                 <div>
@@ -183,7 +183,7 @@ const VerzekeringstaxatieInfo = () => {
               </div>
 
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
+                <div className="step-badge flex-shrink-0">
                   2
                 </div>
                 <div>
@@ -195,7 +195,7 @@ const VerzekeringstaxatieInfo = () => {
               </div>
 
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
+                <div className="step-badge flex-shrink-0">
                   3
                 </div>
                 <div>
@@ -207,7 +207,7 @@ const VerzekeringstaxatieInfo = () => {
               </div>
 
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
+                <div className="step-badge flex-shrink-0">
                   4
                 </div>
                 <div>
@@ -219,7 +219,7 @@ const VerzekeringstaxatieInfo = () => {
               </div>
 
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
+                <div className="step-badge flex-shrink-0">
                   5
                 </div>
                 <div>
