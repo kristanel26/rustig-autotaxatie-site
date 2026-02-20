@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import TrustIndicators from "@/components/TrustIndicators";
 import { Caravan, Calculator, Scale, ArrowRight, Phone, Mail } from "lucide-react";
 import erikPhoto from "@/assets/erik-elderson.png";
+import SiteHeader from "@/components/SiteHeader";
 
 const services = [
   {
@@ -41,24 +42,7 @@ const services = [
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="py-6 px-6 md:px-8 border-b border-border">
-        <div className="container-wide flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-bold text-foreground">Automobiel Taxaties</h1>
-          </div>
-          <div className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
-             <a href="tel:+31854832461" className="flex items-center gap-2 hover:text-foreground transition-colors">
-              <Phone className="w-4 h-4" />
-              085 483 2461
-            </a>
-            <a href="mailto:erik@automobieltaxaties.nl" className="flex items-center gap-2 hover:text-foreground transition-colors">
-              <Mail className="w-4 h-4" />
-              erik@automobieltaxaties.nl
-            </a>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* Hero */}
       <section className="hero-section py-20 md:py-32 px-6 md:px-8">

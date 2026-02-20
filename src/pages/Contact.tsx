@@ -1,29 +1,13 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SiteHeader from "@/components/SiteHeader";
 import erikPhoto from "@/assets/erik-elderson.png";
 
 const Contact = () => {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="py-6 px-6 md:px-8 border-b border-border">
-        <div className="container-wide flex items-center justify-between">
-          <Link to="/" className="text-xl font-bold text-foreground hover:text-foreground/80 transition-colors">
-            Automobiel Taxaties
-          </Link>
-          <div className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
-            <a href="tel:+31854832461" className="flex items-center gap-2 hover:text-foreground transition-colors">
-              <Phone className="w-4 h-4" />
-              085 483 2461
-            </a>
-            <a href="mailto:erik@automobieltaxaties.nl" className="flex items-center gap-2 hover:text-foreground transition-colors">
-              <Mail className="w-4 h-4" />
-              erik@automobieltaxaties.nl
-            </a>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* Hero */}
       <section className="hero-section py-16 md:py-24 px-6 md:px-8">
@@ -76,25 +60,6 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Krista */}
-              <div className="flex gap-6">
-                <div className="w-24 h-24 rounded-xl bg-secondary flex-shrink-0 flex items-center justify-center">
-                  <span className="text-2xl font-semibold text-muted-foreground">KN</span>
-                </div>
-                <div>
-                  <h2 className="text-xl font-semibold mb-1">Krista Nellestijn</h2>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    Eigenaar · Backoffice
-                  </p>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Contactpersoon voor de regio West: Zuid-Holland, Noord-Holland, Utrecht, Flevoland, Zeeland en Friesland.
-                  </p>
-                  <a href="mailto:krista@automobieltaxaties.nl" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    <Mail className="w-4 h-4" />
-                    krista@automobieltaxaties.nl
-                  </a>
-                </div>
-              </div>
             </div>
 
             {/* Right: General info */}
