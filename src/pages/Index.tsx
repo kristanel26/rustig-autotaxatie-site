@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import TrustIndicators from "@/components/TrustIndicators";
 import { Caravan, Calculator, Scale, ArrowRight, Phone, Mail } from "lucide-react";
+import erikPhoto from "@/assets/erik-elderson.png";
 
 const services = [
   {
@@ -47,13 +48,13 @@ const Index = () => {
             <h1 className="text-xl font-bold text-foreground">Automobiel Taxaties</h1>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
-            <a href="tel:+31851234567" className="flex items-center gap-2 hover:text-foreground transition-colors">
+             <a href="tel:+31854832461" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Phone className="w-4 h-4" />
-              085 123 4567
+              085 483 2461
             </a>
-            <a href="mailto:info@automobieltaxaties.nl" className="flex items-center gap-2 hover:text-foreground transition-colors">
+            <a href="mailto:erik@automobieltaxaties.nl" className="flex items-center gap-2 hover:text-foreground transition-colors">
               <Mail className="w-4 h-4" />
-              info@automobieltaxaties.nl
+              erik@automobieltaxaties.nl
             </a>
           </div>
         </div>
@@ -148,19 +149,41 @@ const Index = () => {
 
       {/* About section */}
       <section className="section-padding bg-background">
-        <div className="container-narrow text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance">
-            Vertrouwen en deskundigheid
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-            Automobiel Taxaties werkt onafhankelijk en met meer dan 15 jaar ervaring in voertuigwaarderingen.
-          </p>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-            We nemen de tijd om een voertuig goed te bekijken en leggen vast wat écht van invloed is op de waarde. Geen aannames, geen haastwerk.
-          </p>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Zo ontvang je een duidelijk en zorgvuldig opgesteld taxatierapport waar je op kunt vertrouwen, afgestemd op het doel waarvoor je het gebruikt.
-          </p>
+        <div className="container-wide">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+            <div>
+              <img
+                src={erikPhoto}
+                alt="Erik Elderson – eigenaar Automobiel Taxaties"
+                className="rounded-2xl w-full max-w-md mx-auto shadow-lg"
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-balance">
+                Erik Elderson
+              </h2>
+              <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">
+                Eigenaar · Notarieel Beëdigd TMV Register-Taxateur · Register-Taxateur VRT
+              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                Automobiel Taxaties werkt onafhankelijk en met meer dan 15 jaar ervaring in voertuigwaarderingen. Ik neem de tijd om een voertuig goed te bekijken en leg vast wat écht van invloed is op de waarde.
+              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                Geen aannames, geen haastwerk. Zo ontvang je een duidelijk en zorgvuldig opgesteld taxatierapport waar je op kunt vertrouwen.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="tel:+31654994978" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+                  <Phone className="w-4 h-4" />
+                  +31(0)6 506 949 78
+                </a>
+                <a href="mailto:erik@automobieltaxaties.nl" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
+                  <Mail className="w-4 h-4" />
+                  erik@automobieltaxaties.nl
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -175,13 +198,13 @@ const Index = () => {
             We kijken graag mee welke taxatie bij jouw vraag past.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+31851234567">
+            <a href="tel:+31854832461">
               <Button variant="hero" size="xl">
                 <Phone className="w-5 h-5 mr-2" />
-                Bel ons
+                085 483 2461
               </Button>
             </a>
-            <a href="mailto:info@automobieltaxaties.nl">
+            <a href="mailto:erik@automobieltaxaties.nl">
               <Button variant="subtle" size="xl" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
                 <Mail className="w-5 h-5 mr-2" />
                 Stuur een mail
@@ -213,22 +236,22 @@ const Index = () => {
               <h3 className="font-semibold mb-4">Contact</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <a href="tel:+31851234567" className="hover:text-foreground transition-colors flex items-center gap-2">
+                 <a href="tel:+31854832461" className="hover:text-foreground transition-colors flex items-center gap-2">
                     <Phone className="w-4 h-4" />
-                    085 123 4567
+                    085 483 2461
                   </a>
                 </li>
                 <li>
-                  <a href="mailto:info@automobieltaxaties.nl" className="hover:text-foreground transition-colors flex items-center gap-2">
+                  <a href="mailto:erik@automobieltaxaties.nl" className="hover:text-foreground transition-colors flex items-center gap-2">
                     <Mail className="w-4 h-4" />
-                    info@automobieltaxaties.nl
+                    erik@automobieltaxaties.nl
                   </a>
                 </li>
               </ul>
             </div>
           </div>
           <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            <p>© 2024 Automobiel Taxaties. Alle rechten voorbehouden.</p>
+            <p>© {new Date().getFullYear()} Automobiel Taxaties · KvK 71468889 · BTW NL858727493B01</p>
           </div>
         </div>
       </footer>
