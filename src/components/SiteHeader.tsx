@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { Phone, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import logo from "@/assets/logo-automobiel-taxaties.png";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -31,15 +32,14 @@ const SiteHeader = () => {
       } px-6 md:px-8`}
     >
       <div className="container-wide flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-sm">AT</span>
-          </div>
-          <span className={`text-lg font-bold transition-colors ${
-            scrolled ? "text-foreground" : "text-primary-foreground"
-          } group-hover:opacity-80`}>
-            Automobiel Taxaties
-          </span>
+        <Link to="/" className="flex items-center group">
+          <img
+            src={logo}
+            alt="Automobiel Taxaties"
+            className={`h-10 w-auto transition-all duration-300 ${
+              scrolled ? "" : "brightness-0 invert"
+            } group-hover:opacity-80`}
+          />
         </Link>
 
         {/* Desktop nav */}
