@@ -5,6 +5,7 @@ import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import heroCarInspection from "@/assets/hero-car-inspection.jpg";
 
 const VerzekeringstaxatieInfo = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -22,6 +23,7 @@ const VerzekeringstaxatieInfo = () => {
         description="Vooraf duidelijkheid over de waarde van je voertuig. Zodat bij schade of diefstal geen discussie ontstaat."
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
+        heroImage={heroCarInspection}
       />
 
       <section className="section-padding bg-background">

@@ -5,6 +5,7 @@ import IntakeForm from "@/components/IntakeForm";
 import TrustIndicators from "@/components/TrustIndicators";
 import SiteHeader from "@/components/SiteHeader";
 import { Calculator, FileSearch, Clock } from "lucide-react";
+import heroBpm from "@/assets/hero-bpm.jpg";
 
 const BpmVoorbereiding = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -43,6 +44,7 @@ const BpmVoorbereiding = () => {
         description="Overweeg je een auto te importeren? Met een BPM voorbereiding weet je vooraf precies wat de totale kosten zijn. Zo voorkom je verrassingen en kun je een goede beslissing nemen."
         ctaText="Start je BPM berekening"
         onCtaClick={scrollToForm}
+        heroImage={heroBpm}
       />
 
       <FeatureBlock

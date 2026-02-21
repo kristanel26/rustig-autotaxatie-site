@@ -5,6 +5,7 @@ import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import serviceWev from "@/assets/service-wev.jpg";
 
 const WevTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -22,6 +23,7 @@ const WevTaxatie = () => {
         description="Een WEV-taxatie wordt gebruikt wanneer de waarde van een voertuig fiscaal moet worden vastgesteld. Dat speelt bijvoorbeeld bij het overbrengen van een voertuig van zakelijk naar privé, van privé naar zakelijk of bij andere fiscale momenten waarbij de Belastingdienst een onderbouwde waarde verlangt."
         ctaText="WEV-taxatie aanvragen"
         onCtaClick={scrollToForm}
+        heroImage={serviceWev}
       />
 
 
