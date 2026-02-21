@@ -5,6 +5,7 @@ import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import heroOldtimer from "@/assets/hero-oldtimer.jpg";
 
 const OldtimerTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -22,6 +23,7 @@ const OldtimerTaxatie = () => {
         description="Je oldtimer is meer dan alleen een voertuig. Met een verzekeringstaxatie leg je vast wat het op dit moment werkelijk waard is. Die waarde vormt de basis voor de verzekering, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde."
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
+        heroImage={heroOldtimer}
       />
 
       {/* Waarom een verzekeringstaxatie */}

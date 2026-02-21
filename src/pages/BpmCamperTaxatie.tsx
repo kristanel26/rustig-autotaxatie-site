@@ -5,6 +5,7 @@ import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import heroCamper from "@/assets/hero-camper.jpg";
 
 const BpmCamperTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -22,6 +23,7 @@ const BpmCamperTaxatie = () => {
         description="Bij import van een camper uit het buitenland moet BPM worden aangegeven. De wijze waarop de BPM wordt vastgesteld, heeft direct invloed op de BPM-aangifte en de onderbouwing richting de Belastingdienst."
         ctaText="BPM-taxatie camper aanvragen"
         onCtaClick={scrollToForm}
+        heroImage={heroCamper}
       />
 
       {/* Waarom vraagt BPM bij campers extra aandacht */}

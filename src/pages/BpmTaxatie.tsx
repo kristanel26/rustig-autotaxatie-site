@@ -3,7 +3,7 @@ import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
 import { Users, FileText, Shield, ClipboardCheck, List, AlertTriangle } from "lucide-react";
-
+import heroBpm from "@/assets/hero-bpm.jpg";
 const BpmTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
 
@@ -20,6 +20,7 @@ const BpmTaxatie = () => {
         description="Wanneer je een voertuig uit het buitenland importeert en in Nederland wilt registreren, moet er BPM worden aangegeven. De manier waarop de BPM wordt vastgesteld, verschilt per situatie en heeft direct invloed op de onderbouwing richting de Belastingdienst."
         ctaText="BPM-aangifte aanvragen"
         onCtaClick={scrollToForm}
+        heroImage={heroBpm}
       />
 
       {/* Inleidende uitleg: BPM bij import van voertuigen */}

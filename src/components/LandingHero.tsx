@@ -9,6 +9,7 @@ interface LandingHeroProps {
   ctaText: string;
   onCtaClick: () => void;
   children?: ReactNode;
+  heroImage?: string;
 }
 
 const LandingHero = ({
@@ -17,9 +18,24 @@ const LandingHero = ({
   description,
   ctaText,
   onCtaClick,
+  heroImage,
 }: LandingHeroProps) => {
   return (
-    <section className="hero-section min-h-[85vh] flex items-center relative overflow-hidden">
+    <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+      {/* Background: image or gradient */}
+      {heroImage ? (
+        <div className="absolute inset-0">
+          <img
+            src={heroImage}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--primary))]/90 via-[hsl(var(--primary))]/75 to-[hsl(var(--primary))]/40" />
+        </div>
+      ) : (
+        <div className="absolute inset-0 hero-section" />
+      )}
+
       {/* Subtle dot pattern */}
       <div className="absolute inset-0 opacity-[0.04]">
         <div
@@ -43,14 +59,14 @@ const LandingHero = ({
         <div className="max-w-3xl">
           <div className="flex items-center gap-3 mb-6 animate-fade-in">
             <div className="accent-line" />
-            <p className="text-accent-foreground/90 font-semibold uppercase tracking-widest text-xs">
+            <p className="text-white/80 font-semibold uppercase tracking-widest text-xs">
               {subtitle}
             </p>
           </div>
-          <h1 className="heading-display text-4xl md:text-5xl lg:text-6xl text-primary-foreground mb-6 leading-[1.1] animate-slide-up text-balance">
+          <h1 className="heading-display text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-[1.1] animate-slide-up text-balance">
             {title}
           </h1>
-          <div className="text-lg md:text-xl text-primary-foreground/75 mb-10 max-w-2xl animate-slide-up leading-relaxed" style={{ animationDelay: "100ms" }}>
+          <div className="text-lg md:text-xl text-white/75 mb-10 max-w-2xl animate-slide-up leading-relaxed" style={{ animationDelay: "100ms" }}>
             {description}
           </div>
           <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: "200ms" }}>

@@ -5,6 +5,7 @@ import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import heroMotor from "@/assets/hero-motor.jpg";
 
 const BpmMotorTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -22,6 +23,7 @@ const BpmMotorTaxatie = () => {
         description="Wanneer je een motor uit het buitenland importeert, moet er BPM worden aangegeven. De hoogte van dat bedrag hangt af van de manier waarop de afschrijving wordt vastgesteld. Juist bij motoren kan dat verschil aanzienlijk zijn."
         ctaText="BPM-taxatie motor aanvragen"
         onCtaClick={scrollToForm}
+        heroImage={heroMotor}
       />
 
       {/* Uitleg BPM bij motorimport */}
