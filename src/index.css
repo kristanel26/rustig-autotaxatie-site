@@ -6,40 +6,40 @@
 
 @layer base {
   :root {
-    /* Professional deep blue - trust & expertise */
+    /* Brand navy #1d3c71 */
     --background: 0 0% 100%;
-    --foreground: 215 30% 14%;
+    --foreground: 216 58% 28%;
 
-    /* Cards with subtle warmth */
-    --card: 210 25% 98%;
-    --card-foreground: 215 30% 14%;
+    /* Cards */
+    --card: 210 33% 97%;
+    --card-foreground: 216 58% 28%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 30% 14%;
+    --popover-foreground: 216 58% 28%;
 
-    /* Deep navy primary - authority */
-    --primary: 215 55% 20%;
+    /* Primary navy #1d3c71 / #1e3d71 */
+    --primary: 216 58% 28%;
     --primary-foreground: 0 0% 100%;
 
-    /* Light blue-gray secondary */
-    --secondary: 210 25% 95%;
-    --secondary-foreground: 215 30% 14%;
+    /* Light blue #b3c7db */
+    --secondary: 210 33% 91%;
+    --secondary-foreground: 216 58% 28%;
 
-    /* Muted tones */
-    --muted: 210 18% 93%;
-    --muted-foreground: 215 15% 46%;
+    /* Muted #8eacc9 */
+    --muted: 210 37% 92%;
+    --muted-foreground: 211 33% 56%;
 
-    /* Teal accent for CTAs - warm but professional */
-    --accent: 175 50% 38%;
+    /* Accent - medium blue #6b90b5 */
+    --accent: 211 33% 56%;
     --accent-foreground: 0 0% 100%;
 
-    /* CTA Orange - primary action color */
+    /* CTA Orange #ff751f */
     --cta: 21 100% 56%;
     --cta-foreground: 0 0% 100%;
 
-    /* Secondary button colors - dark blue */
+    /* Secondary button #1d3c71 / hover #6b90b5 */
     --secondary-button: 216 58% 28%;
-    --secondary-button-hover: 213 37% 55%;
+    --secondary-button-hover: 211 33% 56%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
@@ -48,19 +48,19 @@
     --warning: 38 92% 50%;
     --warning-foreground: 38 100% 15%;
 
-    --border: 210 22% 89%;
-    --input: 210 22% 89%;
-    --ring: 175 50% 38%;
+    --border: 210 33% 87%;
+    --input: 210 33% 87%;
+    --ring: 216 58% 28%;
 
     --radius: 0.75rem;
 
     /* Enhanced custom tokens */
-    --hero-gradient: linear-gradient(145deg, hsl(215 55% 18%) 0%, hsl(215 50% 25%) 40%, hsl(210 45% 30%) 100%);
-    --hero-gradient-overlay: radial-gradient(ellipse at 30% 0%, hsl(175 50% 38% / 0.15) 0%, transparent 60%);
-    --card-shadow: 0 1px 3px hsl(215 30% 14% / 0.04), 0 4px 20px -4px hsl(215 30% 14% / 0.06);
-    --card-shadow-hover: 0 4px 12px hsl(215 30% 14% / 0.06), 0 12px 40px -8px hsl(215 30% 14% / 0.1);
+    --hero-gradient: linear-gradient(145deg, hsl(216 58% 22%) 0%, hsl(216 58% 28%) 40%, hsl(211 33% 36%) 100%);
+    --hero-gradient-overlay: radial-gradient(ellipse at 30% 0%, hsl(211 33% 56% / 0.15) 0%, transparent 60%);
+    --card-shadow: 0 1px 3px hsl(216 58% 28% / 0.04), 0 4px 20px -4px hsl(216 58% 28% / 0.06);
+    --card-shadow-hover: 0 4px 12px hsl(216 58% 28% / 0.06), 0 12px 40px -8px hsl(216 58% 28% / 0.1);
     --button-shadow: 0 4px 14px -2px hsl(21 100% 56% / 0.4);
-    --section-glow: radial-gradient(ellipse at 50% 0%, hsl(175 50% 38% / 0.05) 0%, transparent 70%);
+    --section-glow: radial-gradient(ellipse at 50% 0%, hsl(211 33% 56% / 0.05) 0%, transparent 70%);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -199,12 +199,12 @@
   /* Accent line decoration */
   .accent-line {
     @apply w-12 h-1 rounded-full;
-    background: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--cta)));
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--cta)));
   }
 
   /* Gradient text */
   .text-gradient {
-    background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(175 50% 50%) 100%);
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(211 33% 56%) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
