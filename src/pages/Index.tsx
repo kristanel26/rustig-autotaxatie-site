@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import TrustIndicators from "@/components/TrustIndicators";
 import { Caravan, Calculator, Scale, ArrowRight, Phone, Mail } from "lucide-react";
 import erikPhoto from "@/assets/erik-elderson.png";
-import heroImage from "@/assets/hero-car-inspection.jpg";
+import heroImage from "@/assets/hero-homepage.jpg";
 import serviceBpm from "@/assets/service-bpm.jpg";
 import serviceVerzekering from "@/assets/service-verzekering.jpg";
 import serviceWev from "@/assets/service-wev.jpg";
