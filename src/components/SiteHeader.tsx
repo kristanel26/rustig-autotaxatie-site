@@ -36,9 +36,7 @@ const SiteHeader = () => {
           <img
             src={logo}
             alt="Automobiel Taxaties"
-            className={`h-10 w-auto transition-all duration-300 ${
-              scrolled ? "" : "brightness-0 invert"
-            } group-hover:opacity-80`}
+            className="h-14 w-auto transition-all duration-300 group-hover:opacity-80"
           />
         </Link>
 
