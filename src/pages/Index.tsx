@@ -3,6 +3,11 @@ import { Button } from "@/components/ui/button";
 import TrustIndicators from "@/components/TrustIndicators";
 import { Caravan, Calculator, Scale, ArrowRight, Phone, Mail } from "lucide-react";
 import erikPhoto from "@/assets/erik-elderson.png";
+import heroImage from "@/assets/hero-car-inspection.jpg";
+import serviceBpm from "@/assets/service-bpm.jpg";
+import serviceVerzekering from "@/assets/service-verzekering.jpg";
+import serviceWev from "@/assets/service-wev.jpg";
+import logo from "@/assets/logo-automobiel-taxaties.png";
 import SiteHeader from "@/components/SiteHeader";
 
 const services = [
@@ -13,7 +18,7 @@ const services = [
       "Importeer je een voertuig en heb je een BPM-taxatie nodig? Wij maken een zorgvuldig onderbouwd taxatierapport dat je kunt gebruiken bij je BPM-aangifte.",
     href: "/bpm-taxatie",
     cta: "Meer over BPM-taxatie",
-    accent: "from-blue-500/10 to-blue-600/5",
+    image: serviceBpm,
   },
   {
     icon: Caravan,
@@ -22,7 +27,7 @@ const services = [
       "Wil je je voertuig goed verzekeren? Met een officiële verzekeringstaxatie leg je de juiste waarde vast, zodat je bij schade of diefstal weet waar je aan toe bent.",
     href: "/verzekeringstaxatie-info",
     cta: "Meer over verzekeringstaxatie",
-    accent: "from-teal-500/10 to-teal-600/5",
+    image: serviceVerzekering,
     subLinks: [
       { label: "Camper", href: "/camper-taxatie" },
       { label: "Oldtimer", href: "/oldtimer-taxatie" },
@@ -38,7 +43,7 @@ const services = [
       "Een objectieve waardebepaling van je voertuig voor zakelijke of fiscale doeleinden. De WEV-taxatie geeft inzicht in de waarde op een specifiek moment.",
     href: "/wev-taxatie",
     cta: "Meer over WEV-taxatie",
-    accent: "from-amber-500/10 to-amber-600/5",
+    image: serviceWev,
   },
 ];
 
@@ -47,8 +52,18 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <SiteHeader />
 
-      {/* Hero */}
-      <section className="hero-section py-24 md:py-36 px-6 md:px-8 relative overflow-hidden">
+      {/* Hero with background image */}
+      <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <img
+            src={heroImage}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--primary))]/90 via-[hsl(var(--primary))]/75 to-[hsl(var(--primary))]/40" />
+        </div>
+
         {/* Dot pattern */}
         <div className="absolute inset-0 opacity-[0.04]">
           <div className="absolute inset-0" style={{
@@ -57,26 +72,18 @@ const Index = () => {
           }} />
         </div>
 
-        {/* Glow orbs */}
-        <div className="absolute top-10 right-[10%] w-[500px] h-[500px] rounded-full opacity-[0.08]"
-          style={{ background: 'radial-gradient(circle, hsl(175 50% 50%) 0%, transparent 70%)' }}
-        />
-        <div className="absolute bottom-10 left-[5%] w-[300px] h-[300px] rounded-full opacity-[0.06]"
-          style={{ background: 'radial-gradient(circle, hsl(21 100% 56%) 0%, transparent 70%)' }}
-        />
-
-        <div className="container-wide relative z-10">
+        <div className="container-wide w-full px-6 md:px-8 py-24 md:py-36 relative z-10">
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-6 animate-fade-in">
               <div className="accent-line" />
-              <p className="text-accent-foreground/90 font-semibold uppercase tracking-widest text-xs">
+              <p className="text-white/80 font-semibold uppercase tracking-widest text-xs">
                 Meer dan 15 jaar ervaring
               </p>
             </div>
-            <h2 className="heading-display text-4xl md:text-5xl lg:text-6xl text-primary-foreground mb-6 leading-[1.1] animate-slide-up text-balance">
+            <h1 className="heading-display text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-[1.1] animate-slide-up text-balance">
               Onafhankelijke voertuig­waarderingen
-            </h2>
-            <div className="text-lg md:text-xl text-primary-foreground/75 mb-10 animate-slide-up leading-relaxed max-w-2xl space-y-4" style={{ animationDelay: "100ms" }}>
+            </h1>
+            <div className="text-lg md:text-xl text-white/75 mb-10 animate-slide-up leading-relaxed max-w-2xl space-y-4" style={{ animationDelay: "100ms" }}>
               <p>
                 Automobiel Taxaties is een onafhankelijk taxatiebureau. We ondersteunen ondernemers en particulieren met zorgvuldig onderbouwde taxaties voor BPM, verzekering en fiscale waarderingen.
               </p>
@@ -114,37 +121,52 @@ const Index = () => {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="card-elevated p-8 flex flex-col animate-slide-up group"
+                className="card-elevated overflow-hidden flex flex-col animate-slide-up group"
                 style={{ animationDelay: `${index * 120}ms` }}
               >
-                <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ${service.accent} mb-6 self-start border border-border/50 group-hover:scale-110 transition-transform duration-300`}>
-                  <service.icon className="w-7 h-7 text-accent" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                <p className="text-muted-foreground leading-relaxed mb-6 flex-grow">
-                  {service.description}
-                </p>
-                <Link to={service.href}>
-                  <Button variant="secondary-action" className="w-full justify-between group/btn">
-                    {service.cta}
-                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-                {service.subLinks && (
-                  <div className="mt-4 pt-4 border-t border-border/50">
-                    <div className="flex flex-wrap gap-x-3 gap-y-1">
-                      {service.subLinks.map((subLink, subIndex) => (
-                        <Link
-                          key={subIndex}
-                          to={subLink.href}
-                          className="text-sm text-muted-foreground hover:text-accent transition-colors hover:underline underline-offset-2"
-                        >
-                          {subLink.label}
-                        </Link>
-                      ))}
+                {/* Service image */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                  <div className="absolute bottom-4 left-4">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/90 backdrop-blur-sm shadow-lg">
+                      <service.icon className="w-6 h-6 text-accent" />
                     </div>
                   </div>
-                )}
+                </div>
+
+                <div className="p-8 flex flex-col flex-grow">
+                  <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed mb-6 flex-grow">
+                    {service.description}
+                  </p>
+                  <Link to={service.href}>
+                    <Button variant="secondary-action" className="w-full justify-between group/btn">
+                      {service.cta}
+                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+                  {service.subLinks && (
+                    <div className="mt-4 pt-4 border-t border-border/50">
+                      <div className="flex flex-wrap gap-x-3 gap-y-1">
+                        {service.subLinks.map((subLink, subIndex) => (
+                          <Link
+                            key={subIndex}
+                            to={subLink.href}
+                            className="text-sm text-muted-foreground hover:text-accent transition-colors hover:underline underline-offset-2"
+                          >
+                            {subLink.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -239,10 +261,7 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-xs">AT</span>
-                </div>
-                <h3 className="font-bold">Automobiel Taxaties</h3>
+                <img src={logo} alt="Automobiel Taxaties" className="h-10 w-auto" />
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Al meer dan 15 jaar jouw betrouwbare partner voor professionele voertuigtaxaties in Nederland.
