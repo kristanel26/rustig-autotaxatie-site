@@ -133,7 +133,7 @@ const PDFCover = () => {
       }}
     >
       {/* ZONE 1 — Header: AT logo left, register logos right */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '28mm' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28mm' }}>
         <img src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '22mm', width: 'auto' }} />
         <div style={{ display: 'flex', alignItems: 'center', gap: '3mm' }}>
           <img src={logoVrt} alt="VRT" style={{ height: '9mm', width: 'auto', objectFit: 'contain' }} />
@@ -148,10 +148,10 @@ const PDFCover = () => {
         <h1 style={{ fontSize: '26pt', fontWeight: 700, letterSpacing: '0.5px', color: C.title, textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }}>
           TAXATIERAPPORT
         </h1>
-        <p style={{ fontSize: '10pt', color: C.subtitle, margin: '2.5mm 0 0 0' }}>
+        <p style={{ fontSize: '10pt', color: C.subtitle, margin: '3.5mm 0 0 0' }}>
           {subtitle}
         </p>
-        <p style={{ fontSize: '7.5pt', color: C.light, margin: '2mm 0 0 0' }}>
+        <p style={{ fontSize: '7.5pt', color: C.light, margin: '2.5mm 0 0 0' }}>
           {description}
         </p>
       </div>

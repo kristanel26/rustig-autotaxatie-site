@@ -98,7 +98,7 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         <View style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          alignItems: 'flex-start',
+          alignItems: 'center', // register logos vertically centered with AT logo
           marginBottom: mm(28), // 28mm gap to title
         }}>
           <Image src={logoAutomobiel} style={{ height: mm(22), width: 'auto' }} />
@@ -123,10 +123,10 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
           }}>
             Taxatierapport
           </Text>
-          <Text style={{ fontSize: 10, color: COLORS.subtitle, marginTop: mm(2.5) }}>
+          <Text style={{ fontSize: 10, color: COLORS.subtitle, marginTop: mm(3.5) }}>
             {subtitle}
           </Text>
-          <Text style={{ fontSize: 7.5, color: COLORS.light, marginTop: mm(2) }}>
+          <Text style={{ fontSize: 7.5, color: COLORS.light, marginTop: mm(2.5) }}>
             {description}
           </Text>
         </View>
