@@ -25,6 +25,8 @@ interface Report {
   customer_city: string | null;
   license_plate: string | null;
   vehicle_title: string | null;
+  rdw_merk: string | null;
+  rdw_handelsbenaming: string | null;
   opbouw_merk: string | null;
   opbouw_type: string | null;
   inspection_location: string | null;
@@ -35,7 +37,6 @@ interface Report {
   vehicle_photo_rotations: PhotoRotations | null;
 }
 
-// Color palette from gold standard
 const C = {
   title: '#1B2A4A',
   values: '#000000',
@@ -103,7 +104,8 @@ const PDFCover = () => {
 
   const customerName = [report.customer_title, report.customer_initials, report.customer_last_name]
     .filter(Boolean).join(' ') || '-';
-  const vehicleDisplay = report.vehicle_title?.toUpperCase() || '-';
+  const vehicleDisplay = (report.vehicle_title || 
+    [report.rdw_merk, report.rdw_handelsbenaming].filter(Boolean).join(' ') || '-').toUpperCase();
   const coverPhoto = report.vehicle_photos && report.vehicle_photos.length > 0 ? report.vehicle_photos[0] : null;
   const coverRotation = coverPhoto && report.vehicle_photo_rotations
     ? report.vehicle_photo_rotations[coverPhoto] || 0 : 0;
@@ -116,65 +118,65 @@ const PDFCover = () => {
         height: '297mm',
         position: 'relative',
         overflow: 'hidden',
-        padding: '40px 50px',
+        padding: '30px 50px 55px 50px',
         boxSizing: 'border-box',
         display: 'flex',
         flexDirection: 'column',
       }}
     >
       {/* ZONE 1 — Header: AT logo left, register logos right */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '36px' }}>
-        <img src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '60px', width: 'auto' }} />
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '44px' }}>
+        <img src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '80px', width: 'auto' }} />
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <img src={logoVrt} alt="VRT" style={{ height: '36px', width: 'auto', objectFit: 'contain' }} />
-          <img src={logoHobeon} alt="Hobeon SKO" style={{ height: '36px', width: 'auto', objectFit: 'contain' }} />
-          <img src={logoTmv} alt="TMV" style={{ height: '36px', width: 'auto', objectFit: 'contain' }} />
-          <img src={logoFehac} alt="FEHAC" style={{ height: '36px', width: 'auto', objectFit: 'contain' }} />
+          <img src={logoVrt} alt="VRT" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
+          <img src={logoHobeon} alt="Hobeon SKO" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
+          <img src={logoTmv} alt="TMV" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
+          <img src={logoFehac} alt="FEHAC" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
         </div>
       </div>
 
       {/* ZONE 2 — Title block */}
       <div style={{ marginBottom: '8px' }}>
-        <h1 style={{ fontSize: '28px', fontWeight: 700, letterSpacing: '0.5px', color: C.title, textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }}>
+        <h1 style={{ fontSize: '32px', fontWeight: 700, letterSpacing: '0.5px', color: C.title, textTransform: 'uppercase', lineHeight: 1.1, margin: 0 }}>
           TAXATIERAPPORT
         </h1>
-        <p style={{ fontSize: '11px', color: C.subtitle, margin: '4px 0 0 0' }}>
+        <p style={{ fontSize: '12px', color: C.subtitle, margin: '6px 0 0 0' }}>
           Volgens artikel 7:960 BW
         </p>
-        <p style={{ fontSize: '9px', color: C.light, margin: '6px 0 0 0' }}>
+        <p style={{ fontSize: '9px', color: C.light, margin: '8px 0 0 0' }}>
           Dit taxatierapport is opgesteld ten behoeve van de vaststelling van de vervangingswaarde van het voertuig.
         </p>
       </div>
 
       {/* Separator line */}
-      <div style={{ borderBottom: `1px solid ${C.lines}`, marginBottom: '28px' }} />
+      <div style={{ borderBottom: `1px solid ${C.lines}`, marginBottom: '32px' }} />
 
       {/* ZONE 3 — Vehicle info + Photo */}
-      <div style={{ display: 'flex', gap: '30px', marginBottom: '28px' }}>
+      <div style={{ display: 'flex', gap: '30px', marginBottom: '24px' }}>
         {/* Left: vehicle data */}
         <div style={{ flex: 1 }}>
-          <div style={{ marginBottom: '14px' }}>
+          <div style={{ marginBottom: '16px' }}>
             <p style={{ fontSize: '9px', color: C.labels, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>VOERTUIG</p>
-            <p style={{ fontSize: '14px', fontWeight: 700, color: C.values, margin: '2px 0 0 0', textTransform: 'uppercase' }}>
+            <p style={{ fontSize: '15px', fontWeight: 700, color: C.values, margin: '3px 0 0 0', textTransform: 'uppercase' }}>
               {vehicleDisplay}
             </p>
           </div>
-          <div style={{ marginBottom: '14px' }}>
+          <div style={{ marginBottom: '16px' }}>
             <p style={{ fontSize: '9px', color: C.labels, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>KENTEKEN</p>
-            <p style={{ fontSize: '14px', fontWeight: 700, color: C.values, margin: '2px 0 0 0' }}>
+            <p style={{ fontSize: '15px', fontWeight: 700, color: C.values, margin: '3px 0 0 0' }}>
               {report.license_plate || '-'}
             </p>
           </div>
           <div>
             <p style={{ fontSize: '9px', color: C.labels, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>DOCUMENTNUMMER</p>
-            <p style={{ fontSize: '14px', fontWeight: 700, color: C.values, margin: '2px 0 0 0' }}>
+            <p style={{ fontSize: '15px', fontWeight: 700, color: C.values, margin: '3px 0 0 0' }}>
               {report.document_reference || '-'}
             </p>
           </div>
         </div>
 
         {/* Right: vehicle photo */}
-        <div style={{ width: '220px', height: '165px', overflow: 'hidden', border: `1px solid ${C.lines}`, flexShrink: 0 }}>
+        <div style={{ width: '230px', height: '185px', overflow: 'hidden', border: `1px solid ${C.lines}`, flexShrink: 0 }}>
           {coverPhoto ? (
             <img
               src={coverPhoto}
@@ -192,51 +194,51 @@ const PDFCover = () => {
         </div>
       </div>
 
-      {/* ZONE 4 — Client + Inspection + Appraiser */}
-      <div style={{ flex: 1 }}>
-        {/* Subgroup A: Opdrachtgever */}
-        <div style={{ marginBottom: '18px' }}>
-          <p style={{ fontSize: '9px', color: C.labels, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>IN OPDRACHT VAN</p>
-          <p style={{ fontSize: '11px', fontWeight: 700, color: C.values, margin: '3px 0 0 0' }}>{customerName}</p>
-          {report.customer_street && <p style={{ fontSize: '10px', color: C.values, margin: '1px 0 0 0' }}>{report.customer_street}</p>}
-          {(report.customer_postcode || report.customer_city) && (
-            <p style={{ fontSize: '10px', color: C.values, margin: '1px 0 0 0' }}>
-              {[report.customer_postcode, report.customer_city].filter(Boolean).join(' ')}
-            </p>
-          )}
-        </div>
+      {/* ZONE 4 — Client */}
+      <div style={{ marginBottom: '16px' }}>
+        <p style={{ fontSize: '9px', color: C.labels, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>IN OPDRACHT VAN</p>
+        <p style={{ fontSize: '11px', fontWeight: 700, color: C.values, margin: '3px 0 0 0' }}>{customerName}</p>
+        {report.customer_street && <p style={{ fontSize: '10px', color: C.values, margin: '1px 0 0 0' }}>{report.customer_street}</p>}
+        {(report.customer_postcode || report.customer_city) && (
+          <p style={{ fontSize: '10px', color: C.values, margin: '1px 0 0 0' }}>
+            {[report.customer_postcode, report.customer_city].filter(Boolean).join(' ')}
+          </p>
+        )}
+      </div>
 
-        {/* Subgroup B: Opnamedetails */}
-        <div style={{ marginBottom: '18px' }}>
-          <div style={{ marginBottom: '6px' }}>
-            <p style={{ fontSize: '9px', color: C.labels, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>OPNAMEDATUM</p>
-            <p style={{ fontSize: '11px', fontWeight: 700, color: C.values, margin: '2px 0 0 0' }}>{formatDate(report.inspection_date)}</p>
-          </div>
-          <div style={{ marginBottom: '6px' }}>
-            <p style={{ fontSize: '9px', color: C.labels, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>TIJDSTIP OPNAME</p>
-            <p style={{ fontSize: '11px', fontWeight: 700, color: C.values, margin: '2px 0 0 0' }}>{formatTime(report.inspection_start_time)}</p>
-          </div>
-          <div style={{ marginBottom: '6px' }}>
-            <p style={{ fontSize: '9px', color: C.labels, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>TIJDSTIP EINDE OPNAME</p>
-            <p style={{ fontSize: '11px', fontWeight: 700, color: C.values, margin: '2px 0 0 0' }}>{formatTime(report.inspection_end_time)}</p>
-          </div>
-          <div>
-            <p style={{ fontSize: '9px', color: C.labels, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>LOCATIE OPNAME</p>
-            <p style={{ fontSize: '11px', fontWeight: 700, color: C.values, margin: '2px 0 0 0' }}>{capitalizeFirst(report.inspection_location)}</p>
-          </div>
+      {/* ZONE 5 — Inspection details */}
+      <div style={{ marginBottom: '8px' }}>
+        <div style={{ marginBottom: '6px' }}>
+          <p style={{ fontSize: '9px', color: C.labels, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>OPNAMEDATUM</p>
+          <p style={{ fontSize: '11px', fontWeight: 700, color: C.values, margin: '2px 0 0 0' }}>{formatDate(report.inspection_date)}</p>
         </div>
-
-        {/* Subgroup C: Taxateur */}
+        <div style={{ marginBottom: '6px' }}>
+          <p style={{ fontSize: '9px', color: C.labels, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>TIJDSTIP OPNAME</p>
+          <p style={{ fontSize: '11px', fontWeight: 700, color: C.values, margin: '2px 0 0 0' }}>{formatTime(report.inspection_start_time)}</p>
+        </div>
+        <div style={{ marginBottom: '6px' }}>
+          <p style={{ fontSize: '9px', color: C.labels, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>TIJDSTIP EINDE OPNAME</p>
+          <p style={{ fontSize: '11px', fontWeight: 700, color: C.values, margin: '2px 0 0 0' }}>{formatTime(report.inspection_end_time)}</p>
+        </div>
         <div>
-          <p style={{ fontSize: '9px', color: C.labels, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>TAXATIE UITGEVOERD DOOR</p>
-          <p style={{ fontSize: '12px', fontWeight: 700, color: C.values, margin: '3px 0 0 0' }}>Erik Elderson</p>
-          <p style={{ fontSize: '10px', color: C.subtitle, margin: '2px 0 0 0' }}>TMV Register Taxateur nr. 33106</p>
-          <p style={{ fontSize: '10px', color: C.subtitle, margin: '1px 0 0 0' }}>Register Taxateur VRT nr. 22-523-M</p>
+          <p style={{ fontSize: '9px', color: C.labels, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>LOCATIE OPNAME</p>
+          <p style={{ fontSize: '11px', fontWeight: 700, color: C.values, margin: '2px 0 0 0' }}>{capitalizeFirst(report.inspection_location)}</p>
         </div>
       </div>
 
-      {/* ZONE 5 — Footer */}
-      <div>
+      {/* Spacer — pushes appraiser to bottom */}
+      <div style={{ flex: 1 }} />
+
+      {/* ZONE 6 — Appraiser */}
+      <div style={{ marginBottom: '24px' }}>
+        <p style={{ fontSize: '9px', color: C.labels, textTransform: 'uppercase', letterSpacing: '0.5px', margin: 0 }}>TAXATIE UITGEVOERD DOOR</p>
+        <p style={{ fontSize: '12px', fontWeight: 700, color: C.values, margin: '3px 0 0 0' }}>Erik Elderson</p>
+        <p style={{ fontSize: '10px', color: C.subtitle, margin: '2px 0 0 0' }}>TMV Register Taxateur nr. 33106</p>
+        <p style={{ fontSize: '10px', color: C.subtitle, margin: '1px 0 0 0' }}>Register Taxateur VRT nr. 22-523-M</p>
+      </div>
+
+      {/* ZONE 7 — Footer (absolute bottom) */}
+      <div style={{ position: 'absolute', bottom: '22px', left: '50px', right: '50px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '6px' }}>
           <img src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '28px', width: 'auto' }} />
           <span style={{ fontSize: '9px', color: C.light }}>Pagina 1 van 8</span>
