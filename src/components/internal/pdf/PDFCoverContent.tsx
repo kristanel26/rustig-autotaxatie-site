@@ -11,12 +11,15 @@ interface PDFCoverContentProps {
   totalPages?: number;
 }
 
+// 1mm = 2.8346pt (react-pdf uses points)
+const mm = (v: number) => v * 2.8346;
+
 const COLORS = {
   title: '#1B2A4A',
   values: '#000000',
   labels: '#555555',
   subtitle: '#666666',
-  lightText: '#999999',
+  light: '#999999',
   lines: '#CCCCCC',
 };
 
@@ -40,18 +43,36 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
 
+  // Determine report type for variant text
+  const reportType = report.report_type?.toLowerCase() || '';
+  const isWev = reportType === 'wev';
+  const subtitle = isWev
+    ? 'Ter bepaling van de Waarde in het Economisch Verkeer'
+    : 'Volgens artikel 7:960 BW';
+  const description = isWev
+    ? 'Dit taxatierapport is opgesteld ten behoeve van de vaststelling van de waarde in het economisch verkeer van het voertuig.'
+    : 'Dit taxatierapport is opgesteld ten behoeve van de vaststelling van de vervangingswaarde van het voertuig.';
+
   const customerName = [report.customer_title, report.customer_initials, report.customer_last_name]
     .filter(Boolean)
     .join(' ') || null;
   const customerAddress = report.customer_street || null;
   const customerCity = [report.customer_postcode, report.customer_city].filter(Boolean).join(' ') || null;
-  const vehicleDisplay = report.vehicle_title || 
-    [report.rdw_merk, report.rdw_handelsbenaming].filter(Boolean).join(' ') || null;
+  const vehicleDisplay = (report.vehicle_title ||
+    [report.rdw_merk, report.rdw_handelsbenaming].filter(Boolean).join(' ') || 'nog niet ingevuld').toUpperCase();
   const coverPhoto = report.vehicle_photos && report.vehicle_photos.length > 0 ? report.vehicle_photos[0] : null;
   const inspectionDate = report.inspection_date ? formatDate(report.inspection_date) : null;
   const startTime = report.inspection_start_time ? formatTime(report.inspection_start_time) : null;
   const endTime = report.inspection_end_time ? formatTime(report.inspection_end_time) : null;
   const inspectionLocation = capitalizeFirst(report.inspection_location);
+
+  // Layout constants (mm converted to pt)
+  const ML = mm(25);    // margin left
+  const MR = mm(20);    // margin right
+  const MT = mm(12);    // margin top
+  const PAGE_W = mm(210);
+  const PAGE_H = mm(297);
+  const CONTENT_W = PAGE_W - ML - MR;
 
   return (
     <Page size="A4" style={{
@@ -61,146 +82,256 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
       lineHeight: 1.5,
       position: 'relative',
     }}>
-      {/* Main content area with A4 margins */}
+      {/* Main content area */}
       <View style={{
         position: 'absolute',
-        top: 30,
-        left: 50,
-        right: 50,
-        bottom: 55,
+        top: MT,
+        left: ML,
+        right: MR,
+        bottom: mm(8),
         display: 'flex',
         flexDirection: 'column',
       }}>
-        {/* ZONE 1 — Header: AT logo left, register logos right */}
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 44 }}>
-          <Image src={logoAutomobiel} style={{ height: 80, width: 'auto' }} />
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
-            <Image src={logoVrt} style={{ height: 40, width: 'auto' }} />
-            <Image src={logoHobeon} style={{ height: 40, width: 'auto' }} />
-            <Image src={logoTmv} style={{ height: 40, width: 'auto' }} />
-            <Image src={logoFehac} style={{ height: 40, width: 'auto' }} />
+        {/* ============================================ */}
+        {/* ZONE 1 — HEADER: AT logo left, register logos right */}
+        {/* ============================================ */}
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          marginBottom: mm(28), // 28mm gap to title
+        }}>
+          <Image src={logoAutomobiel} style={{ height: mm(22), width: 'auto' }} />
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: mm(3) }}>
+            <Image src={logoVrt} style={{ height: mm(9), width: 'auto' }} />
+            <Image src={logoHobeon} style={{ height: mm(9), width: 'auto' }} />
+            <Image src={logoTmv} style={{ height: mm(9), width: 'auto' }} />
+            <Image src={logoFehac} style={{ height: mm(9), width: 'auto' }} />
           </View>
         </View>
 
-        {/* ZONE 2 — Title block */}
-        <View style={{ marginBottom: 8 }}>
-          <Text style={{ fontSize: 32, fontFamily: 'Helvetica-Bold', color: COLORS.title, letterSpacing: 0.5, textTransform: 'uppercase' }}>
+        {/* ============================================ */}
+        {/* ZONE 2 — TITLE */}
+        {/* ============================================ */}
+        <View>
+          <Text style={{
+            fontSize: 26,
+            fontFamily: 'Helvetica-Bold',
+            color: COLORS.title,
+            letterSpacing: 0.5,
+            textTransform: 'uppercase',
+          }}>
             Taxatierapport
           </Text>
-          <Text style={{ fontSize: 12, color: COLORS.subtitle, marginTop: 6 }}>
-            Volgens artikel 7:960 BW
+          <Text style={{ fontSize: 10, color: COLORS.subtitle, marginTop: mm(2.5) }}>
+            {subtitle}
           </Text>
-          <Text style={{ fontSize: 9, color: COLORS.lightText, marginTop: 8 }}>
-            Dit taxatierapport is opgesteld ten behoeve van de vaststelling van de vervangingswaarde van het voertuig.
+          <Text style={{ fontSize: 7.5, color: COLORS.light, marginTop: mm(2) }}>
+            {description}
           </Text>
         </View>
 
         {/* Separator line */}
-        <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.lines, marginBottom: 32 }} />
+        <View style={{
+          borderBottomWidth: 0.5,
+          borderBottomColor: COLORS.lines,
+          marginTop: mm(3),
+          marginBottom: mm(24), // 24mm gap to content
+        }} />
 
-        {/* ZONE 3 — Vehicle info + Photo (two columns) */}
-        <View style={{ flexDirection: 'row', gap: 30, marginBottom: 24 }}>
+        {/* ============================================ */}
+        {/* ZONE 3 — VEHICLE + PHOTO */}
+        {/* ============================================ */}
+        <View style={{ flexDirection: 'row', marginBottom: mm(18) }}>
           {/* Left: vehicle data */}
           <View style={{ flex: 1 }}>
-            <View style={{ marginBottom: 16 }}>
-              <Text style={{ fontSize: 9, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5 }}>VOERTUIG</Text>
-              <Text style={{ fontSize: 15, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: 3, textTransform: 'uppercase' }}>
-                {vehicleDisplay || 'nog niet ingevuld'}
-              </Text>
-            </View>
-            <View style={{ marginBottom: 16 }}>
-              <Text style={{ fontSize: 9, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5 }}>KENTEKEN</Text>
-              <Text style={{ fontSize: 15, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: 3 }}>
-                {report.license_plate || 'nog niet ingevuld'}
-              </Text>
-            </View>
-            <View>
-              <Text style={{ fontSize: 9, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5 }}>DOCUMENTNUMMER</Text>
-              <Text style={{ fontSize: 15, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: 3 }}>
-                {report.document_reference || 'nog niet ingevuld'}
-              </Text>
-            </View>
+            {/* VOERTUIG */}
+            <Text style={{ fontSize: 7.5, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+              VOERTUIG
+            </Text>
+            <Text style={{
+              fontSize: 13,
+              fontFamily: 'Helvetica-Bold',
+              color: COLORS.values,
+              marginTop: mm(1.5),
+              textTransform: 'uppercase',
+            }}>
+              {vehicleDisplay}
+            </Text>
+
+            {/* KENTEKEN */}
+            <Text style={{
+              fontSize: 7.5,
+              color: COLORS.labels,
+              textTransform: 'uppercase',
+              letterSpacing: 0.5,
+              marginTop: mm(4),
+            }}>
+              KENTEKEN
+            </Text>
+            <Text style={{
+              fontSize: 13,
+              fontFamily: 'Helvetica-Bold',
+              color: COLORS.values,
+              marginTop: mm(1.5),
+            }}>
+              {report.license_plate || 'nog niet ingevuld'}
+            </Text>
+
+            {/* DOCUMENTNUMMER */}
+            <Text style={{
+              fontSize: 7.5,
+              color: COLORS.labels,
+              textTransform: 'uppercase',
+              letterSpacing: 0.5,
+              marginTop: mm(4),
+            }}>
+              DOCUMENTNUMMER
+            </Text>
+            <Text style={{
+              fontSize: 13,
+              fontFamily: 'Helvetica-Bold',
+              color: COLORS.values,
+              marginTop: mm(1.5),
+            }}>
+              {report.document_reference || 'nog niet ingevuld'}
+            </Text>
           </View>
 
-          {/* Right: vehicle photo */}
-          <View style={{ width: 230 }}>
+          {/* Right: vehicle photo — 98x74mm */}
+          <View style={{ width: mm(98) }}>
             {coverPhoto ? (
-              <View style={{ width: 230, height: 185, overflow: 'hidden', borderWidth: 1, borderColor: COLORS.lines }}>
+              <View style={{
+                width: mm(98),
+                height: mm(74),
+                overflow: 'hidden',
+                borderWidth: 0.5,
+                borderColor: COLORS.lines,
+              }}>
                 <Image
                   src={coverPhoto}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </View>
             ) : (
-              <View style={{ width: 230, height: 185, backgroundColor: '#f5f5f5', borderWidth: 1, borderColor: COLORS.lines }} />
+              <View style={{
+                width: mm(98),
+                height: mm(74),
+                backgroundColor: '#f5f5f5',
+                borderWidth: 0.5,
+                borderColor: COLORS.lines,
+              }} />
             )}
           </View>
         </View>
 
-        {/* ZONE 4 — Client info */}
-        <View style={{ marginBottom: 16 }}>
-          <Text style={{ fontSize: 9, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5 }}>IN OPDRACHT VAN</Text>
-          <Text style={{ fontSize: 11, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: 3 }}>
-            {customerName || 'nog niet ingevuld'}
-          </Text>
-          {customerAddress && <Text style={{ fontSize: 10, color: COLORS.values, marginTop: 1 }}>{customerAddress}</Text>}
-          {customerCity && <Text style={{ fontSize: 10, color: COLORS.values, marginTop: 1 }}>{customerCity}</Text>}
-        </View>
+        {/* ============================================ */}
+        {/* ZONE 4 — CLIENT + INSPECTION + APPRAISER */}
+        {/* ============================================ */}
 
-        {/* ZONE 5 — Inspection details */}
-        <View style={{ marginBottom: 8 }}>
-          <View style={{ marginBottom: 6 }}>
-            <Text style={{ fontSize: 9, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5 }}>OPNAMEDATUM</Text>
-            <Text style={{ fontSize: 11, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: 2 }}>
-              {inspectionDate || 'nog niet ingevuld'}
-            </Text>
-          </View>
-          <View style={{ marginBottom: 6 }}>
-            <Text style={{ fontSize: 9, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5 }}>TIJDSTIP OPNAME</Text>
-            <Text style={{ fontSize: 11, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: 2 }}>
-              {startTime || 'nog niet ingevuld'}
-            </Text>
-          </View>
-          <View style={{ marginBottom: 6 }}>
-            <Text style={{ fontSize: 9, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5 }}>TIJDSTIP EINDE OPNAME</Text>
-            <Text style={{ fontSize: 11, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: 2 }}>
-              {endTime || 'nog niet ingevuld'}
-            </Text>
-          </View>
-          <View>
-            <Text style={{ fontSize: 9, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5 }}>LOCATIE OPNAME</Text>
-            <Text style={{ fontSize: 11, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: 2 }}>
-              {inspectionLocation || 'nog niet ingevuld'}
-            </Text>
-          </View>
+        {/* --- Client --- */}
+        <Text style={{ fontSize: 7.5, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+          IN OPDRACHT VAN
+        </Text>
+        <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: mm(1.5) }}>
+          {customerName || 'nog niet ingevuld'}
+        </Text>
+        {customerAddress && (
+          <Text style={{ fontSize: 10, color: COLORS.values, marginTop: mm(0.5) }}>
+            {customerAddress}
+          </Text>
+        )}
+        {customerCity && (
+          <Text style={{ fontSize: 10, color: COLORS.values, marginTop: mm(0.5) }}>
+            {customerCity}
+          </Text>
+        )}
+
+        {/* 2mm gap then inspection details */}
+        <View style={{ marginTop: mm(2) }}>
+          {/* OPNAMEDATUM */}
+          <Text style={{ fontSize: 7.5, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+            OPNAMEDATUM
+          </Text>
+          <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: mm(1) }}>
+            {inspectionDate || 'nog niet ingevuld'}
+          </Text>
+
+          {/* TIJDSTIP OPNAME */}
+          <Text style={{
+            fontSize: 7.5, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5, marginTop: mm(2),
+          }}>
+            TIJDSTIP OPNAME
+          </Text>
+          <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: mm(1) }}>
+            {startTime || 'nog niet ingevuld'}
+          </Text>
+
+          {/* TIJDSTIP EINDE OPNAME */}
+          <Text style={{
+            fontSize: 7.5, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5, marginTop: mm(2),
+          }}>
+            TIJDSTIP EINDE OPNAME
+          </Text>
+          <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: mm(1) }}>
+            {endTime || 'nog niet ingevuld'}
+          </Text>
+
+          {/* LOCATIE OPNAME */}
+          <Text style={{
+            fontSize: 7.5, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5, marginTop: mm(2),
+          }}>
+            LOCATIE OPNAME
+          </Text>
+          <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: mm(1) }}>
+            {inspectionLocation || 'nog niet ingevuld'}
+          </Text>
         </View>
 
         {/* Spacer pushes appraiser to bottom */}
         <View style={{ flex: 1 }} />
 
-        {/* ZONE 6 — Appraiser */}
+        {/* --- Appraiser --- (22mm above footer) */}
         <View>
-          <Text style={{ fontSize: 9, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5 }}>TAXATIE UITGEVOERD DOOR</Text>
-          <Text style={{ fontSize: 12, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: 3 }}>Erik Elderson</Text>
-          <Text style={{ fontSize: 10, color: COLORS.subtitle, marginTop: 2 }}>TMV Register Taxateur nr. 33106</Text>
-          <Text style={{ fontSize: 10, color: COLORS.subtitle, marginTop: 1 }}>Register Taxateur VRT nr. 22-523-M</Text>
+          <Text style={{ fontSize: 7.5, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+            TAXATIE UITGEVOERD DOOR
+          </Text>
+          <Text style={{ fontSize: 11, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: mm(1.5) }}>
+            Erik Elderson
+          </Text>
+          <Text style={{ fontSize: 9, color: COLORS.subtitle, marginTop: mm(2) }}>
+            TMV Register Taxateur nr. 33106
+          </Text>
+          <Text style={{ fontSize: 9, color: COLORS.subtitle, marginTop: mm(1) }}>
+            Register Taxateur VRT nr. 22-523-M
+          </Text>
         </View>
       </View>
 
-      {/* ZONE 7 — Footer (absolute bottom) */}
+      {/* ============================================ */}
+      {/* ZONE 5 — FOOTER (fixed position at bottom) */}
+      {/* ============================================ */}
       <View style={{
         position: 'absolute',
-        bottom: 22,
-        left: 50,
-        right: 50,
+        bottom: mm(8),
+        left: ML,
+        right: MR,
       }}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 6 }}>
-          <Image src={logoAutomobiel} style={{ height: 28, width: 'auto' }} />
-          <Text style={{ fontSize: 9, color: COLORS.lightText }}>Pagina 1 van {totalPages}</Text>
+        {/* Separator line */}
+        <View style={{ borderTopWidth: 0.5, borderTopColor: COLORS.lines, marginBottom: mm(1) }} />
+
+        {/* AT logo small */}
+        <Image src={logoAutomobiel} style={{ height: mm(8), width: 'auto', marginBottom: mm(3) }} />
+
+        {/* Company details + page number */}
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+          <Text style={{ fontSize: 5.5, color: COLORS.subtitle }}>
+            Leigraaf 160, 6651 GJ Druten   |   KvK: 95549269   |   BTW: NL003366178B93   |   TMV: 33106   |   VRT: 22-523-M   |   Bank: NL80 RABO 0387 9156 80
+          </Text>
+          <Text style={{ fontSize: 7, color: COLORS.light }}>
+            Pagina 1 van {totalPages}
+          </Text>
         </View>
-        <Text style={{ fontSize: 7.5, color: COLORS.subtitle }}>
-          Leigraaf 160, 6651 GJ Druten   |   KvK: 95549269   |   BTW: NL003366178B93   |   TMV: 33106   |   VRT: 22-523-M   |   Bank: NL80 RABO 0387 9156 80
-        </Text>
       </View>
     </Page>
   );
