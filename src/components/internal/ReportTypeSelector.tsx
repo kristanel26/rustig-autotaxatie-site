@@ -157,6 +157,7 @@ interface ReportTypeSelectorProps {
 export const ReportTypeSelector = ({ onSelect }: ReportTypeSelectorProps) => {
   return (
     <div className="w-full">
+      <h1 className="font-display text-[2rem] text-white font-normal mb-1.5">Nieuwe taxatie</h1>
       <p className="text-[13.5px] text-[hsl(var(--s500))] mb-10">
         Kies het rapporttype. Dit kan na aanmaken niet meer worden gewijzigd.
       </p>
