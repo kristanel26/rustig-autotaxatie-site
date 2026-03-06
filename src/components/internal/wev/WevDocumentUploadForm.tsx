@@ -42,10 +42,12 @@ export const WevDocumentUploadForm = ({
   onDocumentsChange,
 }: WevDocumentUploadFormProps) => {
   const { toast } = useToast();
+  const { user } = useAuth();
   const [documents, setDocuments] = useState<WevDocument[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
   const [selectedDocType, setSelectedDocType] = useState<DocumentType>('autotelex');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Fetch existing documents
   const fetchDocuments = useCallback(async () => {
