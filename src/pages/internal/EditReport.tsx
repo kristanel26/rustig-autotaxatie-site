@@ -44,6 +44,7 @@ import {
   WevDocumentUploadForm,
 } from '@/components/internal/wev';
 import { ReportCompletenessCheck } from '@/components/internal/ReportCompletenessCheck';
+import { ReportStatusBar, ReportStatus } from '@/components/internal/ReportStatusBar';
 import {
   KlassiekerGeneralImpressionForm,
   KlassiekerImpressionFormData,
@@ -205,6 +206,9 @@ const EditReport = () => {
   const [wevAutotelexData, setWevAutotelexData] = useState<WevAutotelexData>(getInitialWevAutotelexData());
   const [wevValueData, setWevValueData] = useState<WevValueData>(getInitialWevValueData());
 
+  // Report status
+  const [reportStatus, setReportStatus] = useState<ReportStatus>('concept');
+
   // Auto-save hook - 10 second interval for better reliability
   const { status: saveStatus, lastSavedAt, hasPendingChanges, saveField, saveMultipleFields, flushSave } = useAutoSave({
     reportId: id,
@@ -241,7 +245,9 @@ const EditReport = () => {
     ...wevValueData,
     // Photos
     vehicle_photos: vehiclePhotos,
-  }), [customerData, vehicleData, inspectionData, valuationData, klassiekerValueData, wevAutotelexData, wevValueData, vehiclePhotos]);
+    // Status
+    status: reportStatus,
+  }), [customerData, vehicleData, inspectionData, valuationData, klassiekerValueData, wevAutotelexData, wevValueData, vehiclePhotos, reportStatus]);
 
   useEffect(() => {
     const fetchReport = async () => {
@@ -258,6 +264,7 @@ const EditReport = () => {
         
         const reportData = data as unknown as Report;
         setReport(reportData);
+        setReportStatus((reportData as any).status || 'concept');
         
         // Pre-fill customer data
         setCustomerData({
@@ -1084,7 +1091,7 @@ const EditReport = () => {
               <CardHeader>
                 <CardTitle className="text-lg">Rapportgegevens (alleen-lezen)</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label>Rapportnummer</Label>
                   <Input
@@ -1093,6 +1100,13 @@ const EditReport = () => {
                     className="bg-muted"
                   />
                 </div>
+                <ReportStatusBar
+                  status={reportStatus}
+                  onChange={(newStatus) => {
+                    setReportStatus(newStatus);
+                    saveField('status', newStatus);
+                  }}
+                />
               </CardContent>
             </Card>
 
@@ -1547,6 +1561,10 @@ const EditReport = () => {
               <ReportCompletenessCheck
                 reportType={report.report_type}
                 data={completenessData}
+                onMarkGereed={() => {
+                  setReportStatus('gereed');
+                  saveField('status', 'gereed');
+                }}
               />
             </div>
           </aside>

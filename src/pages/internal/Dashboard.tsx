@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { FileText, FilePlus, Calendar } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { getStatusBadgeProps } from '@/components/internal/ReportStatusBar';
 import {
   Table,
   TableBody,
@@ -25,6 +27,7 @@ interface RecentReport {
   license_plate: string | null;
   client_name: string;
   inspection_date: string | null;
+  status: string | null;
 }
 
 const Dashboard = () => {
@@ -62,7 +65,7 @@ const Dashboard = () => {
         // Fetch 5 most recent reports
         const { data: latestReports } = await supabase
           .from('reports')
-          .select('id, report_number, license_plate, client_name, inspection_date')
+          .select('id, report_number, license_plate, client_name, inspection_date, status')
           .order('created_at', { ascending: false })
           .limit(5);
 
@@ -164,6 +167,7 @@ const Dashboard = () => {
                     <TableHead className="w-[120px]">Rapportnr.</TableHead>
                     <TableHead>Kenteken</TableHead>
                     <TableHead>Klantnaam</TableHead>
+                    <TableHead className="w-[100px]">Status</TableHead>
                     <TableHead className="w-[140px]">Inspectiedatum</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -179,6 +183,9 @@ const Dashboard = () => {
                       </TableCell>
                       <TableCell>{report.license_plate || '-'}</TableCell>
                       <TableCell>{report.client_name}</TableCell>
+                      <TableCell>
+                        {(() => { const s = getStatusBadgeProps(report.status); return <Badge variant="outline" className={`text-xs ${s.className}`}>{s.label}</Badge>; })()}
+                      </TableCell>
                       <TableCell>{formatDate(report.inspection_date)}</TableCell>
                     </TableRow>
                   ))}
