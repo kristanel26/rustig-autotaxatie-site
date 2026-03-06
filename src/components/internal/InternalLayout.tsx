@@ -30,8 +30,8 @@ const InternalLayout: React.FC<InternalLayoutProps> = ({ children, title }) => {
   };
 
   const navItems = [
-    { path: '/intern/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/intern/rapporten', label: 'Rapporten', icon: FileText },
+    { path: '/intern/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/intern/herinneringen', label: 'Herinneringen', icon: Bell },
   ];
 
@@ -63,6 +63,19 @@ const InternalLayout: React.FC<InternalLayoutProps> = ({ children, title }) => {
 
         {/* Nav links */}
         <div className="hidden md:flex items-center gap-0.5 flex-1">
+          {/* CTA button — first in visual order */}
+          <Link
+            to="/intern/nieuw-rapport"
+            className={cn(
+              "flex items-center gap-[7px] px-[17px] py-[7px] rounded-md text-[13px] font-semibold transition-all duration-150 no-underline",
+              "bg-gradient-to-br from-[hsl(var(--gold))] to-[hsl(var(--gold-lt))] text-background",
+              "shadow-[0_2px_10px_hsl(var(--gold)/0.25)] hover:brightness-110"
+            )}
+          >
+            <Plus className="w-3.5 h-3.5 flex-shrink-0" strokeWidth={2.2} />
+            Nieuw Rapport
+          </Link>
+
           {navItems.map((item) => {
             const Icon = item.icon;
             const active = isActive(item.path);
@@ -82,19 +95,6 @@ const InternalLayout: React.FC<InternalLayoutProps> = ({ children, title }) => {
               </Link>
             );
           })}
-
-          {/* CTA button */}
-          <Link
-            to="/intern/nieuw-rapport"
-            className={cn(
-              "flex items-center gap-[7px] px-[17px] py-[7px] rounded-md text-[13px] font-semibold transition-all duration-150 no-underline ml-0.5",
-              "bg-gradient-to-br from-[hsl(var(--gold))] to-[hsl(var(--gold-lt))] text-background",
-              "shadow-[0_2px_10px_hsl(var(--gold)/0.25)] hover:brightness-110"
-            )}
-          >
-            <Plus className="w-3.5 h-3.5 flex-shrink-0" strokeWidth={2.2} />
-            Nieuw Rapport
-          </Link>
         </div>
 
         {/* Right side */}

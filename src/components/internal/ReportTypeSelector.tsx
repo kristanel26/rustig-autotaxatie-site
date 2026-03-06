@@ -157,6 +157,7 @@ interface ReportTypeSelectorProps {
 export const ReportTypeSelector = ({ onSelect }: ReportTypeSelectorProps) => {
   return (
     <div className="w-full">
+      <h1 className="font-display text-[2rem] text-white font-normal mb-1.5">Nieuwe taxatie</h1>
       <p className="text-[13.5px] text-[hsl(var(--s500))] mb-10">
         Kies het rapporttype. Dit kan na aanmaken niet meer worden gewijzigd.
       </p>
@@ -204,7 +205,7 @@ export const ReportTypeSelector = ({ onSelect }: ReportTypeSelectorProps) => {
 
               {/* Icon — large silhouette */}
               <div className={cn(
-                "w-[100px] h-[68px] mb-5 text-[hsl(var(--gold-lt))]",
+                "w-full max-w-[180px] h-[120px] mb-5 text-[#c9a84c]",
                 "transition-all duration-200",
                 "group-hover:text-[hsl(var(--gold))]"
               )}>
