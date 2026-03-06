@@ -513,7 +513,7 @@ const PhotoUploadForm = ({
 
   // Open file picker when clicking on drop zone
   const handleDropzoneClick = useCallback((e: React.MouseEvent) => {
-    // Prevent any parent handlers from interfering
+    e.preventDefault();
     e.stopPropagation();
     fileInputRef.current?.click();
   }, []);
