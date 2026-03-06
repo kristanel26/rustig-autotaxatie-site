@@ -771,6 +771,7 @@ export type Database = {
           tellerstand_type: string | null
           tire_advice: string | null
           tire_bandenmaat: string | null
+          tire_bandenmaat_achter: string | null
           tire_front_left_brand: string | null
           tire_front_left_dot: string | null
           tire_front_left_model: string | null
@@ -979,6 +980,7 @@ export type Database = {
           tellerstand_type?: string | null
           tire_advice?: string | null
           tire_bandenmaat?: string | null
+          tire_bandenmaat_achter?: string | null
           tire_front_left_brand?: string | null
           tire_front_left_dot?: string | null
           tire_front_left_model?: string | null
@@ -1187,6 +1189,7 @@ export type Database = {
           tellerstand_type?: string | null
           tire_advice?: string | null
           tire_bandenmaat?: string | null
+          tire_bandenmaat_achter?: string | null
           tire_front_left_brand?: string | null
           tire_front_left_dot?: string | null
           tire_front_left_model?: string | null
