@@ -16,6 +16,8 @@ export default {
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
         display: ['"DM Serif Display"', 'serif'],
+        'intern-sans': ['"DM Sans"', 'system-ui', 'sans-serif'],
+        'intern-mono': ['"Space Mono"', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",

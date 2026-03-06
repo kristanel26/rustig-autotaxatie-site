@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Space+Mono:wght@400;700&display=swap');
 
 @layer base {
   :root {
@@ -105,6 +105,46 @@
     --sidebar-accent-foreground: 210 33% 92%;
     --sidebar-border: 216 35% 18%;
     --sidebar-ring: 211 33% 56%;
+  }
+
+  /* ── TAXARIS INTERNAL THEME ── */
+  .intern-theme {
+    --background: 222 47% 5%;        /* #0a0d14 */
+    --foreground: 216 20% 80%;       /* #b8c5d6 ~ s300 */
+    --card: 222 33% 9%;              /* #111827 ~ s900 */
+    --card-foreground: 216 20% 80%;
+    --popover: 222 33% 9%;
+    --popover-foreground: 216 20% 80%;
+    --primary: 43 50% 54%;           /* #c9a84c gold */
+    --primary-foreground: 222 47% 5%;
+    --secondary: 220 30% 16%;        /* #1a2235 ~ s800 */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 30% 16%;
+    --muted-foreground: 217 18% 44%; /* #5a6e8a ~ s500 */
+    --accent: 43 50% 54%;            /* gold */
+    --accent-foreground: 222 47% 5%;
+    --destructive: 0 84% 60%;        /* #ef4444 */
+    --destructive-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 38 100% 15%;
+    --border: 221 27% 21%;           /* #253047 ~ s700 */
+    --input: 221 27% 21%;
+    --ring: 43 50% 54%;
+
+    /* Taxaris custom tokens */
+    --gold: 43 50% 54%;
+    --gold-lt: 43 51% 63%;           /* #dbb966 */
+    --gold-xlt: 46 76% 74%;          /* #edd98a */
+    --s900: 222 33% 9%;
+    --s800: 220 30% 16%;
+    --s700: 221 27% 21%;
+    --s600: 217 24% 33%;
+    --s500: 217 18% 44%;
+    --s400: 216 17% 62%;
+    --s300: 216 20% 80%;
+    --s200: 213 33% 90%;
+    --intern-green: 160 64% 40%;     /* #10b981 */
+    --intern-amber: 38 92% 50%;      /* #f59e0b */
   }
 }
 
