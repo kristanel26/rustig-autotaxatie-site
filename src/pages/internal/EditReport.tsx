@@ -348,18 +348,26 @@ const EditReport = () => {
           tire_front_left_model: (reportData as any).tire_front_left_model || '',
           tire_front_left_profiel: (reportData as any).tire_front_left_profiel || '',
           tire_front_left_dot: (reportData as any).tire_front_left_dot || '',
+          tire_front_left_season: (reportData as any).tire_front_left_season || '',
+          tire_front_left_size: (reportData as any).tire_front_left_size || '',
           tire_front_right_brand: (reportData as any).tire_front_right_brand || '',
           tire_front_right_model: (reportData as any).tire_front_right_model || '',
           tire_front_right_profiel: (reportData as any).tire_front_right_profiel || '',
           tire_front_right_dot: (reportData as any).tire_front_right_dot || '',
+          tire_front_right_season: (reportData as any).tire_front_right_season || '',
+          tire_front_right_size: (reportData as any).tire_front_right_size || '',
           tire_rear_left_brand: (reportData as any).tire_rear_left_brand || '',
           tire_rear_left_model: (reportData as any).tire_rear_left_model || '',
           tire_rear_left_profiel: (reportData as any).tire_rear_left_profiel || '',
           tire_rear_left_dot: (reportData as any).tire_rear_left_dot || '',
+          tire_rear_left_season: (reportData as any).tire_rear_left_season || '',
+          tire_rear_left_size: (reportData as any).tire_rear_left_size || '',
           tire_rear_right_brand: (reportData as any).tire_rear_right_brand || '',
           tire_rear_right_model: (reportData as any).tire_rear_right_model || '',
           tire_rear_right_profiel: (reportData as any).tire_rear_right_profiel || '',
           tire_rear_right_dot: (reportData as any).tire_rear_right_dot || '',
+          tire_rear_right_season: (reportData as any).tire_rear_right_season || '',
+          tire_rear_right_size: (reportData as any).tire_rear_right_size || '',
           rim_type: (reportData as any).rim_type || '',
           tire_advice: (reportData as any).tire_advice || '',
           exterior_body: (reportData as any).exterior_body || '',
@@ -1368,71 +1376,22 @@ const EditReport = () => {
           <WevDocumentUploadForm reportId={id || ''} />
         )}
 
-        {/* WEV + Camper: Appraisal Findings - Taxateursecties */}
-        {(report.report_type === 'wev' || report.report_type === 'camper' || !report.report_type) && report.report_type !== 'klassieker' && (
-          <AppraisalFindingsForm
-            formData={appraisalData}
-            onChange={handleAppraisalChange}
-            onMultipleChange={handleAppraisalMultipleChange}
-            rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
-            allTiresSame={allTiresSame}
-            onAllTiresSameChange={setAllTiresSame}
-            reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
-            photos={vehiclePhotos}
-            photoTypes={photoTypes}
-            reportId={id}
-          />
-        )}
+        {/* ============================================ */}
+        {/* CAMPER WORKFLOW — nieuwe volgorde:             */}
+        {/* 2. Inspectiegegevens                           */}
+        {/* 5. Fotocollectie (vóór voertuigidentificatie)  */}
+        {/* 9-14. Appraisal (Model, Banden, Tech, Ext, Int) */}
+        {/* 15. Installaties                               */}
+        {/* 16-17. Campertech + Beveiliging                */}
+        {/* 18-19. Vocht + Brand/gas                       */}
+        {/* 20. Algemene indruk                             */}
+        {/* 21. Waarde                                     */}
+        {/* 22. Opmerkingen                                */}
+        {/* ============================================ */}
 
-        {/* Sectie 13: Leidingen & Installaties - only for camper */}
+        {/* Camper: §2 Inspectiegegevens — moved before VehicleInfoForm */}
         {(report.report_type === 'camper' || !report.report_type) && (
-          <InstallationsForm
-            formData={installationsData}
-            onChange={handleInstallationsChange}
-          />
-        )}
-
-        {/* Sectie 14-15: Campertechniek & Beveiliging - only for camper */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <CamperTechForm
-            formData={camperTechData}
-            onChange={handleCamperTechChange}
-          />
-        )}
-
-        {/* Sectie 16: Algemene Indruk - only for camper (klassieker has its own above) */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <GeneralImpressionForm
-            formData={impressionData}
-            onChange={handleImpressionChange}
-          />
-        )}
-
-        {/* Vocht & Brand/Gas veiligheid - only for camper */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <MoistureAndSafetyForm
-            formData={moistureData}
-            onChange={handleMoistureChange}
-          />
-        )}
-
-        {/* Fotocollectie - only for camper (WEV and Klassieker have it earlier) */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <PhotoUploadForm
-            photos={vehiclePhotos}
-            rotations={photoRotations}
-            photoTypes={photoTypes}
-            onChange={handlePhotosChange}
-            onRotationsChange={handleRotationsChange}
-            onPhotoTypesChange={handlePhotoTypesChange}
-            reportId={id}
-            reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
-          />
-        )}
-
-        {/* Camper: Inspection Details */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <Card>
+          <Card id="section-inspectie">
             <CardHeader>
               <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
             </CardHeader>
@@ -1478,9 +1437,73 @@ const EditReport = () => {
           </Card>
         )}
 
-        {/* Valuation - only for camper */}
+        {/* Camper: §5 Fotocollectie — before Voertuigidentificatie */}
         {(report.report_type === 'camper' || !report.report_type) && (
-          <Card>
+          <div id="section-fotos">
+            <PhotoUploadForm
+              photos={vehiclePhotos}
+              rotations={photoRotations}
+              photoTypes={photoTypes}
+              onChange={handlePhotosChange}
+              onRotationsChange={handleRotationsChange}
+              onPhotoTypesChange={handlePhotoTypesChange}
+              reportId={id}
+              reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
+            />
+          </div>
+        )}
+
+        {/* WEV + Camper: Appraisal Findings — §9-14 */}
+        {(report.report_type === 'wev' || report.report_type === 'camper' || !report.report_type) && report.report_type !== 'klassieker' && (
+          <AppraisalFindingsForm
+            formData={appraisalData}
+            onChange={handleAppraisalChange}
+            onMultipleChange={handleAppraisalMultipleChange}
+            rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
+            allTiresSame={allTiresSame}
+            onAllTiresSameChange={setAllTiresSame}
+            reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
+            photos={vehiclePhotos}
+            photoTypes={photoTypes}
+            reportId={id}
+          />
+        )}
+
+        {/* §15 Leidingen en installaties — only for camper */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <InstallationsForm
+            formData={installationsData}
+            onChange={handleInstallationsChange}
+          />
+        )}
+
+        {/* §16-17 Extra's / Campertechniek & Beveiliging — only for camper */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <CamperTechForm
+            formData={camperTechData}
+            onChange={handleCamperTechChange}
+          />
+        )}
+
+        {/* §18-19 Vocht & Brand- en gasveiligheid — only for camper */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <MoistureAndSafetyForm
+            formData={moistureData}
+            onChange={handleMoistureChange}
+          />
+        )}
+
+        {/* §20 Algemene indruk — only for camper (after vocht/gas, before waarde) */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <GeneralImpressionForm
+            formData={impressionData}
+            onChange={handleImpressionChange}
+          />
+        )}
+
+        {/* §21 Waardebepaling — only for camper */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <Card id="section-waarde">
             <CardHeader>
               <CardTitle className="text-lg">Waardebepaling</CardTitle>
             </CardHeader>
@@ -1550,7 +1573,7 @@ const EditReport = () => {
           </>
         )}
 
-        {/* Remarks */}
+        {/* §22 Opmerkingen */}
         <Card>
           <CardHeader>
             <CardTitle className="text-lg">Opmerkingen</CardTitle>
