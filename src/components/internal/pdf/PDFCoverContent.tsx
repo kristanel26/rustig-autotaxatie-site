@@ -53,6 +53,7 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
     ? 'Dit taxatierapport is opgesteld ten behoeve van de vaststelling van de waarde in het economisch verkeer van het voertuig.'
     : 'Dit taxatierapport is opgesteld ten behoeve van de vaststelling van de vervangingswaarde van het voertuig.';
 
+  const companyName = report.opdrachtgever || null;
   const customerName = [report.customer_title, report.customer_initials, report.customer_last_name]
     .filter(Boolean)
     .join(' ') || null;
