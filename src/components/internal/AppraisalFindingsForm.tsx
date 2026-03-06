@@ -16,11 +16,36 @@ import { TireField } from './TireField';
 import { AIExtractButton, PhotoType } from './AIExtractButton';
 import type { PhotoTypes } from './PhotoUploadForm';
 
+export interface DamageRecord {
+  location: string;
+  description: string;
+  severity: 'minor' | 'moderate' | 'severe';
+  repaired: boolean;
+  repairDetails?: string;
+}
+
+export interface DamageSection {
+  title: string;
+  records: DamageRecord[];
+}
+
+export const getInitialDamageRecord = (): DamageRecord => ({
+  location: '',
+  description: '',
+  severity: 'minor',
+  repaired: false,
+  repairDetails: '',
+});
+
+export const getInitialDamageSection = (title: string): DamageSection => ({
+  title: title,
+  records: [getInitialDamageRecord()],
+});
+
 export interface AppraisalFormData {
   // Model display name
   model_display_name: string;
-  
-  // Technische staat
+  // Technical condition
   condition_engine: string;
   condition_engine_notes: string;
   condition_transmission: string;
@@ -33,29 +58,35 @@ export interface AppraisalFormData {
   condition_steering_notes: string;
   condition_electrical: string;
   condition_electrical_notes: string;
-  
-  // Banden en wielen
+  // Tires
   tire_bandenmaat: string;
   tire_front_left_brand: string;
   tire_front_left_model: string;
   tire_front_left_profiel: string;
   tire_front_left_dot: string;
+  tire_front_left_season: string;
+  tire_front_left_size: string;
   tire_front_right_brand: string;
   tire_front_right_model: string;
   tire_front_right_profiel: string;
   tire_front_right_dot: string;
+  tire_front_right_season: string;
+  tire_front_right_size: string;
   tire_rear_left_brand: string;
   tire_rear_left_model: string;
   tire_rear_left_profiel: string;
   tire_rear_left_dot: string;
+  tire_rear_left_season: string;
+  tire_rear_left_size: string;
   tire_rear_right_brand: string;
   tire_rear_right_model: string;
   tire_rear_right_profiel: string;
   tire_rear_right_dot: string;
+  tire_rear_right_season: string;
+  tire_rear_right_size: string;
   rim_type: string;
   tire_advice: string;
-  
-  // Exterieur
+  // Exterior
   exterior_body: string;
   exterior_body_notes: string;
   exterior_paint: string;
@@ -66,8 +97,7 @@ export interface AppraisalFormData {
   exterior_windows_notes: string;
   exterior_sealant: string;
   exterior_sealant_notes: string;
-  
-  // Interieur
+  // Interior
   interior_upholstery: string;
   interior_upholstery_notes: string;
   interior_dashboard: string;
@@ -82,15 +112,14 @@ export interface AppraisalFormData {
   interior_sanitary_notes: string;
 }
 
-interface AppraisalFindingsFormProps {
+export interface AppraisalFindingsFormProps {
   formData: AppraisalFormData;
   onChange: (field: keyof AppraisalFormData, value: string) => void;
-  onMultipleChange?: (fields: Partial<AppraisalFormData>) => void;
+  onMultipleChange?: (updates: Partial<AppraisalFormData>) => void;
   rdwHandelsbenaming?: string;
   allTiresSame?: boolean;
   onAllTiresSameChange?: (value: boolean) => void;
   reportType?: 'camper' | 'wev' | 'klassieker' | null;
-  // AI extraction props
   photos?: string[];
   photoTypes?: PhotoTypes;
   reportId?: string;
@@ -115,18 +144,26 @@ export const getInitialAppraisalFormData = (): AppraisalFormData => ({
   tire_front_left_model: '',
   tire_front_left_profiel: '',
   tire_front_left_dot: '',
+  tire_front_left_season: '',
+  tire_front_left_size: '',
   tire_front_right_brand: '',
   tire_front_right_model: '',
   tire_front_right_profiel: '',
   tire_front_right_dot: '',
+  tire_front_right_season: '',
+  tire_front_right_size: '',
   tire_rear_left_brand: '',
   tire_rear_left_model: '',
   tire_rear_left_profiel: '',
   tire_rear_left_dot: '',
+  tire_rear_left_season: '',
+  tire_rear_left_size: '',
   tire_rear_right_brand: '',
   tire_rear_right_model: '',
   tire_rear_right_profiel: '',
   tire_rear_right_dot: '',
+  tire_rear_right_season: '',
+  tire_rear_right_size: '',
   rim_type: '',
   tire_advice: '',
   exterior_body: '',
@@ -270,64 +307,7 @@ export const AppraisalFindingsForm = ({
         </CardContent>
       </Card>
 
-      {/* Technische staat voertuig */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Technische staat voertuig</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <ConditionField
-            id="condition_engine"
-            label="Motor en aandrijving"
-            conditionValue={formData.condition_engine}
-            notesValue={formData.condition_engine_notes}
-            onConditionChange={(v) => onChange('condition_engine', v)}
-            onNotesChange={(v) => onChange('condition_engine_notes', v)}
-          />
-          <ConditionField
-            id="condition_transmission"
-            label="Transmissie"
-            conditionValue={formData.condition_transmission}
-            notesValue={formData.condition_transmission_notes}
-            onConditionChange={(v) => onChange('condition_transmission', v)}
-            onNotesChange={(v) => onChange('condition_transmission_notes', v)}
-          />
-          <ConditionField
-            id="condition_brakes"
-            label="Remmen"
-            conditionValue={formData.condition_brakes}
-            notesValue={formData.condition_brakes_notes}
-            onConditionChange={(v) => onChange('condition_brakes', v)}
-            onNotesChange={(v) => onChange('condition_brakes_notes', v)}
-          />
-          <ConditionField
-            id="condition_suspension"
-            label="Ophanging"
-            conditionValue={formData.condition_suspension}
-            notesValue={formData.condition_suspension_notes}
-            onConditionChange={(v) => onChange('condition_suspension', v)}
-            onNotesChange={(v) => onChange('condition_suspension_notes', v)}
-          />
-          <ConditionField
-            id="condition_steering"
-            label="Besturing"
-            conditionValue={formData.condition_steering}
-            notesValue={formData.condition_steering_notes}
-            onConditionChange={(v) => onChange('condition_steering', v)}
-            onNotesChange={(v) => onChange('condition_steering_notes', v)}
-          />
-          <ConditionField
-            id="condition_electrical"
-            label="Elektrische installatie"
-            conditionValue={formData.condition_electrical}
-            notesValue={formData.condition_electrical_notes}
-            onConditionChange={(v) => onChange('condition_electrical', v)}
-            onNotesChange={(v) => onChange('condition_electrical_notes', v)}
-          />
-        </CardContent>
-      </Card>
-
-      {/* Banden en wielen */}
+      {/* Banden en wielen — before Technische staat */}
       <Card>
         <CardHeader>
           <CardTitle className="text-lg">Banden en wielen</CardTitle>
@@ -449,6 +429,63 @@ export const AppraisalFindingsForm = ({
               rows={2}
             />
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Technische staat voertuig */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg">Technische staat voertuig</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <ConditionField
+            id="condition_engine"
+            label="Motor en aandrijving"
+            conditionValue={formData.condition_engine}
+            notesValue={formData.condition_engine_notes}
+            onConditionChange={(v) => onChange('condition_engine', v)}
+            onNotesChange={(v) => onChange('condition_engine_notes', v)}
+          />
+          <ConditionField
+            id="condition_transmission"
+            label="Transmissie"
+            conditionValue={formData.condition_transmission}
+            notesValue={formData.condition_transmission_notes}
+            onConditionChange={(v) => onChange('condition_transmission', v)}
+            onNotesChange={(v) => onChange('condition_transmission_notes', v)}
+          />
+          <ConditionField
+            id="condition_brakes"
+            label="Remmen"
+            conditionValue={formData.condition_brakes}
+            notesValue={formData.condition_brakes_notes}
+            onConditionChange={(v) => onChange('condition_brakes', v)}
+            onNotesChange={(v) => onChange('condition_brakes_notes', v)}
+          />
+          <ConditionField
+            id="condition_suspension"
+            label="Ophanging"
+            conditionValue={formData.condition_suspension}
+            notesValue={formData.condition_suspension_notes}
+            onConditionChange={(v) => onChange('condition_suspension', v)}
+            onNotesChange={(v) => onChange('condition_suspension_notes', v)}
+          />
+          <ConditionField
+            id="condition_steering"
+            label="Besturing"
+            conditionValue={formData.condition_steering}
+            notesValue={formData.condition_steering_notes}
+            onConditionChange={(v) => onChange('condition_steering', v)}
+            onNotesChange={(v) => onChange('condition_steering_notes', v)}
+          />
+          <ConditionField
+            id="condition_electrical"
+            label="Elektrische installatie"
+            conditionValue={formData.condition_electrical}
+            notesValue={formData.condition_electrical_notes}
+            onConditionChange={(v) => onChange('condition_electrical', v)}
+            onNotesChange={(v) => onChange('condition_electrical_notes', v)}
+          />
         </CardContent>
       </Card>
 
