@@ -892,6 +892,7 @@ const EditReport = () => {
         
         // Banden
         tire_bandenmaat: appraisalData.tire_bandenmaat || null,
+        tire_bandenmaat_achter: appraisalData.tire_bandenmaat_achter || null,
         tire_front_left_brand: appraisalData.tire_front_left_brand || null,
         tire_front_left_model: appraisalData.tire_front_left_model || null,
         tire_front_left_profiel: appraisalData.tire_front_left_profiel || null,
