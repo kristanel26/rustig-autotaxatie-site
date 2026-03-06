@@ -1302,6 +1302,50 @@ const EditReport = () => {
           </Card>
         )}
 
+        {/* ============================================ */}
+        {/* WEV §2: Inspectiegegevens — before Vehicle   */}
+        {/* ============================================ */}
+        {report.report_type === 'wev' && (
+          <Card id="section-inspectie">
+            <CardHeader>
+              <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
+            </CardHeader>
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="inspection_location">Plaats opname *</Label>
+                <Input
+                  id="inspection_location"
+                  value={inspectionData.inspection_location}
+                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
+                  placeholder="bijv. Druten"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="inspection_date">Datum opname *</Label>
+                <Input
+                  id="inspection_date"
+                  type="date"
+                  value={inspectionData.inspection_date}
+                  onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="wev_peildatum">Peildatum</Label>
+                <Input
+                  id="wev_peildatum"
+                  type="date"
+                  value={inspectionData.inspection_date}
+                  disabled
+                  className="bg-muted"
+                />
+                <p className="text-xs text-muted-foreground">
+                  Peildatum is gelijk aan datum opname
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Vehicle Information — ALL types */}
         {/* CAM: Gebruik/Stalling → Rapporttitel → Voertuigid → Transmissie → Tellerstand → Opbouw */}
         {/* KLS/WEV: Rapporttitel → Voertuigid → Transmissie → Tellerstand */}
@@ -1370,49 +1414,9 @@ const EditReport = () => {
           </div>
         )}
 
-        {/* WEV: Inspectiegegevens */}
-        {report.report_type === 'wev' && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
-            </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2 md:col-span-2">
-                <Label htmlFor="inspection_location">Plaats opname *</Label>
-                <Input
-                  id="inspection_location"
-                  value={inspectionData.inspection_location}
-                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
-                  placeholder="bijv. Druten"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="inspection_date">Datum opname *</Label>
-                <Input
-                  id="inspection_date"
-                  type="date"
-                  value={inspectionData.inspection_date}
-                  onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="wev_peildatum">Peildatum</Label>
-                <Input
-                  id="wev_peildatum"
-                  type="date"
-                  value={inspectionData.inspection_date}
-                  disabled
-                  className="bg-muted"
-                />
-                <p className="text-xs text-muted-foreground">
-                  Peildatum is gelijk aan datum opname
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* WEV: Fotocollectie */}
+        {/* ============================================ */}
+        {/* WEV §4: Fotocollectie — after VehicleInfoForm */}
+        {/* ============================================ */}
         {report.report_type === 'wev' && (
           <PhotoUploadForm
             photos={vehiclePhotos}
@@ -1422,17 +1426,12 @@ const EditReport = () => {
             onRotationsChange={handleRotationsChange}
             onPhotoTypesChange={handlePhotoTypesChange}
             reportId={id}
-            reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
+            reportType="wev"
           />
         )}
 
-        {/* WEV: Taxatiebestanden */}
-        {report.report_type === 'wev' && (
-          <WevDocumentUploadForm reportId={id || ''} />
-        )}
-
-        {/* CAM + WEV: Appraisal Findings — Model, Banden, Tech, Ext, Int */}
-        {(report.report_type === 'wev' || report.report_type === 'camper' || !report.report_type) && report.report_type !== 'klassieker' && (
+        {/* CAM: Appraisal Findings — all sections */}
+        {(report.report_type === 'camper' || !report.report_type) && (
           <AppraisalFindingsForm
             formData={appraisalData}
             onChange={handleAppraisalChange}
@@ -1447,97 +1446,29 @@ const EditReport = () => {
           />
         )}
 
-        {/* §15 Leidingen en installaties — only for camper */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <InstallationsForm
-            formData={installationsData}
-            onChange={handleInstallationsChange}
+        {/* WEV §8-9: Model + Banden (first part of AppraisalFindingsForm) */}
+        {report.report_type === 'wev' && (
+          <AppraisalFindingsForm
+            formData={appraisalData}
+            onChange={handleAppraisalChange}
+            onMultipleChange={handleAppraisalMultipleChange}
+            rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
+            allTiresSame={allTiresSame}
+            onAllTiresSameChange={setAllTiresSame}
+            reportType="wev"
+            photos={vehiclePhotos}
+            photoTypes={photoTypes}
+            reportId={id}
+            showSections={['model', 'tires']}
           />
         )}
 
-        {/* §16-17 Extra's / Campertechniek & Beveiliging — only for camper */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <CamperTechForm
-            formData={camperTechData}
-            onChange={handleCamperTechChange}
-          />
+        {/* WEV §10: Taxatiebestanden */}
+        {report.report_type === 'wev' && (
+          <WevDocumentUploadForm reportId={id || ''} />
         )}
 
-        {/* §18-19 Vocht & Brand- en gasveiligheid — only for camper */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <MoistureAndSafetyForm
-            formData={moistureData}
-            onChange={handleMoistureChange}
-          />
-        )}
-
-        {/* §20 Algemene indruk — only for camper (after vocht/gas, before waarde) */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <GeneralImpressionForm
-            formData={impressionData}
-            onChange={handleImpressionChange}
-          />
-        )}
-
-        {/* §21 Waardebepaling — only for camper */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <Card id="section-waarde">
-            <CardHeader>
-              <CardTitle className="text-lg">Waardebepaling</CardTitle>
-            </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="appraised_value">Getaxeerde waarde (€)</Label>
-                <Input
-                  id="appraised_value"
-                  type="number"
-                  step="0.01"
-                  value={valuationData.appraised_value}
-                  onChange={(e) => handleValuationChange('appraised_value', e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="appraised_value_text">Waarde in woorden</Label>
-                <Input
-                  id="appraised_value_text"
-                  value={valuationData.appraised_value_text}
-                  readOnly
-                  disabled
-                  className="bg-muted"
-                  placeholder="Wordt automatisch ingevuld"
-                />
-              </div>
-              <div className="space-y-2 md:col-span-2">
-                <Label htmlFor="quality_class">Kwaliteitsklasse *</Label>
-                <Select
-                  value={valuationData.quality_class}
-                  onValueChange={(value) => handleValuationChange('quality_class', value)}
-                >
-                  <SelectTrigger className={!valuationData.quality_class ? 'border-destructive' : ''}>
-                    <SelectValue placeholder="Selecteer kwaliteitsklasse..." />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {qualityClasses.map((qc) => (
-                      <SelectItem key={qc.value} value={qc.value}>
-                        {qc.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                {!valuationData.quality_class && (
-                  <p className="text-xs text-destructive">Kwaliteitsklasse is verplicht</p>
-                )}
-                {valuationData.quality_class && (
-                  <p className="text-sm text-muted-foreground mt-2">
-                    {qualityClasses.find((qc) => qc.value === valuationData.quality_class)?.description}
-                  </p>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* WEV Valuation - marktgegevens + eindwaarde */}
+        {/* WEV §11-12: Marktgegevens + Waarde in het Economisch Verkeer */}
         {report.report_type === 'wev' && (
           <>
             <WevAutotelexDataForm
@@ -1549,6 +1480,31 @@ const EditReport = () => {
               onChange={handleWevValueChange}
             />
           </>
+        )}
+
+        {/* WEV §13-15: Technische staat + Exterieur + Interieur */}
+        {report.report_type === 'wev' && (
+          <AppraisalFindingsForm
+            formData={appraisalData}
+            onChange={handleAppraisalChange}
+            onMultipleChange={handleAppraisalMultipleChange}
+            rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
+            allTiresSame={allTiresSame}
+            onAllTiresSameChange={setAllTiresSame}
+            reportType="wev"
+            photos={vehiclePhotos}
+            photoTypes={photoTypes}
+            reportId={id}
+            showSections={['technical', 'exterior', 'interior']}
+          />
+        )}
+
+        {/* WEV §16: Algemene indruk */}
+        {report.report_type === 'wev' && (
+          <GeneralImpressionForm
+            formData={impressionData}
+            onChange={handleImpressionChange}
+          />
         )}
 
         {/* §22 Opmerkingen */}
