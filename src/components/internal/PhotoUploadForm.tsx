@@ -512,8 +512,26 @@ const PhotoUploadForm = ({
   }, [photos, onChange]);
 
   // Open file picker when clicking on drop zone
-  const handleDropzoneClick = useCallback(() => {
+  const handleDropzoneClick = useCallback((e: React.MouseEvent) => {
+    // Prevent any parent handlers from interfering
+    e.stopPropagation();
     fileInputRef.current?.click();
+  }, []);
+
+  // Prevent browser from opening dropped files globally
+  useEffect(() => {
+    const preventDefaults = (e: DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+    };
+    
+    document.addEventListener('dragover', preventDefaults);
+    document.addEventListener('drop', preventDefaults);
+    
+    return () => {
+      document.removeEventListener('dragover', preventDefaults);
+      document.removeEventListener('drop', preventDefaults);
+    };
   }, []);
 
   return (
