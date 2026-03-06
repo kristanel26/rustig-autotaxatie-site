@@ -690,7 +690,7 @@ export const VehicleInfoForm = ({
               <AIExtractButton
                 section="tellerstand"
                 label="Haal tellerstand uit dashboardfoto"
-                photoTypes={['dashboard']}
+                photoTypes={['tellerstand', 'dashboard_old']}
                 photos={photos}
                 photoTypeMap={photoTypes}
                 onAccept={handleTellerstandAIAccept}
