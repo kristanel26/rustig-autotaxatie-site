@@ -146,6 +146,7 @@ const EditReport = () => {
 
   // Customer data
   const [customerData, setCustomerData] = useState({
+    opdrachtgever: '',
     customer_title: '',
     customer_initials: '',
     customer_last_name: '',
@@ -268,6 +269,7 @@ const EditReport = () => {
         
         // Pre-fill customer data
         setCustomerData({
+          opdrachtgever: (reportData as any).opdrachtgever || '',
           customer_title: reportData.customer_title || '',
           customer_initials: reportData.customer_initials || '',
           customer_last_name: reportData.customer_last_name || '',
@@ -806,6 +808,7 @@ const EditReport = () => {
     try {
       const updateData = {
         // Customer data
+        opdrachtgever: customerData.opdrachtgever || null,
         customer_title: normalizedData.customer_title || null,
         customer_initials: normalizedData.customer_initials || null,
         customer_last_name: normalizedData.customer_last_name || null,
@@ -1116,6 +1119,15 @@ const EditReport = () => {
                 <CardTitle className="text-lg">Klantgegevens</CardTitle>
               </CardHeader>
           <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2 md:col-span-2">
+              <Label htmlFor="opdrachtgever">Bedrijfsnaam (optioneel)</Label>
+              <Input
+                id="opdrachtgever"
+                value={customerData.opdrachtgever}
+                onChange={(e) => handleCustomerChange('opdrachtgever', e.target.value)}
+                placeholder="bijv. Autoservice Jansen B.V."
+              />
+            </div>
             <div className="space-y-2">
               <Label htmlFor="customer_title">Aanhef</Label>
               <Select
