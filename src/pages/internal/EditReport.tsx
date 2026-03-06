@@ -1302,6 +1302,50 @@ const EditReport = () => {
           </Card>
         )}
 
+        {/* ============================================ */}
+        {/* WEV §2: Inspectiegegevens — before Vehicle   */}
+        {/* ============================================ */}
+        {report.report_type === 'wev' && (
+          <Card id="section-inspectie">
+            <CardHeader>
+              <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
+            </CardHeader>
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="inspection_location">Plaats opname *</Label>
+                <Input
+                  id="inspection_location"
+                  value={inspectionData.inspection_location}
+                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
+                  placeholder="bijv. Druten"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="inspection_date">Datum opname *</Label>
+                <Input
+                  id="inspection_date"
+                  type="date"
+                  value={inspectionData.inspection_date}
+                  onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="wev_peildatum">Peildatum</Label>
+                <Input
+                  id="wev_peildatum"
+                  type="date"
+                  value={inspectionData.inspection_date}
+                  disabled
+                  className="bg-muted"
+                />
+                <p className="text-xs text-muted-foreground">
+                  Peildatum is gelijk aan datum opname
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {/* Vehicle Information — ALL types */}
         {/* CAM: Gebruik/Stalling → Rapporttitel → Voertuigid → Transmissie → Tellerstand → Opbouw */}
         {/* KLS/WEV: Rapporttitel → Voertuigid → Transmissie → Tellerstand */}
