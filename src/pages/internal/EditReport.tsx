@@ -1469,7 +1469,7 @@ const EditReport = () => {
           />
         )}
 
-        {/* Sectie 13: Leidingen & Installaties - only for camper */}
+        {/* §15 Leidingen en installaties — only for camper */}
         {(report.report_type === 'camper' || !report.report_type) && (
           <InstallationsForm
             formData={installationsData}
@@ -1477,7 +1477,7 @@ const EditReport = () => {
           />
         )}
 
-        {/* Sectie 14-15: Campertechniek & Beveiliging - only for camper */}
+        {/* §16-17 Extra's / Campertechniek & Beveiliging — only for camper */}
         {(report.report_type === 'camper' || !report.report_type) && (
           <CamperTechForm
             formData={camperTechData}
@@ -1485,15 +1485,7 @@ const EditReport = () => {
           />
         )}
 
-        {/* Sectie 16: Algemene Indruk - only for camper (klassieker has its own above) */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <GeneralImpressionForm
-            formData={impressionData}
-            onChange={handleImpressionChange}
-          />
-        )}
-
-        {/* Vocht & Brand/Gas veiligheid - only for camper */}
+        {/* §18-19 Vocht & Brand- en gasveiligheid — only for camper */}
         {(report.report_type === 'camper' || !report.report_type) && (
           <MoistureAndSafetyForm
             formData={moistureData}
@@ -1501,71 +1493,17 @@ const EditReport = () => {
           />
         )}
 
-        {/* Fotocollectie - only for camper (WEV and Klassieker have it earlier) */}
+        {/* §20 Algemene indruk — only for camper (after vocht/gas, before waarde) */}
         {(report.report_type === 'camper' || !report.report_type) && (
-          <PhotoUploadForm
-            photos={vehiclePhotos}
-            rotations={photoRotations}
-            photoTypes={photoTypes}
-            onChange={handlePhotosChange}
-            onRotationsChange={handleRotationsChange}
-            onPhotoTypesChange={handlePhotoTypesChange}
-            reportId={id}
-            reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
+          <GeneralImpressionForm
+            formData={impressionData}
+            onChange={handleImpressionChange}
           />
         )}
 
-        {/* Camper: Inspection Details */}
+        {/* §21 Waardebepaling — only for camper */}
         {(report.report_type === 'camper' || !report.report_type) && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
-            </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2 md:col-span-2">
-                <Label htmlFor="inspection_location">Inspectielocatie</Label>
-                <Input
-                  id="inspection_location"
-                  value={inspectionData.inspection_location}
-                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="inspection_date">Inspectiedatum</Label>
-                <Input
-                  id="inspection_date"
-                  type="date"
-                  value={inspectionData.inspection_date}
-                  onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="inspection_start_time">Starttijd</Label>
-                  <Input
-                    id="inspection_start_time"
-                    type="time"
-                    value={inspectionData.inspection_start_time}
-                    onChange={(e) => handleInspectionChange('inspection_start_time', e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="inspection_end_time">Eindtijd</Label>
-                  <Input
-                    id="inspection_end_time"
-                    type="time"
-                    value={inspectionData.inspection_end_time}
-                    onChange={(e) => handleInspectionChange('inspection_end_time', e.target.value)}
-                  />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Valuation - only for camper */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <Card>
+          <Card id="section-waarde">
             <CardHeader>
               <CardTitle className="text-lg">Waardebepaling</CardTitle>
             </CardHeader>
@@ -1635,7 +1573,7 @@ const EditReport = () => {
           </>
         )}
 
-        {/* Remarks */}
+        {/* §22 Opmerkingen */}
         <Card>
           <CardHeader>
             <CardTitle className="text-lg">Opmerkingen</CardTitle>
