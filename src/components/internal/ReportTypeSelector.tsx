@@ -6,31 +6,34 @@ export type ReportType = 'camper' | 'wev' | 'klassieker';
 /* ── Custom SVG silhouette icons ── */
 
 const CamperIcon = () => (
-  <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-    {/* Body */}
-    <rect x="8" y="22" width="90" height="38" rx="4" fill="currentColor" opacity="0.15" />
-    <rect x="8" y="22" width="90" height="38" rx="4" stroke="currentColor" strokeWidth="2" />
-    {/* Cab windshield angle */}
-    <path d="M98 60V30a8 8 0 00-8-8H88L78 22" stroke="currentColor" strokeWidth="2" />
-    <path d="M98 60H108a4 4 0 004-4V42a8 8 0 00-8-8H98" stroke="currentColor" strokeWidth="2" />
-    {/* Roof unit / AC */}
-    <rect x="30" y="14" width="28" height="8" rx="3" stroke="currentColor" strokeWidth="1.5" fill="currentColor" opacity="0.1" />
-    {/* Windows */}
-    <rect x="14" y="28" width="16" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" fill="currentColor" opacity="0.08" />
-    <rect x="36" y="28" width="16" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" fill="currentColor" opacity="0.08" />
-    <rect x="58" y="28" width="16" height="12" rx="2" stroke="currentColor" strokeWidth="1.5" fill="currentColor" opacity="0.08" />
-    {/* Cab window */}
-    <rect x="100" y="36" width="10" height="10" rx="2" stroke="currentColor" strokeWidth="1.5" fill="currentColor" opacity="0.08" />
-    {/* Door */}
-    <rect x="80" y="32" width="12" height="24" rx="2" stroke="currentColor" strokeWidth="1.5" />
-    <circle cx="88" cy="44" r="1.5" fill="currentColor" />
-    {/* Wheels */}
-    <circle cx="26" cy="62" r="9" stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.1" />
-    <circle cx="26" cy="62" r="4" fill="currentColor" opacity="0.3" />
-    <circle cx="100" cy="62" r="9" stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.1" />
-    <circle cx="100" cy="62" r="4" fill="currentColor" opacity="0.3" />
-    {/* Ground line */}
-    <line x1="4" y1="72" x2="116" y2="72" stroke="currentColor" strokeWidth="1" opacity="0.2" />
+  <svg viewBox="0 0 140 90" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    {/* Alcove (overhang above cab) */}
+    <path d="M88 18H108V30H88Z" fill="currentColor" opacity="0.12" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+    {/* Main body — tall rectangular coach */}
+    <rect x="10" y="18" width="98" height="46" rx="3" fill="currentColor" opacity="0.10" stroke="currentColor" strokeWidth="2" />
+    {/* Cab section */}
+    <path d="M108 30V64H128a4 4 0 004-4V42a10 10 0 00-10-10H108Z" fill="currentColor" opacity="0.08" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+    {/* Cab windshield (angled) */}
+    <path d="M108 32L122 36V54H108" stroke="currentColor" strokeWidth="1.5" fill="currentColor" opacity="0.06" />
+    {/* Large side windows */}
+    <rect x="16" y="26" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" fill="currentColor" opacity="0.08" />
+    <rect x="40" y="26" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" fill="currentColor" opacity="0.08" />
+    <rect x="64" y="26" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" fill="currentColor" opacity="0.08" />
+    {/* Habitation door */}
+    <rect x="88" y="34" width="12" height="28" rx="2" stroke="currentColor" strokeWidth="1.5" />
+    <circle cx="96" cy="48" r="1.5" fill="currentColor" opacity="0.5" />
+    {/* Roof AC unit */}
+    <rect x="34" y="11" width="24" height="7" rx="3" stroke="currentColor" strokeWidth="1.5" fill="currentColor" opacity="0.08" />
+    {/* Rear wheel */}
+    <circle cx="30" cy="66" r="11" stroke="currentColor" strokeWidth="2.5" fill="currentColor" opacity="0.1" />
+    <circle cx="30" cy="66" r="5" fill="currentColor" opacity="0.3" />
+    {/* Front wheel */}
+    <circle cx="114" cy="66" r="11" stroke="currentColor" strokeWidth="2.5" fill="currentColor" opacity="0.1" />
+    <circle cx="114" cy="66" r="5" fill="currentColor" opacity="0.3" />
+    {/* Bumper */}
+    <rect x="128" y="56" width="4" height="8" rx="1.5" fill="currentColor" opacity="0.2" />
+    {/* Ground */}
+    <line x1="4" y1="78" x2="136" y2="78" stroke="currentColor" strokeWidth="1" opacity="0.15" />
   </svg>
 );
 
@@ -63,50 +66,61 @@ const WevIcon = () => (
 );
 
 const KlassiekerIcon = () => (
-  <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-    {/* Body / fenders — long hood classic car silhouette */}
-    <path 
-      d="M16 52 Q16 44 24 42 L50 38 Q54 30 62 26 L78 24 Q88 24 92 30 L96 38 Q106 40 110 44 Q114 48 114 52" 
-      stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.12" 
+  <svg viewBox="0 0 140 90" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    {/* Main body — long hood, rounded cabin, sweeping rear */}
+    <path
+      d="M8 58 Q8 52 14 50 L56 46 Q60 34 68 28 L82 26 Q92 26 96 34 L100 46 Q110 48 118 50 Q126 52 126 58"
+      stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.10"
     />
-    {/* Hood / bonnet (long) */}
-    <path d="M24 42 L50 38" stroke="currentColor" strokeWidth="1.5" opacity="0.6" />
-    {/* Cabin */}
-    <path d="M54 38 Q56 28 64 26 L78 24 Q86 24 90 30 L94 38" stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.08" />
+    {/* Long hood line — 40%+ of length */}
+    <path d="M14 50 L56 46" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
+    {/* Rounded cabin / greenhouse */}
+    <path d="M58 46 Q60 30 70 28 L82 26 Q90 26 94 34 L98 46" stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.06" />
     {/* Windshield */}
-    <line x1="56" y1="38" x2="62" y2="26" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
+    <line x1="60" y1="46" x2="68" y2="28" stroke="currentColor" strokeWidth="1.5" opacity="0.45" />
     {/* Rear window */}
-    <line x1="88" y1="28" x2="94" y2="38" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
-    {/* Running board */}
-    <line x1="28" y1="52" x2="100" y2="52" stroke="currentColor" strokeWidth="1.5" />
-    {/* Front fender curve */}
-    <path d="M16 52 Q14 52 14 56 Q14 60 20 62" stroke="currentColor" strokeWidth="2" />
-    {/* Rear fender curve */}
-    <path d="M114 52 Q116 52 116 56 Q116 60 110 62" stroke="currentColor" strokeWidth="2" />
-    {/* Headlight */}
-    <circle cx="18" cy="44" r="3" stroke="currentColor" strokeWidth="1.5" fill="currentColor" opacity="0.25" />
+    <line x1="90" y1="30" x2="98" y2="46" stroke="currentColor" strokeWidth="1.5" opacity="0.45" />
+    {/* Front fender — bold round spatbord */}
+    <path d="M8 58 Q6 58 6 62 Q6 70 18 72 Q28 72 34 70 Q40 68 40 58" stroke="currentColor" strokeWidth="2.5" fill="currentColor" opacity="0.08" />
+    {/* Rear fender — bold round spatbord */}
+    <path d="M94 58 Q94 68 100 70 Q106 72 116 72 Q128 70 128 62 Q128 58 126 58" stroke="currentColor" strokeWidth="2.5" fill="currentColor" opacity="0.08" />
+    {/* Running board between fenders */}
+    <line x1="40" y1="58" x2="94" y2="58" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
+    {/* Front bumper */}
+    <path d="M6 56 Q2 56 2 58 Q2 60 6 60" stroke="currentColor" strokeWidth="1.5" opacity="0.3" />
+    {/* Large round headlights */}
+    <circle cx="10" cy="50" r="4" stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.25" />
+    <circle cx="10" cy="50" r="1.5" fill="currentColor" opacity="0.5" />
+    {/* Grille */}
+    <line x1="6" y1="52" x2="14" y2="52" stroke="currentColor" strokeWidth="0.8" opacity="0.25" />
+    <line x1="6" y1="54" x2="14" y2="54" stroke="currentColor" strokeWidth="0.8" opacity="0.25" />
+    <line x1="6" y1="56" x2="14" y2="56" stroke="currentColor" strokeWidth="0.8" opacity="0.25" />
     {/* Taillight */}
-    <rect x="112" y="42" width="3" height="6" rx="1" fill="currentColor" opacity="0.3" />
-    {/* Grille lines */}
-    <line x1="14" y1="46" x2="22" y2="46" stroke="currentColor" strokeWidth="1" opacity="0.3" />
-    <line x1="14" y1="48" x2="22" y2="48" stroke="currentColor" strokeWidth="1" opacity="0.3" />
-    <line x1="14" y1="50" x2="22" y2="50" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+    <rect x="126" y="50" width="3" height="6" rx="1.5" fill="currentColor" opacity="0.3" />
     {/* Front wheel with spokes */}
-    <circle cx="34" cy="56" r="10" stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.1" />
-    <circle cx="34" cy="56" r="4" fill="currentColor" opacity="0.3" />
-    <line x1="34" y1="47" x2="34" y2="50" stroke="currentColor" strokeWidth="1" opacity="0.3" />
-    <line x1="34" y1="62" x2="34" y2="65" stroke="currentColor" strokeWidth="1" opacity="0.3" />
-    <line x1="25" y1="56" x2="28" y2="56" stroke="currentColor" strokeWidth="1" opacity="0.3" />
-    <line x1="40" y1="56" x2="43" y2="56" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+    <circle cx="26" cy="64" r="11" stroke="currentColor" strokeWidth="2.5" fill="currentColor" opacity="0.08" />
+    <circle cx="26" cy="64" r="5" fill="currentColor" opacity="0.25" />
+    <line x1="26" y1="54" x2="26" y2="58" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+    <line x1="26" y1="70" x2="26" y2="74" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+    <line x1="16" y1="64" x2="20" y2="64" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+    <line x1="32" y1="64" x2="36" y2="64" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+    <line x1="19" y1="57" x2="22" y2="60" stroke="currentColor" strokeWidth="1" opacity="0.2" />
+    <line x1="30" y1="68" x2="33" y2="71" stroke="currentColor" strokeWidth="1" opacity="0.2" />
+    <line x1="19" y1="71" x2="22" y2="68" stroke="currentColor" strokeWidth="1" opacity="0.2" />
+    <line x1="30" y1="60" x2="33" y2="57" stroke="currentColor" strokeWidth="1" opacity="0.2" />
     {/* Rear wheel with spokes */}
-    <circle cx="96" cy="56" r="10" stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.1" />
-    <circle cx="96" cy="56" r="4" fill="currentColor" opacity="0.3" />
-    <line x1="96" y1="47" x2="96" y2="50" stroke="currentColor" strokeWidth="1" opacity="0.3" />
-    <line x1="96" y1="62" x2="96" y2="65" stroke="currentColor" strokeWidth="1" opacity="0.3" />
-    <line x1="87" y1="56" x2="90" y2="56" stroke="currentColor" strokeWidth="1" opacity="0.3" />
-    <line x1="102" y1="56" x2="105" y2="56" stroke="currentColor" strokeWidth="1" opacity="0.3" />
-    {/* Ground line */}
-    <line x1="6" y1="67" x2="124" y2="67" stroke="currentColor" strokeWidth="1" opacity="0.2" />
+    <circle cx="110" cy="64" r="11" stroke="currentColor" strokeWidth="2.5" fill="currentColor" opacity="0.08" />
+    <circle cx="110" cy="64" r="5" fill="currentColor" opacity="0.25" />
+    <line x1="110" y1="54" x2="110" y2="58" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+    <line x1="110" y1="70" x2="110" y2="74" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+    <line x1="100" y1="64" x2="104" y2="64" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+    <line x1="116" y1="64" x2="120" y2="64" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+    <line x1="103" y1="57" x2="106" y2="60" stroke="currentColor" strokeWidth="1" opacity="0.2" />
+    <line x1="114" y1="68" x2="117" y2="71" stroke="currentColor" strokeWidth="1" opacity="0.2" />
+    <line x1="103" y1="71" x2="106" y2="68" stroke="currentColor" strokeWidth="1" opacity="0.2" />
+    <line x1="114" y1="60" x2="117" y2="57" stroke="currentColor" strokeWidth="1" opacity="0.2" />
+    {/* Ground */}
+    <line x1="0" y1="76" x2="136" y2="76" stroke="currentColor" strokeWidth="1" opacity="0.15" />
   </svg>
 );
 
