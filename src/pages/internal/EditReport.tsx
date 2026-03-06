@@ -269,6 +269,7 @@ const EditReport = () => {
         
         // Pre-fill customer data
         setCustomerData({
+          opdrachtgever: (reportData as any).opdrachtgever || '',
           customer_title: reportData.customer_title || '',
           customer_initials: reportData.customer_initials || '',
           customer_last_name: reportData.customer_last_name || '',
