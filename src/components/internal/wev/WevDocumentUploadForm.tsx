@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -13,6 +13,7 @@ import {
 import { Upload, Trash2, FileText, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/contexts/AuthContext';
 
 export type DocumentType = 'autotelex' | 'schadecalculatie' | 'overig';
 
@@ -41,10 +42,12 @@ export const WevDocumentUploadForm = ({
   onDocumentsChange,
 }: WevDocumentUploadFormProps) => {
   const { toast } = useToast();
+  const { user } = useAuth();
   const [documents, setDocuments] = useState<WevDocument[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
   const [selectedDocType, setSelectedDocType] = useState<DocumentType>('autotelex');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Fetch existing documents
   const fetchDocuments = useCallback(async () => {
@@ -101,9 +104,11 @@ export const WevDocumentUploadForm = ({
     setIsUploading(true);
 
     try {
-      // Generate unique file path
+      // Generate unique file path (must start with user_id per storage RLS policy)
       const fileExt = file.name.split('.').pop();
-      const fileName = `${reportId}/wev-docs/${Date.now()}-${selectedDocType}.${fileExt}`;
+      const userId = user?.id;
+      if (!userId) throw new Error('Niet ingelogd');
+      const fileName = `${userId}/${reportId}/wev-docs/${Date.now()}-${selectedDocType}.${fileExt}`;
 
       // Upload to storage
       const { error: uploadError } = await supabase.storage
@@ -238,29 +243,31 @@ export const WevDocumentUploadForm = ({
           </div>
           <div>
             <Label htmlFor="file_upload" className="sr-only">Bestand uploaden</Label>
+            <input
+              ref={fileInputRef}
+              id="file_upload"
+              type="file"
+              accept=".pdf,.jpg,.jpeg,.png,.webp"
+              onChange={handleFileUpload}
+              className="hidden"
+              disabled={isUploading || !reportId}
+            />
             <Button
               type="button"
               variant="outline"
               disabled={isUploading || !reportId}
-              className="relative"
-              asChild
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                fileInputRef.current?.click();
+              }}
             >
-              <label className="cursor-pointer">
-                {isUploading ? (
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                ) : (
-                  <Upload className="h-4 w-4 mr-2" />
-                )}
-                {isUploading ? 'Uploaden...' : 'Document uploaden'}
-                <input
-                  id="file_upload"
-                  type="file"
-                  accept=".pdf,.jpg,.jpeg,.png,.webp"
-                  onChange={handleFileUpload}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  disabled={isUploading || !reportId}
-                />
-              </label>
+              {isUploading ? (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              ) : (
+                <Upload className="h-4 w-4 mr-2" />
+              )}
+              {isUploading ? 'Uploaden...' : 'Document uploaden'}
             </Button>
           </div>
         </div>
