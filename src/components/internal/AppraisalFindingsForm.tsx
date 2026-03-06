@@ -294,318 +294,327 @@ export const AppraisalFindingsForm = ({
     <div className="space-y-6">
       {/* Model display name */}
       {show('model') && (
-        <CardHeader>
-          <CardTitle className="text-lg">Model (vastgesteld)</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-2">
-            <Label htmlFor="model_display_name">Modelnaam voor rapport</Label>
-            <Input
-              id="model_display_name"
-              value={formData.model_display_name}
-              onChange={(e) => onChange('model_display_name', e.target.value)}
-              placeholder={rdwHandelsbenaming || 'Bijv. California Ocean T6.1'}
-            />
-            <p className="text-xs text-muted-foreground">
-              Laat leeg om de RDW handelsbenaming te gebruiken{rdwHandelsbenaming ? `: "${rdwHandelsbenaming}"` : ''}.
-            </p>
-          </div>
-        </CardContent>
-      </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Model (vastgesteld)</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              <Label htmlFor="model_display_name">Modelnaam voor rapport</Label>
+              <Input
+                id="model_display_name"
+                value={formData.model_display_name}
+                onChange={(e) => onChange('model_display_name', e.target.value)}
+                placeholder={rdwHandelsbenaming || 'Bijv. California Ocean T6.1'}
+              />
+              <p className="text-xs text-muted-foreground">
+                Laat leeg om de RDW handelsbenaming te gebruiken{rdwHandelsbenaming ? `: "${rdwHandelsbenaming}"` : ''}.
+              </p>
+            </div>
+          </CardContent>
+        </Card>
       )}
 
-      {/* Banden en wielen — before Technische staat */}
+      {/* Banden en wielen */}
       {show('tires') && (
-        <CardHeader>
-          <CardTitle className="text-lg">Banden en wielen</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="tire_bandenmaat">Bandenmaat</Label>
-              <Input
-                id="tire_bandenmaat"
-                value={formData.tire_bandenmaat}
-                onChange={(e) => onChange('tire_bandenmaat', e.target.value)}
-                placeholder="Bijv. 225/45R16"
-                className="w-[200px]"
-              />
-            </div>
-            <div className="flex items-center space-x-3 pt-6">
-              <Switch
-                id="all_tires_same"
-                checked={allTiresSame}
-                onCheckedChange={handleAllTiresSameToggle}
-              />
-              <Label htmlFor="all_tires_same" className="cursor-pointer">
-                Alle banden zijn gelijk
-              </Label>
-            </div>
-            {/* AI Extraction Button for tires */}
-            {photos.length > 0 && reportId && (
-              <div className="pt-6">
-                <AIExtractButton
-                  section="banden"
-                  label="Lees bandeninfo"
-                  photoTypes={['band_voor_links', 'band_voor_rechts', 'band_achter_links', 'band_achter_rechts']}
-                  photos={photos}
-                  photoTypeMap={photoTypes}
-                  onAccept={handleTireAIAccept}
-                  reportId={reportId}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Banden en wielen</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="tire_bandenmaat">Bandenmaat</Label>
+                <Input
+                  id="tire_bandenmaat"
+                  value={formData.tire_bandenmaat}
+                  onChange={(e) => onChange('tire_bandenmaat', e.target.value)}
+                  placeholder="Bijv. 225/45R16"
+                  className="w-[200px]"
                 />
               </div>
-            )}
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <TireField
-              position="Linker voorband"
-              brand={formData.tire_front_left_brand}
-              model={formData.tire_front_left_model}
-              profiel={formData.tire_front_left_profiel}
-              dot={formData.tire_front_left_dot}
-              onBrandChange={(v) => handleFirstTireChange('brand', v)}
-              onModelChange={(v) => handleFirstTireChange('model', v)}
-              onProfielChange={(v) => handleFirstTireChange('profiel', v)}
-              onDotChange={(v) => handleFirstTireChange('dot', v)}
-            />
-            <TireField
-              position="Rechter voorband"
-              brand={formData.tire_front_right_brand}
-              model={formData.tire_front_right_model}
-              profiel={formData.tire_front_right_profiel}
-              dot={formData.tire_front_right_dot}
-              onBrandChange={(v) => onChange('tire_front_right_brand', v)}
-              onModelChange={(v) => onChange('tire_front_right_model', v)}
-              onProfielChange={(v) => onChange('tire_front_right_profiel', v)}
-              onDotChange={(v) => onChange('tire_front_right_dot', v)}
-              isLinked={allTiresSame}
-              disabled={allTiresSame}
-            />
-            <TireField
-              position="Linker achterband"
-              brand={formData.tire_rear_left_brand}
-              model={formData.tire_rear_left_model}
-              profiel={formData.tire_rear_left_profiel}
-              dot={formData.tire_rear_left_dot}
-              onBrandChange={(v) => onChange('tire_rear_left_brand', v)}
-              onModelChange={(v) => onChange('tire_rear_left_model', v)}
-              onProfielChange={(v) => onChange('tire_rear_left_profiel', v)}
-              onDotChange={(v) => onChange('tire_rear_left_dot', v)}
-              isLinked={allTiresSame}
-              disabled={allTiresSame}
-            />
-            <TireField
-              position="Rechter achterband"
-              brand={formData.tire_rear_right_brand}
-              model={formData.tire_rear_right_model}
-              profiel={formData.tire_rear_right_profiel}
-              dot={formData.tire_rear_right_dot}
-              onBrandChange={(v) => onChange('tire_rear_right_brand', v)}
-              onModelChange={(v) => onChange('tire_rear_right_model', v)}
-              onProfielChange={(v) => onChange('tire_rear_right_profiel', v)}
-              onDotChange={(v) => onChange('tire_rear_right_dot', v)}
-              isLinked={allTiresSame}
-              disabled={allTiresSame}
-            />
-          </div>
-          <p className="text-xs text-muted-foreground">
-            DOT-code bestaat uit 4 cijfers. Voorbeeld: 2523 betekent week 25, jaar 2023.
-          </p>
-          <div className="space-y-2">
-            <Label htmlFor="rim_type">Type velg</Label>
-            <Select value={formData.rim_type} onValueChange={(v) => onChange('rim_type', v)}>
-              <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder="Selecteer type velg..." />
-              </SelectTrigger>
-              <SelectContent>
-                {rimTypeOptions.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="tire_advice">Advies banden</Label>
-            <Textarea
-              id="tire_advice"
-              value={formData.tire_advice}
-              onChange={(e) => onChange('tire_advice', e.target.value)}
-              placeholder="Eventueel advies met betrekking tot de banden..."
-              rows={2}
-            />
-          </div>
-        </CardContent>
-      </Card>
+              <div className="flex items-center space-x-3 pt-6">
+                <Switch
+                  id="all_tires_same"
+                  checked={allTiresSame}
+                  onCheckedChange={handleAllTiresSameToggle}
+                />
+                <Label htmlFor="all_tires_same" className="cursor-pointer">
+                  Alle banden zijn gelijk
+                </Label>
+              </div>
+              {/* AI Extraction Button for tires */}
+              {photos.length > 0 && reportId && (
+                <div className="pt-6">
+                  <AIExtractButton
+                    section="banden"
+                    label="Lees bandeninfo"
+                    photoTypes={['band_voor_links', 'band_voor_rechts', 'band_achter_links', 'band_achter_rechts']}
+                    photos={photos}
+                    photoTypeMap={photoTypes}
+                    onAccept={handleTireAIAccept}
+                    reportId={reportId}
+                  />
+                </div>
+              )}
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <TireField
+                position="Linker voorband"
+                brand={formData.tire_front_left_brand}
+                model={formData.tire_front_left_model}
+                profiel={formData.tire_front_left_profiel}
+                dot={formData.tire_front_left_dot}
+                onBrandChange={(v) => handleFirstTireChange('brand', v)}
+                onModelChange={(v) => handleFirstTireChange('model', v)}
+                onProfielChange={(v) => handleFirstTireChange('profiel', v)}
+                onDotChange={(v) => handleFirstTireChange('dot', v)}
+              />
+              <TireField
+                position="Rechter voorband"
+                brand={formData.tire_front_right_brand}
+                model={formData.tire_front_right_model}
+                profiel={formData.tire_front_right_profiel}
+                dot={formData.tire_front_right_dot}
+                onBrandChange={(v) => onChange('tire_front_right_brand', v)}
+                onModelChange={(v) => onChange('tire_front_right_model', v)}
+                onProfielChange={(v) => onChange('tire_front_right_profiel', v)}
+                onDotChange={(v) => onChange('tire_front_right_dot', v)}
+                isLinked={allTiresSame}
+                disabled={allTiresSame}
+              />
+              <TireField
+                position="Linker achterband"
+                brand={formData.tire_rear_left_brand}
+                model={formData.tire_rear_left_model}
+                profiel={formData.tire_rear_left_profiel}
+                dot={formData.tire_rear_left_dot}
+                onBrandChange={(v) => onChange('tire_rear_left_brand', v)}
+                onModelChange={(v) => onChange('tire_rear_left_model', v)}
+                onProfielChange={(v) => onChange('tire_rear_left_profiel', v)}
+                onDotChange={(v) => onChange('tire_rear_left_dot', v)}
+                isLinked={allTiresSame}
+                disabled={allTiresSame}
+              />
+              <TireField
+                position="Rechter achterband"
+                brand={formData.tire_rear_right_brand}
+                model={formData.tire_rear_right_model}
+                profiel={formData.tire_rear_right_profiel}
+                dot={formData.tire_rear_right_dot}
+                onBrandChange={(v) => onChange('tire_rear_right_brand', v)}
+                onModelChange={(v) => onChange('tire_rear_right_model', v)}
+                onProfielChange={(v) => onChange('tire_rear_right_profiel', v)}
+                onDotChange={(v) => onChange('tire_rear_right_dot', v)}
+                isLinked={allTiresSame}
+                disabled={allTiresSame}
+              />
+            </div>
+            <p className="text-xs text-muted-foreground">
+              DOT-code bestaat uit 4 cijfers. Voorbeeld: 2523 betekent week 25, jaar 2023.
+            </p>
+            <div className="space-y-2">
+              <Label htmlFor="rim_type">Type velg</Label>
+              <Select value={formData.rim_type} onValueChange={(v) => onChange('rim_type', v)}>
+                <SelectTrigger className="w-[200px]">
+                  <SelectValue placeholder="Selecteer type velg..." />
+                </SelectTrigger>
+                <SelectContent>
+                  {rimTypeOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="tire_advice">Advies banden</Label>
+              <Textarea
+                id="tire_advice"
+                value={formData.tire_advice}
+                onChange={(e) => onChange('tire_advice', e.target.value)}
+                placeholder="Eventueel advies met betrekking tot de banden..."
+                rows={2}
+              />
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Technische staat voertuig */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Technische staat voertuig</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <ConditionField
-            id="condition_engine"
-            label="Motor en aandrijving"
-            conditionValue={formData.condition_engine}
-            notesValue={formData.condition_engine_notes}
-            onConditionChange={(v) => onChange('condition_engine', v)}
-            onNotesChange={(v) => onChange('condition_engine_notes', v)}
-          />
-          <ConditionField
-            id="condition_transmission"
-            label="Transmissie"
-            conditionValue={formData.condition_transmission}
-            notesValue={formData.condition_transmission_notes}
-            onConditionChange={(v) => onChange('condition_transmission', v)}
-            onNotesChange={(v) => onChange('condition_transmission_notes', v)}
-          />
-          <ConditionField
-            id="condition_brakes"
-            label="Remmen"
-            conditionValue={formData.condition_brakes}
-            notesValue={formData.condition_brakes_notes}
-            onConditionChange={(v) => onChange('condition_brakes', v)}
-            onNotesChange={(v) => onChange('condition_brakes_notes', v)}
-          />
-          <ConditionField
-            id="condition_suspension"
-            label="Ophanging"
-            conditionValue={formData.condition_suspension}
-            notesValue={formData.condition_suspension_notes}
-            onConditionChange={(v) => onChange('condition_suspension', v)}
-            onNotesChange={(v) => onChange('condition_suspension_notes', v)}
-          />
-          <ConditionField
-            id="condition_steering"
-            label="Besturing"
-            conditionValue={formData.condition_steering}
-            notesValue={formData.condition_steering_notes}
-            onConditionChange={(v) => onChange('condition_steering', v)}
-            onNotesChange={(v) => onChange('condition_steering_notes', v)}
-          />
-          <ConditionField
-            id="condition_electrical"
-            label="Elektrische installatie"
-            conditionValue={formData.condition_electrical}
-            notesValue={formData.condition_electrical_notes}
-            onConditionChange={(v) => onChange('condition_electrical', v)}
-            onNotesChange={(v) => onChange('condition_electrical_notes', v)}
-          />
-        </CardContent>
-      </Card>
+      {show('technical') && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Technische staat voertuig</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <ConditionField
+              id="condition_engine"
+              label="Motor en aandrijving"
+              conditionValue={formData.condition_engine}
+              notesValue={formData.condition_engine_notes}
+              onConditionChange={(v) => onChange('condition_engine', v)}
+              onNotesChange={(v) => onChange('condition_engine_notes', v)}
+            />
+            <ConditionField
+              id="condition_transmission"
+              label="Transmissie"
+              conditionValue={formData.condition_transmission}
+              notesValue={formData.condition_transmission_notes}
+              onConditionChange={(v) => onChange('condition_transmission', v)}
+              onNotesChange={(v) => onChange('condition_transmission_notes', v)}
+            />
+            <ConditionField
+              id="condition_brakes"
+              label="Remmen"
+              conditionValue={formData.condition_brakes}
+              notesValue={formData.condition_brakes_notes}
+              onConditionChange={(v) => onChange('condition_brakes', v)}
+              onNotesChange={(v) => onChange('condition_brakes_notes', v)}
+            />
+            <ConditionField
+              id="condition_suspension"
+              label="Ophanging"
+              conditionValue={formData.condition_suspension}
+              notesValue={formData.condition_suspension_notes}
+              onConditionChange={(v) => onChange('condition_suspension', v)}
+              onNotesChange={(v) => onChange('condition_suspension_notes', v)}
+            />
+            <ConditionField
+              id="condition_steering"
+              label="Besturing"
+              conditionValue={formData.condition_steering}
+              notesValue={formData.condition_steering_notes}
+              onConditionChange={(v) => onChange('condition_steering', v)}
+              onNotesChange={(v) => onChange('condition_steering_notes', v)}
+            />
+            <ConditionField
+              id="condition_electrical"
+              label="Elektrische installatie"
+              conditionValue={formData.condition_electrical}
+              notesValue={formData.condition_electrical_notes}
+              onConditionChange={(v) => onChange('condition_electrical', v)}
+              onNotesChange={(v) => onChange('condition_electrical_notes', v)}
+            />
+          </CardContent>
+        </Card>
+      )}
 
       {/* Exterieur */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Exterieur</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <ConditionField
-            id="exterior_body"
-            label="Carrosserie"
-            conditionValue={formData.exterior_body}
-            notesValue={formData.exterior_body_notes}
-            onConditionChange={(v) => onChange('exterior_body', v)}
-            onNotesChange={(v) => onChange('exterior_body_notes', v)}
-          />
-          <ConditionField
-            id="exterior_paint"
-            label="Lakwerk"
-            conditionValue={formData.exterior_paint}
-            notesValue={formData.exterior_paint_notes}
-            onConditionChange={(v) => onChange('exterior_paint', v)}
-            onNotesChange={(v) => onChange('exterior_paint_notes', v)}
-          />
-          <ConditionField
-            id="exterior_rubbers"
-            label="Rubbers"
-            conditionValue={formData.exterior_rubbers}
-            notesValue={formData.exterior_rubbers_notes}
-            onConditionChange={(v) => onChange('exterior_rubbers', v)}
-            onNotesChange={(v) => onChange('exterior_rubbers_notes', v)}
-          />
-          <ConditionField
-            id="exterior_windows"
-            label="Ruiten"
-            conditionValue={formData.exterior_windows}
-            notesValue={formData.exterior_windows_notes}
-            onConditionChange={(v) => onChange('exterior_windows', v)}
-            onNotesChange={(v) => onChange('exterior_windows_notes', v)}
-          />
-          <ConditionField
-            id="exterior_sealant"
-            label="Kitnaden"
-            conditionValue={formData.exterior_sealant}
-            notesValue={formData.exterior_sealant_notes}
-            onConditionChange={(v) => onChange('exterior_sealant', v)}
-            onNotesChange={(v) => onChange('exterior_sealant_notes', v)}
-          />
-        </CardContent>
-      </Card>
+      {show('exterior') && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Exterieur</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <ConditionField
+              id="exterior_body"
+              label="Carrosserie"
+              conditionValue={formData.exterior_body}
+              notesValue={formData.exterior_body_notes}
+              onConditionChange={(v) => onChange('exterior_body', v)}
+              onNotesChange={(v) => onChange('exterior_body_notes', v)}
+            />
+            <ConditionField
+              id="exterior_paint"
+              label="Lakwerk"
+              conditionValue={formData.exterior_paint}
+              notesValue={formData.exterior_paint_notes}
+              onConditionChange={(v) => onChange('exterior_paint', v)}
+              onNotesChange={(v) => onChange('exterior_paint_notes', v)}
+            />
+            <ConditionField
+              id="exterior_rubbers"
+              label="Rubbers"
+              conditionValue={formData.exterior_rubbers}
+              notesValue={formData.exterior_rubbers_notes}
+              onConditionChange={(v) => onChange('exterior_rubbers', v)}
+              onNotesChange={(v) => onChange('exterior_rubbers_notes', v)}
+            />
+            <ConditionField
+              id="exterior_windows"
+              label="Ruiten"
+              conditionValue={formData.exterior_windows}
+              notesValue={formData.exterior_windows_notes}
+              onConditionChange={(v) => onChange('exterior_windows', v)}
+              onNotesChange={(v) => onChange('exterior_windows_notes', v)}
+            />
+            <ConditionField
+              id="exterior_sealant"
+              label="Kitnaden"
+              conditionValue={formData.exterior_sealant}
+              notesValue={formData.exterior_sealant_notes}
+              onConditionChange={(v) => onChange('exterior_sealant', v)}
+              onNotesChange={(v) => onChange('exterior_sealant_notes', v)}
+            />
+          </CardContent>
+        </Card>
+      )}
 
       {/* Interieur */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-lg">Interieur</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <ConditionField
-            id="interior_upholstery"
-            label="Bekleding"
-            conditionValue={formData.interior_upholstery}
-            notesValue={formData.interior_upholstery_notes}
-            onConditionChange={(v) => onChange('interior_upholstery', v)}
-            onNotesChange={(v) => onChange('interior_upholstery_notes', v)}
-          />
-          <ConditionField
-            id="interior_dashboard"
-            label="Dashboard"
-            conditionValue={formData.interior_dashboard}
-            notesValue={formData.interior_dashboard_notes}
-            onConditionChange={(v) => onChange('interior_dashboard', v)}
-            onNotesChange={(v) => onChange('interior_dashboard_notes', v)}
-          />
-          <ConditionField
-            id="interior_floor"
-            label="Vloer"
-            conditionValue={formData.interior_floor}
-            notesValue={formData.interior_floor_notes}
-            onConditionChange={(v) => onChange('interior_floor', v)}
-            onNotesChange={(v) => onChange('interior_floor_notes', v)}
-          />
-          <ConditionField
-            id="interior_roof"
-            label="Dak"
-            conditionValue={formData.interior_roof}
-            notesValue={formData.interior_roof_notes}
-            onConditionChange={(v) => onChange('interior_roof', v)}
-            onNotesChange={(v) => onChange('interior_roof_notes', v)}
-          />
-          {/* Camper-specific interior fields */}
-          {isCamperReport && (
-            <>
-              <ConditionField
-                id="interior_kitchen"
-                label="Keuken"
-                conditionValue={formData.interior_kitchen}
-                notesValue={formData.interior_kitchen_notes}
-                onConditionChange={(v) => onChange('interior_kitchen', v)}
-                onNotesChange={(v) => onChange('interior_kitchen_notes', v)}
-              />
-              <ConditionField
-                id="interior_sanitary"
-                label="Sanitair"
-                conditionValue={formData.interior_sanitary}
-                notesValue={formData.interior_sanitary_notes}
-                onConditionChange={(v) => onChange('interior_sanitary', v)}
-                onNotesChange={(v) => onChange('interior_sanitary_notes', v)}
-              />
-            </>
-          )}
-        </CardContent>
-      </Card>
+      {show('interior') && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Interieur</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <ConditionField
+              id="interior_upholstery"
+              label="Bekleding"
+              conditionValue={formData.interior_upholstery}
+              notesValue={formData.interior_upholstery_notes}
+              onConditionChange={(v) => onChange('interior_upholstery', v)}
+              onNotesChange={(v) => onChange('interior_upholstery_notes', v)}
+            />
+            <ConditionField
+              id="interior_dashboard"
+              label="Dashboard"
+              conditionValue={formData.interior_dashboard}
+              notesValue={formData.interior_dashboard_notes}
+              onConditionChange={(v) => onChange('interior_dashboard', v)}
+              onNotesChange={(v) => onChange('interior_dashboard_notes', v)}
+            />
+            <ConditionField
+              id="interior_floor"
+              label="Vloer"
+              conditionValue={formData.interior_floor}
+              notesValue={formData.interior_floor_notes}
+              onConditionChange={(v) => onChange('interior_floor', v)}
+              onNotesChange={(v) => onChange('interior_floor_notes', v)}
+            />
+            <ConditionField
+              id="interior_roof"
+              label="Dak"
+              conditionValue={formData.interior_roof}
+              notesValue={formData.interior_roof_notes}
+              onConditionChange={(v) => onChange('interior_roof', v)}
+              onNotesChange={(v) => onChange('interior_roof_notes', v)}
+            />
+            {/* Camper-specific interior fields */}
+            {isCamperReport && (
+              <>
+                <ConditionField
+                  id="interior_kitchen"
+                  label="Keuken"
+                  conditionValue={formData.interior_kitchen}
+                  notesValue={formData.interior_kitchen_notes}
+                  onConditionChange={(v) => onChange('interior_kitchen', v)}
+                  onNotesChange={(v) => onChange('interior_kitchen_notes', v)}
+                />
+                <ConditionField
+                  id="interior_sanitary"
+                  label="Sanitair"
+                  conditionValue={formData.interior_sanitary}
+                  notesValue={formData.interior_sanitary_notes}
+                  onConditionChange={(v) => onChange('interior_sanitary', v)}
+                  onNotesChange={(v) => onChange('interior_sanitary_notes', v)}
+                />
+              </>
+            )}
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 };
