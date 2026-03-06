@@ -2,24 +2,38 @@
 // This is the central source of truth for photo tags
 
 export type PhotoType =
-  // Common types (shared across report types)
+  // Extractable tags (AI can extract data from these)
   | 'kenteken'
-  | 'vin'  // Combined VIN tag (replaces vin_typeplaat and vin_ruit)
-  | 'vin_typeplaat'  // Legacy - still supported but mapped to 'vin'
-  | 'vin_ruit'       // Legacy - still supported but mapped to 'vin'
-  | 'dashboard'      // internal key - displayed as "Km-stand" in UI
+  | 'vin'
+  | 'vin_typeplaat'    // Legacy - still supported
+  | 'vin_ruit'         // Legacy - still supported
+  | 'tellerstand'
+  | 'dashboard_old'    // Legacy alias for tellerstand
+  | 'transmissie'
+  | 'bandenmerk'
+  | 'bandenmaat'
+  | 'dot_code'
+  | 'dot_voor'         // Legacy
+  | 'dot_achter'       // Legacy
+  // Visual-only tags (categorization, no extraction)
+  | 'velgtype'
+  | 'voorblad'
+  | 'exterieur_voor'
+  | 'exterieur_achter'
+  | 'exterieur_links'
+  | 'exterieur_rechts'
+  | 'interieur'
+  | 'dashboard_visueel'
+  | 'motor'
+  | 'schade'
+  | 'overig'
+  // Legacy tags (kept for backward compatibility)
   | 'band_voor_links'
   | 'band_voor_rechts'
   | 'band_achter_links'
   | 'band_achter_rechts'
   | 'typeplaat_massa'
-  // DOT code tags - for extracting tire DOT codes
-  | 'dot_voor'       // DOT code front tires
-  | 'dot_achter'     // DOT code rear tires
-  // Camper-specific
-  | 'gasinstallatie'
-  // Klassieker-specific - transmissie
-  | 'transmissie';  // Single tag for transmission (replaces pedalen/pook)
+  | 'gasinstallatie';
 
 export type ReportType = 'camper' | 'wev' | 'klassieker';
 
@@ -29,87 +43,109 @@ export type ExtractSection = 'voertuigidentificatie' | 'tellerstand' | 'banden' 
 export const PHOTO_TYPE_TO_SECTION: Record<PhotoType, ExtractSection | null> = {
   kenteken: 'voertuigidentificatie',
   vin: 'voertuigidentificatie',
-  vin_typeplaat: 'voertuigidentificatie',  // Legacy
-  vin_ruit: 'voertuigidentificatie',       // Legacy
-  dashboard: 'tellerstand',
+  vin_typeplaat: 'voertuigidentificatie',
+  vin_ruit: 'voertuigidentificatie',
+  tellerstand: 'tellerstand',
+  dashboard_old: 'tellerstand',
+  transmissie: 'transmissie',
+  bandenmerk: 'banden',
+  bandenmaat: 'banden',
+  dot_code: 'banden',
+  dot_voor: 'banden',
+  dot_achter: 'banden',
+  // Visual-only tags → no extraction
+  velgtype: null,
+  voorblad: null,
+  exterieur_voor: null,
+  exterieur_achter: null,
+  exterieur_links: null,
+  exterieur_rechts: null,
+  interieur: null,
+  dashboard_visueel: null,
+  motor: null,
+  schade: null,
+  overig: null,
+  // Legacy tags
   band_voor_links: 'banden',
   band_voor_rechts: 'banden',
   band_achter_links: 'banden',
   band_achter_rechts: 'banden',
   typeplaat_massa: 'massa',
-  dot_voor: 'banden',
-  dot_achter: 'banden',
   gasinstallatie: 'gasinstallatie',
-  transmissie: 'transmissie',
 };
 
-// Labels shown in UI - can differ per report type
+// Labels shown in UI
 export const PHOTO_TYPE_LABELS: Record<PhotoType, string> = {
   kenteken: 'Kenteken',
   vin: 'VIN / Chassisnummer',
-  vin_typeplaat: 'VIN Typeplaat',   // Legacy
-  vin_ruit: 'VIN Ruit',              // Legacy
-  dashboard: 'Km-stand',
+  vin_typeplaat: 'VIN Typeplaat',
+  vin_ruit: 'VIN Ruit',
+  tellerstand: 'Tellerstand',
+  dashboard_old: 'Km-stand',
+  transmissie: 'Transmissie',
+  bandenmerk: 'Bandenmerk',
+  bandenmaat: 'Bandenmaat',
+  dot_code: 'DOT-code',
+  dot_voor: 'DOT-code voor',
+  dot_achter: 'DOT-code achter',
+  velgtype: 'Velgtype',
+  voorblad: 'Voorblad',
+  exterieur_voor: 'Exterieur voor',
+  exterieur_achter: 'Exterieur achter',
+  exterieur_links: 'Exterieur links',
+  exterieur_rechts: 'Exterieur rechts',
+  interieur: 'Interieur',
+  dashboard_visueel: 'Dashboard',
+  motor: 'Motor',
+  schade: 'Schade',
+  overig: 'Overig',
+  // Legacy
   band_voor_links: 'Band LV',
   band_voor_rechts: 'Band RV',
   band_achter_links: 'Band LA',
   band_achter_rechts: 'Band RA',
   typeplaat_massa: 'Typeplaat Massa',
-  dot_voor: 'DOT-code voor',
-  dot_achter: 'DOT-code achter',
   gasinstallatie: 'Gasinstallatie',
-  transmissie: 'Transmissie',
 };
+
+// The unified tag list used by ALL report types
+const COMMON_PHOTO_TYPES: PhotoType[] = [
+  'kenteken',
+  'vin',
+  'tellerstand',
+  'transmissie',
+  'bandenmerk',
+  'bandenmaat',
+  'dot_code',
+  'velgtype',
+  'voorblad',
+  'exterieur_voor',
+  'exterieur_achter',
+  'exterieur_links',
+  'exterieur_rechts',
+  'interieur',
+  'dashboard_visueel',
+  'motor',
+  'schade',
+  'overig',
+];
 
 // Which photo types are available per report type
 export const PHOTO_TYPES_BY_REPORT: Record<ReportType, PhotoType[]> = {
-  klassieker: [
-    'kenteken',
-    'vin',              // Simplified single VIN tag
-    'dashboard',        // shows as "Km-stand"
-    'band_voor_links',
-    'band_voor_rechts',
-    'band_achter_links',
-    'band_achter_rechts',
-    'dot_voor',         // DOT-code front tires
-    'dot_achter',       // DOT-code rear tires
-    'transmissie',      // Single transmissie tag
-  ],
-  camper: [
-    'kenteken',
-    'dashboard',
-    'vin_typeplaat',
-    'vin_ruit',
-    'band_voor_links',
-    'band_voor_rechts',
-    'band_achter_links',
-    'band_achter_rechts',
-    'typeplaat_massa',
-    'gasinstallatie',
-  ],
-  wev: [
-    'kenteken',
-    'dashboard',
-    'vin_typeplaat',
-    'vin_ruit',
-    'band_voor_links',
-    'band_voor_rechts',
-    'band_achter_links',
-    'band_achter_rechts',
-    'typeplaat_massa',
-  ],
+  klassieker: COMMON_PHOTO_TYPES,
+  camper: COMMON_PHOTO_TYPES,
+  wev: COMMON_PHOTO_TYPES,
 };
 
-// Get label for a photo type - optionally with report type context
+// Get label for a photo type
 export function getPhotoTypeLabel(type: PhotoType, _reportType?: ReportType): string {
-  return PHOTO_TYPE_LABELS[type];
+  return PHOTO_TYPE_LABELS[type] || type;
 }
 
 // Get available photo types for a report type
 export function getPhotoTypesForReport(reportType: ReportType | null): PhotoType[] {
   if (!reportType) {
-    // Default to camper if no report type selected
-    return PHOTO_TYPES_BY_REPORT.camper;
+    return COMMON_PHOTO_TYPES;
   }
   return PHOTO_TYPES_BY_REPORT[reportType];
 }
@@ -160,11 +196,9 @@ export const EXTRACTION_FIELD_MAPPINGS: Record<string, FieldMapping> = {
   tire_rear_right_dot: { fieldKey: 'tire_rear_right_dot', formSection: 'appraisal', displayLabel: 'DOT RA' },
   tire_rear_right_profiel: { fieldKey: 'tire_rear_right_profiel', formSection: 'appraisal', displayLabel: 'Profiel RA' },
   
-  // DOT code extractions from dot_voor and dot_achter tags
-  // dot_voor fills both front tire DOT codes
+  // DOT code extractions
   dot_front_left: { fieldKey: 'tire_front_left_dot', formSection: 'appraisal', displayLabel: 'DOT LV' },
   dot_front_right: { fieldKey: 'tire_front_right_dot', formSection: 'appraisal', displayLabel: 'DOT RV' },
-  // dot_achter fills both rear tire DOT codes
   dot_rear_left: { fieldKey: 'tire_rear_left_dot', formSection: 'appraisal', displayLabel: 'DOT LA' },
   dot_rear_right: { fieldKey: 'tire_rear_right_dot', formSection: 'appraisal', displayLabel: 'DOT RA' },
   
