@@ -125,8 +125,8 @@ const PDFCover = () => {
         height: '297mm',
         position: 'relative',
         overflow: 'hidden',
-        /* Margins: top=12mm, right=20mm, bottom=8mm, left=25mm */
-        padding: '12mm 20mm 8mm 25mm',
+        /* Margins: top=12mm, right=20mm, bottom=24mm (room for footer), left=25mm */
+        padding: '12mm 20mm 24mm 25mm',
         boxSizing: 'border-box',
         display: 'flex',
         flexDirection: 'column',

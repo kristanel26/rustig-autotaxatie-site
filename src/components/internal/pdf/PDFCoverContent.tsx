@@ -88,7 +88,7 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         top: MT,
         left: ML,
         right: MR,
-        bottom: mm(8),
+        bottom: mm(24),
         display: 'flex',
         flexDirection: 'column',
       }}>
