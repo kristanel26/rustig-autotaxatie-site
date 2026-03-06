@@ -353,6 +353,7 @@ const EditReport = () => {
           condition_electrical: (reportData as any).condition_electrical || '',
           condition_electrical_notes: (reportData as any).condition_electrical_notes || '',
           tire_bandenmaat: (reportData as any).tire_bandenmaat || '',
+          tire_bandenmaat_achter: (reportData as any).tire_bandenmaat_achter || '',
           tire_front_left_brand: (reportData as any).tire_front_left_brand || '',
           tire_front_left_model: (reportData as any).tire_front_left_model || '',
           tire_front_left_profiel: (reportData as any).tire_front_left_profiel || '',
