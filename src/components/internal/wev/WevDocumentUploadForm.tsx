@@ -104,9 +104,11 @@ export const WevDocumentUploadForm = ({
     setIsUploading(true);
 
     try {
-      // Generate unique file path
+      // Generate unique file path (must start with user_id per storage RLS policy)
       const fileExt = file.name.split('.').pop();
-      const fileName = `${reportId}/wev-docs/${Date.now()}-${selectedDocType}.${fileExt}`;
+      const userId = user?.id;
+      if (!userId) throw new Error('Niet ingelogd');
+      const fileName = `${userId}/${reportId}/wev-docs/${Date.now()}-${selectedDocType}.${fileExt}`;
 
       // Upload to storage
       const { error: uploadError } = await supabase.storage
@@ -241,29 +243,31 @@ export const WevDocumentUploadForm = ({
           </div>
           <div>
             <Label htmlFor="file_upload" className="sr-only">Bestand uploaden</Label>
+            <input
+              ref={fileInputRef}
+              id="file_upload"
+              type="file"
+              accept=".pdf,.jpg,.jpeg,.png,.webp"
+              onChange={handleFileUpload}
+              className="hidden"
+              disabled={isUploading || !reportId}
+            />
             <Button
               type="button"
               variant="outline"
               disabled={isUploading || !reportId}
-              className="relative"
-              asChild
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                fileInputRef.current?.click();
+              }}
             >
-              <label className="cursor-pointer">
-                {isUploading ? (
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                ) : (
-                  <Upload className="h-4 w-4 mr-2" />
-                )}
-                {isUploading ? 'Uploaden...' : 'Document uploaden'}
-                <input
-                  id="file_upload"
-                  type="file"
-                  accept=".pdf,.jpg,.jpeg,.png,.webp"
-                  onChange={handleFileUpload}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  disabled={isUploading || !reportId}
-                />
-              </label>
+              {isUploading ? (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              ) : (
+                <Upload className="h-4 w-4 mr-2" />
+              )}
+              {isUploading ? 'Uploaden...' : 'Document uploaden'}
             </Button>
           </div>
         </div>
