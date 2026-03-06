@@ -210,9 +210,11 @@ export const AppraisalFindingsForm = ({
   photos = [],
   photoTypes = {},
   reportId = '',
+  showSections,
 }: AppraisalFindingsFormProps) => {
   // Determine if camper-specific sections should be shown
   const isCamperReport = reportType === 'camper' || reportType === null;
+  const show = (section: AppraisalSection) => !showSections || showSections.includes(section);
   // Handler for AI tire extraction results - now handles all tire fields
   const handleTireAIAccept = (fieldKey: string, value: string) => {
     // Map generic field keys to form fields
