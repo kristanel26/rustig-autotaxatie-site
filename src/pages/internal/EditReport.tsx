@@ -146,6 +146,7 @@ const EditReport = () => {
 
   // Customer data
   const [customerData, setCustomerData] = useState({
+    opdrachtgever: '',
     customer_title: '',
     customer_initials: '',
     customer_last_name: '',

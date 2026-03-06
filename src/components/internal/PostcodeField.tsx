@@ -58,7 +58,9 @@ export const PostcodeField = ({
   }, [onPostcodeChange, onCityChange, onStreetChange, street, lookupPostcode, debounceTimer]);
 
   // Manual lookup trigger
-  const handleManualLookup = async () => {
+  const handleManualLookup = async (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    e?.stopPropagation();
     const result = await lookupPostcode(postcode);
     if (result?.found && result.city) {
       onCityChange(result.city);
@@ -124,7 +126,7 @@ export const PostcodeField = ({
             type="button"
             variant="outline"
             size="icon"
-            onClick={handleManualLookup}
+            onClick={(e) => handleManualLookup(e)}
             disabled={isLoading || !postcode}
             title="Zoek postcode"
           >
