@@ -51,7 +51,7 @@ export const klassiekerChecklist: ChecklistItem[] = [
   },
   {
     id: 'voertuig',
-    label: 'Voertuiggegevens',
+    label: 'Voertuigidentificatie',
     sectionId: 'section-voertuig',
     requirements: [
       { 
@@ -131,7 +131,7 @@ export const camperChecklist: ChecklistItem[] = [
   },
   {
     id: 'voertuig',
-    label: 'Voertuiggegevens',
+    label: 'Voertuigidentificatie',
     sectionId: 'section-voertuig',
     requirements: [
       { 
@@ -210,7 +210,7 @@ export const wevChecklist: ChecklistItem[] = [
   },
   {
     id: 'voertuig',
-    label: 'Voertuiggegevens',
+    label: 'Voertuigidentificatie',
     sectionId: 'section-voertuig',
     requirements: [
       { 
