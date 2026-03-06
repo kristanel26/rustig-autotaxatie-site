@@ -1376,7 +1376,84 @@ const EditReport = () => {
           <WevDocumentUploadForm reportId={id || ''} />
         )}
 
-        {/* WEV + Camper: Appraisal Findings - Taxateursecties */}
+        {/* ============================================ */}
+        {/* CAMPER WORKFLOW — nieuwe volgorde:             */}
+        {/* 2. Inspectiegegevens                           */}
+        {/* 5. Fotocollectie (vóór voertuigidentificatie)  */}
+        {/* 9-14. Appraisal (Model, Banden, Tech, Ext, Int) */}
+        {/* 15. Installaties                               */}
+        {/* 16-17. Campertech + Beveiliging                */}
+        {/* 18-19. Vocht + Brand/gas                       */}
+        {/* 20. Algemene indruk                             */}
+        {/* 21. Waarde                                     */}
+        {/* 22. Opmerkingen                                */}
+        {/* ============================================ */}
+
+        {/* Camper: §2 Inspectiegegevens — moved before VehicleInfoForm */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <Card id="section-inspectie">
+            <CardHeader>
+              <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
+            </CardHeader>
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="inspection_location">Inspectielocatie</Label>
+                <Input
+                  id="inspection_location"
+                  value={inspectionData.inspection_location}
+                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="inspection_date">Inspectiedatum</Label>
+                <Input
+                  id="inspection_date"
+                  type="date"
+                  value={inspectionData.inspection_date}
+                  onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="inspection_start_time">Starttijd</Label>
+                  <Input
+                    id="inspection_start_time"
+                    type="time"
+                    value={inspectionData.inspection_start_time}
+                    onChange={(e) => handleInspectionChange('inspection_start_time', e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="inspection_end_time">Eindtijd</Label>
+                  <Input
+                    id="inspection_end_time"
+                    type="time"
+                    value={inspectionData.inspection_end_time}
+                    onChange={(e) => handleInspectionChange('inspection_end_time', e.target.value)}
+                  />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Camper: §5 Fotocollectie — before Voertuigidentificatie */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <div id="section-fotos">
+            <PhotoUploadForm
+              photos={vehiclePhotos}
+              rotations={photoRotations}
+              photoTypes={photoTypes}
+              onChange={handlePhotosChange}
+              onRotationsChange={handleRotationsChange}
+              onPhotoTypesChange={handlePhotoTypesChange}
+              reportId={id}
+              reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
+            />
+          </div>
+        )}
+
+        {/* WEV + Camper: Appraisal Findings — §9-14 */}
         {(report.report_type === 'wev' || report.report_type === 'camper' || !report.report_type) && report.report_type !== 'klassieker' && (
           <AppraisalFindingsForm
             formData={appraisalData}
