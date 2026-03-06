@@ -94,7 +94,7 @@ const NewReport = () => {
   };
 
   return (
-    <InternalLayout title="Nieuwe Taxatie">
+    <InternalLayout>
       {isCreating ? (
         <div className="flex flex-col items-center justify-center py-12 gap-4">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
