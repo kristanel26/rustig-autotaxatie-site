@@ -234,7 +234,12 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         <Text style={{ fontSize: 7.5, color: COLORS.labels, textTransform: 'uppercase', letterSpacing: 0.5 }}>
           IN OPDRACHT VAN
         </Text>
-        <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: mm(1.5) }}>
+        {companyName && (
+          <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: COLORS.values, marginTop: mm(1.5) }}>
+            {companyName}
+          </Text>
+        )}
+        <Text style={{ fontSize: 10, fontFamily: companyName ? 'Helvetica' : 'Helvetica-Bold', color: COLORS.values, marginTop: mm(companyName ? 0.5 : 1.5) }}>
           {customerName || 'nog niet ingevuld'}
         </Text>
         {customerAddress && (
