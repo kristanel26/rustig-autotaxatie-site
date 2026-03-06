@@ -1188,51 +1188,8 @@ const EditReport = () => {
         </Card>
 
         {/* ============================================ */}
-        {/* KLASSIEKER WORKFLOW - Specifieke volgorde:   */}
-        {/* 1. Rapportgegevens (al boven)                 */}
-        {/* 2. Klantgegevens (al boven)                   */}
-        {/* 3. Fotocollectie (direct na klant!)           */}
-        {/* 4. Voertuigidentificatie                      */}
-        {/* 5. Inspectiegegevens                          */}
-        {/* 6. Kilometerstand (in VehicleInfoForm)        */}
-        {/* 7. Banden en wielen (in AppraisalFindingsForm)*/}
-        {/* 8. Algemene indruk                            */}
-        {/* 9. Kwaliteitsklasse                           */}
-        {/* 10. Waardevaststelling                        */}
-        {/* 11. Ondertekening                             */}
+        {/* KLS §2: Inspectiegegevens — before Foto      */}
         {/* ============================================ */}
-
-        {/* KLASSIEKER: Fotocollectie DIRECT NA Klantgegevens (vóór voertuig!) */}
-        {report.report_type === 'klassieker' && (
-          <div id="section-fotos">
-            <PhotoUploadForm
-              photos={vehiclePhotos}
-              rotations={photoRotations}
-              photoTypes={photoTypes}
-              onChange={handlePhotosChange}
-              onRotationsChange={handleRotationsChange}
-              onPhotoTypesChange={handlePhotoTypesChange}
-              reportId={id}
-              reportType="klassieker"
-            />
-          </div>
-        )}
-
-        {/* Vehicle Information - 7 Secties */}
-        <div id="section-voertuig">
-          <VehicleInfoForm
-            formData={vehicleData}
-            onChange={handleVehicleChange}
-            errors={errors}
-            isEditMode={true}
-            reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
-            photos={vehiclePhotos}
-            photoTypes={photoTypes}
-            reportId={id}
-          />
-        </div>
-
-        {/* KLASSIEKER: Inspectiegegevens */}
         {report.report_type === 'klassieker' && (
           <Card id="section-inspectie">
             <CardHeader>
@@ -1279,117 +1236,25 @@ const EditReport = () => {
           </Card>
         )}
 
-        {/* KLASSIEKER: Banden en wielen (alleen dit onderdeel van AppraisalFindingsForm) */}
+        {/* KLS §4: Fotocollectie — after Inspectie */}
         {report.report_type === 'klassieker' && (
-          <AppraisalFindingsForm
-            formData={appraisalData}
-            onChange={handleAppraisalChange}
-            onMultipleChange={handleAppraisalMultipleChange}
-            rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
-            allTiresSame={allTiresSame}
-            onAllTiresSameChange={setAllTiresSame}
-            reportType="klassieker"
-            photos={vehiclePhotos}
-            photoTypes={photoTypes}
-            reportId={id}
-          />
-        )}
-
-        {/* KLASSIEKER: Algemene indruk met standaardteksten */}
-        {report.report_type === 'klassieker' && (
-          <div id="section-indruk">
-            <KlassiekerGeneralImpressionForm
-              formData={klassiekerImpressionData}
-              onChange={handleKlassiekerImpressionChange}
+          <div id="section-fotos">
+            <PhotoUploadForm
+              photos={vehiclePhotos}
+              rotations={photoRotations}
+              photoTypes={photoTypes}
+              onChange={handlePhotosChange}
+              onRotationsChange={handleRotationsChange}
+              onPhotoTypesChange={handlePhotoTypesChange}
+              reportId={id}
+              reportType="klassieker"
             />
           </div>
         )}
 
-        {/* KLASSIEKER: Kwaliteitsklasse + Waardevaststelling */}
-        {report.report_type === 'klassieker' && (
-          <div id="section-waarde">
-            <KlassiekerValueForm
-              data={klassiekerValueData}
-              onChange={handleKlassiekerValueChange}
-            />
-          </div>
-        )}
-
-        {/* WEV: Inspectiegegevens direct na voertuig (kantoorvoorbereiding) */}
-        {report.report_type === 'wev' && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
-            </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2 md:col-span-2">
-                <Label htmlFor="inspection_location">Plaats opname *</Label>
-                <Input
-                  id="inspection_location"
-                  value={inspectionData.inspection_location}
-                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
-                  placeholder="bijv. Druten"
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="inspection_date">Datum opname *</Label>
-                <Input
-                  id="inspection_date"
-                  type="date"
-                  value={inspectionData.inspection_date}
-                  onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="wev_peildatum">Peildatum</Label>
-                <Input
-                  id="wev_peildatum"
-                  type="date"
-                  value={inspectionData.inspection_date}
-                  disabled
-                  className="bg-muted"
-                />
-                <p className="text-xs text-muted-foreground">
-                  Peildatum is gelijk aan datum opname
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* WEV: Fotocollectie vóór technische staat */}
-        {report.report_type === 'wev' && (
-          <PhotoUploadForm
-            photos={vehiclePhotos}
-            rotations={photoRotations}
-            photoTypes={photoTypes}
-            onChange={handlePhotosChange}
-            onRotationsChange={handleRotationsChange}
-            onPhotoTypesChange={handlePhotoTypesChange}
-            reportId={id}
-            reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
-          />
-        )}
-
-        {/* WEV: Taxatiebestanden vóór technische staat */}
-        {report.report_type === 'wev' && (
-          <WevDocumentUploadForm reportId={id || ''} />
-        )}
-
         {/* ============================================ */}
-        {/* CAMPER WORKFLOW — nieuwe volgorde:             */}
-        {/* 2. Inspectiegegevens                           */}
-        {/* 5. Fotocollectie (vóór voertuigidentificatie)  */}
-        {/* 9-14. Appraisal (Model, Banden, Tech, Ext, Int) */}
-        {/* 15. Installaties                               */}
-        {/* 16-17. Campertech + Beveiliging                */}
-        {/* 18-19. Vocht + Brand/gas                       */}
-        {/* 20. Algemene indruk                             */}
-        {/* 21. Waarde                                     */}
-        {/* 22. Opmerkingen                                */}
+        {/* CAM §2: Inspectiegegevens — before Vehicle   */}
         {/* ============================================ */}
-
-        {/* Camper: §2 Inspectiegegevens — moved before VehicleInfoForm */}
         {(report.report_type === 'camper' || !report.report_type) && (
           <Card id="section-inspectie">
             <CardHeader>
@@ -1437,7 +1302,23 @@ const EditReport = () => {
           </Card>
         )}
 
-        {/* Camper: §5 Fotocollectie — before Voertuigidentificatie */}
+        {/* Vehicle Information — ALL types */}
+        {/* CAM: Gebruik/Stalling → Rapporttitel → Voertuigid → Transmissie → Tellerstand → Opbouw */}
+        {/* KLS/WEV: Rapporttitel → Voertuigid → Transmissie → Tellerstand */}
+        <div id="section-voertuig">
+          <VehicleInfoForm
+            formData={vehicleData}
+            onChange={handleVehicleChange}
+            errors={errors}
+            isEditMode={true}
+            reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
+            photos={vehiclePhotos}
+            photoTypes={photoTypes}
+            reportId={id}
+          />
+        </div>
+
+        {/* CAM §5: Fotocollectie — after VehicleInfoForm */}
         {(report.report_type === 'camper' || !report.report_type) && (
           <div id="section-fotos">
             <PhotoUploadForm
@@ -1453,7 +1334,104 @@ const EditReport = () => {
           </div>
         )}
 
-        {/* WEV + Camper: Appraisal Findings — §9-14 */}
+        {/* KLS §9-12: Banden, Technische staat, Exterieur, Interieur */}
+        {report.report_type === 'klassieker' && (
+          <AppraisalFindingsForm
+            formData={appraisalData}
+            onChange={handleAppraisalChange}
+            onMultipleChange={handleAppraisalMultipleChange}
+            rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
+            allTiresSame={allTiresSame}
+            onAllTiresSameChange={setAllTiresSame}
+            reportType="klassieker"
+            photos={vehiclePhotos}
+            photoTypes={photoTypes}
+            reportId={id}
+          />
+        )}
+
+        {/* KLS §13: Algemene indruk */}
+        {report.report_type === 'klassieker' && (
+          <div id="section-indruk">
+            <KlassiekerGeneralImpressionForm
+              formData={klassiekerImpressionData}
+              onChange={handleKlassiekerImpressionChange}
+            />
+          </div>
+        )}
+
+        {/* KLS §14: Kwaliteitsklasse + Waardevaststelling */}
+        {report.report_type === 'klassieker' && (
+          <div id="section-waarde">
+            <KlassiekerValueForm
+              data={klassiekerValueData}
+              onChange={handleKlassiekerValueChange}
+            />
+          </div>
+        )}
+
+        {/* WEV: Inspectiegegevens */}
+        {report.report_type === 'wev' && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
+            </CardHeader>
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2 md:col-span-2">
+                <Label htmlFor="inspection_location">Plaats opname *</Label>
+                <Input
+                  id="inspection_location"
+                  value={inspectionData.inspection_location}
+                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
+                  placeholder="bijv. Druten"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="inspection_date">Datum opname *</Label>
+                <Input
+                  id="inspection_date"
+                  type="date"
+                  value={inspectionData.inspection_date}
+                  onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="wev_peildatum">Peildatum</Label>
+                <Input
+                  id="wev_peildatum"
+                  type="date"
+                  value={inspectionData.inspection_date}
+                  disabled
+                  className="bg-muted"
+                />
+                <p className="text-xs text-muted-foreground">
+                  Peildatum is gelijk aan datum opname
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* WEV: Fotocollectie */}
+        {report.report_type === 'wev' && (
+          <PhotoUploadForm
+            photos={vehiclePhotos}
+            rotations={photoRotations}
+            photoTypes={photoTypes}
+            onChange={handlePhotosChange}
+            onRotationsChange={handleRotationsChange}
+            onPhotoTypesChange={handlePhotoTypesChange}
+            reportId={id}
+            reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
+          />
+        )}
+
+        {/* WEV: Taxatiebestanden */}
+        {report.report_type === 'wev' && (
+          <WevDocumentUploadForm reportId={id || ''} />
+        )}
+
+        {/* CAM + WEV: Appraisal Findings — Model, Banden, Tech, Ext, Int */}
         {(report.report_type === 'wev' || report.report_type === 'camper' || !report.report_type) && report.report_type !== 'klassieker' && (
           <AppraisalFindingsForm
             formData={appraisalData}
