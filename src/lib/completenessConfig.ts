@@ -90,8 +90,8 @@ export const klassiekerChecklist: ChecklistItem[] = [
     ],
   },
   {
-    id: 'waardevaststelling',
-    label: 'Waardevaststelling',
+    id: 'waardeselectie',
+    label: 'Waardeselectie',
     sectionId: 'section-waarde',
     requirements: [
       { field: 'appraised_value', condition: 'filled', label: 'Vervangingswaarde' },
@@ -161,16 +161,8 @@ export const camperChecklist: ChecklistItem[] = [
     ],
   },
   {
-    id: 'kwaliteitsklasse',
-    label: 'Kwaliteitsklasse',
-    sectionId: 'section-kwaliteit',
-    requirements: [
-      { field: 'quality_class', condition: 'filled', label: 'Klasse geselecteerd' },
-    ],
-  },
-  {
-    id: 'waardevaststelling',
-    label: 'Waardebepaling',
+    id: 'waardeselectie',
+    label: 'Waardeselectie',
     sectionId: 'section-waarde',
     requirements: [
       { field: 'appraised_value', condition: 'filled', label: 'Getaxeerde waarde' },
