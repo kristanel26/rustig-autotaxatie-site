@@ -15,6 +15,7 @@ interface ReportCompletenessCheckProps {
   reportType: string | null;
   data: Record<string, unknown>;
   className?: string;
+  onMarkGereed?: () => void;
 }
 
 const statusConfig: Record<ChecklistStatus, {
@@ -99,7 +100,8 @@ function ChecklistItemRow({ item, status, missingFields, warnings }: ChecklistIt
 export function ReportCompletenessCheck({ 
   reportType, 
   data,
-  className 
+  className,
+  onMarkGereed,
 }: ReportCompletenessCheckProps) {
   // Get checklist for this report type
   const checklist = useMemo(() => getChecklistForType(reportType), [reportType]);
@@ -163,6 +165,17 @@ export function ReportCompletenessCheck({
             />
           ))}
         </div>
+        
+        {/* Suggestion to mark as Gereed */}
+        {completenessPercentage === 100 && data.status === 'in_behandeling' && onMarkGereed && (
+          <button
+            type="button"
+            onClick={onMarkGereed}
+            className="w-full mt-3 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-sm font-medium hover:bg-emerald-500/20 transition-colors text-left"
+          >
+            ✓ Rapport is volledig — markeer als Gereed?
+          </button>
+        )}
       </CardContent>
     </Card>
   );

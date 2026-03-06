@@ -15,6 +15,14 @@ import { Button } from '@/components/ui/button';
 import { Search, FilePlus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
+import { getStatusBadgeProps } from '@/components/internal/ReportStatusBar';
+import {
+  Select as SelectUI,
+  SelectContent as SelectContentUI,
+  SelectItem as SelectItemUI,
+  SelectTrigger as SelectTriggerUI,
+  SelectValue as SelectValueUI,
+} from '@/components/ui/select';
 
 interface Report {
   id: string;
@@ -24,6 +32,7 @@ interface Report {
   customer_initials: string | null;
   customer_last_name: string | null;
   inspection_date: string | null;
+  status: string | null;
   herinnering_status: string | null;
   herinnering_verzonden_op: string | null;
 }
@@ -60,6 +69,7 @@ const Reports = () => {
   const [reports, setReports] = useState<Report[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState<string>('all');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -67,7 +77,7 @@ const Reports = () => {
       try {
         const { data, error } = await supabase
           .from('reports')
-          .select('id, report_number, license_plate, customer_title, customer_initials, customer_last_name, inspection_date, herinnering_status, herinnering_verzonden_op')
+          .select('id, report_number, license_plate, customer_title, customer_initials, customer_last_name, inspection_date, status, herinnering_status, herinnering_verzonden_op')
           .order('report_number', { ascending: false });
 
         if (error) throw error;
@@ -83,6 +93,9 @@ const Reports = () => {
   }, []);
 
   const filteredReports = reports.filter((report) => {
+    // Status filter
+    if (statusFilter !== 'all' && (report.status || 'concept') !== statusFilter) return false;
+    
     const search = searchTerm.toLowerCase();
     const customerName = [report.customer_title, report.customer_initials, report.customer_last_name]
       .filter(Boolean)
@@ -109,14 +122,27 @@ const Reports = () => {
       <div className="space-y-4">
         {/* Actions Bar */}
         <div className="flex flex-col sm:flex-row gap-3 justify-between">
-          <div className="relative flex-1 max-w-md">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Zoek op rapportnummer, kenteken of klantnaam..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10"
-            />
+          <div className="flex flex-1 gap-3 items-center">
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Zoek op rapportnummer, kenteken of klantnaam..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+            <SelectUI value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTriggerUI className="w-[180px]">
+                <SelectValueUI placeholder="Alle statussen" />
+              </SelectTriggerUI>
+              <SelectContentUI>
+                <SelectItemUI value="all">Alle statussen</SelectItemUI>
+                <SelectItemUI value="concept">Concept</SelectItemUI>
+                <SelectItemUI value="in_behandeling">In behandeling</SelectItemUI>
+                <SelectItemUI value="gereed">Gereed</SelectItemUI>
+              </SelectContentUI>
+            </SelectUI>
           </div>
           <Button asChild>
             <Link to="/intern/nieuw-rapport">
@@ -134,14 +160,15 @@ const Reports = () => {
                 <TableHead className="w-[120px]">Rapportnr.</TableHead>
                 <TableHead>Kenteken</TableHead>
                 <TableHead>Klant</TableHead>
+                <TableHead className="w-[130px]">Status</TableHead>
                 <TableHead className="w-[140px]">Inspectiedatum</TableHead>
                 <TableHead className="w-[120px]">Herinnering</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {loading ? (
-                <TableRow>
-                  <TableCell colSpan={5} className="text-center py-8">
+              <TableRow>
+                  <TableCell colSpan={6} className="text-center py-8">
                     <div className="flex items-center justify-center">
                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
                     </div>
@@ -149,7 +176,7 @@ const Reports = () => {
                 </TableRow>
               ) : filteredReports.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center py-8 text-muted-foreground">
+                  <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
                     {searchTerm ? 'Geen rapporten gevonden' : 'Nog geen rapporten'}
                   </TableCell>
                 </TableRow>
@@ -168,6 +195,9 @@ const Reports = () => {
                       {[report.customer_title, report.customer_initials, report.customer_last_name]
                         .filter(Boolean)
                         .join(' ') || '-'}
+                    </TableCell>
+                    <TableCell>
+                      {(() => { const s = getStatusBadgeProps(report.status); return <Badge variant="outline" className={`text-xs ${s.className}`}>{s.label}</Badge>; })()}
                     </TableCell>
                     <TableCell>{formatDate(report.inspection_date)}</TableCell>
                     <TableCell>{getStatusBadge(report.herinnering_status, report.herinnering_verzonden_op)}</TableCell>
