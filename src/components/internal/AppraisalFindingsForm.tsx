@@ -60,6 +60,7 @@ export interface AppraisalFormData {
   condition_electrical_notes: string;
   // Tires
   tire_bandenmaat: string;
+  tire_bandenmaat_achter: string;
   tire_front_left_brand: string;
   tire_front_left_model: string;
   tire_front_left_profiel: string;
@@ -144,6 +145,7 @@ export const getInitialAppraisalFormData = (): AppraisalFormData => ({
   condition_electrical: '',
   condition_electrical_notes: '',
   tire_bandenmaat: '',
+  tire_bandenmaat_achter: '',
   tire_front_left_brand: '',
   tire_front_left_model: '',
   tire_front_left_profiel: '',
@@ -322,18 +324,28 @@ export const AppraisalFindingsForm = ({
             <CardTitle className="text-lg">Banden en wielen</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-end gap-4 flex-wrap">
               <div className="space-y-2">
-                <Label htmlFor="tire_bandenmaat">Bandenmaat</Label>
+                <Label htmlFor="tire_bandenmaat">Bandenmaat voor</Label>
                 <Input
                   id="tire_bandenmaat"
                   value={formData.tire_bandenmaat}
                   onChange={(e) => onChange('tire_bandenmaat', e.target.value)}
-                  placeholder="Bijv. 225/45R16"
+                  placeholder="Bijv. 225/45R17"
                   className="w-[200px]"
                 />
               </div>
-              <div className="flex items-center space-x-3 pt-6">
+              <div className="space-y-2">
+                <Label htmlFor="tire_bandenmaat_achter">Bandenmaat achter</Label>
+                <Input
+                  id="tire_bandenmaat_achter"
+                  value={formData.tire_bandenmaat_achter}
+                  onChange={(e) => onChange('tire_bandenmaat_achter', e.target.value)}
+                  placeholder="Bijv. 255/40R17"
+                  className="w-[200px]"
+                />
+              </div>
+              <div className="flex items-center space-x-3 pb-0.5">
                 <Switch
                   id="all_tires_same"
                   checked={allTiresSame}
@@ -345,11 +357,11 @@ export const AppraisalFindingsForm = ({
               </div>
               {/* AI Extraction Button for tires */}
               {photos.length > 0 && reportId && (
-                <div className="pt-6">
+                <div className="pb-0.5">
                   <AIExtractButton
                     section="banden"
                     label="Lees bandeninfo"
-                    photoTypes={['band_voor_links', 'band_voor_rechts', 'band_achter_links', 'band_achter_rechts']}
+                    photoTypes={['bandenmerk', 'bandenmaat', 'band_voor_links', 'band_voor_rechts', 'band_achter_links', 'band_achter_rechts']}
                     photos={photos}
                     photoTypeMap={photoTypes}
                     onAccept={handleTireAIAccept}
