@@ -205,7 +205,7 @@ export const ReportTypeSelector = ({ onSelect }: ReportTypeSelectorProps) => {
 
               {/* Icon — large silhouette */}
               <div className={cn(
-                "w-[100px] h-[68px] mb-5 text-[hsl(var(--gold-lt))]",
+                "w-full max-w-[180px] h-[120px] mb-5 text-[#c9a84c]",
                 "transition-all duration-200",
                 "group-hover:text-[hsl(var(--gold))]"
               )}>
