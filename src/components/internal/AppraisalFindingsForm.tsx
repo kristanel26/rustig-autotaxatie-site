@@ -112,6 +112,8 @@ export interface AppraisalFormData {
   interior_sanitary_notes: string;
 }
 
+export type AppraisalSection = 'model' | 'tires' | 'technical' | 'exterior' | 'interior';
+
 export interface AppraisalFindingsFormProps {
   formData: AppraisalFormData;
   onChange: (field: keyof AppraisalFormData, value: string) => void;
@@ -123,6 +125,8 @@ export interface AppraisalFindingsFormProps {
   photos?: string[];
   photoTypes?: PhotoTypes;
   reportId?: string;
+  /** When set, only render these sections. When omitted, render all. */
+  showSections?: AppraisalSection[];
 }
 
 export const getInitialAppraisalFormData = (): AppraisalFormData => ({
