@@ -293,7 +293,7 @@ export const AppraisalFindingsForm = ({
   return (
     <div className="space-y-6">
       {/* Model display name */}
-      <Card>
+      {show('model') && (
         <CardHeader>
           <CardTitle className="text-lg">Model (vastgesteld)</CardTitle>
         </CardHeader>
@@ -312,9 +312,10 @@ export const AppraisalFindingsForm = ({
           </div>
         </CardContent>
       </Card>
+      )}
 
       {/* Banden en wielen — before Technische staat */}
-      <Card>
+      {show('tires') && (
         <CardHeader>
           <CardTitle className="text-lg">Banden en wielen</CardTitle>
         </CardHeader>
