@@ -150,7 +150,7 @@ const Login = () => {
             }}
           >
             Software voor erkende taxateurs. Klassiekers, campers en
-            WEV-bepalingen — volledig conform art.&nbsp;7:960 BW en fiscale
+            WEV-bepalingen, volledig conform art.&nbsp;7:960 BW en fiscale
             regelgeving.
           </p>
         </div>
