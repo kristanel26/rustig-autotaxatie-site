@@ -9,6 +9,7 @@ const corsHeaders = {
 // RDW Open Data API endpoints
 const RDW_VOERTUIGEN_URL = 'https://opendata.rdw.nl/resource/m9d7-ebf2.json';
 const RDW_BRANDSTOF_URL = 'https://opendata.rdw.nl/resource/8ys7-d773.json';
+const RDW_VERSNELLING_URL = 'https://opendata.rdw.nl/resource/7rjk-eycs.json';
 
 interface RDWVoertuig {
   kenteken?: string;
@@ -34,6 +35,12 @@ interface RDWBrandstof {
   kenteken?: string;
   brandstof_omschrijving?: string;
   nettomaximumvermogen?: string;
+}
+
+interface RDWVersnelling {
+  kenteken?: string;
+  aantal_versnellingen?: string;
+  type_versnellingsbak?: string;
 }
 
 serve(async (req) => {
