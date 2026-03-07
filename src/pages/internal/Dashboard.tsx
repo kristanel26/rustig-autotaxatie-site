@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import InternalLayout from '@/components/internal/InternalLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { supabase } from '@/integrations/supabase/client';
-import { FileText, FilePlus, Clock, Send, Bell, AlertCircle, RefreshCw } from 'lucide-react';
+import { FileText, FilePlus, Clock, Send, Bell, AlertCircle, RefreshCw, Search, User, Building2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { getStatusBadgeProps } from '@/components/internal/ReportStatusBar';
 import {
@@ -38,6 +39,14 @@ interface ReportRow {
   report_type: string | null;
 }
 
+interface SearchResult {
+  type: 'report' | 'customer';
+  id: string;
+  title: string;
+  subtitle: string;
+  badge?: string;
+}
+
 const Dashboard = () => {
   const [stats, setStats] = useState<DashboardStats>({
     totalReports: 0,
@@ -51,6 +60,90 @@ const Dashboard = () => {
   const [hertaxatieReports, setHertaxatieReports] = useState<ReportRow[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  // Quick search state
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searching, setSearching] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  // Close search on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        setSearchOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  // Search debounce
+  useEffect(() => {
+    if (searchQuery.length < 2) {
+      setSearchResults([]);
+      setSearchOpen(false);
+      return;
+    }
+    const timer = setTimeout(async () => {
+      setSearching(true);
+      const q = `%${searchQuery}%`;
+      const [reportsRes, customersRes] = await Promise.all([
+        supabase.from('reports')
+          .select('id, report_number, license_plate, customer_last_name, rdw_merk, rdw_handelsbenaming, status, report_type')
+          .or(`report_number.ilike.${q},license_plate.ilike.${q},customer_last_name.ilike.${q},vin.ilike.${q}`)
+          .order('updated_at', { ascending: false })
+          .limit(6),
+        supabase.from('customers')
+          .select('id, salutation, initials, first_name, last_name, company_name, city, customer_type')
+          .or(`last_name.ilike.${q},first_name.ilike.${q},company_name.ilike.${q}`)
+          .order('last_name')
+          .limit(4),
+      ]);
+
+      const results: SearchResult[] = [];
+
+      if (reportsRes.data) {
+        for (const r of reportsRes.data) {
+          const vehicle = [r.rdw_merk, r.rdw_handelsbenaming].filter(Boolean).join(' ');
+          results.push({
+            type: 'report',
+            id: r.id,
+            title: r.report_number,
+            subtitle: [r.license_plate, vehicle, r.customer_last_name].filter(Boolean).join(' · ') || 'Geen details',
+            badge: r.report_type || undefined,
+          });
+        }
+      }
+      if (customersRes.data) {
+        for (const c of customersRes.data) {
+          const name = [c.salutation, c.initials, c.last_name].filter(Boolean).join(' ');
+          results.push({
+            type: 'customer',
+            id: c.id,
+            title: name,
+            subtitle: [c.company_name, c.city].filter(Boolean).join(' · ') || c.customer_type,
+          });
+        }
+      }
+
+      setSearchResults(results);
+      setSearchOpen(results.length > 0 || searchQuery.length >= 2);
+      setSearching(false);
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
+  const handleSearchSelect = (result: SearchResult) => {
+    setSearchOpen(false);
+    setSearchQuery('');
+    if (result.type === 'report') {
+      navigate(`/intern/rapport/${result.id}`);
+    } else {
+      navigate(`/intern/klanten/${result.id}`);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -212,6 +305,70 @@ const Dashboard = () => {
   return (
     <InternalLayout title="Dashboard">
       <div className="space-y-6">
+        {/* Quick Search */}
+        <div ref={searchRef} className="relative">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Zoek op kenteken, klantnaam of rapportnummer..."
+              className="pl-9"
+            />
+          </div>
+          {searchOpen && (
+            <div className="absolute z-50 w-full mt-1 bg-popover border border-border rounded-lg shadow-lg max-h-[350px] overflow-y-auto">
+              {searching ? (
+                <div className="p-3 text-sm text-muted-foreground text-center">Zoeken...</div>
+              ) : searchResults.length === 0 ? (
+                <div className="p-3 text-sm text-muted-foreground text-center">Geen resultaten gevonden</div>
+              ) : (
+                <>
+                  {searchResults.some(r => r.type === 'report') && (
+                    <div className="px-3 pt-2 pb-1">
+                      <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Rapporten</p>
+                    </div>
+                  )}
+                  {searchResults.filter(r => r.type === 'report').map((r) => (
+                    <button
+                      key={`r-${r.id}`}
+                      onClick={() => handleSearchSelect(r)}
+                      className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-muted/50 transition-colors border-b border-border/30 last:border-b-0"
+                    >
+                      <FileText className="h-4 w-4 text-muted-foreground shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium font-mono truncate">{r.title}</p>
+                        <p className="text-xs text-muted-foreground truncate">{r.subtitle}</p>
+                      </div>
+                      {r.badge && (
+                        <Badge variant="secondary" className="text-[10px] shrink-0">{r.badge.toUpperCase()}</Badge>
+                      )}
+                    </button>
+                  ))}
+                  {searchResults.some(r => r.type === 'customer') && (
+                    <div className="px-3 pt-2 pb-1 border-t border-border/50">
+                      <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Klanten</p>
+                    </div>
+                  )}
+                  {searchResults.filter(r => r.type === 'customer').map((r) => (
+                    <button
+                      key={`c-${r.id}`}
+                      onClick={() => handleSearchSelect(r)}
+                      className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-muted/50 transition-colors border-b border-border/30 last:border-b-0"
+                    >
+                      <User className="h-4 w-4 text-muted-foreground shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate">{r.title}</p>
+                        <p className="text-xs text-muted-foreground truncate">{r.subtitle}</p>
+                      </div>
+                    </button>
+                  ))}
+                </>
+              )}
+            </div>
+          )}
+        </div>
+
         {/* Quick Actions */}
         <div className="flex flex-wrap gap-3">
           <Button asChild>
