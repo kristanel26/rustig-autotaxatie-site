@@ -54,8 +54,7 @@ const Dashboard = () => {
     conceptCount: 0,
     inBehandelingCount: 0,
   });
-  const [conceptReports, setConceptReports] = useState<ReportRow[]>([]);
-  const [sentReports, setSentReports] = useState<ReportRow[]>([]);
+  const [recentReports, setRecentReports] = useState<ReportRow[]>([]);
   
   const [hertaxatieReports, setHertaxatieReports] = useState<ReportRow[]>([]);
   const [loading, setLoading] = useState(true);
@@ -170,8 +169,7 @@ const Dashboard = () => {
           { count: monthCount },
           { count: conceptCount },
           { count: inBehandelingCount },
-          { data: concepts },
-          { data: sent },
+          { data: recent },
           { data: hertaxatie },
         ] = await Promise.all([
           supabase.from('reports').select('*', { count: 'exact', head: true }),
@@ -181,18 +179,11 @@ const Dashboard = () => {
             .eq('status', 'concept'),
           supabase.from('reports').select('*', { count: 'exact', head: true })
             .eq('status', 'in_behandeling'),
-          // Openstaande concepten & in behandeling
+          // Recent bewerkte rapporten (alle statussen)
           supabase.from('reports')
             .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
-            .in('status', ['concept', 'in_behandeling'])
             .order('updated_at', { ascending: false })
-            .limit(5),
-          // Recent verzonden
-          supabase.from('reports')
-            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
-            .not('sent_at', 'is', null)
-            .order('sent_at', { ascending: false })
-            .limit(5),
+            .limit(10),
           // Hertaxatie: rapporten met inspection_date 2j10m–3j3m geleden (verlopen binnenkort)
           supabase.from('reports')
             .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
@@ -210,8 +201,7 @@ const Dashboard = () => {
           conceptCount: conceptCount || 0,
           inBehandelingCount: inBehandelingCount || 0,
         });
-        setConceptReports((concepts as ReportRow[]) || []);
-        setSentReports((sent as ReportRow[]) || []);
+        setRecentReports((recent as ReportRow[]) || []);
         
         setHertaxatieReports((hertaxatie as ReportRow[]) || []);
       } catch (error) {
@@ -242,7 +232,7 @@ const Dashboard = () => {
     reports: ReportRow[];
     emptyText: string;
     showDate?: boolean;
-    dateField?: 'inspection_date' | 'sent_at' | 'reminder_due_date';
+    dateField?: 'inspection_date' | 'sent_at' | 'reminder_due_date' | 'updated_at';
     dateLabel?: string;
   }) => {
     if (loading) {
@@ -415,39 +405,21 @@ const Dashboard = () => {
 
         {/* Widgets */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Openstaande rapporten */}
-          <Card>
+          {/* Recent bewerkte rapporten */}
+          <Card className="lg:col-span-2">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
-                <Clock className="h-5 w-5 text-amber-500" />
-                Openstaand
+                <Clock className="h-5 w-5 text-primary" />
+                Recent
               </CardTitle>
             </CardHeader>
             <CardContent>
               <ReportMiniTable
-                reports={conceptReports}
-                emptyText="Geen openstaande rapporten"
+                reports={recentReports}
+                emptyText="Nog geen rapporten"
                 showDate
-                dateLabel="Inspectie"
-              />
-            </CardContent>
-          </Card>
-
-          {/* Recent verzonden */}
-          <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Send className="h-5 w-5 text-green-500" />
-                Recent Verzonden
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ReportMiniTable
-                reports={sentReports}
-                emptyText="Nog geen rapporten verzonden"
-                showDate
-                dateField="sent_at"
-                dateLabel="Verzonden"
+                dateField="updated_at"
+                dateLabel="Bewerkt"
               />
             </CardContent>
           </Card>
