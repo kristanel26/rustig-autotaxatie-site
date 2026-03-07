@@ -1223,7 +1223,7 @@ const EditReport = () => {
                   toast({ title: 'Klant gekoppeld', description: `${[c.first_name, c.last_name].filter(Boolean).join(' ')} is ingevuld.` });
                 }}
                 onNewCustomer={() => {
-                  window.open('/intern/klanten', '_blank');
+                  window.open('/intern/klanten?nieuw=1', '_blank');
                 }}
               />
             </div>

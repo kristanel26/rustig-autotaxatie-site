@@ -109,6 +109,16 @@ const Customers = () => {
     }
   }, [customers, location.state]);
 
+  // Support opening new customer dialog via query param (e.g. from EditReport)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('nieuw') === '1') {
+      openNew();
+      // Remove query param from URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, []);
+
   const filtered = customers.filter((c) => {
     if (!search) return true;
     const q = search.toLowerCase();
