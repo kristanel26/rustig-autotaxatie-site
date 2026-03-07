@@ -30,6 +30,7 @@ export type Database = {
           notes: string | null
           phone: string | null
           postal_code: string | null
+          rsin: string | null
           salutation: string | null
           street: string | null
           updated_at: string
@@ -50,6 +51,7 @@ export type Database = {
           notes?: string | null
           phone?: string | null
           postal_code?: string | null
+          rsin?: string | null
           salutation?: string | null
           street?: string | null
           updated_at?: string
@@ -70,6 +72,7 @@ export type Database = {
           notes?: string | null
           phone?: string | null
           postal_code?: string | null
+          rsin?: string | null
           salutation?: string | null
           street?: string | null
           updated_at?: string

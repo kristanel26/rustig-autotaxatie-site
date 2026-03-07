@@ -1,0 +1,1 @@
+ALTER TABLE public.customers ADD COLUMN rsin text NULL;
