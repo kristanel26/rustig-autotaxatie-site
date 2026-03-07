@@ -712,6 +712,7 @@ export type Database = {
           created_at: string
           customer_city: string | null
           customer_email: string | null
+          customer_id: string | null
           customer_initials: string | null
           customer_last_name: string | null
           customer_phone: string | null
@@ -921,6 +922,7 @@ export type Database = {
           created_at?: string
           customer_city?: string | null
           customer_email?: string | null
+          customer_id?: string | null
           customer_initials?: string | null
           customer_last_name?: string | null
           customer_phone?: string | null
@@ -1130,6 +1132,7 @@ export type Database = {
           created_at?: string
           customer_city?: string | null
           customer_email?: string | null
+          customer_id?: string | null
           customer_initials?: string | null
           customer_last_name?: string | null
           customer_phone?: string | null
@@ -1319,7 +1322,15 @@ export type Database = {
           wev_status?: string | null
           wev_verkoopwaarde_autotelex?: number | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "reports_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       tire_brands: {
         Row: {
