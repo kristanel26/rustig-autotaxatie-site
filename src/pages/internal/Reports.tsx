@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import InternalLayout from '@/components/internal/InternalLayout';
 import { supabase } from '@/integrations/supabase/client';
 import {
@@ -69,7 +69,8 @@ const Reports = () => {
   const [reports, setReports] = useState<Report[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [searchParams] = useSearchParams();
+  const [statusFilter, setStatusFilter] = useState<string>(searchParams.get('status') || 'all');
   const navigate = useNavigate();
 
   useEffect(() => {
