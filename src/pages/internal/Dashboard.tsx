@@ -55,7 +55,7 @@ const Dashboard = () => {
     inBehandelingCount: 0,
   });
   const [recentReports, setRecentReports] = useState<ReportRow[]>([]);
-  
+  const [sentReports, setSentReports] = useState<ReportRow[]>([]);
   const [hertaxatieReports, setHertaxatieReports] = useState<ReportRow[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -170,6 +170,7 @@ const Dashboard = () => {
           { count: conceptCount },
           { count: inBehandelingCount },
           { data: recent },
+          { data: sent },
           { data: hertaxatie },
         ] = await Promise.all([
           supabase.from('reports').select('*', { count: 'exact', head: true }),
@@ -183,7 +184,13 @@ const Dashboard = () => {
           supabase.from('reports')
             .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
             .order('updated_at', { ascending: false })
-            .limit(10),
+            .limit(5),
+          // Recent verzonden
+          supabase.from('reports')
+            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
+            .not('sent_at', 'is', null)
+            .order('sent_at', { ascending: false })
+            .limit(5),
           // Hertaxatie: rapporten met inspection_date 2j10m–3j3m geleden (verlopen binnenkort)
           supabase.from('reports')
             .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
