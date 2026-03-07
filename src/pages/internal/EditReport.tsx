@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import InternalLayout from '@/components/internal/InternalLayout';
 import { useAuth } from '@/contexts/AuthContext';
@@ -17,7 +17,9 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Loader2 } from 'lucide-react';
+import { pdf } from '@react-pdf/renderer';
+import PdfRenderer from '@/components/internal/pdf/PdfRenderer';
 import { normalizeReportFormData, LICENSE_PLATE_REGEX, numberToDutchWords, normalizeInitials, capitalizeFirst } from '@/lib/normalizers';
 import { validateVin, validateEmail, validatePhone } from '@/lib/validators';
 import { qualityClasses } from '@/lib/qualityClasses';
@@ -210,6 +212,7 @@ const EditReport = () => {
 
   // Report status
   const [reportStatus, setReportStatus] = useState<ReportStatus>('concept');
+  const [isFinalizingReport, setIsFinalizingReport] = useState(false);
 
   // Auto-save hook - 10 second interval for better reliability
   const { status: saveStatus, lastSavedAt, hasPendingChanges, saveField, saveMultipleFields, flushSave } = useAutoSave({
@@ -250,6 +253,68 @@ const EditReport = () => {
     // Status
     status: reportStatus,
   }), [customerData, vehicleData, inspectionData, valuationData, klassiekerValueData, wevAutotelexData, wevValueData, vehiclePhotos, reportStatus]);
+
+  // Rapport afronden: generate PDF, upload to storage, set status gereed
+  const handleFinalizeReport = useCallback(async () => {
+    if (!id || !report || isFinalizingReport) return;
+    setIsFinalizingReport(true);
+    try {
+      // 1. Flush any pending saves first
+      await flushSave();
+
+      // 2. Fetch the latest full report data for PDF generation
+      const { data: fullReport, error: fetchError } = await supabase
+        .from('reports')
+        .select('*')
+        .eq('id', id)
+        .single();
+      if (fetchError || !fullReport) throw new Error('Rapport niet gevonden');
+
+      // 3. Generate PDF blob
+      const blob = await pdf(<PdfRenderer report={fullReport as Record<string, unknown>} />).toBlob();
+
+      // 4. Build filename
+      const filename = [
+        'Taxatierapport',
+        fullReport.document_reference || '',
+        fullReport.license_plate || '',
+      ].filter(Boolean).join('_').replace(/\s+/g, '-') + '.pdf';
+
+      const storagePath = `${id}/${filename}`;
+
+      // 5. Upload to finalized-reports bucket (overwrite if exists)
+      const { error: uploadError } = await supabase.storage
+        .from('finalized-reports')
+        .upload(storagePath, blob, {
+          contentType: 'application/pdf',
+          upsert: true,
+        });
+      if (uploadError) throw uploadError;
+
+      // 6. Update status to gereed + set ready_at timestamp
+      const { error: updateError } = await supabase
+        .from('reports')
+        .update({ status: 'gereed', ready_at: new Date().toISOString() })
+        .eq('id', id);
+      if (updateError) throw updateError;
+
+      setReportStatus('gereed');
+
+      toast({
+        title: 'Rapport afgerond',
+        description: 'De PDF is gegenereerd en het rapport is gemarkeerd als Gereed.',
+      });
+    } catch (error) {
+      console.error('Error finalizing report:', error);
+      toast({
+        title: 'Fout bij afronden',
+        description: 'Er ging iets mis bij het genereren van de PDF. Probeer het opnieuw.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsFinalizingReport(false);
+    }
+  }, [id, report, isFinalizingReport, flushSave, toast]);
 
   useEffect(() => {
     const fetchReport = async () => {
@@ -1619,14 +1684,12 @@ const EditReport = () => {
 
           {/* Completeness Sidebar - sticky on desktop */}
           <aside className="lg:w-80 lg:flex-shrink-0">
-            <div className="lg:sticky lg:top-16">
+            <div className="lg:sticky lg:top-16 space-y-4">
               <ReportCompletenessCheck
                 reportType={report.report_type}
                 data={completenessData}
-                onMarkGereed={() => {
-                  setReportStatus('gereed');
-                  saveField('status', 'gereed');
-                }}
+                onMarkGereed={handleFinalizeReport}
+                isFinalizingReport={isFinalizingReport}
               />
             </div>
           </aside>

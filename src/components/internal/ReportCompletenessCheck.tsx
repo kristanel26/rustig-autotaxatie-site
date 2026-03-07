@@ -16,6 +16,7 @@ interface ReportCompletenessCheckProps {
   data: Record<string, unknown>;
   className?: string;
   onMarkGereed?: () => void;
+  isFinalizingReport?: boolean;
 }
 
 const statusConfig: Record<ChecklistStatus, {
@@ -102,6 +103,7 @@ export function ReportCompletenessCheck({
   data,
   className,
   onMarkGereed,
+  isFinalizingReport,
 }: ReportCompletenessCheckProps) {
   // Get checklist for this report type
   const checklist = useMemo(() => getChecklistForType(reportType), [reportType]);
@@ -171,9 +173,17 @@ export function ReportCompletenessCheck({
           <button
             type="button"
             onClick={onMarkGereed}
-            className="w-full mt-3 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-sm font-medium hover:bg-emerald-500/20 transition-colors text-left"
+            disabled={isFinalizingReport}
+            className="w-full mt-3 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-sm font-medium hover:bg-emerald-500/20 transition-colors text-left disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
           >
-            ✓ Rapport is volledig — markeer als Gereed?
+            {isFinalizingReport ? (
+              <>
+                <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-emerald-600" />
+                PDF genereren & afronden...
+              </>
+            ) : (
+              '✓ Rapport is volledig — afronden en PDF genereren?'
+            )}
           </button>
         )}
       </CardContent>
