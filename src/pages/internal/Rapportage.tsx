@@ -7,6 +7,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Download } from 'lucide-react';
 import * as XLSX from 'xlsx';
@@ -27,11 +29,7 @@ const TYPE_COLORS: Record<string, string> = {
   wev: 'hsl(150, 60%, 45%)',
 };
 
-const TYPE_LABELS: Record<string, string> = {
-  klassieker: 'KLS',
-  camper: 'CAM',
-  wev: 'WEV',
-};
+const BILLABLE_STATUSES = ['gereed', 'verzonden'];
 
 function getYearRange(): number[] {
   const currentYear = new Date().getFullYear();
@@ -50,22 +48,41 @@ export default function Rapportage() {
   const [loading, setLoading] = useState(true);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [userEmails, setUserEmails] = useState<Record<string, string>>({});
+  const [onlyBillable, setOnlyBillable] = useState(true);
 
   useEffect(() => {
     (async () => {
       setLoading(true);
-      // Fetch all reports (we only need lightweight fields)
-      const { data } = await supabase
-        .from('reports')
-        .select('id, report_type, created_at, user_id, status')
-        .order('created_at', { ascending: false });
-      setReports(data ?? []);
 
-      // Gather unique user IDs and try to get emails from auth (we use the current user's email as fallback)
-      // Since we can't query auth.users from client, we'll display user_id truncated
+      // Fetch reports and user emails in parallel
+      const [reportsRes, emailsRes] = await Promise.all([
+        supabase
+          .from('reports')
+          .select('id, report_type, created_at, user_id, status')
+          .order('created_at', { ascending: false }),
+        supabase.rpc('get_user_emails'),
+      ]);
+
+      setReports(reportsRes.data ?? []);
+
+      // Build user_id → email map
+      if (emailsRes.data && Array.isArray(emailsRes.data)) {
+        const emailMap: Record<string, string> = {};
+        (emailsRes.data as { user_id: string; email: string }[]).forEach((row) => {
+          emailMap[row.user_id] = row.email;
+        });
+        setUserEmails(emailMap);
+      }
+
       setLoading(false);
     })();
   }, []);
+
+  // Filter reports by billable status when toggle is on
+  const filteredReports = useMemo(() => {
+    if (!onlyBillable) return reports;
+    return reports.filter((r) => BILLABLE_STATUSES.includes(r.status ?? ''));
+  }, [reports, onlyBillable]);
 
   // ── Compute chart data for the selected year ──
   const chartData = useMemo(() => {
@@ -74,7 +91,7 @@ export default function Rapportage() {
       return { month: MONTH_LABELS[i], key, klassieker: 0, camper: 0, wev: 0 };
     });
 
-    reports.forEach((r) => {
+    filteredReports.forEach((r) => {
       const d = new Date(r.created_at);
       if (d.getFullYear() !== selectedYear) return;
       const type = r.report_type || 'camper';
@@ -85,7 +102,7 @@ export default function Rapportage() {
     });
 
     return months;
-  }, [reports, selectedYear]);
+  }, [filteredReports, selectedYear]);
 
   // ── Monthly table data ──
   const monthlyTable = useMemo(() => {
@@ -99,7 +116,7 @@ export default function Rapportage() {
   const userOverview = useMemo(() => {
     const map: Record<string, Record<string, { klassieker: number; camper: number; wev: number }>> = {};
 
-    reports.forEach((r) => {
+    filteredReports.forEach((r) => {
       const d = new Date(r.created_at);
       if (d.getFullYear() !== selectedYear) return;
       const uid = r.user_id;
@@ -112,12 +129,13 @@ export default function Rapportage() {
       }
     });
 
-    const rows: { userId: string; month: string; monthLabel: string; klassieker: number; camper: number; wev: number; totaal: number }[] = [];
+    const rows: { userId: string; email: string; month: string; monthLabel: string; klassieker: number; camper: number; wev: number; totaal: number }[] = [];
     Object.entries(map).forEach(([uid, months]) => {
       Object.entries(months).forEach(([mk, counts]) => {
         const [y, m] = mk.split('-');
         rows.push({
           userId: uid,
+          email: userEmails[uid] || uid.substring(0, 8) + '…',
           month: mk,
           monthLabel: `${MONTH_LABELS[parseInt(m) - 1]} ${y}`,
           ...counts,
@@ -128,7 +146,7 @@ export default function Rapportage() {
 
     rows.sort((a, b) => a.month.localeCompare(b.month));
     return rows;
-  }, [reports, selectedYear]);
+  }, [filteredReports, selectedYear, userEmails]);
 
   // ── Export to Excel ──
   const handleExport = () => {
@@ -147,7 +165,7 @@ export default function Rapportage() {
     // Add user overview sheet
     if (userOverview.length > 0) {
       const userWsData = userOverview.map((r) => ({
-        Gebruiker: r.userId.substring(0, 8) + '…',
+        Gebruiker: r.email,
         Maand: r.monthLabel,
         KLS: r.klassieker,
         CAM: r.camper,
@@ -167,22 +185,37 @@ export default function Rapportage() {
     navigate(`/intern/rapporten?maand=${y}-${m}`);
   };
 
+  const displayLabel = (uid: string) => userEmails[uid] || uid.substring(0, 8) + '…';
+
   return (
     <InternalLayout title="Rapportage">
       {/* Controls */}
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
-        <div className="flex items-center gap-3">
-          <span className="text-sm text-muted-foreground">Jaar:</span>
-          <Select value={String(selectedYear)} onValueChange={(v) => setSelectedYear(Number(v))}>
-            <SelectTrigger className="w-[120px]">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {getYearRange().map((y) => (
-                <SelectItem key={y} value={String(y)}>{y}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-muted-foreground">Jaar:</span>
+            <Select value={String(selectedYear)} onValueChange={(v) => setSelectedYear(Number(v))}>
+              <SelectTrigger className="w-[120px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {getYearRange().map((y) => (
+                  <SelectItem key={y} value={String(y)}>{y}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Switch
+              id="billable-filter"
+              checked={onlyBillable}
+              onCheckedChange={setOnlyBillable}
+            />
+            <Label htmlFor="billable-filter" className="text-sm text-muted-foreground cursor-pointer">
+              Alleen gereed &amp; verzonden
+            </Label>
+          </div>
         </div>
         <Button variant="outline" onClick={handleExport} className="gap-2">
           <Download className="w-4 h-4" />
@@ -197,7 +230,12 @@ export default function Rapportage() {
           {/* ── Bar Chart ── */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle className="text-lg">Maandoverzicht {selectedYear}</CardTitle>
+              <CardTitle className="text-lg">
+                Maandoverzicht {selectedYear}
+                {onlyBillable && (
+                  <span className="ml-2 text-xs font-normal text-muted-foreground">(alleen gereed &amp; verzonden)</span>
+                )}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="h-[350px]">
@@ -292,7 +330,7 @@ export default function Rapportage() {
                       <TableBody>
                         {userOverview.map((row, i) => (
                           <TableRow key={`${row.userId}-${row.month}-${i}`}>
-                            <TableCell className="font-mono text-xs">{row.userId.substring(0, 8)}…</TableCell>
+                            <TableCell className="text-sm">{row.email}</TableCell>
                             <TableCell>{row.monthLabel}</TableCell>
                             <TableCell className="text-right">{row.klassieker || '–'}</TableCell>
                             <TableCell className="text-right">{row.camper || '–'}</TableCell>
