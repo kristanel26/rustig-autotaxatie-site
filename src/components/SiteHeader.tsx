@@ -106,7 +106,7 @@ const SiteHeader = () => {
               {link.label}
             </Link>
           ))}
-          <div className="pt-3 px-4">
+          <div className="pt-3 px-4 flex items-center justify-between">
             <a
               href="tel:+31854832461"
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -114,6 +114,7 @@ const SiteHeader = () => {
               <Phone className="w-4 h-4" />
               085 483 2461
             </a>
+            <ThemeToggle scrolled />
           </div>
         </nav>
       )}
