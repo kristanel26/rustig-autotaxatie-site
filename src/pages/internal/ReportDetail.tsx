@@ -247,7 +247,7 @@ const ReportDetail = () => {
         {/* Report Header */}
         <div className="flex flex-wrap items-center gap-4 pb-4 border-b border-border">
           <div>
-            <p className="text-sm font-medium text-foreground/70">Rapportnummer</p>
+            <p className="text-sm font-medium text-[hsl(var(--gold-lt))]">Rapportnummer</p>
             <p className="text-2xl font-bold">{report.report_number}</p>
           </div>
           {report.document_reference && (
