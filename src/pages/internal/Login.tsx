@@ -4,7 +4,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { ArrowRight } from 'lucide-react';
-import TaxarisLogo from '@/components/TaxarisLogo';
+import logoIcon from '@/assets/taxaris-logo-icon.svg';
 
 const loginSchema = z.object({
   email: z.string().trim().email({ message: 'Voer een geldig e-mailadres in' }),
@@ -93,15 +93,24 @@ const Login = () => {
           backgroundSize: '60px 60px',
         }}
       >
+        {/* Watermark logo */}
+        <div
+          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          style={{ opacity: 0.06 }}
+        >
+          <img
+            src={logoIcon}
+            alt=""
+            aria-hidden="true"
+            style={{
+              height: '65%',
+              width: 'auto',
+              filter: 'brightness(0) invert(1)',
+            }}
+          />
+        </div>
+
         <div className="relative z-10">
-          {/* Logo */}
-          <div className="flex items-center gap-4 mb-8">
-            <TaxarisLogo variant="white" size="xl" />
-          </div>
-
-          {/* Gold divider */}
-          <div className="mb-10" style={{ width: 48, height: 2, background: '#c9a84c' }} />
-
           {/* Tagline */}
           <h1
             style={{
