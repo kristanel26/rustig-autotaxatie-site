@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { supabase } from '@/integrations/supabase/client';
-import { FileText, FilePlus, Clock, Send, Bell, AlertCircle, RefreshCw, Search, User, Building2 } from 'lucide-react';
+import { FileText, FilePlus, Clock, Send, AlertCircle, RefreshCw, Search, User } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { getStatusBadgeProps } from '@/components/internal/ReportStatusBar';
 import {
@@ -56,7 +56,7 @@ const Dashboard = () => {
   });
   const [conceptReports, setConceptReports] = useState<ReportRow[]>([]);
   const [sentReports, setSentReports] = useState<ReportRow[]>([]);
-  const [reminderReports, setReminderReports] = useState<ReportRow[]>([]);
+  
   const [hertaxatieReports, setHertaxatieReports] = useState<ReportRow[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -156,11 +156,6 @@ const Dashboard = () => {
           ? `${currentYear + 1}-01-01`
           : `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-01`;
 
-        // Today + 60 days for upcoming reminders
-        const today = now.toISOString().split('T')[0];
-        const futureDate = new Date(now);
-        futureDate.setDate(futureDate.getDate() + 60);
-        const future60 = futureDate.toISOString().split('T')[0];
 
         // Hertaxatie: reports where inspection_date is between 2y10m and 3y3m ago (expiring soon)
         const hertaxatieStart = new Date(now);
@@ -177,7 +172,6 @@ const Dashboard = () => {
           { count: inBehandelingCount },
           { data: concepts },
           { data: sent },
-          { data: reminders },
           { data: hertaxatie },
         ] = await Promise.all([
           supabase.from('reports').select('*', { count: 'exact', head: true }),
@@ -199,15 +193,6 @@ const Dashboard = () => {
             .not('sent_at', 'is', null)
             .order('sent_at', { ascending: false })
             .limit(5),
-          // Komende herinneringen (binnen 60 dagen)
-          supabase.from('reports')
-            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
-            .not('reminder_due_date', 'is', null)
-            .gte('reminder_due_date', today)
-            .lte('reminder_due_date', future60)
-            .is('reminder_sent_at', null)
-            .order('reminder_due_date', { ascending: true })
-            .limit(5),
           // Hertaxatie: rapporten met inspection_date 2j10m–3j3m geleden (verlopen binnenkort)
           supabase.from('reports')
             .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
@@ -227,7 +212,7 @@ const Dashboard = () => {
         });
         setConceptReports((concepts as ReportRow[]) || []);
         setSentReports((sent as ReportRow[]) || []);
-        setReminderReports((reminders as ReportRow[]) || []);
+        
         setHertaxatieReports((hertaxatie as ReportRow[]) || []);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -467,27 +452,6 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          {/* Komende herinneringen */}
-          <Card className="lg:col-span-2">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Bell className="h-5 w-5 text-primary" />
-                Komende Herinneringen
-                {!loading && reminderReports.length > 0 && (
-                  <Badge variant="secondary" className="ml-2 text-xs">{reminderReports.length}</Badge>
-                )}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ReportMiniTable
-                reports={reminderReports}
-                emptyText="Geen herinneringen binnen 60 dagen"
-                showDate
-                dateField="reminder_due_date"
-                dateLabel="Herinnering"
-              />
-            </CardContent>
-          </Card>
 
           {/* Hertaxatie — rapporten die binnenkort verlopen */}
           <Card className="lg:col-span-2">
