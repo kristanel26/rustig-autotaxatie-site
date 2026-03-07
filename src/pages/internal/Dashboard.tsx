@@ -305,6 +305,70 @@ const Dashboard = () => {
   return (
     <InternalLayout title="Dashboard">
       <div className="space-y-6">
+        {/* Quick Search */}
+        <div ref={searchRef} className="relative">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Zoek op kenteken, klantnaam of rapportnummer..."
+              className="pl-9"
+            />
+          </div>
+          {searchOpen && (
+            <div className="absolute z-50 w-full mt-1 bg-popover border border-border rounded-lg shadow-lg max-h-[350px] overflow-y-auto">
+              {searching ? (
+                <div className="p-3 text-sm text-muted-foreground text-center">Zoeken...</div>
+              ) : searchResults.length === 0 ? (
+                <div className="p-3 text-sm text-muted-foreground text-center">Geen resultaten gevonden</div>
+              ) : (
+                <>
+                  {searchResults.some(r => r.type === 'report') && (
+                    <div className="px-3 pt-2 pb-1">
+                      <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Rapporten</p>
+                    </div>
+                  )}
+                  {searchResults.filter(r => r.type === 'report').map((r) => (
+                    <button
+                      key={`r-${r.id}`}
+                      onClick={() => handleSearchSelect(r)}
+                      className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-muted/50 transition-colors border-b border-border/30 last:border-b-0"
+                    >
+                      <FileText className="h-4 w-4 text-muted-foreground shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium font-mono truncate">{r.title}</p>
+                        <p className="text-xs text-muted-foreground truncate">{r.subtitle}</p>
+                      </div>
+                      {r.badge && (
+                        <Badge variant="secondary" className="text-[10px] shrink-0">{r.badge.toUpperCase()}</Badge>
+                      )}
+                    </button>
+                  ))}
+                  {searchResults.some(r => r.type === 'customer') && (
+                    <div className="px-3 pt-2 pb-1 border-t border-border/50">
+                      <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Klanten</p>
+                    </div>
+                  )}
+                  {searchResults.filter(r => r.type === 'customer').map((r) => (
+                    <button
+                      key={`c-${r.id}`}
+                      onClick={() => handleSearchSelect(r)}
+                      className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-muted/50 transition-colors border-b border-border/30 last:border-b-0"
+                    >
+                      <User className="h-4 w-4 text-muted-foreground shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate">{r.title}</p>
+                        <p className="text-xs text-muted-foreground truncate">{r.subtitle}</p>
+                      </div>
+                    </button>
+                  ))}
+                </>
+              )}
+            </div>
+          )}
+        </div>
+
         {/* Quick Actions */}
         <div className="flex flex-wrap gap-3">
           <Button asChild>
