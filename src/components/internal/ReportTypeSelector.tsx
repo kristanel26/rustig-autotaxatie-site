@@ -75,77 +75,82 @@ const WevIcon = () => (
 );
 
 const KlassiekerIcon = () => (
-  <svg viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-    {/* === Classic car: long hood, separate fenders, running board === */}
-    {/* Front fender — large, round, protruding */}
-    <path d="M4 68Q2 64 4 58Q8 52 18 50L28 50Q38 52 42 58Q46 64 46 68" 
-      stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.08" />
-    {/* Rear fender */}
-    <path d="M108 68Q108 64 112 58Q116 52 126 50L134 50Q144 52 148 58Q150 64 150 68" 
-      stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.08" />
-    {/* Long hood */}
-    <path d="M4 54L8 48L60 42" stroke="currentColor" strokeWidth="2" fill="none" />
-    <path d="M4 54L4 58" stroke="currentColor" strokeWidth="2" />
-    {/* Hood surface fill */}
-    <path d="M8 48L60 42L60 58L46 60Q28 62 8 58L4 54Z" fill="currentColor" opacity="0.05" />
-    {/* Hood center ridge */}
-    <line x1="12" y1="49" x2="56" y2="43" stroke="currentColor" strokeWidth="0.7" opacity="0.18" />
-    {/* Cabin — small, low, set back */}
-    <path d="M60 42Q62 30 70 24L84 20Q92 20 96 24L102 32L106 42" 
-      stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.05" />
+  <svg viewBox="0 0 180 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    {/* === Elegant classic GT: long nose, fastback roofline, smooth body === */}
+    {/* Complete body outline — one continuous elegant shape */}
+    <path d={`
+      M8 52
+      Q6 50 8 46 L16 44 L80 40
+      Q84 32 92 26 L106 22 Q114 21 118 24 L124 30
+      Q128 36 130 40 L140 42 Q152 44 158 48 Q162 52 160 56
+      L158 58 Q156 60 152 60 L142 60
+      Q138 60 136 58
+      L46 58
+      Q42 60 38 60 L16 60 Q10 60 8 56 Z
+    `} stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.06" strokeLinejoin="round" />
+    {/* Hood surface — long and low */}
+    <path d="M16 44L80 40L80 54L46 56L16 56Z" fill="currentColor" opacity="0.03" />
+    {/* Hood center crease */}
+    <line x1="20" y1="45" x2="76" y2="41" stroke="currentColor" strokeWidth="0.6" opacity="0.15" />
     {/* Windshield */}
-    <path d="M62 42L68 26" stroke="currentColor" strokeWidth="2" opacity="0.4" />
-    {/* Rear window */}
-    <path d="M96 26L104 42" stroke="currentColor" strokeWidth="2" opacity="0.4" />
-    {/* Rear trunk/deck */}
-    <path d="M106 42L106 58L108 60Q120 62 140 60L148 58L150 54L144 48L106 42Z" 
-      fill="currentColor" opacity="0.05" stroke="currentColor" strokeWidth="2" />
-    {/* Running board between fenders */}
-    <line x1="46" y1="68" x2="108" y2="68" stroke="currentColor" strokeWidth="2" opacity="0.25" />
-    <path d="M46 64L46 68L108 68L108 64" stroke="currentColor" strokeWidth="1" opacity="0.12" />
-    {/* Body sill */}
-    <line x1="4" y1="58" x2="46" y2="62" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.2" />
-    <line x1="108" y1="62" x2="150" y2="58" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.2" />
-    {/* Front chrome bumper */}
-    <path d="M0 56Q-2 56 -2 58Q-2 64 2 66L4 66" stroke="currentColor" strokeWidth="2" opacity="0.3" />
-    {/* Rear chrome bumper */}
-    <path d="M152 56Q154 56 154 60Q154 66 150 68" stroke="currentColor" strokeWidth="2" opacity="0.3" />
+    <path d="M82 40L90 28" stroke="currentColor" strokeWidth="2" opacity="0.45" />
+    {/* Roof — low fastback */}
+    <path d="M92 26L106 22Q114 21 118 24L124 30" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.7" />
+    {/* Rear window — long sloping fastback */}
+    <path d="M124 30Q128 36 130 40" stroke="currentColor" strokeWidth="2" opacity="0.4" />
+    {/* Rear deck */}
+    <path d="M130 40L140 42Q152 44 158 48" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.5" />
+    {/* Rear end */}
+    <path d="M158 48Q162 52 160 56L158 58" stroke="currentColor" strokeWidth="2" fill="none" />
+    {/* Side chrome trim line */}
+    <line x1="16" y1="52" x2="158" y2="52" stroke="currentColor" strokeWidth="0.7" opacity="0.15" />
+    {/* Door seam */}
+    <line x1="94" y1="32" x2="92" y2="56" stroke="currentColor" strokeWidth="0.6" opacity="0.12" />
+    {/* Door handle */}
+    <rect x="98" y="44" width="5" height="1.2" rx="0.6" fill="currentColor" opacity="0.2" />
     {/* Round headlight */}
-    <circle cx="8" cy="48" r="5" stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.15" />
-    <circle cx="8" cy="48" r="2.5" fill="currentColor" opacity="0.35" />
-    <circle cx="8" cy="48" r="1" fill="currentColor" opacity="0.6" />
-    {/* Grille bars */}
-    <line x1="4" y1="52" x2="16" y2="51" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
-    <line x1="4" y1="54" x2="16" y2="53" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
-    <line x1="4" y1="56" x2="16" y2="55" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
+    <circle cx="12" cy="46" r="4.5" stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.15" />
+    <circle cx="12" cy="46" r="2.2" fill="currentColor" opacity="0.35" />
+    <circle cx="12" cy="46" r="0.8" fill="currentColor" opacity="0.6" />
+    {/* Grille — vertical chrome slats */}
+    <line x1="8" y1="48" x2="8" y2="54" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
+    <line x1="10" y1="48" x2="10" y2="54" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
+    <line x1="12" y1="48" x2="12" y2="54" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
+    <line x1="14" y1="48" x2="14" y2="54" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
+    {/* Front bumper — chrome overrider */}
+    <path d="M4 50Q2 50 2 52Q2 56 6 58L8 58" stroke="currentColor" strokeWidth="1.8" opacity="0.25" />
     {/* Taillight */}
-    <rect x="150" y="50" width="3" height="7" rx="1.5" fill="currentColor" opacity="0.3" />
-    {/* Front wheel — wire spokes */}
-    <circle cx="26" cy="70" r="13" stroke="currentColor" strokeWidth="2.5" fill="currentColor" opacity="0.05" />
-    <circle cx="26" cy="70" r="6.5" stroke="currentColor" strokeWidth="1" fill="currentColor" opacity="0.12" />
-    <circle cx="26" cy="70" r="2.5" fill="currentColor" opacity="0.4" />
-    <line x1="26" y1="58" x2="26" y2="62" stroke="currentColor" strokeWidth="0.8" opacity="0.22" />
-    <line x1="26" y1="78" x2="26" y2="82" stroke="currentColor" strokeWidth="0.8" opacity="0.22" />
-    <line x1="14" y1="70" x2="18" y2="70" stroke="currentColor" strokeWidth="0.8" opacity="0.22" />
-    <line x1="34" y1="70" x2="38" y2="70" stroke="currentColor" strokeWidth="0.8" opacity="0.22" />
-    <line x1="17" y1="62" x2="20" y2="64" stroke="currentColor" strokeWidth="0.7" opacity="0.15" />
-    <line x1="32" y1="76" x2="35" y2="78" stroke="currentColor" strokeWidth="0.7" opacity="0.15" />
-    <line x1="17" y1="78" x2="20" y2="76" stroke="currentColor" strokeWidth="0.7" opacity="0.15" />
-    <line x1="32" y1="64" x2="35" y2="62" stroke="currentColor" strokeWidth="0.7" opacity="0.15" />
-    {/* Rear wheel — wire spokes */}
-    <circle cx="130" cy="70" r="13" stroke="currentColor" strokeWidth="2.5" fill="currentColor" opacity="0.05" />
-    <circle cx="130" cy="70" r="6.5" stroke="currentColor" strokeWidth="1" fill="currentColor" opacity="0.12" />
-    <circle cx="130" cy="70" r="2.5" fill="currentColor" opacity="0.4" />
-    <line x1="130" y1="58" x2="130" y2="62" stroke="currentColor" strokeWidth="0.8" opacity="0.22" />
-    <line x1="130" y1="78" x2="130" y2="82" stroke="currentColor" strokeWidth="0.8" opacity="0.22" />
-    <line x1="118" y1="70" x2="122" y2="70" stroke="currentColor" strokeWidth="0.8" opacity="0.22" />
-    <line x1="138" y1="70" x2="142" y2="70" stroke="currentColor" strokeWidth="0.8" opacity="0.22" />
-    <line x1="121" y1="62" x2="124" y2="64" stroke="currentColor" strokeWidth="0.7" opacity="0.15" />
-    <line x1="136" y1="76" x2="139" y2="78" stroke="currentColor" strokeWidth="0.7" opacity="0.15" />
-    <line x1="121" y1="78" x2="124" y2="76" stroke="currentColor" strokeWidth="0.7" opacity="0.15" />
-    <line x1="136" y1="64" x2="139" y2="62" stroke="currentColor" strokeWidth="0.7" opacity="0.15" />
+    <rect x="160" y="50" width="3" height="6" rx="1.5" fill="currentColor" opacity="0.3" />
+    {/* Rear bumper */}
+    <path d="M162 50Q164 50 164 54Q164 58 162 58" stroke="currentColor" strokeWidth="1.8" opacity="0.25" />
+    {/* Front wheel */}
+    <circle cx="36" cy="62" r="12" stroke="currentColor" strokeWidth="2.5" fill="currentColor" opacity="0.05" />
+    <circle cx="36" cy="62" r="6" stroke="currentColor" strokeWidth="1" fill="currentColor" opacity="0.12" />
+    <circle cx="36" cy="62" r="2.5" fill="currentColor" opacity="0.4" />
+    {/* Spokes front */}
+    <line x1="36" y1="51" x2="36" y2="55" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
+    <line x1="36" y1="69" x2="36" y2="73" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
+    <line x1="25" y1="62" x2="29" y2="62" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
+    <line x1="43" y1="62" x2="47" y2="62" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
+    <line x1="28" y1="54" x2="30" y2="56" stroke="currentColor" strokeWidth="0.6" opacity="0.14" />
+    <line x1="42" y1="68" x2="44" y2="70" stroke="currentColor" strokeWidth="0.6" opacity="0.14" />
+    <line x1="28" y1="70" x2="30" y2="68" stroke="currentColor" strokeWidth="0.6" opacity="0.14" />
+    <line x1="42" y1="56" x2="44" y2="54" stroke="currentColor" strokeWidth="0.6" opacity="0.14" />
+    {/* Rear wheel */}
+    <circle cx="140" cy="62" r="12" stroke="currentColor" strokeWidth="2.5" fill="currentColor" opacity="0.05" />
+    <circle cx="140" cy="62" r="6" stroke="currentColor" strokeWidth="1" fill="currentColor" opacity="0.12" />
+    <circle cx="140" cy="62" r="2.5" fill="currentColor" opacity="0.4" />
+    {/* Spokes rear */}
+    <line x1="140" y1="51" x2="140" y2="55" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
+    <line x1="140" y1="69" x2="140" y2="73" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
+    <line x1="129" y1="62" x2="133" y2="62" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
+    <line x1="147" y1="62" x2="151" y2="62" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
+    <line x1="132" y1="54" x2="134" y2="56" stroke="currentColor" strokeWidth="0.6" opacity="0.14" />
+    <line x1="146" y1="68" x2="148" y2="70" stroke="currentColor" strokeWidth="0.6" opacity="0.14" />
+    <line x1="132" y1="70" x2="134" y2="68" stroke="currentColor" strokeWidth="0.6" opacity="0.14" />
+    <line x1="146" y1="56" x2="148" y2="54" stroke="currentColor" strokeWidth="0.6" opacity="0.14" />
     {/* Ground */}
-    <line x1="0" y1="85" x2="156" y2="85" stroke="currentColor" strokeWidth="1" opacity="0.12" />
+    <line x1="0" y1="76" x2="170" y2="76" stroke="currentColor" strokeWidth="1" opacity="0.1" />
   </svg>
 );
 
