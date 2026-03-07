@@ -1281,6 +1281,13 @@ const EditReport = () => {
         )}
 
         {/* ============================================ */}
+        {/* CAM §0: CamperHost Import                    */}
+        {/* ============================================ */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <CamperHostImportForm reportId={id || ''} />
+        )}
+
+        {/* ============================================ */}
         {/* CAM §2: Inspectiegegevens — before Vehicle   */}
         {/* ============================================ */}
         {(report.report_type === 'camper' || !report.report_type) && (
