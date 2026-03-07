@@ -179,6 +179,8 @@ const Customers = () => {
         toast.error('Opslaan mislukt');
       } else {
         toast.success('Klant bijgewerkt');
+        // Sync to linked concept reports
+        await syncCustomerToConceptReports(editingId, payload);
       }
     } else {
       const { error } = await supabase
