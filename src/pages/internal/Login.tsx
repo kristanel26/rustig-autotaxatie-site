@@ -93,19 +93,47 @@ const Login = () => {
           backgroundSize: '60px 60px',
         }}
       >
-        {/* Watermark logo */}
+        {/* Watermark — magnifying glass shape (gold, subtle) */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
-          style={{ opacity: 0.06 }}
+          style={{ opacity: 0.07 }}
         >
-          <img
-            src={logoIcon}
-            alt=""
+          <svg
+            viewBox="0 0 520 590"
+            style={{ height: '65%', width: 'auto' }}
             aria-hidden="true"
+          >
+            <clipPath id="icon-clip">
+              <rect x="0" y="0" width="520" height="590" />
+            </clipPath>
+            <image
+              href={logoIcon}
+              x="0"
+              y="0"
+              width="800"
+              height="590"
+              clipPath="url(#icon-clip)"
+              style={{ filter: 'brightness(0)' }}
+            />
+            {/* Gold overlay */}
+            <rect
+              x="0" y="0" width="520" height="590"
+              fill="#C9A84C"
+              clipPath="url(#icon-clip)"
+              style={{ mixBlendMode: 'screen' }}
+            />
+          </svg>
+        </div>
+
+        {/* Top-left logo */}
+        <div className="relative z-20 mb-4">
+          <img
+            src={logoFull}
+            alt="Taxaris"
             style={{
-              height: '65%',
+              height: 40,
               width: 'auto',
-              filter: 'brightness(0) invert(1)',
+              filter: 'brightness(0) invert(0.78) sepia(1) saturate(3) hue-rotate(10deg)',
             }}
           />
         </div>
