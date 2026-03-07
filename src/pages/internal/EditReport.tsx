@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
-import { ArrowLeft, CheckCircle, Loader2 } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Loader2, Send } from 'lucide-react';
 import { pdf } from '@react-pdf/renderer';
 import PdfRenderer from '@/components/internal/pdf/PdfRenderer';
 import { normalizeReportFormData, LICENSE_PLATE_REGEX, numberToDutchWords, normalizeInitials, capitalizeFirst } from '@/lib/normalizers';
@@ -57,6 +57,7 @@ import {
 } from '@/components/internal/klassieker';
 import { CamperHostImportForm } from '@/components/internal/CamperHostImportForm';
 import { CustomerSearchField } from '@/components/internal/CustomerSearchField';
+import { SendReportDialog } from '@/components/internal/SendReportDialog';
 const reportSchema = z.object({
   customer_title: z.string().optional(),
   customer_initials: z.string().optional(),
@@ -213,6 +214,7 @@ const EditReport = () => {
   // Report status
   const [reportStatus, setReportStatus] = useState<ReportStatus>('concept');
   const [isFinalizingReport, setIsFinalizingReport] = useState(false);
+  const [isSendDialogOpen, setIsSendDialogOpen] = useState(false);
 
   // Auto-save hook - 10 second interval for better reliability
   const { status: saveStatus, lastSavedAt, hasPendingChanges, saveField, saveMultipleFields, flushSave } = useAutoSave({
@@ -1691,9 +1693,31 @@ const EditReport = () => {
                 onMarkGereed={handleFinalizeReport}
                 isFinalizingReport={isFinalizingReport}
               />
+
+              {/* Send button when report is gereed */}
+              {reportStatus === 'gereed' && (
+                <Button
+                  type="button"
+                  className="w-full"
+                  onClick={() => setIsSendDialogOpen(true)}
+                >
+                  <Send className="h-4 w-4 mr-2" />
+                  Rapport verzenden
+                </Button>
+              )}
             </div>
           </aside>
         </div>
+
+        <SendReportDialog
+          open={isSendDialogOpen}
+          onOpenChange={setIsSendDialogOpen}
+          reportId={id!}
+          customerEmail={customerData.customer_email}
+          vehicleTitle={[vehicleData.rdw_merk, vehicleData.rdw_handelsbenaming].filter(Boolean).join(' ')}
+          documentReference={(report as any)?.document_reference || ''}
+          onSent={() => setReportStatus('verzonden')}
+        />
       </InternalLayout>
     </AutoExtractProvider>
   );
