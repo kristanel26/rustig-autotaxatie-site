@@ -379,6 +379,16 @@ const Customers = () => {
               </div>
             </div>
 
+            <div>
+              <Label>Notities</Label>
+              <Textarea
+                value={form.notes}
+                onChange={(e) => updateField('notes', e.target.value)}
+                placeholder="Vrij tekstveld voor opmerkingen over deze klant..."
+                rows={3}
+              />
+            </div>
+
             <div className="flex justify-end gap-3 pt-2">
               <Button variant="outline" onClick={() => setDialogOpen(false)}>Annuleren</Button>
               <Button onClick={handleSave} disabled={saving}>
