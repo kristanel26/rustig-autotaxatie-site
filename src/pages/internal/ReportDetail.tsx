@@ -247,17 +247,17 @@ const ReportDetail = () => {
         {/* Report Header */}
         <div className="flex flex-wrap items-center gap-4 pb-4 border-b border-border">
           <div>
-            <p className="text-sm font-medium text-foreground/70">Rapportnummer</p>
+            <p className="text-sm font-medium text-gold-lt">Rapportnummer</p>
             <p className="text-2xl font-bold">{report.report_number}</p>
           </div>
           {report.document_reference && (
             <div>
-              <p className="text-sm font-medium text-foreground/70">Documentreferentie</p>
+              <p className="text-sm font-medium text-gold-lt">Documentreferentie</p>
               <p className="text-lg font-medium">{report.document_reference}</p>
             </div>
           )}
           <div className="ml-auto text-right">
-            <p className="text-sm font-medium text-foreground/70">Aangemaakt op</p>
+            <p className="text-sm font-medium text-gold-lt">Aangemaakt op</p>
             <p className="text-sm">{formatDate(report.created_at)}</p>
           </div>
         </div>
@@ -274,10 +274,10 @@ const ReportDetail = () => {
               <div className="space-y-1">
                 <p className="font-medium">{customerName}</p>
                 {report.customer_street && (
-                  <p className="text-foreground/70">{report.customer_street}</p>
+                  <p className="text-gold-lt/80">{report.customer_street}</p>
                 )}
                 {(report.customer_postcode || report.customer_city) && (
-                  <p className="text-foreground/70">
+                  <p className="text-gold-lt/80">
                     {[report.customer_postcode, report.customer_city].filter(Boolean).join(' ')}
                   </p>
                 )}
@@ -297,43 +297,43 @@ const ReportDetail = () => {
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Kenteken</p>
+                  <p className="text-sm font-medium text-gold-lt">Kenteken</p>
                   <p className="font-medium font-mono">{report.license_plate || '-'}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Merk</p>
+                  <p className="text-sm font-medium text-gold-lt">Merk</p>
                   <p className="font-medium">{report.rdw_merk || report.vehicle_brand || '-'}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Handelsbenaming / Model</p>
+                  <p className="text-sm font-medium text-gold-lt">Handelsbenaming / Model</p>
                   <p className="font-medium">{report.rdw_handelsbenaming || report.vehicle_model || '-'}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Voertuigsoort</p>
+                  <p className="text-sm font-medium text-gold-lt">Voertuigsoort</p>
                   <p className="font-medium">{report.rdw_voertuigsoort || '-'}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Carrosserievorm</p>
+                  <p className="text-sm font-medium text-gold-lt">Carrosserievorm</p>
                   <p className="font-medium">{report.rdw_carrosserievorm || '-'}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">VIN / Chassisnummer</p>
+                  <p className="text-sm font-medium text-gold-lt">VIN / Chassisnummer</p>
                   <p className="font-medium font-mono text-sm">{report.vin || '-'}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Bouwjaar</p>
+                  <p className="text-sm font-medium text-gold-lt">Bouwjaar</p>
                   <p className="font-medium">{report.rdw_bouwjaar || '-'}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Datum eerste toelating</p>
+                  <p className="text-sm font-medium text-gold-lt">Datum eerste toelating</p>
                   <p className="font-medium">{formatDate(report.rdw_datum_eerste_toelating)}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Datum eerste tenaamstelling</p>
+                  <p className="text-sm font-medium text-gold-lt">Datum eerste tenaamstelling</p>
                   <p className="font-medium">{formatDate(report.rdw_datum_eerste_tenaamstelling)}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Datum laatste tenaamstelling</p>
+                  <p className="text-sm font-medium text-gold-lt">Datum laatste tenaamstelling</p>
                   <p className="font-medium">{formatDate(report.rdw_datum_laatste_tenaamstelling)}</p>
                 </div>
               </div>
@@ -352,31 +352,31 @@ const ReportDetail = () => {
             <CardContent>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Brandstof</p>
+                  <p className="text-sm font-medium text-gold-lt">Brandstof</p>
                   <p className="font-medium">{report.rdw_brandstof || '-'}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Transmissie</p>
+                  <p className="text-sm font-medium text-gold-lt">Transmissie</p>
                   <p className="font-medium">{report.rdw_transmissie || '-'}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Aantal cilinders</p>
+                  <p className="text-sm font-medium text-gold-lt">Aantal cilinders</p>
                   <p className="font-medium">{formatNumber(report.rdw_aantal_cilinders)}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Cilinderinhoud</p>
+                  <p className="text-sm font-medium text-gold-lt">Cilinderinhoud</p>
                   <p className="font-medium">{formatNumber(report.rdw_cilinderinhoud, 'cc')}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Vermogen</p>
+                  <p className="text-sm font-medium text-gold-lt">Vermogen</p>
                   <p className="font-medium">{formatNumber(report.rdw_vermogen_kw, 'kW')}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Aantal deuren</p>
+                  <p className="text-sm font-medium text-gold-lt">Aantal deuren</p>
                   <p className="font-medium">{formatNumber(report.rdw_aantal_deuren)}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Wielbasis</p>
+                  <p className="text-sm font-medium text-gold-lt">Wielbasis</p>
                   <p className="font-medium">{formatNumber(report.rdw_wielbasis, 'mm')}</p>
                 </div>
               </div>
@@ -394,15 +394,15 @@ const ReportDetail = () => {
             <CardContent>
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Ledig gewicht</p>
+                  <p className="text-sm font-medium text-gold-lt">Ledig gewicht</p>
                   <p className="font-medium">{formatNumber(report.rdw_ledig_gewicht, 'kg')}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Massa rijklaar</p>
+                  <p className="text-sm font-medium text-gold-lt">Massa rijklaar</p>
                   <p className="font-medium">{formatNumber(report.rdw_massa_rijklaar, 'kg')}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Max. massa</p>
+                  <p className="text-sm font-medium text-gold-lt">Max. massa</p>
                   <p className="font-medium">{formatNumber(report.rdw_max_massa, 'kg')}</p>
                 </div>
               </div>
@@ -420,17 +420,17 @@ const ReportDetail = () => {
             <CardContent>
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">APK gekeurd</p>
+                  <p className="text-sm font-medium text-gold-lt">APK gekeurd</p>
                   <p className="font-medium">
                     {report.rdw_apk_gekeurd === true ? 'Ja' : report.rdw_apk_gekeurd === false ? 'Nee' : '-'}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">APK vervaldatum</p>
+                  <p className="text-sm font-medium text-gold-lt">APK vervaldatum</p>
                   <p className="font-medium">{formatDate(report.rdw_apk_vervaldatum)}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Importvoertuig</p>
+                  <p className="text-sm font-medium text-gold-lt">Importvoertuig</p>
                   <p className="font-medium">
                     {report.rdw_importvoertuig === true ? 'Ja' : report.rdw_importvoertuig === false ? 'Nee' : '-'}
                   </p>
@@ -450,7 +450,7 @@ const ReportDetail = () => {
             <CardContent>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Tellerstand</p>
+                  <p className="text-sm font-medium text-gold-lt">Tellerstand</p>
                   <p className="text-xl font-bold">
                     {report.tellerstand ? formatNumber(report.tellerstand, report.tellerstand_type || 'km') : '-'}
                   </p>
@@ -470,19 +470,19 @@ const ReportDetail = () => {
               <CardContent>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-sm font-medium text-foreground/70">Soort bouw</p>
+                    <p className="text-sm font-medium text-gold-lt">Soort bouw</p>
                     <p className="font-medium capitalize">{report.soort_bouw || '-'}</p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-foreground/70">Opbouw merk</p>
+                    <p className="text-sm font-medium text-gold-lt">Opbouw merk</p>
                     <p className="font-medium">{report.opbouw_merk || '-'}</p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-foreground/70">Opbouw type</p>
+                    <p className="text-sm font-medium text-gold-lt">Opbouw type</p>
                     <p className="font-medium">{report.opbouw_type || '-'}</p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-foreground/70">Constructievorm</p>
+                    <p className="text-sm font-medium text-gold-lt">Constructievorm</p>
                     <p className="font-medium">{report.constructievorm || '-'}</p>
                   </div>
                 </div>
@@ -502,17 +502,17 @@ const ReportDetail = () => {
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-sm font-medium text-foreground/70">Gebruik</p>
+                    <p className="text-sm font-medium text-gold-lt">Gebruik</p>
                     <p className="font-medium capitalize">{report.gebruik || '-'}</p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-foreground/70">Stalling</p>
+                    <p className="text-sm font-medium text-gold-lt">Stalling</p>
                     <p className="font-medium capitalize">{report.stalling || '-'}</p>
                   </div>
                 </div>
                 {report.staat_bij_opname && (
                   <div>
-                    <p className="text-sm font-medium text-foreground/70">Staat bij opname</p>
+                    <p className="text-sm font-medium text-gold-lt">Staat bij opname</p>
                     <p className="font-medium">{report.staat_bij_opname}</p>
                   </div>
                 )}
@@ -530,7 +530,7 @@ const ReportDetail = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <p className="text-sm font-medium text-foreground/70 flex items-center gap-1">
+                <p className="text-sm font-medium text-gold-lt flex items-center gap-1">
                   <MapPin className="h-3 w-3" />
                   Locatie
                 </p>
@@ -538,15 +538,15 @@ const ReportDetail = () => {
               </div>
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Datum</p>
+                  <p className="text-sm font-medium text-gold-lt">Datum</p>
                   <p className="font-medium">{formatDate(report.inspection_date)}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Starttijd</p>
+                  <p className="text-sm font-medium text-gold-lt">Starttijd</p>
                   <p className="font-medium">{formatTime(report.inspection_start_time)}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Eindtijd</p>
+                  <p className="text-sm font-medium text-gold-lt">Eindtijd</p>
                   <p className="font-medium">{formatTime(report.inspection_end_time)}</p>
                 </div>
               </div>
@@ -564,19 +564,19 @@ const ReportDetail = () => {
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Getaxeerde waarde</p>
+                  <p className="text-sm font-medium text-gold-lt">Getaxeerde waarde</p>
                   <p className="text-xl font-bold text-primary">
                     {formatCurrency(report.appraised_value)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Kwaliteitsklasse</p>
+                  <p className="text-sm font-medium text-gold-lt">Kwaliteitsklasse</p>
                   <p className="font-medium">{getQualityClassLabel(report.quality_class)}</p>
                 </div>
               </div>
               {report.appraised_value_text && (
                 <div>
-                  <p className="text-sm font-medium text-foreground/70">Waarde in woorden</p>
+                  <p className="text-sm font-medium text-gold-lt">Waarde in woorden</p>
                   <p className="font-medium italic">{report.appraised_value_text}</p>
                 </div>
               )}
@@ -591,7 +591,7 @@ const ReportDetail = () => {
               <CardTitle className="text-lg">Algemene opmerkingen</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="whitespace-pre-wrap text-foreground/70">
+              <p className="whitespace-pre-wrap text-gold-lt/80">
                 {report.general_remarks}
               </p>
             </CardContent>
