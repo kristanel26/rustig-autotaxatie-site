@@ -4,6 +4,7 @@ import InternalLayout from '@/components/internal/InternalLayout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Search, Plus, Building2, User, Pencil, Trash2 } from 'lucide-react';
@@ -307,10 +308,16 @@ const Customers = () => {
             </div>
 
             {form.customer_type === 'zakelijk' && (
-              <div>
-                <Label>Bedrijfsnaam</Label>
-                <Input value={form.company_name} onChange={(e) => updateField('company_name', e.target.value)} />
-              </div>
+              <>
+                <div>
+                  <Label>Bedrijfsnaam</Label>
+                  <Input value={form.company_name} onChange={(e) => updateField('company_name', e.target.value)} />
+                </div>
+                <div>
+                  <Label>KVK-nummer</Label>
+                  <Input value={form.kvk_nummer} onChange={(e) => updateField('kvk_nummer', e.target.value)} placeholder="12345678" />
+                </div>
+              </>
             )}
 
             <div className="grid grid-cols-3 gap-3">
