@@ -55,6 +55,8 @@ const Dashboard = () => {
     reportsThisMonth: 0,
     conceptCount: 0,
     inBehandelingCount: 0,
+    gereedCount: 0,
+    verzondenCount: 0,
   });
   const [recentReports, setRecentReports] = useState<ReportRow[]>([]);
   const [sentReports, setSentReports] = useState<ReportRow[]>([]);
@@ -171,6 +173,8 @@ const Dashboard = () => {
           { count: monthCount },
           { count: conceptCount },
           { count: inBehandelingCount },
+          { count: gereedCount },
+          { count: verzondenCount },
           { data: recent },
           { data: sent },
           { data: hertaxatie },
@@ -182,6 +186,10 @@ const Dashboard = () => {
             .eq('status', 'concept'),
           supabase.from('reports').select('*', { count: 'exact', head: true })
             .eq('status', 'in_behandeling'),
+          supabase.from('reports').select('*', { count: 'exact', head: true })
+            .eq('status', 'gereed'),
+          supabase.from('reports').select('*', { count: 'exact', head: true })
+            .eq('status', 'verzonden'),
           // Recent bewerkte rapporten (alle statussen)
           supabase.from('reports')
             .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
@@ -209,6 +217,8 @@ const Dashboard = () => {
           reportsThisMonth: monthCount || 0,
           conceptCount: conceptCount || 0,
           inBehandelingCount: inBehandelingCount || 0,
+          gereedCount: gereedCount || 0,
+          verzondenCount: verzondenCount || 0,
         });
         setRecentReports((recent as ReportRow[]) || []);
         setSentReports((sent as ReportRow[]) || []);
