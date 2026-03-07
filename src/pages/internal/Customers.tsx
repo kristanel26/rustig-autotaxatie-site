@@ -40,6 +40,7 @@ interface Customer {
   customer_type: string;
   company_name: string | null;
   kvk_nummer: string | null;
+  rsin: string | null;
   salutation: string | null;
   initials: string | null;
   first_name: string | null;
@@ -58,6 +59,7 @@ const emptyForm = {
   customer_type: 'particulier',
   company_name: '',
   kvk_nummer: '',
+  rsin: '',
   salutation: '',
   initials: '',
   first_name: '',
@@ -132,6 +134,7 @@ const Customers = () => {
       customer_type: c.customer_type,
       company_name: c.company_name || '',
       kvk_nummer: c.kvk_nummer || '',
+      rsin: c.rsin || '',
       salutation: c.salutation || '',
       initials: c.initials || '',
       first_name: c.first_name || '',
@@ -157,6 +160,7 @@ const Customers = () => {
       ...form,
       company_name: form.company_name || null,
       kvk_nummer: form.kvk_nummer || null,
+      rsin: form.rsin || null,
       salutation: form.salutation || null,
       initials: form.initials ? normalizeInitials(form.initials) : null,
       first_name: form.first_name ? capitalizeFirst(form.first_name) : null,
@@ -373,7 +377,18 @@ const Customers = () => {
                   <Label>KVK-nummer</Label>
                   <Input value={form.kvk_nummer} onChange={(e) => updateField('kvk_nummer', e.target.value)} placeholder="12345678" />
                 </div>
+                <div>
+                  <Label>RSIN</Label>
+                  <Input value={form.rsin} onChange={(e) => updateField('rsin', e.target.value)} placeholder="123456789" />
+                </div>
               </>
+            )}
+
+            {form.customer_type === 'particulier' && (
+              <div>
+                <Label>BSN / RSIN (optioneel)</Label>
+                <Input value={form.rsin} onChange={(e) => updateField('rsin', e.target.value)} placeholder="123456789" />
+              </div>
             )}
 
             <div className="grid grid-cols-3 gap-3">
