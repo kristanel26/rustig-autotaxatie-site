@@ -214,7 +214,7 @@ const CustomerDetail = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Contactgegevens</CardTitle>
+              <CardTitle className="text-sm font-medium text-gold-lt">Contactgegevens</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2 text-sm">
               {customer.salutation && <p>{customer.salutation} {displayName()}</p>}
@@ -224,7 +224,7 @@ const CustomerDetail = () => {
           </Card>
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Adres</CardTitle>
+              <CardTitle className="text-sm font-medium text-gold-lt">Adres</CardTitle>
             </CardHeader>
             <CardContent className="space-y-1 text-sm">
               {(customer.street || customer.house_number) && (
@@ -242,7 +242,7 @@ const CustomerDetail = () => {
         {customer.notes && (
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Notities</CardTitle>
+              <CardTitle className="text-sm font-medium text-gold-lt">Notities</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm whitespace-pre-wrap">{customer.notes}</p>

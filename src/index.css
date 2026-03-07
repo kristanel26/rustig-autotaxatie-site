@@ -146,6 +146,12 @@
     --intern-green: 160 64% 40%;     /* #10b981 */
     --intern-amber: 38 92% 50%;      /* #f59e0b */
   }
+
+  /* Label styling for intern theme */
+  .intern-theme label,
+  .intern-theme .label-gold {
+    color: hsl(var(--gold-lt));
+  }
 }
 
 @layer base {
