@@ -212,6 +212,7 @@ const EditReport = () => {
 
   // Report status
   const [reportStatus, setReportStatus] = useState<ReportStatus>('concept');
+  const [isFinalizingReport, setIsFinalizingReport] = useState(false);
 
   // Auto-save hook - 10 second interval for better reliability
   const { status: saveStatus, lastSavedAt, hasPendingChanges, saveField, saveMultipleFields, flushSave } = useAutoSave({
