@@ -25,6 +25,7 @@ export type Database = {
           house_number: string | null
           id: string
           initials: string | null
+          kvk_nummer: string | null
           last_name: string
           notes: string | null
           phone: string | null
@@ -44,6 +45,7 @@ export type Database = {
           house_number?: string | null
           id?: string
           initials?: string | null
+          kvk_nummer?: string | null
           last_name: string
           notes?: string | null
           phone?: string | null
@@ -63,6 +65,7 @@ export type Database = {
           house_number?: string | null
           id?: string
           initials?: string | null
+          kvk_nummer?: string | null
           last_name?: string
           notes?: string | null
           phone?: string | null

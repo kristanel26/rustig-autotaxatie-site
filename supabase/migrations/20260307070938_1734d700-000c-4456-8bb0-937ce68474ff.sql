@@ -1,0 +1,1 @@
+ALTER TABLE public.customers ADD COLUMN kvk_nummer text NULL;
