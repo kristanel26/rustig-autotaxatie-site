@@ -111,18 +111,7 @@ const Login = () => {
         <div className="relative z-10">
           {/* Logo */}
           <div className="flex items-center gap-4 mb-8">
-            <TaxarisLogoIcon />
-            <span
-              style={{
-                fontFamily: '"Cormorant Garamond", serif',
-                fontWeight: 300,
-                fontSize: '1.75rem',
-                letterSpacing: '0.08em',
-                color: '#e8dcc8',
-              }}
-            >
-              Taxaris
-            </span>
+            <TaxarisLogo variant="white" size="xl" />
           </div>
 
           {/* Gold divider */}
