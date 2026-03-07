@@ -69,7 +69,7 @@ export const CustomerSearchField = ({ onSelect, onNewCustomer }: CustomerSearchF
   }, []);
 
   const displayName = (c: Customer) => {
-    return [c.initials, c.first_name, c.last_name].filter(Boolean).join(' ');
+    return [c.salutation, c.initials, c.last_name].filter(Boolean).join(' ');
   };
 
   const handleSelect = (c: Customer) => {
