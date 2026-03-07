@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { supabase } from '@/integrations/supabase/client';
-import { FileText, FilePlus, Clock, Send, AlertCircle, RefreshCw, Search, User } from 'lucide-react';
+import { FileText, FilePlus, Clock, Send, AlertCircle, CheckCircle, RefreshCw, Search, User } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { getStatusBadgeProps } from '@/components/internal/ReportStatusBar';
 import {
@@ -22,6 +22,8 @@ interface DashboardStats {
   reportsThisMonth: number;
   conceptCount: number;
   inBehandelingCount: number;
+  gereedCount: number;
+  verzondenCount: number;
 }
 
 interface ReportRow {
@@ -53,6 +55,8 @@ const Dashboard = () => {
     reportsThisMonth: 0,
     conceptCount: 0,
     inBehandelingCount: 0,
+    gereedCount: 0,
+    verzondenCount: 0,
   });
   const [recentReports, setRecentReports] = useState<ReportRow[]>([]);
   const [sentReports, setSentReports] = useState<ReportRow[]>([]);
@@ -169,6 +173,8 @@ const Dashboard = () => {
           { count: monthCount },
           { count: conceptCount },
           { count: inBehandelingCount },
+          { count: gereedCount },
+          { count: verzondenCount },
           { data: recent },
           { data: sent },
           { data: hertaxatie },
@@ -180,6 +186,10 @@ const Dashboard = () => {
             .eq('status', 'concept'),
           supabase.from('reports').select('*', { count: 'exact', head: true })
             .eq('status', 'in_behandeling'),
+          supabase.from('reports').select('*', { count: 'exact', head: true })
+            .eq('status', 'gereed'),
+          supabase.from('reports').select('*', { count: 'exact', head: true })
+            .eq('status', 'verzonden'),
           // Recent bewerkte rapporten (alle statussen)
           supabase.from('reports')
             .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
@@ -207,6 +217,8 @@ const Dashboard = () => {
           reportsThisMonth: monthCount || 0,
           conceptCount: conceptCount || 0,
           inBehandelingCount: inBehandelingCount || 0,
+          gereedCount: gereedCount || 0,
+          verzondenCount: verzondenCount || 0,
         });
         setRecentReports((recent as ReportRow[]) || []);
         setSentReports((sent as ReportRow[]) || []);
@@ -369,25 +381,6 @@ const Dashboard = () => {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Totaal</CardTitle>
-              <FileText className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{loading ? '…' : stats.totalReports}</div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Deze maand</CardTitle>
-              <Send className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{loading ? '…' : stats.reportsThisMonth}</div>
-              <p className="text-xs text-muted-foreground mt-1">inspectiedatum</p>
-            </CardContent>
-          </Card>
           <Card className="cursor-pointer hover:border-primary/50 transition-colors" onClick={() => navigate('/intern/rapporten?status=concept')}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">Concept</CardTitle>
@@ -395,7 +388,6 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{loading ? '…' : stats.conceptCount}</div>
-              <p className="text-xs text-muted-foreground mt-1">Bekijk alle →</p>
             </CardContent>
           </Card>
           <Card className="cursor-pointer hover:border-primary/50 transition-colors" onClick={() => navigate('/intern/rapporten?status=in_behandeling')}>
@@ -405,7 +397,24 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{loading ? '…' : stats.inBehandelingCount}</div>
-              <p className="text-xs text-muted-foreground mt-1">Bekijk alle →</p>
+            </CardContent>
+          </Card>
+          <Card className="cursor-pointer hover:border-primary/50 transition-colors" onClick={() => navigate('/intern/rapporten?status=gereed')}>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground">Gereed</CardTitle>
+              <CheckCircle className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{loading ? '…' : stats.gereedCount}</div>
+            </CardContent>
+          </Card>
+          <Card className="cursor-pointer hover:border-primary/50 transition-colors" onClick={() => navigate('/intern/rapporten?status=verzonden')}>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground">Verzonden</CardTitle>
+              <Send className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{loading ? '…' : stats.verzondenCount}</div>
             </CardContent>
           </Card>
         </div>
