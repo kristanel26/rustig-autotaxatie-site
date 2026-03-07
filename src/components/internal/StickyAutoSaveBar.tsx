@@ -21,8 +21,8 @@ const statusConfig: Record<SaveStatus, {
   idle: {
     icon: <Check className="h-4 w-4" />,
     text: 'Opgeslagen',
-    className: 'text-muted-foreground',
-    bgClassName: 'bg-muted/50',
+    className: 'text-[hsl(var(--intern-green))]',
+    bgClassName: 'bg-[hsl(var(--intern-green)/0.08)] border-[hsl(var(--intern-green)/0.2)]',
   },
   pending: {
     icon: <CloudOff className="h-4 w-4" />,
@@ -117,7 +117,7 @@ export function StickyAutoSaveBar({
         {effectiveConfig.icon}
         <span className="text-sm">{effectiveConfig.text}</span>
         {lastSavedAt && status !== 'pending' && status !== 'error' && (
-          <span className="text-xs text-muted-foreground ml-1">
+          <span className="text-xs text-foreground/50 ml-1">
             • Laatst: {displayTime}
           </span>
         )}
