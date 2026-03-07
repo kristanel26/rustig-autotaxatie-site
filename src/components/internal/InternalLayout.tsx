@@ -33,11 +33,11 @@ const InternalLayout: React.FC<InternalLayoutProps> = ({ children, title }) => {
   };
 
   const navItems = [
-    { path: '/intern/rapporten', label: 'Rapporten', icon: FileText },
-    { path: '/intern/klanten', label: 'Klanten', icon: Users },
     { path: '/intern/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { path: '/intern/klanten', label: 'Klanten', icon: Users },
     { path: '/intern/rapportage', label: 'Rapportage', icon: BarChart3 },
     { path: '/intern/herinneringen', label: 'Herinneringen', icon: Bell },
+    { path: '/intern/rapporten', label: 'Rapporten', icon: FileText },
   ];
 
   const isActive = (path: string) => location.pathname === path;
