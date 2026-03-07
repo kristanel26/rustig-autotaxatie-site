@@ -179,6 +179,8 @@ const Customers = () => {
         toast.error('Opslaan mislukt');
       } else {
         toast.success('Klant bijgewerkt');
+        // Sync to linked concept reports
+        await syncCustomerToConceptReports(editingId, payload);
       }
     } else {
       const { error } = await supabase
@@ -194,6 +196,44 @@ const Customers = () => {
     setDialogOpen(false);
     fetchCustomers();
   };
+
+  const syncCustomerToConceptReports = async (customerId: string, payload: Record<string, any>) => {
+    try {
+      // Find all concept reports linked to this customer
+      const { data: linkedReports } = await supabase
+        .from('reports')
+        .select('id')
+        .eq('customer_id', customerId)
+        .eq('status', 'concept');
+
+      if (!linkedReports || linkedReports.length === 0) return;
+
+      const reportUpdate = {
+        opdrachtgever: payload.company_name || null,
+        customer_title: payload.salutation || null,
+        customer_initials: payload.initials || null,
+        customer_last_name: payload.last_name || null,
+        customer_street: [payload.street, payload.house_number].filter(Boolean).join(' ') || null,
+        customer_postcode: payload.postal_code || null,
+        customer_city: payload.city || null,
+        customer_email: payload.email || null,
+        customer_phone: payload.phone || null,
+      };
+
+      const { error } = await supabase
+        .from('reports')
+        .update(reportUpdate)
+        .eq('customer_id', customerId)
+        .eq('status', 'concept');
+
+      if (!error) {
+        toast.info(`${linkedReports.length} concept-rapport${linkedReports.length > 1 ? 'en' : ''} bijgewerkt`);
+      }
+    } catch (err) {
+      console.error('Sync to reports failed:', err);
+    }
+  };
+
 
   const handleDelete = async (id: string) => {
     if (!confirm('Weet je zeker dat je deze klant wilt verwijderen?')) return;
