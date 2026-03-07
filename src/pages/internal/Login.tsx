@@ -84,7 +84,7 @@ const Login = () => {
     >
       {/* ── LEFT COLUMN — Brand Panel ── */}
       <div
-        className="relative flex flex-col justify-between p-12 overflow-hidden"
+        className="relative flex flex-col justify-center p-12 overflow-hidden"
         style={{
           background: `
             linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
@@ -94,25 +94,25 @@ const Login = () => {
           backgroundSize: '60px 60px',
         }}
       >
-        {/* Watermark — clean magnifying glass icon from storage */}
+        {/* Watermark — inline SVG magnifying glass */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
-          style={{ opacity: 0.07 }}
         >
-          <img
-            src="https://dzvjybtofvbxtuagtzng.supabase.co/storage/v1/object/public/branding/logo/taxaris-logo-icon.svg"
-            alt=""
+          <svg
+            width="500"
+            height="500"
+            viewBox="0 0 500 500"
+            fill="none"
             aria-hidden="true"
-            style={{
-              height: '65%',
-              width: 'auto',
-              filter: 'brightness(0) invert(0.78) sepia(1) saturate(3) hue-rotate(10deg)',
-            }}
-          />
+            style={{ opacity: 0.07 }}
+          >
+            <circle cx="220" cy="220" r="160" stroke="#C9A84C" strokeWidth="32" fill="none" />
+            <line x1="340" y1="340" x2="460" y2="460" stroke="#C9A84C" strokeWidth="36" strokeLinecap="round" />
+          </svg>
         </div>
 
         {/* Top-left logo */}
-        <div className="relative z-20 mb-4">
+        <div className="absolute top-8 left-12 z-20">
           <img
             src={logoFull}
             alt="Taxaris"
@@ -136,9 +136,7 @@ const Login = () => {
               marginBottom: 16,
             }}
           >
-            Professionele voertuig-
-            <br />
-            taxaties{' '}
+            Professionele voertuigtaxaties{' '}
             <em style={{ color: '#c9a84c', fontStyle: 'italic' }}>op orde</em>
           </h1>
 
@@ -156,7 +154,6 @@ const Login = () => {
             regelgeving.
           </p>
         </div>
-
 
         {/* Vertical separator on right edge */}
         <div
