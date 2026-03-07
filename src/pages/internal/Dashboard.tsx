@@ -35,6 +35,7 @@ interface ReportRow {
   sent_at: string | null;
   reminder_due_date: string | null;
   updated_at: string;
+  report_type: string | null;
 }
 
 const Dashboard = () => {
