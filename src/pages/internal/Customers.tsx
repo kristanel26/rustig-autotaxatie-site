@@ -448,7 +448,13 @@ const Customers = () => {
                 value={form.last_name}
                 onChange={(e) => updateField('last_name', e.target.value)}
                 onBlur={(e) => updateField('last_name', capitalizeFirst(e.target.value))}
+                required
+                autoFocus
+                className={!form.last_name.trim() && saving ? 'border-destructive' : ''}
               />
+              {!form.last_name.trim() && saving && (
+                <p className="text-xs text-destructive mt-1">Achternaam is verplicht</p>
+              )}
             </div>
 
             <div className="grid grid-cols-3 gap-3">
