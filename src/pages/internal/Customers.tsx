@@ -255,7 +255,7 @@ const Customers = () => {
   };
 
   const displayName = (c: Customer) => {
-    const parts = [c.initials, c.first_name, c.last_name].filter(Boolean);
+    const parts = [c.salutation, c.initials, c.last_name].filter(Boolean);
     return parts.join(' ');
   };
 
