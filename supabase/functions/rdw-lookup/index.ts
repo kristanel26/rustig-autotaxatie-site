@@ -217,7 +217,7 @@ serve(async (req) => {
 
       // Sectie 2: Technische hoofdgegevens
       rdw_brandstof: brandstofData?.brandstof_omschrijving || null,
-      rdw_transmissie: null,
+      rdw_transmissie: getTransmissie(),
       rdw_aantal_cilinders: voertuig.aantal_cilinders ? parseInt(voertuig.aantal_cilinders) : null,
       rdw_cilinderinhoud: voertuig.cilinderinhoud ? parseInt(voertuig.cilinderinhoud) : null,
       rdw_vermogen_kw: brandstofData?.nettomaximumvermogen ? parseInt(brandstofData.nettomaximumvermogen) : null,
