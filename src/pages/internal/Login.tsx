@@ -4,7 +4,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { ArrowRight } from 'lucide-react';
-import logoIcon from '@/assets/taxaris-logo-icon.svg';
+
 import logoFull from '@/assets/taxaris-logo-full.svg';
 
 const loginSchema = z.object({
@@ -94,36 +94,21 @@ const Login = () => {
           backgroundSize: '60px 60px',
         }}
       >
-        {/* Watermark — magnifying glass shape (gold, subtle) */}
+        {/* Watermark — clean magnifying glass icon from storage */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
           style={{ opacity: 0.07 }}
         >
-          <svg
-            viewBox="0 0 520 590"
-            style={{ height: '65%', width: 'auto' }}
+          <img
+            src="https://dzvjybtofvbxtuagtzng.supabase.co/storage/v1/object/public/branding/logo/taxaris-logo-icon.svg"
+            alt=""
             aria-hidden="true"
-          >
-            <clipPath id="icon-clip">
-              <rect x="0" y="0" width="520" height="590" />
-            </clipPath>
-            <image
-              href={logoIcon}
-              x="0"
-              y="0"
-              width="800"
-              height="590"
-              clipPath="url(#icon-clip)"
-              style={{ filter: 'brightness(0)' }}
-            />
-            {/* Gold overlay */}
-            <rect
-              x="0" y="0" width="520" height="590"
-              fill="#C9A84C"
-              clipPath="url(#icon-clip)"
-              style={{ mixBlendMode: 'screen' }}
-            />
-          </svg>
+            style={{
+              height: '65%',
+              width: 'auto',
+              filter: 'brightness(0) invert(0.78) sepia(1) saturate(3) hue-rotate(10deg)',
+            }}
+          />
         </div>
 
         {/* Top-left logo */}
