@@ -9,6 +9,7 @@ const corsHeaders = {
 // RDW Open Data API endpoints
 const RDW_VOERTUIGEN_URL = 'https://opendata.rdw.nl/resource/m9d7-ebf2.json';
 const RDW_BRANDSTOF_URL = 'https://opendata.rdw.nl/resource/8ys7-d773.json';
+const RDW_VERSNELLING_URL = 'https://opendata.rdw.nl/resource/7rjk-eycs.json';
 
 interface RDWVoertuig {
   kenteken?: string;
@@ -34,6 +35,12 @@ interface RDWBrandstof {
   kenteken?: string;
   brandstof_omschrijving?: string;
   nettomaximumvermogen?: string;
+}
+
+interface RDWVersnelling {
+  kenteken?: string;
+  aantal_versnellingen?: string;
+  type_versnellingsbak?: string;
 }
 
 serve(async (req) => {
@@ -138,6 +145,32 @@ serve(async (req) => {
       console.log('Could not fetch brandstof data:', e);
     }
 
+    // Fetch transmission data
+    let versnellingData: RDWVersnelling | null = null;
+    try {
+      const versnellingResponse = await fetch(
+        `${RDW_VERSNELLING_URL}?kenteken=${normalizedKenteken}`,
+        { headers: { 'Accept': 'application/json' } }
+      );
+      if (versnellingResponse.ok) {
+        const versnellingArray: RDWVersnelling[] = await versnellingResponse.json();
+        if (versnellingArray && versnellingArray.length > 0) {
+          versnellingData = versnellingArray[0];
+        }
+      }
+    } catch (e) {
+      console.log('Could not fetch versnelling data:', e);
+    }
+
+    // Map transmission type
+    const getTransmissie = (): string | null => {
+      if (!versnellingData?.type_versnellingsbak) return null;
+      const type = versnellingData.type_versnellingsbak.toLowerCase();
+      if (type.includes('handgeschakeld') || type === 'h') return 'handgeschakeld';
+      if (type.includes('automaat') || type.includes('automatisch') || type === 'a') return 'automaat';
+      return versnellingData.type_versnellingsbak;
+    };
+
     // Parse dates from RDW format (YYYYMMDD) to ISO format
     const parseRDWDate = (dateStr: string | undefined): string | null => {
       if (!dateStr || dateStr.length !== 8) return null;
@@ -184,7 +217,7 @@ serve(async (req) => {
 
       // Sectie 2: Technische hoofdgegevens
       rdw_brandstof: brandstofData?.brandstof_omschrijving || null,
-      rdw_transmissie: null,
+      rdw_transmissie: getTransmissie(),
       rdw_aantal_cilinders: voertuig.aantal_cilinders ? parseInt(voertuig.aantal_cilinders) : null,
       rdw_cilinderinhoud: voertuig.cilinderinhoud ? parseInt(voertuig.cilinderinhoud) : null,
       rdw_vermogen_kw: brandstofData?.nettomaximumvermogen ? parseInt(brandstofData.nettomaximumvermogen) : null,
