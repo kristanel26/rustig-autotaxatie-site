@@ -84,6 +84,7 @@ const Customers = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
+  const [returnToReport, setReturnToReport] = useState<string | null>(null);
 
   const fetchCustomers = async () => {
     const { data } = await supabase
@@ -114,7 +115,8 @@ const Customers = () => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('nieuw') === '1') {
       openNew();
-      // Remove query param from URL
+      const rapportId = params.get('rapport');
+      if (rapportId) setReturnToReport(rapportId);
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, []);
@@ -197,13 +199,22 @@ const Customers = () => {
         await syncCustomerToConceptReports(editingId, payload);
       }
     } else {
-      const { error } = await supabase
+      const { data: newCustomer, error } = await supabase
         .from('customers')
-        .insert({ ...payload, user_id: user!.id });
+        .insert({ ...payload, user_id: user!.id })
+        .select('id')
+        .single();
       if (error) {
         toast.error('Opslaan mislukt');
       } else {
         toast.success('Klant aangemaakt');
+        // If we came from a report, redirect back and auto-link
+        if (returnToReport && newCustomer) {
+          setSaving(false);
+          setDialogOpen(false);
+          navigate(`/intern/rapport/${returnToReport}/bewerken?klant=${newCustomer.id}`);
+          return;
+        }
       }
     }
     setSaving(false);
@@ -437,7 +448,13 @@ const Customers = () => {
                 value={form.last_name}
                 onChange={(e) => updateField('last_name', e.target.value)}
                 onBlur={(e) => updateField('last_name', capitalizeFirst(e.target.value))}
+                required
+                autoFocus
+                className={!form.last_name.trim() && saving ? 'border-destructive' : ''}
               />
+              {!form.last_name.trim() && saving && (
+                <p className="text-xs text-destructive mt-1">Achternaam is verplicht</p>
+              )}
             </div>
 
             <div className="grid grid-cols-3 gap-3">

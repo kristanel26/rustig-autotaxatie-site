@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import InternalLayout from '@/components/internal/InternalLayout';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
@@ -142,6 +142,7 @@ const EditReport = () => {
   const { id } = useParams<{ id: string }>();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -228,6 +229,49 @@ const EditReport = () => {
     hasUnsavedChanges: hasPendingChanges,
     onBeforeLeave: flushSave,
   });
+
+  // Auto-link customer when returning from Customers page
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const customerId = params.get('klant');
+    if (!customerId) return;
+    // Remove param from URL
+    window.history.replaceState({}, document.title, location.pathname);
+    // Fetch customer and link
+    (async () => {
+      const { data: c } = await supabase
+        .from('customers')
+        .select('id, customer_type, company_name, salutation, initials, first_name, last_name, street, house_number, postal_code, city, email, phone')
+        .eq('id', customerId)
+        .single();
+      if (!c) return;
+      const newData = {
+        opdrachtgever: c.company_name || '',
+        customer_title: c.salutation || '',
+        customer_initials: c.initials || '',
+        customer_last_name: c.last_name,
+        customer_street: [c.street, c.house_number].filter(Boolean).join(' '),
+        customer_postcode: c.postal_code || '',
+        customer_city: c.city || '',
+        customer_email: c.email || '',
+        customer_phone: c.phone || '',
+      };
+      setCustomerData(newData);
+      saveMultipleFields({
+        customer_id: c.id,
+        opdrachtgever: c.company_name || null,
+        customer_title: c.salutation || null,
+        customer_initials: c.initials || null,
+        customer_last_name: c.last_name || null,
+        customer_street: newData.customer_street || null,
+        customer_postcode: c.postal_code || null,
+        customer_city: c.city || null,
+        customer_email: c.email || null,
+        customer_phone: c.phone || null,
+      });
+      toast({ title: 'Klant gekoppeld', description: `${[c.first_name, c.last_name].filter(Boolean).join(' ')} is ingevuld.` });
+    })();
+  }, [location.search]);
 
   // Combine all data for completeness check
   const completenessData = useMemo(() => ({
@@ -1223,10 +1267,9 @@ const EditReport = () => {
                   toast({ title: 'Klant gekoppeld', description: `${[c.first_name, c.last_name].filter(Boolean).join(' ')} is ingevuld.` });
                 }}
                 onNewCustomer={() => {
-                  const w = window.open('/intern/klanten?nieuw=1', '_blank');
+                  const w = window.open(`/intern/klanten?nieuw=1&rapport=${id}`, '_blank');
                   if (!w) {
-                    // Popup blocked — navigate in same tab
-                    window.location.href = '/intern/klanten?nieuw=1';
+                    window.location.href = `/intern/klanten?nieuw=1&rapport=${id}`;
                   }
                 }}
               />
