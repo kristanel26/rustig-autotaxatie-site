@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Eye, EyeOff } from 'lucide-react';
 
 import logoFull from '@/assets/taxaris-logo-full.svg';
 
@@ -16,6 +16,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
 
   const { signIn, user, loading } = useAuth();
@@ -250,27 +251,47 @@ const Login = () => {
               >
                 Wachtwoord
               </label>
-              <input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={isLoading}
-                style={{
-                  width: '100%',
-                  fontFamily: '"DM Sans", sans-serif',
-                  fontSize: '0.875rem',
-                  padding: '10px 14px',
-                  borderRadius: 6,
-                  border: errors.password ? '1px solid #ef4444' : '1px solid #253047',
-                  background: '#111827',
-                  color: '#e8dcc8',
-                  outline: 'none',
-                }}
-                onFocus={(e) => (e.target.style.borderColor = '#c9a84c')}
-                onBlur={(e) => (e.target.style.borderColor = errors.password ? '#ef4444' : '#253047')}
-              />
+              <div style={{ position: 'relative' }}>
+                <input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={isLoading}
+                  style={{
+                    width: '100%',
+                    fontFamily: '"DM Sans", sans-serif',
+                    fontSize: '0.875rem',
+                    padding: '10px 40px 10px 14px',
+                    borderRadius: 6,
+                    border: errors.password ? '1px solid #ef4444' : '1px solid #253047',
+                    background: '#111827',
+                    color: '#e8dcc8',
+                    outline: 'none',
+                  }}
+                  onFocus={(e) => (e.target.style.borderColor = '#c9a84c')}
+                  onBlur={(e) => (e.target.style.borderColor = errors.password ? '#ef4444' : '#253047')}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    position: 'absolute',
+                    right: 10,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: '#8a9bb5',
+                    padding: 4,
+                    display: 'flex',
+                  }}
+                >
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+              </div>
               {errors.password && (
                 <p style={{ fontSize: '0.75rem', color: '#ef4444', marginTop: 4 }}>{errors.password}</p>
               )}
