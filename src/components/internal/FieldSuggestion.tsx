@@ -28,7 +28,7 @@ export function FieldSuggestion({ fieldKey, onAccept }: FieldSuggestionProps) {
   return (
     <div className="flex items-center gap-2 mt-1 p-2 bg-muted/50 rounded-md border border-dashed border-primary/30">
       <Sparkles className="h-3.5 w-3.5 text-primary flex-shrink-0" />
-      <code className="text-sm font-mono flex-1 truncate">{suggestion.proposedValue}</code>
+      <code className="text-sm font-mono flex-1 break-all">{suggestion.proposedValue}</code>
       <Badge variant="outline" className={`text-xs ${confidenceColor}`}>
         {suggestion.confidence}%
       </Badge>
