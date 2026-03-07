@@ -170,6 +170,9 @@ serve(async (req) => {
       if (type.includes('automaat') || type.includes('automatisch') || type === 'a') return 'automaat';
       return versnellingData.type_versnellingsbak;
     };
+
+    // Parse dates from RDW format (YYYYMMDD) to ISO format
+    const parseRDWDate = (dateStr: string | undefined): string | null => {
       if (!dateStr || dateStr.length !== 8) return null;
       const year = dateStr.substring(0, 4);
       const month = dateStr.substring(4, 6);
