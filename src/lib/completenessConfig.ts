@@ -78,7 +78,8 @@ export const klassiekerChecklist: ChecklistItem[] = [
     requirements: [
       { field: 'inspection_location', condition: 'filled', label: 'Plaats opname' },
       { field: 'inspection_date', condition: 'filled', label: 'Datum opname' },
-      { field: 'inspection_start_time', condition: 'filled', label: 'Opnametijd' },
+      { field: 'inspection_start_time', condition: 'filled', label: 'Aanvangstijd' },
+      { field: 'inspection_end_time', condition: 'filled', label: 'Eindtijd' },
     ],
   },
   {
@@ -158,6 +159,8 @@ export const camperChecklist: ChecklistItem[] = [
     requirements: [
       { field: 'inspection_location', condition: 'filled', label: 'Inspectielocatie' },
       { field: 'inspection_date', condition: 'filled', label: 'Inspectiedatum' },
+      { field: 'inspection_start_time', condition: 'filled', label: 'Aanvangstijd' },
+      { field: 'inspection_end_time', condition: 'filled', label: 'Eindtijd' },
     ],
   },
   {
@@ -229,6 +232,8 @@ export const wevChecklist: ChecklistItem[] = [
     requirements: [
       { field: 'inspection_location', condition: 'filled', label: 'Plaats opname' },
       { field: 'inspection_date', condition: 'filled', label: 'Datum opname' },
+      { field: 'inspection_start_time', condition: 'filled', label: 'Aanvangstijd' },
+      { field: 'inspection_end_time', condition: 'filled', label: 'Eindtijd' },
     ],
   },
   {
