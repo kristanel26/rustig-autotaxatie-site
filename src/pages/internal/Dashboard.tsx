@@ -232,6 +232,12 @@ const Dashboard = () => {
     reports: ReportRow[];
     emptyText: string;
     showDate?: boolean;
+    dateField?: 'inspection_date' | 'sent_at' | 'reminder_due_date' | 'updated_at';
+    dateLabel?: string;
+  }) => {
+    reports: ReportRow[];
+    emptyText: string;
+    showDate?: boolean;
     dateField?: 'inspection_date' | 'sent_at' | 'reminder_due_date';
     dateLabel?: string;
   }) => {
