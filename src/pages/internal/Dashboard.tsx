@@ -76,7 +76,6 @@ const Dashboard = () => {
         hertaxatieEnd.setMonth(hertaxatieEnd.getMonth() - 34); // 2y10m ago
         const hertaxatieStartStr = hertaxatieStart.toISOString().split('T')[0];
         const hertaxatieEndStr = hertaxatieEnd.toISOString().split('T')[0];
-        const future60 = futureDate.toISOString().split('T')[0];
 
         const [
           { count: totalCount },
