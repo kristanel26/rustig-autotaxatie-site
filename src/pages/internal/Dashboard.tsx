@@ -48,6 +48,7 @@ const Dashboard = () => {
   const [conceptReports, setConceptReports] = useState<ReportRow[]>([]);
   const [sentReports, setSentReports] = useState<ReportRow[]>([]);
   const [reminderReports, setReminderReports] = useState<ReportRow[]>([]);
+  const [hertaxatieReports, setHertaxatieReports] = useState<ReportRow[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
