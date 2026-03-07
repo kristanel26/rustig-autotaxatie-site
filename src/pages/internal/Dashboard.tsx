@@ -235,12 +235,6 @@ const Dashboard = () => {
     dateField?: 'inspection_date' | 'sent_at' | 'reminder_due_date' | 'updated_at';
     dateLabel?: string;
   }) => {
-    reports: ReportRow[];
-    emptyText: string;
-    showDate?: boolean;
-    dateField?: 'inspection_date' | 'sent_at' | 'reminder_due_date';
-    dateLabel?: string;
-  }) => {
     if (loading) {
       return (
         <div className="flex items-center justify-center py-8">
