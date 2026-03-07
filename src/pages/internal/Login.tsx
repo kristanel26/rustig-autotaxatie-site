@@ -4,7 +4,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { ArrowRight } from 'lucide-react';
-import logoIcon from '@/assets/taxaris-logo-icon.svg';
+
 import logoFull from '@/assets/taxaris-logo-full.svg';
 
 const loginSchema = z.object({
