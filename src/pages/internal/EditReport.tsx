@@ -53,6 +53,7 @@ import {
   KlassiekerValueData,
   getInitialKlassiekerValueData,
 } from '@/components/internal/klassieker';
+import { CamperHostImportForm } from '@/components/internal/CamperHostImportForm';
 
 const reportSchema = z.object({
   customer_title: z.string().optional(),
@@ -1278,6 +1279,13 @@ const EditReport = () => {
               reportType="klassieker"
             />
           </div>
+        )}
+
+        {/* ============================================ */}
+        {/* CAM §0: CamperHost Import                    */}
+        {/* ============================================ */}
+        {(report.report_type === 'camper' || !report.report_type) && (
+          <CamperHostImportForm reportId={id || ''} />
         )}
 
         {/* ============================================ */}
