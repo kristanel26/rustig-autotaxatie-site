@@ -142,6 +142,7 @@ const Reports = () => {
                 <SelectItemUI value="concept">Concept</SelectItemUI>
                 <SelectItemUI value="in_behandeling">In behandeling</SelectItemUI>
                 <SelectItemUI value="gereed">Gereed</SelectItemUI>
+                <SelectItemUI value="verzonden">Verzonden</SelectItemUI>
               </SelectContentUI>
             </SelectUI>
           </div>

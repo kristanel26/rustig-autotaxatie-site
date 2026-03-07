@@ -22,6 +22,8 @@ interface DashboardStats {
   reportsThisMonth: number;
   conceptCount: number;
   inBehandelingCount: number;
+  gereedCount: number;
+  verzondenCount: number;
 }
 
 interface ReportRow {
