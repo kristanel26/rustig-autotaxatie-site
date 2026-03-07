@@ -84,6 +84,7 @@ const Customers = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
+  const [returnToReport, setReturnToReport] = useState<string | null>(null);
 
   const fetchCustomers = async () => {
     const { data } = await supabase

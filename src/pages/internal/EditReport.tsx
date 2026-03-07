@@ -1267,10 +1267,9 @@ const EditReport = () => {
                   toast({ title: 'Klant gekoppeld', description: `${[c.first_name, c.last_name].filter(Boolean).join(' ')} is ingevuld.` });
                 }}
                 onNewCustomer={() => {
-                  const w = window.open('/intern/klanten?nieuw=1', '_blank');
+                  const w = window.open(`/intern/klanten?nieuw=1&rapport=${id}`, '_blank');
                   if (!w) {
-                    // Popup blocked — navigate in same tab
-                    window.location.href = '/intern/klanten?nieuw=1';
+                    window.location.href = `/intern/klanten?nieuw=1&rapport=${id}`;
                   }
                 }}
               />
