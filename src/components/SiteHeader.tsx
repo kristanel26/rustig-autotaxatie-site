@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Phone, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import logo from "@/assets/logo-automobiel-taxaties.png";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -61,7 +62,7 @@ const SiteHeader = () => {
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex items-center gap-3">
           <a
             href="tel:+31854832461"
             className={`flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200 ${
@@ -73,6 +74,7 @@ const SiteHeader = () => {
             <Phone className="w-4 h-4" />
             085 483 2461
           </a>
+          <ThemeToggle scrolled={scrolled} />
         </div>
 
         {/* Mobile menu button */}
@@ -104,7 +106,7 @@ const SiteHeader = () => {
               {link.label}
             </Link>
           ))}
-          <div className="pt-3 px-4">
+          <div className="pt-3 px-4 flex items-center justify-between">
             <a
               href="tel:+31854832461"
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -112,6 +114,7 @@ const SiteHeader = () => {
               <Phone className="w-4 h-4" />
               085 483 2461
             </a>
+            <ThemeToggle scrolled />
           </div>
         </nav>
       )}
