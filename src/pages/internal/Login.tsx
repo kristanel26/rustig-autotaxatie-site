@@ -172,60 +172,6 @@ const Login = () => {
           </p>
         </div>
 
-        {/* Stats */}
-        <div className="relative z-10">
-          <div className="grid grid-cols-3 gap-6 mb-10">
-            {[
-              { code: 'KLS', label: 'KLASSIEKERTAXATIE' },
-              { code: 'CAM', label: 'CAMPERTAXATIE' },
-              { code: 'WEV', label: 'WAARDEBEPALING' },
-            ].map((s) => (
-              <div key={s.code}>
-                <div
-                  style={{
-                    fontFamily: '"Space Mono", monospace',
-                    fontWeight: 700,
-                    fontSize: '1.125rem',
-                    color: '#c9a84c',
-                    marginBottom: 4,
-                  }}
-                >
-                  {s.code}
-                </div>
-                <div
-                  style={{
-                    fontFamily: '"Space Mono", monospace',
-                    fontSize: '0.625rem',
-                    letterSpacing: '0.06em',
-                    color: '#8a9bb5',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {s.label}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Badges */}
-          <div className="flex gap-3 flex-wrap">
-            {['Art. 7:960 BW', 'RDW-koppeling', 'Digitaal archief'].map((b) => (
-              <span
-                key={b}
-                style={{
-                  fontFamily: '"DM Sans", sans-serif',
-                  fontSize: '0.75rem',
-                  color: '#8a9bb5',
-                  border: '1px solid #253047',
-                  borderRadius: 999,
-                  padding: '5px 14px',
-                }}
-              >
-                {b}
-              </span>
-            ))}
-          </div>
-        </div>
 
         {/* Vertical separator on right edge */}
         <div
