@@ -54,7 +54,7 @@ import {
   getInitialKlassiekerValueData,
 } from '@/components/internal/klassieker';
 import { CamperHostImportForm } from '@/components/internal/CamperHostImportForm';
-
+import { CustomerSearchField } from '@/components/internal/CustomerSearchField';
 const reportSchema = z.object({
   customer_title: z.string().optional(),
   customer_initials: z.string().optional(),
@@ -1121,7 +1121,46 @@ const EditReport = () => {
               <CardHeader>
                 <CardTitle className="text-lg">Klantgegevens</CardTitle>
               </CardHeader>
-          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <CardContent className="space-y-4">
+            {/* Customer search / link */}
+            <div className="md:col-span-2">
+              <Label className="text-xs text-muted-foreground mb-1.5 block">Bestaande klant koppelen</Label>
+              <CustomerSearchField
+                onSelect={(c) => {
+                  // Fill all customer fields from selected customer
+                  const newData = {
+                    opdrachtgever: c.company_name || '',
+                    customer_title: c.salutation || '',
+                    customer_initials: c.initials || '',
+                    customer_last_name: c.last_name,
+                    customer_street: [c.street, c.house_number].filter(Boolean).join(' '),
+                    customer_postcode: c.postal_code || '',
+                    customer_city: c.city || '',
+                    customer_email: c.email || '',
+                    customer_phone: c.phone || '',
+                  };
+                  setCustomerData(newData);
+                  // Save all fields
+                  saveMultipleFields({
+                    customer_id: c.id,
+                    opdrachtgever: c.company_name || null,
+                    customer_title: c.salutation || null,
+                    customer_initials: c.initials || null,
+                    customer_last_name: c.last_name || null,
+                    customer_street: newData.customer_street || null,
+                    customer_postcode: c.postal_code || null,
+                    customer_city: c.city || null,
+                    customer_email: c.email || null,
+                    customer_phone: c.phone || null,
+                  });
+                  toast({ title: 'Klant gekoppeld', description: `${[c.first_name, c.last_name].filter(Boolean).join(' ')} is ingevuld.` });
+                }}
+                onNewCustomer={() => {
+                  window.open('/intern/klanten', '_blank');
+                }}
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2 md:col-span-2">
               <Label htmlFor="opdrachtgever">Bedrijfsnaam (optioneel)</Label>
               <Input
@@ -1213,6 +1252,7 @@ const EditReport = () => {
             <p className="text-xs text-muted-foreground md:col-span-2">
               Invoer wordt automatisch netjes opgeslagen. E-mail en telefoon zijn alleen voor intern gebruik en verschijnen niet op het PDF-rapport.
             </p>
+            </div>
           </CardContent>
         </Card>
 

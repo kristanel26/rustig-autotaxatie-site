@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import InternalLayout from '@/components/internal/InternalLayout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -73,6 +73,8 @@ const emptyForm = {
 
 const Customers = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -93,6 +95,17 @@ const Customers = () => {
   useEffect(() => {
     fetchCustomers();
   }, []);
+
+  // Support opening edit dialog from CustomerDetail page
+  useEffect(() => {
+    const state = location.state as { editId?: string } | null;
+    if (state?.editId && customers.length > 0) {
+      const c = customers.find(c => c.id === state.editId);
+      if (c) openEdit(c);
+      // Clear state
+      window.history.replaceState({}, document.title);
+    }
+  }, [customers, location.state]);
 
   const filtered = customers.filter((c) => {
     if (!search) return true;
@@ -248,7 +261,7 @@ const Customers = () => {
                 </TableHeader>
                 <TableBody>
                   {filtered.map((c) => (
-                    <TableRow key={c.id}>
+                    <TableRow key={c.id} className="cursor-pointer" onClick={() => navigate(`/intern/klanten/${c.id}`)}>
                       <TableCell className="font-medium">{displayName(c)}</TableCell>
                       <TableCell className="hidden sm:table-cell text-sm">
                         {c.company_name || '-'}
@@ -268,7 +281,7 @@ const Customers = () => {
                         )}
                       </TableCell>
                       <TableCell>
-                        <div className="flex gap-1">
+                        <div className="flex gap-1" onClick={(e) => e.stopPropagation()}>
                           <button
                             onClick={() => openEdit(c)}
                             className="p-1.5 rounded hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors"
