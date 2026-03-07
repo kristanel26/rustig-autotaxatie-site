@@ -8,6 +8,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Search, Plus, Building2, User, Pencil, Trash2 } from 'lucide-react';
+import { PostcodeField } from '@/components/internal/PostcodeField';
+import { normalizeInitials, capitalizeFirst, normalizePostcode } from '@/lib/normalizers';
 import { Badge } from '@/components/ui/badge';
 import {
   Table,
@@ -143,12 +145,13 @@ const Customers = () => {
       company_name: form.company_name || null,
       kvk_nummer: form.kvk_nummer || null,
       salutation: form.salutation || null,
-      initials: form.initials || null,
-      first_name: form.first_name || null,
-      street: form.street || null,
+      initials: form.initials ? normalizeInitials(form.initials) : null,
+      first_name: form.first_name ? capitalizeFirst(form.first_name) : null,
+      last_name: capitalizeFirst(form.last_name),
+      street: form.street ? capitalizeFirst(form.street) : null,
       house_number: form.house_number || null,
-      postal_code: form.postal_code || null,
-      city: form.city || null,
+      postal_code: form.postal_code ? normalizePostcode(form.postal_code) : null,
+      city: form.city ? capitalizeFirst(form.city) : null,
       email: form.email || null,
       phone: form.phone || null,
       notes: form.notes || null,
@@ -333,23 +336,40 @@ const Customers = () => {
               </div>
               <div>
                 <Label>Voorletters</Label>
-                <Input value={form.initials} onChange={(e) => updateField('initials', e.target.value)} placeholder="A.B." />
+                <Input
+                  value={form.initials}
+                  onChange={(e) => updateField('initials', e.target.value)}
+                  onBlur={(e) => updateField('initials', normalizeInitials(e.target.value))}
+                  placeholder="A.B."
+                />
               </div>
               <div>
                 <Label>Voornaam</Label>
-                <Input value={form.first_name} onChange={(e) => updateField('first_name', e.target.value)} />
+                <Input
+                  value={form.first_name}
+                  onChange={(e) => updateField('first_name', e.target.value)}
+                  onBlur={(e) => updateField('first_name', capitalizeFirst(e.target.value))}
+                />
               </div>
             </div>
 
             <div>
               <Label>Achternaam *</Label>
-              <Input value={form.last_name} onChange={(e) => updateField('last_name', e.target.value)} />
+              <Input
+                value={form.last_name}
+                onChange={(e) => updateField('last_name', e.target.value)}
+                onBlur={(e) => updateField('last_name', capitalizeFirst(e.target.value))}
+              />
             </div>
 
             <div className="grid grid-cols-3 gap-3">
               <div className="col-span-2">
                 <Label>Straat</Label>
-                <Input value={form.street} onChange={(e) => updateField('street', e.target.value)} />
+                <Input
+                  value={form.street}
+                  onChange={(e) => updateField('street', e.target.value)}
+                  onBlur={(e) => updateField('street', capitalizeFirst(e.target.value))}
+                />
               </div>
               <div>
                 <Label>Huisnr.</Label>
@@ -358,14 +378,14 @@ const Customers = () => {
             </div>
 
             <div className="grid grid-cols-3 gap-3">
-              <div>
-                <Label>Postcode</Label>
-                <Input value={form.postal_code} onChange={(e) => updateField('postal_code', e.target.value)} placeholder="1234 AB" />
-              </div>
-              <div className="col-span-2">
-                <Label>Plaats</Label>
-                <Input value={form.city} onChange={(e) => updateField('city', e.target.value)} />
-              </div>
+              <PostcodeField
+                postcode={form.postal_code}
+                city={form.city}
+                street={form.street}
+                onPostcodeChange={(v) => updateField('postal_code', v)}
+                onCityChange={(v) => updateField('city', v)}
+                onStreetChange={(v) => updateField('street', v)}
+              />
             </div>
 
             <div className="grid grid-cols-2 gap-3">
