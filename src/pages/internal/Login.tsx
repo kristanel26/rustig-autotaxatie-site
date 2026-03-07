@@ -4,7 +4,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { ArrowRight } from 'lucide-react';
-import TaxarisLogo from '@/components/TaxarisLogo';
+import logoIcon from '@/assets/taxaris-logo-icon.svg';
 
 const loginSchema = z.object({
   email: z.string().trim().email({ message: 'Voer een geldig e-mailadres in' }),
