@@ -36,6 +36,7 @@ interface Customer {
   id: string;
   customer_type: string;
   company_name: string | null;
+  kvk_nummer: string | null;
   salutation: string | null;
   initials: string | null;
   first_name: string | null;
@@ -53,6 +54,7 @@ interface Customer {
 const emptyForm = {
   customer_type: 'particulier',
   company_name: '',
+  kvk_nummer: '',
   salutation: '',
   initials: '',
   first_name: '',
@@ -113,6 +115,7 @@ const Customers = () => {
     setForm({
       customer_type: c.customer_type,
       company_name: c.company_name || '',
+      kvk_nummer: c.kvk_nummer || '',
       salutation: c.salutation || '',
       initials: c.initials || '',
       first_name: c.first_name || '',
@@ -137,6 +140,7 @@ const Customers = () => {
     const payload = {
       ...form,
       company_name: form.company_name || null,
+      kvk_nummer: form.kvk_nummer || null,
       salutation: form.salutation || null,
       initials: form.initials || null,
       first_name: form.first_name || null,
