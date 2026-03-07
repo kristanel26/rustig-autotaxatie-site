@@ -85,6 +85,7 @@ const Dashboard = () => {
           { data: concepts },
           { data: sent },
           { data: reminders },
+          { data: hertaxatie },
         ] = await Promise.all([
           supabase.from('reports').select('*', { count: 'exact', head: true }),
           supabase.from('reports').select('*', { count: 'exact', head: true })
@@ -95,25 +96,34 @@ const Dashboard = () => {
             .eq('status', 'in_behandeling'),
           // Openstaande concepten & in behandeling
           supabase.from('reports')
-            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at')
+            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
             .in('status', ['concept', 'in_behandeling'])
             .order('updated_at', { ascending: false })
             .limit(5),
           // Recent verzonden
           supabase.from('reports')
-            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at')
+            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
             .not('sent_at', 'is', null)
             .order('sent_at', { ascending: false })
             .limit(5),
           // Komende herinneringen (binnen 60 dagen)
           supabase.from('reports')
-            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at')
+            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
             .not('reminder_due_date', 'is', null)
             .gte('reminder_due_date', today)
             .lte('reminder_due_date', future60)
             .is('reminder_sent_at', null)
             .order('reminder_due_date', { ascending: true })
             .limit(5),
+          // Hertaxatie: rapporten met inspection_date 2j10m–3j3m geleden (verlopen binnenkort)
+          supabase.from('reports')
+            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
+            .not('inspection_date', 'is', null)
+            .gte('inspection_date', hertaxatieStartStr)
+            .lte('inspection_date', hertaxatieEndStr)
+            .in('report_type', ['camper', 'klassieker'])
+            .order('inspection_date', { ascending: true })
+            .limit(10),
         ]);
 
         setStats({
@@ -125,6 +135,7 @@ const Dashboard = () => {
         setConceptReports((concepts as ReportRow[]) || []);
         setSentReports((sent as ReportRow[]) || []);
         setReminderReports((reminders as ReportRow[]) || []);
+        setHertaxatieReports((hertaxatie as ReportRow[]) || []);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
