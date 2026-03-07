@@ -54,7 +54,7 @@ import {
   getInitialKlassiekerValueData,
 } from '@/components/internal/klassieker';
 import { CamperHostImportForm } from '@/components/internal/CamperHostImportForm';
-
+import { CustomerSearchField } from '@/components/internal/CustomerSearchField';
 const reportSchema = z.object({
   customer_title: z.string().optional(),
   customer_initials: z.string().optional(),
