@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import InternalLayout from '@/components/internal/InternalLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { supabase } from '@/integrations/supabase/client';
-import { FileText, FilePlus, Clock, Send, Bell, AlertCircle, RefreshCw } from 'lucide-react';
+import { FileText, FilePlus, Clock, Send, Bell, AlertCircle, RefreshCw, Search, User, Building2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { getStatusBadgeProps } from '@/components/internal/ReportStatusBar';
 import {
@@ -38,6 +39,14 @@ interface ReportRow {
   report_type: string | null;
 }
 
+interface SearchResult {
+  type: 'report' | 'customer';
+  id: string;
+  title: string;
+  subtitle: string;
+  badge?: string;
+}
+
 const Dashboard = () => {
   const [stats, setStats] = useState<DashboardStats>({
     totalReports: 0,
@@ -51,6 +60,90 @@ const Dashboard = () => {
   const [hertaxatieReports, setHertaxatieReports] = useState<ReportRow[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  // Quick search state
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searching, setSearching] = useState(false);
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  // Close search on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
+        setSearchOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  // Search debounce
+  useEffect(() => {
+    if (searchQuery.length < 2) {
+      setSearchResults([]);
+      setSearchOpen(false);
+      return;
+    }
+    const timer = setTimeout(async () => {
+      setSearching(true);
+      const q = `%${searchQuery}%`;
+      const [reportsRes, customersRes] = await Promise.all([
+        supabase.from('reports')
+          .select('id, report_number, license_plate, customer_last_name, rdw_merk, rdw_handelsbenaming, status, report_type')
+          .or(`report_number.ilike.${q},license_plate.ilike.${q},customer_last_name.ilike.${q},vin.ilike.${q}`)
+          .order('updated_at', { ascending: false })
+          .limit(6),
+        supabase.from('customers')
+          .select('id, salutation, initials, first_name, last_name, company_name, city, customer_type')
+          .or(`last_name.ilike.${q},first_name.ilike.${q},company_name.ilike.${q}`)
+          .order('last_name')
+          .limit(4),
+      ]);
+
+      const results: SearchResult[] = [];
+
+      if (reportsRes.data) {
+        for (const r of reportsRes.data) {
+          const vehicle = [r.rdw_merk, r.rdw_handelsbenaming].filter(Boolean).join(' ');
+          results.push({
+            type: 'report',
+            id: r.id,
+            title: r.report_number,
+            subtitle: [r.license_plate, vehicle, r.customer_last_name].filter(Boolean).join(' · ') || 'Geen details',
+            badge: r.report_type || undefined,
+          });
+        }
+      }
+      if (customersRes.data) {
+        for (const c of customersRes.data) {
+          const name = [c.salutation, c.initials, c.last_name].filter(Boolean).join(' ');
+          results.push({
+            type: 'customer',
+            id: c.id,
+            title: name,
+            subtitle: [c.company_name, c.city].filter(Boolean).join(' · ') || c.customer_type,
+          });
+        }
+      }
+
+      setSearchResults(results);
+      setSearchOpen(results.length > 0 || searchQuery.length >= 2);
+      setSearching(false);
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
+  const handleSearchSelect = (result: SearchResult) => {
+    setSearchOpen(false);
+    setSearchQuery('');
+    if (result.type === 'report') {
+      navigate(`/intern/rapport/${result.id}`);
+    } else {
+      navigate(`/intern/klanten/${result.id}`);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
