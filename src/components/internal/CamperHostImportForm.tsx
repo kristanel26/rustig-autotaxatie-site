@@ -368,9 +368,9 @@ export const CamperHostImportForm = ({
                     <AccordionTrigger className="text-sm">
                       <div className="flex items-center gap-2">
                         {isImported ? (
-                          <CheckCircle2 className="h-4 w-4 text-green-600 shrink-0" />
+                          <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
                         ) : (
-                          <AlertCircle className="h-4 w-4 text-amber-500 shrink-0" />
+                          <AlertCircle className="h-4 w-4 text-muted-foreground shrink-0" />
                         )}
                         <span>{section.label}</span>
                         <Badge variant="secondary" className="text-xs ml-1">
