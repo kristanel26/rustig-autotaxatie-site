@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import InternalLayout from '@/components/internal/InternalLayout';
 import { useAuth } from '@/contexts/AuthContext';
@@ -17,7 +17,9 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Loader2 } from 'lucide-react';
+import { pdf } from '@react-pdf/renderer';
+import PdfRenderer from '@/components/internal/pdf/PdfRenderer';
 import { normalizeReportFormData, LICENSE_PLATE_REGEX, numberToDutchWords, normalizeInitials, capitalizeFirst } from '@/lib/normalizers';
 import { validateVin, validateEmail, validatePhone } from '@/lib/validators';
 import { qualityClasses } from '@/lib/qualityClasses';
