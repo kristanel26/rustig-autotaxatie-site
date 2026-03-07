@@ -329,6 +329,29 @@ const Dashboard = () => {
               />
             </CardContent>
           </Card>
+
+          {/* Hertaxatie — rapporten die binnenkort verlopen */}
+          <Card className="lg:col-span-2">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <RefreshCw className="h-5 w-5 text-orange-500" />
+                Hertaxatie Nodig
+                {!loading && hertaxatieReports.length > 0 && (
+                  <Badge variant="secondary" className="ml-2 text-xs">{hertaxatieReports.length}</Badge>
+                )}
+              </CardTitle>
+              <p className="text-xs text-muted-foreground">Rapporten waarvan de 3-jarige geldigheid binnenkort verloopt</p>
+            </CardHeader>
+            <CardContent>
+              <ReportMiniTable
+                reports={hertaxatieReports}
+                emptyText="Geen rapporten die binnenkort verlopen"
+                showDate
+                dateField="inspection_date"
+                dateLabel="Inspectiedatum"
+              />
+            </CardContent>
+          </Card>
         </div>
       </div>
     </InternalLayout>
