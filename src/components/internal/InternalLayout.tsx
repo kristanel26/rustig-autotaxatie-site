@@ -10,6 +10,7 @@ import {
   Menu,
   X,
   Plus,
+  BarChart3,
 } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -35,6 +36,7 @@ const InternalLayout: React.FC<InternalLayoutProps> = ({ children, title }) => {
     { path: '/intern/rapporten', label: 'Rapporten', icon: FileText },
     { path: '/intern/klanten', label: 'Klanten', icon: Users },
     { path: '/intern/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+    { path: '/intern/rapportage', label: 'Rapportage', icon: BarChart3 },
     { path: '/intern/herinneringen', label: 'Herinneringen', icon: Bell },
   ];
 
