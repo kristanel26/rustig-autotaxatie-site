@@ -1252,6 +1252,7 @@ const EditReport = () => {
             <p className="text-xs text-muted-foreground md:col-span-2">
               Invoer wordt automatisch netjes opgeslagen. E-mail en telefoon zijn alleen voor intern gebruik en verschijnen niet op het PDF-rapport.
             </p>
+            </div>
           </CardContent>
         </Card>
 
