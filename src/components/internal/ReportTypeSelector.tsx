@@ -75,7 +75,7 @@ const WevIcon = () => (
 );
 
 const KlassiekerIcon = () => (
-  <svg viewBox="0 0 180 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+  <svg viewBox="0 0 180 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full" style={{ transform: 'scaleX(-1)' }}>
     {/* === Elegant classic GT: long nose, fastback roofline, smooth body === */}
     {/* Complete body outline — one continuous elegant shape */}
     <path d={`
