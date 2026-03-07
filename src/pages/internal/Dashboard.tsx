@@ -69,6 +69,15 @@ const Dashboard = () => {
         futureDate.setDate(futureDate.getDate() + 60);
         const future60 = futureDate.toISOString().split('T')[0];
 
+        // Hertaxatie: reports where inspection_date is between 2y10m and 3y3m ago (expiring soon)
+        const hertaxatieStart = new Date(now);
+        hertaxatieStart.setMonth(hertaxatieStart.getMonth() - 39); // 3y3m ago
+        const hertaxatieEnd = new Date(now);
+        hertaxatieEnd.setMonth(hertaxatieEnd.getMonth() - 34); // 2y10m ago
+        const hertaxatieStartStr = hertaxatieStart.toISOString().split('T')[0];
+        const hertaxatieEndStr = hertaxatieEnd.toISOString().split('T')[0];
+        const future60 = futureDate.toISOString().split('T')[0];
+
         const [
           { count: totalCount },
           { count: monthCount },
