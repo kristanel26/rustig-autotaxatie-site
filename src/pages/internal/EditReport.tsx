@@ -1684,14 +1684,12 @@ const EditReport = () => {
 
           {/* Completeness Sidebar - sticky on desktop */}
           <aside className="lg:w-80 lg:flex-shrink-0">
-            <div className="lg:sticky lg:top-16">
+            <div className="lg:sticky lg:top-16 space-y-4">
               <ReportCompletenessCheck
                 reportType={report.report_type}
                 data={completenessData}
-                onMarkGereed={() => {
-                  setReportStatus('gereed');
-                  saveField('status', 'gereed');
-                }}
+                onMarkGereed={handleFinalizeReport}
+                isFinalizingReport={isFinalizingReport}
               />
             </div>
           </aside>
