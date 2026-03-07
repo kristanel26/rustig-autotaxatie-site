@@ -418,6 +418,7 @@ const Dashboard = () => {
                 reports={recentReports}
                 emptyText="Nog geen rapporten"
                 showDate
+                dateField="updated_at"
                 dateLabel="Bewerkt"
               />
             </CardContent>
