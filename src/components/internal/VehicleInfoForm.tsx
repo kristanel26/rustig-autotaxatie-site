@@ -368,6 +368,8 @@ export const VehicleInfoForm = ({
                   variant="outline"
                   onClick={fetchRDWData}
                   disabled={isFetchingRDW || (rdwLocked && isEditMode)}
+                  className="bg-primary text-primary-foreground hover:bg-primary/90"
+                  title="RDW data ophalen"
                 >
                   {isFetchingRDW ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
@@ -383,8 +385,9 @@ export const VehicleInfoForm = ({
                 fieldKey="license_plate" 
                 onAccept={(value) => onChange('license_plate', value)} 
               />
-              <p className="text-xs text-muted-foreground">
-                Klik op zoeken om RDW data automatisch op te halen
+              <p className="text-xs text-muted-foreground flex items-center gap-1.5">
+                <span className="inline-block w-2 h-2 rounded-full bg-primary/70" />
+                Zoek om voertuiggegevens automatisch uit het <strong>RDW-register</strong> op te halen
               </p>
             </div>
             <div className="space-y-2">
