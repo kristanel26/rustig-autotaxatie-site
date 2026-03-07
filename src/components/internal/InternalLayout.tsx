@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import TaxarisLogo from '@/components/TaxarisLogo';
 
 interface InternalLayoutProps {
   children: React.ReactNode;
@@ -47,15 +48,9 @@ const InternalLayout: React.FC<InternalLayoutProps> = ({ children, title }) => {
       {/* ── NAVBAR ── */}
       <nav className="sticky top-0 z-50 h-[60px] flex items-center px-7 border-b border-primary/15 bg-background/[0.92] backdrop-blur-xl">
         {/* Logo */}
-        <Link to="/intern/dashboard" className="flex items-center gap-2.5 mr-10 no-underline group">
-          <div className="w-[36px] h-[36px] rounded-lg bg-gradient-to-br from-[#c9a84c] via-[#dbb966] to-[#edd98a] flex items-center justify-center shadow-[0_2px_12px_rgba(201,168,76,0.35)] relative overflow-hidden">
-            <span className="font-display text-[18px] text-[#0a0d14] font-normal leading-none -mt-px" style={{ fontStyle: 'italic' }}>T</span>
-            {/* Automotive underline */}
-            <span className="absolute bottom-[5px] left-[8px] right-[8px] h-[1.5px] bg-[#0a0d14]/30 rounded-full" />
-          </div>
-          <span className="font-display text-[19px] text-white tracking-wide">
-            Tax<em className="text-[hsl(var(--gold))] not-italic">aris</em>
-          </span>
+        <Link to="/intern/dashboard" className="flex items-center mr-10 no-underline group">
+          <TaxarisLogo variant="white" size="md" className="hidden md:block" />
+          <TaxarisLogo variant="icon" size="sm" className="block md:hidden" />
         </Link>
 
         {/* Separator */}

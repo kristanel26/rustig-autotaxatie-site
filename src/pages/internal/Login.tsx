@@ -4,27 +4,12 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { ArrowRight } from 'lucide-react';
+import TaxarisLogo from '@/components/TaxarisLogo';
 
 const loginSchema = z.object({
   email: z.string().trim().email({ message: 'Voer een geldig e-mailadres in' }),
   password: z.string().min(6, { message: 'Wachtwoord moet minimaal 6 tekens bevatten' }),
 });
-
-/* ── Taxaris Logo Icon ── */
-const TaxarisLogoIcon = () => (
-  <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="0.375" y="0.375" width="55.25" height="55.25" rx="7.625" fill="#0d1018" stroke="#c9a84c" strokeWidth="0.75" />
-    {/* T - horizontal bar */}
-    <rect x="14" y="14" width="28" height="4" rx="1" fill="#c9a84c" />
-    {/* T - vertical stem */}
-    <rect x="25" y="14" width="6" height="26" rx="1" fill="#c9a84c" />
-    {/* Decorative line under T */}
-    <rect x="8" y="46" width="40" height="1.5" rx="0.75" fill="#c9a84c" />
-    {/* Endpoint circles */}
-    <circle cx="8" cy="46.75" r="2" fill="#c9a84c" />
-    <circle cx="48" cy="46.75" r="2" fill="#c9a84c" />
-  </svg>
-);
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -111,18 +96,7 @@ const Login = () => {
         <div className="relative z-10">
           {/* Logo */}
           <div className="flex items-center gap-4 mb-8">
-            <TaxarisLogoIcon />
-            <span
-              style={{
-                fontFamily: '"Cormorant Garamond", serif',
-                fontWeight: 300,
-                fontSize: '1.75rem',
-                letterSpacing: '0.08em',
-                color: '#e8dcc8',
-              }}
-            >
-              Taxaris
-            </span>
+            <TaxarisLogo variant="white" size="xl" />
           </div>
 
           {/* Gold divider */}
