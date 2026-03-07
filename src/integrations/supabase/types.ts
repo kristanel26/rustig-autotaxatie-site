@@ -14,6 +14,66 @@ export type Database = {
   }
   public: {
     Tables: {
+      customers: {
+        Row: {
+          city: string | null
+          company_name: string | null
+          created_at: string
+          customer_type: string
+          email: string | null
+          first_name: string | null
+          house_number: string | null
+          id: string
+          initials: string | null
+          last_name: string
+          notes: string | null
+          phone: string | null
+          postal_code: string | null
+          salutation: string | null
+          street: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          city?: string | null
+          company_name?: string | null
+          created_at?: string
+          customer_type?: string
+          email?: string | null
+          first_name?: string | null
+          house_number?: string | null
+          id?: string
+          initials?: string | null
+          last_name: string
+          notes?: string | null
+          phone?: string | null
+          postal_code?: string | null
+          salutation?: string | null
+          street?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          city?: string | null
+          company_name?: string | null
+          created_at?: string
+          customer_type?: string
+          email?: string | null
+          first_name?: string | null
+          house_number?: string | null
+          id?: string
+          initials?: string | null
+          last_name?: string
+          notes?: string | null
+          phone?: string | null
+          postal_code?: string | null
+          salutation?: string | null
+          street?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       photo_extract_results: {
         Row: {
           accepted: boolean
