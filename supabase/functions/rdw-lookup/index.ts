@@ -145,8 +145,31 @@ serve(async (req) => {
       console.log('Could not fetch brandstof data:', e);
     }
 
-    // Parse dates from RDW format (YYYYMMDD) to ISO format
-    const parseRDWDate = (dateStr: string | undefined): string | null => {
+    // Fetch transmission data
+    let versnellingData: RDWVersnelling | null = null;
+    try {
+      const versnellingResponse = await fetch(
+        `${RDW_VERSNELLING_URL}?kenteken=${normalizedKenteken}`,
+        { headers: { 'Accept': 'application/json' } }
+      );
+      if (versnellingResponse.ok) {
+        const versnellingArray: RDWVersnelling[] = await versnellingResponse.json();
+        if (versnellingArray && versnellingArray.length > 0) {
+          versnellingData = versnellingArray[0];
+        }
+      }
+    } catch (e) {
+      console.log('Could not fetch versnelling data:', e);
+    }
+
+    // Map transmission type
+    const getTransmissie = (): string | null => {
+      if (!versnellingData?.type_versnellingsbak) return null;
+      const type = versnellingData.type_versnellingsbak.toLowerCase();
+      if (type.includes('handgeschakeld') || type === 'h') return 'handgeschakeld';
+      if (type.includes('automaat') || type.includes('automatisch') || type === 'a') return 'automaat';
+      return versnellingData.type_versnellingsbak;
+    };
       if (!dateStr || dateStr.length !== 8) return null;
       const year = dateStr.substring(0, 4);
       const month = dateStr.substring(4, 6);
