@@ -115,7 +115,8 @@ const Customers = () => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('nieuw') === '1') {
       openNew();
-      // Remove query param from URL
+      const rapportId = params.get('rapport');
+      if (rapportId) setReturnToReport(rapportId);
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }, []);
