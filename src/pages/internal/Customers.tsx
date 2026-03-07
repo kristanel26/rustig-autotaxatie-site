@@ -199,13 +199,22 @@ const Customers = () => {
         await syncCustomerToConceptReports(editingId, payload);
       }
     } else {
-      const { error } = await supabase
+      const { data: newCustomer, error } = await supabase
         .from('customers')
-        .insert({ ...payload, user_id: user!.id });
+        .insert({ ...payload, user_id: user!.id })
+        .select('id')
+        .single();
       if (error) {
         toast.error('Opslaan mislukt');
       } else {
         toast.success('Klant aangemaakt');
+        // If we came from a report, redirect back and auto-link
+        if (returnToReport && newCustomer) {
+          setSaving(false);
+          setDialogOpen(false);
+          navigate(`/intern/rapport/${returnToReport}/bewerken?klant=${newCustomer.id}`);
+          return;
+        }
       }
     }
     setSaving(false);
