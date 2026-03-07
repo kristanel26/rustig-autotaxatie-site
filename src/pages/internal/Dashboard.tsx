@@ -4,7 +4,7 @@ import InternalLayout from '@/components/internal/InternalLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
-import { FileText, FilePlus, Clock, Send, Bell, AlertCircle } from 'lucide-react';
+import { FileText, FilePlus, Clock, Send, Bell, AlertCircle, RefreshCw } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { getStatusBadgeProps } from '@/components/internal/ReportStatusBar';
 import {
@@ -35,6 +35,7 @@ interface ReportRow {
   sent_at: string | null;
   reminder_due_date: string | null;
   updated_at: string;
+  report_type: string | null;
 }
 
 const Dashboard = () => {
@@ -47,6 +48,7 @@ const Dashboard = () => {
   const [conceptReports, setConceptReports] = useState<ReportRow[]>([]);
   const [sentReports, setSentReports] = useState<ReportRow[]>([]);
   const [reminderReports, setReminderReports] = useState<ReportRow[]>([]);
+  const [hertaxatieReports, setHertaxatieReports] = useState<ReportRow[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -67,6 +69,14 @@ const Dashboard = () => {
         futureDate.setDate(futureDate.getDate() + 60);
         const future60 = futureDate.toISOString().split('T')[0];
 
+        // Hertaxatie: reports where inspection_date is between 2y10m and 3y3m ago (expiring soon)
+        const hertaxatieStart = new Date(now);
+        hertaxatieStart.setMonth(hertaxatieStart.getMonth() - 39); // 3y3m ago
+        const hertaxatieEnd = new Date(now);
+        hertaxatieEnd.setMonth(hertaxatieEnd.getMonth() - 34); // 2y10m ago
+        const hertaxatieStartStr = hertaxatieStart.toISOString().split('T')[0];
+        const hertaxatieEndStr = hertaxatieEnd.toISOString().split('T')[0];
+
         const [
           { count: totalCount },
           { count: monthCount },
@@ -75,6 +85,7 @@ const Dashboard = () => {
           { data: concepts },
           { data: sent },
           { data: reminders },
+          { data: hertaxatie },
         ] = await Promise.all([
           supabase.from('reports').select('*', { count: 'exact', head: true }),
           supabase.from('reports').select('*', { count: 'exact', head: true })
@@ -85,25 +96,34 @@ const Dashboard = () => {
             .eq('status', 'in_behandeling'),
           // Openstaande concepten & in behandeling
           supabase.from('reports')
-            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at')
+            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
             .in('status', ['concept', 'in_behandeling'])
             .order('updated_at', { ascending: false })
             .limit(5),
           // Recent verzonden
           supabase.from('reports')
-            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at')
+            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
             .not('sent_at', 'is', null)
             .order('sent_at', { ascending: false })
             .limit(5),
           // Komende herinneringen (binnen 60 dagen)
           supabase.from('reports')
-            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at')
+            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
             .not('reminder_due_date', 'is', null)
             .gte('reminder_due_date', today)
             .lte('reminder_due_date', future60)
             .is('reminder_sent_at', null)
             .order('reminder_due_date', { ascending: true })
             .limit(5),
+          // Hertaxatie: rapporten met inspection_date 2j10m–3j3m geleden (verlopen binnenkort)
+          supabase.from('reports')
+            .select('id, report_number, license_plate, client_name, vehicle_brand, vehicle_model, inspection_date, status, sent_at, reminder_due_date, updated_at, report_type')
+            .not('inspection_date', 'is', null)
+            .gte('inspection_date', hertaxatieStartStr)
+            .lte('inspection_date', hertaxatieEndStr)
+            .in('report_type', ['camper', 'klassieker'])
+            .order('inspection_date', { ascending: true })
+            .limit(10),
         ]);
 
         setStats({
@@ -115,6 +135,7 @@ const Dashboard = () => {
         setConceptReports((concepts as ReportRow[]) || []);
         setSentReports((sent as ReportRow[]) || []);
         setReminderReports((reminders as ReportRow[]) || []);
+        setHertaxatieReports((hertaxatie as ReportRow[]) || []);
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -305,6 +326,29 @@ const Dashboard = () => {
                 showDate
                 dateField="reminder_due_date"
                 dateLabel="Herinnering"
+              />
+            </CardContent>
+          </Card>
+
+          {/* Hertaxatie — rapporten die binnenkort verlopen */}
+          <Card className="lg:col-span-2">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <RefreshCw className="h-5 w-5 text-orange-500" />
+                Hertaxatie Nodig
+                {!loading && hertaxatieReports.length > 0 && (
+                  <Badge variant="secondary" className="ml-2 text-xs">{hertaxatieReports.length}</Badge>
+                )}
+              </CardTitle>
+              <p className="text-xs text-muted-foreground">Rapporten waarvan de 3-jarige geldigheid binnenkort verloopt</p>
+            </CardHeader>
+            <CardContent>
+              <ReportMiniTable
+                reports={hertaxatieReports}
+                emptyText="Geen rapporten die binnenkort verlopen"
+                showDate
+                dateField="inspection_date"
+                dateLabel="Inspectiedatum"
               />
             </CardContent>
           </Card>

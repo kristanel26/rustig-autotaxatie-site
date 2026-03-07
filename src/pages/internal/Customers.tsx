@@ -4,6 +4,7 @@ import InternalLayout from '@/components/internal/InternalLayout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Search, Plus, Building2, User, Pencil, Trash2 } from 'lucide-react';
@@ -36,6 +37,7 @@ interface Customer {
   id: string;
   customer_type: string;
   company_name: string | null;
+  kvk_nummer: string | null;
   salutation: string | null;
   initials: string | null;
   first_name: string | null;
@@ -53,6 +55,7 @@ interface Customer {
 const emptyForm = {
   customer_type: 'particulier',
   company_name: '',
+  kvk_nummer: '',
   salutation: '',
   initials: '',
   first_name: '',
@@ -113,6 +116,7 @@ const Customers = () => {
     setForm({
       customer_type: c.customer_type,
       company_name: c.company_name || '',
+      kvk_nummer: c.kvk_nummer || '',
       salutation: c.salutation || '',
       initials: c.initials || '',
       first_name: c.first_name || '',
@@ -137,6 +141,7 @@ const Customers = () => {
     const payload = {
       ...form,
       company_name: form.company_name || null,
+      kvk_nummer: form.kvk_nummer || null,
       salutation: form.salutation || null,
       initials: form.initials || null,
       first_name: form.first_name || null,
@@ -303,10 +308,16 @@ const Customers = () => {
             </div>
 
             {form.customer_type === 'zakelijk' && (
-              <div>
-                <Label>Bedrijfsnaam</Label>
-                <Input value={form.company_name} onChange={(e) => updateField('company_name', e.target.value)} />
-              </div>
+              <>
+                <div>
+                  <Label>Bedrijfsnaam</Label>
+                  <Input value={form.company_name} onChange={(e) => updateField('company_name', e.target.value)} />
+                </div>
+                <div>
+                  <Label>KVK-nummer</Label>
+                  <Input value={form.kvk_nummer} onChange={(e) => updateField('kvk_nummer', e.target.value)} placeholder="12345678" />
+                </div>
+              </>
             )}
 
             <div className="grid grid-cols-3 gap-3">
@@ -366,6 +377,16 @@ const Customers = () => {
                 <Label>Telefoon</Label>
                 <Input value={form.phone} onChange={(e) => updateField('phone', e.target.value)} />
               </div>
+            </div>
+
+            <div>
+              <Label>Notities</Label>
+              <Textarea
+                value={form.notes}
+                onChange={(e) => updateField('notes', e.target.value)}
+                placeholder="Vrij tekstveld voor opmerkingen over deze klant..."
+                rows={3}
+              />
             </div>
 
             <div className="flex justify-end gap-3 pt-2">
