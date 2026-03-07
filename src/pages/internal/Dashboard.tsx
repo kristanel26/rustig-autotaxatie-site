@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { supabase } from '@/integrations/supabase/client';
-import { FileText, FilePlus, Clock, Send, Bell, AlertCircle, RefreshCw, Search, User, Building2 } from 'lucide-react';
+import { FileText, FilePlus, Clock, Send, Bell, AlertCircle, RefreshCw, Search, User } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { getStatusBadgeProps } from '@/components/internal/ReportStatusBar';
 import {
@@ -56,7 +56,7 @@ const Dashboard = () => {
   });
   const [conceptReports, setConceptReports] = useState<ReportRow[]>([]);
   const [sentReports, setSentReports] = useState<ReportRow[]>([]);
-  const [reminderReports, setReminderReports] = useState<ReportRow[]>([]);
+  
   const [hertaxatieReports, setHertaxatieReports] = useState<ReportRow[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
