@@ -209,7 +209,7 @@ const Dashboard = () => {
           inBehandelingCount: inBehandelingCount || 0,
         });
         setRecentReports((recent as ReportRow[]) || []);
-        
+        setSentReports((sent as ReportRow[]) || []);
         setHertaxatieReports((hertaxatie as ReportRow[]) || []);
       } catch (error) {
         console.error('Error fetching data:', error);
