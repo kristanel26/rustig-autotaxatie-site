@@ -413,7 +413,7 @@ const Dashboard = () => {
         {/* Widgets */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Recent bewerkte rapporten */}
-          <Card className="lg:col-span-2">
+          <Card>
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
                 <Clock className="h-5 w-5 text-primary" />
@@ -427,6 +427,25 @@ const Dashboard = () => {
                 showDate
                 dateField="updated_at"
                 dateLabel="Bewerkt"
+              />
+            </CardContent>
+          </Card>
+
+          {/* Recent verzonden */}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Send className="h-5 w-5 text-primary" />
+                Recent Verzonden
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ReportMiniTable
+                reports={sentReports}
+                emptyText="Nog geen rapporten verzonden"
+                showDate
+                dateField="sent_at"
+                dateLabel="Verzonden"
               />
             </CardContent>
           </Card>
