@@ -60,15 +60,14 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Build multimodal content for Gemini (supports PDF natively)
+    // Build multimodal content using image_url format (data URIs)
     const contentParts: any[] = [];
 
     for (const file of fileContents) {
       contentParts.push({
-        type: 'file',
-        file: {
-          filename: file.name,
-          file_data: `data:${file.mimeType};base64,${file.base64}`,
+        type: 'image_url',
+        image_url: {
+          url: `data:${file.mimeType};base64,${file.base64}`,
         },
       });
     }
