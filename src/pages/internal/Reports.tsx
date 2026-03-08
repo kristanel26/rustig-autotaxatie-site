@@ -30,6 +30,7 @@ interface Report {
   rdw_handelsbenaming: string | null;
   inspection_date: string | null;
   status: string | null;
+  created_at: string;
 }
 
 const TYPE_LABELS: Record<string, string> = {
