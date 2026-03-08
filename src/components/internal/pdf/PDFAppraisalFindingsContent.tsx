@@ -297,9 +297,9 @@ const PDFAppraisalFindingsContent = ({ report, pageNumber = 3, totalPages = 10 }
           <Text style={{ fontSize: 7, color: '#000000', marginHorizontal: 4 }}>|</Text>
           <Text style={{ fontSize: 7, color: '#000000' }}>KVK: 95549269</Text>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-          <Text style={{ fontSize: 8, color: '#000000' }}>Paraaf</Text>
-          <Image src={signatureErik} style={{ width: 57, height: 'auto' }} />
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+          <Text style={{ fontSize: 7, color: '#000000' }}>Paraaf</Text>
+          <Image src={paraafErik} style={{ width: 43, height: 'auto' }} />
           <Text style={{ fontSize: 7, color: '#000000', marginLeft: 8 }}>Pagina {pageNumber}</Text>
         </View>
       </View>
