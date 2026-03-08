@@ -55,10 +55,15 @@ export const WEV_PAGES: PageDefinition[] = [
 export function getPageRegistry(reportType: ReportType | string | null): PageDefinition[] {
   switch (reportType) {
     case 'klassieker':
+    case 'KLS':
+    case 'kls':
       return KLASSIEKER_PAGES;
     case 'wev':
+    case 'WEV':
       return WEV_PAGES;
     case 'camper':
+    case 'CAM':
+    case 'cam':
     default:
       return CAMPER_PAGES;
   }
