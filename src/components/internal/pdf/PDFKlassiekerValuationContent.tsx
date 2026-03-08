@@ -39,35 +39,31 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
   const valueInWords = hasValue ? (report.appraised_value_text || '') : '___________';
 
   return (
-    <Page size="A4" style={{
-      paddingTop: 56,
-      paddingBottom: 56,
-      paddingLeft: 71,
-      paddingRight: 56,
-      fontFamily: 'Helvetica',
-      position: 'relative',
-    }}>
+    <Page size="A4" style={{ padding: '24 28', fontFamily: 'Helvetica', position: 'relative' }}>
       {/* Header */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 28 }}>
-        <Text style={{ fontSize: 16, fontFamily: 'Helvetica-Bold', color: '#000000', textTransform: 'uppercase', letterSpacing: 0.4 }}>
-          WAARDEVASTSTELLING
-        </Text>
-        <Image src={logoAutomobiel} style={{ height: 40, width: 'auto' }} />
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
+        <View>
+          <Text style={{ fontSize: 18, fontFamily: 'Helvetica-Bold', color: '#000000', textTransform: 'uppercase', letterSpacing: 0.4 }}>
+            WAARDEVASTSTELLING
+          </Text>
+          <Text style={{ fontSize: 9, color: '#666666', marginTop: 3 }}>Automobiel taxatie</Text>
+        </View>
+        <Image src={logoAutomobiel} style={{ height: 36, width: 'auto' }} />
       </View>
 
       {/* Legal Text */}
-      <Text style={{ fontSize: 11, color: '#000000', lineHeight: 1.7, textAlign: 'justify', marginBottom: 22 }}>
+      <Text style={{ fontSize: 10, color: '#000000', lineHeight: 1.6, textAlign: 'justify', marginBottom: 16 }}>
         {LEGAL_TEXT_BLOCK_1}
       </Text>
 
       {/* Value Introduction */}
-      <Text style={{ fontSize: 11, color: '#000000', lineHeight: 1.7, marginBottom: 17 }}>
+      <Text style={{ fontSize: 10, color: '#000000', lineHeight: 1.6, marginBottom: 16 }}>
         {VALUE_INTRO}
       </Text>
 
       {/* Value Block */}
-      <View style={{ marginBottom: 22 }}>
-        <Text style={{ fontSize: 14, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 6 }}>
+      <View style={{ marginBottom: 16 }}>
+        <Text style={{ fontSize: 13, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 4 }}>
           {formattedValue} (inclusief BTW)
         </Text>
         {valueInWords ? (
@@ -78,34 +74,32 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
       </View>
 
       {/* Expert Declaration */}
-      <Text style={{ fontSize: 11, color: '#000000', lineHeight: 1.7, textAlign: 'justify', marginBottom: 28 }}>
+      <Text style={{ fontSize: 10, color: '#000000', lineHeight: 1.6, textAlign: 'justify', marginBottom: 16 }}>
         {EXPERT_DECLARATION}
       </Text>
 
       {/* Closing */}
-      <View style={{ marginBottom: 17 }}>
-        <Text style={{ fontSize: 11, color: '#000000', lineHeight: 1.7, marginBottom: 17 }}>
-          Aldus, naar beste weten en kunnen opgemaakt te Druten, {formatDateLong(null)}.
-        </Text>
-        <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 11 }}>
-          Hoogachtend,
-        </Text>
-        <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 6 }}>
-          Automobiel Taxaties
-        </Text>
-        <Text style={{ fontSize: 11, fontFamily: 'Helvetica-Bold', color: '#000000' }}>
-          Erik Elderson
-        </Text>
+      <Text style={{ fontSize: 10, color: '#000000', lineHeight: 1.6, marginBottom: 20 }}>
+        Aldus, naar beste weten en kunnen opgemaakt te Druten, {formatDateLong(null)}.
+      </Text>
+
+      <View>
+        <Text style={{ fontSize: 10, color: '#000000', marginBottom: 6 }}>Hoogachtend,</Text>
+        <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 2 }}>Automobiel Taxaties</Text>
+        <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000' }}>Erik Elderson</Text>
         {/* Signature - directly under name */}
-        <Image src={signatureErik} style={{ height: 227, width: 'auto', maxWidth: 454, marginTop: -22, marginLeft: -8 }} />
+        <Image src={signatureErik} style={{ height: 80, width: 'auto', maxWidth: 220, marginTop: -8 }} />
       </View>
 
       {/* Footer */}
       <View style={{
         position: 'absolute',
-        bottom: 56,
-        left: 71,
-        right: 56,
+        bottom: 24,
+        left: 28,
+        right: 28,
+        borderTopWidth: 1,
+        borderTopColor: '#e2e8f0',
+        paddingTop: 8,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -113,9 +107,9 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
         <Text style={{ fontSize: 9, color: '#000000' }}>
           Pagina {pageNumber} van {totalPages}
         </Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-          <Text style={{ fontSize: 9, color: '#000000' }}>Paraaf</Text>
-          <Image src={signatureErik} style={{ height: 57, width: 'auto' }} />
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+          <Text style={{ fontSize: 8, color: '#000000' }}>Paraaf</Text>
+          <Image src={signatureErik} style={{ height: 34, width: 'auto' }} />
         </View>
       </View>
     </Page>
