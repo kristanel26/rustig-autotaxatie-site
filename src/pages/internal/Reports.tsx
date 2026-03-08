@@ -188,7 +188,8 @@ const Reports = () => {
                         {TYPE_LABELS[report.report_type || ''] || (report.report_type?.toUpperCase() || '-')}
                       </Badge>
                     </TableCell>
-                    <TableCell className="font-mono text-xs">{report.license_plate || '-'}</TableCell>
+                    <TableCell className="font-mono text-xs">{formatLicensePlate(report.license_plate)}</TableCell>
+                    <TableCell className="text-sm truncate max-w-[200px]">{getVehicleDisplay(report)}</TableCell>
                     <TableCell className="text-sm truncate max-w-[200px]">{getCustomerDisplay(report)}</TableCell>
                     <TableCell>
                       {(() => { const s = getStatusBadgeProps(report.status); return <Badge variant="outline" className={`text-xs ${s.className}`}>{s.label}</Badge>; })()}
