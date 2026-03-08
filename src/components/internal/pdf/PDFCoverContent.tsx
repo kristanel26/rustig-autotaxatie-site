@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   footerLogoAt: { height: '6mm', width: 'auto' },
   footerPageNum: { fontSize: 7, color: GREY_LABEL },
-  footerAddress: { fontSize: 5.5, color: GREY_LABEL, textAlign: 'center' as const },
+  footerAddress: { fontSize: 5.5, color: GREY_LABEL, textAlign: 'left' as const, marginTop: 2 },
 });
 
 // Tekstvarianten per rapporttype
