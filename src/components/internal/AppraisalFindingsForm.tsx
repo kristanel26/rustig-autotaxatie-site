@@ -605,6 +605,14 @@ export const AppraisalFindingsForm = ({
               onConditionChange={(v) => onChange('exterior_sealant', v)}
               onNotesChange={(v) => onChange('exterior_sealant_notes', v)}
             />
+            <ConditionField
+              id="exterior_chrome"
+              label="Chroomwerk"
+              conditionValue={formData.exterior_chrome}
+              notesValue={formData.exterior_chrome_notes}
+              onConditionChange={(v) => onChange('exterior_chrome', v)}
+              onNotesChange={(v) => onChange('exterior_chrome_notes', v)}
+            />
           </CardContent>
         </Card>
       )}
