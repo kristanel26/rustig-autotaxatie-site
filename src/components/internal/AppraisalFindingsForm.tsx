@@ -98,6 +98,8 @@ export interface AppraisalFormData {
   exterior_windows_notes: string;
   exterior_sealant: string;
   exterior_sealant_notes: string;
+  exterior_chrome: string;
+  exterior_chrome_notes: string;
   // Interior
   interior_upholstery: string;
   interior_upholstery_notes: string;
