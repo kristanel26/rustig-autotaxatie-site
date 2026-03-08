@@ -1,6 +1,7 @@
 import { Page, View, Text, Image } from '@react-pdf/renderer';
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
-import signatureErik from '@/assets/signature-erik-elderson.svg';
+
+const signatureErik = '/signature-erik-elderson.png';
 import { getQualityClassByValue } from '@/lib/qualityClasses';
 
 interface PDFVehicleDataContentProps {
@@ -57,17 +58,17 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2, totalPages = 10 }: PDFV
   return (
     <Page size="A4" style={{ padding: '24 28', fontFamily: 'Helvetica', position: 'relative' }}>
       {/* Header */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
-        <View>
-          <Text style={{ fontSize: 16, fontFamily: 'Helvetica-Bold', color: '#000000', textTransform: 'uppercase' }}>VOERTUIGGEGEVENS</Text>
-          {report.document_reference && (
-            <Text style={{ fontSize: 9, color: '#000000', marginTop: 4 }}>
-              Documentkenmerk: {report.document_reference}
-            </Text>
-          )}
-        </View>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 4 }}>
+        <View />
         <Image src={logoAutomobiel} style={{ height: 36, width: 'auto' }} />
       </View>
+      <Text style={{ fontSize: 8, color: '#888888', marginBottom: 4 }}>
+        Automobiel taxatie{report.document_reference ? ` · Documentkenmerk: ${report.document_reference}` : ''}
+      </Text>
+      <View style={{ borderBottomWidth: 0.5, borderBottomColor: '#cccccc', marginBottom: 14 }} />
+      <Text style={{ fontSize: 16, fontFamily: 'Helvetica-Bold', color: '#000000', textTransform: 'uppercase', marginBottom: 16 }}>
+        VOERTUIGGEGEVENS
+      </Text>
 
       {/* Two-column layout */}
       <View style={{ flexDirection: 'row', gap: 20 }}>
