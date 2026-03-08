@@ -120,7 +120,7 @@
     --secondary: 220 30% 16%;        /* #1a2235 ~ s800 */
     --secondary-foreground: 0 0% 100%;
     --muted: 220 30% 16%;
-    --muted-foreground: 217 18% 44%; /* #5a6e8a ~ s500 */
+    --muted-foreground: 217 18% 58%; /* #7e91a8 ~ s400 lighter for readability */
     --accent: 43 50% 54%;            /* gold */
     --accent-foreground: 222 47% 5%;
     --destructive: 0 84% 60%;        /* #ef4444 */
