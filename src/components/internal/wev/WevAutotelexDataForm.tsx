@@ -25,6 +25,7 @@ export interface WevAutotelexData {
   wev_definitief: string;
   wev_override_actief: boolean;
   wev_override_redenering: string;
+  wev_schade_bedrag: string;
 }
 
 export const getInitialWevAutotelexData = (): WevAutotelexData => ({
@@ -39,6 +40,7 @@ export const getInitialWevAutotelexData = (): WevAutotelexData => ({
   wev_definitief: '',
   wev_override_actief: false,
   wev_override_redenering: '',
+  wev_schade_bedrag: '',
 });
 
 interface WevAutotelexDataFormProps {
@@ -51,9 +53,9 @@ const btwMargeOptions = [
   { value: 'marge', label: 'Marge-voertuig' },
 ];
 
-// Calculate WEV: rounded average of handelsinkoop and verkoop
-const calculateWev = (handelsinkoop: number, verkoop: number): number => {
-  return Math.round((handelsinkoop + verkoop) / 2);
+// Calculate WEV: rounded average of handelsinkoop and verkoop, minus schade
+const calculateWev = (handelsinkoop: number, verkoop: number, schade: number = 0): number => {
+  return Math.round((handelsinkoop + verkoop) / 2 - schade);
 };
 
 // Format currency for display
@@ -74,6 +76,7 @@ export const WevAutotelexDataForm = ({ data, onChange }: WevAutotelexDataFormPro
   // Parse numeric values
   const handelsinkoopValue = parseFloat(data.wev_handelsinkoopwaarde_autotelex) || 0;
   const verkoopValue = parseFloat(data.wev_verkoopwaarde_autotelex) || 0;
+  const schadeBedrag = parseFloat(data.wev_schade_bedrag) || 0;
   const wevBerekend = parseFloat(data.wev_berekend) || 0;
   const wevDefinitief = parseFloat(data.wev_definitief) || 0;
 
@@ -86,10 +89,10 @@ export const WevAutotelexDataForm = ({ data, onChange }: WevAutotelexDataFormPro
     }
   }, [handelsinkoopValue, verkoopValue]);
 
-  // Auto-calculate wev_berekend when handelsinkoop or verkoop changes
+  // Auto-calculate wev_berekend when handelsinkoop, verkoop or schade changes
   useEffect(() => {
     if (handelsinkoopValue > 0 && verkoopValue > 0) {
-      const newWevBerekend = calculateWev(handelsinkoopValue, verkoopValue);
+      const newWevBerekend = calculateWev(handelsinkoopValue, verkoopValue, schadeBedrag);
       
       // Update wev_berekend
       if (newWevBerekend.toString() !== data.wev_berekend) {
@@ -108,7 +111,7 @@ export const WevAutotelexDataForm = ({ data, onChange }: WevAutotelexDataFormPro
         onChange('wev_berekend', '');
       }
     }
-  }, [handelsinkoopValue, verkoopValue, data.wev_override_actief, data.wev_berekend, data.wev_definitief, onChange]);
+  }, [handelsinkoopValue, verkoopValue, schadeBedrag, data.wev_override_actief, data.wev_berekend, data.wev_definitief, onChange]);
 
   // Handle wev_definitief change - detect override
   const handleDefinitieChange = (value: string) => {
@@ -271,10 +274,27 @@ export const WevAutotelexDataForm = ({ data, onChange }: WevAutotelexDataFormPro
           </div>
         )}
 
+        {/* Schadebedrag */}
+        <div className="space-y-2 pt-4 border-t">
+          <Label htmlFor="wev_schade_bedrag">Schadebedrag (€) — optioneel</Label>
+          <Input
+            id="wev_schade_bedrag"
+            type="number"
+            min="0"
+            step="1"
+            value={data.wev_schade_bedrag}
+            onChange={(e) => onChange('wev_schade_bedrag', e.target.value)}
+            placeholder="0"
+          />
+          <p className="text-xs text-muted-foreground">
+            Indien van toepassing: het geschatte schadebedrag wordt afgetrokken van het gemiddelde.
+          </p>
+        </div>
+
         {/* Calculated and final values */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t">
           <div className="space-y-2">
-            <Label htmlFor="wev_berekend">WEV berekend (gemiddelde)</Label>
+            <Label htmlFor="wev_berekend">WEV berekend</Label>
             <Input
               id="wev_berekend"
               type="text"
@@ -285,7 +305,7 @@ export const WevAutotelexDataForm = ({ data, onChange }: WevAutotelexDataFormPro
               placeholder="Wordt automatisch berekend"
             />
             <p className="text-xs text-muted-foreground">
-              Rekenkundig gemiddelde van handelsinkoopwaarde en verkoopwaarde, afgerond op hele euro's.
+              (Handelsinkoopwaarde + Verkoopwaarde) / 2{schadeBedrag > 0 ? ` − ${formatCurrency(schadeBedrag)} schade` : ''}, afgerond op hele euro's.
             </p>
           </div>
           <div className="space-y-2">

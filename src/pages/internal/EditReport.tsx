@@ -629,11 +629,11 @@ const EditReport = () => {
           wev_definitief: (reportData as any).wev_definitief?.toString() || '',
           wev_override_actief: (reportData as any).wev_override_actief || false,
           wev_override_redenering: (reportData as any).wev_override_redenering || '',
+          wev_schade_bedrag: (reportData as any).wev_schade_correctie || '',
         });
         setWevValueData({
           wev_eindwaarde: (reportData as any).wev_eindwaarde?.toString() || '',
           wev_eindwaarde_tekst: '',  // Will be auto-generated
-          wev_schade_bedrag: '',
         });
 
       } catch (error) {
@@ -804,7 +804,7 @@ const EditReport = () => {
   // Handle WEV Autotelex changes with autosave
   const handleWevAutotelexChange = useCallback((field: keyof WevAutotelexData, value: string | boolean) => {
     setWevAutotelexData(prev => ({ ...prev, [field]: value }));
-    const numericFields = ['wev_handelsinkoopwaarde_autotelex', 'wev_verkoopwaarde_autotelex', 'wev_berekend', 'wev_definitief'];
+    const numericFields = ['wev_handelsinkoopwaarde_autotelex', 'wev_verkoopwaarde_autotelex', 'wev_berekend', 'wev_definitief', 'wev_schade_bedrag'];
     if (numericFields.includes(field as string)) {
       const numValue = parseFloat(value as string);
       saveField(field as string, !isNaN(numValue) ? numValue : null);

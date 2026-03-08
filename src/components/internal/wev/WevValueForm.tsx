@@ -8,13 +8,11 @@ import { numberToDutchWords } from '@/lib/normalizers';
 export interface WevValueData {
   wev_eindwaarde: string;
   wev_eindwaarde_tekst: string;
-  wev_schade_bedrag: string;
 }
 
 export const getInitialWevValueData = (): WevValueData => ({
   wev_eindwaarde: '',
   wev_eindwaarde_tekst: '',
-  wev_schade_bedrag: '',
 });
 
 interface WevValueFormProps {
@@ -34,7 +32,6 @@ const formatCurrency = (value: number) => {
 
 export const WevValueForm = ({ data, onChange }: WevValueFormProps) => {
   const eindwaarde = parseFloat(data.wev_eindwaarde) || 0;
-  const schadeBedrag = parseFloat(data.wev_schade_bedrag) || 0;
 
   // Auto-generate "waarde in woorden" when eindwaarde changes
   useEffect(() => {
@@ -96,23 +93,6 @@ export const WevValueForm = ({ data, onChange }: WevValueFormProps) => {
           </p>
         </div>
 
-        {/* Optional: Damage amount */}
-        <div className="space-y-2 pt-4 border-t">
-          <Label htmlFor="wev_schade_bedrag">Schadebedrag (€) - optioneel</Label>
-          <Input
-            id="wev_schade_bedrag"
-            type="number"
-            min="0"
-            step="1"
-            value={data.wev_schade_bedrag}
-            onChange={(e) => onChange('wev_schade_bedrag', e.target.value)}
-            placeholder="0"
-          />
-          <p className="text-xs text-muted-foreground">
-            Indien van toepassing: het geschatte schadebedrag.
-          </p>
-        </div>
-
         {/* Summary display */}
         {isComplete && (
           <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg mt-4">
@@ -126,12 +106,6 @@ export const WevValueForm = ({ data, onChange }: WevValueFormProps) => {
                 <span className="text-muted-foreground">Zegge:</span>
                 <span className="italic">{data.wev_eindwaarde_tekst}</span>
               </div>
-              {schadeBedrag > 0 && (
-                <div className="flex justify-between pt-2 border-t">
-                  <span className="text-muted-foreground">Schadebedrag:</span>
-                  <span>{formatCurrency(schadeBedrag)}</span>
-                </div>
-              )}
             </div>
           </div>
         )}
