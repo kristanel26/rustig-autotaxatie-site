@@ -22,7 +22,6 @@ const VALUATION_INTRO = `Uitgaande van de marktsituatie op het moment van de tax
 const SIGNING_TEXT = `Ondergetekende, Erik Elderson, Register Taxateur voor motorvoertuigen te Druten, als zodanig erkend en opgenomen in het Register van Makelaars en Taxateurs TMV onder nummer 33106, Register-Taxateur VRT onder nummer 22-523-M, verklaart te zijn benoemd als deskundige.`;
 
 const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationContentProps) => {
-  const [sigError, setSigError] = React.useState(false);
   const formatCurrency = (value: number | null) => {
     if (value === null || value === undefined || value <= 0) return null;
     return new Intl.NumberFormat('nl-NL', {
