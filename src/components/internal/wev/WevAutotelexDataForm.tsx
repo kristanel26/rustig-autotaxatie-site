@@ -111,7 +111,7 @@ export const WevAutotelexDataForm = ({ data, onChange }: WevAutotelexDataFormPro
         onChange('wev_berekend', '');
       }
     }
-  }, [handelsinkoopValue, verkoopValue, data.wev_override_actief, data.wev_berekend, data.wev_definitief, onChange]);
+  }, [handelsinkoopValue, verkoopValue, schadeBedrag, data.wev_override_actief, data.wev_berekend, data.wev_definitief, onChange]);
 
   // Handle wev_definitief change - detect override
   const handleDefinitieChange = (value: string) => {
