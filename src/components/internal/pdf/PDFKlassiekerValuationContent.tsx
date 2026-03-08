@@ -2,6 +2,7 @@ import { Page, View, Text, Image } from '@react-pdf/renderer';
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
 
 const signatureErik = '/signature-erik-elderson.png';
+const paraafErik = '/paraaf-erik-elderson.png';
 
 interface PDFKlassiekerValuationContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -110,9 +111,9 @@ const PDFKlassiekerValuationContent = ({ report, pageNumber, totalPages }: PDFKl
         <Text style={{ fontSize: 9, color: '#000000' }}>
           Pagina {pageNumber} van {totalPages}
         </Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-          <Text style={{ fontSize: 8, color: '#000000' }}>Paraaf</Text>
-          <Image src={signatureErik} style={{ width: 57, height: 'auto' }} />
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+          <Text style={{ fontSize: 7, color: '#000000' }}>Paraaf</Text>
+          <Image src={paraafErik} style={{ width: 43, height: 'auto' }} />
         </View>
       </View>
     </Page>

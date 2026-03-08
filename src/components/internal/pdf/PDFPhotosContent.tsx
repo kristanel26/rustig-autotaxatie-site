@@ -2,6 +2,7 @@ import { Page, View, Text, Image } from '@react-pdf/renderer';
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
 
 const signatureErik = '/signature-erik-elderson.png';
+const paraafErik = '/paraaf-erik-elderson.png';
 
 interface PDFPhotosContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -87,9 +88,9 @@ const PDFPhotosContent = ({ report, startPageNumber = 4, totalPages = 10 }: PDFP
               <Text style={{ fontSize: 9, color: '#000000', marginHorizontal: 4 }}>|</Text>
               <Text style={{ fontSize: 9, color: '#000000' }}>KVK: 95549269</Text>
             </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-              <Text style={{ fontSize: 8, color: '#000000' }}>Paraaf</Text>
-              <Image src={signatureErik} style={{ width: 57, height: 'auto' }} />
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+              <Text style={{ fontSize: 7, color: '#000000' }}>Paraaf</Text>
+              <Image src={paraafErik} style={{ width: 43, height: 'auto' }} />
               <Text style={{ fontSize: 9, color: '#000000', marginLeft: 8 }}>
                 Fotobijlage {pageIndex + 1}
               </Text>
