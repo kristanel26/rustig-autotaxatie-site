@@ -274,10 +274,27 @@ export const WevAutotelexDataForm = ({ data, onChange }: WevAutotelexDataFormPro
           </div>
         )}
 
+        {/* Schadebedrag */}
+        <div className="space-y-2 pt-4 border-t">
+          <Label htmlFor="wev_schade_bedrag">Schadebedrag (€) — optioneel</Label>
+          <Input
+            id="wev_schade_bedrag"
+            type="number"
+            min="0"
+            step="1"
+            value={data.wev_schade_bedrag}
+            onChange={(e) => onChange('wev_schade_bedrag', e.target.value)}
+            placeholder="0"
+          />
+          <p className="text-xs text-muted-foreground">
+            Indien van toepassing: het geschatte schadebedrag wordt afgetrokken van het gemiddelde.
+          </p>
+        </div>
+
         {/* Calculated and final values */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t">
           <div className="space-y-2">
-            <Label htmlFor="wev_berekend">WEV berekend (gemiddelde)</Label>
+            <Label htmlFor="wev_berekend">WEV berekend</Label>
             <Input
               id="wev_berekend"
               type="text"
@@ -288,7 +305,7 @@ export const WevAutotelexDataForm = ({ data, onChange }: WevAutotelexDataFormPro
               placeholder="Wordt automatisch berekend"
             />
             <p className="text-xs text-muted-foreground">
-              Rekenkundig gemiddelde van handelsinkoopwaarde en verkoopwaarde, afgerond op hele euro's.
+              (Handelsinkoopwaarde + Verkoopwaarde) / 2{schadeBedrag > 0 ? ` − ${formatCurrency(schadeBedrag)} schade` : ''}, afgerond op hele euro's.
             </p>
           </div>
           <div className="space-y-2">
