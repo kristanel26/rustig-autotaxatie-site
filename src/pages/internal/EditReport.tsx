@@ -1758,19 +1758,7 @@ const EditReport = () => {
           </CardContent>
         </Card>
 
-        {/* Actions */}
-        <div className="flex gap-3">
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Opslaan...' : 'Wijzigingen Opslaan'}
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => navigate(`/intern/rapport/${id}`)}
-          >
-            Annuleren
-          </Button>
-        </div>
+        {/* No manual save button needed — autosave handles all changes */}
           </form>
 
           {/* Completeness Sidebar - sticky on desktop */}
