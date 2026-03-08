@@ -1,8 +1,7 @@
 import { Page, View, Text, Image } from '@react-pdf/renderer';
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
-
-const signatureErik = '/signature-erik-elderson.png';
-const paraafErik = '/paraaf-erik-elderson.png';
+import signatureErik from '@/assets/signature-erik-elderson.png';
+import paraafErik from '@/assets/paraaf-erik-elderson.png';
 
 interface PDFPhotosContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
