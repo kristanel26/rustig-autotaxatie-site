@@ -1037,6 +1037,8 @@ const EditReport = () => {
         exterior_windows_notes: appraisalData.exterior_windows_notes || null,
         exterior_sealant: appraisalData.exterior_sealant || null,
         exterior_sealant_notes: appraisalData.exterior_sealant_notes || null,
+        exterior_chrome: appraisalData.exterior_chrome || null,
+        exterior_chrome_notes: appraisalData.exterior_chrome_notes || null,
         
         // Interieur
         interior_upholstery: appraisalData.interior_upholstery || null,
