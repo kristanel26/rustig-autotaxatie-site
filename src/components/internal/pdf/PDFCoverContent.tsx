@@ -104,6 +104,7 @@ const getTitelConfig = (rapporttype: string) => {
       beschrijving: 'Dit taxatierapport is opgesteld ter bepaling van de waarde in het economisch verkeer van het voertuig.',
     };
   }
+  // KLS, kls, klassieker, CAM, cam, camper — allemaal artikel 7:960 BW
   return {
     subtitel: 'Volgens artikel 7:960 BW',
     beschrijving: 'Dit taxatierapport is opgesteld ten behoeve van de vaststelling van de vervangingswaarde van het voertuig.',
