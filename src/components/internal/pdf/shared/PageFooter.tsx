@@ -65,7 +65,7 @@ export function PageFooter({ pageNumber, totalPages, variant = 'standard', photo
       </View>
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
         <Text style={{ fontSize: 8, color: '#000000' }}>Paraaf</Text>
-        <Image src={signatureErik} style={{ height: 57, width: 'auto' }} />
+        <Image src={paraafErik} style={{ height: 18, width: 'auto', opacity: 0.85 }} />
         <Text style={{ fontSize: 9, color: '#000000', marginLeft: 8 }}>
           {variant === 'photos' 
             ? `Fotobijlage ${(photoPageIndex ?? 0) + 1}`
