@@ -257,12 +257,9 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
       <View style={styles.footer}>
         <View style={styles.footerLine} />
         <View style={styles.footerRow}>
-          <View>
-            <Image src={LOGO_AT} style={styles.footerLogoAt} />
-            <Text style={styles.footerAddress}>
-              Leigraaf 160, 6651 GJ Druten | KvK: 95549269 | BTW: NL003366178B93 | TMV: 33106 | VRT: 22-523-M | Bank: NL80 RABO 0387 9156 80
-            </Text>
-          </View>
+          <Text style={styles.footerAddress}>
+            Leigraaf 160, 6651 GJ Druten | KvK: 95549269 | BTW: NL003366178B93 | TMV: 33106 | VRT: 22-523-M | Bank: NL80 RABO 0387 9156 80
+          </Text>
           <Text style={styles.footerPageNum}>Pagina 1 van {totalPages}</Text>
         </View>
       </View>
