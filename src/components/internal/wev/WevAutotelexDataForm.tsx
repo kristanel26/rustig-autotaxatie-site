@@ -53,9 +53,9 @@ const btwMargeOptions = [
   { value: 'marge', label: 'Marge-voertuig' },
 ];
 
-// Calculate WEV: rounded average of handelsinkoop and verkoop
-const calculateWev = (handelsinkoop: number, verkoop: number): number => {
-  return Math.round((handelsinkoop + verkoop) / 2);
+// Calculate WEV: rounded average of handelsinkoop and verkoop, minus schade
+const calculateWev = (handelsinkoop: number, verkoop: number, schade: number = 0): number => {
+  return Math.round((handelsinkoop + verkoop) / 2 - schade);
 };
 
 // Format currency for display

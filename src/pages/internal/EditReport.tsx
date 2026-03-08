@@ -629,6 +629,7 @@ const EditReport = () => {
           wev_definitief: (reportData as any).wev_definitief?.toString() || '',
           wev_override_actief: (reportData as any).wev_override_actief || false,
           wev_override_redenering: (reportData as any).wev_override_redenering || '',
+          wev_schade_bedrag: (reportData as any).wev_schade_correctie || '',
         });
         setWevValueData({
           wev_eindwaarde: (reportData as any).wev_eindwaarde?.toString() || '',
