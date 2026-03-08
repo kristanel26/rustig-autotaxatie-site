@@ -93,23 +93,6 @@ export const WevValueForm = ({ data, onChange }: WevValueFormProps) => {
           </p>
         </div>
 
-        {/* Optional: Damage amount */}
-        <div className="space-y-2 pt-4 border-t">
-          <Label htmlFor="wev_schade_bedrag">Schadebedrag (€) - optioneel</Label>
-          <Input
-            id="wev_schade_bedrag"
-            type="number"
-            min="0"
-            step="1"
-            value={data.wev_schade_bedrag}
-            onChange={(e) => onChange('wev_schade_bedrag', e.target.value)}
-            placeholder="0"
-          />
-          <p className="text-xs text-muted-foreground">
-            Indien van toepassing: het geschatte schadebedrag.
-          </p>
-        </div>
-
         {/* Summary display */}
         {isComplete && (
           <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg mt-4">
