@@ -325,42 +325,57 @@ export const WevDocumentUploadForm = ({
             <p>Nog geen documenten geüpload</p>
           </div>
         ) : (
-          <div className="space-y-2">
+          <div className="space-y-3">
             {documents.map((doc) => (
               <div
                 key={doc.id}
-                className="flex items-center justify-between p-3 bg-muted/50 rounded-lg"
+                className="p-3 bg-muted/50 rounded-lg space-y-2"
               >
-                <div className="flex items-center gap-3 min-w-0 flex-1">
-                  <FileText className="h-5 w-5 text-muted-foreground shrink-0" />
-                  <div className="min-w-0">
-                    <a
-                      href={doc.file_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-medium text-sm hover:underline truncate block"
-                    >
-                      {doc.file_name}
-                    </a>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <Badge variant="secondary" className="text-xs">
-                        {documentTypeLabels[doc.document_type]}
-                      </Badge>
-                      <span>{formatFileSize(doc.file_size)}</span>
-                      <span>•</span>
-                      <span>{formatDate(doc.uploaded_at)}</span>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3 min-w-0 flex-1">
+                    <FileText className="h-5 w-5 text-muted-foreground shrink-0" />
+                    <div className="min-w-0">
+                      <a
+                        href={doc.file_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium text-sm hover:underline truncate block"
+                      >
+                        {doc.file_name}
+                      </a>
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <Badge variant="secondary" className="text-xs">
+                          {documentTypeLabels[doc.document_type]}
+                        </Badge>
+                        <span>{formatFileSize(doc.file_size)}</span>
+                        <span>•</span>
+                        <span>{formatDate(doc.uploaded_at)}</span>
+                      </div>
                     </div>
                   </div>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleDeleteDocument(doc)}
+                    className="shrink-0 text-destructive hover:text-destructive"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
                 </div>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => handleDeleteDocument(doc)}
-                  className="shrink-0 text-destructive hover:text-destructive"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
+                {/* Tag checkboxes */}
+                <div className="flex flex-wrap gap-x-4 gap-y-1 pl-8">
+                  {ALL_TAGS.map((tag) => (
+                    <label key={tag} className="flex items-center gap-1.5 text-xs cursor-pointer">
+                      <Checkbox
+                        checked={(doc.document_tags || []).includes(tag)}
+                        onCheckedChange={() => handleToggleTag(doc, tag)}
+                        className="h-3.5 w-3.5"
+                      />
+                      <span className="text-muted-foreground">{documentTagLabels[tag]}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
