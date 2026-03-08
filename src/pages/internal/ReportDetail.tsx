@@ -46,6 +46,7 @@ interface Report {
   rdw_datum_laatste_tenaamstelling: string | null;
   rdw_brandstof: string | null;
   rdw_transmissie: string | null;
+  transmissie: string | null;
   rdw_aantal_cilinders: number | null;
   rdw_cilinderinhoud: number | null;
   rdw_vermogen_kw: number | null;
@@ -360,7 +361,7 @@ const ReportDetail = () => {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gold-lt">Transmissie</p>
-                  <p className="font-medium">{report.rdw_transmissie || '-'}</p>
+                  <p className="font-medium">{report.rdw_transmissie || report.transmissie || '-'}</p>
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gold-lt">Aantal cilinders</p>
