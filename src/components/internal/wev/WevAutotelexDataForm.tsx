@@ -25,6 +25,7 @@ export interface WevAutotelexData {
   wev_definitief: string;
   wev_override_actief: boolean;
   wev_override_redenering: string;
+  wev_schade_bedrag: string;
 }
 
 export const getInitialWevAutotelexData = (): WevAutotelexData => ({
@@ -39,6 +40,7 @@ export const getInitialWevAutotelexData = (): WevAutotelexData => ({
   wev_definitief: '',
   wev_override_actief: false,
   wev_override_redenering: '',
+  wev_schade_bedrag: '',
 });
 
 interface WevAutotelexDataFormProps {
