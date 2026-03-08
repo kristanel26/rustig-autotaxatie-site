@@ -727,6 +727,8 @@ export type Database = {
           earth_leakage_switch: boolean | null
           exterior_body: string | null
           exterior_body_notes: string | null
+          exterior_chrome: string | null
+          exterior_chrome_notes: string | null
           exterior_paint: string | null
           exterior_paint_notes: string | null
           exterior_rubbers: string | null
@@ -937,6 +939,8 @@ export type Database = {
           earth_leakage_switch?: boolean | null
           exterior_body?: string | null
           exterior_body_notes?: string | null
+          exterior_chrome?: string | null
+          exterior_chrome_notes?: string | null
           exterior_paint?: string | null
           exterior_paint_notes?: string | null
           exterior_rubbers?: string | null
@@ -1147,6 +1151,8 @@ export type Database = {
           earth_leakage_switch?: boolean | null
           exterior_body?: string | null
           exterior_body_notes?: string | null
+          exterior_chrome?: string | null
+          exterior_chrome_notes?: string | null
           exterior_paint?: string | null
           exterior_paint_notes?: string | null
           exterior_rubbers?: string | null

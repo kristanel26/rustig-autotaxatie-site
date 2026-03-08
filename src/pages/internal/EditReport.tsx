@@ -502,6 +502,8 @@ const EditReport = () => {
           exterior_windows_notes: (reportData as any).exterior_windows_notes || '',
           exterior_sealant: (reportData as any).exterior_sealant || '',
           exterior_sealant_notes: (reportData as any).exterior_sealant_notes || '',
+          exterior_chrome: (reportData as any).exterior_chrome || '',
+          exterior_chrome_notes: (reportData as any).exterior_chrome_notes || '',
           interior_upholstery: (reportData as any).interior_upholstery || '',
           interior_upholstery_notes: (reportData as any).interior_upholstery_notes || '',
           interior_dashboard: (reportData as any).interior_dashboard || '',
@@ -1035,6 +1037,8 @@ const EditReport = () => {
         exterior_windows_notes: appraisalData.exterior_windows_notes || null,
         exterior_sealant: appraisalData.exterior_sealant || null,
         exterior_sealant_notes: appraisalData.exterior_sealant_notes || null,
+        exterior_chrome: appraisalData.exterior_chrome || null,
+        exterior_chrome_notes: appraisalData.exterior_chrome_notes || null,
         
         // Interieur
         interior_upholstery: appraisalData.interior_upholstery || null,

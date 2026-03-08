@@ -1,0 +1,1 @@
+ALTER TABLE public.reports ADD COLUMN IF NOT EXISTS exterior_chrome text, ADD COLUMN IF NOT EXISTS exterior_chrome_notes text;

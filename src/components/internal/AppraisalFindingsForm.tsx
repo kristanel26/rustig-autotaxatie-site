@@ -98,6 +98,8 @@ export interface AppraisalFormData {
   exterior_windows_notes: string;
   exterior_sealant: string;
   exterior_sealant_notes: string;
+  exterior_chrome: string;
+  exterior_chrome_notes: string;
   // Interior
   interior_upholstery: string;
   interior_upholstery_notes: string;
@@ -182,6 +184,8 @@ export const getInitialAppraisalFormData = (): AppraisalFormData => ({
   exterior_windows_notes: '',
   exterior_sealant: '',
   exterior_sealant_notes: '',
+  exterior_chrome: '',
+  exterior_chrome_notes: '',
   interior_upholstery: '',
   interior_upholstery_notes: '',
   interior_dashboard: '',
@@ -600,6 +604,14 @@ export const AppraisalFindingsForm = ({
               notesValue={formData.exterior_sealant_notes}
               onConditionChange={(v) => onChange('exterior_sealant', v)}
               onNotesChange={(v) => onChange('exterior_sealant_notes', v)}
+            />
+            <ConditionField
+              id="exterior_chrome"
+              label="Chroomwerk"
+              conditionValue={formData.exterior_chrome}
+              notesValue={formData.exterior_chrome_notes}
+              onConditionChange={(v) => onChange('exterior_chrome', v)}
+              onNotesChange={(v) => onChange('exterior_chrome_notes', v)}
             />
           </CardContent>
         </Card>
