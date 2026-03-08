@@ -8,13 +8,11 @@ import { numberToDutchWords } from '@/lib/normalizers';
 export interface WevValueData {
   wev_eindwaarde: string;
   wev_eindwaarde_tekst: string;
-  wev_schade_bedrag: string;
 }
 
 export const getInitialWevValueData = (): WevValueData => ({
   wev_eindwaarde: '',
   wev_eindwaarde_tekst: '',
-  wev_schade_bedrag: '',
 });
 
 interface WevValueFormProps {
