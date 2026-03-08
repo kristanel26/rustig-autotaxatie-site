@@ -184,6 +184,8 @@ export const getInitialAppraisalFormData = (): AppraisalFormData => ({
   exterior_windows_notes: '',
   exterior_sealant: '',
   exterior_sealant_notes: '',
+  exterior_chrome: '',
+  exterior_chrome_notes: '',
   interior_upholstery: '',
   interior_upholstery_notes: '',
   interior_dashboard: '',
