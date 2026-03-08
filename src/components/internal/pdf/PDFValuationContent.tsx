@@ -1,5 +1,6 @@
 import React from 'react';
 import { Page, View, Text, Image } from '@react-pdf/renderer';
+import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
 import signatureErik from '@/assets/signature-erik-elderson.png';
 import paraafErik from '@/assets/paraaf-erik-elderson.png';
 
