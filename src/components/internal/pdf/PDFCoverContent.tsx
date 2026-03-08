@@ -168,10 +168,10 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
       paddingTop: 30,
       paddingLeft: 40,
       paddingRight: 40,
-      paddingBottom: 0,
+      paddingBottom: 50,
       display: 'flex',
       flexDirection: 'column',
-      height: '100%',
+      position: 'relative',
     }}>
       {/* Alles behalve footer */}
       <View style={{ flex: 1 }}>
