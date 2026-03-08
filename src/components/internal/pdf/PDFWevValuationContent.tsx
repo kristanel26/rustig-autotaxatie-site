@@ -120,7 +120,7 @@ const PDFWevValuationContent = ({ report, pageNumber, totalPages }: PDFWevValuat
         <Text style={{ fontSize: 10, color: '#000000', marginBottom: 6 }}>Hoogachtend,</Text>
         <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 2 }}>Automobiel Taxaties</Text>
         <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000' }}>{TAXATEUR_NAAM}</Text>
-        <Image src={signatureErik} style={{ width: 156, height: 'auto', marginTop: -6 }} />
+        <Image src={signatureErik} style={{ width: 212, height: 'auto', marginTop: -6 }} />
       </View>
 
       {/* Footer */}

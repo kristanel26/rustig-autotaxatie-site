@@ -168,10 +168,10 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
       paddingTop: 30,
       paddingLeft: 40,
       paddingRight: 40,
-      paddingBottom: 0,
+      paddingBottom: 50,
       display: 'flex',
       flexDirection: 'column',
-      height: '100%',
+      position: 'relative',
     }}>
       {/* Alles behalve footer */}
       <View style={{ flex: 1 }}>
@@ -259,15 +259,29 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         </View>
       </View>
 
-      {/* FOOTER: altijd onderaan, nooit op eigen pagina */}
-      <View style={styles.footer}>
-        <View style={styles.footerLine} />
-        <View style={styles.footerRow}>
-          <Text style={styles.footerAddress}>
-            Leigraaf 160, 6651 GJ Druten | KvK: 95549269 | BTW: NL003366178B93 | TMV: 33106 | VRT: 22-523-M | Bank: NL80 RABO 0387 9156 80
-          </Text>
-          <Text style={styles.footerPageNum}>Pagina 1 van {totalPages}</Text>
+      {/* FOOTER — vast onderaan pagina */}
+      <View style={{
+        position: 'absolute',
+        bottom: 24,
+        left: 40,
+        right: 40,
+        borderTopWidth: 1,
+        borderTopColor: '#e2e8f0',
+        paddingTop: 8,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={{ fontSize: 9, fontFamily: 'Helvetica-Bold', color: '#000000' }}>Automobiel Taxaties</Text>
+          <Text style={{ fontSize: 9, color: '#000000', marginHorizontal: 4 }}>|</Text>
+          <Text style={{ fontSize: 9, color: '#000000' }}>Leigraaf 160, 6651 GJ Druten</Text>
+          <Text style={{ fontSize: 9, color: '#000000', marginHorizontal: 4 }}>|</Text>
+          <Text style={{ fontSize: 9, color: '#000000' }}>KVK: 95549269</Text>
         </View>
+        <Text style={{ fontSize: 7, color: '#888888' }}>
+          Pagina 1 van {totalPages}
+        </Text>
       </View>
     </Page>
   );
