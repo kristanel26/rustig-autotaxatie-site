@@ -45,7 +45,7 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
     : '___________';
 
   return (
-    <Page size="A4" style={{ padding: '24 28', fontFamily: 'Helvetica', position: 'relative' }}>
+    <Page size="A4" wrap={false} style={{ padding: '24 28', fontFamily: 'Helvetica', position: 'relative' }}>
       {/* Header */}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 4 }}>
         <View />
@@ -96,7 +96,7 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
         <Text style={{ fontSize: 10, color: '#000000', marginBottom: 6 }}>Hoogachtend,</Text>
         <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 2 }}>Automobiel Taxaties</Text>
         <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000' }}>Erik Elderson</Text>
-        <Image src={signatureErik} style={{ height: 80, width: 'auto', maxWidth: 220, marginTop: -8 }} />
+        <Image src={signatureErik} style={{ width: 156, height: 'auto', marginTop: -8 }} />
       </View>
 
       {/* Footer */}
@@ -117,7 +117,7 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
         </Text>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
           <Text style={{ fontSize: 8, color: '#000000' }}>Paraaf</Text>
-          <Image src={signatureErik} style={{ height: 34, width: 'auto' }} />
+          <Image src={signatureErik} style={{ width: 57, height: 'auto' }} />
         </View>
       </View>
     </Page>

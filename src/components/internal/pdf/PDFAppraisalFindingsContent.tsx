@@ -298,7 +298,7 @@ const PDFAppraisalFindingsContent = ({ report, pageNumber = 3, totalPages = 10 }
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
           <Text style={{ fontSize: 8, color: '#000000' }}>Paraaf</Text>
-          <Image src={signatureErik} style={{ height: 57, width: 'auto' }} />
+          <Image src={signatureErik} style={{ width: 57, height: 'auto' }} />
           <Text style={{ fontSize: 7, color: '#000000', marginLeft: 8 }}>Pagina {pageNumber}</Text>
         </View>
       </View>

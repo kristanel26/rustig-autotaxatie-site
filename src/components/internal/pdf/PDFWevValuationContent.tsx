@@ -120,7 +120,7 @@ const PDFWevValuationContent = ({ report, pageNumber, totalPages }: PDFWevValuat
         <Text style={{ fontSize: 10, color: '#000000', marginBottom: 6 }}>Hoogachtend,</Text>
         <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 2 }}>Automobiel Taxaties</Text>
         <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000' }}>{TAXATEUR_NAAM}</Text>
-        <Image src={signatureErik} style={{ height: 64, width: 'auto', maxWidth: 180, marginTop: -6 }} />
+        <Image src={signatureErik} style={{ width: 156, height: 'auto', marginTop: -6 }} />
       </View>
 
       {/* Footer */}
@@ -139,7 +139,7 @@ const PDFWevValuationContent = ({ report, pageNumber, totalPages }: PDFWevValuat
         <Text style={{ fontSize: 9, color: '#000000' }}>Pagina {pageNumber} van {totalPages}</Text>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
           <Text style={{ fontSize: 8, color: '#000000' }}>Paraaf</Text>
-          <Image src={signatureErik} style={{ height: 34, width: 'auto' }} />
+          <Image src={signatureErik} style={{ width: 57, height: 'auto' }} />
         </View>
       </View>
     </Page>

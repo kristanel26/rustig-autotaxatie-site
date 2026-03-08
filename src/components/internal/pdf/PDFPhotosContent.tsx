@@ -89,7 +89,7 @@ const PDFPhotosContent = ({ report, startPageNumber = 4, totalPages = 10 }: PDFP
             </View>
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
               <Text style={{ fontSize: 8, color: '#000000' }}>Paraaf</Text>
-              <Image src={signatureErik} style={{ height: 57, width: 'auto' }} />
+              <Image src={signatureErik} style={{ width: 57, height: 'auto' }} />
               <Text style={{ fontSize: 9, color: '#000000', marginLeft: 8 }}>
                 Fotobijlage {pageIndex + 1}
               </Text>
