@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   footerLogoAt: { height: '6mm', width: 'auto' },
   footerPageNum: { fontSize: 7, color: GREY_LABEL },
-  footerAddress: { fontSize: 5.5, color: GREY_LABEL, textAlign: 'center' as const },
+  footerAddress: { fontSize: 5.5, color: GREY_LABEL, textAlign: 'left' as const, marginTop: 2 },
 });
 
 // Tekstvarianten per rapporttype
@@ -254,20 +254,17 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
       </View>
 
       {/* FOOTER: altijd onderaan, nooit op eigen pagina */}
-      <View style={{
-        borderTopWidth: 0.4,
-        borderTopColor: LINE_COLOR,
-        paddingTop: 6,
-        paddingBottom: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}>
-        <Image src={LOGO_AT} style={styles.footerLogoAt} />
-        <Text style={styles.footerAddress}>
-          Leigraaf 160, 6651 GJ Druten | KvK: 95549269 | BTW: NL003366178B93 | TMV: 33106 | VRT: 22-523-M | Bank: NL80 RABO 0387 9156 80
-        </Text>
-        <Text style={styles.footerPageNum}>Pagina 1 van {totalPages}</Text>
+      <View style={styles.footer}>
+        <View style={styles.footerLine} />
+        <View style={styles.footerRow}>
+          <View>
+            <Image src={LOGO_AT} style={styles.footerLogoAt} />
+            <Text style={styles.footerAddress}>
+              Leigraaf 160, 6651 GJ Druten | KvK: 95549269 | BTW: NL003366178B93 | TMV: 33106 | VRT: 22-523-M | Bank: NL80 RABO 0387 9156 80
+            </Text>
+          </View>
+          <Text style={styles.footerPageNum}>Pagina 1 van {totalPages}</Text>
+        </View>
       </View>
     </Page>
   );
