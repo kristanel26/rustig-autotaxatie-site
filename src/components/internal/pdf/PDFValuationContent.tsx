@@ -98,8 +98,8 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
       <View>
         <Text style={{ fontSize: 10, color: '#000000', marginBottom: 6 }}>Hoogachtend,</Text>
         <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 2 }}>Automobiel Taxaties</Text>
-        <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000' }}>Erik Elderson</Text>
-        <Image src={signatureErik} style={{ width: 156, height: 'auto', marginTop: -8 }} />
+        <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 8 }}>Erik Elderson</Text>
+        <Image src={signatureErik} style={{ width: '55mm', height: 'auto' }} />
       </View>
 
       {/* Footer */}
