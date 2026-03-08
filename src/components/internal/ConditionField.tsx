@@ -20,6 +20,7 @@ interface ConditionFieldProps {
 
 const conditionOptions = [
   { value: 'goed', label: 'Goed' },
+  { value: 'redelijk', label: 'Redelijk' },
   { value: 'voldoende', label: 'Voldoende' },
   { value: 'matig', label: 'Matig' },
   { value: 'slecht', label: 'Slecht' },
