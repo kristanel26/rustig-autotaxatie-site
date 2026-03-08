@@ -212,19 +212,21 @@ const ReportDetail = () => {
       <div className="space-y-6">
         {/* Action Buttons */}
         <div className="flex flex-wrap items-center gap-3">
-          <Button variant="ghost" onClick={() => navigate('/intern/rapporten')}>
+          <Button variant="ghost" className="text-foreground hover:bg-accent/20 hover:text-foreground" onClick={() => navigate('/intern/rapporten')}>
             <ArrowLeft className="h-4 w-4 mr-2" />
             Terug naar overzicht
           </Button>
           <Button 
-            variant="secondary-action" 
+            variant="secondary-action"
+            className="text-foreground border-border bg-secondary hover:bg-secondary/80 hover:text-foreground"
             onClick={() => navigate(`/intern/rapport/${id}/bewerken`)}
           >
             Rapport Bewerken
             <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
           </Button>
           <Button 
-            variant="outline" 
+            variant="outline"
+            className="text-foreground border-border bg-transparent hover:bg-accent/20 hover:text-foreground"
             onClick={handlePdfDownload}
             disabled={isGeneratingPdf}
           >
@@ -236,7 +238,8 @@ const ReportDetail = () => {
             {isGeneratingPdf ? 'Genereren...' : 'PDF Downloaden'}
           </Button>
           <Button 
-            variant="ghost" 
+            variant="ghost"
+            className="text-foreground hover:bg-accent/20 hover:text-foreground"
             onClick={handlePdfPreview}
           >
             <Eye className="h-4 w-4 mr-2" />
@@ -248,17 +251,17 @@ const ReportDetail = () => {
         <div className="flex flex-wrap items-center gap-4 pb-4 border-b border-border">
           <div>
             <p className="text-sm font-medium text-gold-lt">Rapportnummer</p>
-            <p className="text-2xl font-bold">{report.report_number}</p>
+            <p className="text-2xl font-bold text-foreground">{report.report_number}</p>
           </div>
           {report.document_reference && (
             <div>
               <p className="text-sm font-medium text-gold-lt">Documentreferentie</p>
-              <p className="text-lg font-medium">{report.document_reference}</p>
+              <p className="text-lg font-medium text-foreground">{report.document_reference}</p>
             </div>
           )}
           <div className="ml-auto text-right">
             <p className="text-sm font-medium text-gold-lt">Aangemaakt op</p>
-            <p className="text-sm">{formatDate(report.created_at)}</p>
+            <p className="text-sm text-foreground">{formatDate(report.created_at)}</p>
           </div>
         </div>
 
