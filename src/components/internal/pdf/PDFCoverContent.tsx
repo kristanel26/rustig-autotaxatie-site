@@ -37,15 +37,15 @@ const styles = StyleSheet.create({
   },
 
   // --- TITELSECTIE ---
-  titleSection: { marginTop: '13mm' },
-  mainTitle: { fontSize: 26, fontFamily: 'Helvetica-Bold', color: NAVY, marginBottom: 4 },
-  subtitle: { fontSize: 10, color: GREY_SUB, marginBottom: 3 },
-  bodyText: { fontSize: 7.5, color: GREY_BODY },
+  titleSection: { marginTop: '8mm' },
+  mainTitle: { fontSize: 24, fontFamily: 'Helvetica-Bold', color: NAVY, marginBottom: 3 },
+  subtitle: { fontSize: 9.5, color: GREY_SUB, marginBottom: 2 },
+  bodyText: { fontSize: 7.2, color: GREY_BODY },
 
   // --- VOERTUIG + FOTO ROW ---
   vehicleRow: {
     flexDirection: 'row',
-    marginTop: '14mm',
+    marginTop: '8mm',
     alignItems: 'flex-start',
   },
   leftCol: { flex: 1 },
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   photo: { width: '100%', height: '100%', objectFit: 'cover' as const },
 
   // --- DATA BLOKKEN ---
-  dataBlock: { marginBottom: '9.5mm' },
+  dataBlock: { marginBottom: '6mm' },
   dataLabel: {
     fontSize: 6.5,
     color: GREY_LABEL,
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   dataValueNormal: { fontSize: 9, color: '#333333' },
 
   // --- TAXATEUR ---
-  taxateurSection: { paddingTop: '8mm' },
+  taxateurSection: { paddingTop: '3mm' },
 
   // --- FOOTER ---
   footer: {
