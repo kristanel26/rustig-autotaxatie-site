@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Select,
   SelectContent,
@@ -17,9 +18,21 @@ import { useAuth } from '@/contexts/AuthContext';
 
 export type DocumentType = 'autotelex' | 'schadecalculatie' | 'overig';
 
+export type DocumentTag = 'algemene_info' | 'handelswaarde' | 'verkoopwaarde' | 'schadecalculatie';
+
+const documentTagLabels: Record<DocumentTag, string> = {
+  algemene_info: 'Algemene info',
+  handelswaarde: 'Handelswaarde',
+  verkoopwaarde: 'Verkoopwaarde',
+  schadecalculatie: 'Schadecalculatie',
+};
+
+const ALL_TAGS: DocumentTag[] = ['algemene_info', 'handelswaarde', 'verkoopwaarde', 'schadecalculatie'];
+
 export interface WevDocument {
   id: string;
   document_type: DocumentType;
+  document_tags: DocumentTag[];
   file_name: string;
   file_url: string;
   file_size: number | null;
