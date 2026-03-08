@@ -344,7 +344,7 @@ export const CamperHostImportForm = ({
         )}
 
         {/* Extract button */}
-        {uploadedFiles.length > 0 && !extraction && (
+        {uploadedFiles.length > 0 && (
           <Button
             type="button"
             onClick={(e) => {
@@ -359,6 +359,8 @@ export const CamperHostImportForm = ({
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                 Gegevens uitlezen...
               </>
+            ) : extraction ? (
+              'Opnieuw uitlezen'
             ) : (
               'Gegevens uitlezen'
             )}
