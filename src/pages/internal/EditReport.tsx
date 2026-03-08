@@ -1378,7 +1378,7 @@ const EditReport = () => {
             <CardHeader>
               <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
             </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="inspection_date">Datum opname *</Label>
                 <Input
@@ -1392,7 +1392,19 @@ const EditReport = () => {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="inspection_start_time">Opnametijd *</Label>
+                <Label htmlFor="inspection_location">Plaats opname *</Label>
+                <Input
+                  id="inspection_location"
+                  value={inspectionData.inspection_location}
+                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
+                  placeholder="bijv. Druten"
+                />
+                {!inspectionData.inspection_location && (
+                  <p className="text-xs text-destructive">Verplicht veld</p>
+                )}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="inspection_start_time">Aanvangstijd *</Label>
                 <Input
                   id="inspection_start_time"
                   type="time"
@@ -1404,14 +1416,14 @@ const EditReport = () => {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="inspection_location">Plaats opname *</Label>
+                <Label htmlFor="inspection_end_time">Eindtijd *</Label>
                 <Input
-                  id="inspection_location"
-                  value={inspectionData.inspection_location}
-                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
-                  placeholder="bijv. Druten"
+                  id="inspection_end_time"
+                  type="time"
+                  value={inspectionData.inspection_end_time}
+                  onChange={(e) => handleInspectionChange('inspection_end_time', e.target.value)}
                 />
-                {!inspectionData.inspection_location && (
+                {!inspectionData.inspection_end_time && (
                   <p className="text-xs text-destructive">Verplicht veld</p>
                 )}
               </div>
@@ -1501,15 +1513,6 @@ const EditReport = () => {
               <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2 md:col-span-2">
-                <Label htmlFor="inspection_location">Plaats opname *</Label>
-                <Input
-                  id="inspection_location"
-                  value={inspectionData.inspection_location}
-                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
-                  placeholder="bijv. Druten"
-                />
-              </div>
               <div className="space-y-2">
                 <Label htmlFor="inspection_date">Datum opname *</Label>
                 <Input
@@ -1518,6 +1521,45 @@ const EditReport = () => {
                   value={inspectionData.inspection_date}
                   onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
                 />
+                {!inspectionData.inspection_date && (
+                  <p className="text-xs text-destructive">Verplicht veld</p>
+                )}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="inspection_location">Plaats opname *</Label>
+                <Input
+                  id="inspection_location"
+                  value={inspectionData.inspection_location}
+                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
+                  placeholder="bijv. Druten"
+                />
+                {!inspectionData.inspection_location && (
+                  <p className="text-xs text-destructive">Verplicht veld</p>
+                )}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="inspection_start_time">Aanvangstijd *</Label>
+                <Input
+                  id="inspection_start_time"
+                  type="time"
+                  value={inspectionData.inspection_start_time}
+                  onChange={(e) => handleInspectionChange('inspection_start_time', e.target.value)}
+                />
+                {!inspectionData.inspection_start_time && (
+                  <p className="text-xs text-destructive">Verplicht veld</p>
+                )}
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="inspection_end_time">Eindtijd *</Label>
+                <Input
+                  id="inspection_end_time"
+                  type="time"
+                  value={inspectionData.inspection_end_time}
+                  onChange={(e) => handleInspectionChange('inspection_end_time', e.target.value)}
+                />
+                {!inspectionData.inspection_end_time && (
+                  <p className="text-xs text-destructive">Verplicht veld</p>
+                )}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="wev_peildatum">Peildatum</Label>
