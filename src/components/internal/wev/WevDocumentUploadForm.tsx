@@ -236,6 +236,7 @@ export const WevDocumentUploadForm = ({
         variant: 'destructive',
       });
     }
+  };
 
   const formatFileSize = (bytes: number | null): string => {
     if (!bytes) return '-';
