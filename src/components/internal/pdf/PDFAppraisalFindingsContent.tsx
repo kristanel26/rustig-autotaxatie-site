@@ -90,15 +90,17 @@ const PDFAppraisalFindingsContent = ({ report, pageNumber = 3, totalPages = 10 }
   return (
     <Page size="A4" style={{ padding: '14 18', fontFamily: 'Helvetica', position: 'relative' }}>
       {/* Header */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
-        <View>
-          <Text style={{ fontSize: 14, fontFamily: 'Helvetica-Bold', color: '#000000', textTransform: 'uppercase' }}>TAXATEURBEVINDINGEN</Text>
-          {report.document_reference && (
-            <Text style={{ fontSize: 8, color: '#000000', marginTop: 2 }}>Documentkenmerk: {report.document_reference}</Text>
-          )}
-        </View>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 4 }}>
+        <View />
         <Image src={logoAutomobiel} style={{ height: 28, width: 'auto' }} />
       </View>
+      <Text style={{ fontSize: 7, color: '#888888', marginBottom: 3 }}>
+        Automobiel taxatie{report.document_reference ? ` · Documentkenmerk: ${report.document_reference}` : ''}
+      </Text>
+      <View style={{ borderBottomWidth: 0.5, borderBottomColor: '#cccccc', marginBottom: 10 }} />
+      <Text style={{ fontSize: 14, fontFamily: 'Helvetica-Bold', color: '#000000', textTransform: 'uppercase', marginBottom: 10 }}>
+        TAXATEURBEVINDINGEN
+      </Text>
 
       {/* Two-column layout */}
       <View style={{ flexDirection: 'row', gap: 14 }}>

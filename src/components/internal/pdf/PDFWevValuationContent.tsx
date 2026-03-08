@@ -46,12 +46,17 @@ const PDFWevValuationContent = ({ report, pageNumber, totalPages }: PDFWevValuat
   return (
     <Page size="A4" style={{ padding: '24 28', fontFamily: 'Helvetica', position: 'relative' }}>
       {/* Header */}
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
-        <Text style={{ fontSize: 18, fontFamily: 'Helvetica-Bold', color: '#000000', textTransform: 'uppercase', letterSpacing: 0.5 }}>
-          WAARDEBEPALING WEV
-        </Text>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 4 }}>
+        <View />
         <Image src={logoAutomobiel} style={{ height: 36, width: 'auto' }} />
       </View>
+      <Text style={{ fontSize: 8, color: '#888888', marginBottom: 4 }}>
+        Automobiel taxatie{report.document_reference ? ` · Documentkenmerk: ${report.document_reference}` : ''}
+      </Text>
+      <View style={{ borderBottomWidth: 0.5, borderBottomColor: '#cccccc', marginBottom: 14 }} />
+      <Text style={{ fontSize: 18, fontFamily: 'Helvetica-Bold', color: '#000000', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 16 }}>
+        WAARDEBEPALING WEV
+      </Text>
 
       {/* Taxateur declaration */}
       <View style={{ marginBottom: 14 }}>

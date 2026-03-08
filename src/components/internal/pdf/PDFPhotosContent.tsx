@@ -28,17 +28,17 @@ const PDFPhotosContent = ({ report, startPageNumber = 4, totalPages = 10 }: PDFP
       {pages.map((pagePhotos, pageIndex) => (
         <Page key={pageIndex} size="A4" style={{ padding: '22 24', fontFamily: 'Helvetica', position: 'relative' }}>
           {/* Header */}
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
-            <View>
-              <Text style={{ fontSize: 18, fontFamily: 'Helvetica-Bold', color: '#000000', textTransform: 'uppercase' }}>
-                FOTOBIJLAGE
-              </Text>
-              <Text style={{ fontSize: 10, color: '#000000', marginTop: 4 }}>
-                Documentkenmerk: {report.document_reference || '–'}
-              </Text>
-            </View>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 4 }}>
+            <View />
             <Image src={logoAutomobiel} style={{ height: 36, width: 'auto' }} />
           </View>
+          <Text style={{ fontSize: 8, color: '#888888', marginBottom: 4 }}>
+            Automobiel taxatie{report.document_reference ? ` · Documentkenmerk: ${report.document_reference}` : ''}
+          </Text>
+          <View style={{ borderBottomWidth: 0.5, borderBottomColor: '#cccccc', marginBottom: 14 }} />
+          <Text style={{ fontSize: 18, fontFamily: 'Helvetica-Bold', color: '#000000', textTransform: 'uppercase', marginBottom: 12 }}>
+            FOTOBIJLAGE
+          </Text>
 
           {/* Photo Grid - 2 columns x 3 rows using flexbox */}
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12, marginBottom: 20 }}>
