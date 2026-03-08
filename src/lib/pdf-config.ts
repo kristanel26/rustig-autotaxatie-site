@@ -16,6 +16,10 @@ import PDFKlassiekerValuationContent from '@/components/internal/pdf/PDFKlassiek
 import PDFVehicleDataContent from '@/components/internal/pdf/PDFVehicleDataContent';
 import PDFAppraisalFindingsContent from '@/components/internal/pdf/PDFAppraisalFindingsContent';
 import PDFPhotosContent from '@/components/internal/pdf/PDFPhotosContent';
+import PDFWevDocumentsContent from '@/components/internal/pdf/PDFWevDocumentsContent';
+import PDFWevMarketDataContent from '@/components/internal/pdf/PDFWevMarketDataContent';
+import PDFWevValueContent from '@/components/internal/pdf/PDFWevValueContent';
+import PDFWevRemarksContent from '@/components/internal/pdf/PDFWevRemarksContent';
 
 export type ReportType = 'camper' | 'wev' | 'klassieker';
 
@@ -48,6 +52,10 @@ export const WEV_PAGES: PageDefinition[] = [
   { id: 'cover', component: PDFCoverContent },
   { id: 'valuation', component: PDFWevValuationContent },
   { id: 'vehicle-data', component: PDFVehicleDataContent },
+  { id: 'wev-documents', component: PDFWevDocumentsContent },
+  { id: 'wev-market-data', component: PDFWevMarketDataContent },
+  { id: 'wev-value', component: PDFWevValueContent },
+  { id: 'wev-remarks', component: PDFWevRemarksContent },
   { id: 'appraisal-findings', component: PDFAppraisalFindingsContent },
   { id: 'photos', component: PDFPhotosContent, isMultiPage: true },
 ];
