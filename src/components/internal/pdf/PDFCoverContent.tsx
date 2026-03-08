@@ -109,12 +109,18 @@ const getTitelConfig = (rapporttype: string) => {
   };
 };
 
-// Logo's uit public/logos/
-const LOGO_AT = '/logos/logo_at.png';
-const LOGO_VRT = '/logos/logo_vrt.png';
-const LOGO_HOBEON = '/logos/logo_hobeon.png';
-const LOGO_TMV = '/logos/logo_tmv.png';
-const LOGO_FEHAC = '/logos/logo_fehac.png';
+// Logo's as ES6 imports for @react-pdf/renderer compatibility
+import logoAt from '@/assets/logo-automobiel-taxaties.png';
+import logoVrt from '@/assets/logo-vrt.png';
+import logoHobeon from '@/assets/logo-hobeon.webp';
+import logoTmv from '@/assets/logo-tmv.png';
+import logoFehac from '@/assets/logo-fehac.png';
+
+const LOGO_AT = logoAt;
+const LOGO_VRT = logoVrt;
+const LOGO_HOBEON = logoHobeon;
+const LOGO_TMV = logoTmv;
+const LOGO_FEHAC = logoFehac;
 
 interface PDFCoverContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
