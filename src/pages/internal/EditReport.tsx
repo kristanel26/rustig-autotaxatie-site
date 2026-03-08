@@ -839,6 +839,221 @@ const EditReport = () => {
     saveField('photo_types', Object.keys(types).length > 0 ? types : null);
   }, [saveField]);
 
+  // CamperHost import: map extracted section fields to report state + autosave
+  const handleCamperHostImportSection = useCallback((sectionKey: string, fields: Record<string, string>) => {
+    const dbFields: Record<string, unknown> = {};
+
+    // Map extracted field keys to state setters and db fields
+    const fieldMapping: Record<string, (value: string) => void> = {
+      // Voertuig
+      license_plate: (v) => setVehicleData(p => ({ ...p, license_plate: v })),
+      vin: (v) => setVehicleData(p => ({ ...p, vin: v })),
+      rdw_merk: (v) => setVehicleData(p => ({ ...p, rdw_merk: v })),
+      rdw_handelsbenaming: (v) => setVehicleData(p => ({ ...p, rdw_handelsbenaming: v })),
+      rdw_bouwjaar: (v) => setVehicleData(p => ({ ...p, rdw_bouwjaar: v })),
+      rdw_brandstof: (v) => setVehicleData(p => ({ ...p, rdw_brandstof: v })),
+      rdw_transmissie: (v) => setVehicleData(p => ({ ...p, rdw_transmissie: v })),
+      rdw_kleur: (v) => setVehicleData(p => ({ ...p, rdw_kleur: v })),
+      kleur_laksoort: (v) => setVehicleData(p => ({ ...p, kleur_laksoort: v })),
+      rdw_carrosserievorm: (v) => setVehicleData(p => ({ ...p, rdw_carrosserievorm: v })),
+      rdw_vermogen_kw: (v) => setVehicleData(p => ({ ...p, rdw_vermogen_kw: v })),
+      rdw_cilinderinhoud: (v) => setVehicleData(p => ({ ...p, rdw_cilinderinhoud: v })),
+      rdw_aantal_cilinders: (v) => setVehicleData(p => ({ ...p, rdw_aantal_cilinders: v })),
+      rdw_ledig_gewicht: (v) => setVehicleData(p => ({ ...p, rdw_ledig_gewicht: v })),
+      rdw_massa_rijklaar: (v) => setVehicleData(p => ({ ...p, rdw_massa_rijklaar: v })),
+      rdw_max_massa: (v) => setVehicleData(p => ({ ...p, rdw_max_massa: v })),
+      rdw_wielbasis: (v) => setVehicleData(p => ({ ...p, rdw_wielbasis: v })),
+      tellerstand: (v) => setVehicleData(p => ({ ...p, tellerstand: v })),
+      transmissie: (v) => setVehicleData(p => ({ ...p, transmissie: v })),
+      model_display_name: (v) => setVehicleData(p => ({ ...p, model_display_name: v })),
+      vehicle_title: (v) => setVehicleData(p => ({ ...p, vehicle_title: v })),
+      rdw_voertuigsoort: (v) => setVehicleData(p => ({ ...p, rdw_voertuigsoort: v })),
+      rdw_datum_eerste_toelating: (v) => setVehicleData(p => ({ ...p, rdw_datum_eerste_toelating: v })),
+      rdw_datum_eerste_tenaamstelling: (v) => setVehicleData(p => ({ ...p, rdw_datum_eerste_tenaamstelling: v })),
+
+      // Opbouw
+      soort_bouw: (v) => setVehicleData(p => ({ ...p, soort_bouw: v })),
+      opbouw_merk: (v) => setVehicleData(p => ({ ...p, opbouw_merk: v })),
+      opbouw_type: (v) => setVehicleData(p => ({ ...p, opbouw_type: v })),
+      constructievorm: (v) => setVehicleData(p => ({ ...p, constructievorm: v })),
+      gebruik: (v) => setVehicleData(p => ({ ...p, gebruik: v })),
+      stalling: (v) => setVehicleData(p => ({ ...p, stalling: v })),
+      staat_bij_opname: (v) => setVehicleData(p => ({ ...p, staat_bij_opname: v })),
+
+      // Klant
+      customer_title: (v) => setCustomerData(p => ({ ...p, customer_title: v })),
+      customer_initials: (v) => setCustomerData(p => ({ ...p, customer_initials: normalizeInitials(v) })),
+      customer_last_name: (v) => setCustomerData(p => ({ ...p, customer_last_name: capitalizeFirst(v) })),
+      customer_street: (v) => setCustomerData(p => ({ ...p, customer_street: v })),
+      customer_postcode: (v) => setCustomerData(p => ({ ...p, customer_postcode: v })),
+      customer_city: (v) => setCustomerData(p => ({ ...p, customer_city: capitalizeFirst(v) })),
+      customer_email: (v) => setCustomerData(p => ({ ...p, customer_email: v })),
+      customer_phone: (v) => setCustomerData(p => ({ ...p, customer_phone: v })),
+      opdrachtgever: (v) => setCustomerData(p => ({ ...p, opdrachtgever: v })),
+
+      // Inspectie
+      inspection_date: (v) => setInspectionData(p => ({ ...p, inspection_date: v })),
+      inspection_location: (v) => setInspectionData(p => ({ ...p, inspection_location: capitalizeFirst(v) })),
+      inspection_start_time: (v) => setInspectionData(p => ({ ...p, inspection_start_time: v })),
+      inspection_end_time: (v) => setInspectionData(p => ({ ...p, inspection_end_time: v })),
+
+      // Exterieur
+      exterior_paint: (v) => setAppraisalData(p => ({ ...p, exterior_paint: v })),
+      exterior_paint_notes: (v) => setAppraisalData(p => ({ ...p, exterior_paint_notes: v })),
+      exterior_body: (v) => setAppraisalData(p => ({ ...p, exterior_body: v })),
+      exterior_body_notes: (v) => setAppraisalData(p => ({ ...p, exterior_body_notes: v })),
+      exterior_rubbers: (v) => setAppraisalData(p => ({ ...p, exterior_rubbers: v })),
+      exterior_rubbers_notes: (v) => setAppraisalData(p => ({ ...p, exterior_rubbers_notes: v })),
+      exterior_windows: (v) => setAppraisalData(p => ({ ...p, exterior_windows: v })),
+      exterior_windows_notes: (v) => setAppraisalData(p => ({ ...p, exterior_windows_notes: v })),
+      exterior_sealant: (v) => setAppraisalData(p => ({ ...p, exterior_sealant: v })),
+      exterior_sealant_notes: (v) => setAppraisalData(p => ({ ...p, exterior_sealant_notes: v })),
+      exterior_chrome: (v) => setAppraisalData(p => ({ ...p, exterior_chrome: v })),
+      exterior_chrome_notes: (v) => setAppraisalData(p => ({ ...p, exterior_chrome_notes: v })),
+
+      // Interieur
+      interior_upholstery: (v) => setAppraisalData(p => ({ ...p, interior_upholstery: v })),
+      interior_upholstery_notes: (v) => setAppraisalData(p => ({ ...p, interior_upholstery_notes: v })),
+      interior_dashboard: (v) => setAppraisalData(p => ({ ...p, interior_dashboard: v })),
+      interior_dashboard_notes: (v) => setAppraisalData(p => ({ ...p, interior_dashboard_notes: v })),
+      interior_floor: (v) => setAppraisalData(p => ({ ...p, interior_floor: v })),
+      interior_floor_notes: (v) => setAppraisalData(p => ({ ...p, interior_floor_notes: v })),
+      interior_roof: (v) => setAppraisalData(p => ({ ...p, interior_roof: v })),
+      interior_roof_notes: (v) => setAppraisalData(p => ({ ...p, interior_roof_notes: v })),
+      interior_kitchen: (v) => setAppraisalData(p => ({ ...p, interior_kitchen: v })),
+      interior_kitchen_notes: (v) => setAppraisalData(p => ({ ...p, interior_kitchen_notes: v })),
+      interior_sanitary: (v) => setAppraisalData(p => ({ ...p, interior_sanitary: v })),
+      interior_sanitary_notes: (v) => setAppraisalData(p => ({ ...p, interior_sanitary_notes: v })),
+
+      // Technisch
+      condition_engine: (v) => setAppraisalData(p => ({ ...p, condition_engine: v })),
+      condition_engine_notes: (v) => setAppraisalData(p => ({ ...p, condition_engine_notes: v })),
+      condition_transmission: (v) => setAppraisalData(p => ({ ...p, condition_transmission: v })),
+      condition_transmission_notes: (v) => setAppraisalData(p => ({ ...p, condition_transmission_notes: v })),
+      condition_brakes: (v) => setAppraisalData(p => ({ ...p, condition_brakes: v })),
+      condition_brakes_notes: (v) => setAppraisalData(p => ({ ...p, condition_brakes_notes: v })),
+      condition_suspension: (v) => setAppraisalData(p => ({ ...p, condition_suspension: v })),
+      condition_suspension_notes: (v) => setAppraisalData(p => ({ ...p, condition_suspension_notes: v })),
+      condition_steering: (v) => setAppraisalData(p => ({ ...p, condition_steering: v })),
+      condition_steering_notes: (v) => setAppraisalData(p => ({ ...p, condition_steering_notes: v })),
+      condition_electrical: (v) => setAppraisalData(p => ({ ...p, condition_electrical: v })),
+      condition_electrical_notes: (v) => setAppraisalData(p => ({ ...p, condition_electrical_notes: v })),
+
+      // Installaties
+      installation_gas: (v) => setInstallationsData(p => ({ ...p, installation_gas: v })),
+      installation_water: (v) => setInstallationsData(p => ({ ...p, installation_water: v })),
+      installation_electrical: (v) => setInstallationsData(p => ({ ...p, installation_electrical: v })),
+      leakage_electrical: (v) => setInstallationsData(p => ({ ...p, leakage_electrical: v })),
+      voltage: (v) => setInstallationsData(p => ({ ...p, voltage: v })),
+
+      // Vocht & veiligheid
+      moisture_measurement_performed: (v) => setMoistureData(p => ({ ...p, moisture_measurement_performed: v === 'true' || v === 'ja' })),
+      moisture_advice: (v) => setMoistureData(p => ({ ...p, moisture_advice: v })),
+      fire_extinguisher: (v) => setCamperTechData(p => ({ ...p, fire_extinguisher: v === 'true' || v === 'ja' })),
+      smoke_detector: (v) => setCamperTechData(p => ({ ...p, smoke_detector: v === 'true' || v === 'ja' })),
+      gas_detection: (v) => setCamperTechData(p => ({ ...p, gas_detection: v === 'true' || v === 'ja' })),
+      gas_hose_production_date: (v) => setCamperTechData(p => ({ ...p, gas_hose_production_date: v })),
+      pressure_regulator_production_date: (v) => setCamperTechData(p => ({ ...p, pressure_regulator_production_date: v })),
+      earth_leakage_switch: (v) => setCamperTechData(p => ({ ...p, earth_leakage_switch: v === 'true' || v === 'ja' })),
+      fused: (v) => setCamperTechData(p => ({ ...p, fused: v === 'true' || v === 'ja' })),
+      lpg_underbody: (v) => setCamperTechData(p => ({ ...p, lpg_underbody: v === 'true' || v === 'ja' })),
+      loose_gas_tanks: (v) => setCamperTechData(p => ({ ...p, loose_gas_tanks: v === 'true' || v === 'ja' })),
+      onboard_battery: (v) => setCamperTechData(p => ({ ...p, onboard_battery: v === 'true' || v === 'ja' })),
+      starter_battery: (v) => setCamperTechData(p => ({ ...p, starter_battery: v === 'true' || v === 'ja' })),
+
+      // Banden
+      tire_bandenmaat: (v) => setAppraisalData(p => ({ ...p, tire_bandenmaat: v })),
+      tire_bandenmaat_achter: (v) => setAppraisalData(p => ({ ...p, tire_bandenmaat_achter: v })),
+      rim_type: (v) => setAppraisalData(p => ({ ...p, rim_type: v })),
+      tire_front_left_brand: (v) => setAppraisalData(p => ({ ...p, tire_front_left_brand: v })),
+      tire_front_left_dot: (v) => setAppraisalData(p => ({ ...p, tire_front_left_dot: v })),
+      tire_front_left_profiel: (v) => setAppraisalData(p => ({ ...p, tire_front_left_profiel: v })),
+      tire_front_left_season: (v) => setAppraisalData(p => ({ ...p, tire_front_left_season: v })),
+      tire_front_right_brand: (v) => setAppraisalData(p => ({ ...p, tire_front_right_brand: v })),
+      tire_front_right_dot: (v) => setAppraisalData(p => ({ ...p, tire_front_right_dot: v })),
+      tire_front_right_profiel: (v) => setAppraisalData(p => ({ ...p, tire_front_right_profiel: v })),
+      tire_front_right_season: (v) => setAppraisalData(p => ({ ...p, tire_front_right_season: v })),
+      tire_rear_left_brand: (v) => setAppraisalData(p => ({ ...p, tire_rear_left_brand: v })),
+      tire_rear_left_dot: (v) => setAppraisalData(p => ({ ...p, tire_rear_left_dot: v })),
+      tire_rear_left_profiel: (v) => setAppraisalData(p => ({ ...p, tire_rear_left_profiel: v })),
+      tire_rear_left_season: (v) => setAppraisalData(p => ({ ...p, tire_rear_left_season: v })),
+      tire_rear_right_brand: (v) => setAppraisalData(p => ({ ...p, tire_rear_right_brand: v })),
+      tire_rear_right_dot: (v) => setAppraisalData(p => ({ ...p, tire_rear_right_dot: v })),
+      tire_rear_right_profiel: (v) => setAppraisalData(p => ({ ...p, tire_rear_right_profiel: v })),
+      tire_rear_right_season: (v) => setAppraisalData(p => ({ ...p, tire_rear_right_season: v })),
+      tire_advice: (v) => setAppraisalData(p => ({ ...p, tire_advice: v })),
+
+      // Algemene indruk
+      impression_general: (v) => setImpressionData(p => ({ ...p, impression_general: v })),
+      impression_body: (v) => setImpressionData(p => ({ ...p, impression_body: v })),
+      impression_interior: (v) => setImpressionData(p => ({ ...p, impression_interior: v })),
+      impression_engine: (v) => setImpressionData(p => ({ ...p, impression_engine: v })),
+      impression_transmission: (v) => setImpressionData(p => ({ ...p, impression_transmission: v })),
+      impression_brakes: (v) => setImpressionData(p => ({ ...p, impression_brakes: v })),
+      impression_suspension: (v) => setImpressionData(p => ({ ...p, impression_suspension: v })),
+      impression_steering: (v) => setImpressionData(p => ({ ...p, impression_steering: v })),
+      impression_electrical: (v) => setImpressionData(p => ({ ...p, impression_electrical: v })),
+      impression_wheels_tires: (v) => setImpressionData(p => ({ ...p, impression_wheels_tires: v })),
+      impression_extras: (v) => setImpressionData(p => ({ ...p, impression_extras: v })),
+      quality_class: (v) => setValuationData(p => ({ ...p, quality_class: v })),
+      general_remarks: (v) => setValuationData(p => ({ ...p, general_remarks: v })),
+
+      // Beveiliging
+      security_present: (v) => setCamperTechData(p => ({ ...p, security_present: v === 'true' || v === 'ja' })),
+      security_type: (v) => setCamperTechData(p => ({ ...p, security_type: v })),
+      mechanical_security: (v) => setCamperTechData(p => ({ ...p, mechanical_security: v })),
+      vehicle_tracking: (v) => setCamperTechData(p => ({ ...p, vehicle_tracking: v === 'true' || v === 'ja' })),
+      tracking_brand: (v) => setCamperTechData(p => ({ ...p, tracking_brand: v })),
+    };
+
+    // Numeric fields that need parseInt conversion for DB
+    const numericDbFields = new Set([
+      'rdw_bouwjaar', 'rdw_aantal_cilinders', 'rdw_cilinderinhoud', 'rdw_vermogen_kw',
+      'rdw_aantal_deuren', 'rdw_wielbasis', 'rdw_ledig_gewicht', 'rdw_massa_rijklaar',
+      'rdw_max_massa', 'tellerstand',
+    ]);
+
+    // Boolean fields for DB
+    const booleanDbFields = new Set([
+      'moisture_measurement_performed', 'fire_extinguisher', 'smoke_detector', 'gas_detection',
+      'earth_leakage_switch', 'fused', 'lpg_underbody', 'loose_gas_tanks',
+      'onboard_battery', 'starter_battery', 'security_present', 'vehicle_tracking',
+    ]);
+
+    for (const [key, value] of Object.entries(fields)) {
+      // Update component state
+      const setter = fieldMapping[key];
+      if (setter) {
+        setter(value);
+      }
+
+      // Prepare DB value
+      if (numericDbFields.has(key)) {
+        const num = parseInt(value);
+        dbFields[key] = !isNaN(num) ? num : null;
+      } else if (booleanDbFields.has(key)) {
+        dbFields[key] = value === 'true' || value === 'ja';
+      } else {
+        dbFields[key] = value || null;
+      }
+    }
+
+    // Batch save all fields
+    if (Object.keys(dbFields).length > 0) {
+      saveMultipleFields(dbFields);
+    }
+  }, [saveMultipleFields]);
+
+  const handleCamperHostImportAll = useCallback((sections: { key: string; label: string; fields: Record<string, { label: string; value: string }> }[]) => {
+    for (const section of sections) {
+      const flatFields: Record<string, string> = {};
+      for (const [key, field] of Object.entries(section.fields)) {
+        flatFields[key] = field.value;
+      }
+      handleCamperHostImportSection(section.key, flatFields);
+    }
+  }, [handleCamperHostImportSection]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
