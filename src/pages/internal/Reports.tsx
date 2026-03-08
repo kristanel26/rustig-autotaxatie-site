@@ -3,12 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import InternalLayout from '@/components/internal/InternalLayout';
 import { supabase } from '@/integrations/supabase/client';
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -17,52 +12,30 @@ import { Link } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
 import { getStatusBadgeProps } from '@/components/internal/ReportStatusBar';
 import {
-  Select as SelectUI,
-  SelectContent as SelectContentUI,
-  SelectItem as SelectItemUI,
-  SelectTrigger as SelectTriggerUI,
-  SelectValue as SelectValueUI,
+  Select as SelectUI, SelectContent as SelectContentUI, SelectItem as SelectItemUI,
+  SelectTrigger as SelectTriggerUI, SelectValue as SelectValueUI,
 } from '@/components/ui/select';
 
 interface Report {
   id: string;
   report_number: string;
+  report_type: string | null;
   license_plate: string | null;
   customer_title: string | null;
   customer_initials: string | null;
   customer_last_name: string | null;
+  client_name: string | null;
+  opdrachtgever: string | null;
+  rdw_merk: string | null;
+  rdw_handelsbenaming: string | null;
   inspection_date: string | null;
   status: string | null;
-  herinnering_status: string | null;
-  herinnering_verzonden_op: string | null;
 }
 
-const getStatusBadge = (status: string | null, verzondenOp: string | null) => {
-  switch (status) {
-    case 'verzonden':
-      return (
-        <div className="flex flex-col gap-0.5">
-          <Badge className="bg-emerald-500/15 text-emerald-700 border-emerald-500/20 hover:bg-emerald-500/15 text-xs">
-            Verzonden
-          </Badge>
-          {verzondenOp && (
-            <span className="text-xs text-muted-foreground">
-              {new Date(verzondenOp).toLocaleDateString('nl-NL', {
-                day: 'numeric',
-                month: 'short',
-              })}
-            </span>
-          )}
-        </div>
-      );
-    case 'mislukt':
-      return <Badge variant="destructive" className="text-xs">Mislukt</Badge>;
-    case 'niet_meer_van_toepassing':
-      return <Badge variant="secondary" className="text-xs">N.v.t.</Badge>;
-    case 'gepland':
-    default:
-      return <Badge variant="outline" className="text-xs">Gepland</Badge>;
-  }
+const TYPE_LABELS: Record<string, string> = {
+  klassieker: 'KLS',
+  camper: 'CAM',
+  wev: 'WEV',
 };
 
 const Reports = () => {
@@ -71,6 +44,7 @@ const Reports = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchParams] = useSearchParams();
   const [statusFilter, setStatusFilter] = useState<string>(searchParams.get('status') || 'all');
+  const [typeFilter, setTypeFilter] = useState<string>('all');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -78,9 +52,8 @@ const Reports = () => {
       try {
         const { data, error } = await supabase
           .from('reports')
-          .select('id, report_number, license_plate, customer_title, customer_initials, customer_last_name, inspection_date, status, herinnering_status, herinnering_verzonden_op')
+          .select('id, report_number, report_type, license_plate, customer_title, customer_initials, customer_last_name, client_name, opdrachtgever, rdw_merk, rdw_handelsbenaming, inspection_date, status')
           .order('report_number', { ascending: false });
-
         if (error) throw error;
         setReports(data || []);
       } catch (error) {
@@ -89,33 +62,34 @@ const Reports = () => {
         setLoading(false);
       }
     };
-
     fetchReports();
   }, []);
 
+  const getCustomerDisplay = (r: Report) => {
+    // Prefer opdrachtgever, then customer name parts, then client_name
+    const nameParts = [r.customer_title, r.customer_initials, r.customer_last_name].filter(Boolean).join(' ');
+    return r.opdrachtgever || nameParts || r.client_name || '-';
+  };
+
   const filteredReports = reports.filter((report) => {
-    // Status filter
     if (statusFilter !== 'all' && (report.status || 'concept') !== statusFilter) return false;
-    
+    if (typeFilter !== 'all' && (report.report_type || '') !== typeFilter) return false;
+
     const search = searchTerm.toLowerCase();
-    const customerName = [report.customer_title, report.customer_initials, report.customer_last_name]
-      .filter(Boolean)
-      .join(' ')
-      .toLowerCase();
+    if (!search) return true;
+    const customerName = getCustomerDisplay(report).toLowerCase();
+    const vehicle = [report.rdw_merk, report.rdw_handelsbenaming].filter(Boolean).join(' ').toLowerCase();
     return (
-      report.report_number.toString().includes(search) ||
+      report.report_number.toLowerCase().includes(search) ||
       (report.license_plate?.toLowerCase().includes(search) ?? false) ||
-      customerName.includes(search)
+      customerName.includes(search) ||
+      vehicle.includes(search)
     );
   });
 
   const formatDate = (dateString: string | null) => {
     if (!dateString) return '-';
-    return new Date(dateString).toLocaleDateString('nl-NL', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-    });
+    return new Date(dateString).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' });
   };
 
   return (
@@ -123,18 +97,13 @@ const Reports = () => {
       <div className="space-y-4">
         {/* Actions Bar */}
         <div className="flex flex-col sm:flex-row gap-3 justify-between">
-          <div className="flex flex-1 gap-3 items-center">
-            <div className="relative flex-1 max-w-md">
+          <div className="flex flex-1 gap-3 items-center flex-wrap">
+            <div className="relative flex-1 min-w-[200px] max-w-md">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Zoek op rapportnummer, kenteken of klantnaam..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
-              />
+              <Input placeholder="Zoek op rapportnummer, kenteken, klant of voertuig..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10" />
             </div>
             <SelectUI value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTriggerUI className="w-[180px]">
+              <SelectTriggerUI className="w-[170px]">
                 <SelectValueUI placeholder="Alle statussen" />
               </SelectTriggerUI>
               <SelectContentUI>
@@ -143,6 +112,17 @@ const Reports = () => {
                 <SelectItemUI value="in_behandeling">In behandeling</SelectItemUI>
                 <SelectItemUI value="gereed">Gereed</SelectItemUI>
                 <SelectItemUI value="verzonden">Verzonden</SelectItemUI>
+              </SelectContentUI>
+            </SelectUI>
+            <SelectUI value={typeFilter} onValueChange={setTypeFilter}>
+              <SelectTriggerUI className="w-[140px]">
+                <SelectValueUI placeholder="Alle types" />
+              </SelectTriggerUI>
+              <SelectContentUI>
+                <SelectItemUI value="all">Alle types</SelectItemUI>
+                <SelectItemUI value="klassieker">KLS — Klassiek</SelectItemUI>
+                <SelectItemUI value="camper">CAM — Camper</SelectItemUI>
+                <SelectItemUI value="wev">WEV</SelectItemUI>
               </SelectContentUI>
             </SelectUI>
           </div>
@@ -160,49 +140,43 @@ const Reports = () => {
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[120px]">Rapportnr.</TableHead>
+                <TableHead className="w-[60px]">Type</TableHead>
                 <TableHead>Kenteken</TableHead>
                 <TableHead>Klant</TableHead>
                 <TableHead className="w-[130px]">Status</TableHead>
                 <TableHead className="w-[140px]">Inspectiedatum</TableHead>
-                <TableHead className="w-[120px]">Herinnering</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {loading ? (
-              <TableRow>
+                <TableRow>
                   <TableCell colSpan={6} className="text-center py-8">
                     <div className="flex items-center justify-center">
-                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+                      <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary" />
                     </div>
                   </TableCell>
                 </TableRow>
               ) : filteredReports.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
-                    {searchTerm ? 'Geen rapporten gevonden' : 'Nog geen rapporten'}
+                    {searchTerm || statusFilter !== 'all' || typeFilter !== 'all' ? 'Geen rapporten gevonden' : 'Nog geen rapporten'}
                   </TableCell>
                 </TableRow>
               ) : (
                 filteredReports.map((report) => (
-                  <TableRow
-                    key={report.id}
-                    className="cursor-pointer hover:bg-muted/50"
-                    onClick={() => navigate(`/intern/rapport/${report.id}`)}
-                  >
-                    <TableCell className="font-medium">
-                      {report.report_number}
-                    </TableCell>
-                    <TableCell>{report.license_plate || '-'}</TableCell>
+                  <TableRow key={report.id} className="cursor-pointer hover:bg-muted/50" onClick={() => navigate(`/intern/rapport/${report.id}`)}>
+                    <TableCell className="font-medium font-mono text-xs">{report.report_number}</TableCell>
                     <TableCell>
-                      {[report.customer_title, report.customer_initials, report.customer_last_name]
-                        .filter(Boolean)
-                        .join(' ') || '-'}
+                      <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
+                        {TYPE_LABELS[report.report_type || ''] || (report.report_type?.toUpperCase() || '-')}
+                      </Badge>
                     </TableCell>
+                    <TableCell className="font-mono text-xs">{report.license_plate || '-'}</TableCell>
+                    <TableCell className="text-sm truncate max-w-[200px]">{getCustomerDisplay(report)}</TableCell>
                     <TableCell>
                       {(() => { const s = getStatusBadgeProps(report.status); return <Badge variant="outline" className={`text-xs ${s.className}`}>{s.label}</Badge>; })()}
                     </TableCell>
-                    <TableCell>{formatDate(report.inspection_date)}</TableCell>
-                    <TableCell>{getStatusBadge(report.herinnering_status, report.herinnering_verzonden_op)}</TableCell>
+                    <TableCell className="text-xs">{formatDate(report.inspection_date)}</TableCell>
                   </TableRow>
                 ))
               )}
@@ -210,7 +184,6 @@ const Reports = () => {
           </Table>
         </div>
 
-        {/* Results Count */}
         {!loading && (
           <p className="text-sm text-muted-foreground">
             {filteredReports.length} rapport{filteredReports.length !== 1 ? 'en' : ''} gevonden
