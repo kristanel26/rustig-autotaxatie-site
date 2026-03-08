@@ -10,27 +10,27 @@ export interface QualityClass {
 export const qualityClasses: QualityClass[] = [
   {
     value: 'Uitmuntend',
-    label: 'Uitmuntend',
+    label: '1. Uitmuntend',
     description: 'Optisch en technisch in topstaat. Origineel, zonder waarneembare gebreken, beschadigingen of gebruikssporen. Restauratie volgens destijds geldende specificaties. Potentieel concourswinnaar.',
   },
   {
     value: 'Zeer goed',
-    label: 'Zeer goed',
-    description: 'In zeer goede, niet-gerestaureerde staat verkerend voertuig dan wel vakkundig gerestaureerd. Met geringe gebruikssporen.',
+    label: '2. Zeer goed',
+    description: 'In zeer goede, niet gerestaureerde staat verkerend voertuig dan wel vakkundig gerestaureerd. Met geringe gebruikssporen.',
   },
   {
     value: 'Goed',
-    label: 'Goed',
-    description: 'In gebruikte toestand met normale gebruikssporen overeenkomstig de ouderdom van het voertuig. Carrosserie in goede staat.',
+    label: '3. Goed',
+    description: 'In gebruikte toestand met normale gebruikssporen overeenkomstig de ouderdom van het voertuig. Gebruiksklaar, kan direct deelnemen aan het verkeer. Geen directe reparaties noodzakelijk.',
   },
   {
     value: 'Matig',
-    label: 'Matig',
-    description: 'Een voertuig dat nog wel inzetbaar is. Compleet in alle onderdelen. Wel met direct zichtbare gebruiks- en slijtage­sporen. Enige corrosie mogelijk. Eenvoudige reparaties zijn noodzakelijk.',
+    label: '4. Matig',
+    description: 'Een voertuig dat nog wel inzetbaar is. Compleet in alle onderdelen. Wel met direct zichtbare gebruiks- en slijtagesporen. Enige corrosie mogelijk. Eenvoudige reparaties zijn noodzakelijk.',
   },
   {
     value: 'Slecht',
-    label: 'Slecht',
+    label: '5. Slecht',
     description: 'Niet rijklare toestand. Veel werk nodig aan het gehele voertuig om het weer rijvaardig te maken. Er ontbreken dikwijls meerdere onderdelen.',
   },
 ];
