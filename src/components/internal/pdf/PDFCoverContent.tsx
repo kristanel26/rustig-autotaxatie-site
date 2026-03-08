@@ -11,7 +11,6 @@ interface PDFCoverContentProps {
   totalPages?: number;
 }
 
-// 1mm = 2.8346pt
 const mm = (v: number) => v * 2.8346;
 
 const C = {
@@ -23,10 +22,8 @@ const C = {
   lines: '#CCCCCC',
 };
 
-const ML = mm(25); // left margin
-const MR = mm(20); // right margin
-const PAGE_W = mm(210);
-const PAGE_H = mm(297);
+const ML = mm(25);
+const MR = mm(20);
 
 const getTitleConfig = (reportType: string | null) => {
   if (reportType?.toLowerCase() === 'wev') {
@@ -46,13 +43,6 @@ const labelStyle = {
   fontFamily: 'Helvetica' as const,
   color: C.darkGrey,
   textTransform: 'uppercase' as const,
-};
-
-const valueStyle = {
-  fontSize: 13,
-  fontFamily: 'Helvetica-Bold' as const,
-  color: C.black,
-  marginTop: mm(1.5),
 };
 
 const detailLabelStyle = {
@@ -104,34 +94,32 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
       fontSize: 10,
       color: C.black,
       lineHeight: 1.4,
-      position: 'relative',
+      paddingTop: mm(12),
+      paddingLeft: ML,
+      paddingRight: MR,
+      paddingBottom: mm(30),
     }}>
-      {/* === ZONE 1: HEADER (y: 12mm) === */}
+
+      {/* === ZONE 1: HEADER === */}
       <View style={{
-        position: 'absolute',
-        top: mm(12),
-        left: ML,
-        right: MR,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
       }}>
-        <Image src={logoAutomobiel} style={{ height: mm(22), width: 'auto' }} />
+        <Image src={logoAutomobiel} style={{ height: mm(22), maxWidth: mm(70) }} />
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: mm(3) }}>
-          <Image src={logoVrt} style={{ height: mm(9), width: 'auto' }} />
-          <Image src={logoHobeon} style={{ height: mm(9), width: 'auto' }} />
-          <Image src={logoTmv} style={{ height: mm(9), width: 'auto' }} />
-          <Image src={logoFehac} style={{ height: mm(9), width: 'auto' }} />
+          <Image src={logoVrt} style={{ height: mm(9), maxWidth: mm(20) }} />
+          <Image src={logoHobeon} style={{ height: mm(9), maxWidth: mm(20) }} />
+          <Image src={logoTmv} style={{ height: mm(9), maxWidth: mm(20) }} />
+          <Image src={logoFehac} style={{ height: mm(9), maxWidth: mm(20) }} />
         </View>
       </View>
 
-      {/* === ZONE 2: TITEL (y: 12 + 22 + 28 = 62mm) === */}
-      <View style={{
-        position: 'absolute',
-        top: mm(62),
-        left: ML,
-        right: MR,
-      }}>
+      {/* 28mm gap */}
+      <View style={{ height: mm(28) }} />
+
+      {/* === ZONE 2: TITEL === */}
+      <View>
         <Text style={{
           fontSize: 26,
           fontFamily: 'Helvetica-Bold',
@@ -146,32 +134,39 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         <Text style={{ fontSize: 7.5, color: C.lightGrey, marginTop: mm(1.5) }}>
           {description}
         </Text>
-        {/* Separator line */}
-        <View style={{
-          borderTopWidth: 0.2,
-          borderTopColor: C.lines,
-          marginTop: mm(3),
-        }} />
+        <View style={{ borderTopWidth: 0.2, borderTopColor: C.lines, marginTop: mm(3) }} />
       </View>
 
-      {/* === ZONE 3: VOERTUIG + FOTO (y: ~114mm) === */}
-      <View style={{
-        position: 'absolute',
-        top: mm(114),
-        left: ML,
-        right: MR,
-        flexDirection: 'row',
-      }}>
+      {/* 24mm gap */}
+      <View style={{ height: mm(24) }} />
+
+      {/* === ZONE 3: VOERTUIG + FOTO === */}
+      <View style={{ flexDirection: 'row' }}>
         {/* Left column: vehicle data */}
         <View style={{ width: mm(65), paddingRight: mm(4) }}>
           <Text style={labelStyle}>VOERTUIG</Text>
-          <Text style={valueStyle}>{vehicleDisplay}</Text>
+          <Text style={{
+            fontSize: 13,
+            fontFamily: 'Helvetica-Bold',
+            color: C.black,
+            marginTop: mm(1.5),
+          }}>{vehicleDisplay}</Text>
 
           <Text style={{ ...labelStyle, marginTop: mm(6) }}>KENTEKEN</Text>
-          <Text style={valueStyle}>{report.license_plate || 'nog niet ingevuld'}</Text>
+          <Text style={{
+            fontSize: 13,
+            fontFamily: 'Helvetica-Bold',
+            color: C.black,
+            marginTop: mm(1.5),
+          }}>{report.license_plate || 'nog niet ingevuld'}</Text>
 
           <Text style={{ ...labelStyle, marginTop: mm(6) }}>DOCUMENTNUMMER</Text>
-          <Text style={valueStyle}>{report.document_reference || report.report_number || 'nog niet ingevuld'}</Text>
+          <Text style={{
+            fontSize: 13,
+            fontFamily: 'Helvetica-Bold',
+            color: C.black,
+            marginTop: mm(1.5),
+          }}>{report.document_reference || report.report_number || 'nog niet ingevuld'}</Text>
         </View>
 
         {/* Right column: photo 98x74mm */}
@@ -201,17 +196,14 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         </View>
       </View>
 
-      {/* === ZONE 4: OPDRACHTGEVER + OPNAME + TAXATEUR (y: ~206mm) === */}
-      <View style={{
-        position: 'absolute',
-        top: mm(206),
-        left: ML,
-        right: MR,
-      }}>
-        {/* --- Opdrachtgever --- */}
+      {/* 18mm gap */}
+      <View style={{ height: mm(18) }} />
+
+      {/* === ZONE 4: OPDRACHTGEVER + OPNAME === */}
+      <View>
         <Text style={detailLabelStyle}>IN OPDRACHT VAN</Text>
         {companyName && (
-          <Text style={{ ...detailValueStyle, marginTop: mm(1.2) }}>{companyName}</Text>
+          <Text style={detailValueStyle}>{companyName}</Text>
         )}
         <Text style={{
           fontSize: 10,
@@ -224,7 +216,6 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         {customerAddress && <Text style={{ fontSize: 10, color: C.black, marginTop: mm(0.5) }}>{customerAddress}</Text>}
         {customerCity && <Text style={{ fontSize: 10, color: C.black, marginTop: mm(0.5) }}>{customerCity}</Text>}
 
-        {/* --- Opnamedetails --- */}
         <Text style={{ ...detailLabelStyle, marginTop: mm(4) }}>OPNAMEDATUM</Text>
         <Text style={detailValueStyle}>{formatDate(report.inspection_date)}</Text>
 
@@ -238,13 +229,11 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         <Text style={detailValueStyle}>{capitalizeFirst(report.inspection_location)}</Text>
       </View>
 
-      {/* --- Taxateur (vaste positie, bottom-anchored) --- */}
-      <View style={{
-        position: 'absolute',
-        top: mm(265),
-        left: ML,
-        right: MR,
-      }}>
+      {/* Spacer pushes taxateur to bottom */}
+      <View style={{ flex: 1 }} />
+
+      {/* === TAXATEUR === */}
+      <View>
         <Text style={detailLabelStyle}>TAXATIE UITGEVOERD DOOR</Text>
         <Text style={{
           fontSize: 11,
@@ -262,20 +251,15 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
         </Text>
       </View>
 
-      {/* === ZONE 5: FOOTER (vast op ~279mm) === */}
+      {/* === ZONE 5: FOOTER (fixed at bottom) === */}
       <View style={{
         position: 'absolute',
         bottom: mm(8),
         left: ML,
         right: MR,
       }}>
-        {/* Separator */}
         <View style={{ borderTopWidth: 0.2, borderTopColor: C.lines, marginBottom: mm(1) }} />
-
-        {/* AT logo small */}
-        <Image src={logoAutomobiel} style={{ height: mm(8), width: 'auto', marginBottom: mm(3) }} />
-
-        {/* Company details + page number */}
+        <Image src={logoAutomobiel} style={{ height: mm(8), maxWidth: mm(50), marginBottom: mm(3) }} />
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <Text style={{ fontSize: 5.5, color: C.midGrey }}>
             Leigraaf 160, 6651 GJ Druten   |   KvK: 95549269   |   BTW: NL003366178B93   |   TMV: 33106   |   VRT: 22-523-M   |   Bank: NL80 RABO 0387 9156 80
