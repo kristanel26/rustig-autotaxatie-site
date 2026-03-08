@@ -2,8 +2,9 @@ import { Page, View, Text, Image } from '@react-pdf/renderer';
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
 
 // NOTE: @react-pdf/renderer cannot render SVG via <Image>. Use PNG from public/.
-const signatureErik = '/signature-erik-elderson.png';
-const paraafErik = '/paraaf-erik-elderson.png';
+// Use absolute URL so react-pdf can fetch them at render time
+const signatureErik = `${window.location.origin}/signature-erik-elderson.png`;
+const paraafErik = `${window.location.origin}/paraaf-erik-elderson.png`;
 
 interface PDFValuationContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,6 +21,8 @@ const VALUATION_INTRO = `Uitgaande van de marktsituatie op het moment van de tax
 const SIGNING_TEXT = `Ondergetekende, Erik Elderson, Register Taxateur voor motorvoertuigen te Druten, als zodanig erkend en opgenomen in het Register van Makelaars en Taxateurs TMV onder nummer 33106, Register-Taxateur VRT onder nummer 22-523-M, verklaart te zijn benoemd als deskundige.`;
 
 const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationContentProps) => {
+  console.log('[PDFValuation] signature URL:', signatureErik);
+  console.log('[PDFValuation] paraaf URL:', paraafErik);
   const formatCurrency = (value: number | null) => {
     if (value === null || value === undefined || value <= 0) return null;
     return new Intl.NumberFormat('nl-NL', {
@@ -122,7 +125,7 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
           <Text style={{ fontSize: 5.5, color: '#888888' }}>Paraaf</Text>
-          <Image src={paraafErik} style={{ width: 25, height: 'auto' }} />
+          <Image src={paraafErik} style={{ height: 18, width: 'auto', opacity: 0.85 }} />
           <Text style={{ fontSize: 7, color: '#888888', marginLeft: 6 }}>
             Pagina {pageNumber} van {totalPages}
           </Text>
