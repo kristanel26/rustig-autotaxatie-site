@@ -634,7 +634,6 @@ const EditReport = () => {
         setWevValueData({
           wev_eindwaarde: (reportData as any).wev_eindwaarde?.toString() || '',
           wev_eindwaarde_tekst: '',  // Will be auto-generated
-          wev_schade_bedrag: '',
         });
 
       } catch (error) {

@@ -106,12 +106,6 @@ export const WevValueForm = ({ data, onChange }: WevValueFormProps) => {
                 <span className="text-muted-foreground">Zegge:</span>
                 <span className="italic">{data.wev_eindwaarde_tekst}</span>
               </div>
-              {schadeBedrag > 0 && (
-                <div className="flex justify-between pt-2 border-t">
-                  <span className="text-muted-foreground">Schadebedrag:</span>
-                  <span>{formatCurrency(schadeBedrag)}</span>
-                </div>
-              )}
             </div>
           </div>
         )}
