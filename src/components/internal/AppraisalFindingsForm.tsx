@@ -219,27 +219,68 @@ export const AppraisalFindingsForm = ({
   const show = (section: AppraisalSection) => !showSections || showSections.includes(section);
   // Handler for AI tire extraction results - now handles all tire fields
   const handleTireAIAccept = (fieldKey: string, value: string) => {
-    // Map generic field keys to form fields
+    // Map generic field keys (without position prefix) to front-left + sync if needed
+    const genericToSuffix: Record<string, string> = {
+      tire_brand: 'brand',
+      tire_model: 'model',
+      tire_profiel: 'profiel',
+      tire_dot: 'dot',
+      brand: 'brand',
+      model: 'model',
+      profiel: 'profiel',
+      dot: 'dot',
+    };
+
     if (fieldKey === 'tire_size' || fieldKey === 'tire_bandenmaat') {
       onChange('tire_bandenmaat', value);
-    } else if (fieldKey === 'tire_dot') {
-      // Legacy: Apply to first tire DOT field
-      onChange('tire_front_left_dot', value);
-    } else if (fieldKey.startsWith('tire_front_left_') || 
-               fieldKey.startsWith('tire_front_right_') ||
-               fieldKey.startsWith('tire_rear_left_') ||
-               fieldKey.startsWith('tire_rear_right_')) {
-      // Direct tire position fields (brand, model, dot, profiel)
+      return;
+    }
+    
+    if (fieldKey === 'tire_bandenmaat_achter') {
+      onChange('tire_bandenmaat_achter', value);
+      return;
+    }
+
+    if (fieldKey === 'rim_type') {
+      onChange('rim_type', value);
+      return;
+    }
+
+    if (fieldKey === 'tire_advice') {
+      onChange('tire_advice', value);
+      return;
+    }
+
+    // Handle generic keys without position prefix → apply to front-left (and sync if allTiresSame)
+    const suffix = genericToSuffix[fieldKey];
+    if (suffix) {
+      if (allTiresSame && onMultipleChange) {
+        onMultipleChange({
+          [`tire_front_left_${suffix}`]: value,
+          [`tire_front_right_${suffix}`]: value,
+          [`tire_rear_left_${suffix}`]: value,
+          [`tire_rear_right_${suffix}`]: value,
+        } as Partial<AppraisalFormData>);
+      } else {
+        onChange(`tire_front_left_${suffix}` as keyof AppraisalFormData, value);
+      }
+      return;
+    }
+
+    // Handle position-specific fields (tire_front_left_brand, etc.)
+    if (fieldKey.startsWith('tire_front_left_') || 
+        fieldKey.startsWith('tire_front_right_') ||
+        fieldKey.startsWith('tire_rear_left_') ||
+        fieldKey.startsWith('tire_rear_right_')) {
       const formField = fieldKey as keyof AppraisalFormData;
       if (formField in formData) {
-        // If all tires same is enabled and it's the first tire, sync to all
         if (allTiresSame && fieldKey.startsWith('tire_front_left_') && onMultipleChange) {
-          const suffix = fieldKey.replace('tire_front_left_', '');
+          const posSuffix = fieldKey.replace('tire_front_left_', '');
           onMultipleChange({
-            [`tire_front_left_${suffix}`]: value,
-            [`tire_front_right_${suffix}`]: value,
-            [`tire_rear_left_${suffix}`]: value,
-            [`tire_rear_right_${suffix}`]: value,
+            [`tire_front_left_${posSuffix}`]: value,
+            [`tire_front_right_${posSuffix}`]: value,
+            [`tire_rear_left_${posSuffix}`]: value,
+            [`tire_rear_right_${posSuffix}`]: value,
           } as Partial<AppraisalFormData>);
         } else {
           onChange(formField, value);
