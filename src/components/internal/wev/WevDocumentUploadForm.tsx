@@ -209,6 +209,34 @@ export const WevDocumentUploadForm = ({
     }
   };
 
+  const handleToggleTag = async (doc: WevDocument, tag: DocumentTag) => {
+    const currentTags = doc.document_tags || [];
+    const newTags = currentTags.includes(tag)
+      ? currentTags.filter((t) => t !== tag)
+      : [...currentTags, tag];
+
+    try {
+      const { error } = await supabase
+        .from('wev_documents')
+        .update({ document_tags: newTags })
+        .eq('id', doc.id);
+
+      if (error) throw error;
+
+      const updatedDocs = documents.map((d) =>
+        d.id === doc.id ? { ...d, document_tags: newTags as DocumentTag[] } : d
+      );
+      setDocuments(updatedDocs);
+      onDocumentsChange?.(updatedDocs);
+    } catch (error) {
+      console.error('Error updating document tags:', error);
+      toast({
+        title: 'Fout bij opslaan',
+        description: 'Tags konden niet worden opgeslagen.',
+        variant: 'destructive',
+      });
+    }
+
   const formatFileSize = (bytes: number | null): string => {
     if (!bytes) return '-';
     if (bytes < 1024) return `${bytes} B`;
