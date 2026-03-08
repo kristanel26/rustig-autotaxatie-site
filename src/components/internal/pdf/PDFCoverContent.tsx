@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
     paddingLeft: '25mm',
     paddingRight: '20mm',
     paddingBottom: '15mm',
-    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
   },
 
   // --- HEADER ---
@@ -75,10 +76,7 @@ const styles = StyleSheet.create({
 
   // --- FOOTER ---
   footer: {
-    position: 'absolute' as const,
-    bottom: '10mm',
-    left: '25mm',
-    right: '20mm',
+    marginTop: 'auto',
   },
   footerLine: {
     borderTopWidth: 0.4,
