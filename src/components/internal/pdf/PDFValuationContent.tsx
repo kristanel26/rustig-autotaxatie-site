@@ -1,11 +1,8 @@
 import React from 'react';
 import { Page, View, Text, Image } from '@react-pdf/renderer';
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
-
-// NOTE: @react-pdf/renderer cannot render SVG via <Image>. Use PNG from public/.
-// Use absolute URL so react-pdf can fetch them at render time
-const signatureErik = `${window.location.origin}/signature-erik-elderson.png`;
-const paraafErik = `${window.location.origin}/paraaf-erik-elderson.png`;
+import signatureErik from '@/assets/signature-erik-elderson.png';
+import paraafErik from '@/assets/paraaf-erik-elderson.png';
 
 interface PDFValuationContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
