@@ -698,6 +698,7 @@ export type Database = {
         Row: {
           appraised_value: number | null
           appraised_value_text: string | null
+          assigned_to: string | null
           client_name: string | null
           condition_brakes: string | null
           condition_brakes_notes: string | null
@@ -910,6 +911,7 @@ export type Database = {
         Insert: {
           appraised_value?: number | null
           appraised_value_text?: string | null
+          assigned_to?: string | null
           client_name?: string | null
           condition_brakes?: string | null
           condition_brakes_notes?: string | null
@@ -1122,6 +1124,7 @@ export type Database = {
         Update: {
           appraised_value?: number | null
           appraised_value_text?: string | null
+          assigned_to?: string | null
           client_name?: string | null
           condition_brakes?: string | null
           condition_brakes_notes?: string | null
