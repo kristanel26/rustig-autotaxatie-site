@@ -175,19 +175,47 @@ export const CamperHostImportForm = ({
   };
 
   const handleExtract = async () => {
+    if (uploadedFiles.length === 0) return;
     setIsExtracting(true);
     try {
-      // Placeholder: in the future this calls the extract-camperhost edge function
-      // For now we show a toast that the feature is coming
+      const fileUrls = uploadedFiles.map((f) => f.url);
+
+      const { data, error } = await supabase.functions.invoke('extract-camperhost', {
+        body: { fileUrls },
+      });
+
+      if (error) throw error;
+
+      if (!data?.success) {
+        throw new Error(data?.error || 'Extractie mislukt');
+      }
+
+      const result: CamperHostExtraction = {
+        sections: data.sections || [],
+        extractedAt: data.extractedAt || new Date().toISOString(),
+      };
+
+      if (result.sections.length === 0) {
+        toast({
+          title: 'Geen gegevens gevonden',
+          description: 'Er konden geen gegevens uit de documenten worden uitgelezen.',
+          variant: 'destructive',
+        });
+        return;
+      }
+
+      setExtraction(result);
+      setImportedSections(new Set());
+
       toast({
-        title: 'Extractie niet beschikbaar',
-        description: 'De automatische uitlezing wordt binnenkort beschikbaar.',
+        title: 'Gegevens uitgelezen',
+        description: `${result.sections.length} secties met gegevens gevonden.`,
       });
     } catch (error) {
       console.error('Error extracting CamperHost data:', error);
       toast({
         title: 'Fout bij uitlezen',
-        description: 'Er is een fout opgetreden bij het uitlezen van de documenten.',
+        description: error instanceof Error ? error.message : 'Er is een fout opgetreden bij het uitlezen van de documenten.',
         variant: 'destructive',
       });
     } finally {
