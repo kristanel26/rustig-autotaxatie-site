@@ -112,22 +112,14 @@ const Dashboard = () => {
   useEffect(() => {
     const fetch = async () => {
       const { data, error } = await supabase.from('reports')
-        .select('id, report_number, license_plate, rdw_merk, rdw_handelsbenaming, vehicle_brand, vehicle_model, updated_at, report_type')
+        .select('id, report_number, license_plate, rdw_merk, rdw_handelsbenaming, vehicle_brand, vehicle_model, updated_at, report_type, status')
         .in('status', ['concept', 'in_behandeling', 'gereed', 'verzonden'])
         .order('updated_at', { ascending: false });
 
       if (!error && data) {
-        // Also fetch status since we need it for grouping
-        const { data: fullData } = await supabase.from('reports')
-          .select('id, status')
-          .in('status', ['concept', 'in_behandeling', 'gereed', 'verzonden']);
-
-        const statusMap: Record<string, string> = {};
-        fullData?.forEach(r => { statusMap[r.id] = r.status || 'concept'; });
-
         const grouped: Record<string, ReportRow[]> = { concept: [], in_behandeling: [], gereed: [], verzonden: [] };
         data.forEach(r => {
-          const s = statusMap[r.id] || 'concept';
+          const s = (r as any).status || 'concept';
           if (grouped[s]) grouped[s].push(r);
         });
         setReportsByStatus(grouped);
