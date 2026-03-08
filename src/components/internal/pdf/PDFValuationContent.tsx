@@ -117,7 +117,7 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
         </Text>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
           <Text style={{ fontSize: 8, color: '#000000' }}>Paraaf</Text>
-          <Image src={signatureErik} style={{ height: 34, width: 'auto' }} />
+          <Image src={signatureErik} style={{ width: 57, height: 'auto' }} />
         </View>
       </View>
     </Page>
