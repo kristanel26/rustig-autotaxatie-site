@@ -44,7 +44,7 @@ const PDFWevValuationContent = ({ report, pageNumber, totalPages }: PDFWevValuat
   const datumRapportGereed = formatDateLong(report.wev_finalized_at || new Date().toISOString());
 
   return (
-    <Page size="A4" style={{ padding: '24 28', fontFamily: 'Helvetica', position: 'relative' }}>
+    <Page size="A4" wrap={false} style={{ padding: '24 28', fontFamily: 'Helvetica', position: 'relative' }}>
       {/* Header */}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 4 }}>
         <View />
