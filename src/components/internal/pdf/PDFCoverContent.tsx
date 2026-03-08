@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
     paddingLeft: '25mm',
     paddingRight: '20mm',
     paddingBottom: '15mm',
-    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
   },
 
   // --- HEADER ---
