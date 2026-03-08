@@ -156,103 +156,119 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
   const hoofdfoto = report.vehicle_photos?.[0] || null;
 
   return (
-    <Page size="A4" style={styles.page}>
-
-      {/* HEADER */}
-      <View style={styles.header}>
-        <Image src={LOGO_AT} style={styles.logoAt} />
-        <View style={styles.keurmerken}>
-          <Image src={LOGO_VRT} style={styles.keurmerkLogo} />
-          <Image src={LOGO_HOBEON} style={styles.keurmerkLogo} />
-          <Image src={LOGO_TMV} style={styles.keurmerkLogo} />
-          <Image src={LOGO_FEHAC} style={styles.keurmerkLogo} />
-        </View>
-      </View>
-      <View style={styles.headerLine} />
-
-      {/* TITELSECTIE */}
-      <View style={styles.titleSection}>
-        <Text style={styles.mainTitle}>TAXATIERAPPORT</Text>
-        <Text style={styles.subtitle}>{subtitel}</Text>
-        <Text style={styles.bodyText}>{beschrijving}</Text>
-      </View>
-
-      {/* VOERTUIG + FOTO */}
-      <View style={styles.vehicleRow}>
-        <View style={styles.leftCol}>
-          <View style={styles.dataBlock}>
-            <Text style={styles.dataLabel}>Voertuig</Text>
-            <Text style={styles.dataValue}>{vehicleName}</Text>
-          </View>
-          <View style={styles.dataBlock}>
-            <Text style={styles.dataLabel}>Kenteken</Text>
-            <Text style={styles.dataValue}>{report.license_plate || '-'}</Text>
-          </View>
-          <View style={styles.dataBlock}>
-            <Text style={styles.dataLabel}>Documentnummer</Text>
-            <Text style={styles.dataValue}>{report.document_reference || report.report_number}</Text>
+    <Page size="A4" style={{
+      fontFamily: 'Helvetica',
+      backgroundColor: '#ffffff',
+      paddingTop: 30,
+      paddingLeft: 40,
+      paddingRight: 40,
+      paddingBottom: 0,
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
+    }}>
+      {/* Alles behalve footer */}
+      <View style={{ flex: 1 }}>
+        {/* HEADER */}
+        <View style={styles.header}>
+          <Image src={LOGO_AT} style={styles.logoAt} />
+          <View style={styles.keurmerken}>
+            <Image src={LOGO_VRT} style={styles.keurmerkLogo} />
+            <Image src={LOGO_HOBEON} style={styles.keurmerkLogo} />
+            <Image src={LOGO_TMV} style={styles.keurmerkLogo} />
+            <Image src={LOGO_FEHAC} style={styles.keurmerkLogo} />
           </View>
         </View>
-        {hoofdfoto && (
-          <View style={styles.photoContainer}>
-            <Image src={hoofdfoto} style={styles.photo} />
+        <View style={styles.headerLine} />
+
+        {/* TITELSECTIE */}
+        <View style={styles.titleSection}>
+          <Text style={styles.mainTitle}>TAXATIERAPPORT</Text>
+          <Text style={styles.subtitle}>{subtitel}</Text>
+          <Text style={styles.bodyText}>{beschrijving}</Text>
+        </View>
+
+        {/* VOERTUIG + FOTO */}
+        <View style={styles.vehicleRow}>
+          <View style={styles.leftCol}>
+            <View style={styles.dataBlock}>
+              <Text style={styles.dataLabel}>Voertuig</Text>
+              <Text style={styles.dataValue}>{vehicleName}</Text>
+            </View>
+            <View style={styles.dataBlock}>
+              <Text style={styles.dataLabel}>Kenteken</Text>
+              <Text style={styles.dataValue}>{report.license_plate || '-'}</Text>
+            </View>
+            <View style={styles.dataBlock}>
+              <Text style={styles.dataLabel}>Documentnummer</Text>
+              <Text style={styles.dataValue}>{report.document_reference || report.report_number}</Text>
+            </View>
           </View>
-        )}
-      </View>
+          {hoofdfoto && (
+            <View style={styles.photoContainer}>
+              <Image src={hoofdfoto} style={styles.photo} />
+            </View>
+          )}
+        </View>
 
-      {/* IN OPDRACHT VAN */}
-      <View style={styles.dataBlock}>
-        <Text style={styles.dataLabel}>In opdracht van</Text>
-        {report.opdrachtgever && (
-          <Text style={styles.dataValue}>{report.opdrachtgever}</Text>
-        )}
-        <Text style={report.opdrachtgever ? styles.dataValueNormal : styles.dataValue}>
-          {customerLine1}
-        </Text>
-        {customerLine2 ? <Text style={styles.dataValueNormal}>{customerLine2}</Text> : null}
-        {customerLine3 ? <Text style={styles.dataValueNormal}>{customerLine3}</Text> : null}
-      </View>
-
-      {/* INSPECTIEGEGEVENS */}
-      <View style={styles.dataBlock}>
-        <Text style={styles.dataLabel}>Opnamedatum</Text>
-        <Text style={styles.dataValue}>{opnamedatum}</Text>
-      </View>
-      <View style={styles.dataBlock}>
-        <Text style={styles.dataLabel}>Tijdstip opname</Text>
-        <Text style={styles.dataValue}>{tijdstipOpname}</Text>
-      </View>
-      <View style={styles.dataBlock}>
-        <Text style={styles.dataLabel}>Tijdstip einde opname</Text>
-        <Text style={styles.dataValue}>{tijdstipEinde}</Text>
-      </View>
-      <View style={styles.dataBlock}>
-        <Text style={styles.dataLabel}>Locatie opname</Text>
-        <Text style={styles.dataValue}>{report.inspection_location || '-'}</Text>
-      </View>
-
-      {/* TAXATEUR */}
-      <View style={styles.taxateurSection}>
+        {/* IN OPDRACHT VAN */}
         <View style={styles.dataBlock}>
-          <Text style={styles.dataLabel}>Taxatie uitgevoerd door</Text>
-          <Text style={styles.dataValue}>Erik Elderson</Text>
-          <Text style={styles.dataValueNormal}>TMV Register Taxateur nr. 33106</Text>
-          <Text style={styles.dataValueNormal}>Register Taxateur VRT nr. 22-523-M</Text>
+          <Text style={styles.dataLabel}>In opdracht van</Text>
+          {report.opdrachtgever && (
+            <Text style={styles.dataValue}>{report.opdrachtgever}</Text>
+          )}
+          <Text style={report.opdrachtgever ? styles.dataValueNormal : styles.dataValue}>
+            {customerLine1}
+          </Text>
+          {customerLine2 ? <Text style={styles.dataValueNormal}>{customerLine2}</Text> : null}
+          {customerLine3 ? <Text style={styles.dataValueNormal}>{customerLine3}</Text> : null}
+        </View>
+
+        {/* INSPECTIEGEGEVENS */}
+        <View style={styles.dataBlock}>
+          <Text style={styles.dataLabel}>Opnamedatum</Text>
+          <Text style={styles.dataValue}>{opnamedatum}</Text>
+        </View>
+        <View style={styles.dataBlock}>
+          <Text style={styles.dataLabel}>Tijdstip opname</Text>
+          <Text style={styles.dataValue}>{tijdstipOpname}</Text>
+        </View>
+        <View style={styles.dataBlock}>
+          <Text style={styles.dataLabel}>Tijdstip einde opname</Text>
+          <Text style={styles.dataValue}>{tijdstipEinde}</Text>
+        </View>
+        <View style={styles.dataBlock}>
+          <Text style={styles.dataLabel}>Locatie opname</Text>
+          <Text style={styles.dataValue}>{report.inspection_location || '-'}</Text>
+        </View>
+
+        {/* TAXATEUR */}
+        <View style={styles.taxateurSection}>
+          <View style={styles.dataBlock}>
+            <Text style={styles.dataLabel}>Taxatie uitgevoerd door</Text>
+            <Text style={styles.dataValue}>Erik Elderson</Text>
+            <Text style={styles.dataValueNormal}>TMV Register Taxateur nr. 33106</Text>
+            <Text style={styles.dataValueNormal}>Register Taxateur VRT nr. 22-523-M</Text>
+          </View>
         </View>
       </View>
 
-      {/* FOOTER */}
-      <View style={styles.footer}>
-        <View style={styles.footerLine} />
-        <View style={styles.footerRow}>
-          <Image src={LOGO_AT} style={styles.footerLogoAt} />
-          <Text style={styles.footerPageNum}>Pagina 1 van {totalPages}</Text>
-        </View>
+      {/* FOOTER: altijd onderaan, nooit op eigen pagina */}
+      <View style={{
+        borderTopWidth: 0.4,
+        borderTopColor: LINE_COLOR,
+        paddingTop: 6,
+        paddingBottom: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}>
+        <Image src={LOGO_AT} style={styles.footerLogoAt} />
         <Text style={styles.footerAddress}>
           Leigraaf 160, 6651 GJ Druten | KvK: 95549269 | BTW: NL003366178B93 | TMV: 33106 | VRT: 22-523-M | Bank: NL80 RABO 0387 9156 80
         </Text>
+        <Text style={styles.footerPageNum}>Pagina 1 van {totalPages}</Text>
       </View>
-
     </Page>
   );
 };
