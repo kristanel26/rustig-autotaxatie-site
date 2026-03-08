@@ -10,7 +10,7 @@
  */
 
 import PDFCoverContent from '@/components/internal/pdf/PDFCoverContent';
-import PDFValuationContent from '@/components/internal/pdf/PDFValuationContent';
+import PDFCamperValuationContent from '@/components/internal/pdf/PDFCamperValuationContent';
 import PDFWevValuationContent from '@/components/internal/pdf/PDFWevValuationContent';
 import PDFKlassiekerValuationContent from '@/components/internal/pdf/PDFKlassiekerValuationContent';
 import PDFVehicleDataContent from '@/components/internal/pdf/PDFVehicleDataContent';
@@ -42,7 +42,7 @@ export const KLASSIEKER_PAGES: PageDefinition[] = [
 
 export const CAMPER_PAGES: PageDefinition[] = [
   { id: 'cover', component: PDFCoverContent },
-  { id: 'valuation', component: PDFValuationContent },
+  { id: 'valuation', component: PDFCamperValuationContent },
   { id: 'vehicle-data', component: PDFVehicleDataContent },
   { id: 'appraisal-findings', component: PDFAppraisalFindingsContent },
   { id: 'photos', component: PDFPhotosContent, isMultiPage: true },
