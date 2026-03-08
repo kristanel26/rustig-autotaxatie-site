@@ -136,10 +136,19 @@ const PDFWevValuationContent = ({ report, pageNumber, totalPages }: PDFWevValuat
         justifyContent: 'space-between',
         alignItems: 'center',
       }}>
-        <Text style={{ fontSize: 9, color: '#000000' }}>Pagina {pageNumber} van {totalPages}</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={{ fontSize: 9, fontFamily: 'Helvetica-Bold', color: '#000000' }}>Automobiel Taxaties</Text>
+          <Text style={{ fontSize: 9, color: '#000000', marginHorizontal: 4 }}>|</Text>
+          <Text style={{ fontSize: 9, color: '#000000' }}>Leigraaf 160, 6651 GJ Druten</Text>
+          <Text style={{ fontSize: 9, color: '#000000', marginHorizontal: 4 }}>|</Text>
+          <Text style={{ fontSize: 9, color: '#000000' }}>KVK: 95549269</Text>
+        </View>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-          <Text style={{ fontSize: 7, color: '#000000' }}>Paraaf</Text>
-          <Image src={paraafErik} style={{ width: 43, height: 'auto' }} />
+          <Text style={{ fontSize: 5.5, color: '#888888' }}>Paraaf</Text>
+          <Image src={paraafErik} style={{ height: 18, width: 'auto', opacity: 0.85 }} />
+          <Text style={{ fontSize: 7, color: '#888888', marginLeft: 6 }}>
+            Pagina {pageNumber} van {totalPages}
+          </Text>
         </View>
       </View>
     </Page>

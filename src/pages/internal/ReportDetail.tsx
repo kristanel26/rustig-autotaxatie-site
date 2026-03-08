@@ -251,17 +251,17 @@ const ReportDetail = () => {
         <div className="flex flex-wrap items-center gap-4 pb-4 border-b border-border">
           <div>
             <p className="text-sm font-medium text-gold-lt">Rapportnummer</p>
-            <p className="text-2xl font-bold">{report.report_number}</p>
+            <p className="text-2xl font-bold text-foreground">{report.report_number}</p>
           </div>
           {report.document_reference && (
             <div>
               <p className="text-sm font-medium text-gold-lt">Documentreferentie</p>
-              <p className="text-lg font-medium">{report.document_reference}</p>
+              <p className="text-lg font-medium text-foreground">{report.document_reference}</p>
             </div>
           )}
           <div className="ml-auto text-right">
             <p className="text-sm font-medium text-gold-lt">Aangemaakt op</p>
-            <p className="text-sm">{formatDate(report.created_at)}</p>
+            <p className="text-sm text-foreground">{formatDate(report.created_at)}</p>
           </div>
         </div>
 
