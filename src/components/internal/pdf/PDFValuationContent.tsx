@@ -103,9 +103,9 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
       {/* Footer */}
       <View style={{
         position: 'absolute',
-        bottom: 24,
-        left: 28,
-        right: 28,
+        bottom: 18,
+        left: 24,
+        right: 24,
         borderTopWidth: 1,
         borderTopColor: '#e2e8f0',
         paddingTop: 8,
@@ -114,16 +114,16 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
         alignItems: 'center',
       }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={{ fontSize: 8, fontFamily: 'Helvetica-Bold', color: '#000000' }}>Automobiel Taxaties</Text>
-          <Text style={{ fontSize: 8, color: '#000000', marginHorizontal: 4 }}>|</Text>
-          <Text style={{ fontSize: 8, color: '#000000' }}>Leigraaf 160, 6651 GJ Druten</Text>
-          <Text style={{ fontSize: 8, color: '#000000', marginHorizontal: 4 }}>|</Text>
-          <Text style={{ fontSize: 8, color: '#000000' }}>KVK: 95549269</Text>
+          <Text style={{ fontSize: 9, fontFamily: 'Helvetica-Bold', color: '#000000' }}>Automobiel Taxaties</Text>
+          <Text style={{ fontSize: 9, color: '#000000', marginHorizontal: 4 }}>|</Text>
+          <Text style={{ fontSize: 9, color: '#000000' }}>Leigraaf 160, 6651 GJ Druten</Text>
+          <Text style={{ fontSize: 9, color: '#000000', marginHorizontal: 4 }}>|</Text>
+          <Text style={{ fontSize: 9, color: '#000000' }}>KVK: 95549269</Text>
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
           <Text style={{ fontSize: 7, color: '#000000' }}>Paraaf</Text>
           <Image src={paraafErik} style={{ width: 43, height: 'auto' }} />
-          <Text style={{ fontSize: 8, color: '#000000', marginLeft: 8 }}>
+          <Text style={{ fontSize: 9, color: '#000000', marginLeft: 8 }}>
             Pagina {pageNumber} van {totalPages}
           </Text>
         </View>

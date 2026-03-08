@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   dataValueNormal: { fontSize: 9, color: '#333333' },
 
   // --- TAXATEUR ---
-  taxateurSection: { marginTop: 'auto', paddingTop: '8mm' },
+  taxateurSection: { paddingTop: '8mm' },
 
   // --- FOOTER ---
   footer: {
