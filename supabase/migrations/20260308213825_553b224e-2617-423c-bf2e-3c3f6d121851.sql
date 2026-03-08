@@ -1,0 +1,1 @@
+ALTER TABLE public.wev_documents ADD COLUMN document_tags text[] NOT NULL DEFAULT '{}'::text[];

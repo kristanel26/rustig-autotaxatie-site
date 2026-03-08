@@ -1419,6 +1419,7 @@ export type Database = {
       wev_documents: {
         Row: {
           created_at: string
+          document_tags: string[]
           document_type: string
           file_name: string
           file_size: number | null
@@ -1429,6 +1430,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          document_tags?: string[]
           document_type: string
           file_name: string
           file_size?: number | null
@@ -1439,6 +1441,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          document_tags?: string[]
           document_type?: string
           file_name?: string
           file_size?: number | null
