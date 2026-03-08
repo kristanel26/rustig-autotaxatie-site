@@ -1,6 +1,8 @@
 import { Page, View, Text, Image } from '@react-pdf/renderer';
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
-import signatureErik from '@/assets/signature-erik-elderson.svg';
+
+// NOTE: @react-pdf/renderer cannot render SVG via <Image>. Use PNG from public/.
+const signatureErik = '/signature-erik-elderson.png';
 
 interface PDFValuationContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

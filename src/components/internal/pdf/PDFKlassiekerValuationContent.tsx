@@ -1,6 +1,7 @@
 import { Page, View, Text, Image } from '@react-pdf/renderer';
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
-import signatureErik from '@/assets/signature-erik-elderson.svg';
+
+const signatureErik = '/signature-erik-elderson.png';
 
 interface PDFKlassiekerValuationContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
