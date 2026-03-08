@@ -76,10 +76,7 @@ const styles = StyleSheet.create({
 
   // --- FOOTER ---
   footer: {
-    position: 'absolute' as const,
-    bottom: '10mm',
-    left: '25mm',
-    right: '20mm',
+    marginTop: 'auto',
   },
   footerLine: {
     borderTopWidth: 0.4,
