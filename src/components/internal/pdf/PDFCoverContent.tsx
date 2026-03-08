@@ -162,7 +162,7 @@ const PDFCoverContent = ({ report, totalPages = 1 }: PDFCoverContentProps) => {
   const hoofdfoto = report.vehicle_photos?.[0] || null;
 
   return (
-    <Page size="A4" style={{
+    <Page size="A4" wrap={false} style={{
       fontFamily: 'Helvetica',
       backgroundColor: '#ffffff',
       paddingTop: 30,
