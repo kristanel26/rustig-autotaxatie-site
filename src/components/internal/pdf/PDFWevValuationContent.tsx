@@ -2,6 +2,7 @@ import { Page, View, Text, Image } from '@react-pdf/renderer';
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
 
 const signatureErik = '/signature-erik-elderson.png';
+const paraafErik = '/paraaf-erik-elderson.png';
 import { numberToDutchWords } from '@/lib/normalizers';
 
 interface PDFWevValuationContentProps {
