@@ -3,6 +3,7 @@ import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
 
 // NOTE: @react-pdf/renderer cannot render SVG via <Image>. Use PNG from public/.
 const signatureErik = '/signature-erik-elderson.png';
+const paraafErik = '/paraaf-erik-elderson.png';
 
 interface PDFValuationContentProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
