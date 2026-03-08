@@ -76,6 +76,7 @@ export const WevAutotelexDataForm = ({ data, onChange }: WevAutotelexDataFormPro
   // Parse numeric values
   const handelsinkoopValue = parseFloat(data.wev_handelsinkoopwaarde_autotelex) || 0;
   const verkoopValue = parseFloat(data.wev_verkoopwaarde_autotelex) || 0;
+  const schadeBedrag = parseFloat(data.wev_schade_bedrag) || 0;
   const wevBerekend = parseFloat(data.wev_berekend) || 0;
   const wevDefinitief = parseFloat(data.wev_definitief) || 0;
 
@@ -88,10 +89,10 @@ export const WevAutotelexDataForm = ({ data, onChange }: WevAutotelexDataFormPro
     }
   }, [handelsinkoopValue, verkoopValue]);
 
-  // Auto-calculate wev_berekend when handelsinkoop or verkoop changes
+  // Auto-calculate wev_berekend when handelsinkoop, verkoop or schade changes
   useEffect(() => {
     if (handelsinkoopValue > 0 && verkoopValue > 0) {
-      const newWevBerekend = calculateWev(handelsinkoopValue, verkoopValue);
+      const newWevBerekend = calculateWev(handelsinkoopValue, verkoopValue, schadeBedrag);
       
       // Update wev_berekend
       if (newWevBerekend.toString() !== data.wev_berekend) {
