@@ -1380,9 +1380,9 @@ const EditReport = () => {
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="inspection_date">Datum opname *</Label>
+                <Label htmlFor="kls_inspection_date">Datum opname *</Label>
                 <Input
-                  id="inspection_date"
+                  id="kls_inspection_date"
                   type="date"
                   value={inspectionData.inspection_date}
                   onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
@@ -1392,9 +1392,9 @@ const EditReport = () => {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="inspection_location">Plaats opname *</Label>
+                <Label htmlFor="kls_inspection_location">Plaats opname *</Label>
                 <Input
-                  id="inspection_location"
+                  id="kls_inspection_location"
                   value={inspectionData.inspection_location}
                   onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
                   placeholder="bijv. Druten"
@@ -1404,9 +1404,9 @@ const EditReport = () => {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="inspection_start_time">Aanvangstijd *</Label>
+                <Label htmlFor="kls_inspection_start_time">Aanvangstijd *</Label>
                 <Input
-                  id="inspection_start_time"
+                  id="kls_inspection_start_time"
                   type="time"
                   value={inspectionData.inspection_start_time}
                   onChange={(e) => handleInspectionChange('inspection_start_time', e.target.value)}
@@ -1416,9 +1416,9 @@ const EditReport = () => {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="inspection_end_time">Eindtijd *</Label>
+                <Label htmlFor="kls_inspection_end_time">Eindtijd *</Label>
                 <Input
-                  id="inspection_end_time"
+                  id="kls_inspection_end_time"
                   type="time"
                   value={inspectionData.inspection_end_time}
                   onChange={(e) => handleInspectionChange('inspection_end_time', e.target.value)}
@@ -1464,17 +1464,17 @@ const EditReport = () => {
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2 md:col-span-2">
-                <Label htmlFor="inspection_location">Inspectielocatie</Label>
+                <Label htmlFor="cam_inspection_location">Inspectielocatie</Label>
                 <Input
-                  id="inspection_location"
+                  id="cam_inspection_location"
                   value={inspectionData.inspection_location}
                   onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="inspection_date">Inspectiedatum</Label>
+                <Label htmlFor="cam_inspection_date">Inspectiedatum</Label>
                 <Input
-                  id="inspection_date"
+                  id="cam_inspection_date"
                   type="date"
                   value={inspectionData.inspection_date}
                   onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
@@ -1482,18 +1482,18 @@ const EditReport = () => {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="inspection_start_time">Starttijd</Label>
+                  <Label htmlFor="cam_inspection_start_time">Starttijd</Label>
                   <Input
-                    id="inspection_start_time"
+                    id="cam_inspection_start_time"
                     type="time"
                     value={inspectionData.inspection_start_time}
                     onChange={(e) => handleInspectionChange('inspection_start_time', e.target.value)}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="inspection_end_time">Eindtijd</Label>
+                  <Label htmlFor="cam_inspection_end_time">Eindtijd</Label>
                   <Input
-                    id="inspection_end_time"
+                    id="cam_inspection_end_time"
                     type="time"
                     value={inspectionData.inspection_end_time}
                     onChange={(e) => handleInspectionChange('inspection_end_time', e.target.value)}
@@ -1514,9 +1514,9 @@ const EditReport = () => {
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="inspection_date">Datum opname *</Label>
+                <Label htmlFor="wev_inspection_date">Datum opname *</Label>
                 <Input
-                  id="inspection_date"
+                  id="wev_inspection_date"
                   type="date"
                   value={inspectionData.inspection_date}
                   onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
@@ -1526,9 +1526,9 @@ const EditReport = () => {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="inspection_location">Plaats opname *</Label>
+                <Label htmlFor="wev_inspection_location">Plaats opname *</Label>
                 <Input
-                  id="inspection_location"
+                  id="wev_inspection_location"
                   value={inspectionData.inspection_location}
                   onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
                   placeholder="bijv. Druten"
@@ -1538,9 +1538,9 @@ const EditReport = () => {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="inspection_start_time">Aanvangstijd *</Label>
+                <Label htmlFor="wev_inspection_start_time">Aanvangstijd *</Label>
                 <Input
-                  id="inspection_start_time"
+                  id="wev_inspection_start_time"
                   type="time"
                   value={inspectionData.inspection_start_time}
                   onChange={(e) => handleInspectionChange('inspection_start_time', e.target.value)}
@@ -1550,9 +1550,9 @@ const EditReport = () => {
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor="inspection_end_time">Eindtijd *</Label>
+                <Label htmlFor="wev_inspection_end_time">Eindtijd *</Label>
                 <Input
-                  id="inspection_end_time"
+                  id="wev_inspection_end_time"
                   type="time"
                   value={inspectionData.inspection_end_time}
                   onChange={(e) => handleInspectionChange('inspection_end_time', e.target.value)}
