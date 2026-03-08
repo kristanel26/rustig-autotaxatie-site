@@ -1,5 +1,5 @@
 import { View, Text, Image } from '@react-pdf/renderer';
-import signatureErik from '@/assets/signature-erik-elderson.svg';
+import paraafErik from '@/assets/paraaf-erik-elderson.png';
 
 interface PageFooterProps {
   pageNumber: number;
