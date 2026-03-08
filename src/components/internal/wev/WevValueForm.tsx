@@ -32,7 +32,6 @@ const formatCurrency = (value: number) => {
 
 export const WevValueForm = ({ data, onChange }: WevValueFormProps) => {
   const eindwaarde = parseFloat(data.wev_eindwaarde) || 0;
-  const schadeBedrag = parseFloat(data.wev_schade_bedrag) || 0;
 
   // Auto-generate "waarde in woorden" when eindwaarde changes
   useEffect(() => {
