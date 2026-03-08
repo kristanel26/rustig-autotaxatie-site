@@ -72,6 +72,21 @@ const Reports = () => {
     return r.opdrachtgever || nameParts || r.client_name || '-';
   };
 
+  const getVehicleDisplay = (r: Report) => {
+    const parts = [r.rdw_merk, r.rdw_handelsbenaming].filter(Boolean);
+    return parts.length > 0 ? parts.join(' ') : '-';
+  };
+
+  const formatLicensePlate = (plate: string | null) => {
+    if (!plate) return '-';
+    // Simple formatting to add dashes if missing
+    const cleaned = plate.replace(/[^A-Z0-9]/gi, '').toUpperCase();
+    if (cleaned.length === 6) {
+      return `${cleaned.slice(0, 2)}-${cleaned.slice(2, 4)}-${cleaned.slice(4, 6)}`;
+    }
+    return plate;
+  };
+
   const filteredReports = reports.filter((report) => {
     if (statusFilter !== 'all' && (report.status || 'concept') !== statusFilter) return false;
     if (typeFilter !== 'all' && (report.report_type || '') !== typeFilter) return false;
