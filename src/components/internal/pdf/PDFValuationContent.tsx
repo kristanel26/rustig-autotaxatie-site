@@ -1,3 +1,4 @@
+import React from 'react';
 import { Page, View, Text, Image } from '@react-pdf/renderer';
 import logoAutomobiel from '@/assets/logo-automobiel-taxaties.png';
 
@@ -21,8 +22,6 @@ const VALUATION_INTRO = `Uitgaande van de marktsituatie op het moment van de tax
 const SIGNING_TEXT = `Ondergetekende, Erik Elderson, Register Taxateur voor motorvoertuigen te Druten, als zodanig erkend en opgenomen in het Register van Makelaars en Taxateurs TMV onder nummer 33106, Register-Taxateur VRT onder nummer 22-523-M, verklaart te zijn benoemd als deskundige.`;
 
 const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationContentProps) => {
-  console.log('[PDFValuation] signature URL:', signatureErik);
-  console.log('[PDFValuation] paraaf URL:', paraafErik);
   const formatCurrency = (value: number | null) => {
     if (value === null || value === undefined || value <= 0) return null;
     return new Intl.NumberFormat('nl-NL', {
@@ -99,8 +98,8 @@ const PDFValuationContent = ({ report, pageNumber, totalPages }: PDFValuationCon
       <View>
         <Text style={{ fontSize: 10, color: '#000000', marginBottom: 6 }}>Hoogachtend,</Text>
         <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 2 }}>Automobiel Taxaties</Text>
-        <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000' }}>Erik Elderson</Text>
-        <Image src={signatureErik} style={{ width: 156, height: 'auto', marginTop: -8 }} />
+        <Text style={{ fontSize: 10, fontFamily: 'Helvetica-Bold', color: '#000000', marginBottom: 8 }}>Erik Elderson</Text>
+        <Image src={signatureErik} style={{ width: '55mm', height: 'auto' }} />
       </View>
 
       {/* Footer */}
