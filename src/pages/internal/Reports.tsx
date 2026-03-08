@@ -30,6 +30,7 @@ interface Report {
   rdw_handelsbenaming: string | null;
   inspection_date: string | null;
   status: string | null;
+  created_at: string;
 }
 
 const TYPE_LABELS: Record<string, string> = {
@@ -52,8 +53,8 @@ const Reports = () => {
       try {
         const { data, error } = await supabase
           .from('reports')
-          .select('id, report_number, report_type, license_plate, customer_title, customer_initials, customer_last_name, client_name, opdrachtgever, rdw_merk, rdw_handelsbenaming, inspection_date, status')
-          .order('report_number', { ascending: false });
+          .select('id, report_number, report_type, license_plate, customer_title, customer_initials, customer_last_name, client_name, opdrachtgever, rdw_merk, rdw_handelsbenaming, inspection_date, status, created_at')
+          .order('created_at', { ascending: false });
         if (error) throw error;
         setReports(data || []);
       } catch (error) {
@@ -69,6 +70,21 @@ const Reports = () => {
     // Prefer opdrachtgever, then customer name parts, then client_name
     const nameParts = [r.customer_title, r.customer_initials, r.customer_last_name].filter(Boolean).join(' ');
     return r.opdrachtgever || nameParts || r.client_name || '-';
+  };
+
+  const getVehicleDisplay = (r: Report) => {
+    const parts = [r.rdw_merk, r.rdw_handelsbenaming].filter(Boolean);
+    return parts.length > 0 ? parts.join(' ') : '-';
+  };
+
+  const formatLicensePlate = (plate: string | null) => {
+    if (!plate) return '-';
+    // Simple formatting to add dashes if missing
+    const cleaned = plate.replace(/[^A-Z0-9]/gi, '').toUpperCase();
+    if (cleaned.length === 6) {
+      return `${cleaned.slice(0, 2)}-${cleaned.slice(2, 4)}-${cleaned.slice(4, 6)}`;
+    }
+    return plate;
   };
 
   const filteredReports = reports.filter((report) => {
@@ -141,7 +157,8 @@ const Reports = () => {
               <TableRow>
                 <TableHead className="w-[120px]">Rapportnr.</TableHead>
                 <TableHead className="w-[60px]">Type</TableHead>
-                <TableHead>Kenteken</TableHead>
+                <TableHead className="w-[100px]">Kenteken</TableHead>
+                <TableHead>Voertuig</TableHead>
                 <TableHead>Klant</TableHead>
                 <TableHead className="w-[130px]">Status</TableHead>
                 <TableHead className="w-[140px]">Inspectiedatum</TableHead>
@@ -150,7 +167,7 @@ const Reports = () => {
             <TableBody>
               {loading ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-8">
+                  <TableCell colSpan={7} className="text-center py-8">
                     <div className="flex items-center justify-center">
                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary" />
                     </div>
@@ -158,7 +175,7 @@ const Reports = () => {
                 </TableRow>
               ) : filteredReports.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                  <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
                     {searchTerm || statusFilter !== 'all' || typeFilter !== 'all' ? 'Geen rapporten gevonden' : 'Nog geen rapporten'}
                   </TableCell>
                 </TableRow>
@@ -171,7 +188,8 @@ const Reports = () => {
                         {TYPE_LABELS[report.report_type || ''] || (report.report_type?.toUpperCase() || '-')}
                       </Badge>
                     </TableCell>
-                    <TableCell className="font-mono text-xs">{report.license_plate || '-'}</TableCell>
+                    <TableCell className="font-mono text-xs">{formatLicensePlate(report.license_plate)}</TableCell>
+                    <TableCell className="text-sm truncate max-w-[200px]">{getVehicleDisplay(report)}</TableCell>
                     <TableCell className="text-sm truncate max-w-[200px]">{getCustomerDisplay(report)}</TableCell>
                     <TableCell>
                       {(() => { const s = getStatusBadgeProps(report.status); return <Badge variant="outline" className={`text-xs ${s.className}`}>{s.label}</Badge>; })()}
