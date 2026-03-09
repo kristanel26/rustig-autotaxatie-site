@@ -27,8 +27,9 @@ export interface CamperHostExtraction {
 }
 
 interface UploadedFile {
+  id: string;
   name: string;
-  type: 'pdf' | 'docx';
+  type: 'pdf' | 'docx' | 'doc';
   url: string;
   size: number;
 }
