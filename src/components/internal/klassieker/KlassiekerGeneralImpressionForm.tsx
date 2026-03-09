@@ -1,6 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 export interface KlassiekerImpressionFormData {
   impression_suspension: string;
@@ -15,6 +22,7 @@ export interface KlassiekerImpressionFormData {
   impression_general: string;
   impression_extras: string;
   stalling: string;
+  stalling_toelichting: string;
 }
 
 interface KlassiekerGeneralImpressionFormProps {
@@ -36,6 +44,7 @@ const defaultKlassiekerImpressionTexts: KlassiekerImpressionFormData = {
   impression_general: 'Dit voertuig verkeert in een zeer goede staat en wordt netjes onderhouden.',
   impression_extras: '',
   stalling: '',
+  stalling_toelichting: '',
 };
 
 export const getInitialKlassiekerImpressionFormData = (): KlassiekerImpressionFormData => ({
@@ -54,7 +63,6 @@ const impressionFields = [
   { key: 'impression_interior', label: 'Interieur' },
   { key: 'impression_general', label: 'Algemene staat' },
   { key: 'impression_extras', label: "Extra's" },
-  { key: 'stalling', label: 'Stalling' },
 ] as const;
 
 export const KlassiekerGeneralImpressionForm = ({
@@ -84,6 +92,32 @@ export const KlassiekerGeneralImpressionForm = ({
               />
             </div>
           ))}
+
+          {/* Stalling — select + toelichting */}
+          <div className="space-y-2">
+            <Label htmlFor="stalling">Stalling</Label>
+            <Select
+              value={formData.stalling}
+              onValueChange={(value) => onChange('stalling', value)}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Selecteer stalling..." />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="binnen">Binnen</SelectItem>
+                <SelectItem value="buiten">Buiten</SelectItem>
+                <SelectItem value="onbekend">Onbekend</SelectItem>
+              </SelectContent>
+            </Select>
+            <Textarea
+              id="stalling_toelichting"
+              value={formData.stalling_toelichting}
+              onChange={(e) => onChange('stalling_toelichting', e.target.value)}
+              rows={2}
+              placeholder="Eventuele toelichting stalling..."
+              className="text-foreground"
+            />
+          </div>
         </div>
       </CardContent>
     </Card>
