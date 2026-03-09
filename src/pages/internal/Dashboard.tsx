@@ -7,8 +7,14 @@ import { useToast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { FileText, Search, User, Loader2, Car, Truck, Scale, Filter } from 'lucide-react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { FileText, Search, User, Loader2, Car, Truck, Scale } from 'lucide-react';
 import { useAppraisers } from '@/hooks/useAppraisers';
 
 type ReportType = 'klassieker' | 'camper' | 'wev';
@@ -53,7 +59,7 @@ const Dashboard = () => {
   const { toast } = useToast();
   const [isCreating, setIsCreating] = useState<ReportType | null>(null);
   const { appraisers, getAppraiserById } = useAppraisers();
-  const [showOnlyMyReports, setShowOnlyMyReports] = useState(false);
+  const [assignedFilter, setAssignedFilter] = useState<string>('all'); // 'all', 'mine', or a user_id
 
   const [reportsByStatus, setReportsByStatus] = useState<Record<string, ReportRow[]>>({
     concept: [], in_behandeling: [], gereed: [], verzonden: [],
@@ -158,11 +164,16 @@ const Dashboard = () => {
 
   const formatDate = (d: string) => new Date(d).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short' });
 
-  // Filter reports by assigned_to when toggle is active
+  // Filter reports by assigned_to
   const filterReports = (reports: ReportRow[]) => {
-    if (!showOnlyMyReports || !user) return reports;
-    return reports.filter(r => r.assigned_to === user.id);
+    if (assignedFilter === 'all') return reports;
+    if (assignedFilter === 'mine') return reports.filter(r => r.assigned_to === user?.id);
+    return reports.filter(r => r.assigned_to === assignedFilter);
   };
+
+  const selectedAppraiser = assignedFilter !== 'all' && assignedFilter !== 'mine' 
+    ? getAppraiserById(assignedFilter) 
+    : null;
 
   return (
     <InternalLayout title="Dashboard">
@@ -206,15 +217,20 @@ const Dashboard = () => {
               </div>
             )}
           </div>
-          <Button
-            variant={showOnlyMyReports ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setShowOnlyMyReports(!showOnlyMyReports)}
-            className="shrink-0 gap-1.5"
-          >
-            <Filter className="h-3.5 w-3.5" />
-            {showOnlyMyReports ? 'Mijn rapporten' : 'Alle taxateurs'}
-          </Button>
+          <Select value={assignedFilter} onValueChange={setAssignedFilter}>
+            <SelectTrigger className="w-[180px] shrink-0">
+              <SelectValue placeholder="Alle taxateurs" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Alle taxateurs</SelectItem>
+              <SelectItem value="mine">Mijn rapporten</SelectItem>
+              {appraisers.map((a) => (
+                <SelectItem key={a.user_id} value={a.user_id}>
+                  {a.displayName}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         {/* New Report Buttons */}
