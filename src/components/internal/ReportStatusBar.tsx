@@ -17,9 +17,9 @@ const statusOptions: { value: ReportStatus; label: string }[] = [
 
 export function ReportStatusBar({ status, onChange, disabled }: ReportStatusBarProps) {
   return (
-    <div className="flex items-center gap-2">
-      <span className="text-sm font-medium text-muted-foreground mr-1">Status:</span>
-      <div className="flex gap-2 flex-nowrap">
+    <div className="flex flex-col gap-2">
+      <span className="text-sm font-medium text-muted-foreground">Status:</span>
+      <div className="flex flex-col gap-2">
         {statusOptions.map((opt) => (
           <button
             key={opt.value}
