@@ -240,6 +240,13 @@ const EditReport = () => {
     general_remarks: '',
   });
 
+  // WEV toggles
+  const [wevToggles, setWevToggles] = useState({
+    is_nieuwe_auto: false,
+    is_grijs_kenteken: false,
+    is_geel_kenteken: true,
+  });
+
   // WEV valuation data (simplified - single value, no bandwidth)
   const [wevAutotelexData, setWevAutotelexData] = useState<WevAutotelexData>(getInitialWevAutotelexData());
   const [wevValueData, setWevValueData] = useState<WevValueData>(getInitialWevValueData());
