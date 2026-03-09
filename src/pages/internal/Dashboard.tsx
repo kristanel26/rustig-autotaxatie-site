@@ -20,6 +20,7 @@ interface ReportRow {
   vehicle_model: string | null;
   updated_at: string;
   report_type: string | null;
+  assigned_to?: string | null;
 }
 
 interface SearchResult {
@@ -112,7 +113,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetch = async () => {
       const { data, error } = await supabase.from('reports')
-        .select('id, report_number, license_plate, rdw_merk, rdw_handelsbenaming, vehicle_brand, vehicle_model, updated_at, report_type, status')
+        .select('id, report_number, license_plate, rdw_merk, rdw_handelsbenaming, vehicle_brand, vehicle_model, updated_at, report_type, status, assigned_to')
         .in('status', ['concept', 'in_behandeling', 'gereed', 'verzonden'])
         .order('updated_at', { ascending: false });
 
@@ -256,9 +257,16 @@ const Dashboard = () => {
                           )}
                         </div>
                         <p className="text-sm font-medium text-foreground truncate">{vehicleLabel(r)}</p>
-                        <div className="flex items-center justify-between mt-1.5">
-                          <span className="text-xs font-mono text-muted-foreground">{r.license_plate || '-'}</span>
-                          <span className="text-[10px] text-muted-foreground">{formatDate(r.updated_at)}</span>
+                        <div className="flex items-end justify-between mt-1.5">
+                          <div className="flex flex-col gap-0.5">
+                            <span className="text-xs font-mono text-muted-foreground">{r.license_plate || '-'}</span>
+                            <span className="text-[10px] text-muted-foreground">{formatDate(r.updated_at)}</span>
+                          </div>
+                          {!r.assigned_to && (
+                            <div className="flex items-center justify-center w-6 h-6 rounded-full bg-muted/50 border border-border shrink-0">
+                              <span className="text-xs font-medium text-muted-foreground">+</span>
+                            </div>
+                          )}
                         </div>
                       </button>
                     ))
