@@ -53,8 +53,8 @@ const InternalLayout: React.FC<InternalLayoutProps> = ({ children, title }) => {
       <nav className="sticky top-0 z-50 h-[60px] flex items-center px-7 border-b border-primary/15 bg-background/[0.92] backdrop-blur-xl">
         {/* Logo */}
         <Link to="/intern/dashboard" className="flex items-center mr-10 no-underline group">
-          <TaxarisLogo variant="white" size="md" className="hidden md:block" />
-          <TaxarisLogo variant="icon" size="sm" className="block md:hidden" />
+          <TaxarisLogo variant="white" size="lg" className="hidden md:block" />
+          <TaxarisLogo variant="icon" size="md" className="block md:hidden" />
         </Link>
 
         {/* Separator */}
