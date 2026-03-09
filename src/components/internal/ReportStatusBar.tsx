@@ -8,34 +8,18 @@ interface ReportStatusBarProps {
   disabled?: boolean;
 }
 
-const statusOptions: { value: ReportStatus; label: string; activeClass: string }[] = [
-  {
-    value: 'concept',
-    label: 'Concept',
-    activeClass: 'bg-muted text-muted-foreground border-muted',
-  },
-  {
-    value: 'in_behandeling',
-    label: 'In behandeling',
-    activeClass: 'bg-[#c9a84c]/15 text-[#c9a84c] border-[#c9a84c]/30',
-  },
-  {
-    value: 'gereed',
-    label: 'Gereed',
-    activeClass: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border-emerald-500/30',
-  },
-  {
-    value: 'verzonden',
-    label: 'Verzonden',
-    activeClass: 'bg-blue-500/15 text-blue-700 dark:text-blue-400 border-blue-500/30',
-  },
+const statusOptions: { value: ReportStatus; label: string }[] = [
+  { value: 'concept', label: 'Concept' },
+  { value: 'in_behandeling', label: 'In behandeling' },
+  { value: 'gereed', label: 'Gereed' },
+  { value: 'verzonden', label: 'Verzonden' },
 ];
 
 export function ReportStatusBar({ status, onChange, disabled }: ReportStatusBarProps) {
   return (
     <div className="flex items-center gap-2">
       <span className="text-sm font-medium text-muted-foreground mr-1">Status:</span>
-      <div className="flex gap-1.5">
+      <div className="flex gap-2 flex-nowrap">
         {statusOptions.map((opt) => (
           <button
             key={opt.value}
@@ -43,12 +27,12 @@ export function ReportStatusBar({ status, onChange, disabled }: ReportStatusBarP
             disabled={disabled}
             onClick={() => onChange(opt.value)}
             className={cn(
-              'px-3 py-1.5 rounded-full text-xs font-medium border transition-colors',
+              'whitespace-nowrap rounded-[6px] text-[13px] px-[14px] py-[5px] border transition-colors',
               'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1',
               'disabled:opacity-50 disabled:cursor-not-allowed',
               status === opt.value
-                ? opt.activeClass
-                : 'border-border text-muted-foreground hover:bg-muted/50'
+                ? 'bg-[#C9A84C] border-[#C9A84C] text-[#0e0e0f] font-medium'
+                : 'bg-transparent border-[rgba(255,255,255,0.15)] text-[#7a7870] hover:border-[rgba(255,255,255,0.3)]'
             )}
           >
             {opt.label}
