@@ -1945,6 +1945,7 @@ const EditReport = () => {
             </div>
           </aside>
         </div>
+        </div>
 
         <SendReportDialog
           open={isSendDialogOpen}
