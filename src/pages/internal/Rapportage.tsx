@@ -264,9 +264,9 @@ export default function Rapportage() {
 
           {/* ── Tables ── */}
           <Tabs defaultValue="maand" className="space-y-4">
-            <TabsList>
-              <TabsTrigger value="maand">Maandtabel</TabsTrigger>
-              <TabsTrigger value="gebruiker">Per Gebruiker</TabsTrigger>
+            <TabsList className="bg-transparent border-none h-auto p-0 gap-2">
+              <TabsTrigger value="maand" className="rounded-[6px] border border-[rgba(201,168,76,0.3)] bg-transparent text-[#7a7870] px-[18px] py-[6px] font-normal shadow-none data-[state=active]:bg-[#C9A84C] data-[state=active]:border-[#C9A84C] data-[state=active]:text-[#0e0e0f] data-[state=active]:font-medium data-[state=active]:shadow-none">Maandtabel</TabsTrigger>
+              <TabsTrigger value="gebruiker" className="rounded-[6px] border border-[rgba(201,168,76,0.3)] bg-transparent text-[#7a7870] px-[18px] py-[6px] font-normal shadow-none data-[state=active]:bg-[#C9A84C] data-[state=active]:border-[#C9A84C] data-[state=active]:text-[#0e0e0f] data-[state=active]:font-medium data-[state=active]:shadow-none">Per Gebruiker</TabsTrigger>
             </TabsList>
 
             <TabsContent value="maand">
