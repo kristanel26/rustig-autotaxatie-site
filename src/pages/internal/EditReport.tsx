@@ -288,6 +288,10 @@ const EditReport = () => {
         customer_phone: c.phone || '',
       };
       setCustomerData(newData);
+      // Default inspection location to customer city if not yet set
+      if (!inspectionData.inspection_location && c.city) {
+        setInspectionData(p => ({ ...p, inspection_location: capitalizeFirst(c.city!) }));
+      }
       saveMultipleFields({
         customer_id: c.id,
         opdrachtgever: c.company_name || null,
