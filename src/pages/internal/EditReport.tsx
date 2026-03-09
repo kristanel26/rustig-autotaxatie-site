@@ -1446,7 +1446,7 @@ const EditReport = () => {
         {/* Main content with completeness sidebar */}
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Form content */}
-          <form onSubmit={handleSubmit} className="space-y-6 flex-1 max-w-full px-6">
+          <form onSubmit={handleSubmit} className="space-y-6 flex-1 w-full px-8">
             {/* Header with Back Button */}
             <div className="flex items-center">
               <Button 
