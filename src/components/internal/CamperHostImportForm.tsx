@@ -155,13 +155,15 @@ export const CamperHostImportForm = ({
     e.stopPropagation();
   }, []);
 
-  const handleRemoveFile = (type: 'pdf' | 'docx') => {
-    setUploadedFiles((prev) => prev.filter((f) => f.type !== type));
-    // Clear extraction if no files left
-    if (uploadedFiles.length <= 1) {
-      setExtraction(null);
-      setImportedSections(new Set());
-    }
+  const handleRemoveFile = (fileId: string) => {
+    setUploadedFiles((prev) => {
+      const next = prev.filter((f) => f.id !== fileId);
+      if (next.length === 0) {
+        setExtraction(null);
+        setImportedSections(new Set());
+      }
+      return next;
+    });
   };
 
   const handleExtract = async () => {
