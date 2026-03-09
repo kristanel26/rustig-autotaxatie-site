@@ -164,11 +164,16 @@ const Dashboard = () => {
 
   const formatDate = (d: string) => new Date(d).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short' });
 
-  // Filter reports by assigned_to when toggle is active
+  // Filter reports by assigned_to
   const filterReports = (reports: ReportRow[]) => {
-    if (!showOnlyMyReports || !user) return reports;
-    return reports.filter(r => r.assigned_to === user.id);
+    if (assignedFilter === 'all') return reports;
+    if (assignedFilter === 'mine') return reports.filter(r => r.assigned_to === user?.id);
+    return reports.filter(r => r.assigned_to === assignedFilter);
   };
+
+  const selectedAppraiser = assignedFilter !== 'all' && assignedFilter !== 'mine' 
+    ? getAppraiserById(assignedFilter) 
+    : null;
 
   return (
     <InternalLayout title="Dashboard">
