@@ -117,6 +117,19 @@ export const camperChecklist: ChecklistItem[] = [
     ],
   },
   {
+    id: 'fotos',
+    label: 'Fotocollectie',
+    sectionId: 'section-fotos',
+    requirements: [
+      { 
+        field: 'vehicle_photos', 
+        condition: 'minCount', 
+        value: MIN_PHOTOS.camper,
+        label: `Minimaal ${MIN_PHOTOS.camper} foto's`
+      },
+    ],
+  },
+  {
     id: 'voertuig',
     label: 'Voertuigidentificatie',
     sectionId: 'section-voertuig',
@@ -130,12 +143,6 @@ export const camperChecklist: ChecklistItem[] = [
       { field: 'rdw_merk', condition: 'filled', label: 'Merk' },
       { field: 'rdw_bouwjaar', condition: 'filled', label: 'Bouwjaar' },
       { field: 'tellerstand', condition: 'filled', label: 'Km-stand' },
-    ],
-    warningConditions: [
-      {
-        condition: (data) => !data.rdw_data_locked && !!data.license_plate,
-        message: 'RDW-gegevens niet opgehaald',
-      },
     ],
   },
   {
@@ -156,19 +163,6 @@ export const camperChecklist: ChecklistItem[] = [
     requirements: [
       { field: 'appraised_value', condition: 'filled', label: 'Getaxeerde waarde' },
       { field: 'appraised_value_text', condition: 'filled', label: 'Waarde in woorden' },
-    ],
-  },
-  {
-    id: 'fotos',
-    label: 'Fotocollectie',
-    sectionId: 'section-fotos',
-    requirements: [
-      { 
-        field: 'vehicle_photos', 
-        condition: 'minCount', 
-        value: MIN_PHOTOS.camper,
-        label: `Minimaal ${MIN_PHOTOS.camper} foto's`
-      },
     ],
   },
 ];
