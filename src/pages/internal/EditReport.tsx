@@ -1918,22 +1918,6 @@ const EditReport = () => {
           </div>
         )}
 
-        {/* ============================================ */}
-        {/* WEV §4: Fotocollectie — after VehicleInfoForm */}
-        {/* ============================================ */}
-        {report.report_type === 'wev' && (
-          <PhotoUploadForm
-            photos={vehiclePhotos}
-            rotations={photoRotations}
-            photoTypes={photoTypes}
-            onChange={handlePhotosChange}
-            onRotationsChange={handleRotationsChange}
-            onPhotoTypesChange={handlePhotoTypesChange}
-            reportId={id}
-            reportType="wev"
-          />
-        )}
-
         {/* CAM: Appraisal Findings — all sections */}
         {(report.report_type === 'camper' || !report.report_type) && (
           <AppraisalFindingsForm
@@ -1950,7 +1934,7 @@ const EditReport = () => {
           />
         )}
 
-        {/* WEV §8-9: Model + Banden (first part of AppraisalFindingsForm) */}
+        {/* WEV §5: Model + Banden (following KLS order) */}
         {report.report_type === 'wev' && (
           <AppraisalFindingsForm
             formData={appraisalData}
@@ -1964,6 +1948,31 @@ const EditReport = () => {
             photoTypes={photoTypes}
             reportId={id}
             showSections={['model', 'tires']}
+          />
+        )}
+
+        {/* WEV §6-8: Technische staat + Exterieur + Interieur (before valuation, KLS order) */}
+        {report.report_type === 'wev' && (
+          <AppraisalFindingsForm
+            formData={appraisalData}
+            onChange={handleAppraisalChange}
+            onMultipleChange={handleAppraisalMultipleChange}
+            rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
+            allTiresSame={allTiresSame}
+            onAllTiresSameChange={setAllTiresSame}
+            reportType="wev"
+            photos={vehiclePhotos}
+            photoTypes={photoTypes}
+            reportId={id}
+            showSections={['technical', 'exterior', 'interior']}
+          />
+        )}
+
+        {/* WEV §9: Algemene indruk (before valuation, KLS order) */}
+        {report.report_type === 'wev' && (
+          <GeneralImpressionForm
+            formData={impressionData}
+            onChange={handleImpressionChange}
           />
         )}
 
@@ -1984,31 +1993,6 @@ const EditReport = () => {
               onChange={handleWevValueChange}
             />
           </>
-        )}
-
-        {/* WEV §13-15: Technische staat + Exterieur + Interieur */}
-        {report.report_type === 'wev' && (
-          <AppraisalFindingsForm
-            formData={appraisalData}
-            onChange={handleAppraisalChange}
-            onMultipleChange={handleAppraisalMultipleChange}
-            rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
-            allTiresSame={allTiresSame}
-            onAllTiresSameChange={setAllTiresSame}
-            reportType="wev"
-            photos={vehiclePhotos}
-            photoTypes={photoTypes}
-            reportId={id}
-            showSections={['technical', 'exterior', 'interior']}
-          />
-        )}
-
-        {/* WEV §16: Algemene indruk */}
-        {report.report_type === 'wev' && (
-          <GeneralImpressionForm
-            formData={impressionData}
-            onChange={handleImpressionChange}
-          />
         )}
 
         {/* §22 Opmerkingen */}
