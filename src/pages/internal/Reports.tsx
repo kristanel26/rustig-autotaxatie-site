@@ -10,11 +10,13 @@ import { Button } from '@/components/ui/button';
 import { Search, FilePlus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { getStatusBadgeProps } from '@/components/internal/ReportStatusBar';
 import {
   Select as SelectUI, SelectContent as SelectContentUI, SelectItem as SelectItemUI,
   SelectTrigger as SelectTriggerUI, SelectValue as SelectValueUI,
 } from '@/components/ui/select';
+import { useAppraisers } from '@/hooks/useAppraisers';
 
 interface Report {
   id: string;
