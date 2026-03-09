@@ -805,6 +805,9 @@ export type Database = {
           interior_sanitary_notes: string | null
           interior_upholstery: string | null
           interior_upholstery_notes: string | null
+          is_geel_kenteken: boolean
+          is_grijs_kenteken: boolean
+          is_nieuwe_auto: boolean
           kleur_laksoort: string | null
           last_downloaded_at: string | null
           leakage_electrical: string | null
@@ -1021,6 +1024,9 @@ export type Database = {
           interior_sanitary_notes?: string | null
           interior_upholstery?: string | null
           interior_upholstery_notes?: string | null
+          is_geel_kenteken?: boolean
+          is_grijs_kenteken?: boolean
+          is_nieuwe_auto?: boolean
           kleur_laksoort?: string | null
           last_downloaded_at?: string | null
           leakage_electrical?: string | null
@@ -1237,6 +1243,9 @@ export type Database = {
           interior_sanitary_notes?: string | null
           interior_upholstery?: string | null
           interior_upholstery_notes?: string | null
+          is_geel_kenteken?: boolean
+          is_grijs_kenteken?: boolean
+          is_nieuwe_auto?: boolean
           kleur_laksoort?: string | null
           last_downloaded_at?: string | null
           leakage_electrical?: string | null
