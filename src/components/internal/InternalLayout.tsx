@@ -169,7 +169,7 @@ const InternalLayout: React.FC<InternalLayoutProps> = ({ children, title }) => {
       {/* ── MAIN CONTENT ── */}
       <main className="max-w-[1180px] mx-auto px-8 py-8">
         {title && (
-          <h1 className="font-display text-[2rem] text-white font-normal mb-1.5 tracking-normal">
+          <h1 className="font-display text-[2rem] text-[#c9a84c] font-normal mb-1.5 tracking-normal">
             {title}
           </h1>
         )}
