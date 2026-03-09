@@ -139,7 +139,7 @@ export const CamperHostImportForm = ({
     } finally {
       setIsUploading(false);
     }
-  }, [reportId, user?.id, uploadedFiles, toast]);
+  }, [reportId, user?.id, toast]);
 
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
