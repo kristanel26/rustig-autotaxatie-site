@@ -141,7 +141,11 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2, totalPages = 10 }: PDFV
             <View style={{ marginBottom: 16 }}>
               <SectionHeader number="7" title="Gebruik en stalling" />
               <DataRow label="Gebruik" value={report.gebruik || ''} />
-              <DataRow label="Stalling" value={report.stalling || ''} />
+              <DataRow label="Stalling" value={
+                report.stalling 
+                  ? `${report.stalling === 'binnen' ? 'Binnen' : report.stalling === 'buiten' ? 'Buiten' : report.stalling === 'onbekend' ? 'Onbekend' : report.stalling}${report.stalling_toelichting ? ` — ${report.stalling_toelichting}` : ''}`
+                  : ''
+              } />
               <DataRow label="Staat bij opname" value={report.staat_bij_opname || ''} />
             </View>
           )}
