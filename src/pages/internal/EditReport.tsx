@@ -1973,11 +1973,11 @@ const EditReport = () => {
           />
         )}
 
-        {/* WEV §9: Algemene indruk (before valuation, KLS order) */}
+        {/* WEV §9: Algemene indruk (same form as KLS with default texts) */}
         {report.report_type === 'wev' && (
-          <GeneralImpressionForm
-            formData={impressionData}
-            onChange={handleImpressionChange}
+          <KlassiekerGeneralImpressionForm
+            formData={klassiekerImpressionData}
+            onChange={handleKlassiekerImpressionChange}
           />
         )}
 
