@@ -50,6 +50,19 @@ export const klassiekerChecklist: ChecklistItem[] = [
     ],
   },
   {
+    id: 'fotos',
+    label: 'Fotocollectie',
+    sectionId: 'section-fotos',
+    requirements: [
+      { 
+        field: 'vehicle_photos', 
+        condition: 'minCount', 
+        value: MIN_PHOTOS.klassieker,
+        label: `Minimaal ${MIN_PHOTOS.klassieker} foto's`
+      },
+    ],
+  },
+  {
     id: 'voertuig',
     label: 'Voertuigidentificatie',
     sectionId: 'section-voertuig',
@@ -64,12 +77,6 @@ export const klassiekerChecklist: ChecklistItem[] = [
       { field: 'rdw_bouwjaar', condition: 'filled', label: 'Bouwjaar' },
       { field: 'tellerstand', condition: 'filled', label: 'Km-stand' },
     ],
-    warningConditions: [
-      {
-        condition: (data) => !data.rdw_data_locked && !!data.license_plate,
-        message: 'RDW-gegevens niet opgehaald',
-      },
-    ],
   },
   {
     id: 'inspectie',
@@ -83,33 +90,12 @@ export const klassiekerChecklist: ChecklistItem[] = [
     ],
   },
   {
-    id: 'kwaliteitsklasse',
-    label: 'Kwaliteitsklasse',
-    sectionId: 'section-kwaliteit',
-    requirements: [
-      { field: 'quality_class', condition: 'filled', label: 'Klasse geselecteerd' },
-    ],
-  },
-  {
     id: 'waardeselectie',
     label: 'Waardeselectie',
     sectionId: 'section-waarde',
     requirements: [
       { field: 'appraised_value', condition: 'filled', label: 'Vervangingswaarde' },
       { field: 'appraised_value_text', condition: 'filled', label: 'Waarde in woorden' },
-    ],
-  },
-  {
-    id: 'fotos',
-    label: 'Fotocollectie',
-    sectionId: 'section-fotos',
-    requirements: [
-      { 
-        field: 'vehicle_photos', 
-        condition: 'minCount', 
-        value: MIN_PHOTOS.klassieker,
-        label: `Minimaal ${MIN_PHOTOS.klassieker} foto's`
-      },
     ],
   },
 ];
@@ -131,6 +117,19 @@ export const camperChecklist: ChecklistItem[] = [
     ],
   },
   {
+    id: 'fotos',
+    label: 'Fotocollectie',
+    sectionId: 'section-fotos',
+    requirements: [
+      { 
+        field: 'vehicle_photos', 
+        condition: 'minCount', 
+        value: MIN_PHOTOS.camper,
+        label: `Minimaal ${MIN_PHOTOS.camper} foto's`
+      },
+    ],
+  },
+  {
     id: 'voertuig',
     label: 'Voertuigidentificatie',
     sectionId: 'section-voertuig',
@@ -144,12 +143,6 @@ export const camperChecklist: ChecklistItem[] = [
       { field: 'rdw_merk', condition: 'filled', label: 'Merk' },
       { field: 'rdw_bouwjaar', condition: 'filled', label: 'Bouwjaar' },
       { field: 'tellerstand', condition: 'filled', label: 'Km-stand' },
-    ],
-    warningConditions: [
-      {
-        condition: (data) => !data.rdw_data_locked && !!data.license_plate,
-        message: 'RDW-gegevens niet opgehaald',
-      },
     ],
   },
   {
@@ -172,19 +165,6 @@ export const camperChecklist: ChecklistItem[] = [
       { field: 'appraised_value_text', condition: 'filled', label: 'Waarde in woorden' },
     ],
   },
-  {
-    id: 'fotos',
-    label: 'Fotocollectie',
-    sectionId: 'section-fotos',
-    requirements: [
-      { 
-        field: 'vehicle_photos', 
-        condition: 'minCount', 
-        value: MIN_PHOTOS.camper,
-        label: `Minimaal ${MIN_PHOTOS.camper} foto's`
-      },
-    ],
-  },
 ];
 
 // Checklist configuration for WEV reports
@@ -204,6 +184,19 @@ export const wevChecklist: ChecklistItem[] = [
     ],
   },
   {
+    id: 'fotos',
+    label: 'Fotocollectie',
+    sectionId: 'section-fotos',
+    requirements: [
+      { 
+        field: 'vehicle_photos', 
+        condition: 'minCount', 
+        value: MIN_PHOTOS.wev,
+        label: `Minimaal ${MIN_PHOTOS.wev} foto's`
+      },
+    ],
+  },
+  {
     id: 'voertuig',
     label: 'Voertuigidentificatie',
     sectionId: 'section-voertuig',
@@ -218,12 +211,6 @@ export const wevChecklist: ChecklistItem[] = [
       { field: 'rdw_bouwjaar', condition: 'filled', label: 'Bouwjaar' },
       { field: 'tellerstand', condition: 'filled', label: 'Km-stand' },
     ],
-    warningConditions: [
-      {
-        condition: (data) => !data.rdw_data_locked && !!data.license_plate,
-        message: 'RDW-gegevens niet opgehaald',
-      },
-    ],
   },
   {
     id: 'inspectie',
@@ -234,16 +221,6 @@ export const wevChecklist: ChecklistItem[] = [
       { field: 'inspection_date', condition: 'filled', label: 'Datum opname' },
       { field: 'inspection_start_time', condition: 'filled', label: 'Aanvangstijd' },
       { field: 'inspection_end_time', condition: 'filled', label: 'Eindtijd' },
-    ],
-  },
-  {
-    id: 'marktgegevens',
-    label: 'Marktgegevens',
-    sectionId: 'section-markt',
-    requirements: [
-      { field: 'wev_btw_of_marge', condition: 'filled', label: 'BTW/Marge gekozen' },
-      { field: 'wev_handelsinkoopwaarde_autotelex', condition: 'filled', label: 'Handelsinkoopwaarde' },
-      { field: 'wev_verkoopwaarde_autotelex', condition: 'filled', label: 'Verkoopwaarde' },
     ],
   },
   {
@@ -263,17 +240,6 @@ export const wevChecklist: ChecklistItem[] = [
         label: 'Autotelex waardebepaling geüpload'
       },
     ],
-    warningConditions: [
-      {
-        condition: (data) => {
-          const docs = data.wev_documents as Array<{ document_type: string }> | undefined;
-          if (!docs || !Array.isArray(docs)) return false;
-          const hasSchadecalc = docs.some(d => d.document_type === 'schadecalculatie');
-          return !hasSchadecalc;
-        },
-        message: 'Schadecalculatie ontbreekt (optioneel)',
-      },
-    ],
   },
   {
     id: 'eindwaarde',
@@ -281,19 +247,6 @@ export const wevChecklist: ChecklistItem[] = [
     sectionId: 'section-waarde',
     requirements: [
       { field: 'wev_eindwaarde', condition: 'filled', label: 'Eindwaarde ingevuld' },
-    ],
-  },
-  {
-    id: 'fotos',
-    label: 'Fotocollectie',
-    sectionId: 'section-fotos',
-    requirements: [
-      { 
-        field: 'vehicle_photos', 
-        condition: 'minCount', 
-        value: MIN_PHOTOS.wev,
-        label: `Minimaal ${MIN_PHOTOS.wev} foto's`
-      },
     ],
   },
 ];
