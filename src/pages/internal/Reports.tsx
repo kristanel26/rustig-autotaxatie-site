@@ -10,11 +10,13 @@ import { Button } from '@/components/ui/button';
 import { Search, FilePlus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Badge } from '@/components/ui/badge';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { getStatusBadgeProps } from '@/components/internal/ReportStatusBar';
 import {
   Select as SelectUI, SelectContent as SelectContentUI, SelectItem as SelectItemUI,
   SelectTrigger as SelectTriggerUI, SelectValue as SelectValueUI,
 } from '@/components/ui/select';
+import { useAppraisers } from '@/hooks/useAppraisers';
 
 interface Report {
   id: string;
@@ -31,6 +33,7 @@ interface Report {
   inspection_date: string | null;
   status: string | null;
   created_at: string;
+  assigned_to: string | null;
 }
 
 const TYPE_LABELS: Record<string, string> = {
@@ -47,13 +50,14 @@ const Reports = () => {
   const [statusFilter, setStatusFilter] = useState<string>(searchParams.get('status') || 'all');
   const [typeFilter, setTypeFilter] = useState<string>('all');
   const navigate = useNavigate();
+  const { getAppraiserById } = useAppraisers();
 
   useEffect(() => {
     const fetchReports = async () => {
       try {
         const { data, error } = await supabase
           .from('reports')
-          .select('id, report_number, report_type, license_plate, customer_title, customer_initials, customer_last_name, client_name, opdrachtgever, rdw_merk, rdw_handelsbenaming, inspection_date, status, created_at')
+          .select('id, report_number, report_type, license_plate, customer_title, customer_initials, customer_last_name, client_name, opdrachtgever, rdw_merk, rdw_handelsbenaming, inspection_date, status, created_at, assigned_to')
           .order('created_at', { ascending: false });
         if (error) throw error;
         setReports(data || []);
@@ -161,13 +165,14 @@ const Reports = () => {
                 <TableHead>Voertuig</TableHead>
                 <TableHead>Klant</TableHead>
                 <TableHead className="w-[130px]">Status</TableHead>
+                <TableHead className="w-[100px]">Toegewezen</TableHead>
                 <TableHead className="w-[140px]">Inspectiedatum</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {loading ? (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center py-8">
+                   <TableCell colSpan={8} className="text-center py-8">
                     <div className="flex items-center justify-center">
                       <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary" />
                     </div>
@@ -175,7 +180,7 @@ const Reports = () => {
                 </TableRow>
               ) : filteredReports.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center py-8 text-muted-foreground">
+                  <TableCell colSpan={8} className="text-center py-8 text-muted-foreground">
                     {searchTerm || statusFilter !== 'all' || typeFilter !== 'all' ? 'Geen rapporten gevonden' : 'Nog geen rapporten'}
                   </TableCell>
                 </TableRow>
@@ -193,6 +198,20 @@ const Reports = () => {
                     <TableCell className="text-sm truncate max-w-[200px]">{getCustomerDisplay(report)}</TableCell>
                     <TableCell>
                       {(() => { const s = getStatusBadgeProps(report.status); return <Badge variant="outline" className={`text-xs ${s.className}`}>{s.label}</Badge>; })()}
+                    </TableCell>
+                    <TableCell>
+                      {(() => {
+                        const a = getAppraiserById(report.assigned_to);
+                        if (!a) return <span className="text-xs text-muted-foreground">—</span>;
+                        return (
+                          <div className="flex items-center gap-1.5">
+                            <Avatar className="h-5 w-5">
+                              <AvatarFallback className="text-[9px] font-semibold bg-primary/20 text-primary">{a.initials}</AvatarFallback>
+                            </Avatar>
+                            <span className="text-xs text-muted-foreground truncate max-w-[80px]">{a.email.split('@')[0]}</span>
+                          </div>
+                        );
+                      })()}
                     </TableCell>
                     <TableCell className="text-xs">{formatDate(report.inspection_date)}</TableCell>
                   </TableRow>

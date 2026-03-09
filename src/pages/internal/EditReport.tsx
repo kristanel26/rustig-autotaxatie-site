@@ -58,6 +58,36 @@ import {
 import { CamperHostImportForm } from '@/components/internal/CamperHostImportForm';
 import { CustomerSearchField } from '@/components/internal/CustomerSearchField';
 import { SendReportDialog } from '@/components/internal/SendReportDialog';
+import { useAppraisers } from '@/hooks/useAppraisers';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+
+// Inline sub-component for assigned_to field
+const AssignedToField = ({ reportId, saveField, initialValue }: { reportId: string | undefined; saveField: (field: string, value: any) => void; initialValue: string | null }) => {
+  const { appraisers, loading } = useAppraisers();
+  const [value, setValue] = useState<string>(initialValue || '');
+
+  if (loading) return null;
+
+  return (
+    <div className="space-y-2">
+      <Label>Toegewezen aan</Label>
+      <Select value={value} onValueChange={(v) => { const val = v === '__none' ? '' : v; setValue(val); saveField('assigned_to', val || null); }}>
+        <SelectTrigger>
+          <SelectValue placeholder="Niet toegewezen" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="__none">Niet toegewezen</SelectItem>
+          {appraisers.map((a) => (
+            <SelectItem key={a.user_id} value={a.user_id}>
+              {a.email.split('@')[0]} ({a.initials})
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  );
+};
+
 const reportSchema = z.object({
   customer_title: z.string().optional(),
   customer_initials: z.string().optional(),
@@ -1443,6 +1473,7 @@ const EditReport = () => {
                     saveField('status', newStatus);
                   }}
                 />
+                <AssignedToField reportId={id} saveField={saveField} initialValue={(report as any).assigned_to || null} />
               </CardContent>
             </Card>
 

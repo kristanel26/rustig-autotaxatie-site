@@ -6,7 +6,10 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { FileText, Search, User, Loader2, Car, Truck, Scale } from 'lucide-react';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { FileText, Search, User, Loader2, Car, Truck, Scale, Filter } from 'lucide-react';
+import { useAppraisers } from '@/hooks/useAppraisers';
 
 type ReportType = 'klassieker' | 'camper' | 'wev';
 
@@ -49,6 +52,8 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isCreating, setIsCreating] = useState<ReportType | null>(null);
+  const { appraisers, getAppraiserById } = useAppraisers();
+  const [showOnlyMyReports, setShowOnlyMyReports] = useState(false);
 
   const [reportsByStatus, setReportsByStatus] = useState<Record<string, ReportRow[]>>({
     concept: [], in_behandeling: [], gereed: [], verzonden: [],
@@ -153,46 +158,63 @@ const Dashboard = () => {
 
   const formatDate = (d: string) => new Date(d).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short' });
 
+  // Filter reports by assigned_to when toggle is active
+  const filterReports = (reports: ReportRow[]) => {
+    if (!showOnlyMyReports || !user) return reports;
+    return reports.filter(r => r.assigned_to === user.id);
+  };
+
   return (
     <InternalLayout title="Dashboard">
       <div className="space-y-6">
-        {/* Quick Search */}
-        <div ref={searchRef} className="relative">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Zoek op kenteken, klantnaam of rapportnummer..." className="pl-9" />
-          </div>
-          {searchOpen && (
-            <div className="absolute z-50 w-full mt-1 bg-popover border border-border rounded-lg shadow-lg max-h-[350px] overflow-y-auto">
-              {searching ? (
-                <div className="p-3 text-sm text-muted-foreground text-center">Zoeken...</div>
-              ) : searchResults.length === 0 ? (
-                <div className="p-3 text-sm text-muted-foreground text-center">Geen resultaten gevonden</div>
-              ) : (
-                <>
-                  {searchResults.filter(r => r.type === 'report').map((r) => (
-                    <button key={`r-${r.id}`} onClick={() => handleSearchSelect(r)} className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-muted/50 transition-colors border-b border-border/30 last:border-b-0">
-                      <FileText className="h-4 w-4 text-muted-foreground shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium font-mono truncate">{r.title}</p>
-                        <p className="text-xs text-muted-foreground truncate">{r.subtitle}</p>
-                      </div>
-                      {r.badge && <Badge variant="secondary" className="text-[10px] shrink-0">{r.badge.toUpperCase()}</Badge>}
-                    </button>
-                  ))}
-                  {searchResults.filter(r => r.type === 'customer').map((r) => (
-                    <button key={`c-${r.id}`} onClick={() => handleSearchSelect(r)} className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-muted/50 transition-colors border-b border-border/30 last:border-b-0">
-                      <User className="h-4 w-4 text-muted-foreground shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium truncate">{r.title}</p>
-                        <p className="text-xs text-muted-foreground truncate">{r.subtitle}</p>
-                      </div>
-                    </button>
-                  ))}
-                </>
-              )}
+        {/* Quick Search + Filter */}
+        <div className="flex gap-3 items-start">
+          <div ref={searchRef} className="relative flex-1">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Zoek op kenteken, klantnaam of rapportnummer..." className="pl-9" />
             </div>
-          )}
+            {searchOpen && (
+              <div className="absolute z-50 w-full mt-1 bg-popover border border-border rounded-lg shadow-lg max-h-[350px] overflow-y-auto">
+                {searching ? (
+                  <div className="p-3 text-sm text-muted-foreground text-center">Zoeken...</div>
+                ) : searchResults.length === 0 ? (
+                  <div className="p-3 text-sm text-muted-foreground text-center">Geen resultaten gevonden</div>
+                ) : (
+                  <>
+                    {searchResults.filter(r => r.type === 'report').map((r) => (
+                      <button key={`r-${r.id}`} onClick={() => handleSearchSelect(r)} className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-muted/50 transition-colors border-b border-border/30 last:border-b-0">
+                        <FileText className="h-4 w-4 text-muted-foreground shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium font-mono truncate">{r.title}</p>
+                          <p className="text-xs text-muted-foreground truncate">{r.subtitle}</p>
+                        </div>
+                        {r.badge && <Badge variant="secondary" className="text-[10px] shrink-0">{r.badge.toUpperCase()}</Badge>}
+                      </button>
+                    ))}
+                    {searchResults.filter(r => r.type === 'customer').map((r) => (
+                      <button key={`c-${r.id}`} onClick={() => handleSearchSelect(r)} className="w-full flex items-center gap-3 px-3 py-2.5 text-left hover:bg-muted/50 transition-colors border-b border-border/30 last:border-b-0">
+                        <User className="h-4 w-4 text-muted-foreground shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium truncate">{r.title}</p>
+                          <p className="text-xs text-muted-foreground truncate">{r.subtitle}</p>
+                        </div>
+                      </button>
+                    ))}
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+          <Button
+            variant={showOnlyMyReports ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setShowOnlyMyReports(!showOnlyMyReports)}
+            className="shrink-0 gap-1.5"
+          >
+            <Filter className="h-3.5 w-3.5" />
+            {showOnlyMyReports ? 'Mijn rapporten' : 'Alle taxateurs'}
+          </Button>
         </div>
 
         {/* New Report Buttons */}
@@ -221,7 +243,7 @@ const Dashboard = () => {
         {/* Kanban Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
           {STATUS_CONFIG.map((col) => {
-            const reports = reportsByStatus[col.key] || [];
+            const reports = filterReports(reportsByStatus[col.key] || []);
             return (
               <div key={col.key} className={`rounded-xl border ${col.border} bg-[#111827]/60 flex flex-col min-h-[400px]`}>
                 {/* Column Header */}
@@ -244,32 +266,41 @@ const Dashboard = () => {
                   ) : reports.length === 0 ? (
                     <p className="text-center text-xs text-muted-foreground py-8">Geen rapporten</p>
                   ) : (
-                    reports.map((r) => (
-                      <button
-                        key={r.id}
-                        onClick={() => navigate(`/intern/rapport/${r.id}`)}
-                        className="w-full text-left p-3 rounded-lg bg-[#0a0d14] border border-[#253047] hover:border-[#c9a84c]/50 hover:bg-[#0f1320] transition-all duration-150 group"
-                      >
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-mono font-medium text-muted-foreground">{r.report_number}</span>
-                          {r.report_type && (
-                            <Badge variant="secondary" className="text-[9px] px-1.5 py-0">{r.report_type.toUpperCase()}</Badge>
-                          )}
-                        </div>
-                        <p className="text-sm font-medium text-foreground truncate">{vehicleLabel(r)}</p>
-                        <div className="flex items-end justify-between mt-1.5">
-                          <div className="flex flex-col gap-0.5">
-                            <span className="text-xs font-mono text-muted-foreground">{r.license_plate || '-'}</span>
-                            <span className="text-[10px] text-muted-foreground">{formatDate(r.updated_at)}</span>
+                    reports.map((r) => {
+                      const appraiser = getAppraiserById(r.assigned_to);
+                      return (
+                        <button
+                          key={r.id}
+                          onClick={() => navigate(`/intern/rapport/${r.id}`)}
+                          className="w-full text-left p-3 rounded-lg bg-[#0a0d14] border border-[#253047] hover:border-[#c9a84c]/50 hover:bg-[#0f1320] transition-all duration-150 group"
+                        >
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-xs font-mono font-medium text-muted-foreground">{r.report_number}</span>
+                            {r.report_type && (
+                              <Badge variant="secondary" className="text-[9px] px-1.5 py-0">{r.report_type.toUpperCase()}</Badge>
+                            )}
                           </div>
-                          {!r.assigned_to && (
-                            <div className="flex items-center justify-center w-6 h-6 rounded-full bg-muted/50 border border-border shrink-0">
-                              <span className="text-xs font-medium text-muted-foreground">+</span>
+                          <p className="text-sm font-medium text-foreground truncate">{vehicleLabel(r)}</p>
+                          <div className="flex items-end justify-between mt-1.5">
+                            <div className="flex flex-col gap-0.5">
+                              <span className="text-xs font-mono text-muted-foreground">{r.license_plate || '-'}</span>
+                              <span className="text-[10px] text-muted-foreground">{formatDate(r.updated_at)}</span>
                             </div>
-                          )}
-                        </div>
-                      </button>
-                    ))
+                            {appraiser ? (
+                              <Avatar className="h-6 w-6 shrink-0">
+                                <AvatarFallback className="text-[10px] font-semibold bg-primary/20 text-primary">
+                                  {appraiser.initials}
+                                </AvatarFallback>
+                              </Avatar>
+                            ) : (
+                              <div className="flex items-center justify-center w-6 h-6 rounded-full bg-muted/50 border border-border shrink-0">
+                                <span className="text-xs font-medium text-muted-foreground">+</span>
+                              </div>
+                            )}
+                          </div>
+                        </button>
+                      );
+                    })
                   )}
                 </div>
               </div>
