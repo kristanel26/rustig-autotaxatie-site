@@ -123,11 +123,7 @@ export const CamperHostImportForm = ({
         });
       }
 
-      setUploadedFiles((prev) => {
-        // Remove files of same types, add new ones
-        const types = new Set(newFiles.map((f) => f.type));
-        return [...prev.filter((f) => !types.has(f.type)), ...newFiles];
-      });
+      setUploadedFiles((prev) => [...prev, ...newFiles]);
 
       toast({
         title: 'Bestanden geüpload',
