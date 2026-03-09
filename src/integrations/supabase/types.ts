@@ -860,6 +860,7 @@ export type Database = {
           soort_bouw: string | null
           staat_bij_opname: string | null
           stalling: string | null
+          stalling_toelichting: string | null
           starter_battery: boolean | null
           status: string | null
           stuurpositie: string | null
@@ -1075,6 +1076,7 @@ export type Database = {
           soort_bouw?: string | null
           staat_bij_opname?: string | null
           stalling?: string | null
+          stalling_toelichting?: string | null
           starter_battery?: boolean | null
           status?: string | null
           stuurpositie?: string | null
@@ -1290,6 +1292,7 @@ export type Database = {
           soort_bouw?: string | null
           staat_bij_opname?: string | null
           stalling?: string | null
+          stalling_toelichting?: string | null
           starter_battery?: boolean | null
           status?: string | null
           stuurpositie?: string | null
