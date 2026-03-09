@@ -298,11 +298,11 @@ export default function Rapportage() {
                       ))}
                       {/* Totaal row */}
                       <TableRow className="border-t-2 border-primary/20 font-bold">
-                        <TableCell>Totaal {selectedYear}</TableCell>
-                        <TableCell className="text-right">{monthlyTable.reduce((s, r) => s + r.klassieker, 0)}</TableCell>
-                        <TableCell className="text-right">{monthlyTable.reduce((s, r) => s + r.camper, 0)}</TableCell>
-                        <TableCell className="text-right">{monthlyTable.reduce((s, r) => s + r.wev, 0)}</TableCell>
-                        <TableCell className="text-right">{monthlyTable.reduce((s, r) => s + r.totaal, 0)}</TableCell>
+                        <TableCell className="text-white">Totaal {selectedYear}</TableCell>
+                        <TableCell className="text-right text-white">{monthlyTable.reduce((s, r) => s + r.klassieker, 0)}</TableCell>
+                        <TableCell className="text-right text-white">{monthlyTable.reduce((s, r) => s + r.camper, 0)}</TableCell>
+                        <TableCell className="text-right text-white">{monthlyTable.reduce((s, r) => s + r.wev, 0)}</TableCell>
+                        <TableCell className="text-right text-white">{monthlyTable.reduce((s, r) => s + r.totaal, 0)}</TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
