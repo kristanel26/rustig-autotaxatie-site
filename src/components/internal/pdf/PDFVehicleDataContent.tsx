@@ -91,6 +91,7 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2, totalPages = 10 }: PDFV
             <DataRow label="Kleur" value={report.rdw_kleur || ''} />
             <DataRow label="Interieur" value={report.interieur_beschrijving || ''} />
             <DataRow label="Stuur" value={report.stuurpositie ? (report.stuurpositie === 'links' ? 'Links' : 'Rechts') : ''} />
+          </View>
 
           <View style={{ marginBottom: 16 }}>
             <SectionHeader number="2" title="Technische hoofdgegevens" />
