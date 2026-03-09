@@ -1444,6 +1444,7 @@ const EditReport = () => {
                     saveField('status', newStatus);
                   }}
                 />
+                <AssignedToField reportId={id} saveField={saveField} initialValue={(report as any).assigned_to || null} />
               </CardContent>
             </Card>
 
