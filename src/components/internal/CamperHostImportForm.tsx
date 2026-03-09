@@ -267,7 +267,7 @@ export const CamperHostImportForm = ({
           <input
             ref={fileInputRef}
             type="file"
-            accept=".pdf,.docx"
+            accept=".pdf,.docx,.doc"
             multiple
             onChange={(e) => {
               handleFileSelect(e.target.files);
