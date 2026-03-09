@@ -62,6 +62,7 @@ interface Report {
   // Taxateur Sectie 7: Gebruik en stalling
   gebruik: string | null;
   stalling: string | null;
+  stalling_toelichting: string | null;
   staat_bij_opname: string | null;
   
   // Kwaliteitsklasse
