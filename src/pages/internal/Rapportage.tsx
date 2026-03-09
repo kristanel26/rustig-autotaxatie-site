@@ -217,7 +217,7 @@ export default function Rapportage() {
             </Label>
           </div>
         </div>
-        <Button variant="outline" onClick={handleExport} className="gap-2">
+        <Button variant="outline" onClick={handleExport} className="gap-2 text-white">
           <Download className="w-4 h-4" />
           Exporteer naar Excel
         </Button>
