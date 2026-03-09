@@ -289,11 +289,11 @@ export default function Rapportage() {
                           className="cursor-pointer hover:bg-muted/50"
                           onClick={() => handleMonthClick(row.key)}
                         >
-                          <TableCell className="font-medium">{row.month}</TableCell>
-                          <TableCell className="text-right">{row.klassieker || '–'}</TableCell>
-                          <TableCell className="text-right">{row.camper || '–'}</TableCell>
-                          <TableCell className="text-right">{row.wev || '–'}</TableCell>
-                          <TableCell className="text-right font-semibold">{row.totaal || '–'}</TableCell>
+                          <TableCell className="font-medium text-white">{row.month}</TableCell>
+                          <TableCell className="text-right text-white">{row.klassieker || <span className="text-[#9CA3AF]">–</span>}</TableCell>
+                          <TableCell className="text-right text-white">{row.camper || <span className="text-[#9CA3AF]">–</span>}</TableCell>
+                          <TableCell className="text-right text-white">{row.wev || <span className="text-[#9CA3AF]">–</span>}</TableCell>
+                          <TableCell className="text-right font-semibold text-white">{row.totaal || <span className="text-[#9CA3AF]">–</span>}</TableCell>
                         </TableRow>
                       ))}
                       {/* Totaal row */}
