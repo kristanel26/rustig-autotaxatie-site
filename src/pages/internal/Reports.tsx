@@ -55,8 +55,6 @@ const Reports = () => {
   const [searchParams] = useSearchParams();
   const [statusFilter, setStatusFilter] = useState<string>(searchParams.get('status') || 'all');
   const [typeFilter, setTypeFilter] = useState<string>('all');
-  const [deleteTarget, setDeleteTarget] = useState<Report | null>(null);
-  const [deleting, setDeleting] = useState(false);
   const navigate = useNavigate();
   const { getAppraiserById } = useAppraisers();
   const { hasRole } = useAuth();
