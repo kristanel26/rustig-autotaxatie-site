@@ -1463,7 +1463,7 @@ const EditReport = () => {
               <CardHeader>
                 <CardTitle className="text-lg">Rapportgegevens (alleen-lezen)</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Rapportnummer</Label>
                   <Input
