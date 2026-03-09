@@ -208,7 +208,7 @@ const Reports = () => {
                             <Avatar className="h-5 w-5">
                               <AvatarFallback className="text-[9px] font-semibold bg-primary/20 text-primary">{a.initials}</AvatarFallback>
                             </Avatar>
-                            <span className="text-xs text-muted-foreground truncate max-w-[80px]">{a.email.split('@')[0]}</span>
+                            <span className="text-xs text-muted-foreground">{a.displayName}</span>
                           </div>
                         );
                       })()}

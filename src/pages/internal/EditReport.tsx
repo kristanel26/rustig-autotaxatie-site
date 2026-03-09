@@ -79,7 +79,7 @@ const AssignedToField = ({ reportId, saveField, initialValue }: { reportId: stri
           <SelectItem value="__none">Niet toegewezen</SelectItem>
           {appraisers.map((a) => (
             <SelectItem key={a.user_id} value={a.user_id}>
-              {a.email.split('@')[0]} ({a.initials})
+              {a.displayName}
             </SelectItem>
           ))}
         </SelectContent>
