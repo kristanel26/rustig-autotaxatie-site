@@ -31,6 +31,7 @@ interface Report {
   inspection_date: string | null;
   status: string | null;
   created_at: string;
+  assigned_to: string | null;
 }
 
 const TYPE_LABELS: Record<string, string> = {
