@@ -460,6 +460,8 @@ const EditReport = () => {
           gebruik: reportData.gebruik || '',
           stalling: reportData.stalling || '',
           staat_bij_opname: reportData.staat_bij_opname || '',
+          interieur_beschrijving: (reportData as any).interieur_beschrijving || '',
+          stuurpositie: (reportData as any).stuurpositie || '',
           rdw_data_locked: reportData.rdw_data_locked || false,
         });
 

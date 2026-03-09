@@ -80,6 +80,10 @@ export interface VehicleFormData {
   stalling: string;
   staat_bij_opname: string;
 
+  // Sectie 8: Specificaties motorvoertuig (Taxateur)
+  interieur_beschrijving: string;
+  stuurpositie: string;
+
   // RDW status
   rdw_data_locked: boolean;
 }
@@ -133,6 +137,8 @@ export const getInitialVehicleFormData = (): VehicleFormData => ({
   gebruik: '',
   stalling: '',
   staat_bij_opname: '',
+  interieur_beschrijving: '',
+  stuurpositie: '',
   rdw_data_locked: false,
 });
 
@@ -752,6 +758,46 @@ export const VehicleInfoForm = ({
                   value={formData.constructievorm}
                   onChange={(e) => onChange('constructievorm', e.target.value)}
                 />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Specificaties motorvoertuig — for WEV and KLS */}
+      {(reportType === 'wev' || reportType === 'klassieker') && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Specificaties motorvoertuig</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="interieur_beschrijving">Interieur</Label>
+                <Input
+                  id="interieur_beschrijving"
+                  value={formData.interieur_beschrijving}
+                  onChange={(e) => onChange('interieur_beschrijving', e.target.value)}
+                  placeholder="bijv. Stof/leder zwart"
+                />
+                <p className="text-xs text-muted-foreground">
+                  Beschrijving van de bekleding en kleur van het interieur.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="stuurpositie">Stuurpositie</Label>
+                <Select
+                  value={formData.stuurpositie}
+                  onValueChange={(value) => onChange('stuurpositie', value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecteer..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="links">Links</SelectItem>
+                    <SelectItem value="rechts">Rechts</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </CardContent>

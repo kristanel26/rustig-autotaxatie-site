@@ -41,7 +41,10 @@ const PDFWevValueContent = ({ report, pageNumber, totalPages }: PDFWevValueConte
 
       <DataRow label="Verkoopwaarde (bron)" value={formatCurrency(report.wev_verkoopwaarde_autotelex)} />
       <DataRow label="Handelsinkoopwaarde (bron)" value={formatCurrency(report.wev_handelsinkoopwaarde_autotelex)} />
-      <DataRow label="Berekende waarde" value={formatCurrency(report.wev_berekend)} />
+      <DataRow label="Berekende waarde (gemiddeld)" value={formatCurrency(report.wev_berekend)} />
+      {(report.wev_schade_bedrag > 0) && (
+        <DataRow label="Schadebedrag" value={formatCurrency(report.wev_schade_bedrag)} />
+      )}
 
       <View style={{ marginTop: 16, marginBottom: 16, borderTopWidth: 1, borderTopColor: '#000000', paddingTop: 8 }}>
         <DataRow label="Waarde in het Economisch Verkeer" value={formatCurrency(eindwaarde)} bold />

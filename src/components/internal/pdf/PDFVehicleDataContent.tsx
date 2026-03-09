@@ -89,6 +89,8 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2, totalPages = 10 }: PDFV
             <DataRow label="Datum eerste tenaamstelling" value={formatDate(report.rdw_datum_eerste_tenaamstelling)} />
             <DataRow label="Datum laatste tenaamstelling" value={formatDate(report.rdw_datum_laatste_tenaamstelling)} />
             <DataRow label="Kleur" value={report.rdw_kleur || ''} />
+            <DataRow label="Interieur" value={report.interieur_beschrijving || ''} />
+            <DataRow label="Stuur" value={report.stuurpositie ? (report.stuurpositie === 'links' ? 'Links' : 'Rechts') : ''} />
           </View>
 
           <View style={{ marginBottom: 16 }}>

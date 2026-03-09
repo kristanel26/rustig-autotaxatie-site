@@ -768,6 +768,7 @@ export type Database = {
           installation_electrical: string | null
           installation_gas: string | null
           installation_water: string | null
+          interieur_beschrijving: string | null
           interior_dashboard: string | null
           interior_dashboard_notes: string | null
           interior_floor: string | null
@@ -837,6 +838,7 @@ export type Database = {
           stalling: string | null
           starter_battery: boolean | null
           status: string | null
+          stuurpositie: string | null
           tellerstand: number | null
           tellerstand_type: string | null
           tire_advice: string | null
@@ -981,6 +983,7 @@ export type Database = {
           installation_electrical?: string | null
           installation_gas?: string | null
           installation_water?: string | null
+          interieur_beschrijving?: string | null
           interior_dashboard?: string | null
           interior_dashboard_notes?: string | null
           interior_floor?: string | null
@@ -1050,6 +1053,7 @@ export type Database = {
           stalling?: string | null
           starter_battery?: boolean | null
           status?: string | null
+          stuurpositie?: string | null
           tellerstand?: number | null
           tellerstand_type?: string | null
           tire_advice?: string | null
@@ -1194,6 +1198,7 @@ export type Database = {
           installation_electrical?: string | null
           installation_gas?: string | null
           installation_water?: string | null
+          interieur_beschrijving?: string | null
           interior_dashboard?: string | null
           interior_dashboard_notes?: string | null
           interior_floor?: string | null
@@ -1263,6 +1268,7 @@ export type Database = {
           stalling?: string | null
           starter_battery?: boolean | null
           status?: string | null
+          stuurpositie?: string | null
           tellerstand?: number | null
           tellerstand_type?: string | null
           tire_advice?: string | null
