@@ -19,7 +19,7 @@ export function ReportStatusBar({ status, onChange, disabled }: ReportStatusBarP
   return (
     <div className="flex flex-col gap-2">
       <span className="text-sm font-medium text-muted-foreground">Status:</span>
-      <div className="flex flex-col gap-2">
+      <div className="grid grid-cols-2 gap-2">
         {statusOptions.map((opt) => (
           <button
             key={opt.value}
