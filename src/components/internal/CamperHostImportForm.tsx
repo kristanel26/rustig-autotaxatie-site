@@ -27,8 +27,9 @@ export interface CamperHostExtraction {
 }
 
 interface UploadedFile {
+  id: string;
   name: string;
-  type: 'pdf' | 'docx';
+  type: 'pdf' | 'docx' | 'doc';
   url: string;
   size: number;
 }
@@ -66,13 +67,14 @@ export const CamperHostImportForm = ({
     const allowedTypes = [
       'application/pdf',
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'application/msword',
     ];
 
     const validFiles = Array.from(files).filter((f) => {
       if (!allowedTypes.includes(f.type)) {
         toast({
           title: 'Ongeldig bestandstype',
-          description: `${f.name}: Alleen PDF en DOCX bestanden zijn toegestaan.`,
+          description: `${f.name}: Alleen PDF, DOC en DOCX bestanden zijn toegestaan.`,
           variant: 'destructive',
         });
         return false;
@@ -97,19 +99,10 @@ export const CamperHostImportForm = ({
 
       for (const file of validFiles) {
         const fileExt = file.name.split('.').pop()?.toLowerCase();
-        const fileType = fileExt === 'pdf' ? 'pdf' : 'docx';
+        const fileType = fileExt === 'pdf' ? 'pdf' : fileExt === 'doc' ? 'doc' : 'docx';
+        const fileId = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
-        // Check if we already have this type
-        if (uploadedFiles.some((f) => f.type === fileType)) {
-          toast({
-            title: 'Bestand vervangen',
-            description: `Het bestaande ${fileType.toUpperCase()}-bestand wordt vervangen.`,
-          });
-          // Remove old file of same type
-          setUploadedFiles((prev) => prev.filter((f) => f.type !== fileType));
-        }
-
-        const storagePath = `${user.id}/${reportId}/camperhost/${Date.now()}-${fileType}.${fileExt}`;
+        const storagePath = `${user.id}/${reportId}/camperhost/${fileId}.${fileExt}`;
 
         const { error: uploadError } = await supabase.storage
           .from('report-photos')
@@ -122,18 +115,15 @@ export const CamperHostImportForm = ({
           .getPublicUrl(storagePath);
 
         newFiles.push({
+          id: fileId,
           name: file.name,
-          type: fileType as 'pdf' | 'docx',
+          type: fileType as 'pdf' | 'docx' | 'doc',
           url: urlData.publicUrl,
           size: file.size,
         });
       }
 
-      setUploadedFiles((prev) => {
-        // Remove files of same types, add new ones
-        const types = new Set(newFiles.map((f) => f.type));
-        return [...prev.filter((f) => !types.has(f.type)), ...newFiles];
-      });
+      setUploadedFiles((prev) => [...prev, ...newFiles]);
 
       toast({
         title: 'Bestanden geüpload',
@@ -149,7 +139,7 @@ export const CamperHostImportForm = ({
     } finally {
       setIsUploading(false);
     }
-  }, [reportId, user?.id, uploadedFiles, toast]);
+  }, [reportId, user?.id, toast]);
 
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
@@ -165,13 +155,15 @@ export const CamperHostImportForm = ({
     e.stopPropagation();
   }, []);
 
-  const handleRemoveFile = (type: 'pdf' | 'docx') => {
-    setUploadedFiles((prev) => prev.filter((f) => f.type !== type));
-    // Clear extraction if no files left
-    if (uploadedFiles.length <= 1) {
-      setExtraction(null);
-      setImportedSections(new Set());
-    }
+  const handleRemoveFile = (fileId: string) => {
+    setUploadedFiles((prev) => {
+      const next = prev.filter((f) => f.id !== fileId);
+      if (next.length === 0) {
+        setExtraction(null);
+        setImportedSections(new Set());
+      }
+      return next;
+    });
   };
 
   const handleExtract = async () => {
@@ -275,7 +267,7 @@ export const CamperHostImportForm = ({
           <input
             ref={fileInputRef}
             type="file"
-            accept=".pdf,.docx"
+            accept=".pdf,.docx,.doc"
             multiple
             onChange={(e) => {
               handleFileSelect(e.target.files);
@@ -307,7 +299,7 @@ export const CamperHostImportForm = ({
           <div className="space-y-2">
             {uploadedFiles.map((file) => (
               <div
-                key={file.type}
+                key={file.id}
                 className="flex items-center justify-between p-3 bg-muted/50 rounded-lg"
               >
                 <div className="flex items-center gap-3 min-w-0 flex-1">
@@ -333,7 +325,7 @@ export const CamperHostImportForm = ({
                   type="button"
                   variant="ghost"
                   size="icon"
-                  onClick={() => handleRemoveFile(file.type)}
+                  onClick={() => handleRemoveFile(file.id)}
                   className="shrink-0 text-destructive hover:text-destructive"
                 >
                   <Trash2 className="h-4 w-4" />
