@@ -201,7 +201,7 @@ const CustomerDetail = () => {
             </div>
           </div>
           <div className="flex gap-2">
-            <Button variant="outline" size="sm" onClick={() => navigate('/intern/klanten', { state: { editId: customer.id } })}>
+            <Button variant="outline" size="sm" onClick={() => navigate('/intern/klanten', { state: { editId: customer.id } })} className="text-white">
               <Pencil className="h-4 w-4 mr-1" /> Bewerken
             </Button>
             <Button size="sm" onClick={() => setTypeDialogOpen(true)}>
