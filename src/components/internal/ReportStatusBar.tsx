@@ -62,7 +62,7 @@ export function ReportStatusBar({ status, onChange, disabled }: ReportStatusBarP
 export function getStatusBadgeProps(status: string | null) {
   switch (status) {
     case 'in_behandeling':
-      return { label: 'In behandeling', className: 'bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/20' };
+      return { label: 'In behandeling', className: 'bg-[#c9a84c] text-white border-[#c9a84c]' };
     case 'gereed':
       return { label: 'Gereed', className: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border-emerald-500/20' };
     case 'verzonden':
