@@ -68,6 +68,7 @@ interface Report {
   constructievorm: string | null;
   gebruik: string | null;
   stalling: string | null;
+  stalling_toelichting: string | null;
   staat_bij_opname: string | null;
 }
 
