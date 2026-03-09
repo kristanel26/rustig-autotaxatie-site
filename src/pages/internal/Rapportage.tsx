@@ -217,7 +217,7 @@ export default function Rapportage() {
             </Label>
           </div>
         </div>
-        <Button variant="outline" onClick={handleExport} className="gap-2">
+        <Button variant="outline" onClick={handleExport} className="gap-2 text-white">
           <Download className="w-4 h-4" />
           Exporteer naar Excel
         </Button>
@@ -275,11 +275,11 @@ export default function Rapportage() {
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>Maand</TableHead>
-                        <TableHead className="text-right">KLS</TableHead>
-                        <TableHead className="text-right">CAM</TableHead>
-                        <TableHead className="text-right">WEV</TableHead>
-                        <TableHead className="text-right font-semibold">Totaal</TableHead>
+                        <TableHead className="text-white font-bold">Maand</TableHead>
+                        <TableHead className="text-right text-white font-bold">KLS</TableHead>
+                        <TableHead className="text-right text-white font-bold">CAM</TableHead>
+                        <TableHead className="text-right text-white font-bold">WEV</TableHead>
+                        <TableHead className="text-right text-white font-bold">Totaal</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -289,20 +289,20 @@ export default function Rapportage() {
                           className="cursor-pointer hover:bg-muted/50"
                           onClick={() => handleMonthClick(row.key)}
                         >
-                          <TableCell className="font-medium">{row.month}</TableCell>
-                          <TableCell className="text-right">{row.klassieker || '–'}</TableCell>
-                          <TableCell className="text-right">{row.camper || '–'}</TableCell>
-                          <TableCell className="text-right">{row.wev || '–'}</TableCell>
-                          <TableCell className="text-right font-semibold">{row.totaal || '–'}</TableCell>
+                          <TableCell className="font-medium text-white">{row.month}</TableCell>
+                          <TableCell className="text-right text-white">{row.klassieker || <span className="text-[#9CA3AF]">–</span>}</TableCell>
+                          <TableCell className="text-right text-white">{row.camper || <span className="text-[#9CA3AF]">–</span>}</TableCell>
+                          <TableCell className="text-right text-white">{row.wev || <span className="text-[#9CA3AF]">–</span>}</TableCell>
+                          <TableCell className="text-right font-semibold text-white">{row.totaal || <span className="text-[#9CA3AF]">–</span>}</TableCell>
                         </TableRow>
                       ))}
                       {/* Totaal row */}
                       <TableRow className="border-t-2 border-primary/20 font-bold">
-                        <TableCell>Totaal {selectedYear}</TableCell>
-                        <TableCell className="text-right">{monthlyTable.reduce((s, r) => s + r.klassieker, 0)}</TableCell>
-                        <TableCell className="text-right">{monthlyTable.reduce((s, r) => s + r.camper, 0)}</TableCell>
-                        <TableCell className="text-right">{monthlyTable.reduce((s, r) => s + r.wev, 0)}</TableCell>
-                        <TableCell className="text-right">{monthlyTable.reduce((s, r) => s + r.totaal, 0)}</TableCell>
+                        <TableCell className="text-white">Totaal {selectedYear}</TableCell>
+                        <TableCell className="text-right text-white">{monthlyTable.reduce((s, r) => s + r.klassieker, 0)}</TableCell>
+                        <TableCell className="text-right text-white">{monthlyTable.reduce((s, r) => s + r.camper, 0)}</TableCell>
+                        <TableCell className="text-right text-white">{monthlyTable.reduce((s, r) => s + r.wev, 0)}</TableCell>
+                        <TableCell className="text-right text-white">{monthlyTable.reduce((s, r) => s + r.totaal, 0)}</TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
@@ -318,24 +318,24 @@ export default function Rapportage() {
                   ) : (
                     <Table>
                       <TableHeader>
-                        <TableRow>
-                          <TableHead>Gebruiker</TableHead>
-                          <TableHead>Maand</TableHead>
-                          <TableHead className="text-right">KLS</TableHead>
-                          <TableHead className="text-right">CAM</TableHead>
-                          <TableHead className="text-right">WEV</TableHead>
-                          <TableHead className="text-right font-semibold">Totaal</TableHead>
+                      <TableRow>
+                          <TableHead className="text-white font-bold">Gebruiker</TableHead>
+                          <TableHead className="text-white font-bold">Maand</TableHead>
+                          <TableHead className="text-right text-white font-bold">KLS</TableHead>
+                          <TableHead className="text-right text-white font-bold">CAM</TableHead>
+                          <TableHead className="text-right text-white font-bold">WEV</TableHead>
+                          <TableHead className="text-right text-white font-bold">Totaal</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
                         {userOverview.map((row, i) => (
                           <TableRow key={`${row.userId}-${row.month}-${i}`}>
-                            <TableCell className="text-sm">{row.email}</TableCell>
-                            <TableCell>{row.monthLabel}</TableCell>
-                            <TableCell className="text-right">{row.klassieker || '–'}</TableCell>
-                            <TableCell className="text-right">{row.camper || '–'}</TableCell>
-                            <TableCell className="text-right">{row.wev || '–'}</TableCell>
-                            <TableCell className="text-right font-semibold">{row.totaal}</TableCell>
+                            <TableCell className="text-sm text-white">{row.email}</TableCell>
+                            <TableCell className="text-white">{row.monthLabel}</TableCell>
+                            <TableCell className="text-right text-white">{row.klassieker || <span className="text-[#9CA3AF]">–</span>}</TableCell>
+                            <TableCell className="text-right text-white">{row.camper || <span className="text-[#9CA3AF]">–</span>}</TableCell>
+                            <TableCell className="text-right text-white">{row.wev || <span className="text-[#9CA3AF]">–</span>}</TableCell>
+                            <TableCell className="text-right font-semibold text-white">{row.totaal}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>

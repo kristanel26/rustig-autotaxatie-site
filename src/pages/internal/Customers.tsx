@@ -315,25 +315,25 @@ const Customers = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Naam</TableHead>
-                    <TableHead className="hidden sm:table-cell">Bedrijf</TableHead>
-                    <TableHead className="hidden md:table-cell">Plaats</TableHead>
-                    <TableHead className="hidden lg:table-cell">E-mail</TableHead>
-                    <TableHead className="hidden lg:table-cell">Telefoon</TableHead>
-                    <TableHead className="w-[60px]">Type</TableHead>
+                    <TableHead className="text-white font-bold">Naam</TableHead>
+                    <TableHead className="hidden sm:table-cell text-white font-bold">Bedrijf</TableHead>
+                    <TableHead className="hidden md:table-cell text-white font-bold">Plaats</TableHead>
+                    <TableHead className="hidden lg:table-cell text-white font-bold">E-mail</TableHead>
+                    <TableHead className="hidden lg:table-cell text-white font-bold">Telefoon</TableHead>
+                    <TableHead className="w-[60px] text-white font-bold">Type</TableHead>
                     <TableHead className="w-[80px]"></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filtered.map((c) => (
                     <TableRow key={c.id} className="cursor-pointer" onClick={() => navigate(`/intern/klanten/${c.id}`)}>
-                      <TableCell className="font-medium">{displayName(c)}</TableCell>
-                      <TableCell className="hidden sm:table-cell text-sm">
-                        {c.company_name || '-'}
+                      <TableCell className="font-medium text-white">{displayName(c)}</TableCell>
+                      <TableCell className="hidden sm:table-cell text-sm text-white">
+                        {c.company_name || <span className="text-[#9CA3AF]">-</span>}
                       </TableCell>
-                      <TableCell className="hidden md:table-cell text-sm">{c.city || '-'}</TableCell>
-                      <TableCell className="hidden lg:table-cell text-sm">{c.email || '-'}</TableCell>
-                      <TableCell className="hidden lg:table-cell text-sm font-mono">{c.phone || '-'}</TableCell>
+                      <TableCell className="hidden md:table-cell text-sm text-white">{c.city || <span className="text-[#9CA3AF]">-</span>}</TableCell>
+                      <TableCell className="hidden lg:table-cell text-sm text-[#c9a84c]">{c.email || <span className="text-[#9CA3AF]">-</span>}</TableCell>
+                      <TableCell className="hidden lg:table-cell text-sm font-mono text-white">{c.phone || <span className="text-[#9CA3AF]">-</span>}</TableCell>
                       <TableCell>
                         {c.customer_type === 'zakelijk' ? (
                           <Badge variant="outline" className="text-xs gap-1">

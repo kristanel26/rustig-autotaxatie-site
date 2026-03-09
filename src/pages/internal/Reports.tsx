@@ -136,7 +136,8 @@ const Reports = () => {
     return new Date(dateString).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' });
   };
 
-  const colSpan = isAdmin ? 9 : 8;
+  const hasAnyAssigned = filteredReports.some(r => r.assigned_to);
+  const colSpan = isAdmin ? (hasAnyAssigned ? 9 : 8) : (hasAnyAssigned ? 8 : 7);
 
   return (
     <InternalLayout title="Rapporten">
@@ -185,14 +186,14 @@ const Reports = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[120px]">Rapportnr.</TableHead>
-                <TableHead className="w-[60px]">Type</TableHead>
-                <TableHead className="w-[100px]">Kenteken</TableHead>
-                <TableHead>Voertuig</TableHead>
-                <TableHead>Klant</TableHead>
-                <TableHead className="w-[130px]">Status</TableHead>
-                <TableHead className="w-[100px]">Toegewezen</TableHead>
-                <TableHead className="w-[140px]">Inspectiedatum</TableHead>
+                <TableHead className="w-[120px] text-white font-bold">Rapportnr.</TableHead>
+                <TableHead className="w-[60px] text-white font-bold">Type</TableHead>
+                <TableHead className="w-[100px] text-white font-bold">Kenteken</TableHead>
+                <TableHead className="text-white font-bold">Voertuig</TableHead>
+                <TableHead className="text-white font-bold">Klant</TableHead>
+                <TableHead className="w-[130px] text-white font-bold">Status</TableHead>
+                {hasAnyAssigned && <TableHead className="w-[100px] text-white font-bold">Toegewezen</TableHead>}
+                <TableHead className="w-[140px] text-white font-bold">Inspectiedatum</TableHead>
                 {isAdmin && <TableHead className="w-[60px]"></TableHead>}
               </TableRow>
             </TableHeader>
@@ -216,29 +217,31 @@ const Reports = () => {
                   const appraiser = getAppraiserById(report.assigned_to);
                   return (
                     <TableRow key={report.id} className="cursor-pointer hover:bg-muted/50" onClick={() => navigate(`/intern/rapport/${report.id}`)}>
-                      <TableCell className="font-medium font-mono text-xs">{report.report_number}</TableCell>
+                      <TableCell className="font-medium font-mono text-xs text-[#c9a84c]">{report.report_number}</TableCell>
                       <TableCell>
                         <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
                           {TYPE_LABELS[report.report_type || ''] || (report.report_type?.toUpperCase() || '-')}
                         </Badge>
                       </TableCell>
-                      <TableCell className="font-mono text-xs">{formatLicensePlate(report.license_plate)}</TableCell>
-                      <TableCell className="text-sm truncate max-w-[200px]">{getVehicleDisplay(report)}</TableCell>
-                      <TableCell className="text-sm truncate max-w-[200px]">{getCustomerDisplay(report)}</TableCell>
+                      <TableCell className="font-mono text-xs text-white">{formatLicensePlate(report.license_plate)}</TableCell>
+                      <TableCell className="text-sm truncate max-w-[200px] text-white">{getVehicleDisplay(report)}</TableCell>
+                      <TableCell className="text-sm truncate max-w-[200px] text-white">{getCustomerDisplay(report)}</TableCell>
                       <TableCell>
                         {(() => { const s = getStatusBadgeProps(report.status); return <Badge variant="outline" className={`text-xs ${s.className}`}>{s.label}</Badge>; })()}
                       </TableCell>
-                      <TableCell>
-                        {appraiser ? (
-                          <div className="flex items-center gap-1.5">
-                            <Avatar className="h-5 w-5">
-                              <AvatarFallback className="text-[9px] font-semibold bg-primary/20 text-primary">{appraiser.initials}</AvatarFallback>
-                            </Avatar>
-                            <span className="text-xs text-muted-foreground">{appraiser.displayName}</span>
-                          </div>
-                        ) : <span className="text-xs text-muted-foreground">—</span>}
-                      </TableCell>
-                      <TableCell className="text-xs">{formatDate(report.inspection_date)}</TableCell>
+                      {hasAnyAssigned && (
+                        <TableCell>
+                          {appraiser ? (
+                            <div className="flex items-center gap-1.5">
+                              <Avatar className="h-5 w-5">
+                                <AvatarFallback className="text-[9px] font-semibold bg-primary/20 text-primary">{appraiser.initials}</AvatarFallback>
+                              </Avatar>
+                              <span className="text-xs text-[#9CA3AF]">{appraiser.displayName}</span>
+                            </div>
+                          ) : <span className="text-xs text-[#9CA3AF]">—</span>}
+                        </TableCell>
+                      )}
+                      <TableCell className="text-xs text-[#9CA3AF]">{formatDate(report.inspection_date)}</TableCell>
                       {isAdmin && (
                         <TableCell onClick={(e) => e.stopPropagation()}>
                           <button

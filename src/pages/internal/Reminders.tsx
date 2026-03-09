@@ -305,15 +305,15 @@ const Reminders = () => {
 
           {/* Actions */}
           <div className="flex gap-2">
-            <Button variant="outline" onClick={fetchReports} disabled={loading}>
+            <Button variant="outline" onClick={fetchReports} disabled={loading} className="text-white">
               <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
               Vernieuwen
             </Button>
-            <Button variant="outline" onClick={exportToCSV} disabled={filteredReports.length === 0}>
+            <Button variant="outline" onClick={exportToCSV} disabled={filteredReports.length === 0} className="text-white">
               <Download className="h-4 w-4 mr-2" />
               CSV Export
             </Button>
-            <Button onClick={runReminders} disabled={processing}>
+            <Button onClick={runReminders} disabled={processing} className="text-white">
               <Play className={`h-4 w-4 mr-2 ${processing ? 'animate-pulse' : ''}`} />
               Verwerk nu
             </Button>
@@ -325,15 +325,15 @@ const Reminders = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">Rapportnr.</TableHead>
-                <TableHead>Klant</TableHead>
-                <TableHead>Voertuig</TableHead>
-                <TableHead className="w-[100px]">Inspectie</TableHead>
-                <TableHead className="w-[100px]">Geldig tot</TableHead>
-                <TableHead className="w-[100px]">Status</TableHead>
-                <TableHead className="w-[100px]">Verzonden</TableHead>
-                <TableHead>Verzonden aan</TableHead>
-                <TableHead>Fout</TableHead>
+                <TableHead className="w-[100px] text-white font-bold">Rapportnr.</TableHead>
+                <TableHead className="text-white font-bold">Klant</TableHead>
+                <TableHead className="text-white font-bold">Voertuig</TableHead>
+                <TableHead className="w-[100px] text-white font-bold">Inspectie</TableHead>
+                <TableHead className="w-[100px] text-white font-bold">Geldig tot</TableHead>
+                <TableHead className="w-[100px] text-white font-bold">Status</TableHead>
+                <TableHead className="w-[100px] text-white font-bold">Verzonden</TableHead>
+                <TableHead className="text-white font-bold">Verzonden aan</TableHead>
+                <TableHead className="text-white font-bold">Fout</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -358,15 +358,15 @@ const Reminders = () => {
                     className="cursor-pointer hover:bg-muted/50"
                     onClick={() => navigate(`/intern/rapport/${report.id}`)}
                   >
-                    <TableCell className="font-medium">{report.report_number}</TableCell>
-                    <TableCell>
+                    <TableCell className="font-medium text-[#c9a84c]">{report.report_number}</TableCell>
+                    <TableCell className="text-white">
                       {[report.customer_title, report.customer_initials, report.customer_last_name]
                         .filter(Boolean)
-                        .join(' ') || '-'}
+                        .join(' ') || <span className="text-[#9CA3AF]">-</span>}
                     </TableCell>
                     <TableCell>
                       <div className="flex flex-col">
-                        <span>
+                        <span className="text-white">
                           {[
                             report.rdw_merk || report.vehicle_brand,
                             report.rdw_handelsbenaming || report.model_display_name,
@@ -375,19 +375,19 @@ const Reminders = () => {
                             .join(' ') || '-'}
                         </span>
                         {report.license_plate && (
-                          <span className="text-xs text-muted-foreground">
+                          <span className="text-xs text-[#9CA3AF]">
                             {report.license_plate}
                           </span>
                         )}
                       </div>
                     </TableCell>
-                    <TableCell>{formatDate(report.inspection_date)}</TableCell>
-                    <TableCell>{calculateValidUntil(report.inspection_date)}</TableCell>
+                    <TableCell className="text-[#9CA3AF]">{formatDate(report.inspection_date)}</TableCell>
+                    <TableCell className="text-[#9CA3AF]">{calculateValidUntil(report.inspection_date)}</TableCell>
                     <TableCell>{getStatusBadge(report.herinnering_status)}</TableCell>
-                    <TableCell>{formatDate(report.herinnering_verzonden_op)}</TableCell>
-                    <TableCell className="text-xs">{report.herinnering_verzonden_aan_email || '-'}</TableCell>
+                    <TableCell className="text-[#9CA3AF]">{formatDate(report.herinnering_verzonden_op)}</TableCell>
+                    <TableCell className="text-xs text-[#9CA3AF]">{report.herinnering_verzonden_aan_email || '-'}</TableCell>
                     <TableCell className="text-xs text-destructive max-w-[150px] truncate">
-                      {report.herinnering_laatste_fout || '-'}
+                      {report.herinnering_laatste_fout || <span className="text-[#9CA3AF]">-</span>}
                     </TableCell>
                   </TableRow>
                 ))

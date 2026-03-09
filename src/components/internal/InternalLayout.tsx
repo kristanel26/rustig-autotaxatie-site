@@ -85,8 +85,8 @@ const InternalLayout: React.FC<InternalLayoutProps> = ({ children, title }) => {
                 className={cn(
                   "flex items-center gap-[7px] px-[14px] py-[7px] rounded-md text-[13px] font-medium transition-all duration-150 no-underline",
                   active
-                    ? "text-white"
-                    : "text-[hsl(var(--s400))] hover:text-white hover:bg-[hsl(var(--s800))]"
+                    ? "text-[#c9a84c]"
+                    : "text-white/80 hover:text-white hover:bg-[hsl(var(--s800))]"
                 )}
               >
                 <Icon className="w-3.5 h-3.5 flex-shrink-0" />
@@ -136,8 +136,8 @@ const InternalLayout: React.FC<InternalLayoutProps> = ({ children, title }) => {
                 className={cn(
                   "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors no-underline",
                   active
-                    ? "text-white bg-[hsl(var(--s800))]"
-                    : "text-[hsl(var(--s400))] hover:text-white hover:bg-[hsl(var(--s800))]"
+                    ? "text-[#c9a84c] bg-[hsl(var(--s800))]"
+                    : "text-white/80 hover:text-white hover:bg-[hsl(var(--s800))]"
                 )}
               >
                 <Icon className="h-4 w-4" />
@@ -169,7 +169,7 @@ const InternalLayout: React.FC<InternalLayoutProps> = ({ children, title }) => {
       {/* ── MAIN CONTENT ── */}
       <main className="max-w-[1180px] mx-auto px-8 py-8">
         {title && (
-          <h1 className="font-display text-[2rem] text-white font-normal mb-1.5 tracking-normal">
+          <h1 className="font-display text-[2rem] text-[#c9a84c] font-normal mb-1.5 tracking-normal">
             {title}
           </h1>
         )}
