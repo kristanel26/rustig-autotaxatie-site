@@ -61,10 +61,10 @@ const PDFAppraisalFindingsContent = ({ report, pageNumber = 3, totalPages = 10 }
   const TireRow = ({ position, brand, model, profiel, dot }: { position: string; brand: string | null; model: string | null; profiel: string | null; dot: string | null }) => (
     <View style={{ flexDirection: 'row', paddingVertical: 3, borderBottomWidth: 1, borderBottomColor: '#e2e8f0' }}>
       <Text style={{ width: '22%', color: '#000000', fontSize: 8 }}>{position}</Text>
-      <Text style={{ width: '22%', color: '#000000', fontSize: 8 }}>{brand || '-'}</Text>
-      <Text style={{ width: '22%', color: '#000000', fontSize: 8 }}>{model || '-'}</Text>
-      <Text style={{ width: '17%', color: '#000000', fontSize: 8 }}>{profiel ? `${profiel} mm` : '-'}</Text>
-      <Text style={{ width: '17%', color: '#000000', fontSize: 8 }}>{dot || '-'}</Text>
+      <Text style={{ width: '22%', color: '#000000', fontSize: 8 }}>{brand || 'N.b.'}</Text>
+      <Text style={{ width: '22%', color: '#000000', fontSize: 8 }}>{model || 'N.b.'}</Text>
+      <Text style={{ width: '17%', color: '#000000', fontSize: 8 }}>{profiel ? `${profiel} mm` : 'N.b.'}</Text>
+      <Text style={{ width: '17%', color: '#000000', fontSize: 8 }}>{dot || 'N.b.'}</Text>
     </View>
   );
 

@@ -137,6 +137,8 @@ export const getInitialVehicleFormData = (): VehicleFormData => ({
   gebruik: '',
   stalling: '',
   staat_bij_opname: '',
+  interieur_beschrijving: '',
+  stuurpositie: '',
   rdw_data_locked: false,
 });
 
