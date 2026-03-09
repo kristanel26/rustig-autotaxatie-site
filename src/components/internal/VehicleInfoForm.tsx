@@ -17,6 +17,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { AIExtractButton } from './AIExtractButton';
 import { ColorCombobox } from './ColorCombobox';
+import { InteriorCombobox } from './InteriorCombobox';
 import { FieldSuggestion } from './FieldSuggestion';
 import type { PhotoTypes } from './PhotoUploadForm';
 import type { PhotoType, ReportType } from './photoTypes';
