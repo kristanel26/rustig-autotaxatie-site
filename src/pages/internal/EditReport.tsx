@@ -1783,6 +1783,34 @@ const EditReport = () => {
                   />
                 </div>
 
+                {/* WEV: Voertuig toggles */}
+                {report.report_type === 'wev' && (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Voertuigkenmerken</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      {[
+                        { key: 'is_nieuwe_auto' as const, label: 'Is Nieuwe Auto' },
+                        { key: 'is_grijs_kenteken' as const, label: 'Is Grijs Kenteken' },
+                        { key: 'is_geel_kenteken' as const, label: 'Is Geel Kenteken' },
+                      ].map(({ key, label }) => (
+                        <div key={key} className="flex items-center justify-between">
+                          <Label htmlFor={key}>{label}</Label>
+                          <Switch
+                            id={key}
+                            checked={wevToggles[key]}
+                            onCheckedChange={(checked) => {
+                              setWevToggles(p => ({ ...p, [key]: checked }));
+                              saveField(key, checked);
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </CardContent>
+                  </Card>
+                )}
+
                 {/* WEV/KLS: Model + Banden via AppraisalFindingsForm */}
                 {report.report_type === 'wev' && (
                   <AppraisalFindingsForm
