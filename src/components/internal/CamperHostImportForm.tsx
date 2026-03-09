@@ -67,6 +67,7 @@ export const CamperHostImportForm = ({
     const allowedTypes = [
       'application/pdf',
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'application/msword',
     ];
 
     const validFiles = Array.from(files).filter((f) => {
