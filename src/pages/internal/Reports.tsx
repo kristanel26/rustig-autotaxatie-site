@@ -50,6 +50,7 @@ const Reports = () => {
   const [statusFilter, setStatusFilter] = useState<string>(searchParams.get('status') || 'all');
   const [typeFilter, setTypeFilter] = useState<string>('all');
   const navigate = useNavigate();
+  const { getAppraiserById } = useAppraisers();
 
   useEffect(() => {
     const fetchReports = async () => {
