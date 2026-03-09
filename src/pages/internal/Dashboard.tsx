@@ -113,7 +113,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetch = async () => {
       const { data, error } = await supabase.from('reports')
-        .select('id, report_number, license_plate, rdw_merk, rdw_handelsbenaming, vehicle_brand, vehicle_model, updated_at, report_type, status')
+        .select('id, report_number, license_plate, rdw_merk, rdw_handelsbenaming, vehicle_brand, vehicle_model, updated_at, report_type, status, assigned_to')
         .in('status', ['concept', 'in_behandeling', 'gereed', 'verzonden'])
         .order('updated_at', { ascending: false });
 
