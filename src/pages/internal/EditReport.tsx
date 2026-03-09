@@ -1486,12 +1486,12 @@ const EditReport = () => {
 
             {/* ============ TAB NAVIGATION ============ */}
             <Tabs defaultValue="algemeen" className="w-full">
-              <TabsList className="w-full justify-start bg-transparent border-b border-border rounded-none h-auto p-0 gap-0">
+              <TabsList className="w-full justify-start bg-transparent border-none rounded-none h-auto p-0 gap-2">
                 {['Algemeen', 'Voertuig', 'Staat', "Foto's", 'Waarde'].map((tab) => (
                   <TabsTrigger
                     key={tab}
                     value={tab.toLowerCase().replace("'", '')}
-                    className="rounded-none border-b-2 border-transparent data-[state=active]:border-[#C9A84C] data-[state=active]:text-white data-[state=active]:shadow-none text-muted-foreground px-4 py-2.5 font-medium"
+                    className="rounded-[6px] border border-[rgba(201,168,76,0.3)] bg-transparent text-[#7a7870] px-[18px] py-[6px] font-normal shadow-none data-[state=active]:bg-[#C9A84C] data-[state=active]:border-[#C9A84C] data-[state=active]:text-[#0e0e0f] data-[state=active]:font-medium data-[state=active]:shadow-none"
                   >
                     {tab}
                   </TabsTrigger>
