@@ -325,15 +325,15 @@ const Reminders = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[100px]">Rapportnr.</TableHead>
-                <TableHead>Klant</TableHead>
-                <TableHead>Voertuig</TableHead>
-                <TableHead className="w-[100px]">Inspectie</TableHead>
-                <TableHead className="w-[100px]">Geldig tot</TableHead>
-                <TableHead className="w-[100px]">Status</TableHead>
-                <TableHead className="w-[100px]">Verzonden</TableHead>
-                <TableHead>Verzonden aan</TableHead>
-                <TableHead>Fout</TableHead>
+                <TableHead className="w-[100px] text-white font-bold">Rapportnr.</TableHead>
+                <TableHead className="text-white font-bold">Klant</TableHead>
+                <TableHead className="text-white font-bold">Voertuig</TableHead>
+                <TableHead className="w-[100px] text-white font-bold">Inspectie</TableHead>
+                <TableHead className="w-[100px] text-white font-bold">Geldig tot</TableHead>
+                <TableHead className="w-[100px] text-white font-bold">Status</TableHead>
+                <TableHead className="w-[100px] text-white font-bold">Verzonden</TableHead>
+                <TableHead className="text-white font-bold">Verzonden aan</TableHead>
+                <TableHead className="text-white font-bold">Fout</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
