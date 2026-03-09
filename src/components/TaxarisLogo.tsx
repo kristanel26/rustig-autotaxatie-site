@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
-import logoFull from '@/assets/taxaris-logo-full.svg';
-import logoIcon from '@/assets/taxaris-logo-icon.svg';
-import logoWhite from '@/assets/taxaris-logo-white.svg';
+import logoFull from '@/assets/taxaris-logo-full-white.png';
+import logoIcon from '@/assets/taxaris-logo-icon-white.png';
 
 interface TaxarisLogoProps {
   variant?: 'full' | 'icon' | 'white';
@@ -15,12 +14,6 @@ const sizeMap = {
   md: 40,
   lg: 56,
   xl: 80,
-} as const;
-
-const variantSrc = {
-  full: logoFull,
-  icon: logoIcon,
-  white: logoWhite,
 } as const;
 
 const TaxarisLogo: React.FC<TaxarisLogoProps> = ({
@@ -37,7 +30,7 @@ const TaxarisLogo: React.FC<TaxarisLogoProps> = ({
         className={cn('font-bold', className)}
         style={{
           fontSize: height * 0.4,
-          color: variant === 'white' ? '#FFFFFF' : '#1A1A1A',
+          color: '#FFFFFF',
         }}
       >
         Taxaris
@@ -45,9 +38,11 @@ const TaxarisLogo: React.FC<TaxarisLogoProps> = ({
     );
   }
 
+  const src = variant === 'icon' ? logoIcon : logoFull;
+
   return (
     <img
-      src={variantSrc[variant]}
+      src={src}
       alt="Taxaris — Automobiel Taxatiesoftware"
       height={height}
       style={{ height, width: 'auto' }}
