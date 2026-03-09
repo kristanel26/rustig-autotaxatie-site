@@ -1487,7 +1487,7 @@ const EditReport = () => {
             {/* ============ TAB NAVIGATION ============ */}
             <Tabs defaultValue="algemeen" className="w-full">
               <TabsList className="w-full justify-start bg-transparent border-none rounded-none h-auto p-0 gap-2">
-                {['Algemeen', 'Voertuig', 'Staat', "Foto's", 'Waarde'].map((tab) => (
+                {['Algemeen', "Foto's", 'Voertuig', 'Staat', 'Waarde'].map((tab) => (
                   <TabsTrigger
                     key={tab}
                     value={tab.toLowerCase().replace("'", '')}
