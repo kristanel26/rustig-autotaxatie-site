@@ -99,19 +99,10 @@ export const CamperHostImportForm = ({
 
       for (const file of validFiles) {
         const fileExt = file.name.split('.').pop()?.toLowerCase();
-        const fileType = fileExt === 'pdf' ? 'pdf' : 'docx';
+        const fileType = fileExt === 'pdf' ? 'pdf' : fileExt === 'doc' ? 'doc' : 'docx';
+        const fileId = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
-        // Check if we already have this type
-        if (uploadedFiles.some((f) => f.type === fileType)) {
-          toast({
-            title: 'Bestand vervangen',
-            description: `Het bestaande ${fileType.toUpperCase()}-bestand wordt vervangen.`,
-          });
-          // Remove old file of same type
-          setUploadedFiles((prev) => prev.filter((f) => f.type !== fileType));
-        }
-
-        const storagePath = `${user.id}/${reportId}/camperhost/${Date.now()}-${fileType}.${fileExt}`;
+        const storagePath = `${user.id}/${reportId}/camperhost/${fileId}.${fileExt}`;
 
         const { error: uploadError } = await supabase.storage
           .from('report-photos')
@@ -124,8 +115,9 @@ export const CamperHostImportForm = ({
           .getPublicUrl(storagePath);
 
         newFiles.push({
+          id: fileId,
           name: file.name,
-          type: fileType as 'pdf' | 'docx',
+          type: fileType as 'pdf' | 'docx' | 'doc',
           url: urlData.publicUrl,
           size: file.size,
         });
