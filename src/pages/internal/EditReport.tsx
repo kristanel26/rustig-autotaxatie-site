@@ -288,6 +288,10 @@ const EditReport = () => {
         customer_phone: c.phone || '',
       };
       setCustomerData(newData);
+      // Default inspection location to customer city if not yet set
+      if (!inspectionData.inspection_location && c.city) {
+        setInspectionData(p => ({ ...p, inspection_location: capitalizeFirst(c.city!) }));
+      }
       saveMultipleFields({
         customer_id: c.id,
         opdrachtgever: c.company_name || null,
@@ -468,7 +472,7 @@ const EditReport = () => {
 
         // Pre-fill inspection data
         setInspectionData({
-          inspection_location: reportData.inspection_location || '',
+          inspection_location: reportData.inspection_location || reportData.customer_city || '',
           inspection_date: reportData.inspection_date || '',
           inspection_start_time: reportData.inspection_start_time?.slice(0, 5) || '',
           inspection_end_time: reportData.inspection_end_time?.slice(0, 5) || '',
@@ -1523,6 +1527,10 @@ const EditReport = () => {
                             customer_phone: c.phone || '',
                           };
                           setCustomerData(newData);
+                          // Default inspection location to customer city if not yet set
+                          if (!inspectionData.inspection_location && c.city) {
+                            setInspectionData(p => ({ ...p, inspection_location: capitalizeFirst(c.city!) }));
+                          }
                           saveMultipleFields({
                             customer_id: c.id,
                             opdrachtgever: c.company_name || null,
