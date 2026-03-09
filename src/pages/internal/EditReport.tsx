@@ -1488,7 +1488,7 @@ const EditReport = () => {
               <CardHeader>
                 <CardTitle className="text-lg">Klantgegevens</CardTitle>
               </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Customer search / link */}
             <div className="md:col-span-2">
               <Label className="text-xs text-muted-foreground mb-1.5 block">Bestaande klant koppelen</Label>
