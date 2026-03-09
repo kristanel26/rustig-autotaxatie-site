@@ -494,6 +494,13 @@ const EditReport = () => {
           general_remarks: reportData.general_remarks || '',
         });
 
+        // Pre-fill WEV toggles
+        setWevToggles({
+          is_nieuwe_auto: (reportData as any).is_nieuwe_auto ?? false,
+          is_grijs_kenteken: (reportData as any).is_grijs_kenteken ?? false,
+          is_geel_kenteken: (reportData as any).is_geel_kenteken ?? true,
+        });
+
         // Pre-fill appraisal findings data
         setAppraisalData({
           model_display_name: (reportData as any).model_display_name || '',
