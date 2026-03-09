@@ -318,13 +318,13 @@ export default function Rapportage() {
                   ) : (
                     <Table>
                       <TableHeader>
-                        <TableRow>
-                          <TableHead>Gebruiker</TableHead>
-                          <TableHead>Maand</TableHead>
-                          <TableHead className="text-right">KLS</TableHead>
-                          <TableHead className="text-right">CAM</TableHead>
-                          <TableHead className="text-right">WEV</TableHead>
-                          <TableHead className="text-right font-semibold">Totaal</TableHead>
+                      <TableRow>
+                          <TableHead className="text-white font-bold">Gebruiker</TableHead>
+                          <TableHead className="text-white font-bold">Maand</TableHead>
+                          <TableHead className="text-right text-white font-bold">KLS</TableHead>
+                          <TableHead className="text-right text-white font-bold">CAM</TableHead>
+                          <TableHead className="text-right text-white font-bold">WEV</TableHead>
+                          <TableHead className="text-right text-white font-bold">Totaal</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
