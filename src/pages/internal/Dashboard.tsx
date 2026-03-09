@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import InternalLayout from '@/components/internal/InternalLayout';
 import { supabase } from '@/integrations/supabase/client';
@@ -16,6 +16,18 @@ import {
 } from '@/components/ui/select';
 import { FileText, Search, User, Loader2, Car, Truck, Scale } from 'lucide-react';
 import { useAppraisers } from '@/hooks/useAppraisers';
+import {
+  DndContext,
+  DragOverlay,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  useDroppable,
+  DragStartEvent,
+  DragEndEvent,
+} from '@dnd-kit/core';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 type ReportType = 'klassieker' | 'camper' | 'wev';
 
@@ -53,18 +65,151 @@ const REPORT_TYPES: { type: ReportType; label: string; sub: string; icon: typeof
   { type: 'wev', label: 'WEV', sub: 'Waarde Economisch Verkeer', icon: Scale },
 ];
 
+const vehicleLabel = (r: ReportRow) =>
+  [r.rdw_merk || r.vehicle_brand, r.rdw_handelsbenaming || r.vehicle_model].filter(Boolean).join(' ') || '-';
+
+const formatDate = (d: string) =>
+  new Date(d).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short' });
+
+/* ─── Draggable Card ─── */
+const DraggableCard = ({
+  report,
+  appraiserInitials,
+  onClick,
+}: {
+  report: ReportRow;
+  appraiserInitials: string | null;
+  onClick: () => void;
+}) => {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: report.id,
+  });
+
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+    opacity: isDragging ? 0.4 : 1,
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      onClick={onClick}
+      className="w-full text-left p-3 rounded-lg bg-[#0a0d14] border border-[#253047] hover:border-[#c9a84c]/50 hover:bg-[#0f1320] transition-all duration-150 group cursor-grab active:cursor-grabbing"
+    >
+      <div className="flex items-center justify-between mb-1">
+        <span className="text-xs font-mono font-medium text-muted-foreground">{report.report_number}</span>
+        {report.report_type && (
+          <Badge variant="secondary" className="text-[9px] px-1.5 py-0">{report.report_type.toUpperCase()}</Badge>
+        )}
+      </div>
+      <p className="text-sm font-medium text-foreground truncate">{vehicleLabel(report)}</p>
+      <div className="flex items-end justify-between mt-1.5">
+        <div className="flex flex-col gap-0.5">
+          <span className="text-xs font-mono text-muted-foreground">{report.license_plate || '-'}</span>
+          <span className="text-[10px] text-muted-foreground">{formatDate(report.updated_at)}</span>
+        </div>
+        {appraiserInitials ? (
+          <Avatar className="h-6 w-6 shrink-0">
+            <AvatarFallback className="text-[10px] font-semibold bg-primary/20 text-primary">
+              {appraiserInitials}
+            </AvatarFallback>
+          </Avatar>
+        ) : (
+          <div className="flex items-center justify-center w-6 h-6 rounded-full bg-muted/50 border border-border shrink-0">
+            <span className="text-xs font-medium text-muted-foreground">+</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+/* ─── Overlay Card (shown while dragging) ─── */
+const OverlayCard = ({ report }: { report: ReportRow }) => (
+  <div className="w-[260px] p-3 rounded-lg bg-[#0a0d14] border-2 border-[#c9a84c] shadow-xl shadow-[#c9a84c]/10">
+    <div className="flex items-center justify-between mb-1">
+      <span className="text-xs font-mono font-medium text-muted-foreground">{report.report_number}</span>
+      {report.report_type && (
+        <Badge variant="secondary" className="text-[9px] px-1.5 py-0">{report.report_type.toUpperCase()}</Badge>
+      )}
+    </div>
+    <p className="text-sm font-medium text-foreground truncate">{vehicleLabel(report)}</p>
+    <span className="text-xs font-mono text-muted-foreground">{report.license_plate || '-'}</span>
+  </div>
+);
+
+/* ─── Droppable Column ─── */
+const DroppableColumn = ({
+  col,
+  reports,
+  loading,
+  getAppraiserById,
+  navigate,
+}: {
+  col: typeof STATUS_CONFIG[number];
+  reports: ReportRow[];
+  loading: boolean;
+  getAppraiserById: (id?: string | null) => { initials: string } | null;
+  navigate: (path: string) => void;
+}) => {
+  const { setNodeRef, isOver } = useDroppable({ id: col.key });
+
+  return (
+    <div
+      ref={setNodeRef}
+      className={`rounded-xl border ${col.border} bg-[#111827]/60 flex flex-col min-h-[400px] transition-all duration-200 ${isOver ? 'ring-2 ring-[#c9a84c]/50 bg-[#111827]/80' : ''}`}
+    >
+      <div className={`flex items-center justify-between px-4 py-3 rounded-t-xl ${col.headerBg}`}>
+        <div className="flex items-center gap-2">
+          <div className={`h-2.5 w-2.5 rounded-full ${col.color}`} />
+          <h3 className={`font-semibold text-sm ${col.text}`}>{col.label}</h3>
+        </div>
+        <span className={`text-xl font-bold ${col.text}`}>
+          {loading ? '…' : reports.length}
+        </span>
+      </div>
+      <div className="flex-1 overflow-y-auto px-2 py-2 space-y-2 max-h-[60vh]">
+        {loading ? (
+          <div className="flex justify-center py-8">
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary" />
+          </div>
+        ) : reports.length === 0 ? (
+          <p className="text-center text-xs text-muted-foreground py-8">Geen rapporten</p>
+        ) : (
+          reports.map((r) => {
+            const appraiser = getAppraiserById(r.assigned_to);
+            return (
+              <DraggableCard
+                key={r.id}
+                report={r}
+                appraiserInitials={appraiser?.initials ?? null}
+                onClick={() => navigate(`/intern/rapport/${r.id}`)}
+              />
+            );
+          })
+        )}
+      </div>
+    </div>
+  );
+};
+
 const Dashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isCreating, setIsCreating] = useState<ReportType | null>(null);
   const { appraisers, getAppraiserById } = useAppraisers();
-  const [assignedFilter, setAssignedFilter] = useState<string>('all'); // 'all', 'mine', or a user_id
+  const [assignedFilter, setAssignedFilter] = useState<string>('all');
 
   const [reportsByStatus, setReportsByStatus] = useState<Record<string, ReportRow[]>>({
     concept: [], in_behandeling: [], gereed: [], verzonden: [],
   });
   const [loading, setLoading] = useState(true);
+  const [activeReport, setActiveReport] = useState<ReportRow | null>(null);
 
   // Search
   const [searchQuery, setSearchQuery] = useState('');
@@ -72,6 +217,10 @@ const Dashboard = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searching, setSearching] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } })
+  );
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -158,12 +307,6 @@ const Dashboard = () => {
     }
   };
 
-  const vehicleLabel = (r: ReportRow) => {
-    return [r.rdw_merk || r.vehicle_brand, r.rdw_handelsbenaming || r.vehicle_model].filter(Boolean).join(' ') || '-';
-  };
-
-  const formatDate = (d: string) => new Date(d).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short' });
-
   // Filter reports by assigned_to
   const filterReports = (reports: ReportRow[]) => {
     if (assignedFilter === 'all') return reports;
@@ -171,9 +314,69 @@ const Dashboard = () => {
     return reports.filter(r => r.assigned_to === assignedFilter);
   };
 
-  const selectedAppraiser = assignedFilter !== 'all' && assignedFilter !== 'mine' 
-    ? getAppraiserById(assignedFilter) 
-    : null;
+  // Find report across all statuses
+  const findReport = useCallback((id: string): { report: ReportRow; status: string } | null => {
+    for (const [status, reports] of Object.entries(reportsByStatus)) {
+      const report = reports.find(r => r.id === id);
+      if (report) return { report, status };
+    }
+    return null;
+  }, [reportsByStatus]);
+
+  const handleDragStart = (event: DragStartEvent) => {
+    const found = findReport(event.active.id as string);
+    setActiveReport(found?.report ?? null);
+  };
+
+  const handleDragEnd = async (event: DragEndEvent) => {
+    setActiveReport(null);
+    const { active, over } = event;
+    if (!over) return;
+
+    const reportId = active.id as string;
+    const targetStatus = over.id as string;
+
+    // Only accept drops on columns
+    if (!['concept', 'in_behandeling', 'gereed', 'verzonden'].includes(targetStatus)) return;
+
+    const found = findReport(reportId);
+    if (!found || found.status === targetStatus) return;
+
+    // Optimistic update
+    setReportsByStatus(prev => {
+      const next = { ...prev };
+      next[found.status] = prev[found.status].filter(r => r.id !== reportId);
+      next[targetStatus] = [found.report, ...prev[targetStatus]];
+      return next;
+    });
+
+    // Persist to database
+    const { error } = await supabase
+      .from('reports')
+      .update({ status: targetStatus })
+      .eq('id', reportId);
+
+    if (error) {
+      // Revert on error
+      setReportsByStatus(prev => {
+        const next = { ...prev };
+        next[targetStatus] = prev[targetStatus].filter(r => r.id !== reportId);
+        next[found.status] = [found.report, ...prev[found.status]];
+        return next;
+      });
+      toast({
+        title: 'Fout bij statuswijziging',
+        description: 'De status kon niet worden opgeslagen.',
+        variant: 'destructive',
+      });
+    } else {
+      const statusLabel = STATUS_CONFIG.find(s => s.key === targetStatus)?.label ?? targetStatus;
+      toast({
+        title: 'Status gewijzigd',
+        description: `${found.report.report_number} → ${statusLabel}`,
+      });
+    }
+  };
 
   return (
     <InternalLayout title="Dashboard">
@@ -256,73 +459,24 @@ const Dashboard = () => {
           ))}
         </div>
 
-        {/* Kanban Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-          {STATUS_CONFIG.map((col) => {
-            const reports = filterReports(reportsByStatus[col.key] || []);
-            return (
-              <div key={col.key} className={`rounded-xl border ${col.border} bg-[#111827]/60 flex flex-col min-h-[400px]`}>
-                {/* Column Header */}
-                <div className={`flex items-center justify-between px-4 py-3 rounded-t-xl ${col.headerBg}`}>
-                  <div className="flex items-center gap-2">
-                    <div className={`h-2.5 w-2.5 rounded-full ${col.color}`} />
-                    <h3 className={`font-semibold text-sm ${col.text}`}>{col.label}</h3>
-                  </div>
-                  <span className={`text-xl font-bold ${col.text}`}>
-                    {loading ? '…' : reports.length}
-                  </span>
-                </div>
-
-                {/* Cards */}
-                <div className="flex-1 overflow-y-auto px-2 py-2 space-y-2 max-h-[60vh]">
-                  {loading ? (
-                    <div className="flex justify-center py-8">
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary" />
-                    </div>
-                  ) : reports.length === 0 ? (
-                    <p className="text-center text-xs text-muted-foreground py-8">Geen rapporten</p>
-                  ) : (
-                    reports.map((r) => {
-                      const appraiser = getAppraiserById(r.assigned_to);
-                      return (
-                        <button
-                          key={r.id}
-                          onClick={() => navigate(`/intern/rapport/${r.id}`)}
-                          className="w-full text-left p-3 rounded-lg bg-[#0a0d14] border border-[#253047] hover:border-[#c9a84c]/50 hover:bg-[#0f1320] transition-all duration-150 group"
-                        >
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-xs font-mono font-medium text-muted-foreground">{r.report_number}</span>
-                            {r.report_type && (
-                              <Badge variant="secondary" className="text-[9px] px-1.5 py-0">{r.report_type.toUpperCase()}</Badge>
-                            )}
-                          </div>
-                          <p className="text-sm font-medium text-foreground truncate">{vehicleLabel(r)}</p>
-                          <div className="flex items-end justify-between mt-1.5">
-                            <div className="flex flex-col gap-0.5">
-                              <span className="text-xs font-mono text-muted-foreground">{r.license_plate || '-'}</span>
-                              <span className="text-[10px] text-muted-foreground">{formatDate(r.updated_at)}</span>
-                            </div>
-                            {appraiser ? (
-                              <Avatar className="h-6 w-6 shrink-0">
-                                <AvatarFallback className="text-[10px] font-semibold bg-primary/20 text-primary">
-                                  {appraiser.initials}
-                                </AvatarFallback>
-                              </Avatar>
-                            ) : (
-                              <div className="flex items-center justify-center w-6 h-6 rounded-full bg-muted/50 border border-border shrink-0">
-                                <span className="text-xs font-medium text-muted-foreground">+</span>
-                              </div>
-                            )}
-                          </div>
-                        </button>
-                      );
-                    })
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        {/* Kanban Columns with DnD */}
+        <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+            {STATUS_CONFIG.map((col) => (
+              <DroppableColumn
+                key={col.key}
+                col={col}
+                reports={filterReports(reportsByStatus[col.key] || [])}
+                loading={loading}
+                getAppraiserById={getAppraiserById}
+                navigate={navigate}
+              />
+            ))}
+          </div>
+          <DragOverlay>
+            {activeReport ? <OverlayCard report={activeReport} /> : null}
+          </DragOverlay>
+        </DndContext>
       </div>
     </InternalLayout>
   );
