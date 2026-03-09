@@ -17,7 +17,7 @@ const statusOptions: { value: ReportStatus; label: string; activeClass: string }
   {
     value: 'in_behandeling',
     label: 'In behandeling',
-    activeClass: 'bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/30',
+    activeClass: 'bg-[#c9a84c]/15 text-[#c9a84c] border-[#c9a84c]/30',
   },
   {
     value: 'gereed',
