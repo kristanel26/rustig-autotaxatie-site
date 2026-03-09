@@ -165,6 +165,7 @@ const Reports = () => {
                 <TableHead>Voertuig</TableHead>
                 <TableHead>Klant</TableHead>
                 <TableHead className="w-[130px]">Status</TableHead>
+                <TableHead className="w-[100px]">Toegewezen</TableHead>
                 <TableHead className="w-[140px]">Inspectiedatum</TableHead>
               </TableRow>
             </TableHeader>
