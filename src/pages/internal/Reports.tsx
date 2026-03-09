@@ -16,13 +16,8 @@ import {
   Select as SelectUI, SelectContent as SelectContentUI, SelectItem as SelectItemUI,
   SelectTrigger as SelectTriggerUI, SelectValue as SelectValueUI,
 } from '@/components/ui/select';
-import {
-  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
-  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
 import { useAppraisers } from '@/hooks/useAppraisers';
 import { useAuth } from '@/contexts/AuthContext';
-import { toast } from 'sonner';
 
 interface Report {
   id: string;
@@ -79,34 +74,18 @@ const Reports = () => {
     fetchReports();
   }, []);
 
-  const handleDelete = async () => {
-    if (!deleteTarget) return;
-    setDeleting(true);
-    try {
-      const { error } = await supabase.from('reports').delete().eq('id', deleteTarget.id);
-      if (error) throw error;
-      setReports(prev => prev.filter(r => r.id !== deleteTarget.id));
-      toast.success(`Rapport ${deleteTarget.report_number} verwijderd`);
-      setDeleteTarget(null);
-    } catch (err) {
-      toast.error('Verwijderen mislukt');
-    } finally {
-      setDeleting(false);
-    }
-  };
-
   const getCustomerDisplay = (r: Report) => {
     const nameParts = [r.customer_title, r.customer_initials, r.customer_last_name].filter(Boolean).join(' ');
-    return r.opdrachtgever || nameParts || r.client_name || '-';
+    return r.opdrachtgever || nameParts || r.client_name || '';
   };
 
   const getVehicleDisplay = (r: Report) => {
     const parts = [r.rdw_merk, r.rdw_handelsbenaming].filter(Boolean);
-    return parts.length > 0 ? parts.join(' ') : '-';
+    return parts.length > 0 ? parts.join(' ') : '';
   };
 
   const formatLicensePlate = (plate: string | null) => {
-    if (!plate) return '-';
+    if (!plate) return '';
     const cleaned = plate.replace(/[^A-Z0-9]/gi, '').toUpperCase();
     if (cleaned.length === 6) {
       return `${cleaned.slice(0, 2)}-${cleaned.slice(2, 4)}-${cleaned.slice(4, 6)}`;
@@ -129,13 +108,22 @@ const Reports = () => {
     );
   });
 
+  // Sort: reports with vehicle data first, empty concepts last
+  const sortedReports = [...filteredReports].sort((a, b) => {
+    const aHasData = !!(a.rdw_merk || a.rdw_handelsbenaming || a.license_plate || a.customer_last_name || a.client_name || a.opdrachtgever);
+    const bHasData = !!(b.rdw_merk || b.rdw_handelsbenaming || b.license_plate || b.customer_last_name || b.client_name || b.opdrachtgever);
+    if (aHasData && !bHasData) return -1;
+    if (!aHasData && bHasData) return 1;
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  });
+
   const formatDate = (dateString: string | null) => {
-    if (!dateString) return '-';
+    if (!dateString) return '';
     return new Date(dateString).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' });
   };
 
-  const hasAnyAssigned = filteredReports.some(r => r.assigned_to);
-  const colSpan = isAdmin ? (hasAnyAssigned ? 9 : 8) : (hasAnyAssigned ? 8 : 7);
+  const hasAnyAssigned = sortedReports.some(r => r.assigned_to);
+  const colSpan = hasAnyAssigned ? 8 : 7;
 
   return (
     <InternalLayout title="Rapporten">
@@ -192,7 +180,6 @@ const Reports = () => {
                 <TableHead className="w-[130px] text-white font-bold">Status</TableHead>
                 {hasAnyAssigned && <TableHead className="w-[100px] text-white font-bold">Toegewezen</TableHead>}
                 <TableHead className="w-[140px] text-white font-bold">Inspectiedatum</TableHead>
-                {isAdmin && <TableHead className="w-[60px]"></TableHead>}
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -204,14 +191,14 @@ const Reports = () => {
                     </div>
                   </TableCell>
                 </TableRow>
-              ) : filteredReports.length === 0 ? (
+              ) : sortedReports.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={colSpan} className="text-center py-8 text-muted-foreground">
                     {searchTerm || statusFilter !== 'all' || typeFilter !== 'all' ? 'Geen rapporten gevonden' : 'Nog geen rapporten'}
                   </TableCell>
                 </TableRow>
               ) : (
-                filteredReports.map((report) => {
+                sortedReports.map((report) => {
                   const appraiser = getAppraiserById(report.assigned_to);
                   return (
                     <TableRow key={report.id} className="cursor-pointer hover:bg-muted/50" onClick={() => navigate(`/intern/rapport/${report.id}`)}>
@@ -240,17 +227,6 @@ const Reports = () => {
                         </TableCell>
                       )}
                       <TableCell className="text-xs text-[#9CA3AF]">{formatDate(report.inspection_date)}</TableCell>
-                      {isAdmin && (
-                        <TableCell onClick={(e) => e.stopPropagation()}>
-                          <button
-                            onClick={() => setDeleteTarget(report)}
-                            className="p-1.5 rounded hover:bg-destructive/15 text-muted-foreground hover:text-destructive transition-colors"
-                            title="Rapport verwijderen"
-                          >
-                            <Trash2 className="h-3.5 w-3.5" />
-                          </button>
-                        </TableCell>
-                      )}
                     </TableRow>
                   );
                 })
@@ -261,32 +237,10 @@ const Reports = () => {
 
         {!loading && (
           <p className="text-sm text-muted-foreground">
-            {filteredReports.length} rapport{filteredReports.length !== 1 ? 'en' : ''} gevonden
+            {sortedReports.length} rapport{sortedReports.length !== 1 ? 'en' : ''} gevonden
           </p>
         )}
       </div>
-
-      {/* Delete Confirmation Dialog */}
-      <AlertDialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Rapport verwijderen?</AlertDialogTitle>
-            <AlertDialogDescription>
-              Weet je zeker dat je rapport <strong className="text-foreground">{deleteTarget?.report_number}</strong> wilt verwijderen? Dit kan niet ongedaan worden gemaakt.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Annuleren</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={handleDelete}
-              disabled={deleting}
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-            >
-              {deleting ? 'Verwijderen...' : 'Definitief verwijderen'}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </InternalLayout>
   );
 };
