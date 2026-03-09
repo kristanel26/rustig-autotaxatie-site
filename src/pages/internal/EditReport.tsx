@@ -627,6 +627,7 @@ const EditReport = () => {
           impression_extras: (reportData as any).impression_extras || '',
           stalling: (reportData as any).stalling || 
             (shouldUseDefaults ? defaultKlassiekerImpressions.stalling : ''),
+          stalling_toelichting: (reportData as any).stalling_toelichting || '',
         });
 
         // Pre-fill klassieker-specific valuation data
