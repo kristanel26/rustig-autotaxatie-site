@@ -7,8 +7,14 @@ import { useToast } from '@/hooks/use-toast';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { FileText, Search, User, Loader2, Car, Truck, Scale, Filter } from 'lucide-react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { FileText, Search, User, Loader2, Car, Truck, Scale } from 'lucide-react';
 import { useAppraisers } from '@/hooks/useAppraisers';
 
 type ReportType = 'klassieker' | 'camper' | 'wev';
