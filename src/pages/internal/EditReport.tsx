@@ -605,28 +605,28 @@ const EditReport = () => {
         
         setKlassiekerImpressionData({
           impression_suspension: (reportData as any).impression_suspension || 
-            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_suspension : ''),
+            (shouldUseDefaults ? defaultKlassiekerImpressions.impression_suspension : ''),
           impression_wheels_tires: (reportData as any).impression_wheels_tires || 
-            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_wheels_tires : ''),
+            (shouldUseDefaults ? defaultKlassiekerImpressions.impression_wheels_tires : ''),
           impression_steering: (reportData as any).impression_steering || 
-            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_steering : ''),
+            (shouldUseDefaults ? defaultKlassiekerImpressions.impression_steering : ''),
           impression_brakes: (reportData as any).impression_brakes || 
-            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_brakes : ''),
+            (shouldUseDefaults ? defaultKlassiekerImpressions.impression_brakes : ''),
           impression_engine: (reportData as any).impression_engine || 
-            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_engine : ''),
+            (shouldUseDefaults ? defaultKlassiekerImpressions.impression_engine : ''),
           impression_transmission: (reportData as any).impression_transmission || 
-            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_transmission : ''),
+            (shouldUseDefaults ? defaultKlassiekerImpressions.impression_transmission : ''),
           impression_electrical: (reportData as any).impression_electrical || 
-            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_electrical : ''),
+            (shouldUseDefaults ? defaultKlassiekerImpressions.impression_electrical : ''),
           impression_body: (reportData as any).impression_body || 
-            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_body : ''),
+            (shouldUseDefaults ? defaultKlassiekerImpressions.impression_body : ''),
           impression_interior: (reportData as any).impression_interior || 
-            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_interior : ''),
+            (shouldUseDefaults ? defaultKlassiekerImpressions.impression_interior : ''),
           impression_general: (reportData as any).impression_general || 
-            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.impression_general : ''),
+            (shouldUseDefaults ? defaultKlassiekerImpressions.impression_general : ''),
           impression_extras: (reportData as any).impression_extras || '',
           stalling: (reportData as any).stalling || 
-            (isKlassieker && !hasExistingKlassiekerData ? defaultKlassiekerImpressions.stalling : ''),
+            (shouldUseDefaults ? defaultKlassiekerImpressions.stalling : ''),
         });
 
         // Pre-fill klassieker-specific valuation data
