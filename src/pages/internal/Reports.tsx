@@ -199,6 +199,20 @@ const Reports = () => {
                     <TableCell>
                       {(() => { const s = getStatusBadgeProps(report.status); return <Badge variant="outline" className={`text-xs ${s.className}`}>{s.label}</Badge>; })()}
                     </TableCell>
+                    <TableCell>
+                      {(() => {
+                        const a = getAppraiserById(report.assigned_to);
+                        if (!a) return <span className="text-xs text-muted-foreground">—</span>;
+                        return (
+                          <div className="flex items-center gap-1.5">
+                            <Avatar className="h-5 w-5">
+                              <AvatarFallback className="text-[9px] font-semibold bg-primary/20 text-primary">{a.initials}</AvatarFallback>
+                            </Avatar>
+                            <span className="text-xs text-muted-foreground truncate max-w-[80px]">{a.email.split('@')[0]}</span>
+                          </div>
+                        );
+                      })()}
+                    </TableCell>
                     <TableCell className="text-xs">{formatDate(report.inspection_date)}</TableCell>
                   </TableRow>
                 ))
