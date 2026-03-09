@@ -80,6 +80,30 @@ export type Database = {
         }
         Relationships: []
       }
+      interior_options: {
+        Row: {
+          created_at: string
+          id: string
+          last_used_at: string
+          name: string
+          usage_count: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_used_at?: string
+          name: string
+          usage_count?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_used_at?: string
+          name?: string
+          usage_count?: number
+        }
+        Relationships: []
+      }
       photo_extract_results: {
         Row: {
           accepted: boolean
