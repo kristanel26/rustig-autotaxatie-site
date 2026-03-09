@@ -59,7 +59,7 @@ const Dashboard = () => {
   const { toast } = useToast();
   const [isCreating, setIsCreating] = useState<ReportType | null>(null);
   const { appraisers, getAppraiserById } = useAppraisers();
-  const [showOnlyMyReports, setShowOnlyMyReports] = useState(false);
+  const [assignedFilter, setAssignedFilter] = useState<string>('all'); // 'all', 'mine', or a user_id
 
   const [reportsByStatus, setReportsByStatus] = useState<Record<string, ReportRow[]>>({
     concept: [], in_behandeling: [], gereed: [], verzonden: [],
