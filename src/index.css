@@ -110,17 +110,17 @@
   /* ── TAXARIS INTERNAL THEME ── */
   .intern-theme {
     --background: 222 47% 5%;        /* #0a0d14 */
-    --foreground: 216 24% 88%;       /* lighter for internal readability */
+    --foreground: 216 20% 92%;       /* brighter white text */
     --card: 222 33% 9%;              /* #111827 ~ s900 */
-    --card-foreground: 216 24% 88%;
+    --card-foreground: 216 20% 92%;
     --popover: 222 33% 9%;
-    --popover-foreground: 216 24% 88%;
+    --popover-foreground: 216 20% 92%;
     --primary: 43 50% 54%;           /* #c9a84c gold */
     --primary-foreground: 222 47% 5%;
     --secondary: 220 30% 16%;        /* #1a2235 ~ s800 */
     --secondary-foreground: 0 0% 100%;
     --muted: 220 30% 16%;
-    --muted-foreground: 217 24% 68%; /* lighter muted text */
+    --muted-foreground: 217 20% 78%; /* much brighter muted text */
     --accent: 43 50% 54%;            /* gold */
     --accent-foreground: 222 47% 5%;
     --destructive: 0 84% 60%;        /* #ef4444 */
@@ -139,8 +139,8 @@
     --s800: 220 30% 16%;
     --s700: 221 27% 21%;
     --s600: 217 24% 33%;
-    --s500: 217 22% 62%;
-    --s400: 216 22% 74%;
+    --s500: 217 22% 70%;             /* brighter */
+    --s400: 216 22% 80%;             /* brighter */
     --s300: 216 26% 88%;
     --s200: 213 33% 90%;
     --intern-green: 160 64% 40%;     /* #10b981 */
