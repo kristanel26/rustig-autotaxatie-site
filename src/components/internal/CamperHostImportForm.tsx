@@ -74,7 +74,7 @@ export const CamperHostImportForm = ({
       if (!allowedTypes.includes(f.type)) {
         toast({
           title: 'Ongeldig bestandstype',
-          description: `${f.name}: Alleen PDF en DOCX bestanden zijn toegestaan.`,
+          description: `${f.name}: Alleen PDF, DOC en DOCX bestanden zijn toegestaan.`,
           variant: 'destructive',
         });
         return false;
