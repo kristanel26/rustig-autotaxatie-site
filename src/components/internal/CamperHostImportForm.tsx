@@ -299,7 +299,7 @@ export const CamperHostImportForm = ({
           <div className="space-y-2">
             {uploadedFiles.map((file) => (
               <div
-                key={file.type}
+                key={file.id}
                 className="flex items-center justify-between p-3 bg-muted/50 rounded-lg"
               >
                 <div className="flex items-center gap-3 min-w-0 flex-1">
@@ -325,7 +325,7 @@ export const CamperHostImportForm = ({
                   type="button"
                   variant="ghost"
                   size="icon"
-                  onClick={() => handleRemoveFile(file.type)}
+                  onClick={() => handleRemoveFile(file.id)}
                   className="shrink-0 text-destructive hover:text-destructive"
                 >
                   <Trash2 className="h-4 w-4" />
