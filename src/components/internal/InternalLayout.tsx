@@ -85,8 +85,8 @@ const InternalLayout: React.FC<InternalLayoutProps> = ({ children, title }) => {
                 className={cn(
                   "flex items-center gap-[7px] px-[14px] py-[7px] rounded-md text-[13px] font-medium transition-all duration-150 no-underline",
                   active
-                    ? "text-white"
-                    : "text-[hsl(var(--s400))] hover:text-white hover:bg-[hsl(var(--s800))]"
+                    ? "text-[#c9a84c]"
+                    : "text-white/80 hover:text-white hover:bg-[hsl(var(--s800))]"
                 )}
               >
                 <Icon className="w-3.5 h-3.5 flex-shrink-0" />
