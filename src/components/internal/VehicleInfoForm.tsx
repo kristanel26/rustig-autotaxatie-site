@@ -775,11 +775,9 @@ export const VehicleInfoForm = ({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="interieur_beschrijving">Interieur</Label>
-                <Input
-                  id="interieur_beschrijving"
+                <InteriorCombobox
                   value={formData.interieur_beschrijving}
-                  onChange={(e) => onChange('interieur_beschrijving', e.target.value)}
-                  placeholder="bijv. Stof/leder zwart"
+                  onChange={(val) => onChange('interieur_beschrijving', val)}
                 />
                 <p className="text-xs text-muted-foreground">
                   Beschrijving van de bekleding en kleur van het interieur.
