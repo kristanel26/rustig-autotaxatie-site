@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Select,
   SelectContent,
@@ -1458,7 +1459,7 @@ const EditReport = () => {
               </Button>
             </div>
 
-            {/* Read-only Report Info */}
+            {/* Read-only Report Info — always visible above tabs */}
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">Rapportgegevens (alleen-lezen)</CardTitle>
@@ -1483,542 +1484,441 @@ const EditReport = () => {
               </CardContent>
             </Card>
 
-            {/* Customer Information */}
-            <Card id="section-klant">
-              <CardHeader>
-                <CardTitle className="text-lg">Klantgegevens</CardTitle>
-              </CardHeader>
-          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Customer search / link */}
-            <div className="md:col-span-2">
-              <Label className="text-xs text-muted-foreground mb-1.5 block">Bestaande klant koppelen</Label>
-              <CustomerSearchField
-                onSelect={(c) => {
-                  // Fill all customer fields from selected customer
-                  const newData = {
-                    opdrachtgever: c.company_name || '',
-                    customer_title: c.salutation || '',
-                    customer_initials: c.initials || '',
-                    customer_last_name: c.last_name,
-                    customer_street: [c.street, c.house_number].filter(Boolean).join(' '),
-                    customer_postcode: c.postal_code || '',
-                    customer_city: c.city || '',
-                    customer_email: c.email || '',
-                    customer_phone: c.phone || '',
-                  };
-                  setCustomerData(newData);
-                  // Save all fields
-                  saveMultipleFields({
-                    customer_id: c.id,
-                    opdrachtgever: c.company_name || null,
-                    customer_title: c.salutation || null,
-                    customer_initials: c.initials || null,
-                    customer_last_name: c.last_name || null,
-                    customer_street: newData.customer_street || null,
-                    customer_postcode: c.postal_code || null,
-                    customer_city: c.city || null,
-                    customer_email: c.email || null,
-                    customer_phone: c.phone || null,
-                  });
-                  toast({ title: 'Klant gekoppeld', description: `${[c.first_name, c.last_name].filter(Boolean).join(' ')} is ingevuld.` });
-                }}
-                onNewCustomer={() => {
-                  const w = window.open(`/intern/klanten?nieuw=1&rapport=${id}`, '_blank');
-                  if (!w) {
-                    window.location.href = `/intern/klanten?nieuw=1&rapport=${id}`;
-                  }
-                }}
-              />
-            </div>
-            <div className="space-y-2 md:col-span-2">
-              <Label htmlFor="opdrachtgever">Bedrijfsnaam (optioneel)</Label>
-              <Input
-                id="opdrachtgever"
-                value={customerData.opdrachtgever}
-                onChange={(e) => handleCustomerChange('opdrachtgever', e.target.value)}
-                placeholder="bijv. Autoservice Jansen B.V."
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="customer_title">Aanhef</Label>
-              <Select
-                value={customerData.customer_title}
-                onValueChange={(value) => handleCustomerChange('customer_title', value)}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Selecteer aanhef" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Dhr.">Dhr.</SelectItem>
-                  <SelectItem value="Mevr.">Mevr.</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="customer_initials">Voorletters</Label>
-                <Input
-                  id="customer_initials"
-                  value={customerData.customer_initials}
-                  onChange={(e) => handleCustomerChange('customer_initials', e.target.value)}
-                  placeholder="J.P."
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="customer_last_name">Achternaam</Label>
-                <Input
-                  id="customer_last_name"
-                  value={customerData.customer_last_name}
-                  onChange={(e) => handleCustomerChange('customer_last_name', e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="space-y-2 md:col-span-2">
-              <Label htmlFor="customer_street">Straat en huisnummer</Label>
-              <Input
-                id="customer_street"
-                value={customerData.customer_street}
-                onChange={(e) => handleCustomerChange('customer_street', e.target.value)}
-                placeholder="Hoofdstraat 123"
-              />
-            </div>
-            <PostcodeField
-              postcode={customerData.customer_postcode}
-              city={customerData.customer_city}
-              street={customerData.customer_street}
-              onPostcodeChange={(value) => handleCustomerChange('customer_postcode', value)}
-              onCityChange={(value) => handleCustomerChange('customer_city', value)}
-              onStreetChange={(value) => handleCustomerChange('customer_street', value)}
-            />
-            <div className="space-y-2">
-              <Label htmlFor="customer_email">E-mailadres (intern gebruik)</Label>
-              <Input
-                id="customer_email"
-                type="email"
-                value={customerData.customer_email}
-                onChange={(e) => handleCustomerChange('customer_email', e.target.value)}
-                placeholder="klant@voorbeeld.nl"
-                className={errors.customer_email ? 'border-destructive' : ''}
-              />
-              {errors.customer_email && (
-                <p className="text-sm text-destructive">{errors.customer_email}</p>
-              )}
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="customer_phone">Telefoonnummer (intern gebruik)</Label>
-              <Input
-                id="customer_phone"
-                type="tel"
-                value={customerData.customer_phone}
-                onChange={(e) => handleCustomerChange('customer_phone', e.target.value)}
-                placeholder="0612345678"
-                className={errors.customer_phone ? 'border-destructive' : ''}
-              />
-              {errors.customer_phone && (
-                <p className="text-sm text-destructive">{errors.customer_phone}</p>
-              )}
-            </div>
-            <p className="text-xs text-muted-foreground md:col-span-2">
-              Invoer wordt automatisch netjes opgeslagen. E-mail en telefoon zijn alleen voor intern gebruik en verschijnen niet op het PDF-rapport.
-            </p>
-          </CardContent>
-        </Card>
+            {/* ============ TAB NAVIGATION ============ */}
+            <Tabs defaultValue="algemeen" className="w-full">
+              <TabsList className="w-full justify-start bg-transparent border-b border-border rounded-none h-auto p-0 gap-0">
+                {['Algemeen', 'Voertuig', 'Staat', "Foto's", 'Waarde'].map((tab) => (
+                  <TabsTrigger
+                    key={tab}
+                    value={tab.toLowerCase().replace("'", '')}
+                    className="rounded-none border-b-2 border-transparent data-[state=active]:border-[#C9A84C] data-[state=active]:text-white data-[state=active]:shadow-none text-muted-foreground px-4 py-2.5 font-medium"
+                  >
+                    {tab}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
 
-        {/* ============================================ */}
-        {/* KLS §2: Inspectiegegevens — before Foto      */}
-        {/* ============================================ */}
-        {report.report_type === 'klassieker' && (
-          <Card id="section-inspectie">
-            <CardHeader>
-              <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
-            </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="kls_inspection_date">Datum opname *</Label>
-                <Input
-                  id="kls_inspection_date"
-                  type="date"
-                  value={inspectionData.inspection_date}
-                  onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
-                />
-                {!inspectionData.inspection_date && (
-                  <p className="text-xs text-destructive">Verplicht veld</p>
-                )}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="kls_inspection_location">Plaats opname *</Label>
-                <Input
-                  id="kls_inspection_location"
-                  value={inspectionData.inspection_location}
-                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
-                  placeholder="bijv. Druten"
-                />
-                {!inspectionData.inspection_location && (
-                  <p className="text-xs text-destructive">Verplicht veld</p>
-                )}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="kls_inspection_start_time">Aanvangstijd *</Label>
-                <Input
-                  id="kls_inspection_start_time"
-                  type="time"
-                  value={inspectionData.inspection_start_time}
-                  onChange={(e) => handleInspectionChange('inspection_start_time', e.target.value)}
-                />
-                {!inspectionData.inspection_start_time && (
-                  <p className="text-xs text-destructive">Verplicht veld</p>
-                )}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="kls_inspection_end_time">Eindtijd *</Label>
-                <Input
-                  id="kls_inspection_end_time"
-                  type="time"
-                  value={inspectionData.inspection_end_time}
-                  onChange={(e) => handleInspectionChange('inspection_end_time', e.target.value)}
-                />
-                {!inspectionData.inspection_end_time && (
-                  <p className="text-xs text-destructive">Verplicht veld</p>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        )}
+              {/* ========== TAB 1: ALGEMEEN ========== */}
+              <TabsContent value="algemeen" className="space-y-6 mt-6">
+                {/* Customer Information */}
+                <Card id="section-klant">
+                  <CardHeader>
+                    <CardTitle className="text-lg">Klantgegevens</CardTitle>
+                  </CardHeader>
+                  <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Customer search / link */}
+                    <div className="md:col-span-2">
+                      <Label className="text-xs text-muted-foreground mb-1.5 block">Bestaande klant koppelen</Label>
+                      <CustomerSearchField
+                        onSelect={(c) => {
+                          const newData = {
+                            opdrachtgever: c.company_name || '',
+                            customer_title: c.salutation || '',
+                            customer_initials: c.initials || '',
+                            customer_last_name: c.last_name,
+                            customer_street: [c.street, c.house_number].filter(Boolean).join(' '),
+                            customer_postcode: c.postal_code || '',
+                            customer_city: c.city || '',
+                            customer_email: c.email || '',
+                            customer_phone: c.phone || '',
+                          };
+                          setCustomerData(newData);
+                          saveMultipleFields({
+                            customer_id: c.id,
+                            opdrachtgever: c.company_name || null,
+                            customer_title: c.salutation || null,
+                            customer_initials: c.initials || null,
+                            customer_last_name: c.last_name || null,
+                            customer_street: newData.customer_street || null,
+                            customer_postcode: c.postal_code || null,
+                            customer_city: c.city || null,
+                            customer_email: c.email || null,
+                            customer_phone: c.phone || null,
+                          });
+                          toast({ title: 'Klant gekoppeld', description: `${[c.first_name, c.last_name].filter(Boolean).join(' ')} is ingevuld.` });
+                        }}
+                        onNewCustomer={() => {
+                          const w = window.open(`/intern/klanten?nieuw=1&rapport=${id}`, '_blank');
+                          if (!w) {
+                            window.location.href = `/intern/klanten?nieuw=1&rapport=${id}`;
+                          }
+                        }}
+                      />
+                    </div>
+                    <div className="space-y-2 md:col-span-2">
+                      <Label htmlFor="opdrachtgever">Bedrijfsnaam (optioneel)</Label>
+                      <Input
+                        id="opdrachtgever"
+                        value={customerData.opdrachtgever}
+                        onChange={(e) => handleCustomerChange('opdrachtgever', e.target.value)}
+                        placeholder="bijv. Autoservice Jansen B.V."
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="customer_title">Aanhef</Label>
+                      <Select
+                        value={customerData.customer_title}
+                        onValueChange={(value) => handleCustomerChange('customer_title', value)}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecteer aanhef" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Dhr.">Dhr.</SelectItem>
+                          <SelectItem value="Mevr.">Mevr.</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="customer_initials">Voorletters</Label>
+                        <Input
+                          id="customer_initials"
+                          value={customerData.customer_initials}
+                          onChange={(e) => handleCustomerChange('customer_initials', e.target.value)}
+                          placeholder="J.P."
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="customer_last_name">Achternaam</Label>
+                        <Input
+                          id="customer_last_name"
+                          value={customerData.customer_last_name}
+                          onChange={(e) => handleCustomerChange('customer_last_name', e.target.value)}
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-2 md:col-span-2">
+                      <Label htmlFor="customer_street">Straat en huisnummer</Label>
+                      <Input
+                        id="customer_street"
+                        value={customerData.customer_street}
+                        onChange={(e) => handleCustomerChange('customer_street', e.target.value)}
+                        placeholder="Hoofdstraat 123"
+                      />
+                    </div>
+                    <PostcodeField
+                      postcode={customerData.customer_postcode}
+                      city={customerData.customer_city}
+                      street={customerData.customer_street}
+                      onPostcodeChange={(value) => handleCustomerChange('customer_postcode', value)}
+                      onCityChange={(value) => handleCustomerChange('customer_city', value)}
+                      onStreetChange={(value) => handleCustomerChange('customer_street', value)}
+                    />
+                    <div className="space-y-2">
+                      <Label htmlFor="customer_email">E-mailadres (intern gebruik)</Label>
+                      <Input
+                        id="customer_email"
+                        type="email"
+                        value={customerData.customer_email}
+                        onChange={(e) => handleCustomerChange('customer_email', e.target.value)}
+                        placeholder="klant@voorbeeld.nl"
+                        className={errors.customer_email ? 'border-destructive' : ''}
+                      />
+                      {errors.customer_email && (
+                        <p className="text-sm text-destructive">{errors.customer_email}</p>
+                      )}
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="customer_phone">Telefoonnummer (intern gebruik)</Label>
+                      <Input
+                        id="customer_phone"
+                        type="tel"
+                        value={customerData.customer_phone}
+                        onChange={(e) => handleCustomerChange('customer_phone', e.target.value)}
+                        placeholder="0612345678"
+                        className={errors.customer_phone ? 'border-destructive' : ''}
+                      />
+                      {errors.customer_phone && (
+                        <p className="text-sm text-destructive">{errors.customer_phone}</p>
+                      )}
+                    </div>
+                    <p className="text-xs text-muted-foreground md:col-span-2">
+                      Invoer wordt automatisch netjes opgeslagen. E-mail en telefoon zijn alleen voor intern gebruik en verschijnen niet op het PDF-rapport.
+                    </p>
+                  </CardContent>
+                </Card>
 
-        {/* KLS §4: Fotocollectie — after Inspectie */}
-        {report.report_type === 'klassieker' && (
-          <div id="section-fotos">
-            <PhotoUploadForm
-              photos={vehiclePhotos}
-              rotations={photoRotations}
-              photoTypes={photoTypes}
-              onChange={handlePhotosChange}
-              onRotationsChange={handleRotationsChange}
-              onPhotoTypesChange={handlePhotoTypesChange}
-              reportId={id}
-              reportType="klassieker"
-            />
-          </div>
-        )}
+                {/* Inspectiegegevens — KLS */}
+                {report.report_type === 'klassieker' && (
+                  <Card id="section-inspectie">
+                    <CardHeader>
+                      <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
+                    </CardHeader>
+                    <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="kls_inspection_date">Datum opname *</Label>
+                        <Input id="kls_inspection_date" type="date" value={inspectionData.inspection_date} onChange={(e) => handleInspectionChange('inspection_date', e.target.value)} />
+                        {!inspectionData.inspection_date && <p className="text-xs text-destructive">Verplicht veld</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="kls_inspection_location">Plaats opname *</Label>
+                        <Input id="kls_inspection_location" value={inspectionData.inspection_location} onChange={(e) => handleInspectionChange('inspection_location', e.target.value)} placeholder="bijv. Druten" />
+                        {!inspectionData.inspection_location && <p className="text-xs text-destructive">Verplicht veld</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="kls_inspection_start_time">Aanvangstijd *</Label>
+                        <Input id="kls_inspection_start_time" type="time" value={inspectionData.inspection_start_time} onChange={(e) => handleInspectionChange('inspection_start_time', e.target.value)} />
+                        {!inspectionData.inspection_start_time && <p className="text-xs text-destructive">Verplicht veld</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="kls_inspection_end_time">Eindtijd *</Label>
+                        <Input id="kls_inspection_end_time" type="time" value={inspectionData.inspection_end_time} onChange={(e) => handleInspectionChange('inspection_end_time', e.target.value)} />
+                        {!inspectionData.inspection_end_time && <p className="text-xs text-destructive">Verplicht veld</p>}
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
 
-        {/* ============================================ */}
-        {/* CAM §0: CamperHost Import                    */}
-        {/* ============================================ */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <CamperHostImportForm
-            reportId={id || ''}
-            onImport={handleCamperHostImportSection}
-            onImportAll={handleCamperHostImportAll}
-          />
-        )}
+                {/* Inspectiegegevens — CAM */}
+                {(report.report_type === 'camper' || !report.report_type) && (
+                  <Card id="section-inspectie">
+                    <CardHeader>
+                      <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
+                    </CardHeader>
+                    <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2 md:col-span-2">
+                        <Label htmlFor="cam_inspection_location">Inspectielocatie</Label>
+                        <Input id="cam_inspection_location" value={inspectionData.inspection_location} onChange={(e) => handleInspectionChange('inspection_location', e.target.value)} />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="cam_inspection_date">Inspectiedatum</Label>
+                        <Input id="cam_inspection_date" type="date" value={inspectionData.inspection_date} onChange={(e) => handleInspectionChange('inspection_date', e.target.value)} />
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="cam_inspection_start_time">Starttijd</Label>
+                          <Input id="cam_inspection_start_time" type="time" value={inspectionData.inspection_start_time} onChange={(e) => handleInspectionChange('inspection_start_time', e.target.value)} />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="cam_inspection_end_time">Eindtijd</Label>
+                          <Input id="cam_inspection_end_time" type="time" value={inspectionData.inspection_end_time} onChange={(e) => handleInspectionChange('inspection_end_time', e.target.value)} />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
 
-        {/* ============================================ */}
-        {/* CAM §2: Inspectiegegevens — before Vehicle   */}
-        {/* ============================================ */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <Card id="section-inspectie">
-            <CardHeader>
-              <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
-            </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2 md:col-span-2">
-                <Label htmlFor="cam_inspection_location">Inspectielocatie</Label>
-                <Input
-                  id="cam_inspection_location"
-                  value={inspectionData.inspection_location}
-                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="cam_inspection_date">Inspectiedatum</Label>
-                <Input
-                  id="cam_inspection_date"
-                  type="date"
-                  value={inspectionData.inspection_date}
-                  onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="cam_inspection_start_time">Starttijd</Label>
-                  <Input
-                    id="cam_inspection_start_time"
-                    type="time"
-                    value={inspectionData.inspection_start_time}
-                    onChange={(e) => handleInspectionChange('inspection_start_time', e.target.value)}
+                {/* Inspectiegegevens — WEV */}
+                {report.report_type === 'wev' && (
+                  <Card id="section-inspectie">
+                    <CardHeader>
+                      <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
+                    </CardHeader>
+                    <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="wev_inspection_date">Datum opname *</Label>
+                        <Input id="wev_inspection_date" type="date" value={inspectionData.inspection_date} onChange={(e) => handleInspectionChange('inspection_date', e.target.value)} />
+                        {!inspectionData.inspection_date && <p className="text-xs text-destructive">Verplicht veld</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="wev_inspection_location">Plaats opname *</Label>
+                        <Input id="wev_inspection_location" value={inspectionData.inspection_location} onChange={(e) => handleInspectionChange('inspection_location', e.target.value)} placeholder="bijv. Druten" />
+                        {!inspectionData.inspection_location && <p className="text-xs text-destructive">Verplicht veld</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="wev_inspection_start_time">Aanvangstijd *</Label>
+                        <Input id="wev_inspection_start_time" type="time" value={inspectionData.inspection_start_time} onChange={(e) => handleInspectionChange('inspection_start_time', e.target.value)} />
+                        {!inspectionData.inspection_start_time && <p className="text-xs text-destructive">Verplicht veld</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="wev_inspection_end_time">Eindtijd *</Label>
+                        <Input id="wev_inspection_end_time" type="time" value={inspectionData.inspection_end_time} onChange={(e) => handleInspectionChange('inspection_end_time', e.target.value)} />
+                        {!inspectionData.inspection_end_time && <p className="text-xs text-destructive">Verplicht veld</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="wev_peildatum">Peildatum</Label>
+                        <Input id="wev_peildatum" type="date" value={inspectionData.inspection_date} disabled className="bg-muted" />
+                        <p className="text-xs text-muted-foreground">Peildatum is gelijk aan datum opname</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* CamperHost Import — CAM only */}
+                {(report.report_type === 'camper' || !report.report_type) && (
+                  <CamperHostImportForm
+                    reportId={id || ''}
+                    onImport={handleCamperHostImportSection}
+                    onImportAll={handleCamperHostImportAll}
+                  />
+                )}
+              </TabsContent>
+
+              {/* ========== TAB 2: VOERTUIG ========== */}
+              <TabsContent value="voertuig" className="space-y-6 mt-6">
+                <div id="section-voertuig">
+                  <VehicleInfoForm
+                    formData={vehicleData}
+                    onChange={handleVehicleChange}
+                    errors={errors}
+                    isEditMode={true}
+                    reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
+                    photos={vehiclePhotos}
+                    photoTypes={photoTypes}
+                    reportId={id}
                   />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="cam_inspection_end_time">Eindtijd</Label>
-                  <Input
-                    id="cam_inspection_end_time"
-                    type="time"
-                    value={inspectionData.inspection_end_time}
-                    onChange={(e) => handleInspectionChange('inspection_end_time', e.target.value)}
+
+                {/* WEV/KLS: Model + Banden via AppraisalFindingsForm */}
+                {report.report_type === 'wev' && (
+                  <AppraisalFindingsForm
+                    formData={appraisalData}
+                    onChange={handleAppraisalChange}
+                    onMultipleChange={handleAppraisalMultipleChange}
+                    rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
+                    allTiresSame={allTiresSame}
+                    onAllTiresSameChange={setAllTiresSame}
+                    reportType="wev"
+                    photos={vehiclePhotos}
+                    photoTypes={photoTypes}
+                    reportId={id}
+                    showSections={['model', 'tires']}
+                  />
+                )}
+
+                {/* KLS: Full AppraisalFindings (includes model, tires) */}
+                {report.report_type === 'klassieker' && (
+                  <AppraisalFindingsForm
+                    formData={appraisalData}
+                    onChange={handleAppraisalChange}
+                    onMultipleChange={handleAppraisalMultipleChange}
+                    rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
+                    allTiresSame={allTiresSame}
+                    onAllTiresSameChange={setAllTiresSame}
+                    reportType="klassieker"
+                    photos={vehiclePhotos}
+                    photoTypes={photoTypes}
+                    reportId={id}
+                  />
+                )}
+
+                {/* CAM: Full AppraisalFindings (includes model, tires, opbouw) */}
+                {(report.report_type === 'camper' || !report.report_type) && (
+                  <AppraisalFindingsForm
+                    formData={appraisalData}
+                    onChange={handleAppraisalChange}
+                    onMultipleChange={handleAppraisalMultipleChange}
+                    rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
+                    allTiresSame={allTiresSame}
+                    onAllTiresSameChange={setAllTiresSame}
+                    reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
+                    photos={vehiclePhotos}
+                    photoTypes={photoTypes}
+                    reportId={id}
+                  />
+                )}
+              </TabsContent>
+
+              {/* ========== TAB 3: STAAT ========== */}
+              <TabsContent value="staat" className="space-y-6 mt-6">
+                {/* WEV: Technische staat + Exterieur + Interieur */}
+                {report.report_type === 'wev' && (
+                  <AppraisalFindingsForm
+                    formData={appraisalData}
+                    onChange={handleAppraisalChange}
+                    onMultipleChange={handleAppraisalMultipleChange}
+                    rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
+                    allTiresSame={allTiresSame}
+                    onAllTiresSameChange={setAllTiresSame}
+                    reportType="wev"
+                    photos={vehiclePhotos}
+                    photoTypes={photoTypes}
+                    reportId={id}
+                    showSections={['technical', 'exterior', 'interior']}
+                  />
+                )}
+
+                {/* WEV/KLS: Algemene indruk */}
+                {(report.report_type === 'wev' || report.report_type === 'klassieker') && (
+                  <div id="section-indruk">
+                    <KlassiekerGeneralImpressionForm
+                      formData={klassiekerImpressionData}
+                      onChange={handleKlassiekerImpressionChange}
+                    />
+                  </div>
+                )}
+
+                {/* CAM: Algemene indruk */}
+                {(report.report_type === 'camper' || !report.report_type) && (
+                  <div id="section-indruk">
+                    <GeneralImpressionForm
+                      formData={impressionData}
+                      onChange={handleImpressionChange}
+                    />
+                  </div>
+                )}
+              </TabsContent>
+
+              {/* ========== TAB 4: FOTO'S ========== */}
+              <TabsContent value="fotos" className="space-y-6 mt-6">
+                <div id="section-fotos">
+                  <PhotoUploadForm
+                    photos={vehiclePhotos}
+                    rotations={photoRotations}
+                    photoTypes={photoTypes}
+                    onChange={handlePhotosChange}
+                    onRotationsChange={handleRotationsChange}
+                    onPhotoTypesChange={handlePhotoTypesChange}
+                    reportId={id}
+                    reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
                   />
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        )}
+              </TabsContent>
 
-        {/* ============================================ */}
-        {/* WEV §2: Inspectiegegevens — before Vehicle   */}
-        {/* ============================================ */}
-        {report.report_type === 'wev' && (
-          <Card id="section-inspectie">
-            <CardHeader>
-              <CardTitle className="text-lg">Inspectiegegevens</CardTitle>
-            </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="wev_inspection_date">Datum opname *</Label>
-                <Input
-                  id="wev_inspection_date"
-                  type="date"
-                  value={inspectionData.inspection_date}
-                  onChange={(e) => handleInspectionChange('inspection_date', e.target.value)}
-                />
-                {!inspectionData.inspection_date && (
-                  <p className="text-xs text-destructive">Verplicht veld</p>
+              {/* ========== TAB 5: WAARDE ========== */}
+              <TabsContent value="waarde" className="space-y-6 mt-6">
+                {/* KLS: Kwaliteitsklasse + Waardevaststelling */}
+                {report.report_type === 'klassieker' && (
+                  <div id="section-waarde">
+                    <KlassiekerValueForm
+                      data={klassiekerValueData}
+                      onChange={handleKlassiekerValueChange}
+                    />
+                  </div>
                 )}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="wev_inspection_location">Plaats opname *</Label>
-                <Input
-                  id="wev_inspection_location"
-                  value={inspectionData.inspection_location}
-                  onChange={(e) => handleInspectionChange('inspection_location', e.target.value)}
-                  placeholder="bijv. Druten"
-                />
-                {!inspectionData.inspection_location && (
-                  <p className="text-xs text-destructive">Verplicht veld</p>
+
+                {/* WEV: Taxatiebestanden */}
+                {report.report_type === 'wev' && (
+                  <WevDocumentUploadForm reportId={id || ''} />
                 )}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="wev_inspection_start_time">Aanvangstijd *</Label>
-                <Input
-                  id="wev_inspection_start_time"
-                  type="time"
-                  value={inspectionData.inspection_start_time}
-                  onChange={(e) => handleInspectionChange('inspection_start_time', e.target.value)}
-                />
-                {!inspectionData.inspection_start_time && (
-                  <p className="text-xs text-destructive">Verplicht veld</p>
+
+                {/* WEV: Marktgegevens + Waarde in het Economisch Verkeer */}
+                {report.report_type === 'wev' && (
+                  <>
+                    <WevAutotelexDataForm
+                      data={wevAutotelexData}
+                      onChange={handleWevAutotelexChange}
+                    />
+                    <WevValueForm
+                      data={wevValueData}
+                      onChange={handleWevValueChange}
+                    />
+                  </>
                 )}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="wev_inspection_end_time">Eindtijd *</Label>
-                <Input
-                  id="wev_inspection_end_time"
-                  type="time"
-                  value={inspectionData.inspection_end_time}
-                  onChange={(e) => handleInspectionChange('inspection_end_time', e.target.value)}
-                />
-                {!inspectionData.inspection_end_time && (
-                  <p className="text-xs text-destructive">Verplicht veld</p>
-                )}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="wev_peildatum">Peildatum</Label>
-                <Input
-                  id="wev_peildatum"
-                  type="date"
-                  value={inspectionData.inspection_date}
-                  disabled
-                  className="bg-muted"
-                />
-                <p className="text-xs text-muted-foreground">
-                  Peildatum is gelijk aan datum opname
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
 
-        {/* ============================================ */}
-        {/* WEV §3: Fotocollectie — before Vehicle (KLS order) */}
-        {/* ============================================ */}
-        {report.report_type === 'wev' && (
-          <div id="section-fotos">
-            <PhotoUploadForm
-              photos={vehiclePhotos}
-              rotations={photoRotations}
-              photoTypes={photoTypes}
-              onChange={handlePhotosChange}
-              onRotationsChange={handleRotationsChange}
-              onPhotoTypesChange={handlePhotoTypesChange}
-              reportId={id}
-              reportType="wev"
-            />
-          </div>
-        )}
+                {/* Opmerkingen — alle types */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Opmerkingen</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2">
+                      <Label htmlFor="general_remarks">Algemene opmerkingen</Label>
+                      <Textarea
+                        id="general_remarks"
+                        value={valuationData.general_remarks}
+                        onChange={(e) => handleValuationChange('general_remarks', e.target.value)}
+                        rows={5}
+                        placeholder="Voeg hier eventuele opmerkingen toe..."
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
 
-        {/* Vehicle Information — ALL types */}
-        {/* CAM: Gebruik/Stalling → Rapporttitel → Voertuigid → Transmissie → Tellerstand → Opbouw */}
-        {/* KLS/WEV: Rapporttitel → Voertuigid → Transmissie → Tellerstand */}
-        <div id="section-voertuig">
-          <VehicleInfoForm
-            formData={vehicleData}
-            onChange={handleVehicleChange}
-            errors={errors}
-            isEditMode={true}
-            reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
-            photos={vehiclePhotos}
-            photoTypes={photoTypes}
-            reportId={id}
-          />
-        </div>
-
-        {/* CAM §5: Fotocollectie — after VehicleInfoForm */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <div id="section-fotos">
-            <PhotoUploadForm
-              photos={vehiclePhotos}
-              rotations={photoRotations}
-              photoTypes={photoTypes}
-              onChange={handlePhotosChange}
-              onRotationsChange={handleRotationsChange}
-              onPhotoTypesChange={handlePhotoTypesChange}
-              reportId={id}
-              reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
-            />
-          </div>
-        )}
-
-        {/* KLS §9-12: Banden, Technische staat, Exterieur, Interieur */}
-        {report.report_type === 'klassieker' && (
-          <AppraisalFindingsForm
-            formData={appraisalData}
-            onChange={handleAppraisalChange}
-            onMultipleChange={handleAppraisalMultipleChange}
-            rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
-            allTiresSame={allTiresSame}
-            onAllTiresSameChange={setAllTiresSame}
-            reportType="klassieker"
-            photos={vehiclePhotos}
-            photoTypes={photoTypes}
-            reportId={id}
-          />
-        )}
-
-        {/* KLS §13: Algemene indruk */}
-        {report.report_type === 'klassieker' && (
-          <div id="section-indruk">
-            <KlassiekerGeneralImpressionForm
-              formData={klassiekerImpressionData}
-              onChange={handleKlassiekerImpressionChange}
-            />
-          </div>
-        )}
-
-        {/* KLS §14: Kwaliteitsklasse + Waardevaststelling */}
-        {report.report_type === 'klassieker' && (
-          <div id="section-waarde">
-            <KlassiekerValueForm
-              data={klassiekerValueData}
-              onChange={handleKlassiekerValueChange}
-            />
-          </div>
-        )}
-
-        {/* CAM: Appraisal Findings — all sections */}
-        {(report.report_type === 'camper' || !report.report_type) && (
-          <AppraisalFindingsForm
-            formData={appraisalData}
-            onChange={handleAppraisalChange}
-            onMultipleChange={handleAppraisalMultipleChange}
-            rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
-            allTiresSame={allTiresSame}
-            onAllTiresSameChange={setAllTiresSame}
-            reportType={report.report_type as 'camper' | 'wev' | 'klassieker' | null}
-            photos={vehiclePhotos}
-            photoTypes={photoTypes}
-            reportId={id}
-          />
-        )}
-
-        {/* WEV §5: Model + Banden (following KLS order) */}
-        {report.report_type === 'wev' && (
-          <AppraisalFindingsForm
-            formData={appraisalData}
-            onChange={handleAppraisalChange}
-            onMultipleChange={handleAppraisalMultipleChange}
-            rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
-            allTiresSame={allTiresSame}
-            onAllTiresSameChange={setAllTiresSame}
-            reportType="wev"
-            photos={vehiclePhotos}
-            photoTypes={photoTypes}
-            reportId={id}
-            showSections={['model', 'tires']}
-          />
-        )}
-
-        {/* WEV §6-8: Technische staat + Exterieur + Interieur (before valuation, KLS order) */}
-        {report.report_type === 'wev' && (
-          <AppraisalFindingsForm
-            formData={appraisalData}
-            onChange={handleAppraisalChange}
-            onMultipleChange={handleAppraisalMultipleChange}
-            rdwHandelsbenaming={vehicleData.rdw_handelsbenaming}
-            allTiresSame={allTiresSame}
-            onAllTiresSameChange={setAllTiresSame}
-            reportType="wev"
-            photos={vehiclePhotos}
-            photoTypes={photoTypes}
-            reportId={id}
-            showSections={['technical', 'exterior', 'interior']}
-          />
-        )}
-
-        {/* WEV §9: Algemene indruk (same form as KLS with default texts) */}
-        {report.report_type === 'wev' && (
-          <KlassiekerGeneralImpressionForm
-            formData={klassiekerImpressionData}
-            onChange={handleKlassiekerImpressionChange}
-          />
-        )}
-
-        {/* WEV §10: Taxatiebestanden */}
-        {report.report_type === 'wev' && (
-          <WevDocumentUploadForm reportId={id || ''} />
-        )}
-
-        {/* WEV §11-12: Marktgegevens + Waarde in het Economisch Verkeer */}
-        {report.report_type === 'wev' && (
-          <>
-            <WevAutotelexDataForm
-              data={wevAutotelexData}
-              onChange={handleWevAutotelexChange}
-            />
-            <WevValueForm
-              data={wevValueData}
-              onChange={handleWevValueChange}
-            />
-          </>
-        )}
-
-        {/* §22 Opmerkingen */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Opmerkingen</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              <Label htmlFor="general_remarks">Algemene opmerkingen</Label>
-              <Textarea
-                id="general_remarks"
-                value={valuationData.general_remarks}
-                onChange={(e) => handleValuationChange('general_remarks', e.target.value)}
-                rows={5}
-                placeholder="Voeg hier eventuele opmerkingen toe..."
-              />
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* No manual save button needed — autosave handles all changes */}
+            {/* No manual save button needed — autosave handles all changes */}
           </form>
 
           {/* Completeness Sidebar - sticky on desktop */}
