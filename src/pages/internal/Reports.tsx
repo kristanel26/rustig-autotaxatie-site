@@ -136,7 +136,8 @@ const Reports = () => {
     return new Date(dateString).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' });
   };
 
-  const colSpan = isAdmin ? 9 : 8;
+  const hasAnyAssigned = filteredReports.some(r => r.assigned_to);
+  const colSpan = isAdmin ? (hasAnyAssigned ? 9 : 8) : (hasAnyAssigned ? 8 : 7);
 
   return (
     <InternalLayout title="Rapporten">

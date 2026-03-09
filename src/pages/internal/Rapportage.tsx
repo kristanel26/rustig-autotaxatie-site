@@ -330,12 +330,12 @@ export default function Rapportage() {
                       <TableBody>
                         {userOverview.map((row, i) => (
                           <TableRow key={`${row.userId}-${row.month}-${i}`}>
-                            <TableCell className="text-sm">{row.email}</TableCell>
-                            <TableCell>{row.monthLabel}</TableCell>
-                            <TableCell className="text-right">{row.klassieker || '–'}</TableCell>
-                            <TableCell className="text-right">{row.camper || '–'}</TableCell>
-                            <TableCell className="text-right">{row.wev || '–'}</TableCell>
-                            <TableCell className="text-right font-semibold">{row.totaal}</TableCell>
+                            <TableCell className="text-sm text-white">{row.email}</TableCell>
+                            <TableCell className="text-white">{row.monthLabel}</TableCell>
+                            <TableCell className="text-right text-white">{row.klassieker || <span className="text-[#9CA3AF]">–</span>}</TableCell>
+                            <TableCell className="text-right text-white">{row.camper || <span className="text-[#9CA3AF]">–</span>}</TableCell>
+                            <TableCell className="text-right text-white">{row.wev || <span className="text-[#9CA3AF]">–</span>}</TableCell>
+                            <TableCell className="text-right font-semibold text-white">{row.totaal}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>

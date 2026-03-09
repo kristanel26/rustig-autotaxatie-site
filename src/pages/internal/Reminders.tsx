@@ -305,15 +305,15 @@ const Reminders = () => {
 
           {/* Actions */}
           <div className="flex gap-2">
-            <Button variant="outline" onClick={fetchReports} disabled={loading}>
+            <Button variant="outline" onClick={fetchReports} disabled={loading} className="text-white">
               <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
               Vernieuwen
             </Button>
-            <Button variant="outline" onClick={exportToCSV} disabled={filteredReports.length === 0}>
+            <Button variant="outline" onClick={exportToCSV} disabled={filteredReports.length === 0} className="text-white">
               <Download className="h-4 w-4 mr-2" />
               CSV Export
             </Button>
-            <Button onClick={runReminders} disabled={processing}>
+            <Button onClick={runReminders} disabled={processing} className="text-white">
               <Play className={`h-4 w-4 mr-2 ${processing ? 'animate-pulse' : ''}`} />
               Verwerk nu
             </Button>
