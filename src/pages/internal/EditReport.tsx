@@ -579,6 +579,8 @@ const EditReport = () => {
         // Pre-fill general impression data (Sectie 16) - for camper
         // For klassieker, use defaults if fields are empty (new report)
         const isKlassieker = reportData.report_type === 'klassieker';
+        const isWev = reportData.report_type === 'wev';
+        const usesKlassiekerImpressions = isKlassieker || isWev;
         const defaultKlassiekerImpressions = getInitialKlassiekerImpressionFormData();
         
         setImpressionData({
