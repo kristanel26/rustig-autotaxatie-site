@@ -185,14 +185,14 @@ const Reports = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[120px]">Rapportnr.</TableHead>
-                <TableHead className="w-[60px]">Type</TableHead>
-                <TableHead className="w-[100px]">Kenteken</TableHead>
-                <TableHead>Voertuig</TableHead>
-                <TableHead>Klant</TableHead>
-                <TableHead className="w-[130px]">Status</TableHead>
-                <TableHead className="w-[100px]">Toegewezen</TableHead>
-                <TableHead className="w-[140px]">Inspectiedatum</TableHead>
+                <TableHead className="w-[120px] text-white font-bold">Rapportnr.</TableHead>
+                <TableHead className="w-[60px] text-white font-bold">Type</TableHead>
+                <TableHead className="w-[100px] text-white font-bold">Kenteken</TableHead>
+                <TableHead className="text-white font-bold">Voertuig</TableHead>
+                <TableHead className="text-white font-bold">Klant</TableHead>
+                <TableHead className="w-[130px] text-white font-bold">Status</TableHead>
+                {hasAnyAssigned && <TableHead className="w-[100px] text-white font-bold">Toegewezen</TableHead>}
+                <TableHead className="w-[140px] text-white font-bold">Inspectiedatum</TableHead>
                 {isAdmin && <TableHead className="w-[60px]"></TableHead>}
               </TableRow>
             </TableHeader>
