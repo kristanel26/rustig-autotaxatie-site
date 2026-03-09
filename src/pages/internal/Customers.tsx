@@ -315,12 +315,12 @@ const Customers = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Naam</TableHead>
-                    <TableHead className="hidden sm:table-cell">Bedrijf</TableHead>
-                    <TableHead className="hidden md:table-cell">Plaats</TableHead>
-                    <TableHead className="hidden lg:table-cell">E-mail</TableHead>
-                    <TableHead className="hidden lg:table-cell">Telefoon</TableHead>
-                    <TableHead className="w-[60px]">Type</TableHead>
+                    <TableHead className="text-white font-bold">Naam</TableHead>
+                    <TableHead className="hidden sm:table-cell text-white font-bold">Bedrijf</TableHead>
+                    <TableHead className="hidden md:table-cell text-white font-bold">Plaats</TableHead>
+                    <TableHead className="hidden lg:table-cell text-white font-bold">E-mail</TableHead>
+                    <TableHead className="hidden lg:table-cell text-white font-bold">Telefoon</TableHead>
+                    <TableHead className="w-[60px] text-white font-bold">Type</TableHead>
                     <TableHead className="w-[80px]"></TableHead>
                   </TableRow>
                 </TableHeader>
