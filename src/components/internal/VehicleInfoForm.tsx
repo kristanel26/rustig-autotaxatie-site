@@ -80,6 +80,10 @@ export interface VehicleFormData {
   stalling: string;
   staat_bij_opname: string;
 
+  // Sectie 8: Specificaties motorvoertuig (Taxateur)
+  interieur_beschrijving: string;
+  stuurpositie: string;
+
   // RDW status
   rdw_data_locked: boolean;
 }
