@@ -601,6 +601,7 @@ const EditReport = () => {
         // Only use defaults if this is a klassieker AND the fields are empty (new report)
         const hasExistingKlassiekerData = (reportData as any).impression_suspension || 
           (reportData as any).impression_wheels_tires || (reportData as any).impression_general;
+        const shouldUseDefaults = usesKlassiekerImpressions && !hasExistingKlassiekerData;
         
         setKlassiekerImpressionData({
           impression_suspension: (reportData as any).impression_suspension || 
