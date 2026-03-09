@@ -358,15 +358,15 @@ const Reminders = () => {
                     className="cursor-pointer hover:bg-muted/50"
                     onClick={() => navigate(`/intern/rapport/${report.id}`)}
                   >
-                    <TableCell className="font-medium">{report.report_number}</TableCell>
-                    <TableCell>
+                    <TableCell className="font-medium text-[#c9a84c]">{report.report_number}</TableCell>
+                    <TableCell className="text-white">
                       {[report.customer_title, report.customer_initials, report.customer_last_name]
                         .filter(Boolean)
-                        .join(' ') || '-'}
+                        .join(' ') || <span className="text-[#9CA3AF]">-</span>}
                     </TableCell>
                     <TableCell>
                       <div className="flex flex-col">
-                        <span>
+                        <span className="text-white">
                           {[
                             report.rdw_merk || report.vehicle_brand,
                             report.rdw_handelsbenaming || report.model_display_name,
@@ -375,19 +375,19 @@ const Reminders = () => {
                             .join(' ') || '-'}
                         </span>
                         {report.license_plate && (
-                          <span className="text-xs text-muted-foreground">
+                          <span className="text-xs text-[#9CA3AF]">
                             {report.license_plate}
                           </span>
                         )}
                       </div>
                     </TableCell>
-                    <TableCell>{formatDate(report.inspection_date)}</TableCell>
-                    <TableCell>{calculateValidUntil(report.inspection_date)}</TableCell>
+                    <TableCell className="text-[#9CA3AF]">{formatDate(report.inspection_date)}</TableCell>
+                    <TableCell className="text-[#9CA3AF]">{calculateValidUntil(report.inspection_date)}</TableCell>
                     <TableCell>{getStatusBadge(report.herinnering_status)}</TableCell>
-                    <TableCell>{formatDate(report.herinnering_verzonden_op)}</TableCell>
-                    <TableCell className="text-xs">{report.herinnering_verzonden_aan_email || '-'}</TableCell>
+                    <TableCell className="text-[#9CA3AF]">{formatDate(report.herinnering_verzonden_op)}</TableCell>
+                    <TableCell className="text-xs text-[#9CA3AF]">{report.herinnering_verzonden_aan_email || '-'}</TableCell>
                     <TableCell className="text-xs text-destructive max-w-[150px] truncate">
-                      {report.herinnering_laatste_fout || '-'}
+                      {report.herinnering_laatste_fout || <span className="text-[#9CA3AF]">-</span>}
                     </TableCell>
                   </TableRow>
                 ))
