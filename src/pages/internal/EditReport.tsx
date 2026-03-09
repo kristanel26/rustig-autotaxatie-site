@@ -1445,7 +1445,7 @@ const EditReport = () => {
         {/* Main content with completeness sidebar */}
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Form content */}
-          <form onSubmit={handleSubmit} className="space-y-6 flex-1 max-w-4xl">
+          <form onSubmit={handleSubmit} className="space-y-6 flex-1">
             {/* Header with Back Button */}
             <div className="flex items-center">
               <Button 
@@ -1463,7 +1463,7 @@ const EditReport = () => {
               <CardHeader>
                 <CardTitle className="text-lg">Rapportgegevens (alleen-lezen)</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Rapportnummer</Label>
                   <Input
@@ -1488,7 +1488,7 @@ const EditReport = () => {
               <CardHeader>
                 <CardTitle className="text-lg">Klantgegevens</CardTitle>
               </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Customer search / link */}
             <div className="md:col-span-2">
               <Label className="text-xs text-muted-foreground mb-1.5 block">Bestaande klant koppelen</Label>
@@ -1530,7 +1530,6 @@ const EditReport = () => {
                 }}
               />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2 md:col-span-2">
               <Label htmlFor="opdrachtgever">Bedrijfsnaam (optioneel)</Label>
               <Input
@@ -1622,7 +1621,6 @@ const EditReport = () => {
             <p className="text-xs text-muted-foreground md:col-span-2">
               Invoer wordt automatisch netjes opgeslagen. E-mail en telefoon zijn alleen voor intern gebruik en verschijnen niet op het PDF-rapport.
             </p>
-            </div>
           </CardContent>
         </Card>
 
