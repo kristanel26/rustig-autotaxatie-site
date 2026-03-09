@@ -20,6 +20,7 @@ interface ReportRow {
   vehicle_model: string | null;
   updated_at: string;
   report_type: string | null;
+  assigned_to?: string | null;
 }
 
 interface SearchResult {
