@@ -1832,6 +1832,24 @@ const EditReport = () => {
           </Card>
         )}
 
+        {/* ============================================ */}
+        {/* WEV §3: Fotocollectie — before Vehicle (KLS order) */}
+        {/* ============================================ */}
+        {report.report_type === 'wev' && (
+          <div id="section-fotos">
+            <PhotoUploadForm
+              photos={vehiclePhotos}
+              rotations={photoRotations}
+              photoTypes={photoTypes}
+              onChange={handlePhotosChange}
+              onRotationsChange={handleRotationsChange}
+              onPhotoTypesChange={handlePhotoTypesChange}
+              reportId={id}
+              reportType="wev"
+            />
+          </div>
+        )}
+
         {/* Vehicle Information — ALL types */}
         {/* CAM: Gebruik/Stalling → Rapporttitel → Voertuigid → Transmissie → Tellerstand → Opbouw */}
         {/* KLS/WEV: Rapporttitel → Voertuigid → Transmissie → Tellerstand */}
