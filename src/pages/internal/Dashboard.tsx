@@ -217,15 +217,20 @@ const Dashboard = () => {
               </div>
             )}
           </div>
-          <Button
-            variant={showOnlyMyReports ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => setShowOnlyMyReports(!showOnlyMyReports)}
-            className="shrink-0 gap-1.5"
-          >
-            <Filter className="h-3.5 w-3.5" />
-            {showOnlyMyReports ? 'Mijn rapporten' : 'Alle taxateurs'}
-          </Button>
+          <Select value={assignedFilter} onValueChange={setAssignedFilter}>
+            <SelectTrigger className="w-[180px] shrink-0">
+              <SelectValue placeholder="Alle taxateurs" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Alle taxateurs</SelectItem>
+              <SelectItem value="mine">Mijn rapporten</SelectItem>
+              {appraisers.map((a) => (
+                <SelectItem key={a.user_id} value={a.user_id}>
+                  {a.displayName}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         {/* New Report Buttons */}
