@@ -5,7 +5,7 @@ import { useToast } from '@/hooks/use-toast';
 import { z } from 'zod';
 import { ArrowRight, Eye, EyeOff } from 'lucide-react';
 
-import logoFull from '@/assets/taxaris-logo-full.svg';
+import logoFull from '@/assets/taxaris-logo-full-white.png';
 
 const loginSchema = z.object({
   email: z.string().trim().email({ message: 'Voer een geldig e-mailadres in' }),
