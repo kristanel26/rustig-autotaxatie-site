@@ -152,6 +152,11 @@
   .intern-theme .label-gold {
     color: hsl(var(--gold-lt));
   }
+
+  /* Date input styling for dark theme */
+  .intern-theme input[type="date"] {
+    color-scheme: dark;
+  }
 }
 
 @layer base {
