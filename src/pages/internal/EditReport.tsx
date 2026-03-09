@@ -1876,8 +1876,8 @@ const EditReport = () => {
 
               {/* ========== TAB 5: WAARDE ========== */}
               <TabsContent value="waarde" className="space-y-6 mt-6">
-                {/* KLS: Kwaliteitsklasse + Waardevaststelling */}
-                {report.report_type === 'klassieker' && (
+                {/* KLS + CAM: Kwaliteitsklasse + Waardevaststelling */}
+                {(report.report_type === 'klassieker' || report.report_type === 'camper') && (
                   <div id="section-waarde">
                     <KlassiekerValueForm
                       data={klassiekerValueData}
