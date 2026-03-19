@@ -454,6 +454,7 @@ const Index = () => {
                   </span>
                 )}
 
+                <div className="flex items-center justify-center mb-4" style={{ width: 56, height: 56 }}>
                   <d.icon size={40} color="#ffffff" />
                 </div>
 
