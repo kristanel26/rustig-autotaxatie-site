@@ -66,12 +66,12 @@ const Index = () => {
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <img src={heroImage} alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(105deg, rgba(29,60,113,0.88) 0%, rgba(29,60,113,0.55) 60%, transparent 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(105deg, rgba(29,60,113,0.82) 0%, rgba(29,60,113,0.60) 55%, rgba(29,60,113,0.25) 100%)' }} />
           <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 30% 60%, rgba(105,141,179,0.18) 0%, transparent 60%)' }} />
         </div>
 
         <div className="max-w-7xl mx-auto w-full px-6 lg:px-8 py-24 md:py-36 relative z-10">
-          <div style={{ maxWidth: 600 }}>
+          <div style={{ maxWidth: 560 }}>
             <p className="animate-slide-up uppercase font-semibold tracking-[0.13em] mb-5" style={{ fontSize: 11, color: '#ff751f' }}>
               Erkend taxatiebureau &mdash; landelijk actief
             </p>
@@ -81,10 +81,12 @@ const Index = () => {
                 fontSize: 'clamp(44px, 5.5vw, 68px)',
                 lineHeight: 1.08,
                 letterSpacing: '-0.025em',
-                maxWidth: 600,
+                maxWidth: 560,
               }}
             >
-              De laagst haalbare BPM. Fysiek onderbouwd. Juridisch verdedigbaar.
+              De laagst haalbare BPM.<br />
+              Fysiek onderbouwd.<br />
+              Juridisch verdedigbaar.
             </h1>
             <p
               className="animate-slide-up delay-200 mb-10"
@@ -124,7 +126,7 @@ const Index = () => {
             >
               Bereken uw BPM indicatie
             </h2>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(16px, 1.8vw, 19px)', fontWeight: 400, lineHeight: 1.70, color: '#698db3', maxWidth: 540 }} className="mb-8">
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 400, lineHeight: 1.70, color: '#4a5568', maxWidth: 540 }} className="mb-8">
               Gebruik onze calculator voor een eerste indicatie van de BPM-kosten bij import. Let op: een berekening is geen taxatie en biedt geen juridische onderbouwing.
             </p>
             <div
@@ -213,7 +215,7 @@ const Index = () => {
       </section>
 
       {/* ── USP BAR ── */}
-      <section className="px-6 lg:px-8" style={{ background: '#ffffff', padding: '48px 0' }}>
+      <section style={{ background: '#ffffff', borderTop: '3px solid #ff751f', boxShadow: '0 4px 24px rgba(29,60,113,0.06)', padding: '40px 0' }} className="px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 px-6 lg:px-8">
           {usps.map((usp, i) => (
             <div key={i} className="text-center relative">
@@ -223,8 +225,8 @@ const Index = () => {
               >
                 <usp.icon className="w-8 h-8" />
               </div>
-              <h4 style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 600, color: '#1a1a1a' }} className="mb-1">{usp.title}</h4>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#698db3' }}>{usp.sub}</p>
+              <h4 className="heading-display mb-1" style={{ fontSize: 16, fontWeight: 600, color: '#1a1a1a' }}>{usp.title}</h4>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#698db3', lineHeight: 1.5 }}>{usp.sub}</p>
               {i < usps.length - 1 && (
                 <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 h-12" style={{ width: 1, background: '#e8edf3' }} />
               )}
@@ -291,30 +293,38 @@ const Index = () => {
           >
             Wat kunnen wij voor u doen?
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {services.map((service, i) => (
               <Link
                 key={i}
                 to={service.href}
-                className={`group card-elevated p-6 ${
+                className={`group card-elevated p-6 relative ${
                   service.highlight
                     ? "col-span-1 lg:col-span-2 sm:col-span-2"
                     : ""
                 }`}
                 style={{
-                  background: service.highlight ? 'rgba(255,117,31,0.03)' : '#ffffff',
-                  borderColor: service.highlight ? 'rgba(255,117,31,0.20)' : undefined,
+                  background: service.highlight ? 'linear-gradient(135deg, #ffffff 0%, #fff8f4 100%)' : '#ffffff',
+                  border: service.highlight ? '2px solid rgba(255,117,31,0.35)' : undefined,
                 }}
               >
+                {service.highlight && (
+                  <span className="absolute top-4 right-4 text-white font-bold text-[10px] tracking-[0.08em] uppercase px-2.5 py-1 rounded-full" style={{ background: '#ff751f' }}>
+                    Meest gekozen
+                  </span>
+                )}
                 <div
-                  className="inline-flex items-center justify-center w-10 h-10 rounded-lg mb-4"
-                  style={{ background: service.highlight ? 'rgba(255,117,31,0.10)' : 'rgba(29,60,113,0.08)' }}
+                  className="inline-flex items-center justify-center rounded-xl mb-4"
+                  style={{
+                    width: 52, height: 52,
+                    background: service.highlight ? 'rgba(255,117,31,0.12)' : '#f0f4f8',
+                  }}
                 >
-                  <service.icon className="w-5 h-5" style={{ color: service.highlight ? '#ff751f' : '#1d3c71' }} />
+                  <service.icon style={{ width: 26, height: 26, color: service.highlight ? '#ff751f' : '#1d3c71' }} />
                 </div>
-                <h3 style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 600, color: '#1a1a1a' }} className="mb-1.5">{service.title}</h3>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.72, color: '#4a5568' }} className="mb-3">{service.description}</p>
-                <span className="text-sm font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all" style={{ color: '#ff751f' }}>
+                <h3 className="heading-display mb-1.5" style={{ fontSize: 18, fontWeight: 600, color: '#1a1a1a' }}>{service.title}</h3>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13.5, fontWeight: 400, lineHeight: 1.65, color: '#6b7a8d' }} className="mb-3">{service.description}</p>
+                <span className="text-[13px] font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition-all" style={{ color: '#ff751f' }}>
                   Meer info <ArrowRight className="w-3.5 h-3.5" />
                 </span>
               </Link>
