@@ -115,8 +115,8 @@ const Index = () => {
       </section>
 
       {/* ── BPM CALCULATOR ── */}
-      <section style={{ background: '#f0f4f8' }} className="py-16 md:py-24 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-start">
+      <section className="py-16 md:py-24 px-6 lg:px-8 bg-white">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-start">
           <div>
             <h2
               className="heading-display font-bold mb-4"
@@ -127,7 +127,13 @@ const Index = () => {
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(16px, 1.8vw, 19px)', fontWeight: 400, lineHeight: 1.70, color: '#698db3', maxWidth: 540 }} className="mb-8">
               Gebruik onze calculator voor een eerste indicatie van de BPM-kosten bij import. Let op: een berekening is geen taxatie en biedt geen juridische onderbouwing.
             </p>
-            <div className="card-elevated p-7">
+            <div
+              className="rounded-[14px] p-7 bg-white"
+              style={{
+                boxShadow: '0 4px 24px rgba(29,60,113,0.10), 0 1px 6px rgba(0,0,0,0.05)',
+                border: '1px solid rgba(29,60,113,0.08)',
+              }}
+            >
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium mb-1.5" style={{ color: '#1a1a1a' }}>Datum eerste toelating</label>
@@ -187,14 +193,16 @@ const Index = () => {
             </div>
           </div>
           <div
-            className="rounded-[14px] p-10 text-white overflow-hidden"
+            className="rounded-[14px] p-8 text-white overflow-hidden"
             style={{
               background: '#1d3c71',
               backgroundImage: 'radial-gradient(ellipse at 20% 50%, rgba(105,141,179,0.20) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 50%)',
+              height: 'fit-content',
+              alignSelf: 'start',
             }}
           >
             <h3 className="heading-display text-2xl mb-4">Twijfelt u na de berekening?</h3>
-            <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 'clamp(16px, 1.8vw, 19px)', lineHeight: 1.70 }} className="mb-6">
+            <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.70 }} className="mb-6">
               Vraag gratis BPM advies aan. Wij bepalen de laagst haalbare BPM voor uw specifieke voertuig.
             </p>
             <Link to="/contact">
