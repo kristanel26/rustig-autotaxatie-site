@@ -49,7 +49,7 @@ const SiteFooter = () => {
   return (
     <>
       {/* Newsletter bar */}
-      <section className="bg-pattern py-10 px-6">
+      <section className="py-10 px-6" style={{ background: '#f0f4f8' }}>
         <div className="max-w-2xl mx-auto text-center">
           <p className="text-foreground font-medium mb-4">
             Blijf op de hoogte van BPM-nieuws en wijzigingen in de regelgeving.
