@@ -21,6 +21,7 @@ import VerzekeringstaxatieInfo from "./pages/VerzekeringstaxatieInfo";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
+import Blog from "./pages/Blog";
 
 // Internal pages
 import Login from "./pages/internal/Login";
