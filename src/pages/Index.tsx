@@ -213,11 +213,12 @@ const Index = () => {
             className="rounded-[14px] overflow-hidden flex flex-col self-stretch"
             style={{ boxShadow: '0 4px 24px rgba(29,60,113,0.12)' }}
           >
-            <div className="w-full h-[200px] overflow-hidden flex-shrink-0">
+            <div className="w-full h-[260px] overflow-hidden flex-shrink-0">
               <img
                 src={erikInspectie}
-                alt="BPM taxatie op locatie"
-                className="w-full h-full object-cover object-center"
+                alt="Erik Elderson fotografeert een auto tijdens taxatie"
+                className="w-full h-full object-cover"
+                style={{ objectPosition: '50% 35%' }}
               />
             </div>
             <div
