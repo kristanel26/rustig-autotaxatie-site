@@ -279,8 +279,13 @@
 
   /* Nav link with animated underline */
   .nav-link {
-    @apply relative text-sm font-medium tracking-[0.02em] transition-colors;
-    color: hsl(0 0% 10% / 0.70);
+    position: relative;
+    color: #1a1a1a;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    padding-bottom: 2px;
   }
 
   .nav-link::after {
@@ -290,8 +295,8 @@
     left: 0;
     width: 0;
     height: 2px;
-    background: hsl(var(--primary));
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #ff751f;
+    transition: width 200ms ease;
   }
 
   .nav-link:hover {
