@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, Calculator, Caravan, Car, Bike, Truck, Wrench, ChevronRight, Search, MessageCircle, Handshake, Clock, UtensilsCrossed } from "lucide-react";
+import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, Calculator, Car, Bike, Truck, Wrench, ChevronRight, Search, MessageCircle, Handshake, Clock, UtensilsCrossed } from "lucide-react";
 import erikPhoto from "@/assets/erik-elderson.png";
+import erikInspectie from "@/assets/erik-inspectie.jpg";
 import heroImage from "@/assets/hero-homepage.jpg";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
