@@ -128,6 +128,27 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ── USP BAR ── */}
+      <section style={{ background: '#ffffff', borderTop: '3px solid #ff751f', boxShadow: '0 4px 24px rgba(29,60,113,0.06)', padding: '40px 0' }} className="px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 px-6 lg:px-8">
+          {usps.map((usp, i) => (
+            <div key={i} className="text-center relative">
+              <div
+                className="mx-auto mb-3.5 flex items-center justify-center"
+                style={{ width: 56, height: 56, borderRadius: '50%', background: '#f0f4f8', color: '#1d3c71' }}
+              >
+                <usp.icon className="w-8 h-8" />
+              </div>
+              <h4 className="heading-display mb-1" style={{ fontSize: 16, fontWeight: 600, color: '#1a1a1a' }}>{usp.title}</h4>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#698db3', lineHeight: 1.5 }}>{usp.sub}</p>
+              {i < usps.length - 1 && (
+                <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 h-12" style={{ width: 1, background: '#e8edf3' }} />
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ── BPM CALCULATOR ── */}
       <section className="py-16 md:py-24 px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-stretch">
@@ -247,27 +268,6 @@ const Index = () => {
               </Link>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ── USP BAR ── */}
-      <section style={{ background: '#ffffff', borderTop: '3px solid #ff751f', boxShadow: '0 4px 24px rgba(29,60,113,0.06)', padding: '40px 0' }} className="px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 px-6 lg:px-8">
-          {usps.map((usp, i) => (
-            <div key={i} className="text-center relative">
-              <div
-                className="mx-auto mb-3.5 flex items-center justify-center"
-                style={{ width: 56, height: 56, borderRadius: '50%', background: '#f0f4f8', color: '#1d3c71' }}
-              >
-                <usp.icon className="w-8 h-8" />
-              </div>
-              <h4 className="heading-display mb-1" style={{ fontSize: 16, fontWeight: 600, color: '#1a1a1a' }}>{usp.title}</h4>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#698db3', lineHeight: 1.5 }}>{usp.sub}</p>
-              {i < usps.length - 1 && (
-                <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 h-12" style={{ width: 1, background: '#e8edf3' }} />
-              )}
-            </div>
-          ))}
         </div>
       </section>
 
