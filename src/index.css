@@ -239,21 +239,30 @@
 
   /* Premium CTA button */
   .btn-cta {
+    height: 52px;
+    padding: 0 32px;
     background: #ff751f;
     color: #ffffff;
-    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
     font-weight: 600;
     letter-spacing: 0.02em;
-    padding: 10px 22px;
     border-radius: 6px;
-    border: none;
-    box-shadow: 0 2px 12px rgba(255,117,31,0.30);
+    border: 2px solid #ff751f;
+    box-shadow: 0 4px 16px rgba(255,117,31,0.35);
     transition: background 200ms ease, box-shadow 200ms ease, transform 150ms ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+    cursor: pointer;
   }
 
   .btn-cta:hover {
     background: #e8651a;
-    box-shadow: 0 4px 18px rgba(255,117,31,0.42);
+    border-color: #e8651a;
+    box-shadow: 0 6px 20px rgba(255,117,31,0.45);
     transform: translateY(-1px);
   }
 
@@ -264,17 +273,28 @@
 
   /* Outline button on dark */
   .btn-outline-white {
-    @apply font-semibold text-[15px] tracking-[0.03em] text-white;
-    border: 2px solid rgba(255,255,255,0.7);
+    height: 52px;
+    padding: 0 32px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    border: 2px solid rgba(255,255,255,0.65);
     background: transparent;
-    padding: 14px 28px;
     border-radius: 6px;
-    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 200ms ease;
   }
 
   .btn-outline-white:hover {
-    background: rgba(255,255,255,0.12);
-    border-color: #fff;
+    background: rgba(255,255,255,0.10);
+    border-color: #ffffff;
   }
 
   /* Nav link with animated underline */
@@ -373,9 +393,9 @@
     background-clip: text;
   }
 
-  /* Section diagonal clip */
+  /* Section diagonal clip — removed */
   .section-clip-bottom {
-    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+    clip-path: none;
   }
 
   /* Clean background — no patterns */

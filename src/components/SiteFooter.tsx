@@ -79,7 +79,7 @@ const SiteFooter = () => {
           <div className="grid md:grid-cols-3 gap-10 mb-10">
             {/* Column 1 - About */}
             <div className="border-b border-white/10 pb-8 md:border-0 md:pb-0">
-              <img src={logo} alt="Automobiel Taxaties" className="h-10 w-auto mb-4 brightness-0 invert" />
+              <img src={logo} alt="Automobiel Taxaties" className="h-12 w-auto mb-4 brightness-0 invert" />
               <p className="text-white/70 text-sm leading-relaxed mb-6">
                 Erkend taxatiebureau voor BPM, verzekering en waardebepaling. Landelijk actief vanuit Druten.
               </p>
@@ -149,12 +149,12 @@ const SiteFooter = () => {
       </footer>
 
       {/* Certifications bar */}
-      <div className="bg-[hsl(216,58%,22%)] py-5 px-6 border-t border-white/10">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-8">
-          <img src={logoTmv} alt="TMV Federatie" className="h-8 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-          <img src={logoVrt} alt="VRT Register" className="h-8 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-          <img src={logoFehac} alt="FEHAC" className="h-8 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-          <img src={logoHobeon} alt="Hobeon" className="h-8 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+      <div className="bg-[hsl(216,58%,22%)] py-6 px-6 border-t border-white/10">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-10">
+          <img src={logoTmv} alt="TMV Federatie" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
+          <img src={logoVrt} alt="VRT Register" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
+          <img src={logoFehac} alt="FEHAC" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
+          <img src={logoHobeon} alt="Hobeon" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
         </div>
       </div>
 
