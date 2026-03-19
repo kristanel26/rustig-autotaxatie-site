@@ -7,22 +7,24 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
-const services = [
+const importServices = [
   { title: "BPM Taxatie", description: "De laagst haalbare BPM voor je importvoertuig.", href: "/bpm-taxatie", icon: Calculator, highlight: true },
-  { title: "Verzekeringstaxatie", description: "De juiste waarde voor je verzekeringspolis.", href: "/verzekeringstaxatie-info", icon: Shield },
   { title: "WEV Taxatie", description: "Objectieve waardebepaling voor fiscale doeleinden.", href: "/wev-taxatie", icon: ScaleIcon },
+  { title: "Schadevaststelling", description: "Onafhankelijke vaststelling na schade.", href: "/schadevaststelling", icon: Wrench },
+];
+
+const verzekeringsServices = [
   { title: "Camper Taxatie", description: "Specifieke kennis van de campermarkt.", href: "/camper-taxatie", icon: Caravan },
   { title: "Oldtimer Taxatie", description: "Waardering met oog voor detail en historie.", href: "/oldtimer-taxatie", icon: Car },
   { title: "Youngtimer Taxatie", description: "Taxatie van voertuigen vanaf 15 jaar oud.", href: "/youngtimer-taxatie", icon: Car },
   { title: "Motor Taxatie", description: "Professionele waardering van motorfietsen.", href: "/motor-taxatie", icon: Bike },
   { title: "Foodtruck Taxatie", description: "Taxatie van mobiele horecavoertuigen.", href: "/foodtruck-taxatie", icon: Truck },
-  { title: "Schadevaststelling", description: "Onafhankelijke vaststelling na schade.", href: "/schadevaststelling", icon: Wrench },
 ];
 
 const usps = [
   { icon: Award, title: "Erkend taxateur", sub: "Geregistreerd bij TMV en VRT" },
-  { icon: MapPin, title: "Op locatie", sub: "Wij komen naar uw voertuig toe" },
-  { icon: Shield, title: "Juridisch verdedigbaar", sub: "Elk rapport standhoudt bij de Belastingdienst" },
+  { icon: MapPin, title: "Op locatie", sub: "Wij komen naar je voertuig toe" },
+  { icon: Shield, title: "Juridisch verdedigbaar", sub: "Elk rapport houdt stand bij de Belastingdienst" },
   { icon: Users, title: "Persoonlijk contact", sub: "Direct contact met de taxateur" },
 ];
 
@@ -71,22 +73,31 @@ const Index = () => {
         </div>
 
         <div className="max-w-7xl mx-auto w-full px-6 lg:px-8 py-24 md:py-36 relative z-10">
-          <div style={{ maxWidth: 560 }}>
-            <p className="animate-slide-up uppercase font-semibold tracking-[0.13em] mb-5" style={{ fontSize: 11, color: '#ff751f' }}>
+          <div style={{ maxWidth: 620 }}>
+            <p
+              className="animate-slide-up flex items-center gap-2.5 mb-5"
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 12,
+                fontWeight: 700,
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase' as const,
+                color: '#ff751f',
+              }}
+            >
+              <span style={{ display: 'inline-block', width: 28, height: 2, background: '#ff751f', flexShrink: 0 }} />
               Erkend taxatiebureau &mdash; landelijk actief
             </p>
             <h1
               className="animate-slide-up delay-100 heading-display text-white font-bold mb-6"
               style={{
-                fontSize: 'clamp(44px, 5.5vw, 68px)',
-                lineHeight: 1.08,
-                letterSpacing: '-0.025em',
-                maxWidth: 560,
+                fontSize: 'clamp(38px, 4.8vw, 62px)',
+                lineHeight: 1.10,
+                letterSpacing: '-0.02em',
+                maxWidth: 620,
               }}
             >
-              De laagst haalbare BPM.<br />
-              Fysiek onderbouwd.<br />
-              Juridisch verdedigbaar.
+              De laagst haalbare BPM. Fysiek onderbouwd. Juridisch verdedigbaar.
             </h1>
             <p
               className="animate-slide-up delay-200 mb-10"
@@ -99,14 +110,14 @@ const Index = () => {
                 maxWidth: 540,
               }}
             >
-              Automobieltaxaties.nl is het erkende taxatiebureau voor merkdealers, importeurs en particulieren. Wij komen bij u op locatie, door heel Nederland.
+              Automobieltaxaties.nl is het erkende taxatiebureau voor merkdealers, importeurs en particulieren. Wij komen bij je op locatie, door heel Nederland.
             </p>
-            <div className="animate-slide-up delay-300 flex flex-col sm:flex-row gap-3">
+            <div className="animate-slide-up delay-300 flex flex-col sm:flex-row gap-3 items-center">
               <Link to="/contact">
                 <button className="btn-cta">Taxatie aanvragen</button>
               </Link>
               <a href="tel:+31854832461">
-                <button className="btn-outline-white flex items-center gap-2">
+                <button className="btn-outline-white">
                   <Phone className="w-5 h-5" />
                   085 483 2461
                 </button>
@@ -118,19 +129,19 @@ const Index = () => {
 
       {/* ── BPM CALCULATOR ── */}
       <section className="py-16 md:py-24 px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-start">
-          <div>
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-stretch">
+          <div className="flex flex-col">
             <h2
               className="heading-display font-bold mb-4"
               style={{ fontSize: 'clamp(30px, 3.5vw, 44px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#1a1a1a' }}
             >
-              Bereken uw BPM indicatie
+              Bereken je BPM indicatie
             </h2>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 400, lineHeight: 1.70, color: '#4a5568', maxWidth: 540 }} className="mb-8">
               Gebruik onze calculator voor een eerste indicatie van de BPM-kosten bij import. Let op: een berekening is geen taxatie en biedt geen juridische onderbouwing.
             </p>
             <div
-              className="rounded-[14px] p-7 bg-white"
+              className="rounded-[14px] p-7 bg-white flex-1"
               style={{
                 boxShadow: '0 4px 24px rgba(29,60,113,0.10), 0 1px 6px rgba(0,0,0,0.05)',
                 border: '1px solid rgba(29,60,113,0.08)',
@@ -195,17 +206,15 @@ const Index = () => {
             </div>
           </div>
           <div
-            className="rounded-[14px] p-8 text-white overflow-hidden"
+            className="rounded-[14px] p-8 text-white overflow-hidden flex flex-col justify-center"
             style={{
               background: '#1d3c71',
               backgroundImage: 'radial-gradient(ellipse at 20% 50%, rgba(105,141,179,0.20) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 50%)',
-              height: 'fit-content',
-              alignSelf: 'start',
             }}
           >
-            <h3 className="heading-display text-2xl mb-4">Twijfelt u na de berekening?</h3>
-            <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 15, lineHeight: 1.70 }} className="mb-6">
-              Vraag gratis BPM advies aan. Wij bepalen de laagst haalbare BPM voor uw specifieke voertuig.
+            <h3 className="heading-display text-2xl font-bold mb-3" style={{ color: '#ffffff' }}>Twijfel je na de berekening?</h3>
+            <p style={{ color: 'rgba(255, 255, 255, 0.88)', fontSize: 15, lineHeight: 1.70 }} className="mb-6">
+              Vraag gratis BPM-advies aan. Wij bepalen de laagst haalbare BPM voor jouw specifieke voertuig.
             </p>
             <Link to="/contact">
               <button className="btn-cta">Gratis advies aanvragen</button>
@@ -250,7 +259,7 @@ const Index = () => {
           </div>
           <div>
             <span className="block mb-3" style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase' as const, color: '#ff751f' }}>
-              Uw taxateur
+              Jouw taxateur
             </span>
             <h2
               className="heading-display font-bold mb-2"
@@ -259,13 +268,16 @@ const Index = () => {
               Erik Elderson
             </h2>
             <p style={{ color: '#698db3', fontSize: 16 }} className="mb-6">
-              Eigenaar &mdash; Notarieel Beëdigd TMV Register Taxateur &mdash; Register Taxateur VRT
+              Eigenaar · Notarieel Beëdigd TMV Register Taxateur · Register Taxateur VRT
             </p>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.72, color: '#4a5568' }} className="mb-4">
-              Automobiel Taxaties werkt onafhankelijk en met meer dan 15 jaar ervaring in voertuigwaarderingen. Ik neem de tijd om een voertuig goed te bekijken en leg vast wat écht van invloed is op de waarde.
+              Erik Elderson taxeert al meer dan 15 jaar voertuigen, van gewone personenauto's tot oldtimers, campers en foodtrucks. Hij werkt als notarieel beëdigd TMV Register Taxateur en VRT Register Taxateur.
+            </p>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.72, color: '#4a5568' }} className="mb-4">
+              Zijn rapporten staan bij de Belastingdienst. Niet omdat hij een formulier invult, maar omdat hij het voertuig fysiek inspecteert, meet en documenteert.
             </p>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.72, color: '#4a5568' }} className="mb-6">
-              Geen aannames, geen haastwerk. Zo ontvang je een duidelijk en zorgvuldig opgesteld taxatierapport waar je op kunt vertrouwen.
+              Je krijgt altijd direct contact met Erik zelf, geen callcenter, geen tussenpersoon.
             </p>
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-3">
@@ -274,7 +286,7 @@ const Index = () => {
               </div>
               <div className="flex items-center gap-3">
                 <span className="w-5 h-0.5 rounded-full" style={{ background: '#ff751f' }} />
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 500, color: '#1a1a1a' }}>Landelijk actief, op locatie bij u</span>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 500, color: '#1a1a1a' }}>Landelijk actief, op locatie bij je</span>
               </div>
             </div>
             <Link to="/werkwijze" className="text-sm font-semibold hover:underline inline-flex items-center gap-1" style={{ color: '#ff751f' }}>
@@ -291,18 +303,19 @@ const Index = () => {
             className="heading-display font-bold text-center mb-14"
             style={{ fontSize: 'clamp(30px, 3.5vw, 44px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#1a1a1a' }}
           >
-            Wat kunnen wij voor u doen?
+            Wat kunnen wij voor je doen?
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {services.map((service, i) => (
+
+          {/* Groep 1: Importtaxatie */}
+          <p className="mb-4" style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 600, letterSpacing: '0.10em', textTransform: 'uppercase' as const, color: '#698db3' }}>
+            BPM &amp; Waardebepaling
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+            {importServices.map((service, i) => (
               <Link
                 key={i}
                 to={service.href}
-                className={`group card-elevated p-6 relative ${
-                  service.highlight
-                    ? "col-span-1 lg:col-span-2 sm:col-span-2"
-                    : ""
-                }`}
+                className={`group card-elevated p-6 relative ${service.highlight ? "sm:col-span-2 lg:col-span-2" : ""}`}
                 style={{
                   background: service.highlight ? 'linear-gradient(135deg, #ffffff 0%, #fff8f4 100%)' : '#ffffff',
                   border: service.highlight ? '2px solid rgba(255,117,31,0.35)' : undefined,
@@ -321,6 +334,33 @@ const Index = () => {
                   }}
                 >
                   <service.icon style={{ width: 26, height: 26, color: service.highlight ? '#ff751f' : '#1d3c71' }} />
+                </div>
+                <h3 className="heading-display mb-1.5" style={{ fontSize: 18, fontWeight: 600, color: '#1a1a1a' }}>{service.title}</h3>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13.5, fontWeight: 400, lineHeight: 1.65, color: '#6b7a8d' }} className="mb-3">{service.description}</p>
+                <span className="text-[13px] font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition-all" style={{ color: '#ff751f' }}>
+                  Meer info <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          {/* Groep 2: Verzekeringstaxatie */}
+          <p className="mb-4" style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 600, letterSpacing: '0.10em', textTransform: 'uppercase' as const, color: '#698db3' }}>
+            Verzekeringstaxatie
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {verzekeringsServices.map((service, i) => (
+              <Link
+                key={i}
+                to={service.href}
+                className="group card-elevated p-6"
+                style={{ background: '#ffffff' }}
+              >
+                <div
+                  className="inline-flex items-center justify-center rounded-xl mb-4"
+                  style={{ width: 52, height: 52, background: '#f0f4f8' }}
+                >
+                  <service.icon style={{ width: 26, height: 26, color: '#1d3c71' }} />
                 </div>
                 <h3 className="heading-display mb-1.5" style={{ fontSize: 18, fontWeight: 600, color: '#1a1a1a' }}>{service.title}</h3>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13.5, fontWeight: 400, lineHeight: 1.65, color: '#6b7a8d' }} className="mb-3">{service.description}</p>
@@ -353,7 +393,7 @@ const Index = () => {
               Waarom kiezen klanten ons?
             </h2>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(16px, 1.8vw, 19px)', fontWeight: 400, lineHeight: 1.70, color: 'rgba(255,255,255,0.72)', maxWidth: 540 }} className="mx-auto">
-              Niet omdat wij de goedkoopste zijn. Maar omdat onze rapporten standhouden bij de Belastingdienst — en dat levert klanten gemiddeld duizenden euro's op.
+              Niet omdat wij de goedkoopste zijn. Maar omdat onze rapporten standhouden bij de Belastingdienst, en dat levert klanten gemiddeld duizenden euro's op.
             </p>
           </div>
 
@@ -363,17 +403,17 @@ const Index = () => {
               {
                 icon: Search,
                 title: "Fysieke inspectie, geen software",
-                text: "Wij komen op locatie bij uw voertuig. Lakdiktemetingen, schadecalculatie en een volledig fotodossier vormen de basis van elk rapport. Niet een algoritme — maar een erkende taxateur met twee ogen en vakkennis.",
+                text: "Wij komen op locatie bij je voertuig. Lakdiktemetingen, schadecalculatie en een volledig fotodossier vormen de basis van elk rapport. Niet een algoritme, maar een erkende taxateur met twee ogen en vakkennis.",
               },
               {
                 icon: Award,
                 title: "Erkend en juridisch verdedigbaar",
-                text: "Ons rapport is opgesteld door een notarieel beëdigd TMV Register Taxateur. Het staat bij bezwaar, beroep en navorderingen van de Belastingdienst. Klanten die twijfelden aan een rapport elders, kwamen bij ons terecht — en kregen gelijk.",
+                text: "Ons rapport is opgesteld door een notarieel beëdigd TMV Register Taxateur. Het staat bij bezwaar, beroep en navorderingen van de Belastingdienst. Klanten die twijfelden aan een rapport elders, kwamen bij ons terecht en kregen gelijk.",
               },
               {
                 icon: Handshake,
                 title: "Gratis advies, eerlijk antwoord",
-                text: "Wij berekenen altijd eerst vrijblijvend of een taxatierapport loont voor uw situatie. Is het niet zinvol? Dan zeggen wij dat gewoon. Zo weet u waar u aan toe bent — zonder verrassingen achteraf.",
+                text: "Wij berekenen altijd eerst vrijblijvend of een taxatierapport loont voor jouw situatie. Is het niet zinvol? Dan zeggen wij dat gewoon. Zo weet je waar je aan toe bent, zonder verrassingen achteraf.",
               },
             ].map((item, i) => (
               <div
@@ -398,7 +438,7 @@ const Index = () => {
           <div className="grid grid-cols-3 gap-0 mb-12">
             {[
               { num: "1.200+", label: "Taxaties uitgevoerd" },
-              { num: "€ 2.400", label: "Gemiddelde BPM-besparing per voertuig" },
+              { num: "15 jaar", label: "Ervaring in voertuigtaxaties" },
               { num: "98%", label: "Rapporten geaccepteerd door Belastingdienst" },
             ].map((stat, i) => (
               <div key={i} className={`text-center py-6 ${i > 0 ? "border-l" : ""}`} style={{ borderColor: 'rgba(255,255,255,0.15)' }}>
@@ -465,9 +505,9 @@ const Index = () => {
       >
         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-0 text-white text-center relative z-10">
           {[
-            { title: "Merkdealers en groothandelaren", sub: "Professionele taxatierapporten voor uw bedrijfsvoering en handelsvoorraad." },
+            { title: "Merkdealers en groothandelaren", sub: "Professionele taxatierapporten voor je bedrijfsvoering en handelsvoorraad." },
             { title: "Importeurs en handelaren", sub: "De laagst haalbare BPM met een juridisch waterdicht rapport als onderbouwing." },
-            { title: "Particulieren", sub: "Persoonlijke begeleiding bij het taxeren van uw voertuig voor verzekering of import." },
+            { title: "Particulieren", sub: "Persoonlijke begeleiding bij het taxeren van je voertuig voor verzekering of import." },
           ].map((item, i) => (
             <div key={i} className={`py-8 px-8 ${i > 0 ? "md:border-l" : ""}`} style={{ borderColor: 'rgba(255,255,255,0.15)' }}>
               <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ background: 'rgba(255,255,255,0.15)' }}>
@@ -524,7 +564,7 @@ const Index = () => {
 
       {/* ── CTA BLOCK ── */}
       <section
-        className="py-16 md:py-20 px-6 lg:px-8 text-center overflow-hidden section-clip-bottom"
+        className="py-16 md:py-20 px-6 lg:px-8 text-center overflow-hidden"
         style={{
           background: '#1d3c71',
           backgroundImage: 'radial-gradient(ellipse at 20% 50%, rgba(105,141,179,0.20) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 50%)',
@@ -538,14 +578,14 @@ const Index = () => {
             Vragen of een taxatie nodig?
           </h2>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(16px, 1.8vw, 19px)', fontWeight: 400, lineHeight: 1.70, color: 'rgba(255,255,255,0.72)' }} className="mb-10">
-            Neem contact op om uw situatie te bespreken. We kijken graag mee welke taxatie bij uw vraag past.
+            Neem contact op om jouw situatie te bespreken. We kijken graag mee welke taxatie bij je vraag past.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <Link to="/contact">
               <button className="btn-cta">Taxatie aanvragen</button>
             </Link>
             <a href="tel:+31854832461">
-              <button className="btn-outline-white flex items-center gap-2">
+              <button className="btn-outline-white">
                 <Phone className="w-5 h-5" />
                 085 483 2461
               </button>
