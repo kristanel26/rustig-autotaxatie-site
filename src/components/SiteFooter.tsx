@@ -80,7 +80,8 @@ const SiteFooter = () => {
           <div className="grid md:grid-cols-3 gap-10 mb-10">
             {/* Column 1 - About */}
             <div className="border-b border-white/10 pb-8 md:border-0 md:pb-0 flex flex-col items-start">
-              <img src={logo} alt="Automobiel Taxaties" className="h-12 w-auto mb-4 brightness-0 invert" />
+              <div className="w-9 h-[3px] bg-[#ff751f] mb-4" />
+              <img src={logo} alt="Automobiel Taxaties" className="h-[52px] w-auto mb-5 brightness-0 invert opacity-100" />
               <p className="text-white/70 text-sm leading-relaxed mb-6 text-left">
                 Erkend taxatiebureau voor BPM, verzekering en waardebepaling. Landelijk actief vanuit Druten.
               </p>
