@@ -21,10 +21,10 @@ const diensten = [
 ];
 
 const usps = [
-  { icon: Award, title: "Erkend taxateur", sub: "Geregistreerd bij TMV en VRT" },
-  { icon: MapPin, title: "Op locatie", sub: "Wij komen naar je voertuig toe" },
-  { icon: Shield, title: "Juridisch verdedigbaar", sub: "Elk rapport houdt stand bij de Belastingdienst" },
-  { icon: Users, title: "Persoonlijk contact", sub: "Direct contact met de taxateur" },
+  { icon: Shield, title: "Erkend taxateur", sub: "Geregistreerd bij TMV en VRT" },
+  { icon: MapPin, title: "Op locatie bij je", sub: "Door heel Nederland" },
+  { icon: ScaleIcon, title: "Juridisch verdedigbaar", sub: "Staat bij de Belastingdienst" },
+  { icon: Users, title: "Direct contact met Erik", sub: "Geen callcenter, geen tussenpersoon" },
 ];
 
 const reviews = [
