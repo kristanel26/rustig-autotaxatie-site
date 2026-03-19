@@ -711,26 +711,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ── NIEUWSBRIEF BALK ── */}
-      <section style={{ background: '#f0f4f8' }} className="py-12 px-6 lg:px-8">
-        <div className="max-w-[640px] mx-auto text-center">
-          <h3 className="heading-display font-bold mb-2" style={{ fontSize: 22, color: '#1a1a1a' }}>
-            Blijf op de hoogte
-          </h3>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#698db3', lineHeight: 1.65 }} className="mb-5">
-            Ontvang het laatste BPM-nieuws, wetswijzigingen en taxatietips in je inbox.
-          </p>
-          <form className="flex flex-col sm:flex-row gap-3 justify-center" onSubmit={(e) => e.preventDefault()}>
-            <input
-              type="email"
-              placeholder="Je e-mailadres"
-              className="flex-1 px-4 py-3 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] focus:border-transparent"
-              style={{ borderColor: '#e2e8f0', maxWidth: 340 }}
-            />
-            <button className="btn-cta" style={{ whiteSpace: 'nowrap' }}>Aanmelden</button>
-          </form>
-        </div>
-      </section>
 
       <SiteFooter />
       <WhatsAppButton />
