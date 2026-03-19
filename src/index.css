@@ -239,24 +239,27 @@
 
   /* Premium CTA button */
   .btn-cta {
-    @apply font-semibold text-[15px] tracking-[0.03em];
-    background: hsl(var(--cta));
-    color: hsl(var(--cta-foreground));
-    padding: 14px 28px;
+    background: #ff751f;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 10px 22px;
     border-radius: 6px;
-    box-shadow: var(--button-shadow);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    box-shadow: 0 2px 12px rgba(255,117,31,0.30);
+    transition: background 200ms ease, box-shadow 200ms ease, transform 150ms ease;
   }
 
   .btn-cta:hover {
-    background: hsl(21 100% 50%);
-    box-shadow: var(--button-shadow-hover);
+    background: #e8651a;
+    box-shadow: 0 4px 18px rgba(255,117,31,0.42);
     transform: translateY(-1px);
   }
 
   .btn-cta:active {
     transform: translateY(0);
-    box-shadow: 0 2px 8px hsl(21 100% 56% / 0.30);
+    box-shadow: 0 2px 8px rgba(255,117,31,0.30);
   }
 
   /* Outline button on dark */
