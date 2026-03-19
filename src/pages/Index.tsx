@@ -130,22 +130,28 @@ const Index = () => {
       </section>
 
       {/* ── USP BAR ── */}
-      <section style={{ background: '#ffffff', borderTop: '3px solid #ff751f', boxShadow: '0 4px 24px rgba(29,60,113,0.06)', padding: '40px 0' }} className="px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 px-6 lg:px-8">
+      <section style={{ background: '#1d3c71', borderTop: '3px solid #ff751f' }}>
+        <div className="max-w-[1100px] mx-auto flex flex-wrap md:flex-nowrap items-stretch">
           {usps.map((usp, i) => (
-            <div key={i} className="text-center relative">
+            <React.Fragment key={i}>
               <div
-                className="mx-auto mb-3.5 flex items-center justify-center"
-                style={{ width: 56, height: 56, borderRadius: '50%', background: '#f0f4f8', color: '#1d3c71' }}
+                className="flex items-center gap-4 flex-[0_0_50%] md:flex-1 transition-colors duration-200 hover:bg-white/[0.06]"
+                style={{ padding: '28px 32px' }}
               >
-                <usp.icon className="w-8 h-8" />
+                <usp.icon style={{ width: 28, height: 28, color: '#ff751f', flexShrink: 0 }} />
+                <div className="flex flex-col">
+                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 700, color: '#ffffff', marginBottom: 3 }}>
+                    {usp.title}
+                  </span>
+                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, color: 'rgba(255,255,255,0.60)' }}>
+                    {usp.sub}
+                  </span>
+                </div>
               </div>
-              <h4 className="heading-display mb-1" style={{ fontSize: 16, fontWeight: 600, color: '#1a1a1a' }}>{usp.title}</h4>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#698db3', lineHeight: 1.5 }}>{usp.sub}</p>
               {i < usps.length - 1 && (
-                <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 h-12" style={{ width: 1, background: '#e8edf3' }} />
+                <div className="hidden md:block self-stretch flex-shrink-0" style={{ width: 1, background: 'rgba(255,255,255,0.12)' }} />
               )}
-            </div>
+            </React.Fragment>
           ))}
         </div>
       </section>
