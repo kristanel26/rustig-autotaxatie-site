@@ -215,7 +215,7 @@ const Index = () => {
           >
             <div className="w-full h-[200px] overflow-hidden flex-shrink-0">
               <img
-                src={erikPhoto}
+                src={erikInspectie}
                 alt="BPM taxatie op locatie"
                 className="w-full h-full object-cover object-center"
               />
