@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, Calculator, Car, Bike, Truck, Wrench, ChevronRight, Search, MessageCircle, Handshake, Clock, UtensilsCrossed } from "lucide-react";
 import erikPhoto from "@/assets/erik-elderson.png";
