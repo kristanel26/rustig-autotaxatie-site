@@ -470,8 +470,14 @@ const Index = () => {
       </section>
 
       {/* ── BOOKING WIZARD ── */}
-      <section style={{ background: '#f0f4f8' }} className="py-16 md:py-24 px-6 lg:px-8">
-        <div className="max-w-[1100px] mx-auto">
+      <section
+        className="relative py-16 md:py-24 px-6 lg:px-8 overflow-hidden"
+        style={{ background: '#1d3c71' }}
+      >
+        {/* Decorative glow */}
+        <div className="absolute pointer-events-none" style={{ top: -100, right: -100, width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(105,141,179,0.20) 0%, transparent 70%)' }} />
+
+        <div className="max-w-[1100px] mx-auto relative z-10">
           <div className="text-center mb-12">
             <span
               className="block mb-3"
@@ -488,15 +494,24 @@ const Index = () => {
             </span>
             <h2
               className="heading-display font-bold mb-3"
-              style={{ fontSize: 'clamp(30px, 3.5vw, 44px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#1a1a1a' }}
+              style={{ fontSize: 'clamp(30px, 3.5vw, 44px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#ffffff' }}
             >
               Maak een afspraak
             </h2>
-            <p style={{ fontSize: 16, color: '#698db3', maxWidth: 480, margin: '0 auto' }}>
+            <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.65)', maxWidth: 480, margin: '0 auto' }}>
               Vul je gegevens in en Erik neemt binnen één werkdag contact met je op om de afspraak in te plannen.
             </p>
           </div>
-          <BookingWizard />
+          <div
+            className="rounded-[20px] p-8 md:p-12 mx-auto"
+            style={{
+              background: 'rgba(255,255,255,0.97)',
+              maxWidth: 760,
+              boxShadow: '0 24px 64px rgba(0,0,0,0.20), 0 4px 16px rgba(0,0,0,0.10)',
+            }}
+          >
+            <BookingWizard />
+          </div>
         </div>
       </section>
 
