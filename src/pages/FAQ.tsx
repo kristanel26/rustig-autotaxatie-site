@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail } from "lucide-react";
 import {
