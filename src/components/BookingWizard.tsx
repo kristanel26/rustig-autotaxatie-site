@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Calculator, Shield, Scale as ScaleIcon, Caravan, Car, Bike, Truck, Check, ArrowRight, ArrowLeft } from "lucide-react";
+import { FaCarCrash } from "react-icons/fa";
+
+const SchadevaststellingIcon = () => <FaCarCrash size={24} />;
 
 const taxatieOptions = [
   { value: "bpm", label: "BPM Taxatie", icon: Calculator },
@@ -9,6 +12,7 @@ const taxatieOptions = [
   { value: "camper", label: "Camper Taxatie", icon: Caravan },
   { value: "motor", label: "Motor Taxatie", icon: Bike },
   { value: "foodtruck", label: "Foodtruck Taxatie", icon: Truck },
+  { value: "schadevaststelling", label: "Schadevaststelling", icon: SchadevaststellingIcon },
 ];
 
 const steps = ["Type taxatie", "Voertuig", "Locatie & datum", "Contact"];

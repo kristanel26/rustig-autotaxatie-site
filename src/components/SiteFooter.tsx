@@ -151,12 +151,24 @@ const SiteFooter = () => {
       </footer>
 
       {/* Certifications bar */}
-      <div className="bg-[hsl(216,58%,22%)] py-6 px-6 border-t border-white/10">
-        <div className="max-w-[1100px] mx-auto flex flex-wrap items-center justify-center gap-10">
-          <img src={logoTmv} alt="TMV Federatie" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
-          <img src={logoVrt} alt="VRT Register" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
-          <img src={logoFehac} alt="FEHAC" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
-          <img src={logoHobeon} alt="Hobeon" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
+      <div className="bg-[hsl(216,58%,22%)] py-5 px-6 lg:px-10 border-t border-white/10">
+        <div className="max-w-[1100px] mx-auto flex flex-wrap items-center justify-center gap-12">
+          {[
+            { name: "TMV Federatie", sub: "Erkend Taxateur" },
+            { name: "VRT Register", sub: "Register Taxateur" },
+            { name: "FEHAC", sub: "Erkend Rapport" },
+            { name: "Hobeon", sub: "Gecertificeerd" },
+          ].map((cert, i, arr) => (
+            <div key={cert.name} className="flex items-center gap-12">
+              <div className="flex flex-col items-center text-center">
+                <span className="text-[13px] font-bold text-white tracking-wide">{cert.name}</span>
+                <span className="text-[10px] font-normal text-white/50 tracking-wider uppercase mt-0.5">{cert.sub}</span>
+              </div>
+              {i < arr.length - 1 && (
+                <div className="hidden sm:block w-px h-8 bg-white/15" />
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
