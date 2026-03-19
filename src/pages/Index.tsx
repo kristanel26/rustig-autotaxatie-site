@@ -11,14 +11,14 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import BookingWizard from "@/components/BookingWizard";
 
 const diensten = [
-  { title: "BPM Taxatie", sub: "Importvoertuig", href: "/bpm-taxatie", icon: Calculator, accent: true },
-  { title: "WEV Taxatie", sub: "Fiscale waardebepaling", href: "/wev-taxatie", icon: ScaleIcon },
-  { title: "Oldtimer Taxatie", sub: "Klassieke voertuigen", href: "/oldtimer-taxatie", icon: Clock },
-  { title: "Youngtimer Taxatie", sub: "Voertuigen vanaf 15 jaar", href: "/youngtimer-taxatie", icon: Car },
-  { title: "Camper Taxatie", sub: "Campermarkt specialist", href: "/camper-taxatie", icon: Truck },
-  { title: "Motor Taxatie", sub: "Motorfietsen", href: "/motor-taxatie", icon: Bike },
-  { title: "Foodtruck Taxatie", sub: "Mobiele horeca", href: "/foodtruck-taxatie", icon: UtensilsCrossed },
-  { title: "Schadevaststelling", sub: "Na een incident", href: "/schadevaststelling", icon: Wrench },
+  { title: "BPM Taxatie", sub: "Importvoertuig", href: "/bpm-taxatie", icon: FaFileInvoiceDollar, accent: true },
+  { title: "WEV Taxatie", sub: "Fiscale waardebepaling", href: "/wev-taxatie", icon: FaBalanceScale },
+  { title: "Oldtimer Taxatie", sub: "Klassieke voertuigen", href: "/oldtimer-taxatie", icon: FaClock },
+  { title: "Youngtimer Taxatie", sub: "Voertuigen vanaf 15 jaar", href: "/youngtimer-taxatie", icon: FaCar },
+  { title: "Camper Taxatie", sub: "Campermarkt specialist", href: "/camper-taxatie", icon: FaTruck },
+  { title: "Motor Taxatie", sub: "Motorfietsen", href: "/motor-taxatie", icon: FaMotorcycle },
+  { title: "Foodtruck Taxatie", sub: "Mobiele horeca", href: "/foodtruck-taxatie", icon: FaUtensils },
+  { title: "Schadevaststelling", sub: "Na een incident", href: "/schadevaststelling", icon: FaCarCrash },
 ];
 
 const usps = [
