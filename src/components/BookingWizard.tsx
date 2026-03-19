@@ -155,10 +155,12 @@ const BookingWizard = () => {
         <div>
           <h3 className="heading-display text-xl font-semibold mb-6" style={{ color: '#1a1a1a' }}>Voertuiggegevens</h3>
           <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-1.5" style={{ color: '#1a1a1a' }}>Kenteken <span className="text-xs font-normal" style={{ color: '#9aa5b4' }}>(optioneel, helpt ons sneller)</span></label>
-              <input value={form.kenteken} onChange={e => set("kenteken", e.target.value)} placeholder="AB-123-CD" className={inputClass} style={{ borderColor: '#e2e8f0' }} />
-            </div>
+            {form.type !== "bpm" && (
+              <div>
+                <label className="block text-sm font-medium mb-1.5" style={{ color: '#1a1a1a' }}>Kenteken <span className="text-xs font-normal" style={{ color: '#9aa5b4' }}>(optioneel, helpt ons sneller)</span></label>
+                <input value={form.kenteken} onChange={e => set("kenteken", e.target.value)} placeholder="AB-123-CD" className={inputClass} style={{ borderColor: '#e2e8f0' }} />
+              </div>
+            )}
             <div>
               <label className="block text-sm font-medium mb-1.5" style={{ color: '#1a1a1a' }}>Merk en model *</label>
               <input value={form.merk_model} onChange={e => set("merk_model", e.target.value)} placeholder="bijv. Volkswagen Golf" className={inputClass} style={{ borderColor: '#e2e8f0' }} />
