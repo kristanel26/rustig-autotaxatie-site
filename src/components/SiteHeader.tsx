@@ -143,6 +143,14 @@ const SiteHeader = () => {
           </nav>
 
           <div className="hidden xl:flex items-center gap-3">
+            {/* Google Reviews badge */}
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-md" style={{ border: '1px solid #e2e8f0' }}>
+              <span style={{ color: '#ff751f', fontSize: 13, letterSpacing: -1 }}>★★★★★</span>
+              <div>
+                <span className="block text-sm font-bold" style={{ color: '#1a1a1a', lineHeight: 1 }}>4,9</span>
+                <span className="block" style={{ fontSize: 10, color: '#9aa5b4', lineHeight: 1, marginTop: 2 }}>Google Reviews</span>
+              </div>
+            </div>
             <Link to="/contact">
               <button className="btn-cta !py-[10px] !px-[22px] !text-sm">
                 Taxatie aanvragen

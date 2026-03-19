@@ -293,30 +293,38 @@ const Index = () => {
           >
             Wat kunnen wij voor u doen?
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {services.map((service, i) => (
               <Link
                 key={i}
                 to={service.href}
-                className={`group card-elevated p-6 ${
+                className={`group card-elevated p-6 relative ${
                   service.highlight
                     ? "col-span-1 lg:col-span-2 sm:col-span-2"
                     : ""
                 }`}
                 style={{
-                  background: service.highlight ? 'rgba(255,117,31,0.03)' : '#ffffff',
-                  borderColor: service.highlight ? 'rgba(255,117,31,0.20)' : undefined,
+                  background: service.highlight ? 'linear-gradient(135deg, #ffffff 0%, #fff8f4 100%)' : '#ffffff',
+                  border: service.highlight ? '2px solid rgba(255,117,31,0.35)' : undefined,
                 }}
               >
+                {service.highlight && (
+                  <span className="absolute top-4 right-4 text-white font-bold text-[10px] tracking-[0.08em] uppercase px-2.5 py-1 rounded-full" style={{ background: '#ff751f' }}>
+                    Meest gekozen
+                  </span>
+                )}
                 <div
-                  className="inline-flex items-center justify-center w-10 h-10 rounded-lg mb-4"
-                  style={{ background: service.highlight ? 'rgba(255,117,31,0.10)' : 'rgba(29,60,113,0.08)' }}
+                  className="inline-flex items-center justify-center rounded-xl mb-4"
+                  style={{
+                    width: 52, height: 52,
+                    background: service.highlight ? 'rgba(255,117,31,0.12)' : '#f0f4f8',
+                  }}
                 >
-                  <service.icon className="w-5 h-5" style={{ color: service.highlight ? '#ff751f' : '#1d3c71' }} />
+                  <service.icon style={{ width: 26, height: 26, color: service.highlight ? '#ff751f' : '#1d3c71' }} />
                 </div>
-                <h3 style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 600, color: '#1a1a1a' }} className="mb-1.5">{service.title}</h3>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.72, color: '#4a5568' }} className="mb-3">{service.description}</p>
-                <span className="text-sm font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all" style={{ color: '#ff751f' }}>
+                <h3 className="heading-display mb-1.5" style={{ fontSize: 18, fontWeight: 600, color: '#1a1a1a' }}>{service.title}</h3>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13.5, fontWeight: 400, lineHeight: 1.65, color: '#6b7a8d' }} className="mb-3">{service.description}</p>
+                <span className="text-[13px] font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition-all" style={{ color: '#ff751f' }}>
                   Meer info <ArrowRight className="w-3.5 h-3.5" />
                 </span>
               </Link>
