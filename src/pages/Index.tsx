@@ -525,7 +525,7 @@ const Index = () => {
           <div className="grid grid-cols-3 gap-0 mb-12">
             {[
               { num: "25.000+", label: "Voertuigen getaxeerd" },
-              { num: "15 jaar", label: "Ervaring in voertuigtaxaties" },
+              { num: "13 jaar", label: "Ervaring in voertuigtaxaties" },
               { num: "98%", label: "Rapporten geaccepteerd door Belastingdienst" },
             ].map((stat, i) => (
               <div key={i} className={`text-center py-6 ${i > 0 ? "border-l" : ""}`} style={{ borderColor: 'rgba(255,255,255,0.15)' }}>
