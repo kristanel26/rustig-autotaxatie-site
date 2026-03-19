@@ -78,12 +78,12 @@ const SiteFooter = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-10 mb-10">
             {/* Column 1 - About */}
-            <div className="border-b border-white/10 pb-8 md:border-0 md:pb-0">
-              <img src={logo} alt="Automobiel Taxaties" className="h-16 w-auto mb-4 brightness-0 invert" />
-              <p className="text-white/70 text-sm leading-relaxed mb-6">
+            <div className="border-b border-white/10 pb-8 md:border-0 md:pb-0 flex flex-col items-start">
+              <img src={logo} alt="Automobiel Taxaties" className="h-12 w-auto mb-4 brightness-0 invert" />
+              <p className="text-white/70 text-sm leading-relaxed mb-6 text-left">
                 Erkend taxatiebureau voor BPM, verzekering en waardebepaling. Landelijk actief vanuit Druten.
               </p>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 justify-start">
                 {(["facebook", "instagram", "linkedin", "youtube"] as const).map((social) => (
                   <a
                     key={social}

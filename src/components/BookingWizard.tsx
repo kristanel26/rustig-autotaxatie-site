@@ -3,11 +3,10 @@ import { Calculator, Shield, Scale as ScaleIcon, Caravan, Car, Bike, Truck, Wren
 
 const taxatieOptions = [
   { value: "bpm", label: "BPM Taxatie", icon: Calculator },
-  { value: "verzekering", label: "Verzekeringstaxatie", icon: Shield },
   { value: "wev", label: "WEV Taxatie", icon: ScaleIcon },
-  { value: "camper", label: "Camper Taxatie", icon: Caravan },
   { value: "oldtimer", label: "Oldtimer Taxatie", icon: Car },
   { value: "youngtimer", label: "Youngtimer Taxatie", icon: Car },
+  { value: "camper", label: "Camper Taxatie", icon: Caravan },
   { value: "motor", label: "Motor Taxatie", icon: Bike },
   { value: "foodtruck", label: "Foodtruck Taxatie", icon: Truck },
 ];
