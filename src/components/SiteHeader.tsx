@@ -47,16 +47,18 @@ const SiteHeader = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileOpen(false);
     setDropdownOpen(false);
   }, [location.pathname]);
 
+  const isActive = (href: string) => location.pathname === href;
+  const isVerzekeringActive = verzekeringSubLinks.some(s => location.pathname === s.href);
+
   return (
     <>
       {/* Top bar */}
-      <div className="bg-[#1d3c71] text-white text-[13px] hidden md:block">
+      <div className="bg-[hsl(var(--primary))] text-white text-[13px] hidden md:block">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 h-9 flex items-center justify-between">
           <span className="flex items-center gap-1.5">
             <MapPin className="w-3.5 h-3.5" />
@@ -74,11 +76,11 @@ const SiteHeader = () => {
 
       {/* Main navigation */}
       <header
-        className={`sticky top-0 z-50 transition-all duration-300 ${
+        className={`sticky top-0 z-50 transition-all duration-300 px-6 lg:px-8 ${
           scrolled
-            ? "bg-white shadow-[0_2px_16px_rgba(0,0,0,0.08)] py-2"
+            ? "glass-header py-2 shadow-[0_2px_16px_rgba(0,0,0,0.08)]"
             : "bg-white py-3"
-        } px-6 lg:px-8`}
+        }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link to="/" className="flex items-center group">
@@ -90,38 +92,36 @@ const SiteHeader = () => {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden xl:flex items-center gap-0.5">
+          <nav className="hidden xl:flex items-center gap-1">
             {navLinks.map((link) => (
               link.dropdown ? (
                 <div key={link.href} className="relative" ref={dropdownRef}>
                   <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 ${
-                      location.pathname === link.href || verzekeringSubLinks.some(s => location.pathname === s.href)
-                        ? "text-[#1d3c71] bg-[#f7f8fa]"
-                        : "text-[#1a1a1a]/70 hover:text-[#1d3c71] hover:bg-[#f7f8fa]"
+                    className={`nav-link px-3 py-2 flex items-center gap-1 ${
+                      isActive(link.href) || isVerzekeringActive ? "active" : ""
                     }`}
                   >
                     {link.label}
                     <ChevronDown className={`w-3.5 h-3.5 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
                   </button>
                   {dropdownOpen && (
-                    <div className="absolute top-full left-0 mt-1 bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-[#e5e7eb] py-2 min-w-[220px] z-50">
+                    <div className="absolute top-full left-0 mt-2 bg-white rounded-[14px] shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-border py-2 min-w-[220px] z-50">
                       <Link
                         to={link.href}
-                        className="block px-4 py-2.5 text-sm font-semibold text-[#1d3c71] hover:bg-[#f7f8fa] transition-colors"
+                        className="block px-4 py-2.5 text-sm font-semibold text-[hsl(var(--primary))] hover:bg-secondary transition-colors"
                       >
                         Overzicht
                       </Link>
-                      <div className="h-px bg-[#e5e7eb] mx-3 my-1" />
+                      <div className="h-px bg-border mx-3 my-1" />
                       {verzekeringSubLinks.map((sub) => (
                         <Link
                           key={sub.href}
                           to={sub.href}
                           className={`block px-4 py-2.5 text-sm transition-colors ${
-                            location.pathname === sub.href
-                              ? "text-[#1d3c71] bg-[#f7f8fa] font-medium"
-                              : "text-[#1a1a1a]/70 hover:text-[#1d3c71] hover:bg-[#f7f8fa]"
+                            isActive(sub.href)
+                              ? "text-[hsl(var(--primary))] bg-secondary font-medium"
+                              : "text-foreground/70 hover:text-[hsl(var(--primary))] hover:bg-secondary"
                           }`}
                         >
                           {sub.label}
@@ -134,11 +134,7 @@ const SiteHeader = () => {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    location.pathname === link.href
-                      ? "text-[#1d3c71] bg-[#f7f8fa]"
-                      : "text-[#1a1a1a]/70 hover:text-[#1d3c71] hover:bg-[#f7f8fa]"
-                  }`}
+                  className={`nav-link px-3 py-2 ${isActive(link.href) ? "active" : ""}`}
                 >
                   {link.label}
                 </Link>
@@ -148,7 +144,7 @@ const SiteHeader = () => {
 
           <div className="hidden xl:flex items-center gap-3">
             <Link to="/contact">
-              <button className="bg-[#ff751f] text-white font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-[#e5681b] transition-colors shadow-[0_4px_14px_rgba(255,117,31,0.35)] hover:shadow-[0_6px_20px_rgba(255,117,31,0.4)]">
+              <button className="btn-cta !py-[10px] !px-[22px] !text-sm">
                 Taxatie aanvragen
               </button>
             </Link>
@@ -156,7 +152,7 @@ const SiteHeader = () => {
 
           {/* Mobile menu button */}
           <button
-            className="xl:hidden p-2 rounded-lg text-[#1a1a1a]/70 hover:text-[#1d3c71] hover:bg-[#f7f8fa] transition-colors"
+            className="xl:hidden p-2 rounded-lg text-foreground/70 hover:text-[hsl(var(--primary))] hover:bg-secondary transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Menu"
           >
@@ -166,16 +162,16 @@ const SiteHeader = () => {
 
         {/* Mobile nav */}
         {mobileOpen && (
-          <nav className="xl:hidden mt-3 pb-4 border-t border-[#e5e7eb] pt-4 space-y-1">
+          <nav className="xl:hidden mt-3 pb-4 border-t border-border pt-4 space-y-1">
             {navLinks.map((link) => (
               link.dropdown ? (
                 <div key={link.href}>
                   <Link
                     to={link.href}
                     className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                      location.pathname === link.href
-                        ? "text-[#1d3c71] bg-[#f7f8fa]"
-                        : "text-[#1a1a1a]/70 hover:text-[#1d3c71] hover:bg-[#f7f8fa]"
+                      isActive(link.href)
+                        ? "text-[hsl(var(--primary))] bg-secondary"
+                        : "text-foreground/70 hover:text-[hsl(var(--primary))] hover:bg-secondary"
                     }`}
                   >
                     {link.label}
@@ -186,9 +182,9 @@ const SiteHeader = () => {
                         key={sub.href}
                         to={sub.href}
                         className={`block px-4 py-2 rounded-lg text-sm transition-colors ${
-                          location.pathname === sub.href
-                            ? "text-[#1d3c71] font-medium"
-                            : "text-[#1a1a1a]/50 hover:text-[#1d3c71]"
+                          isActive(sub.href)
+                            ? "text-[hsl(var(--primary))] font-medium"
+                            : "text-foreground/50 hover:text-[hsl(var(--primary))]"
                         }`}
                       >
                         {sub.label}
@@ -201,9 +197,9 @@ const SiteHeader = () => {
                   key={link.href}
                   to={link.href}
                   className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                    location.pathname === link.href
-                      ? "text-[#1d3c71] bg-[#f7f8fa]"
-                      : "text-[#1a1a1a]/70 hover:text-[#1d3c71] hover:bg-[#f7f8fa]"
+                    isActive(link.href)
+                      ? "text-[hsl(var(--primary))] bg-secondary"
+                      : "text-foreground/70 hover:text-[hsl(var(--primary))] hover:bg-secondary"
                   }`}
                 >
                   {link.label}
@@ -212,16 +208,16 @@ const SiteHeader = () => {
             ))}
             <div className="pt-3 px-4">
               <Link to="/contact" className="block">
-                <button className="w-full bg-[#ff751f] text-white font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-[#e5681b] transition-colors">
+                <button className="btn-cta w-full !text-sm">
                   Taxatie aanvragen
                 </button>
               </Link>
             </div>
-            <div className="pt-2 px-4 space-y-2 text-sm text-[#1a1a1a]/60">
-              <a href="tel:+31854832461" className="flex items-center gap-2 hover:text-[#1d3c71]">
+            <div className="pt-2 px-4 space-y-2 text-sm text-foreground/60">
+              <a href="tel:+31854832461" className="flex items-center gap-2 hover:text-[hsl(var(--primary))]">
                 <Phone className="w-4 h-4" /> 085 483 2461
               </a>
-              <a href="mailto:algemeen@automobieltaxaties.nl" className="flex items-center gap-2 hover:text-[#1d3c71]">
+              <a href="mailto:algemeen@automobieltaxaties.nl" className="flex items-center gap-2 hover:text-[hsl(var(--primary))]">
                 <Mail className="w-4 h-4" /> algemeen@automobieltaxaties.nl
               </a>
             </div>
