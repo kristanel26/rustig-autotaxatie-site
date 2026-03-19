@@ -636,30 +636,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ── TARGET AUDIENCE BANNER ── */}
-      <section
-        className="py-16 px-6 lg:px-8 overflow-hidden relative"
-        style={{
-          background: '#1d3c71',
-          backgroundImage: 'radial-gradient(ellipse at 20% 50%, rgba(105,141,179,0.20) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 50%)',
-        }}
-      >
-        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-0 text-white text-center relative z-10">
-          {[
-            { title: "Merkdealers en groothandelaren", sub: "Professionele taxatierapporten voor je bedrijfsvoering en handelsvoorraad." },
-            { title: "Importeurs en handelaren", sub: "De laagst haalbare BPM met een juridisch waterdicht rapport als onderbouwing." },
-            { title: "Particulieren", sub: "Persoonlijke begeleiding bij het taxeren van je voertuig voor verzekering of import." },
-          ].map((item, i) => (
-            <div key={i} className={`py-8 px-8 ${i > 0 ? "md:border-l" : ""}`} style={{ borderColor: 'rgba(255,255,255,0.15)' }}>
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ background: 'rgba(255,255,255,0.15)' }}>
-                <Users className="w-7 h-7 text-white" style={{ opacity: 1 }} />
-              </div>
-              <h3 className="heading-display text-[20px] font-semibold text-white mb-2" style={{ lineHeight: 1.3 }}>{item.title}</h3>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, lineHeight: 1.65, color: 'rgba(255,255,255,0.80)' }}>{item.sub}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* ── NEWS SECTION ── */}
       <section className="bg-white py-16 md:py-24 px-6 lg:px-8">
