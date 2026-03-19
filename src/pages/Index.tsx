@@ -66,12 +66,12 @@ const Index = () => {
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
           <img src={heroImage} alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(105deg, rgba(29,60,113,0.88) 0%, rgba(29,60,113,0.55) 60%, transparent 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(105deg, rgba(29,60,113,0.82) 0%, rgba(29,60,113,0.60) 55%, rgba(29,60,113,0.25) 100%)' }} />
           <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 30% 60%, rgba(105,141,179,0.18) 0%, transparent 60%)' }} />
         </div>
 
         <div className="max-w-7xl mx-auto w-full px-6 lg:px-8 py-24 md:py-36 relative z-10">
-          <div style={{ maxWidth: 600 }}>
+          <div style={{ maxWidth: 560 }}>
             <p className="animate-slide-up uppercase font-semibold tracking-[0.13em] mb-5" style={{ fontSize: 11, color: '#ff751f' }}>
               Erkend taxatiebureau &mdash; landelijk actief
             </p>
@@ -81,10 +81,12 @@ const Index = () => {
                 fontSize: 'clamp(44px, 5.5vw, 68px)',
                 lineHeight: 1.08,
                 letterSpacing: '-0.025em',
-                maxWidth: 600,
+                maxWidth: 560,
               }}
             >
-              De laagst haalbare BPM. Fysiek onderbouwd. Juridisch verdedigbaar.
+              De laagst haalbare BPM.<br />
+              Fysiek onderbouwd.<br />
+              Juridisch verdedigbaar.
             </h1>
             <p
               className="animate-slide-up delay-200 mb-10"
