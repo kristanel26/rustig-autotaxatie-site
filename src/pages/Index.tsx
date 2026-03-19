@@ -271,22 +271,22 @@ const Index = () => {
               Eigenaar · Notarieel Beëdigd TMV Register Taxateur · Register Taxateur VRT
             </p>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.72, color: '#4a5568' }} className="mb-4">
-              Erik Elderson taxeert al meer dan 15 jaar voertuigen, van gewone personenauto's tot oldtimers, campers en foodtrucks. Hij werkt als notarieel beëdigd TMV Register Taxateur en VRT Register Taxateur.
+              In 2013 startte Erik Elderson Automobieltaxaties vanuit een eenvoudige overtuiging: een taxatierapport moet kloppen, en de klant verdient eerlijk advies.
             </p>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.72, color: '#4a5568' }} className="mb-4">
-              Zijn rapporten staan bij de Belastingdienst. Niet omdat hij een formulier invult, maar omdat hij het voertuig fysiek inspecteert, meet en documenteert.
+              Na jarenlange ervaring in de taxatiebranche wist Erik precies wat hij anders wilde doen. Geen aannames, geen haastwerk. Elk voertuig verdient een grondige fysieke inspectie, met lakdiktemetingen, schadecalculatie en een volledig fotodossier als onderbouwing.
             </p>
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.72, color: '#4a5568' }} className="mb-6">
-              Je krijgt altijd direct contact met Erik zelf, geen callcenter, geen tussenpersoon.
+              Zaken die Erik enorm belangrijk vindt: flexibiliteit, kwaliteit leveren en veel aandacht voor de klant. Je hebt altijd direct contact met Erik zelf. Geen tussenpersoon, geen callcenter.
             </p>
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-3">
                 <span className="w-5 h-0.5 rounded-full" style={{ background: '#ff751f' }} />
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 500, color: '#1a1a1a' }}>Meer dan 15 jaar ervaring</span>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 500, color: '#1a1a1a' }}>Meer dan 15 jaar ervaring in voertuigtaxaties</span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="w-5 h-0.5 rounded-full" style={{ background: '#ff751f' }} />
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 500, color: '#1a1a1a' }}>Landelijk actief, op locatie bij je</span>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 500, color: '#1a1a1a' }}>Landelijk actief, op locatie bij jou</span>
               </div>
             </div>
             <Link to="/werkwijze" className="text-sm font-semibold hover:underline inline-flex items-center gap-1" style={{ color: '#ff751f' }}>
