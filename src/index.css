@@ -175,8 +175,8 @@
 
   /* Display headings get the serif font */
   .heading-display {
-    font-family: 'DM Serif Display', serif;
-    letter-spacing: -0.02em;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: -0.01em;
   }
 }
 
