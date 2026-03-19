@@ -1,21 +1,34 @@
 import { Link, useLocation } from "react-router-dom";
-import { Phone, Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Phone, Menu, X, ChevronDown, Mail, MapPin } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import logo from "@/assets/logo-automobiel-taxaties.png";
-import ThemeToggle from "@/components/ThemeToggle";
+
+const verzekeringSubLinks = [
+  { label: "Camper", href: "/camper-taxatie" },
+  { label: "Oldtimer", href: "/oldtimer-taxatie" },
+  { label: "Youngtimer", href: "/youngtimer-taxatie" },
+  { label: "Motor", href: "/motor-taxatie" },
+  { label: "Foodtruck", href: "/foodtruck-taxatie" },
+  { label: "Schadevaststelling", href: "/schadevaststelling" },
+];
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "BPM-taxatie", href: "/bpm-taxatie" },
-  { label: "Verzekeringstaxatie", href: "/verzekeringstaxatie-info" },
-  { label: "WEV-taxatie", href: "/wev-taxatie" },
+  { label: "BPM Taxatie", href: "/bpm-taxatie" },
+  { label: "Verzekeringstaxatie", href: "/verzekeringstaxatie-info", dropdown: true },
+  { label: "WEV Taxatie", href: "/wev-taxatie" },
+  { label: "Werkwijze", href: "/werkwijze" },
+  { label: "Over ons", href: "/over-ons" },
   { label: "FAQ", href: "/faq" },
+  { label: "Nieuws", href: "/nieuws" },
   { label: "Contact", href: "/contact" },
 ];
 
 const SiteHeader = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -24,101 +37,198 @@ const SiteHeader = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileOpen(false);
+    setDropdownOpen(false);
+  }, [location.pathname]);
+
   return (
-    <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "glass-header py-3"
-          : "bg-transparent py-4 border-b border-transparent"
-      } px-6 md:px-8`}
-    >
-      <div className="container-wide flex items-center justify-between">
-        <Link to="/" className="flex items-center group">
-          <img
-            src={logo}
-            alt="Automobiel Taxaties"
-            className="h-14 w-auto transition-all duration-300 group-hover:opacity-80"
-          />
-        </Link>
-
-        {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              to={link.href}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                location.pathname === link.href
-                  ? scrolled
-                    ? "text-foreground bg-secondary"
-                    : "text-primary-foreground bg-white/15"
-                  : scrolled
-                    ? "text-muted-foreground hover:text-foreground hover:bg-secondary/80"
-                    : "text-primary-foreground/70 hover:text-primary-foreground hover:bg-white/10"
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="hidden md:flex items-center gap-3">
-          <a
-            href="tel:+31854832461"
-            className={`flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg transition-all duration-200 ${
-              scrolled
-                ? "text-muted-foreground hover:text-foreground hover:bg-secondary/80"
-                : "text-primary-foreground/70 hover:text-primary-foreground hover:bg-white/10"
-            }`}
-          >
-            <Phone className="w-4 h-4" />
+    <>
+      {/* Top bar */}
+      <div className="bg-[#1d3c71] text-white text-[13px] hidden md:block">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 h-9 flex items-center justify-between">
+          <span className="flex items-center gap-1.5">
+            <MapPin className="w-3.5 h-3.5" />
+            Van Heemstraweg 123, Druten
+          </span>
+          <a href="mailto:algemeen@automobieltaxaties.nl" className="hover:text-white/80 transition-colors">
+            algemeen@automobieltaxaties.nl
+          </a>
+          <a href="tel:+31854832461" className="hover:text-white/80 transition-colors flex items-center gap-1.5">
+            <Phone className="w-3.5 h-3.5" />
             085 483 2461
           </a>
-          <ThemeToggle scrolled={scrolled} />
         </div>
-
-        {/* Mobile menu button */}
-        <button
-          className={`lg:hidden p-2 rounded-lg transition-colors ${
-            scrolled ? "text-muted-foreground hover:text-foreground" : "text-primary-foreground/70 hover:text-primary-foreground"
-          }`}
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Menu"
-        >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
       </div>
 
-      {/* Mobile nav */}
-      {mobileOpen && (
-        <nav className="lg:hidden mt-4 pb-4 border-t border-border/50 pt-4 space-y-1 bg-background rounded-b-xl">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              to={link.href}
-              onClick={() => setMobileOpen(false)}
-              className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                location.pathname === link.href
-                  ? "text-foreground bg-secondary"
-                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-              }`}
-            >
-              {link.label}
+      {/* Main navigation */}
+      <header
+        className={`sticky top-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-white shadow-[0_2px_16px_rgba(0,0,0,0.08)] py-2"
+            : "bg-white py-3"
+        } px-6 lg:px-8`}
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <Link to="/" className="flex items-center group">
+            <img
+              src={logo}
+              alt="Automobiel Taxaties"
+              className="h-12 w-auto transition-all duration-300 group-hover:opacity-80"
+            />
+          </Link>
+
+          {/* Desktop nav */}
+          <nav className="hidden xl:flex items-center gap-0.5">
+            {navLinks.map((link) => (
+              link.dropdown ? (
+                <div key={link.href} className="relative" ref={dropdownRef}>
+                  <button
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 ${
+                      location.pathname === link.href || verzekeringSubLinks.some(s => location.pathname === s.href)
+                        ? "text-[#1d3c71] bg-[#f7f8fa]"
+                        : "text-[#1a1a1a]/70 hover:text-[#1d3c71] hover:bg-[#f7f8fa]"
+                    }`}
+                  >
+                    {link.label}
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {dropdownOpen && (
+                    <div className="absolute top-full left-0 mt-1 bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-[#e5e7eb] py-2 min-w-[220px] z-50">
+                      <Link
+                        to={link.href}
+                        className="block px-4 py-2.5 text-sm font-semibold text-[#1d3c71] hover:bg-[#f7f8fa] transition-colors"
+                      >
+                        Overzicht
+                      </Link>
+                      <div className="h-px bg-[#e5e7eb] mx-3 my-1" />
+                      {verzekeringSubLinks.map((sub) => (
+                        <Link
+                          key={sub.href}
+                          to={sub.href}
+                          className={`block px-4 py-2.5 text-sm transition-colors ${
+                            location.pathname === sub.href
+                              ? "text-[#1d3c71] bg-[#f7f8fa] font-medium"
+                              : "text-[#1a1a1a]/70 hover:text-[#1d3c71] hover:bg-[#f7f8fa]"
+                          }`}
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    location.pathname === link.href
+                      ? "text-[#1d3c71] bg-[#f7f8fa]"
+                      : "text-[#1a1a1a]/70 hover:text-[#1d3c71] hover:bg-[#f7f8fa]"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            ))}
+          </nav>
+
+          <div className="hidden xl:flex items-center gap-3">
+            <Link to="/contact">
+              <button className="bg-[#ff751f] text-white font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-[#e5681b] transition-colors shadow-[0_4px_14px_rgba(255,117,31,0.35)] hover:shadow-[0_6px_20px_rgba(255,117,31,0.4)]">
+                Taxatie aanvragen
+              </button>
             </Link>
-          ))}
-          <div className="pt-3 px-4 flex items-center justify-between">
-            <a
-              href="tel:+31854832461"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Phone className="w-4 h-4" />
-              085 483 2461
-            </a>
-            <ThemeToggle scrolled />
           </div>
-        </nav>
-      )}
-    </header>
+
+          {/* Mobile menu button */}
+          <button
+            className="xl:hidden p-2 rounded-lg text-[#1a1a1a]/70 hover:text-[#1d3c71] hover:bg-[#f7f8fa] transition-colors"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Menu"
+          >
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+
+        {/* Mobile nav */}
+        {mobileOpen && (
+          <nav className="xl:hidden mt-3 pb-4 border-t border-[#e5e7eb] pt-4 space-y-1">
+            {navLinks.map((link) => (
+              link.dropdown ? (
+                <div key={link.href}>
+                  <Link
+                    to={link.href}
+                    className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                      location.pathname === link.href
+                        ? "text-[#1d3c71] bg-[#f7f8fa]"
+                        : "text-[#1a1a1a]/70 hover:text-[#1d3c71] hover:bg-[#f7f8fa]"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                  <div className="ml-4 space-y-0.5">
+                    {verzekeringSubLinks.map((sub) => (
+                      <Link
+                        key={sub.href}
+                        to={sub.href}
+                        className={`block px-4 py-2 rounded-lg text-sm transition-colors ${
+                          location.pathname === sub.href
+                            ? "text-[#1d3c71] font-medium"
+                            : "text-[#1a1a1a]/50 hover:text-[#1d3c71]"
+                        }`}
+                      >
+                        {sub.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className={`block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                    location.pathname === link.href
+                      ? "text-[#1d3c71] bg-[#f7f8fa]"
+                      : "text-[#1a1a1a]/70 hover:text-[#1d3c71] hover:bg-[#f7f8fa]"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            ))}
+            <div className="pt-3 px-4">
+              <Link to="/contact" className="block">
+                <button className="w-full bg-[#ff751f] text-white font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-[#e5681b] transition-colors">
+                  Taxatie aanvragen
+                </button>
+              </Link>
+            </div>
+            <div className="pt-2 px-4 space-y-2 text-sm text-[#1a1a1a]/60">
+              <a href="tel:+31854832461" className="flex items-center gap-2 hover:text-[#1d3c71]">
+                <Phone className="w-4 h-4" /> 085 483 2461
+              </a>
+              <a href="mailto:algemeen@automobieltaxaties.nl" className="flex items-center gap-2 hover:text-[#1d3c71]">
+                <Mail className="w-4 h-4" /> algemeen@automobieltaxaties.nl
+              </a>
+            </div>
+          </nav>
+        )}
+      </header>
+    </>
   );
 };
 
