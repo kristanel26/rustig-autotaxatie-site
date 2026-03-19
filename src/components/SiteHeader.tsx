@@ -92,7 +92,7 @@ const SiteHeader = () => {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden xl:flex items-center gap-1">
+          <nav className="hidden xl:flex items-center gap-0.5">
             {navLinks.map((link) => (
               link.dropdown ? (
                 <div key={link.href} className="relative" ref={dropdownRef}>
