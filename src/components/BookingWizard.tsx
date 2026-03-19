@@ -57,61 +57,97 @@ const BookingWizard = () => {
         <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'rgba(16,185,129,0.12)' }}>
           <Check className="w-8 h-8" style={{ color: '#10b981' }} />
         </div>
-        <h3 className="heading-display text-2xl font-bold mb-3" style={{ color: '#1a1a1a' }}>Bedankt voor uw aanvraag</h3>
+        <h3 className="heading-display text-2xl font-bold mb-3" style={{ color: '#1a1a1a' }}>Bedankt voor je aanvraag</h3>
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#4a5568', lineHeight: 1.7 }}>
-          Wij nemen binnen één werkdag contact met u op.
+          We nemen binnen één werkdag contact met je op.
         </p>
       </div>
     );
   }
 
-  const inputClass = "w-full px-4 py-2.5 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] focus:border-transparent bg-white";
+  const inputClass = "w-full px-4 py-2.5 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-[#1d3c71] focus:border-transparent bg-white";
 
   return (
     <div>
       {/* Step indicator */}
       <div className="flex items-center mb-10">
-        {steps.map((label, i) => (
-          <div key={i} className="flex-1 flex flex-col items-center relative">
-            {i < steps.length - 1 && (
-              <div className="absolute top-5 left-1/2 w-full h-0.5" style={{ background: i < step ? '#1d3c71' : '#e2e8f0', zIndex: 0 }} />
-            )}
-            <div
-              className="w-10 h-10 rounded-full flex items-center justify-center font-bold text-[15px] relative z-10 transition-all"
-              style={{
-                background: i <= step ? '#1d3c71' : '#e2e8f0',
-                color: i <= step ? '#ffffff' : '#9aa5b4',
-                boxShadow: i === step ? '0 0 0 4px rgba(29,60,113,0.15)' : 'none',
-              }}
-            >
-              {i < step ? <Check className="w-4 h-4" /> : i + 1}
+        {steps.map((label, i) => {
+          const isCompleted = i < step;
+          const isActive = i === step;
+          return (
+            <div key={i} className="flex-1 flex flex-col items-center relative">
+              {i < steps.length - 1 && (
+                <div
+                  className="absolute top-[22px] left-1/2 w-full"
+                  style={{ height: 3, background: isCompleted ? '#ff751f' : '#e8edf3', zIndex: 0 }}
+                />
+              )}
+              <div
+                className="w-11 h-11 rounded-full flex items-center justify-center font-bold text-[16px] relative z-10 transition-all"
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  background: isCompleted ? '#ff751f' : isActive ? '#1d3c71' : '#e8edf3',
+                  color: isCompleted || isActive ? '#ffffff' : '#9aa5b4',
+                  boxShadow: isActive ? '0 0 0 5px rgba(29,60,113,0.15)' : 'none',
+                }}
+              >
+                {isCompleted ? <Check className="w-4 h-4" /> : i + 1}
+              </div>
+              <span
+                className="text-xs mt-2 text-center hidden sm:block"
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 12,
+                  fontWeight: isActive ? 700 : 600,
+                  color: isActive ? '#1d3c71' : '#9aa5b4',
+                }}
+              >
+                {label}
+              </span>
             </div>
-            <span className="text-xs mt-2 text-center hidden sm:block" style={{ fontWeight: i === step ? 600 : 500, color: i === step ? '#1d3c71' : '#9aa5b4' }}>
-              {label}
-            </span>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Step content */}
       {step === 0 && (
         <div>
-          <h3 className="heading-display text-xl font-semibold mb-6" style={{ color: '#1a1a1a' }}>Welk type taxatie heeft u nodig?</h3>
+          <h3 className="heading-display text-xl font-semibold mb-6" style={{ color: '#1a1a1a' }}>Welk type taxatie heb je nodig?</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {taxatieOptions.map(opt => (
-              <button
-                key={opt.value}
-                onClick={() => set("type", opt.value)}
-                className="rounded-[10px] p-5 text-center transition-all cursor-pointer"
-                style={{
-                  border: form.type === opt.value ? '2px solid #1d3c71' : '2px solid #e2e8f0',
-                  background: form.type === opt.value ? '#eef3fb' : '#ffffff',
-                }}
-              >
-                <opt.icon className="w-7 h-7 mx-auto mb-2" style={{ color: '#1d3c71' }} />
-                <span className="text-[13px] font-semibold block" style={{ color: '#1a1a1a' }}>{opt.label}</span>
-              </button>
-            ))}
+            {taxatieOptions.map(opt => {
+              const selected = form.type === opt.value;
+              return (
+                <button
+                  key={opt.value}
+                  onClick={() => set("type", opt.value)}
+                  className="rounded-xl p-5 text-center transition-all cursor-pointer flex flex-col items-center gap-2.5"
+                  style={{
+                    border: selected ? '2px solid #1d3c71' : '2px solid #e2e8f0',
+                    background: selected ? '#eef3fb' : '#ffffff',
+                    boxShadow: selected ? '0 4px 20px rgba(29,60,113,0.15)' : 'none',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!selected) {
+                      e.currentTarget.style.borderColor = '#698db3';
+                      e.currentTarget.style.background = '#f7faff';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '0 4px 16px rgba(29,60,113,0.10)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!selected) {
+                      e.currentTarget.style.borderColor = '#e2e8f0';
+                      e.currentTarget.style.background = '#ffffff';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }
+                  }}
+                >
+                  <opt.icon className="w-7 h-7" style={{ color: selected ? '#1d3c71' : '#698db3', transition: 'color 200ms ease' }} />
+                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: '#1a1a1a' }}>{opt.label}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
@@ -192,7 +228,7 @@ const BookingWizard = () => {
 
       {step === 3 && (
         <div>
-          <h3 className="heading-display text-xl font-semibold mb-6" style={{ color: '#1a1a1a' }}>Uw contactgegevens</h3>
+          <h3 className="heading-display text-xl font-semibold mb-6" style={{ color: '#1a1a1a' }}>Jouw contactgegevens</h3>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -213,7 +249,7 @@ const BookingWizard = () => {
               <input type="email" value={form.email} onChange={e => set("email", e.target.value)} className={inputClass} style={{ borderColor: '#e2e8f0' }} />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1.5" style={{ color: '#1a1a1a' }}>Hoe heeft u ons gevonden?</label>
+              <label className="block text-sm font-medium mb-1.5" style={{ color: '#1a1a1a' }}>Hoe heb je ons gevonden?</label>
               <select value={form.gevonden} onChange={e => set("gevonden", e.target.value)} className={inputClass} style={{ borderColor: '#e2e8f0' }}>
                 <option value="">— Selecteer —</option>
                 <option value="google">Google</option>
@@ -240,8 +276,31 @@ const BookingWizard = () => {
         {step < 3 ? (
           <button
             onClick={() => canNext() && setStep(step + 1)}
-            className="btn-cta flex items-center gap-2"
-            style={{ opacity: canNext() ? 1 : 0.5 }}
+            className="inline-flex items-center gap-2.5 transition-all duration-200"
+            style={{
+              background: '#ff751f',
+              color: '#ffffff',
+              height: 52,
+              padding: '0 40px',
+              borderRadius: 8,
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 15,
+              fontWeight: 700,
+              border: 'none',
+              cursor: 'pointer',
+              boxShadow: '0 4px 16px rgba(255,117,31,0.35)',
+              opacity: canNext() ? 1 : 0.5,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#e8651a';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 6px 20px rgba(255,117,31,0.45)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#ff751f';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(255,117,31,0.35)';
+            }}
             disabled={!canNext()}
           >
             Volgende <ArrowRight className="w-4 h-4" />
@@ -249,8 +308,31 @@ const BookingWizard = () => {
         ) : (
           <button
             onClick={handleSubmit}
-            className="btn-cta flex items-center gap-2"
-            style={{ opacity: canNext() ? 1 : 0.5 }}
+            className="inline-flex items-center gap-2.5 transition-all duration-200"
+            style={{
+              background: '#ff751f',
+              color: '#ffffff',
+              height: 52,
+              padding: '0 40px',
+              borderRadius: 8,
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 15,
+              fontWeight: 700,
+              border: 'none',
+              cursor: 'pointer',
+              boxShadow: '0 4px 16px rgba(255,117,31,0.35)',
+              opacity: canNext() ? 1 : 0.5,
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#e8651a';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 6px 20px rgba(255,117,31,0.45)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#ff751f';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(255,117,31,0.35)';
+            }}
             disabled={!canNext()}
           >
             Aanvraag versturen <ArrowRight className="w-4 h-4" />
