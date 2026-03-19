@@ -7,6 +7,7 @@ import heroImage from "@/assets/hero-homepage.jpg";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import BookingWizard from "@/components/BookingWizard";
 
 const diensten = [
   { title: "BPM Taxatie", sub: "Importvoertuig", href: "/bpm-taxatie", icon: Calculator, accent: true },
@@ -462,7 +463,38 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ── WAAROM KIEZEN KLANTEN ONS? ── */}
+      {/* ── BOOKING WIZARD ── */}
+      <section style={{ background: '#f0f4f8' }} className="py-16 md:py-24 px-6 lg:px-8">
+        <div className="max-w-[1100px] mx-auto">
+          <div className="text-center mb-12">
+            <span
+              className="block mb-3"
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: '0.14em',
+                textTransform: 'uppercase' as const,
+                color: '#ff751f',
+              }}
+            >
+              DIRECT PLANNEN
+            </span>
+            <h2
+              className="heading-display font-bold mb-3"
+              style={{ fontSize: 'clamp(30px, 3.5vw, 44px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#1a1a1a' }}
+            >
+              Maak een afspraak
+            </h2>
+            <p style={{ fontSize: 16, color: '#698db3', maxWidth: 480, margin: '0 auto' }}>
+              Vul je gegevens in en Erik neemt binnen één werkdag contact met je op om de afspraak in te plannen.
+            </p>
+          </div>
+          <BookingWizard />
+        </div>
+      </section>
+
+
       <section
         className="relative py-20 md:py-28 px-6 lg:px-8 overflow-hidden"
         style={{
