@@ -524,7 +524,7 @@ const Index = () => {
 
           <div className="grid grid-cols-3 gap-0 mb-12">
             {[
-              { num: "1.200+", label: "Taxaties uitgevoerd" },
+              { num: "25.000+", label: "Voertuigen getaxeerd" },
               { num: "15 jaar", label: "Ervaring in voertuigtaxaties" },
               { num: "98%", label: "Rapporten geaccepteerd door Belastingdienst" },
             ].map((stat, i) => (
