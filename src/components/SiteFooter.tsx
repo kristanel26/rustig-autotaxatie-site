@@ -2,10 +2,6 @@ import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useState } from "react";
 import logo from "@/assets/logo-automobiel-taxaties.png";
-import logoFehac from "@/assets/logo-fehac.png";
-import logoTmv from "@/assets/logo-tmv.png";
-import logoVrt from "@/assets/logo-vrt.png";
-import logoHobeon from "@/assets/logo-hobeon.webp";
 
 const dienstenLinks = [
   { label: "BPM Taxatie", href: "/bpm-taxatie" },
