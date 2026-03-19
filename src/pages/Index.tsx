@@ -126,7 +126,7 @@ const Index = () => {
             >
               Bereken uw BPM indicatie
             </h2>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(16px, 1.8vw, 19px)', fontWeight: 400, lineHeight: 1.70, color: '#698db3', maxWidth: 540 }} className="mb-8">
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 400, lineHeight: 1.70, color: '#4a5568', maxWidth: 540 }} className="mb-8">
               Gebruik onze calculator voor een eerste indicatie van de BPM-kosten bij import. Let op: een berekening is geen taxatie en biedt geen juridische onderbouwing.
             </p>
             <div
