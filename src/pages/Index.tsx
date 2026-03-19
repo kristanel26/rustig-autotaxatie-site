@@ -217,7 +217,7 @@ const Index = () => {
                 src={erikInspectie}
                 alt="Erik Elderson fotografeert een auto tijdens taxatie"
                 className="w-full h-full object-cover"
-                style={{ objectPosition: '50% 35%' }}
+                style={{ objectPosition: '70% 20%' }}
               />
             </div>
             <div
