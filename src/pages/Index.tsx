@@ -473,7 +473,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-14">
             <span className="block mb-4" style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.50)' }}>
-              Meer dan 15 jaar bewezen resultaat
+              Meer dan 13 jaar bewezen resultaat
             </span>
             <h2
               className="heading-display font-bold mb-4"
