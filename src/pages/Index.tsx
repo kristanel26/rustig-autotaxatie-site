@@ -1,24 +1,22 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, Calculator, Caravan, Car, Bike, Truck, Wrench, ChevronRight, Search, MessageCircle, Handshake } from "lucide-react";
+import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, Calculator, Caravan, Car, Bike, Truck, Wrench, ChevronRight, Search, MessageCircle, Handshake, Clock, UtensilsCrossed } from "lucide-react";
 import erikPhoto from "@/assets/erik-elderson.png";
 import heroImage from "@/assets/hero-homepage.jpg";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
-const importServices = [
-  { title: "BPM Taxatie", description: "De laagst haalbare BPM voor je importvoertuig.", href: "/bpm-taxatie", icon: Calculator, highlight: true },
-  { title: "WEV Taxatie", description: "Objectieve waardebepaling voor fiscale doeleinden.", href: "/wev-taxatie", icon: ScaleIcon },
-  { title: "Schadevaststelling", description: "Onafhankelijke vaststelling na schade.", href: "/schadevaststelling", icon: Wrench },
-];
-
-const verzekeringsServices = [
-  { title: "Camper Taxatie", description: "Specifieke kennis van de campermarkt.", href: "/camper-taxatie", icon: Caravan },
-  { title: "Oldtimer Taxatie", description: "Waardering met oog voor detail en historie.", href: "/oldtimer-taxatie", icon: Car },
-  { title: "Youngtimer Taxatie", description: "Taxatie van voertuigen vanaf 15 jaar oud.", href: "/youngtimer-taxatie", icon: Car },
-  { title: "Motor Taxatie", description: "Professionele waardering van motorfietsen.", href: "/motor-taxatie", icon: Bike },
-  { title: "Foodtruck Taxatie", description: "Taxatie van mobiele horecavoertuigen.", href: "/foodtruck-taxatie", icon: Truck },
+const diensten = [
+  { title: "BPM Taxatie", sub: "Importvoertuig", href: "/bpm-taxatie", icon: Calculator, accent: true },
+  { title: "Verzekeringstaxatie", sub: "Waardebepaling polis", href: "/verzekeringstaxatie-info", icon: Shield },
+  { title: "WEV Taxatie", sub: "Fiscale waardebepaling", href: "/wev-taxatie", icon: ScaleIcon },
+  { title: "Oldtimer Taxatie", sub: "Klassieke voertuigen", href: "/oldtimer-taxatie", icon: Clock },
+  { title: "Youngtimer Taxatie", sub: "Voertuigen vanaf 15 jaar", href: "/youngtimer-taxatie", icon: Car },
+  { title: "Camper Taxatie", sub: "Campermarkt specialist", href: "/camper-taxatie", icon: Caravan },
+  { title: "Motor Taxatie", sub: "Motorfietsen", href: "/motor-taxatie", icon: Bike },
+  { title: "Foodtruck Taxatie", sub: "Mobiele horeca", href: "/foodtruck-taxatie", icon: UtensilsCrossed },
+  { title: "Schadevaststelling", sub: "Na een incident", href: "/schadevaststelling", icon: Wrench },
 ];
 
 const usps = [
@@ -73,7 +71,7 @@ const Index = () => {
         </div>
 
         <div className="max-w-7xl mx-auto w-full px-6 lg:px-8 py-24 md:py-36 relative z-10">
-          <div style={{ maxWidth: 620 }}>
+          <div style={{ maxWidth: 680 }}>
             <p
               className="animate-slide-up flex items-center gap-2.5 mb-5"
               style={{
@@ -83,6 +81,7 @@ const Index = () => {
                 letterSpacing: '0.14em',
                 textTransform: 'uppercase' as const,
                 color: '#ff751f',
+                lineHeight: 1,
               }}
             >
               <span style={{ display: 'inline-block', width: 28, height: 2, background: '#ff751f', flexShrink: 0 }} />
@@ -91,13 +90,15 @@ const Index = () => {
             <h1
               className="animate-slide-up delay-100 heading-display text-white font-bold mb-6"
               style={{
-                fontSize: 'clamp(38px, 4.8vw, 62px)',
-                lineHeight: 1.10,
+                fontSize: 'clamp(36px, 4.2vw, 58px)',
+                lineHeight: 1.15,
                 letterSpacing: '-0.02em',
-                maxWidth: 620,
+                maxWidth: 680,
               }}
             >
-              De laagst haalbare BPM. Fysiek onderbouwd. Juridisch verdedigbaar.
+              De laagst haalbare BPM.<br />
+              Fysiek onderbouwd.<br />
+              Juridisch verdedigbaar.
             </h1>
             <p
               className="animate-slide-up delay-200 mb-10"
@@ -205,20 +206,45 @@ const Index = () => {
               </div>
             </div>
           </div>
+
+          {/* BPM Advieskaart met foto */}
           <div
-            className="rounded-[14px] p-8 text-white overflow-hidden flex flex-col justify-center"
-            style={{
-              background: '#1d3c71',
-              backgroundImage: 'radial-gradient(ellipse at 20% 50%, rgba(105,141,179,0.20) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 50%)',
-            }}
+            className="rounded-[14px] overflow-hidden flex flex-col self-stretch"
+            style={{ boxShadow: '0 4px 24px rgba(29,60,113,0.12)' }}
           >
-            <h3 className="heading-display text-2xl font-bold mb-3" style={{ color: '#ffffff' }}>Twijfel je na de berekening?</h3>
-            <p style={{ color: 'rgba(255, 255, 255, 0.88)', fontSize: 15, lineHeight: 1.70 }} className="mb-6">
-              Vraag gratis BPM-advies aan. Wij bepalen de laagst haalbare BPM voor jouw specifieke voertuig.
-            </p>
-            <Link to="/contact">
-              <button className="btn-cta">Gratis advies aanvragen</button>
-            </Link>
+            <div className="w-full h-[200px] overflow-hidden flex-shrink-0">
+              <img
+                src={erikPhoto}
+                alt="BPM taxatie op locatie"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+            <div
+              className="flex-1 flex flex-col justify-center"
+              style={{ background: '#1d3c71', padding: '28px 28px 32px' }}
+            >
+              <h3 className="heading-display text-xl font-bold mb-2.5" style={{ color: '#ffffff', lineHeight: 1.3 }}>
+                Twijfel je na de berekening?
+              </h3>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: 'rgba(255,255,255,0.82)', lineHeight: 1.70 }} className="mb-5">
+                Vraag gratis BPM-advies aan. Wij bepalen de laagst haalbare BPM voor jouw specifieke voertuig.
+              </p>
+              <Link to="/contact" className="self-start">
+                <button
+                  className="inline-flex items-center justify-center font-semibold text-white text-sm rounded-md transition-colors"
+                  style={{
+                    height: 46,
+                    padding: '0 24px',
+                    background: '#ff751f',
+                    boxShadow: '0 3px 12px rgba(255,117,31,0.35)',
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = '#e8651a')}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = '#ff751f')}
+                >
+                  Gratis advies aanvragen
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -244,128 +270,190 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ── ERIK SECTION ── */}
-      <section className="bg-white py-16 md:py-24 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-          <div className="relative">
-            <div className="absolute -bottom-4 -left-4 w-full h-full rounded-lg -z-10" style={{ border: '8px solid rgba(105,141,179,0.20)' }} />
-            <img
-              src={erikPhoto}
-              alt="Erik Elderson – eigenaar Automobiel Taxaties"
-              className="rounded-lg w-full max-w-md mx-auto relative z-10"
-              style={{ boxShadow: '0 20px 60px rgba(29,60,113,0.20)' }}
-              loading="lazy"
-            />
+      {/* ── ERIK SECTION — EDITORIAL ── */}
+      <section className="relative py-20 md:py-24 overflow-hidden" style={{ background: '#1d3c71' }}>
+        {/* Decorative circle */}
+        <div className="absolute pointer-events-none" style={{ top: -120, right: -120, width: 480, height: 480, borderRadius: '50%', background: 'radial-gradient(circle, rgba(105,141,179,0.18) 0%, transparent 70%)' }} />
+
+        <div className="max-w-[1100px] mx-auto px-6 lg:px-10 grid md:grid-cols-[420px_1fr] gap-16 items-center">
+          {/* Photo column */}
+          <div className="relative hidden md:block">
+            {/* Vertical accent line */}
+            <div className="absolute rounded-sm" style={{ left: -20, top: 40, bottom: 40, width: 4, background: 'linear-gradient(to bottom, #ff751f 0%, rgba(255,117,31,0.20) 100%)' }} />
+
+            {/* Photo */}
+            <div className="rounded-2xl overflow-hidden relative" style={{ marginTop: -40, boxShadow: '0 24px 64px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.20)' }}>
+              <img
+                src={erikPhoto}
+                alt="Erik Elderson — Automobieltaxaties"
+                className="w-full block"
+                style={{ height: 520, objectFit: 'cover', objectPosition: 'center top', filter: 'contrast(1.05) brightness(0.98)' }}
+                loading="lazy"
+              />
+            </div>
+
+            {/* Badge on photo */}
+            <div
+              className="absolute flex flex-col items-center rounded-[10px]"
+              style={{
+                bottom: 24,
+                left: 24,
+                background: 'rgba(29,60,113,0.92)',
+                backdropFilter: 'blur(8px)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                padding: '12px 18px',
+              }}
+            >
+              <span className="heading-display" style={{ fontSize: 28, fontWeight: 700, color: '#ff751f', lineHeight: 1 }}>2013</span>
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: '0.10em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.65)', marginTop: 4 }}>Opgericht</span>
+            </div>
           </div>
+
+          {/* Text column */}
           <div>
-            <span className="block mb-3" style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase' as const, color: '#ff751f' }}>
+            <span
+              className="flex items-center gap-2.5 mb-4"
+              style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase' as const, color: '#ff751f' }}
+            >
+              <span style={{ display: 'inline-block', width: 28, height: 2, background: '#ff751f', flexShrink: 0 }} />
               Jouw taxateur
             </span>
-            <h2
-              className="heading-display font-bold mb-2"
-              style={{ fontSize: 'clamp(30px, 3.5vw, 44px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#1a1a1a' }}
-            >
+
+            <h2 className="heading-display font-bold mb-2.5" style={{ fontSize: 'clamp(36px, 4vw, 52px)', lineHeight: 1.05, letterSpacing: '-0.02em', color: '#ffffff' }}>
               Erik Elderson
             </h2>
-            <p style={{ color: '#698db3', fontSize: 16 }} className="mb-6">
+
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 400, color: '#698db3', lineHeight: 1.6 }} className="mb-6">
               Eigenaar · Notarieel Beëdigd TMV Register Taxateur · Register Taxateur VRT
             </p>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.72, color: '#4a5568' }} className="mb-4">
-              In 2013 startte Erik Elderson Automobieltaxaties vanuit een eenvoudige overtuiging: een taxatierapport moet kloppen, en de klant verdient eerlijk advies.
-            </p>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.72, color: '#4a5568' }} className="mb-4">
-              Na jarenlange ervaring in de taxatiebranche wist Erik precies wat hij anders wilde doen. Geen aannames, geen haastwerk. Elk voertuig verdient een grondige fysieke inspectie, met lakdiktemetingen, schadecalculatie en een volledig fotodossier als onderbouwing.
-            </p>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.72, color: '#4a5568' }} className="mb-6">
-              Zaken die Erik enorm belangrijk vindt: flexibiliteit, kwaliteit leveren en veel aandacht voor de klant. Je hebt altijd direct contact met Erik zelf. Geen tussenpersoon, geen callcenter.
-            </p>
-            <div className="space-y-3 mb-6">
-              <div className="flex items-center gap-3">
-                <span className="w-5 h-0.5 rounded-full" style={{ background: '#ff751f' }} />
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 500, color: '#1a1a1a' }}>Meer dan 15 jaar ervaring in voertuigtaxaties</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="w-5 h-0.5 rounded-full" style={{ background: '#ff751f' }} />
-                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 500, color: '#1a1a1a' }}>Landelijk actief, op locatie bij jou</span>
-              </div>
+
+            <div className="space-y-3.5 mb-7">
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
+                In 2013 startte Erik Elderson Automobieltaxaties vanuit een eenvoudige overtuiging: een taxatierapport moet kloppen, en de klant verdient eerlijk advies.
+              </p>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
+                Na jarenlange ervaring in de taxatiebranche wist Erik precies wat hij anders wilde doen. Geen aannames, geen haastwerk. Elk voertuig verdient een grondige fysieke inspectie — met lakdiktemetingen, schadecalculatie en een volledig fotodossier als basis.
+              </p>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
+                Je krijgt altijd direct contact met Erik zelf. Geen callcenter, geen tussenpersoon.
+              </p>
             </div>
-            <Link to="/werkwijze" className="text-sm font-semibold hover:underline inline-flex items-center gap-1" style={{ color: '#ff751f' }}>
-              Lees meer over onze werkwijze <ArrowRight className="w-4 h-4" />
+
+            {/* Certification badges */}
+            <div className="flex flex-wrap gap-2 mb-7">
+              {["TMV Register", "VRT Register", "FEHAC", "Hobeon"].map((badge) => (
+                <span
+                  key={badge}
+                  className="text-[11px] font-semibold uppercase"
+                  style={{
+                    letterSpacing: '0.06em',
+                    color: 'rgba(255,255,255,0.80)',
+                    background: 'rgba(255,255,255,0.10)',
+                    border: '1px solid rgba(255,255,255,0.18)',
+                    padding: '5px 14px',
+                    borderRadius: 4,
+                  }}
+                >
+                  {badge}
+                </span>
+              ))}
+            </div>
+
+            {/* Stats */}
+            <div className="flex gap-8 mb-8 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.10)' }}>
+              {[
+                { num: "15+", label: "Jaar ervaring" },
+                { num: "1.200+", label: "Taxaties uitgevoerd" },
+                { num: "98%", label: "Geaccepteerd" },
+              ].map((stat, i) => (
+                <div key={i} className="flex flex-col">
+                  <span className="heading-display" style={{ fontSize: 32, fontWeight: 700, color: '#ffffff', lineHeight: 1, letterSpacing: '-0.02em' }}>{stat.num}</span>
+                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 500, color: 'rgba(255,255,255,0.50)', textTransform: 'uppercase' as const, letterSpacing: '0.08em', marginTop: 6 }}>{stat.label}</span>
+                </div>
+              ))}
+            </div>
+
+            <Link
+              to="/werkwijze"
+              className="text-sm font-semibold inline-flex items-center gap-1.5 transition-all hover:gap-2.5"
+              style={{ color: '#ff751f' }}
+            >
+              Lees meer over de werkwijze <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
+
+        {/* Mobile photo fallback */}
+        <div className="md:hidden px-6 mt-8">
+          <img
+            src={erikPhoto}
+            alt="Erik Elderson"
+            className="rounded-xl w-full max-w-sm mx-auto"
+            style={{ boxShadow: '0 16px 48px rgba(0,0,0,0.30)' }}
+            loading="lazy"
+          />
+        </div>
       </section>
 
-      {/* ── SERVICES GRID ── */}
+      {/* ── DIENSTEN GRID — GEKLEURDE TEGELS ── */}
       <section style={{ background: '#f0f4f8' }} className="py-16 md:py-24 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <h2
-            className="heading-display font-bold text-center mb-14"
-            style={{ fontSize: 'clamp(30px, 3.5vw, 44px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#1a1a1a' }}
-          >
-            Wat kunnen wij voor je doen?
-          </h2>
+        <div className="max-w-[1100px] mx-auto">
+          <div className="text-center mb-12">
+            <h2
+              className="heading-display font-bold mb-2.5"
+              style={{ fontSize: 'clamp(30px, 3.5vw, 44px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#1a1a1a' }}
+            >
+              Wat kunnen wij voor je doen?
+            </h2>
+            <p style={{ fontSize: 16, color: '#698db3' }}>
+              Kies het type taxatie dat bij jouw voertuig past.
+            </p>
+          </div>
 
-          {/* Groep 1: Importtaxatie */}
-          <p className="mb-4" style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 600, letterSpacing: '0.10em', textTransform: 'uppercase' as const, color: '#698db3' }}>
-            BPM &amp; Waardebepaling
-          </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-            {importServices.map((service, i) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {diensten.map((d, i) => (
               <Link
                 key={i}
-                to={service.href}
-                className={`group card-elevated p-6 relative ${service.highlight ? "sm:col-span-2 lg:col-span-2" : ""}`}
+                to={d.href}
+                className="group relative rounded-[14px] overflow-hidden flex flex-col items-center justify-center text-center no-underline transition-all duration-200"
                 style={{
-                  background: service.highlight ? 'linear-gradient(135deg, #ffffff 0%, #fff8f4 100%)' : '#ffffff',
-                  border: service.highlight ? '2px solid rgba(255,117,31,0.35)' : undefined,
+                  background: d.accent ? '#ff751f' : '#1d3c71',
+                  padding: '32px 20px 28px',
+                  aspectRatio: '1 / 1',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                  e.currentTarget.style.boxShadow = '0 12px 36px rgba(29,60,113,0.25)';
+                  if (!d.accent) e.currentTarget.style.background = '#254d91';
+                  else e.currentTarget.style.background = '#e8651a';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = 'none';
+                  e.currentTarget.style.background = d.accent ? '#ff751f' : '#1d3c71';
                 }}
               >
-                {service.highlight && (
-                  <span className="absolute top-4 right-4 text-white font-bold text-[10px] tracking-[0.08em] uppercase px-2.5 py-1 rounded-full" style={{ background: '#ff751f' }}>
+                {/* Subtle glow */}
+                <div className="absolute pointer-events-none" style={{ top: -30, right: -30, width: 100, height: 100, borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
+
+                {d.accent && (
+                  <span
+                    className="absolute text-white font-bold uppercase"
+                    style={{ top: 14, right: 14, fontSize: 9, letterSpacing: '0.10em', background: 'rgba(255,255,255,0.22)', padding: '3px 10px', borderRadius: 20 }}
+                  >
                     Meest gekozen
                   </span>
                 )}
-                <div
-                  className="inline-flex items-center justify-center rounded-xl mb-4"
-                  style={{
-                    width: 52, height: 52,
-                    background: service.highlight ? 'rgba(255,117,31,0.12)' : '#f0f4f8',
-                  }}
-                >
-                  <service.icon style={{ width: 26, height: 26, color: service.highlight ? '#ff751f' : '#1d3c71' }} />
-                </div>
-                <h3 className="heading-display mb-1.5" style={{ fontSize: 18, fontWeight: 600, color: '#1a1a1a' }}>{service.title}</h3>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13.5, fontWeight: 400, lineHeight: 1.65, color: '#6b7a8d' }} className="mb-3">{service.description}</p>
-                <span className="text-[13px] font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition-all" style={{ color: '#ff751f' }}>
-                  Meer info <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </Link>
-            ))}
-          </div>
 
-          {/* Groep 2: Verzekeringstaxatie */}
-          <p className="mb-4" style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 600, letterSpacing: '0.10em', textTransform: 'uppercase' as const, color: '#698db3' }}>
-            Verzekeringstaxatie
-          </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {verzekeringsServices.map((service, i) => (
-              <Link
-                key={i}
-                to={service.href}
-                className="group card-elevated p-6"
-                style={{ background: '#ffffff' }}
-              >
-                <div
-                  className="inline-flex items-center justify-center rounded-xl mb-4"
-                  style={{ width: 52, height: 52, background: '#f0f4f8' }}
-                >
-                  <service.icon style={{ width: 26, height: 26, color: '#1d3c71' }} />
+                <div className="flex items-center justify-center mb-4" style={{ width: 56, height: 56 }}>
+                  <d.icon style={{ width: 48, height: 48, color: 'rgba(255,255,255,0.90)' }} />
                 </div>
-                <h3 className="heading-display mb-1.5" style={{ fontSize: 18, fontWeight: 600, color: '#1a1a1a' }}>{service.title}</h3>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13.5, fontWeight: 400, lineHeight: 1.65, color: '#6b7a8d' }} className="mb-3">{service.description}</p>
-                <span className="text-[13px] font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition-all" style={{ color: '#ff751f' }}>
-                  Meer info <ArrowRight className="w-3.5 h-3.5" />
+
+                <span className="heading-display block mb-1" style={{ fontSize: 17, fontWeight: 600, color: '#ffffff', lineHeight: 1.3 }}>
+                  {d.title}
+                </span>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 400, color: 'rgba(255,255,255,0.65)', letterSpacing: '0.02em' }}>
+                  {d.sub}
                 </span>
               </Link>
             ))}
@@ -397,7 +485,6 @@ const Index = () => {
             </p>
           </div>
 
-          {/* 3 Statements */}
           <div className="grid md:grid-cols-3 gap-6 mb-14">
             {[
               {
@@ -434,7 +521,6 @@ const Index = () => {
             ))}
           </div>
 
-          {/* Stats bar */}
           <div className="grid grid-cols-3 gap-0 mb-12">
             {[
               { num: "1.200+", label: "Taxaties uitgevoerd" },
