@@ -364,7 +364,7 @@ const Index = () => {
             <div className="flex gap-8 mb-8 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.10)' }}>
               {[
                 { num: "15+", label: "Jaar ervaring" },
-                { num: "1.200+", label: "Taxaties uitgevoerd" },
+                { num: "25.000+", label: "Voertuigen getaxeerd" },
                 { num: "98%", label: "Geaccepteerd" },
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col">
