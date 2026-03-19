@@ -255,6 +255,8 @@ const MotorTaxatie = () => {
         </div>
       </section>
     </div>
+      <SiteFooter />
+      <WhatsAppButton />
   );
 };
 
