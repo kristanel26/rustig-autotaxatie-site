@@ -10,7 +10,6 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 
 const diensten = [
   { title: "BPM Taxatie", sub: "Importvoertuig", href: "/bpm-taxatie", icon: Calculator, accent: true },
-  { title: "Verzekeringstaxatie", sub: "Waardebepaling polis", href: "/verzekeringstaxatie-info", icon: Shield },
   { title: "WEV Taxatie", sub: "Fiscale waardebepaling", href: "/wev-taxatie", icon: ScaleIcon },
   { title: "Oldtimer Taxatie", sub: "Klassieke voertuigen", href: "/oldtimer-taxatie", icon: Clock },
   { title: "Youngtimer Taxatie", sub: "Voertuigen vanaf 15 jaar", href: "/youngtimer-taxatie", icon: Car },
