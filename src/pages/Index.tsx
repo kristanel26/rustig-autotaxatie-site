@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, Calculator, Car, Bike, Truck, Wrench, ChevronRight, Search, MessageCircle, Handshake, Clock, UtensilsCrossed } from "lucide-react";
+import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, ChevronRight, Search, MessageCircle, Handshake } from "lucide-react";
+import { FaFileInvoiceDollar, FaBalanceScale, FaClock, FaCar, FaTruck, FaMotorcycle, FaUtensils, FaCarCrash } from "react-icons/fa";
 import erikPhoto from "@/assets/erik-elderson.png";
 import erikInspectie from "@/assets/erik-inspectie.jpg";
 import heroImage from "@/assets/hero-homepage.jpg";
@@ -10,14 +11,14 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import BookingWizard from "@/components/BookingWizard";
 
 const diensten = [
-  { title: "BPM Taxatie", sub: "Importvoertuig", href: "/bpm-taxatie", icon: Calculator, accent: true },
-  { title: "WEV Taxatie", sub: "Fiscale waardebepaling", href: "/wev-taxatie", icon: ScaleIcon },
-  { title: "Oldtimer Taxatie", sub: "Klassieke voertuigen", href: "/oldtimer-taxatie", icon: Clock },
-  { title: "Youngtimer Taxatie", sub: "Voertuigen vanaf 15 jaar", href: "/youngtimer-taxatie", icon: Car },
-  { title: "Camper Taxatie", sub: "Campermarkt specialist", href: "/camper-taxatie", icon: Truck },
-  { title: "Motor Taxatie", sub: "Motorfietsen", href: "/motor-taxatie", icon: Bike },
-  { title: "Foodtruck Taxatie", sub: "Mobiele horeca", href: "/foodtruck-taxatie", icon: UtensilsCrossed },
-  { title: "Schadevaststelling", sub: "Na een incident", href: "/schadevaststelling", icon: Wrench },
+  { title: "BPM Taxatie", sub: "Importvoertuig", href: "/bpm-taxatie", icon: FaFileInvoiceDollar, accent: true },
+  { title: "WEV Taxatie", sub: "Fiscale waardebepaling", href: "/wev-taxatie", icon: FaBalanceScale },
+  { title: "Oldtimer Taxatie", sub: "Klassieke voertuigen", href: "/oldtimer-taxatie", icon: FaClock },
+  { title: "Youngtimer Taxatie", sub: "Voertuigen vanaf 15 jaar", href: "/youngtimer-taxatie", icon: FaCar },
+  { title: "Camper Taxatie", sub: "Campermarkt specialist", href: "/camper-taxatie", icon: FaTruck },
+  { title: "Motor Taxatie", sub: "Motorfietsen", href: "/motor-taxatie", icon: FaMotorcycle },
+  { title: "Foodtruck Taxatie", sub: "Mobiele horeca", href: "/foodtruck-taxatie", icon: FaUtensils },
+  { title: "Schadevaststelling", sub: "Na een incident", href: "/schadevaststelling", icon: FaCarCrash },
 ];
 
 const usps = [
@@ -112,7 +113,7 @@ const Index = () => {
                 maxWidth: 540,
               }}
             >
-              Automobieltaxaties.nl is het erkende taxatiebureau voor merkdealers, importeurs en particulieren. Wij komen bij je op locatie, door heel Nederland.
+              Automobieltaxaties is het erkende taxatiebureau voor merkdealers, importeurs en particulieren. Wij komen bij je op locatie, door heel Nederland.
             </p>
             <div className="animate-slide-up delay-300 flex flex-col sm:flex-row gap-3 items-center">
               <Link to="/contact">
@@ -130,7 +131,7 @@ const Index = () => {
       </section>
 
       {/* ── USP BAR ── */}
-      <section style={{ background: '#1d3c71', borderTop: '3px solid #ff751f', borderBottom: '3px solid #ff751f' }}>
+      <section style={{ background: '#1d3c71', borderTop: '5px solid #ff751f', borderBottom: '5px solid #ff751f' }}>
         <div className="max-w-[1100px] mx-auto flex flex-wrap md:flex-nowrap items-stretch">
           {usps.map((usp, i) => (
             <React.Fragment key={i}>
@@ -370,8 +371,8 @@ const Index = () => {
             {/* Stats */}
             <div className="flex gap-8 mb-8 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.10)' }}>
               {[
-                { num: "13+", label: "Jaar ervaring" },
                 { num: "25.000+", label: "Voertuigen getaxeerd" },
+                { num: "13 jaar", label: "Ervaring" },
                 { num: "98%", label: "Geaccepteerd" },
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col">
@@ -454,7 +455,7 @@ const Index = () => {
                 )}
 
                 <div className="flex items-center justify-center mb-4" style={{ width: 56, height: 56 }}>
-                  <d.icon style={{ width: 52, height: 52, color: '#ffffff', strokeWidth: 2.5 }} />
+                  <d.icon size={40} color="#ffffff" />
                 </div>
 
                 <span className="heading-display block mb-1" style={{ fontSize: 17, fontWeight: 600, color: '#ffffff', lineHeight: 1.3 }}>
@@ -635,30 +636,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ── TARGET AUDIENCE BANNER ── */}
-      <section
-        className="py-16 px-6 lg:px-8 overflow-hidden relative"
-        style={{
-          background: '#1d3c71',
-          backgroundImage: 'radial-gradient(ellipse at 20% 50%, rgba(105,141,179,0.20) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.04) 0%, transparent 50%)',
-        }}
-      >
-        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-0 text-white text-center relative z-10">
-          {[
-            { title: "Merkdealers en groothandelaren", sub: "Professionele taxatierapporten voor je bedrijfsvoering en handelsvoorraad." },
-            { title: "Importeurs en handelaren", sub: "De laagst haalbare BPM met een juridisch waterdicht rapport als onderbouwing." },
-            { title: "Particulieren", sub: "Persoonlijke begeleiding bij het taxeren van je voertuig voor verzekering of import." },
-          ].map((item, i) => (
-            <div key={i} className={`py-8 px-8 ${i > 0 ? "md:border-l" : ""}`} style={{ borderColor: 'rgba(255,255,255,0.15)' }}>
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ background: 'rgba(255,255,255,0.15)' }}>
-                <Users className="w-7 h-7 text-white" style={{ opacity: 1 }} />
-              </div>
-              <h3 className="heading-display text-[20px] font-semibold text-white mb-2" style={{ lineHeight: 1.3 }}>{item.title}</h3>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, lineHeight: 1.65, color: 'rgba(255,255,255,0.80)' }}>{item.sub}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* ── NEWS SECTION ── */}
       <section className="bg-white py-16 md:py-24 px-6 lg:px-8">
@@ -731,6 +708,27 @@ const Index = () => {
               </button>
             </a>
           </div>
+        </div>
+      </section>
+
+      {/* ── NIEUWSBRIEF BALK ── */}
+      <section style={{ background: '#f0f4f8' }} className="py-12 px-6 lg:px-8">
+        <div className="max-w-[640px] mx-auto text-center">
+          <h3 className="heading-display font-bold mb-2" style={{ fontSize: 22, color: '#1a1a1a' }}>
+            Blijf op de hoogte
+          </h3>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#698db3', lineHeight: 1.65 }} className="mb-5">
+            Ontvang het laatste BPM-nieuws, wetswijzigingen en taxatietips in je inbox.
+          </p>
+          <form className="flex flex-col sm:flex-row gap-3 justify-center" onSubmit={(e) => e.preventDefault()}>
+            <input
+              type="email"
+              placeholder="Je e-mailadres"
+              className="flex-1 px-4 py-3 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] focus:border-transparent"
+              style={{ borderColor: '#e2e8f0', maxWidth: 340 }}
+            />
+            <button className="btn-cta" style={{ whiteSpace: 'nowrap' }}>Aanmelden</button>
+          </form>
         </div>
       </section>
 

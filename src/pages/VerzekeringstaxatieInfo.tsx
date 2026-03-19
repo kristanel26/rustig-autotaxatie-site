@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import heroCarInspection from "@/assets/hero-car-inspection.jpg";
@@ -279,11 +281,8 @@ const VerzekeringstaxatieInfo = () => {
         </div>
       </section>
 
-      <footer className="py-8 px-6 border-t border-border">
-        <div className="container-wide text-center text-sm text-muted-foreground">
-          <p>© 2024 Automobiel Taxaties. Alle rechten voorbehouden.</p>
-        </div>
-      </footer>
+      <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 };

@@ -252,6 +252,8 @@ const CamperTaxatie = () => {
           </Button>
         </div>
       </section>
+      <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 };

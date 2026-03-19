@@ -21,6 +21,7 @@ import VerzekeringstaxatieInfo from "./pages/VerzekeringstaxatieInfo";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
+import Blog from "./pages/Blog";
 
 // Internal pages
 import Login from "./pages/internal/Login";
@@ -58,6 +59,7 @@ const router = createBrowserRouter([
   { path: "/verzekeringstaxatie-info", element: <VerzekeringstaxatieInfo /> },
   { path: "/contact", element: <Contact /> },
   { path: "/faq", element: <FAQ /> },
+  { path: "/blog", element: <Blog /> },
   
   // Internal routes - Login is public
   { path: "/intern/login", element: <Login /> },

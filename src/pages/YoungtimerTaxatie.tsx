@@ -252,6 +252,8 @@ const YoungtimerTaxatie = () => {
           </Button>
         </div>
       </section>
+      <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 };

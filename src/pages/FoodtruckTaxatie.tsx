@@ -252,6 +252,8 @@ const FoodtruckTaxatie = () => {
           </Button>
         </div>
       </section>
+      <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 };

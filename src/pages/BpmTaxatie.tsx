@@ -2,6 +2,8 @@ import { useRef } from "react";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { Users, FileText, Shield, ClipboardCheck, List, AlertTriangle } from "lucide-react";
 import heroBpm from "@/assets/hero-bpm.jpg";
 const BpmTaxatie = () => {
@@ -299,11 +301,8 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      <footer className="py-8 px-6 border-t border-border">
-        <div className="container-wide text-center text-sm text-muted-foreground">
-          <p>© 2024 Automobiel Taxaties. Alle rechten voorbehouden.</p>
-        </div>
-      </footer>
+      <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 };

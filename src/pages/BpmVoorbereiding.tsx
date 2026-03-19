@@ -4,6 +4,8 @@ import FeatureBlock from "@/components/FeatureBlock";
 import IntakeForm from "@/components/IntakeForm";
 import TrustIndicators from "@/components/TrustIndicators";
 import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { Calculator, FileSearch, Clock } from "lucide-react";
 import heroBpm from "@/assets/hero-bpm.jpg";
 
@@ -65,11 +67,8 @@ const BpmVoorbereiding = () => {
         </div>
       </section>
 
-      <footer className="py-8 px-6 border-t border-border">
-        <div className="container-wide text-center text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Automobiel Taxaties. Alle rechten voorbehouden.</p>
-        </div>
-      </footer>
+      <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 };

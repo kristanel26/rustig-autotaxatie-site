@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail } from "lucide-react";
 import {
@@ -161,14 +163,8 @@ const FAQ = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-border">
-        <div className="container-wide">
-          <div className="pt-0 text-center text-sm text-muted-foreground">
-            <p>© {new Date().getFullYear()} Automobiel Taxaties · KvK 71468889 · BTW NL858727493B01</p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 };

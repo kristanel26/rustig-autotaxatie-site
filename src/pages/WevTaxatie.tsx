@@ -282,6 +282,8 @@ const WevTaxatie = () => {
           </Button>
         </div>
       </section>
+      <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 };

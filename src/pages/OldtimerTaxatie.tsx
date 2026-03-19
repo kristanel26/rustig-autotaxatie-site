@@ -252,6 +252,8 @@ const OldtimerTaxatie = () => {
           </Button>
         </div>
       </section>
+      <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 };
