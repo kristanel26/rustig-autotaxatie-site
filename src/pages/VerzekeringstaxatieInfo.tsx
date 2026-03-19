@@ -281,11 +281,8 @@ const VerzekeringstaxatieInfo = () => {
         </div>
       </section>
 
-      <footer className="py-8 px-6 border-t border-border">
-        <div className="container-wide text-center text-sm text-muted-foreground">
-          <p>© 2024 Automobiel Taxaties. Alle rechten voorbehouden.</p>
-        </div>
-      </footer>
+      <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 };
