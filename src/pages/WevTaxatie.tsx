@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
-import SiteFooter from "@/components/SiteFooter";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import serviceWev from "@/assets/service-wev.jpg";
@@ -284,9 +282,9 @@ const WevTaxatie = () => {
           </Button>
         </div>
       </section>
-    </div>
       <SiteFooter />
       <WhatsAppButton />
+    </div>
   );
 };
 
