@@ -2,10 +2,6 @@ import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { useState } from "react";
 import logo from "@/assets/logo-automobiel-taxaties.png";
-import logoFehac from "@/assets/logo-fehac.png";
-import logoTmv from "@/assets/logo-tmv.png";
-import logoVrt from "@/assets/logo-vrt.png";
-import logoHobeon from "@/assets/logo-hobeon.webp";
 
 const dienstenLinks = [
   { label: "BPM Taxatie", href: "/bpm-taxatie" },
@@ -76,10 +72,12 @@ const SiteFooter = () => {
       {/* Main footer */}
       <footer className="bg-[hsl(var(--primary))] text-white py-14 px-6 lg:px-8">
         <div className="max-w-[1100px] mx-auto px-0">
+          {/* Orange accent bar above logo */}
           <div className="grid md:grid-cols-3 gap-10 mb-10">
             {/* Column 1 - About */}
             <div className="border-b border-white/10 pb-8 md:border-0 md:pb-0 flex flex-col items-start">
-              <img src={logo} alt="Automobiel Taxaties" className="h-12 w-auto mb-4 brightness-0 invert" />
+              <div className="w-9 h-[3px] bg-[#ff751f] mb-4" />
+              <img src={logo} alt="Automobiel Taxaties" className="h-[52px] w-auto mb-5 brightness-0 invert opacity-100" />
               <p className="text-white/70 text-sm leading-relaxed mb-6 text-left">
                 Erkend taxatiebureau voor BPM, verzekering en waardebepaling. Landelijk actief vanuit Druten.
               </p>
@@ -149,12 +147,24 @@ const SiteFooter = () => {
       </footer>
 
       {/* Certifications bar */}
-      <div className="bg-[hsl(216,58%,22%)] py-6 px-6 border-t border-white/10">
-        <div className="max-w-[1100px] mx-auto flex flex-wrap items-center justify-center gap-10">
-          <img src={logoTmv} alt="TMV Federatie" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
-          <img src={logoVrt} alt="VRT Register" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
-          <img src={logoFehac} alt="FEHAC" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
-          <img src={logoHobeon} alt="Hobeon" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
+      <div className="bg-[hsl(216,58%,22%)] py-5 px-6 lg:px-10 border-t border-white/10">
+        <div className="max-w-[1100px] mx-auto flex flex-wrap items-center justify-center gap-12">
+          {[
+            { name: "TMV Federatie", sub: "Erkend Taxateur" },
+            { name: "VRT Register", sub: "Register Taxateur" },
+            { name: "FEHAC", sub: "Erkend Rapport" },
+            { name: "Hobeon", sub: "Gecertificeerd" },
+          ].map((cert, i, arr) => (
+            <div key={cert.name} className="flex items-center gap-12">
+              <div className="flex flex-col items-center text-center">
+                <span className="text-[13px] font-bold text-white tracking-wide">{cert.name}</span>
+                <span className="text-[10px] font-normal text-white/50 tracking-wider uppercase mt-0.5">{cert.sub}</span>
+              </div>
+              {i < arr.length - 1 && (
+                <div className="hidden sm:block w-px h-8 bg-white/15" />
+              )}
+            </div>
+          ))}
         </div>
       </div>
 
