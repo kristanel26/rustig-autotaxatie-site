@@ -7,6 +7,7 @@ import heroImage from "@/assets/hero-homepage.jpg";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import BookingWizard from "@/components/BookingWizard";
 
 const diensten = [
   { title: "BPM Taxatie", sub: "Importvoertuig", href: "/bpm-taxatie", icon: Calculator, accent: true },
