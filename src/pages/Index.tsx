@@ -10,7 +10,6 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 
 const diensten = [
   { title: "BPM Taxatie", sub: "Importvoertuig", href: "/bpm-taxatie", icon: Calculator, accent: true },
-  { title: "Verzekeringstaxatie", sub: "Waardebepaling polis", href: "/verzekeringstaxatie-info", icon: Shield },
   { title: "WEV Taxatie", sub: "Fiscale waardebepaling", href: "/wev-taxatie", icon: ScaleIcon },
   { title: "Oldtimer Taxatie", sub: "Klassieke voertuigen", href: "/oldtimer-taxatie", icon: Clock },
   { title: "Youngtimer Taxatie", sub: "Voertuigen vanaf 15 jaar", href: "/youngtimer-taxatie", icon: Car },
@@ -448,7 +447,7 @@ const Index = () => {
                 )}
 
                 <div className="flex items-center justify-center mb-4" style={{ width: 56, height: 56 }}>
-                  <d.icon style={{ width: 48, height: 48, color: 'rgba(255,255,255,0.90)' }} />
+                  <d.icon style={{ width: 52, height: 52, color: '#ffffff', strokeWidth: 2.5 }} />
                 </div>
 
                 <span className="heading-display block mb-1" style={{ fontSize: 17, fontWeight: 600, color: '#ffffff', lineHeight: 1.3 }}>
