@@ -1,305 +1,341 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import TrustIndicators from "@/components/TrustIndicators";
-import { Caravan, Calculator, Scale, ArrowRight, Phone, Mail } from "lucide-react";
+import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, Calculator, Caravan, Car, Bike, Truck, Wrench, ChevronRight } from "lucide-react";
 import erikPhoto from "@/assets/erik-elderson.png";
 import heroImage from "@/assets/hero-homepage.jpg";
-import serviceBpm from "@/assets/service-bpm.jpg";
-import serviceVerzekering from "@/assets/service-verzekering.jpg";
-import serviceWev from "@/assets/service-wev.jpg";
-import logo from "@/assets/logo-automobiel-taxaties.png";
 import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const services = [
-  {
-    icon: Calculator,
-    title: "BPM-taxatie bij import",
-    description:
-      "Importeer je een voertuig en heb je een BPM-taxatie nodig? Wij maken een zorgvuldig onderbouwd taxatierapport dat je kunt gebruiken bij je BPM-aangifte.",
-    href: "/bpm-taxatie",
-    cta: "Meer over BPM-taxatie",
-    image: serviceBpm,
-  },
-  {
-    icon: Caravan,
-    title: "Verzekeringstaxatie voertuig",
-    description:
-      "Wil je je voertuig goed verzekeren? Met een officiële verzekeringstaxatie leg je de juiste waarde vast, zodat je bij schade of diefstal weet waar je aan toe bent.",
-    href: "/verzekeringstaxatie-info",
-    cta: "Meer over verzekeringstaxatie",
-    image: serviceVerzekering,
-    subLinks: [
-      { label: "Camper", href: "/camper-taxatie" },
-      { label: "Oldtimer", href: "/oldtimer-taxatie" },
-      { label: "Youngtimer", href: "/youngtimer-taxatie" },
-      { label: "Motor", href: "/motor-taxatie" },
-      { label: "Foodtruck", href: "/foodtruck-taxatie" },
-    ],
-  },
-  {
-    icon: Scale,
-    title: "WEV-taxatie",
-    description:
-      "Een objectieve waardebepaling van je voertuig voor zakelijke of fiscale doeleinden. De WEV-taxatie geeft inzicht in de waarde op een specifiek moment.",
-    href: "/wev-taxatie",
-    cta: "Meer over WEV-taxatie",
-    image: serviceWev,
-  },
+  { title: "BPM Taxatie", description: "De laagst haalbare BPM voor je importvoertuig.", href: "/bpm-taxatie", icon: Calculator, highlight: true },
+  { title: "Verzekeringstaxatie", description: "De juiste waarde voor je verzekeringspolis.", href: "/verzekeringstaxatie-info", icon: Shield },
+  { title: "WEV Taxatie", description: "Objectieve waardebepaling voor fiscale doeleinden.", href: "/wev-taxatie", icon: ScaleIcon },
+  { title: "Camper Taxatie", description: "Specifieke kennis van de campermarkt.", href: "/camper-taxatie", icon: Caravan },
+  { title: "Oldtimer Taxatie", description: "Waardering met oog voor detail en historie.", href: "/oldtimer-taxatie", icon: Car },
+  { title: "Youngtimer Taxatie", description: "Taxatie van voertuigen vanaf 15 jaar oud.", href: "/youngtimer-taxatie", icon: Car },
+  { title: "Motor Taxatie", description: "Professionele waardering van motorfietsen.", href: "/motor-taxatie", icon: Bike },
+  { title: "Foodtruck Taxatie", description: "Taxatie van mobiele horecavoertuigen.", href: "/foodtruck-taxatie", icon: Truck },
+  { title: "Schadevaststelling", description: "Onafhankelijke vaststelling na schade.", href: "/schadevaststelling", icon: Wrench },
+];
+
+const usps = [
+  { icon: Award, title: "Erkend taxateur", sub: "Geregistreerd bij TMV en VRT" },
+  { icon: MapPin, title: "Op locatie", sub: "Wij komen naar uw voertuig toe" },
+  { icon: Shield, title: "Juridisch verdedigbaar", sub: "Elk rapport standhoudt bij de Belastingdienst" },
+  { icon: Users, title: "Persoonlijk contact", sub: "Direct contact met de taxateur" },
+];
+
+const reviews = [
+  { name: "Marco V.", text: "Uitstekende service. Rapport was snel klaar en zeer professioneel opgesteld. De BPM-besparing was aanzienlijk." },
+  { name: "Sandra K.", text: "Erik nam de tijd om alles goed uit te leggen. Het taxatierapport was helder en compleet. Echt een aanrader." },
+  { name: "Peter de G.", text: "Betrouwbaar en deskundig. De taxatie van mijn oldtimer was tot in detail correct. Zeer tevreden." },
 ];
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <SiteHeader />
 
-      {/* Hero with background image */}
+      {/* ── HERO ── */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
-        {/* Background image */}
         <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            alt=""
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--primary))]/90 via-[hsl(var(--primary))]/75 to-[hsl(var(--primary))]/40" />
+          <img src={heroImage} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-[#1d3c71]/[0.55]" />
         </div>
 
-        {/* Dot pattern */}
-        <div className="absolute inset-0 opacity-[0.04]">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1.5px 1.5px, white 1px, transparent 0)`,
-            backgroundSize: "32px 32px",
-          }} />
-        </div>
-
-        <div className="container-wide w-full px-6 md:px-8 py-24 md:py-36 relative z-10">
-          <div className="max-w-3xl">
-            <div className="flex items-center gap-3 mb-6 animate-fade-in">
-              <div className="accent-line" />
-              <p className="text-white/80 font-semibold uppercase tracking-widest text-xs">
-                Meer dan 15 jaar ervaring
-              </p>
-            </div>
-            <h1 className="heading-display text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-[1.1] animate-slide-up text-balance">
-              Onafhankelijke voertuig­waarderingen
-            </h1>
-            <div className="text-lg md:text-xl text-white/75 mb-10 animate-slide-up leading-relaxed max-w-2xl space-y-4" style={{ animationDelay: "100ms" }}>
-              <p>
-                Automobiel Taxaties is een onafhankelijk taxatiebureau. We ondersteunen ondernemers en particulieren met zorgvuldig onderbouwde taxaties voor BPM, verzekering en fiscale waarderingen.
-              </p>
-            </div>
-            <a href="#diensten" className="inline-block animate-slide-up" style={{ animationDelay: "200ms" }}>
-              <Button variant="hero" size="xl">
-                Bekijk onze diensten
-              </Button>
-            </a>
-          </div>
-        </div>
-
-        {/* Wave */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto" preserveAspectRatio="none">
-            <path d="M0 120L48 110C96 100 192 80 288 70C384 60 480 60 576 65C672 70 768 80 864 85C960 90 1056 90 1152 85C1248 80 1344 70 1392 65L1440 60V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0Z" fill="hsl(var(--background))" />
-          </svg>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section id="diensten" className="section-padding bg-background scroll-mt-8 section-glow relative">
-        <div className="container-wide relative z-10">
-          <div className="text-center mb-14 md:mb-20">
-            <div className="accent-line mx-auto mb-4" />
-            <h2 className="heading-display text-3xl md:text-4xl lg:text-5xl mb-4 text-balance">
-              Onze diensten
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              Professionele taxaties voor elke situatie
+        <div className="max-w-7xl mx-auto w-full px-6 lg:px-8 py-24 md:py-36 relative z-10">
+          <div className="max-w-[600px]">
+            <p className="text-[#ff751f] font-semibold uppercase tracking-[0.1em] text-xs mb-5">
+              Erkend taxatiebureau &mdash; landelijk actief
             </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="card-elevated overflow-hidden flex flex-col animate-slide-up group"
-                style={{ animationDelay: `${index * 120}ms` }}
-              >
-                {/* Service image */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/90 backdrop-blur-sm shadow-lg">
-                      <service.icon className="w-6 h-6 text-accent" />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-8 flex flex-col flex-grow">
-                  <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed mb-6 flex-grow">
-                    {service.description}
-                  </p>
-                  <Link to={service.href}>
-                    <Button variant="secondary-action" className="w-full justify-between group/btn">
-                      {service.cta}
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </Button>
-                  </Link>
-                  {service.subLinks && (
-                    <div className="mt-4 pt-4 border-t border-border/50">
-                      <div className="flex flex-wrap gap-x-3 gap-y-1">
-                        {service.subLinks.map((subLink, subIndex) => (
-                          <Link
-                            key={subIndex}
-                            to={subLink.href}
-                            className="text-sm text-muted-foreground hover:text-accent transition-colors hover:underline underline-offset-2"
-                          >
-                            {subLink.label}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Trust indicators */}
-      <section className="section-padding bg-secondary/40">
-        <div className="container-wide">
-          <TrustIndicators />
-        </div>
-      </section>
-
-      {/* About section */}
-      <section className="section-padding bg-background section-glow relative overflow-hidden">
-        <div className="container-wide relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-br from-accent/10 to-transparent rounded-3xl blur-2xl" />
-              <img
-                src={erikPhoto}
-                alt="Erik Elderson – eigenaar Automobiel Taxaties"
-                className="relative rounded-2xl w-full max-w-md mx-auto shadow-xl"
-                loading="lazy"
-              />
-            </div>
-            <div>
-              <div className="accent-line mb-4" />
-              <h2 className="heading-display text-3xl md:text-4xl mb-3 text-balance">
-                Erik Elderson
-              </h2>
-              <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-6">
-                Eigenaar · Notarieel Beëdigd TMV Register-Taxateur · Register-Taxateur VRT
-              </p>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-4">
-                Automobiel Taxaties werkt onafhankelijk en met meer dan 15 jaar ervaring in voertuigwaarderingen. Ik neem de tijd om een voertuig goed te bekijken en leg vast wat écht van invloed is op de waarde.
-              </p>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                Geen aannames, geen haastwerk. Zo ontvang je een duidelijk en zorgvuldig opgesteld taxatierapport waar je op kunt vertrouwen.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a href="tel:+31650694978" className="flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors">
-                  <Phone className="w-4 h-4" />
-                  +31(0)6 506 949 78
-                </a>
-                <a href="mailto:erik@automobieltaxaties.nl" className="flex items-center gap-2 text-muted-foreground hover:text-accent transition-colors">
-                  <Mail className="w-4 h-4" />
-                  erik@automobieltaxaties.nl
-                </a>
-              </div>
+            <h1 className="heading-display text-[40px] md:text-[52px] text-white mb-6 leading-[1.12]">
+              De laagst haalbare BPM. Fysiek onderbouwd. Juridisch verdedigbaar.
+            </h1>
+            <p className="text-white/80 text-lg leading-[1.7] mb-10">
+              Automobieltaxaties.nl is het erkende taxatiebureau voor merkdealers, importeurs en particulieren. Wij komen bij u op locatie, door heel Nederland.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/contact">
+                <button className="bg-[#ff751f] text-white font-semibold px-8 py-4 rounded-lg text-base hover:bg-[#e5681b] transition-colors shadow-[0_4px_14px_rgba(255,117,31,0.4)]">
+                  Taxatie aanvragen
+                </button>
+              </Link>
+              <a href="tel:+31854832461">
+                <button className="border-2 border-white/30 text-white font-semibold px-8 py-4 rounded-lg text-base hover:bg-white/10 transition-colors flex items-center gap-2">
+                  <Phone className="w-5 h-5" />
+                  085 483 2461
+                </button>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA section */}
-      <section className="hero-section py-20 md:py-28 px-6 md:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.04]">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1.5px 1.5px, white 1px, transparent 0)`,
-            backgroundSize: "32px 32px",
-          }} />
-        </div>
-        <div className="container-narrow text-center relative z-10">
-          <h2 className="heading-display text-3xl md:text-4xl mb-4 text-primary-foreground text-balance">
-            Vragen of een taxatie nodig?
-          </h2>
-          <p className="text-lg text-primary-foreground/70 mb-10 max-w-xl mx-auto">
-            Neem contact op om je situatie te bespreken.
-            We kijken graag mee welke taxatie bij jouw vraag past.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:+31854832461">
-              <Button variant="hero" size="xl">
-                <Phone className="w-5 h-5 mr-2" />
-                085 483 2461
-              </Button>
-            </a>
+      {/* ── BPM CALCULATOR (placeholder) ── */}
+      <section className="bg-[#f7f8fa] py-16 md:py-24 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h2 className="heading-display text-[32px] text-[#1a1a1a] mb-4">Bereken uw BPM indicatie</h2>
+            <p className="text-[#1a1a1a]/60 text-[17px] leading-[1.7] mb-8">
+              Gebruik onze calculator voor een eerste indicatie van de BPM-kosten bij import. Let op: een berekening is geen taxatie en biedt geen juridische onderbouwing.
+            </p>
+            <div className="bg-white rounded-xl border border-[#adafc7]/30 p-10 text-center min-h-[200px] flex items-center justify-center">
+              <p className="text-[#698db3]">BPM Calculator wordt hier ingeladen</p>
+            </div>
+          </div>
+          <div className="bg-[#1d3c71] rounded-xl p-10 text-white">
+            <h3 className="heading-display text-2xl mb-4">Twijfelt u na de berekening?</h3>
+            <p className="text-white/70 text-[17px] leading-[1.7] mb-6">
+              Vraag gratis BPM advies aan. Wij bepalen de laagst haalbare BPM voor uw specifieke voertuig.
+            </p>
             <Link to="/contact">
-              <Button variant="subtle" size="xl" className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10">
-                <Mail className="w-5 h-5 mr-2" />
-                Contactpagina
-              </Button>
+              <button className="bg-[#ff751f] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#e5681b] transition-colors">
+                Gratis advies aanvragen
+              </button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-border bg-secondary/20">
-        <div className="container-wide">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <img src={logo} alt="Automobiel Taxaties" className="h-10 w-auto" />
+      {/* ── USP BAR ── */}
+      <section className="bg-white py-14 px-6 lg:px-8 border-y border-[#e5e7eb]">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+          {usps.map((usp, i) => (
+            <div key={i} className="text-center relative">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#1d3c71]/[0.08] mb-4">
+                <usp.icon className="w-6 h-6 text-[#1d3c71]" />
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Al meer dan 15 jaar jouw betrouwbare partner voor professionele voertuigtaxaties in Nederland.
-              </p>
+              <h4 className="font-semibold text-[#1a1a1a] mb-1">{usp.title}</h4>
+              <p className="text-sm text-[#1a1a1a]/60">{usp.sub}</p>
+              {i < usps.length - 1 && (
+                <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-[#e5e7eb]" />
+              )}
             </div>
-            <div>
-              <h3 className="font-bold mb-4">Diensten</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link to="/bpm-taxatie" className="hover:text-accent transition-colors">BPM-taxaties</Link></li>
-                <li><Link to="/verzekeringstaxatie-info" className="hover:text-accent transition-colors">Verzekeringstaxaties</Link></li>
-                <li><Link to="/wev-taxatie" className="hover:text-accent transition-colors">WEV-taxatie</Link></li>
-                <li><Link to="/faq" className="hover:text-accent transition-colors">Veelgestelde vragen</Link></li>
-                <li><Link to="/contact" className="hover:text-accent transition-colors">Contact</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-bold mb-4">Contact</h3>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <a href="tel:+31854832461" className="hover:text-accent transition-colors flex items-center gap-2">
-                    <Phone className="w-4 h-4" />
-                    085 483 2461
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:erik@automobieltaxaties.nl" className="hover:text-accent transition-colors flex items-center gap-2">
-                    <Mail className="w-4 h-4" />
-                    erik@automobieltaxaties.nl
-                  </a>
-                </li>
-              </ul>
-            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── ERIK SECTION ── */}
+      <section className="bg-white py-16 md:py-24 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+          <div className="relative">
+            <img
+              src={erikPhoto}
+              alt="Erik Elderson – eigenaar Automobiel Taxaties"
+              className="rounded-lg w-full max-w-md mx-auto shadow-xl"
+              loading="lazy"
+            />
           </div>
-          <div className="pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            <p>© {new Date().getFullYear()} Automobiel Taxaties · KvK 71468889 · BTW NL858727493B01</p>
+          <div>
+            <p className="text-[#ff751f] font-semibold uppercase tracking-[0.1em] text-xs mb-3">
+              Uw taxateur
+            </p>
+            <h2 className="heading-display text-[32px] text-[#1a1a1a] mb-2">Erik Elderson</h2>
+            <p className="text-[#698db3] text-sm mb-6">
+              Eigenaar &mdash; Notarieel Beëdigd TMV Register Taxateur &mdash; Register Taxateur VRT
+            </p>
+            <p className="text-[#1a1a1a]/70 text-[17px] leading-[1.7] mb-4">
+              Automobiel Taxaties werkt onafhankelijk en met meer dan 15 jaar ervaring in voertuigwaarderingen. Ik neem de tijd om een voertuig goed te bekijken en leg vast wat écht van invloed is op de waarde.
+            </p>
+            <p className="text-[#1a1a1a]/70 text-[17px] leading-[1.7] mb-6">
+              Geen aannames, geen haastwerk. Zo ontvang je een duidelijk en zorgvuldig opgesteld taxatierapport waar je op kunt vertrouwen.
+            </p>
+            <div className="space-y-2 mb-6">
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-[#ff751f]/10 flex items-center justify-center">
+                  <ChevronRight className="w-3 h-3 text-[#ff751f]" />
+                </div>
+                <span className="text-[#1a1a1a] text-sm font-medium">Meer dan 15 jaar ervaring</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-[#ff751f]/10 flex items-center justify-center">
+                  <ChevronRight className="w-3 h-3 text-[#ff751f]" />
+                </div>
+                <span className="text-[#1a1a1a] text-sm font-medium">Landelijk actief, op locatie bij u</span>
+              </div>
+            </div>
+            <Link to="/werkwijze" className="text-[#ff751f] text-sm font-semibold hover:underline inline-flex items-center gap-1">
+              Lees meer over onze werkwijze <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
-      </footer>
+      </section>
+
+      {/* ── SERVICES GRID ── */}
+      <section className="bg-white py-16 md:py-24 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="heading-display text-[32px] text-[#1a1a1a] text-center mb-14">
+            Wat kunnen wij voor u doen?
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {services.map((service, i) => (
+              <Link
+                key={i}
+                to={service.href}
+                className={`group rounded-xl border p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${
+                  service.highlight
+                    ? "border-[#ff751f]/30 bg-[#ff751f]/[0.03] shadow-md col-span-1 lg:col-span-2 sm:col-span-2"
+                    : "border-[#e5e7eb] bg-white shadow-[0_2px_10px_rgba(0,0,0,0.07)]"
+                }`}
+              >
+                <div className={`inline-flex items-center justify-center w-10 h-10 rounded-lg mb-4 ${
+                  service.highlight ? "bg-[#ff751f]/10" : "bg-[#1d3c71]/[0.08]"
+                }`}>
+                  <service.icon className={`w-5 h-5 ${service.highlight ? "text-[#ff751f]" : "text-[#1d3c71]"}`} />
+                </div>
+                <h3 className="font-semibold text-[#1a1a1a] mb-1.5">{service.title}</h3>
+                <p className="text-sm text-[#1a1a1a]/60 leading-relaxed mb-3">{service.description}</p>
+                <span className="text-[#ff751f] text-sm font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                  Meer info <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── COMPARISON TABLE ── */}
+      <section className="bg-[#f7f8fa] py-16 md:py-24 px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="heading-display text-[32px] text-[#1a1a1a] text-center mb-10">
+            Wat is het verschil?
+          </h2>
+          <div className="overflow-hidden rounded-xl border border-[#e5e7eb]">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr>
+                  <th className="bg-[#f7f8fa] px-6 py-4 font-semibold text-[#1a1a1a]/60 border-b border-r border-[#e5e7eb]">
+                    Een online BPM berekening
+                  </th>
+                  <th className="bg-[#EBF2FB] px-6 py-4 font-semibold text-[#1d3c71] border-b border-[#e5e7eb]">
+                    Een taxatierapport van Automobieltaxaties.nl
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="text-[#1a1a1a]/70">
+                {[
+                  ["Gebaseerd op software", "Fysieke inspectie op locatie"],
+                  ["Geen opname van het voertuig", "Lakdiktemetingen, schadecalculatie, fotodossier"],
+                  ["Niet bruikbaar als officieel tegenbewijs", "Officieel erkend, verdedigbaar bij bezwaar"],
+                  ["Gratis, maar zonder garantie", "Betaald, maar juridisch waterdicht"],
+                ].map(([left, right], i) => (
+                  <tr key={i} className="border-b border-[#e5e7eb] last:border-0">
+                    <td className="px-6 py-4 bg-white border-r border-[#e5e7eb]">{left}</td>
+                    <td className="px-6 py-4 bg-[#EBF2FB] text-[#1d3c71] font-medium">{right}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* ── GOOGLE REVIEWS ── */}
+      <section className="bg-[#f7f8fa] py-16 md:py-24 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="heading-display text-[32px] text-[#1a1a1a] text-center mb-12">
+            Wat onze klanten zeggen
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
+            {reviews.map((review, i) => (
+              <div key={i} className="bg-white rounded-xl p-7 shadow-[0_2px_10px_rgba(0,0,0,0.07)] border border-[#e5e7eb]">
+                <div className="flex gap-1 mb-3">
+                  {[...Array(5)].map((_, s) => (
+                    <Star key={s} className="w-4 h-4 fill-[#ff751f] text-[#ff751f]" />
+                  ))}
+                </div>
+                <p className="text-[#1a1a1a]/70 text-sm leading-relaxed mb-4">"{review.text}"</p>
+                <p className="text-[#1a1a1a] font-semibold text-sm">{review.name}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <p className="text-[#1a1a1a] font-semibold mb-4">4,9 / 5 sterren op Google Reviews</p>
+            <a href="#" className="text-[#ff751f] font-semibold text-sm hover:underline inline-flex items-center gap-1">
+              Bekijk alle reviews <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TARGET AUDIENCE BANNER ── */}
+      <section className="bg-[#1d3c71] py-16 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 text-white text-center">
+          {[
+            { title: "Merkdealers en groothandelaren", sub: "Professionele taxatierapporten voor uw bedrijfsvoering en handelsvoorraad." },
+            { title: "Importeurs en handelaren", sub: "De laagst haalbare BPM met een juridisch waterdicht rapport als onderbouwing." },
+            { title: "Particulieren", sub: "Persoonlijke begeleiding bij het taxeren van uw voertuig voor verzekering of import." },
+          ].map((item, i) => (
+            <div key={i}>
+              <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mx-auto mb-4">
+                <Users className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+              <p className="text-white/70 text-sm leading-relaxed">{item.sub}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── NEWS SECTION (placeholder) ── */}
+      <section className="bg-white py-16 md:py-24 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="heading-display text-[32px] text-[#1a1a1a] text-center mb-12">
+            Laatste nieuws
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
+            {[
+              { date: "12 maart 2026", title: "Nieuwe BPM-tarieven per 1 april 2026", intro: "De Belastingdienst heeft de nieuwe forfaitaire tabel gepubliceerd. Wat dit betekent voor importeurs." },
+              { date: "28 februari 2026", title: "Uitspraak rechtbank over taxatiemethode", intro: "Een recente uitspraak bevestigt de geldigheid van fysieke inspectie als grondslag voor BPM-bepaling." },
+              { date: "15 februari 2026", title: "Verzekeringstaxatie nu ook voor foodtrucks", intro: "Wij hebben ons dienstenaanbod uitgebreid met taxaties specifiek voor mobiele horecavoertuigen." },
+            ].map((item, i) => (
+              <div key={i} className="bg-white rounded-xl border border-[#e5e7eb] p-7 shadow-[0_2px_10px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-transform">
+                <p className="text-xs text-[#698db3] mb-2">{item.date}</p>
+                <h3 className="font-semibold text-[#1d3c71] mb-2">{item.title}</h3>
+                <p className="text-sm text-[#1a1a1a]/60 leading-relaxed mb-3 line-clamp-2">{item.intro}</p>
+                <span className="text-[#ff751f] text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all cursor-pointer">
+                  Lees meer <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <Link to="/nieuws">
+              <button className="border-2 border-[#1d3c71] text-[#1d3c71] font-semibold px-6 py-3 rounded-lg hover:bg-[#1d3c71] hover:text-white transition-colors">
+                Bekijk al het nieuws
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA BLOCK ── */}
+      <section className="bg-[#1d3c71] py-16 md:py-20 px-6 lg:px-8 text-center">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="heading-display text-[32px] text-white mb-4">
+            Vragen of een taxatie nodig?
+          </h2>
+          <p className="text-white/70 text-lg mb-10">
+            Neem contact op om uw situatie te bespreken. We kijken graag mee welke taxatie bij uw vraag past.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/contact">
+              <button className="bg-[#ff751f] text-white font-semibold px-8 py-4 rounded-lg text-base hover:bg-[#e5681b] transition-colors shadow-[0_4px_14px_rgba(255,117,31,0.4)]">
+                Taxatie aanvragen
+              </button>
+            </Link>
+            <a href="tel:+31854832461">
+              <button className="border-2 border-white/30 text-white font-semibold px-8 py-4 rounded-lg text-base hover:bg-white/10 transition-colors flex items-center gap-2">
+                <Phone className="w-5 h-5" />
+                085 483 2461
+              </button>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 };
