@@ -75,7 +75,7 @@ const SiteFooter = () => {
 
       {/* Main footer */}
       <footer className="bg-[hsl(var(--primary))] text-white py-14 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[1100px] mx-auto px-0">
           <div className="grid md:grid-cols-3 gap-10 mb-10">
             {/* Column 1 - About */}
             <div className="border-b border-white/10 pb-8 md:border-0 md:pb-0 flex flex-col items-start">
