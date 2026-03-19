@@ -4,6 +4,8 @@ import FeatureBlock from "@/components/FeatureBlock";
 import IntakeForm from "@/components/IntakeForm";
 import TrustIndicators from "@/components/TrustIndicators";
 import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { Calculator, FileSearch, Clock } from "lucide-react";
 import heroBpm from "@/assets/hero-bpm.jpg";
 
