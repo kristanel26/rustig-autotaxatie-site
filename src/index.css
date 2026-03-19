@@ -227,15 +227,14 @@
 
   .card-elevated {
     @apply bg-card rounded-[14px];
-    border: 1px solid hsl(216 58% 28% / 0.08);
-    box-shadow: var(--card-shadow);
-    transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease;
+    border: 1px solid rgba(29,60,113,0.07);
+    box-shadow: 0 2px 16px rgba(29,60,113,0.08), 0 1px 4px rgba(0,0,0,0.04);
+    transition: transform 250ms ease, box-shadow 250ms ease;
   }
 
   .card-elevated:hover {
-    box-shadow: var(--card-shadow-hover);
-    transform: translateY(-3px);
-    border-color: hsl(var(--accent) / 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(29,60,113,0.13), 0 2px 8px rgba(0,0,0,0.05);
   }
 
   /* Premium CTA button */
