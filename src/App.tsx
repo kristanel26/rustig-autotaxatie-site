@@ -59,6 +59,7 @@ const router = createBrowserRouter([
   { path: "/verzekeringstaxatie-info", element: <VerzekeringstaxatieInfo /> },
   { path: "/contact", element: <Contact /> },
   { path: "/faq", element: <FAQ /> },
+  { path: "/blog", element: <Blog /> },
   
   // Internal routes - Login is public
   { path: "/intern/login", element: <Login /> },
