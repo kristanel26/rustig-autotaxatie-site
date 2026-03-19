@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, Calculator, Caravan, Car, Bike, Truck, Wrench, ChevronRight, Search, MessageCircle, Handshake, Clock, UtensilsCrossed } from "lucide-react";
+import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, Calculator, Car, Bike, Truck, Wrench, ChevronRight, Search, MessageCircle, Handshake, Clock, UtensilsCrossed } from "lucide-react";
 import erikPhoto from "@/assets/erik-elderson.png";
+import erikInspectie from "@/assets/erik-inspectie.jpg";
 import heroImage from "@/assets/hero-homepage.jpg";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -13,7 +14,7 @@ const diensten = [
   { title: "WEV Taxatie", sub: "Fiscale waardebepaling", href: "/wev-taxatie", icon: ScaleIcon },
   { title: "Oldtimer Taxatie", sub: "Klassieke voertuigen", href: "/oldtimer-taxatie", icon: Clock },
   { title: "Youngtimer Taxatie", sub: "Voertuigen vanaf 15 jaar", href: "/youngtimer-taxatie", icon: Car },
-  { title: "Camper Taxatie", sub: "Campermarkt specialist", href: "/camper-taxatie", icon: Caravan },
+  { title: "Camper Taxatie", sub: "Campermarkt specialist", href: "/camper-taxatie", icon: Truck },
   { title: "Motor Taxatie", sub: "Motorfietsen", href: "/motor-taxatie", icon: Bike },
   { title: "Foodtruck Taxatie", sub: "Mobiele horeca", href: "/foodtruck-taxatie", icon: UtensilsCrossed },
   { title: "Schadevaststelling", sub: "Na een incident", href: "/schadevaststelling", icon: Wrench },
@@ -214,7 +215,7 @@ const Index = () => {
           >
             <div className="w-full h-[200px] overflow-hidden flex-shrink-0">
               <img
-                src={erikPhoto}
+                src={erikInspectie}
                 alt="BPM taxatie op locatie"
                 className="w-full h-full object-cover object-center"
               />
@@ -332,7 +333,7 @@ const Index = () => {
                 In 2013 startte Erik Elderson Automobieltaxaties vanuit een eenvoudige overtuiging: een taxatierapport moet kloppen, en de klant verdient eerlijk advies.
               </p>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
-                Na jarenlange ervaring in de taxatiebranche wist Erik precies wat hij anders wilde doen. Geen aannames, geen haastwerk. Elk voertuig verdient een grondige fysieke inspectie — met lakdiktemetingen, schadecalculatie en een volledig fotodossier als basis.
+                Na jarenlange ervaring in de taxatiebranche wist Erik precies wat hij anders wilde doen. Geen aannames, geen haastwerk. Elk voertuig verdient een grondige fysieke inspectie, met lakdiktemetingen, schadecalculatie en een volledig fotodossier als basis.
               </p>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
                 Je krijgt altijd direct contact met Erik zelf. Geen callcenter, geen tussenpersoon.
@@ -363,7 +364,7 @@ const Index = () => {
             <div className="flex gap-8 mb-8 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.10)' }}>
               {[
                 { num: "15+", label: "Jaar ervaring" },
-                { num: "1.200+", label: "Taxaties uitgevoerd" },
+                { num: "25.000+", label: "Voertuigen getaxeerd" },
                 { num: "98%", label: "Geaccepteerd" },
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col">
@@ -523,7 +524,7 @@ const Index = () => {
 
           <div className="grid grid-cols-3 gap-0 mb-12">
             {[
-              { num: "1.200+", label: "Taxaties uitgevoerd" },
+              { num: "25.000+", label: "Voertuigen getaxeerd" },
               { num: "15 jaar", label: "Ervaring in voertuigtaxaties" },
               { num: "98%", label: "Rapporten geaccepteerd door Belastingdienst" },
             ].map((stat, i) => (
