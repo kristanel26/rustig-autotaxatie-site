@@ -14,7 +14,7 @@ const diensten = [
   { title: "WEV Taxatie", sub: "Fiscale waardebepaling", href: "/wev-taxatie", icon: ScaleIcon },
   { title: "Oldtimer Taxatie", sub: "Klassieke voertuigen", href: "/oldtimer-taxatie", icon: Clock },
   { title: "Youngtimer Taxatie", sub: "Voertuigen vanaf 15 jaar", href: "/youngtimer-taxatie", icon: Car },
-  { title: "Camper Taxatie", sub: "Campermarkt specialist", href: "/camper-taxatie", icon: Caravan },
+  { title: "Camper Taxatie", sub: "Campermarkt specialist", href: "/camper-taxatie", icon: Truck },
   { title: "Motor Taxatie", sub: "Motorfietsen", href: "/motor-taxatie", icon: Bike },
   { title: "Foodtruck Taxatie", sub: "Mobiele horeca", href: "/foodtruck-taxatie", icon: UtensilsCrossed },
   { title: "Schadevaststelling", sub: "Na een incident", href: "/schadevaststelling", icon: Wrench },
