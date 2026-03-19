@@ -130,7 +130,7 @@ const Index = () => {
       </section>
 
       {/* ── USP BAR ── */}
-      <section style={{ background: '#1d3c71', borderTop: '3px solid #ff751f' }}>
+      <section style={{ background: '#1d3c71', borderTop: '3px solid #ff751f', borderBottom: '3px solid #ff751f' }}>
         <div className="max-w-[1100px] mx-auto flex flex-wrap md:flex-nowrap items-stretch">
           {usps.map((usp, i) => (
             <React.Fragment key={i}>
