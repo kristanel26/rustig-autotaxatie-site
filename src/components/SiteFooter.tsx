@@ -149,12 +149,12 @@ const SiteFooter = () => {
       </footer>
 
       {/* Certifications bar */}
-      <div className="bg-[hsl(216,58%,22%)] py-5 px-6 border-t border-white/10">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-8">
-          <img src={logoTmv} alt="TMV Federatie" className="h-8 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-          <img src={logoVrt} alt="VRT Register" className="h-8 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-          <img src={logoFehac} alt="FEHAC" className="h-8 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
-          <img src={logoHobeon} alt="Hobeon" className="h-8 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity" />
+      <div className="bg-[hsl(216,58%,22%)] py-6 px-6 border-t border-white/10">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-10">
+          <img src={logoTmv} alt="TMV Federatie" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
+          <img src={logoVrt} alt="VRT Register" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
+          <img src={logoFehac} alt="FEHAC" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
+          <img src={logoHobeon} alt="Hobeon" className="h-10 w-auto brightness-0 invert opacity-75 hover:opacity-100 transition-opacity" />
         </div>
       </div>
 

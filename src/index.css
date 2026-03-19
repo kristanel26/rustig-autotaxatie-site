@@ -393,9 +393,9 @@
     background-clip: text;
   }
 
-  /* Section diagonal clip */
+  /* Section diagonal clip — removed */
   .section-clip-bottom {
-    clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+    clip-path: none;
   }
 
   /* Clean background — no patterns */
