@@ -19,6 +19,7 @@ const LandingHero = ({
   ctaText,
   onCtaClick,
   heroImage,
+  children,
 }: LandingHeroProps) => {
   return (
     <section className="relative min-h-[85vh] flex items-center overflow-hidden">
@@ -75,6 +76,11 @@ const LandingHero = ({
               <ArrowDown className="w-5 h-5 ml-2" />
             </Button>
           </div>
+          {children && (
+            <div className="animate-slide-up mt-5" style={{ animationDelay: "300ms" }}>
+              {children}
+            </div>
+          )}
         </div>
       </div>
 
