@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
@@ -6,7 +7,7 @@ import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
-import { Users, FileText, Shield, ClipboardCheck, Table, BarChart3, Search, ArrowDown, Star, CheckCircle, Scale, Phone, Mail, Clock, MessageCircle } from "lucide-react";
+import { Users, FileText, Shield, ClipboardCheck, Table, BarChart3, Search, ArrowDown, ArrowRight, CheckCircle, Scale, Phone, Mail, Clock, MessageCircle } from "lucide-react";
 import erikHeroBpm from "@/assets/erik-bpm-taxatie-hero.jpg";
 
 const BpmTaxatie = () => {
@@ -108,44 +109,29 @@ const BpmTaxatie = () => {
                 icon: Table,
                 title: "Afschrijvingstabel",
                 desc: "Een forfaitaire tabel op basis van de leeftijd van het voertuig. Houdt geen rekening met de werkelijke staat.",
-                featured: false,
               },
               {
                 icon: BarChart3,
                 title: "Koerslijst",
                 desc: "Een gestandaardiseerde waardebepaling op basis van merk, model en uitvoering. Geen individuele beoordeling.",
-                featured: false,
               },
               {
                 icon: Search,
                 title: "BPM-taxatierapport",
                 desc: "Een onderbouwing op basis van fysieke inspectie door een geregistreerd taxateur. De werkelijke staat is het uitgangspunt.",
-                featured: true,
               },
             ].map((method, i) => (
               <div
                 key={i}
-                className="bg-white relative"
+                className="bg-white"
                 style={{
                   borderRadius: 14,
                   padding: 28,
                   boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
-                  ...(method.featured ? {
-                    borderLeft: '4px solid #ff751f',
-                    background: '#EBF2FB',
-                  } : {}),
                 }}
               >
-                {method.featured && (
-                  <span
-                    className="absolute top-4 right-4 text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full"
-                    style={{ background: '#ff751f', color: '#fff' }}
-                  >
-                    Aanbevolen
-                  </span>
-                )}
-                <div className="inline-flex items-center justify-center rounded-xl mb-4" style={{ width: 44, height: 44, background: method.featured ? 'rgba(255,117,31,0.12)' : 'rgba(29,60,113,0.08)' }}>
-                  <method.icon style={{ width: 22, height: 22 }} className={method.featured ? 'text-cta' : 'text-primary'} />
+                <div className="inline-flex items-center justify-center rounded-xl mb-4" style={{ width: 44, height: 44, background: 'rgba(29,60,113,0.08)' }}>
+                  <method.icon style={{ width: 22, height: 22 }} className="text-primary" />
                 </div>
                 <h3 className="text-lg font-bold mb-1.5" style={{ color: '#1d3c71' }}>{method.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: '#4a5568' }}>{method.desc}</p>
@@ -155,21 +141,7 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* Mid-page CTA */}
-      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(to right, #1d3c71, #2a4f8a)' }}>
-        <div className="container-wide text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>Wil je weten welke methode voor jou het gunstigst is?</h2>
-          <p className="text-[15px] mb-6 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>
-            Wij beoordelen per voertuig welke aanpak het meest verdedigbaar is en geven je vrijblijvend advies.
-          </p>
-          <Button variant="cta" size="lg" onClick={scrollToForm}>
-            Gratis advies aanvragen
-            <ArrowDown className="w-4 h-4 ml-2" />
-          </Button>
-        </div>
-      </section>
-
-      {/* Werkwijze */}
+      {/* Werkwijze + CTA */}
       <section className="py-10 md:py-12 px-6 md:px-8 bg-background">
         <div className="container-wide">
           <div className="text-center mb-8">
@@ -185,16 +157,14 @@ const BpmTaxatie = () => {
               { step: 5, title: "Oplevering", desc: "Per e-mail, klaar om te ondertekenen en versturen" },
             ].map((s, i, arr) => (
               <div key={s.step} className="text-center relative">
-                {/* Connecting line */}
                 {i < arr.length - 1 && (
                   <div
-                    className="hidden md:block absolute top-[22px] left-[calc(50%+22px)] h-[2px]"
+                    className="hidden md:block absolute top-[22px] h-[2px]"
                     style={{
+                      left: 'calc(50% + 22px)',
                       width: 'calc(100% - 44px)',
-                      right: 0,
-                      left: 'auto',
                       background: '#698db3',
-                      transform: 'translateX(calc(50% + 22px))',
+                      transform: 'translateX(calc(50% - 22px))',
                       zIndex: 0,
                     }}
                   />
@@ -210,43 +180,19 @@ const BpmTaxatie = () => {
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Reviews placeholder */}
-      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
-        <div className="container-wide">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-sm font-medium" style={{ color: '#4a5568' }}>[REVIEWS AANLEVEREN DOOR OPDRACHTGEVER]</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust balk */}
-      <section className="py-8 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
-        <div className="container-wide">
-          <div className="flex flex-wrap justify-center items-center divide-x divide-border">
-            <div className="flex items-center gap-2 px-6 md:px-10 py-2">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-cta text-cta" />
-                ))}
-              </div>
-              <span className="text-2xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>4,9</span>
-              <span className="text-xs" style={{ color: '#4a5568' }}>/ 5 Google Reviews</span>
-            </div>
-            <div className="text-center px-6 md:px-10 py-2">
-              <span className="text-2xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>25.000+</span>
-              <span className="text-xs ml-1.5 block md:inline" style={{ color: '#4a5568' }}>voertuigen getaxeerd</span>
-            </div>
-            <div className="text-center px-6 md:px-10 py-2">
-              <span className="text-2xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>13 jaar</span>
-              <span className="text-xs ml-1.5 block md:inline" style={{ color: '#4a5568' }}>ervaring</span>
-            </div>
-            <div className="text-center px-6 md:px-10 py-2">
-              <span className="text-2xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>98%</span>
-              <span className="text-xs ml-1.5 block md:inline" style={{ color: '#4a5568' }}>akkoord bij controle</span>
-            </div>
+          {/* CTA buttons under werkwijze */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
+            <Button variant="cta" size="lg" onClick={scrollToForm}>
+              BPM-aangifte aanvragen
+              <ArrowDown className="w-4 h-4 ml-2" />
+            </Button>
+            <Link to="/stappenplan-bpm-aangifte">
+              <button className="btn-outline-white" style={{ border: '2px solid #1d3c71', color: '#1d3c71', background: 'white' }}>
+                Meer weten? Bekijk het stappenplan
+                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+              </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -293,20 +239,6 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(to right, #1d3c71, #2a4f8a)' }}>
-        <div className="container-wide text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>BPM netjes en onafhankelijk laten regelen?</h2>
-          <p className="text-[15px] mb-6" style={{ color: 'rgba(255,255,255,0.75)' }}>
-            Vraag vrijblijvend een BPM-aangifte aan. Wij beoordelen de juiste methode voor jouw situatie.
-          </p>
-          <Button variant="cta" size="lg" onClick={scrollToForm}>
-            BPM-aangifte aanvragen
-            <ArrowDown className="w-4 h-4 ml-2" />
-          </Button>
-        </div>
-      </section>
-
       {/* Formulier */}
       <section className="py-10 md:py-14 px-6 md:px-8 bg-background" ref={formRef}>
         <div className="container-wide">
@@ -325,6 +257,8 @@ const BpmTaxatie = () => {
                 toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig en de import."
                 submitButtonText="Aanvraag indienen"
                 showVoertuigType={true}
+                hideKenteken={true}
+                compact={true}
               />
             </div>
             <div
@@ -365,48 +299,6 @@ const BpmTaxatie = () => {
                 </svg>
                 App ons direct
               </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Belangrijk + Onafhankelijkheid */}
-      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
-        <div className="container-wide">
-          <div className="grid md:grid-cols-2 gap-6">
-            <div
-              className="bg-white"
-              style={{ borderRadius: 14, padding: 28, boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <div className="flex items-center justify-center rounded-xl" style={{ width: 44, height: 44, background: 'rgba(255,117,31,0.1)' }}>
-                  <ClipboardCheck style={{ width: 22, height: 22, color: '#1d3c71' }} />
-                </div>
-                <h3 className="text-base font-semibold" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>Belangrijk om te weten</h3>
-              </div>
-              <ul className="space-y-1.5 text-sm" style={{ color: '#4a5568' }}>
-                <li>• De BPM wordt vastgesteld op basis van de staat op moment van aangifte</li>
-                <li>• Een taxatierapport heeft beperkte geldigheid</li>
-                <li>• Het voertuig moet in getaxeerde staat blijven tot na verwerking</li>
-                <li>• Volledige en juiste aankoopgegevens zijn essentieel</li>
-              </ul>
-            </div>
-            <div
-              className="bg-white"
-              style={{ borderRadius: 14, padding: 28, boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <div className="flex items-center justify-center rounded-xl" style={{ width: 44, height: 44, background: 'rgba(29,60,113,0.08)' }}>
-                  <Shield style={{ width: 22, height: 22, color: '#1d3c71' }} />
-                </div>
-                <h3 className="text-base font-semibold" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>Onafhankelijk en juridisch geborgd</h3>
-              </div>
-              <ul className="space-y-1.5 text-sm" style={{ color: '#4a5568' }}>
-                <li>• Aangesloten bij Federatie TMV, VRT Register en FEHAC</li>
-                <li>• Geen vooraf afgesproken uitkomsten</li>
-                <li>• Rapportages zijn transparant en controleerbaar</li>
-                <li>• Samenwerking met gespecialiseerde BPM-jurist</li>
-              </ul>
             </div>
           </div>
         </div>
