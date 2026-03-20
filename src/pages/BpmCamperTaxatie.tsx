@@ -5,6 +5,7 @@ import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import heroCamper from "@/assets/hero-camper.jpg";
