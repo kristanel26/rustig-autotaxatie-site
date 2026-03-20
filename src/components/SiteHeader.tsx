@@ -227,8 +227,8 @@ const SiteHeader = () => {
                 >
                   {link.label}
                 </Link>
-              )
-            ))}
+              );
+            })}
             <div className="pt-3 px-4">
               <Link to="/contact" className="block">
                 <button className="btn-cta w-full !text-sm">
