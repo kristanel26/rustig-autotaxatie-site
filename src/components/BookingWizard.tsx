@@ -184,7 +184,7 @@ const BookingWizard = () => {
                     }
                   }}
                 >
-                  <opt.icon className="w-7 h-7" style={{ color: selected ? '#1d3c71' : '#698db3', transition: 'color 200ms ease' }} />
+                  <opt.icon size={28} style={{ color: selected ? '#1d3c71' : '#698db3', transition: 'color 200ms ease' }} />
                   <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: '#1a1a1a' }}>{opt.label}</span>
                 </button>
               );
