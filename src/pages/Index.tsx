@@ -242,7 +242,6 @@ const Index = () => {
                 )}
               </div>
             </div>
-          </div>
 
           {/* BPM Advieskaart met foto */}
           <div
