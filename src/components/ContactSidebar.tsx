@@ -3,7 +3,7 @@ import { Phone, Mail, Clock, MessageCircle } from "lucide-react";
 const ContactSidebar = () => {
   return (
     <div
-      className="rounded-2xl p-10 text-white self-start"
+      className="rounded-2xl p-10 text-white flex flex-col h-full"
       style={{ background: '#1d3c71' }}
     >
       <h3 className="text-lg font-semibold mb-5">Direct contact</h3>
