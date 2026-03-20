@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Phone, Mail, MessageCircle } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
-import { Phone, Mail } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -107,29 +106,33 @@ const FAQ = () => {
             <ArrowLeft className="w-4 h-4" />
             Terug naar home
           </Link>
-          <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-4">
+          <p className="uppercase text-[11px] font-semibold tracking-[0.12em] mb-3" style={{ color: '#ff751f' }}>FAQ</p>
+          <h1 className="heading-display text-4xl md:text-5xl text-primary-foreground mb-4">
             Veelgestelde vragen
           </h1>
-          <p className="text-lg text-primary-foreground/80 max-w-2xl">
-            Hier vind je antwoorden op de meest gestelde vragen over onze taxaties. Staat jouw vraag er niet bij? Neem dan gerust contact met ons op.
+          <p className="text-lg max-w-2xl" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            Hier vind je antwoorden op de meest gestelde vragen. Staat jouw vraag er niet bij? Neem gerust contact op.
           </p>
         </div>
       </section>
 
       {/* FAQ content */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
+      <section className="py-12 md:py-16 px-6 md:px-8 bg-background">
+        <div className="max-w-3xl mx-auto">
           <div className="space-y-10">
             {faqItems.map((category, catIndex) => (
               <div key={catIndex}>
-                <h2 className="text-2xl font-semibold mb-4">{category.category}</h2>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="accent-line" />
+                  <h2 className="text-xl md:text-2xl font-semibold">{category.category}</h2>
+                </div>
                 <Accordion type="single" collapsible className="w-full">
                   {category.questions.map((item, qIndex) => (
                     <AccordionItem key={qIndex} value={`${catIndex}-${qIndex}`}>
-                      <AccordionTrigger className="text-left font-medium">
+                      <AccordionTrigger className="text-left font-medium text-[15px]">
                         {item.q}
                       </AccordionTrigger>
-                      <AccordionContent className="text-muted-foreground leading-relaxed">
+                      <AccordionContent className="text-sm leading-relaxed" style={{ color: '#4a5568' }}>
                         {item.a}
                       </AccordionContent>
                     </AccordionItem>
@@ -138,27 +141,29 @@ const FAQ = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* CTA */}
-          <div className="mt-16 card-elevated p-8 text-center">
-            <h3 className="text-xl font-semibold mb-2">Staat jouw vraag er niet bij?</h3>
-            <p className="text-muted-foreground mb-6">
-              Neem contact met ons op. We helpen je graag verder.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+31854832461">
-                <Button variant="default" size="lg">
-                  <Phone className="w-4 h-4 mr-2" />
-                  085 483 2461
-                </Button>
-              </a>
-              <Link to="/contact">
-                <Button variant="outline" size="lg">
-                  <Mail className="w-4 h-4 mr-2" />
-                  Contactpagina
-                </Button>
-              </Link>
-            </div>
+      {/* CTA donkerblauw */}
+      <section className="py-14 md:py-20 px-6 md:px-8" style={{ background: '#1d3c71' }}>
+        <div className="container-wide text-center">
+          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">Staat jouw vraag er niet bij?</h2>
+          <p className="mb-8 max-w-lg mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            Neem contact op. We helpen je graag verder.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="tel:+31854832461">
+              <Button variant="cta" size="lg">
+                <Phone className="w-4 h-4 mr-2" />
+                085 483 2461
+              </Button>
+            </a>
+            <Link to="/contact">
+              <button className="btn-outline-white">
+                <Mail className="w-4 h-4" />
+                Contactpagina
+              </button>
+            </Link>
           </div>
         </div>
       </section>
