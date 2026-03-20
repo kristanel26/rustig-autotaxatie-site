@@ -220,32 +220,60 @@ const ChatWidget = () => {
       )}
 
       {/* Trigger button */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="fixed z-[60] flex items-center justify-center text-white transition-all duration-200 hover:scale-105"
-        style={{
-          bottom: 96,
-          right: 24,
-          width: 62,
-          height: 62,
-          borderRadius: "50%",
-          background: "#1d3c71",
-          boxShadow: "0 4px 16px rgba(29,60,113,0.35)",
-        }}
-        aria-label={open ? "Chat sluiten" : "Chat openen"}
-      >
-        {open ? (
+      {open ? (
+        <button
+          onClick={() => setOpen(false)}
+          className="fixed z-[60] flex items-center justify-center text-white transition-all duration-200 hover:scale-105"
+          style={{
+            bottom: 24,
+            right: 24,
+            width: 52,
+            height: 52,
+            borderRadius: "50%",
+            background: "#1d3c71",
+            boxShadow: "0 4px 16px rgba(29,60,113,0.35)",
+          }}
+          aria-label="Chat sluiten"
+        >
           <X className="w-6 h-6" />
-        ) : (
-          <>
-            <MessageCircle className="w-7 h-7" />
+        </button>
+      ) : (
+        <button
+          onClick={() => setOpen(true)}
+          className="fixed z-[60] flex items-center gap-3 transition-all duration-200 hover:scale-[1.03] cursor-pointer bg-transparent border-0 p-0"
+          style={{ bottom: 24, right: 24 }}
+          aria-label="Chat openen"
+        >
+          <span
+            className="text-white text-[14px] font-semibold whitespace-nowrap"
+            style={{
+              background: "#ff751f",
+              borderRadius: 20,
+              padding: "8px 14px",
+              boxShadow: "0 4px 12px rgba(255,117,31,0.3)",
+            }}
+          >
+            Wij zijn online
+          </span>
+          <span className="relative shrink-0">
+            <img
+              src={erikPhoto}
+              alt="Erik Elderson"
+              className="object-cover"
+              style={{
+                width: 52,
+                height: 52,
+                borderRadius: "50%",
+                boxShadow: "0 4px 16px rgba(29,60,113,0.35)",
+              }}
+            />
             <span
               className="absolute flex items-center justify-center text-white text-[10px] font-bold"
               style={{
                 top: -2,
                 right: -2,
-                width: 20,
-                height: 20,
+                width: 18,
+                height: 18,
                 borderRadius: "50%",
                 background: "#ff751f",
                 boxShadow: "0 2px 6px rgba(255,117,31,0.4)",
@@ -253,9 +281,9 @@ const ChatWidget = () => {
             >
               1
             </span>
-          </>
-        )}
-      </button>
+          </span>
+        </button>
+      )}
 
       {/* Bounce animation */}
       <style>{`
