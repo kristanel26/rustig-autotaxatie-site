@@ -4,6 +4,7 @@ import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import { Users, FileText, Shield, ClipboardCheck, Table, BarChart3, Search, ArrowDown, Star, CheckCircle, Scale } from "lucide-react";
 import erikInspectie from "@/assets/erik-inspectie.jpg";
