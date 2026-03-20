@@ -8,6 +8,7 @@ import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
+import StatsBar from "@/components/StatsBar";
 import { Button } from "@/components/ui/button";
 import { Users, FileText, Shield, Table, BarChart3, Search, ArrowDown, ArrowRight, CheckCircle, Scale, Phone, Mail, Clock, MessageCircle, FileCheck, Star } from "lucide-react";
 import erikHeroBpm from "@/assets/erik-bpm-taxatie-hero.jpg";
