@@ -33,7 +33,7 @@ const steps = [
   {
     number: 5,
     title: "Verzekering regelen",
-    content: "Het rapport lever je aan bij je verzekeraar. Geldigheid doorgaans 3 tot 5 jaar — informeer bij jouw verzekeraar.",
+    content: "Het rapport lever je aan bij je verzekeraar. Geldigheid doorgaans 3 tot 5 jaar. Informeer bij jouw verzekeraar.",
   },
 ];
 

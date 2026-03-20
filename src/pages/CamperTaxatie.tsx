@@ -107,7 +107,7 @@ const CamperTaxatie = () => {
                 {[
                   "Uitkering op taxatiewaarde, niet dagwaarde",
                   "Premie betalen over de juiste waarde",
-                  "Rapport 2 tot 3 jaar geldig — check je verzekeraar",
+                  "Rapport 2 tot 3 jaar geldig, check je verzekeraar",
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="w-[18px] h-[18px] flex-shrink-0 mt-0.5" style={{ color: '#ff751f' }} />

@@ -72,7 +72,7 @@ const VerzekeringstaxatieInfo = () => {
       >
         <p className="flex items-center gap-2 text-white/60 text-sm">
           <MapPin className="w-4 h-4" />
-          Landelijk actief — op locatie bij jou
+          Landelijk actief, op locatie bij jou
         </p>
       </LandingHero>
       <UspBar />

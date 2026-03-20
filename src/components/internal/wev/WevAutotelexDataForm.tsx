@@ -276,7 +276,7 @@ export const WevAutotelexDataForm = ({ data, onChange }: WevAutotelexDataFormPro
 
         {/* Schadebedrag */}
         <div className="space-y-2 pt-4 border-t">
-          <Label htmlFor="wev_schade_bedrag">Schadebedrag (€) — optioneel</Label>
+          <Label htmlFor="wev_schade_bedrag">Schadebedrag (€), optioneel</Label>
           <Input
             id="wev_schade_bedrag"
             type="number"

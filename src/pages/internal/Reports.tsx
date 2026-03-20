@@ -153,8 +153,8 @@ const Reports = () => {
               </SelectTriggerUI>
               <SelectContentUI>
                 <SelectItemUI value="all">Alle types</SelectItemUI>
-                <SelectItemUI value="klassieker">KLS — Klassiek</SelectItemUI>
-                <SelectItemUI value="camper">CAM — Camper</SelectItemUI>
+                <SelectItemUI value="klassieker">KLS, Klassiek</SelectItemUI>
+                <SelectItemUI value="camper">CAM, Camper</SelectItemUI>
                 <SelectItemUI value="wev">WEV</SelectItemUI>
               </SelectContentUI>
             </SelectUI>
