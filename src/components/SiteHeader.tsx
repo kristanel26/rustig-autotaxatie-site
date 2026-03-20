@@ -152,8 +152,8 @@ const SiteHeader = () => {
                 >
                   {link.label}
                 </Link>
-              )
-            ))}
+              );
+            })}
           </nav>
 
           <div className="hidden xl:flex items-center gap-3">
