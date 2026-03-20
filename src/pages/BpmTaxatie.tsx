@@ -341,7 +341,7 @@ const BpmTaxatie = () => {
                 Liever direct contact? Wij reageren binnen één werkdag.
               </p>
               <a
-                href="https://wa.me/31629182258"
+                href="https://wa.me/31650694978"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 w-full"
