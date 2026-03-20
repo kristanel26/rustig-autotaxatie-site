@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Phone } from "lucide-react";
 
 interface LandingHeroProps {
   title: string;
@@ -10,6 +10,7 @@ interface LandingHeroProps {
   onCtaClick: () => void;
   children?: ReactNode;
   heroImage?: string;
+  showPhoneButton?: boolean;
 }
 
 const LandingHero = ({
@@ -20,6 +21,7 @@ const LandingHero = ({
   onCtaClick,
   heroImage,
   children,
+  showPhoneButton = true,
 }: LandingHeroProps) => {
   return (
     <section className="relative min-h-[85vh] flex items-center overflow-hidden">
@@ -75,6 +77,14 @@ const LandingHero = ({
               {ctaText}
               <ArrowDown className="w-5 h-5 ml-2" />
             </Button>
+            {showPhoneButton && (
+              <a href="tel:+31854832461">
+                <button className="btn-outline-white">
+                  <Phone className="w-5 h-5" />
+                  085 483 2461
+                </button>
+              </a>
+            )}
           </div>
           {children && (
             <div className="animate-slide-up mt-5" style={{ animationDelay: "300ms" }}>
