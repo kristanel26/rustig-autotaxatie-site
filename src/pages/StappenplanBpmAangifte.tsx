@@ -144,6 +144,7 @@ const StappenplanBpmAangifte = () => {
           </Link>
         </div>
       </section>
+      <UspBar />
 
       {/* Steps Timeline */}
       {steps.map((step, i) => (
