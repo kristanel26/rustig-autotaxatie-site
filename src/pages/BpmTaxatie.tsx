@@ -76,7 +76,7 @@ const BpmTaxatie = () => {
             <div>
               {sectionLabel("BPM-taxatie")}
               <div className="mb-4" style={{ width: 48, height: 3, background: '#ff751f', borderRadius: 2 }} />
-              <h2 className="font-semibold mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36 }}>BPM bij import van voertuigen</h2>
+              <h2 className="font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36, color: '#1d3c71' }}>BPM bij import van voertuigen</h2>
               <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
                 Bij import van een voertuig uit het buitenland moet BPM worden aangegeven. De manier waarop de BPM wordt vastgesteld verschilt per situatie en heeft direct invloed op de onderbouwing richting de Belastingdienst.
               </p>
