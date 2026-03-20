@@ -88,14 +88,14 @@ const Index = () => {
                 fontFamily: "'Inter', sans-serif",
                 fontSize: 12,
                 fontWeight: 700,
-                letterSpacing: '0.14em',
+                letterSpacing: '0.10em',
                 textTransform: 'uppercase' as const,
                 color: '#ff751f',
                 lineHeight: 1,
               }}
             >
               <span style={{ display: 'inline-block', width: 28, height: 2, background: '#ff751f', flexShrink: 0 }} />
-              Erkend taxatiebureau &mdash; landelijk actief
+              Automobiel Taxaties
             </p>
             <h1
               className="animate-slide-up delay-100 heading-display text-white font-bold mb-6"
