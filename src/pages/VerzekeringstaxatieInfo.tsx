@@ -63,7 +63,7 @@ const VerzekeringstaxatieInfo = () => {
       <LandingHero
         subtitle="Automobiel Taxaties"
         title="Verzekeringstaxatie"
-        description="Zorg dat je voertuig voor de juiste waarde verzekerd is. Wij taxeren op locatie, door heel Nederland."
+        description={<>Zorg dat je voertuig voor de juiste waarde verzekerd is.<br />Wij taxeren op locatie, door heel Nederland.</>}
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroVerzekeringstaxatie}
