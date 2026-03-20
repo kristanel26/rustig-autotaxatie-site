@@ -250,7 +250,7 @@ const BpmTaxatie = () => {
               Vul het formulier in en wij bepalen de juiste aanpak voor jouw situatie.
             </p>
           </div>
-          <div className="grid md:grid-cols-[1fr_380px] gap-8">
+          <div className="grid md:grid-cols-[1fr_380px] gap-8 items-stretch">
             <div className="bg-white" style={{ borderRadius: 16, boxShadow: '0 8px 40px rgba(0,0,0,0.10)', overflow: 'hidden' }}>
               <IntakeForm
                 serviceType="BPM-aangifte"
