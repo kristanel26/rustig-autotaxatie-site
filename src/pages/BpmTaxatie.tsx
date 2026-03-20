@@ -148,21 +148,20 @@ const BpmTaxatie = () => {
                 key={i}
                 className="bg-white"
                 style={{
-                  borderRadius: 14,
-                  padding: 32,
-                  borderTop: '3px solid #1d3c71',
+                  borderRadius: 12,
+                  padding: 28,
                   borderBottom: '3px solid #ff751f',
-                  boxShadow: '0 4px 24px rgba(0,0,0,0.07)',
-                  transition: 'transform 200ms ease, box-shadow 200ms ease, border 200ms ease',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                  transition: 'transform 200ms ease, box-shadow 200ms ease',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.12)'; e.currentTarget.style.borderBottom = '3px solid transparent'; e.currentTarget.style.borderTop = '3px solid #ff751f'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.07)'; e.currentTarget.style.borderBottom = '3px solid #ff751f'; e.currentTarget.style.borderTop = '3px solid #1d3c71'; }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.12)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)'; }}
               >
-                <div className="inline-flex items-center justify-center rounded-full mb-4" style={{ width: 48, height: 48, background: '#EBF2FB' }}>
+                <div className="inline-flex items-center justify-center rounded-full mb-4" style={{ width: 56, height: 56, background: '#EBF2FB' }}>
                   <method.icon style={{ width: 24, height: 24, color: '#1d3c71' }} />
                 </div>
-                <h3 className="font-bold mb-2" style={{ color: '#1d3c71', fontFamily: 'Playfair Display, serif', fontSize: 18 }}>{method.title}</h3>
-                <p className="text-[14px]" style={{ color: '#4a5568', lineHeight: 1.6 }}>{method.desc}</p>
+                <h3 className="font-bold mb-2" style={{ color: '#1d3c71', fontFamily: 'Inter, sans-serif', fontSize: 17 }}>{method.title}</h3>
+                <p className="text-[14px]" style={{ color: '#555', lineHeight: 1.65 }}>{method.desc}</p>
               </div>
             ))}
           </div>
