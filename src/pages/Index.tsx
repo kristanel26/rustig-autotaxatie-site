@@ -66,6 +66,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <PageMeta
+        title="BPM Taxatie & Voertuigtaxaties | Automobieltaxaties"
+        description="Erkend taxatiebureau voor BPM-aangifte, verzekeringstaxatie en WEV taxatie. Erik Elderson taxeert op locatie door heel Nederland. 25.000+ voertuigen getaxeerd."
+      />
       <SiteHeader />
 
       {/* ── HERO ── */}

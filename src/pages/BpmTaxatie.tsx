@@ -18,6 +18,10 @@ const BpmTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="BPM Taxatie bij Import | Laagste BPM | Automobieltaxaties"
+        description="De laagst haalbare BPM voor je importvoertuig. Fysieke inspectie op locatie door een erkend TMV en VRT register taxateur. Gratis advies aanvragen."
+      />
       <SiteHeader />
       <LandingHero
         subtitle="BPM-taxatie"
