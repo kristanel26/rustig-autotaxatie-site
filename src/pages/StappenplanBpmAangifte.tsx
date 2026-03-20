@@ -196,7 +196,7 @@ const StappenplanBpmAangifte = () => {
       ))}
 
       {/* Info block after all steps */}
-      <div className="max-w-4xl mx-auto px-6 lg:px-8 py-8">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 py-8">
         <div
           className="rounded-xl p-6 flex gap-4 items-start"
           style={{ background: '#EBF2FB', borderLeft: '4px solid #1d3c71' }}
