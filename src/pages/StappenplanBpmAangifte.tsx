@@ -72,6 +72,7 @@ const steps: { number: number; title: string; image?: string; content: React.Rea
   },
   {
     number: 7,
+    image: stepAangifteFormulier,
     title: "Wat doe je na ontvangst van het rapport?",
     content: (
       <>
