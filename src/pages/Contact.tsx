@@ -4,6 +4,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BookingWizard from "@/components/BookingWizard";
+import PageMeta from "@/components/PageMeta";
 import erikPhoto from "@/assets/erik-elderson.png";
 
 const Contact = () => {
