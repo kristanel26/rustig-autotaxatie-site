@@ -245,44 +245,6 @@ const CamperTaxatie = () => {
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
-        <div className="container-wide text-center">
-          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Zekerheid over de waarde van je camper?</h2>
-          <p className="text-[15px] mb-6" style={{ color: 'rgba(255,255,255,0.75)' }}>
-            Vraag vrijblijvend een verzekeringstaxatie aan.
-          </p>
-          <Button variant="cta" size="lg" onClick={scrollToForm}>
-            Verzekeringstaxatie aanvragen
-            <ArrowDown className="w-4 h-4 ml-2" />
-          </Button>
-        </div>
-      </section>
-
-      {/* Formulier — 65/35 layout */}
-      <section className="py-14 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
-        <div className="container-wide">
-          <div className="text-center mb-8">
-            <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>AANVRAGEN</p>
-            <h2 className="heading-display text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1d3c71' }}>Verzekeringstaxatie aanvragen</h2>
-            <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
-              Vul het formulier in en wij nemen binnen één werkdag contact met je op.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-[1fr_380px] gap-8">
-            <div>
-              <IntakeForm
-                serviceType="camperverzekeringstaxatie"
-                formTitle="Verzekeringstaxatie aanvragen"
-                formSubtext="Vul onderstaand formulier zo volledig mogelijk in."
-                submitButtonText="Verzekeringstaxatie aanvragen"
-              />
-            </div>
-            <ContactSidebar />
-          </div>
-        </div>
-      </section>
-
       {/* Acceptatie — 3 kaartjes */}
       <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
@@ -304,6 +266,44 @@ const CamperTaxatie = () => {
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#555', lineHeight: 1.65 }}>{card.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
+        <div className="container-wide text-center">
+          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Zekerheid over de waarde van je camper?</h2>
+          <p className="text-[15px] mb-6" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            Vraag vrijblijvend een verzekeringstaxatie aan.
+          </p>
+          <Button variant="cta" size="lg" onClick={scrollToForm}>
+            Verzekeringstaxatie aanvragen
+            <ArrowDown className="w-4 h-4 ml-2" />
+          </Button>
+        </div>
+      </section>
+
+      {/* Formulier */}
+      <section className="py-14 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
+        <div className="container-wide">
+          <div className="text-center mb-8">
+            <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>AANVRAGEN</p>
+            <h2 className="heading-display text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1d3c71' }}>Verzekeringstaxatie aanvragen</h2>
+            <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
+              Vul het formulier in en wij nemen binnen één werkdag contact met je op.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-[1fr_380px] gap-8">
+            <div>
+              <IntakeForm
+                serviceType="camperverzekeringstaxatie"
+                formTitle="Verzekeringstaxatie aanvragen"
+                formSubtext="Vul onderstaand formulier zo volledig mogelijk in."
+                submitButtonText="Verzekeringstaxatie aanvragen"
+              />
+            </div>
+            <ContactSidebar />
           </div>
         </div>
       </section>
