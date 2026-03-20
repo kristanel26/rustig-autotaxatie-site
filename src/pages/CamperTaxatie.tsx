@@ -82,12 +82,14 @@ const CamperTaxatie = () => {
               <div className="flex items-center justify-center rounded-full mb-4 mx-auto" style={{ width: 48, height: 48, background: '#EBF2FB' }}>
                 <Info className="w-5 h-5" style={{ color: '#1d3c71' }} />
               </div>
+              <p className="text-white font-bold text-[18px] text-center leading-[1.4] mb-4">De waarde staat vooraf vast. Geen discussie bij schade of diefstal.</p>
+              <div className="mb-5" style={{ borderBottom: '1px solid rgba(255,255,255,0.2)' }} />
               <h3 className="text-white font-bold text-[16px] text-center mb-4">Waarom is een goede taxatie belangrijk?</h3>
               <p className="text-[14px] leading-[1.65] mb-3" style={{ color: 'rgba(255,255,255,0.85)' }}>
-                Je camper kan schade oplopen door brand, storm, inbraak, vandalisme of een aanrijding. Een taxatierapport zorgt ervoor dat je bij calamiteiten uitgekeerd krijgt op basis van de taxatiewaarde, niet de dagwaarde.
+                Een taxatie is eigenlijk de enige manier om ervoor te zorgen dat je de camper voor de juiste waarde verzekert. Met een taxatierapport krijg je bij calamiteiten uitgekeerd waarop je recht hebt, op basis van de taxatiewaarde en niet de dagwaarde.
               </p>
               <p className="text-[14px] leading-[1.65] mb-6" style={{ color: 'rgba(255,255,255,0.85)' }}>
-                Bijkomend voordeel is dat je premie betaalt over de getaxeerde waarde, waardoor je onder- of oververzekering voorkomt.
+                Bijkomend voordeel is dat je premie betaalt over de getaxeerde waarde, waardoor je onder- of oververzekering voorkomt. Het taxatierapport is afhankelijk van de verzekeraar 2 tot 3 jaar geldig.
               </p>
               <div className="space-y-3 mb-6">
                 {[
