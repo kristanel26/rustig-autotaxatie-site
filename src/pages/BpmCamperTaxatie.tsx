@@ -6,6 +6,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
+import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, CheckCircle, Shield, Star } from "lucide-react";
 import heroCamper from "@/assets/hero-camper.jpg";
@@ -19,6 +20,7 @@ const BpmCamperTaxatie = () => {
       <PageMeta title="BPM Camper Taxatie | Import Camper | Automobiel Taxaties" description="BPM-taxatie voor geïmporteerde campers. Erkend taxateur bepaalt de juiste methode voor de laagst haalbare BPM." />
       <SiteHeader />
       <LandingHero subtitle="BPM-TAXATIE CAMPER" title="Zorgvuldig vastgestelde BPM bij import van een camper" description="Bij import van een camper uit het buitenland moet BPM worden aangegeven. De wijze waarop de BPM wordt vastgesteld, heeft direct invloed op de BPM-aangifte en de onderbouwing richting de Belastingdienst." ctaText="BPM-taxatie camper aanvragen" onCtaClick={scrollToForm} heroImage={heroCamper} />
+      <UspBar />
 
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide"><div className="max-w-3xl mx-auto text-center">

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, Phone, Mail, MessageCircle } from "lucide-react";
+import UspBar from "@/components/UspBar";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -118,8 +119,15 @@ const FAQ = () => {
           <p className="text-lg max-w-2xl" style={{ color: 'rgba(255,255,255,0.75)' }}>
             Hier vind je antwoorden op de meest gestelde vragen. Staat jouw vraag er niet bij? Neem gerust contact op.
           </p>
+          <a href="tel:+31854832461" className="inline-block mt-4">
+            <button className="btn-outline-white">
+              <Phone className="w-5 h-5" />
+              085 483 2461
+            </button>
+          </a>
         </div>
       </section>
+      <UspBar />
 
       {/* FAQ content */}
       <section className="py-12 md:py-16 px-6 md:px-8 bg-background">

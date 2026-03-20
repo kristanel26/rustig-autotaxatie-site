@@ -6,6 +6,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
+import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, CheckCircle, Shield, Star } from "lucide-react";
 import heroCamper from "@/assets/hero-camper.jpg";
@@ -46,6 +47,7 @@ const CamperTaxatie = () => {
         onCtaClick={scrollToForm}
         heroImage={heroCamper}
       />
+      <UspBar />
 
       {/* Korte intro */}
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Clock, ArrowLeft } from "lucide-react";
+import UspBar from "@/components/UspBar";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -38,8 +39,15 @@ const Contact = () => {
           <p className="text-lg text-primary-foreground/70 max-w-2xl">
             Vul het formulier in en wij nemen binnen één werkdag contact met je op. Of bel direct voor persoonlijk advies.
           </p>
+          <a href="tel:+31854832461" className="inline-block mt-4">
+            <button className="btn-outline-white">
+              <Phone className="w-5 h-5" />
+              085 483 2461
+            </button>
+          </a>
         </div>
       </section>
+      <UspBar />
 
       {/* Wizard + sidebar */}
       <section className="py-16 md:py-24 px-6 lg:px-8 bg-white">

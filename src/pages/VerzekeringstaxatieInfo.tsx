@@ -6,6 +6,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
+import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight, ArrowDown, Shield, BadgeCheck, ClipboardCheck, ThumbsUp,
@@ -66,6 +67,7 @@ const VerzekeringstaxatieInfo = () => {
           Landelijk actief — op locatie bij jou
         </p>
       </LandingHero>
+      <UspBar />
 
       {/* WAAROM TAXEREN — 2×2 kaartjes */}
       <section className="py-16 md:py-24 px-6 md:px-8" style={{ background: '#f7f8fa' }}>

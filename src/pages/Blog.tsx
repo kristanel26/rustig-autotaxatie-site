@@ -6,6 +6,7 @@ import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import { supabase } from "@/integrations/supabase/client";
+import UspBar from "@/components/UspBar";
 import { format } from "date-fns";
 import { nl } from "date-fns/locale";
 
@@ -77,6 +78,7 @@ const Blog = () => {
           Praktische informatie over BPM, taxaties en voertuigwaardering.
         </p>
       </section>
+      <UspBar />
 
       {/* Category filter */}
       <section className="bg-white border-b" style={{ borderColor: '#e2e8f0' }}>

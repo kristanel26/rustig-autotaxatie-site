@@ -2,8 +2,9 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
+import UspBar from "@/components/UspBar";
 import { Link } from "react-router-dom";
-import { ArrowRight, AlertTriangle, Info } from "lucide-react";
+import { ArrowRight, AlertTriangle, Info, Phone } from "lucide-react";
 import stepCarShopping from "@/assets/step-car-shopping.jpg";
 import stepDocuments from "@/assets/step-documents-needed.png";
 import erikHero from "@/assets/erik-bpm-taxatie-hero.jpg";
@@ -135,14 +136,23 @@ const StappenplanBpmAangifte = () => {
           <p className="text-white/80 text-lg max-w-[550px] mb-8" style={{ lineHeight: 1.7 }}>
             Hoe verloopt een BPM aangifte?
           </p>
-          <Link to="/contact">
-            <button className="btn-cta flex items-center gap-2">
-              Afspraak inplannen
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link to="/contact">
+              <button className="btn-cta flex items-center gap-2">
+                Afspraak inplannen
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </Link>
+            <a href="tel:+31854832461">
+              <button className="btn-outline-white">
+                <Phone className="w-5 h-5" />
+                085 483 2461
+              </button>
+            </a>
+          </div>
         </div>
       </section>
+      <UspBar />
 
       {/* Steps Timeline */}
       {steps.map((step, i) => (

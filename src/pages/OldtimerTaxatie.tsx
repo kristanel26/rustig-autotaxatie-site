@@ -6,6 +6,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
+import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, CheckCircle, Shield, Star } from "lucide-react";
 import heroOldtimer from "@/assets/hero-oldtimer.jpg";
@@ -32,6 +33,7 @@ const OldtimerTaxatie = () => {
       <PageMeta title="Oldtimer Taxatie | Erkend Rapport | Automobiel Taxaties" description="Professionele oldtimer taxatie voor verzekering en waardebepaling. Oog voor detail en historie. Op locatie door heel Nederland." />
       <SiteHeader />
       <LandingHero subtitle="VERZEKERINGSTAXATIE OLDTIMER" title="Zekerheid over de waarde van je oldtimer" description="Je oldtimer is meer dan alleen een voertuig. Met een verzekeringstaxatie leg je vast wat het op dit moment werkelijk waard is. Die waarde vormt de basis voor de verzekering, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde." ctaText="Verzekeringstaxatie aanvragen" onCtaClick={scrollToForm} heroImage={heroOldtimer} />
+      <UspBar />
 
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide"><div className="max-w-3xl mx-auto text-center">

@@ -6,6 +6,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
+import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowDown, CheckCircle, Shield, Building2, RefreshCw, FileText, Search, BarChart3 } from "lucide-react";
 import ContactSidebar from "@/components/ContactSidebar";
@@ -33,8 +34,8 @@ const WevTaxatie = () => {
         onCtaClick={scrollToForm}
         heroImage={serviceWev}
       />
+      <UspBar />
 
-      {/* Wanneer nodig - visuele kaarten */}
       <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide">
           <div className="text-center mb-10">
