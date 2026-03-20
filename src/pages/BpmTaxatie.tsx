@@ -119,8 +119,8 @@ const BpmTaxatie = () => {
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.borderColor = '#698db3'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; }}
               >
-                <div className="mx-auto flex items-center justify-center rounded-full mb-4" style={{ width: 64, height: 64, background: '#EBF2FB' }}>
-                  <item.icon style={{ width: 28, height: 28, color: '#1d3c71' }} />
+                <div className="mx-auto flex items-center justify-center rounded-full mb-4" style={{ width: 64, height: 64, background: 'rgba(255,255,255,0.15)' }}>
+                  <item.icon style={{ width: 28, height: 28, color: '#ffffff' }} />
                 </div>
                 <p className="font-bold text-[16px] mb-1 text-white">{item.label}</p>
                 <p className="text-[13px]" style={{ color: '#adafc7' }}>{item.desc}</p>
