@@ -201,11 +201,8 @@ const ChatWidget = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Stel je vraag..."
-                className="flex-1 px-4 py-2.5 rounded-lg border text-sm focus:outline-none focus:ring-2"
-                style={{
-                  borderColor: "#dde3ea",
-                  focusRingColor: "#1d3c71",
-                }}
+                className="flex-1 px-4 py-2.5 rounded-lg border text-sm focus:outline-none focus:ring-2 focus:ring-[#1d3c71]/30 focus:border-[#1d3c71]"
+                style={{ borderColor: "#dde3ea" }}
                 disabled={isLoading}
               />
               <button
