@@ -30,7 +30,7 @@ const articles = [
   },
   {
     category: "Tips & Uitleg",
-    title: "NEDC of WLTP — welke CO2-waarde gebruik je voor de BPM-aangifte?",
+    title: "NEDC of WLTP: welke CO2-waarde gebruik je voor de BPM-aangifte?",
     intro: "Veel importeurs weten niet welke CO2-waarde ze moeten gebruiken. We leggen het verschil uit.",
     date: "22 februari 2026",
   },

@@ -2,7 +2,7 @@ export const BRANDING = {
   name: "Taxaris",
   tagline: "Automobiel Taxatiesoftware",
   owner: "Automobiel Taxaties",
-  ownerFull: "E. Elderson — Automobiel Taxaties",
+  ownerFull: "E. Elderson, Automobiel Taxaties",
   address: "Leigraaf 160, Druten",
   tmvNr: "33106",
   vrtNr: "22-523-M",
