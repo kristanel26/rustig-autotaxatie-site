@@ -8,6 +8,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowDown, CheckCircle, Shield, Truck, Car, Bike, UtensilsCrossed, Clock } from "lucide-react";
+import ContactSidebar from "@/components/ContactSidebar";
 import heroCarInspection from "@/assets/hero-car-inspection.jpg";
 
 const VerzekeringstaxatieInfo = () => {
@@ -146,7 +147,7 @@ const VerzekeringstaxatieInfo = () => {
               <h2 className="text-xl font-semibold">Acceptatie en geldigheid</h2>
             </div>
             <ul className="space-y-2 text-sm" style={{ color: '#4a5568' }}>
-              <li>• Geregistreerd bij VRT en aangesloten bij TMV</li>
+              <li>• Aangesloten bij Federatie TMV, VRT Register en FEHAC</li>
               <li>• Werkt binnen FEHAC-richtlijnen voor klassiekers</li>
               <li>• Rapporten geaccepteerd door verzekeraars</li>
               <li>• Geldigheid doorgaans 3 tot 5 jaar (check je verzekeraar)</li>
@@ -155,21 +156,26 @@ const VerzekeringstaxatieInfo = () => {
         </div>
       </section>
 
-      {/* Formulier */}
+      {/* Formulier — 65/35 layout */}
       <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }} ref={formRef}>
-        <div className="container-narrow">
+        <div className="container-wide">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-semibold mb-3">Verzekeringstaxatie aanvragen</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
               Vul het formulier in en we nemen binnen één werkdag contact met je op.
             </p>
           </div>
-          <IntakeForm
-            serviceType="verzekeringstaxatie"
-            formTitle="Verzekeringstaxatie aanvragen"
-            formSubtext="Vul onderstaand formulier in."
-            toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig."
-          />
+          <div className="grid md:grid-cols-[1fr_380px] gap-8">
+            <div>
+              <IntakeForm
+                serviceType="verzekeringstaxatie"
+                formTitle="Verzekeringstaxatie aanvragen"
+                formSubtext="Vul onderstaand formulier in."
+                toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig."
+              />
+            </div>
+            <ContactSidebar />
+          </div>
         </div>
       </section>
 

@@ -7,7 +7,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import { Users, FileText, Shield, ClipboardCheck, Table, BarChart3, Search, ArrowDown, Star, CheckCircle, Scale, Phone, Mail, Clock, MessageCircle, Quote } from "lucide-react";
-import erikHeroBpm from "@/assets/erik-hero-bpm.jpg";
+import erikHeroBpm from "@/assets/erik-bpm-taxatie-hero.jpg";
 
 const BpmTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -189,28 +189,11 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* Social proof — klantquote */}
+      {/* Reviews placeholder */}
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide">
           <div className="max-w-3xl mx-auto text-center">
-            <Quote className="w-8 h-8 mx-auto mb-4 text-cta opacity-60" />
-            <blockquote className="text-lg md:text-xl font-medium leading-relaxed mb-4 text-foreground italic">
-              "Erik heeft de BPM-aangifte voor onze importauto volledig verzorgd. Duidelijke uitleg, snel rapport en het scheelde ons ruim €1.800 ten opzichte van de forfaitaire tabel."
-            </blockquote>
-            <div className="flex items-center justify-center gap-3">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white" style={{ background: '#1d3c71' }}>
-                RV
-              </div>
-              <div className="text-left">
-                <p className="text-sm font-semibold text-foreground">R. Vermeulen</p>
-                <p className="text-xs" style={{ color: '#4a5568' }}>Importeur — Breda</p>
-              </div>
-              <div className="flex ml-3">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-3.5 h-3.5 fill-cta text-cta" />
-                ))}
-              </div>
-            </div>
+            <p className="text-sm font-medium" style={{ color: '#4a5568' }}>[REVIEWS AANLEVEREN DOOR OPDRACHTGEVER]</p>
           </div>
         </div>
       </section>
@@ -389,7 +372,7 @@ const BpmTaxatie = () => {
                 <h3 className="text-base font-semibold">Onafhankelijk en juridisch geborgd</h3>
               </div>
               <ul className="space-y-1.5 text-sm" style={{ color: '#4a5568' }}>
-                <li>• Geregistreerd bij VRT en aangesloten bij TMV</li>
+                <li>• Aangesloten bij Federatie TMV, VRT Register en FEHAC</li>
                 <li>• Geen vooraf afgesproken uitkomsten</li>
                 <li>• Rapportages zijn transparant en controleerbaar</li>
                 <li>• Samenwerking met gespecialiseerde BPM-jurist</li>

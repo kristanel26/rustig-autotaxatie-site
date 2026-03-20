@@ -1,337 +1,103 @@
 import { useRef } from "react";
-import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
+import ContactSidebar from "@/components/ContactSidebar";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowDown, CheckCircle, Shield, Star } from "lucide-react";
 import heroMotor from "@/assets/hero-motor.jpg";
 
 const BpmMotorTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
-
-  const scrollToForm = () => {
-    formRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta
-        title="BPM Motor Taxatie | Import Motor | Automobieltaxaties"
-        description="BPM-taxatie voor geïmporteerde motorfietsen. Erkend taxateur op locatie voor de laagst haalbare BPM."
-      />
+      <PageMeta title="BPM Motor Taxatie | Import Motor | Automobieltaxaties" description="BPM-taxatie voor geïmporteerde motorfietsen. Erkend taxateur op locatie voor de laagst haalbare BPM." />
       <SiteHeader />
-      <LandingHero
-        subtitle="BPM-TAXATIE MOTOR"
-        title="Zorgvuldig vastgestelde BPM bij import van een motor"
-        description="Wanneer je een motor uit het buitenland importeert, moet er BPM worden aangegeven. De hoogte van dat bedrag hangt af van de manier waarop de afschrijving wordt vastgesteld. Juist bij motoren kan dat verschil aanzienlijk zijn."
-        ctaText="BPM-taxatie motor aanvragen"
-        onCtaClick={scrollToForm}
-        heroImage={heroMotor}
-      />
+      <LandingHero subtitle="BPM-TAXATIE MOTOR" title="Zorgvuldig vastgestelde BPM bij import van een motor" description="Wanneer je een motor uit het buitenland importeert, moet er BPM worden aangegeven. De hoogte van dat bedrag hangt af van de manier waarop de afschrijving wordt vastgesteld." ctaText="BPM-taxatie motor aanvragen" onCtaClick={scrollToForm} heroImage={heroMotor} />
 
-      {/* Uitleg BPM bij motorimport */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-narrow">
-          <p className="text-foreground/90 leading-relaxed">
-            Bij het importeren van een motor krijg je te maken met BPM. De manier waarop deze BPM wordt vastgesteld, verschilt per situatie en heeft direct invloed op de aangifte en de onderbouwing richting de Belastingdienst.
-          </p>
-        </div>
+      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+        <div className="container-wide"><div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-3">Wanneer is een BPM-taxatie voor een motor nodig?</h2>
+          <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>In veel gevallen kan de BPM worden vastgesteld op basis van een afschrijvingstabel of koerslijst. Soms geven deze methodes echter geen realistisch beeld van de werkelijke staat van de motor.</p>
+        </div></div>
       </section>
 
-      {/* Wanneer is een BPM-taxatie nodig */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Wanneer is een BPM-taxatie voor een motor nodig?
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            In veel gevallen kan de BPM worden vastgesteld op basis van een afschrijvingstabel of koerslijst. Soms geven deze methodes echter geen realistisch beeld van de werkelijke staat van de motor.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            Een BPM-taxatie is noodzakelijk wanneer:
-          </p>
-          <ul className="space-y-2 text-foreground/90 mb-6">
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>de motor schade heeft of heeft gehad</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>de staat afwijkt van wat gangbaar is voor dit type motor</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>het gaat om bijzondere uitvoeringen of aangepaste motoren</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>een tabel- of koerslijstaangifte geen realistisch en verdedigbaar beeld geeft</span>
-            </li>
-          </ul>
-          <p className="text-foreground/90 leading-relaxed">
-            In deze situaties is een BPM-taxatierapport de enige manier om de afschrijving correct en inhoudelijk verdedigbaar vast te stellen.
-          </p>
-        </div>
-      </section>
-
-      {/* Welke methodes */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Welke BPM-methodes zijn mogelijk bij motoren?
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            De Belastingdienst staat meerdere methodes toe om de BPM bij import vast te stellen:
-          </p>
-          
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Afschrijvingstabel</h3>
-              <p className="text-foreground/90">
-                De BPM wordt vastgesteld op basis van vaste tabellen. De werkelijke staat van de motor speelt hierbij geen rol.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Koerslijst</h3>
-              <p className="text-foreground/90">
-                De BPM wordt gebaseerd op marktgegevens van vergelijkbare motoren. Ook hier wordt de individuele staat niet meegewogen.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">BPM-taxatierapport</h3>
-              <p className="text-foreground/90">
-                Bij een taxatie wordt de motor fysiek geïnspecteerd en wordt de afschrijving vastgesteld op basis van de werkelijke staat. Dit resulteert in een onderbouwd BPM-taxatierapport.
-              </p>
-            </div>
+      <section className="py-10 md:py-12 px-6 md:px-8 bg-background">
+        <div className="container-wide"><div className="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-2">Wanneer nodig</p>
+            <h2 className="text-2xl md:text-3xl font-semibold mb-3">Wanneer is een taxatie nodig?</h2>
+            <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>Een BPM-taxatie is noodzakelijk wanneer standaardmethodes geen reëel en verdedigbaar beeld geven.</p>
           </div>
-
-          <p className="text-foreground/90 leading-relaxed mt-8">
-            Wanneer de BPM bij import van een motor niet realistisch kan worden vastgesteld via een afschrijvingstabel of koerslijst, is een BPM-taxatie de meest logische en verdedigbare methode. Automobiel Taxaties stelt in die gevallen een BPM-taxatierapport op, gebaseerd op een fysieke inspectie en de werkelijke staat van de motor.
-          </p>
-        </div>
-      </section>
-
-      {/* Werkwijze */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
-            Onze werkwijze bij een BPM-taxatie voor motoren
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-10">
-            Een BPM-taxatie bestaat uit meerdere stappen. Wij zorgen ervoor dat dit proces overzichtelijk verloopt en correct wordt uitgevoerd.
-          </p>
-
-          <div className="space-y-8">
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                1
+          <div className="grid grid-cols-2 gap-4">
+            {[{ label: "Schade", desc: "Motor heeft (gehad) schade" }, { label: "Afwijkende staat", desc: "Anders dan gangbaar" }, { label: "Bijzondere uitvoering", desc: "Aangepaste motoren" }, { label: "Standaard ontoereikend", desc: "Tabel of koerslijst past niet" }].map((item, i) => (
+              <div key={i} className="card-elevated p-5 text-center cursor-default transition-transform duration-200 hover:-translate-y-1">
+                <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                <p className="text-xs mt-0.5" style={{ color: '#4a5568' }}>{item.desc}</p>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Aanleveren van gegevens</h3>
-                <p className="text-foreground/90">
-                  Je levert de beschikbare voertuiggegevens aan, waaronder het buitenlandse kenteken of chassisnummer, de aankoopfactuur, de actuele kilometerstand, recente foto's van de motor en beschikbare informatie over schade, gebruik en onderhoud.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                2
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Beoordeling en voorbereiding</h3>
-                <p className="text-foreground/90">
-                  Wij beoordelen de aangeleverde gegevens en bereiden de fysieke inspectie voor. Zo weten we vooraf waar we op moeten letten.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                3
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Fysieke inspectie</h3>
-                <p className="text-foreground/90">
-                  De motor wordt op locatie geïnspecteerd. De werkelijke staat wordt vastgelegd, inclusief eventuele schade, slijtage of bijzonderheden.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                4
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Opstellen BPM-taxatierapport</h3>
-                <p className="text-foreground/90">
-                  Op basis van de inspectie stellen wij een BPM-taxatierapport op waarin de afschrijving wordt onderbouwd. Dit rapport vormt de basis voor de BPM-aangifte.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                5
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Oplevering per e-mail</h3>
-                <p className="text-foreground/90">
-                  Je ontvangt het BPM-taxatierapport per e-mail. Dit rapport kan worden gebruikt voor de BPM-aangifte bij de Belastingdienst.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
+        </div></div>
+      </section>
+
+      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+        <div className="container-wide"><div className="text-center mb-8">
+          <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-2">Werkwijze</p>
+          <h2 className="text-2xl md:text-3xl font-semibold">Onze werkwijze in 5 stappen</h2>
+        </div>
+        <div className="grid md:grid-cols-5 gap-5">
+          {[{ step: 1, title: "Gegevens aanleveren", desc: "Kenteken, chassisnummer, factuur" }, { step: 2, title: "Beoordeling", desc: "Welke methode passend is" }, { step: 3, title: "Fysieke inspectie", desc: "Werkelijke staat vastleggen" }, { step: 4, title: "Rapport opstellen", desc: "BPM-taxatierapport voor aangifte" }, { step: 5, title: "Oplevering", desc: "Per e-mail, klaar voor indiening" }].map((s) => (
+            <div key={s.step} className="text-center"><div className="step-badge mx-auto mb-3">{s.step}</div><h4 className="font-semibold text-sm mb-1 text-foreground">{s.title}</h4><p className="text-xs leading-relaxed" style={{ color: '#4a5568' }}>{s.desc}</p></div>
+          ))}
+        </div></div>
+      </section>
+
+      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: '#1d3c71' }}>
+        <div className="container-wide text-center">
+          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">BPM bij import van een motor?</h2>
+          <p className="text-[15px] mb-6 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>Wij beoordelen per motor welke methode het meest verdedigbaar is.</p>
+          <Button variant="cta" size="lg" onClick={scrollToForm}>BPM-taxatie motor aanvragen<ArrowDown className="w-4 h-4 ml-2" /></Button>
         </div>
       </section>
 
-      {/* Wat kun je van ons verwachten */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Wat kun je van ons verwachten?
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            Bij Automobiel Taxaties begeleiden wij het BPM-traject voor motoren zorgvuldig en inhoudelijk onderbouwd. Per voertuig beoordelen wij welke methode fiscaal logisch en verdedigbaar is.
-          </p>
-          <ul className="space-y-2 text-foreground/90 mb-6">
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>een onafhankelijke beoordeling per motor</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>geen wensbedragen of vooraf afgesproken uitkomsten</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>duidelijke uitleg over de gekozen methode</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>onderbouwing die is ingericht op controle door de Belastingdienst</span>
-            </li>
-          </ul>
-          <p className="text-foreground/90 leading-relaxed">
-            Wij werken zonder vooraf vastgestelde uitkomsten en richten ons op een dossier dat inhoudelijk verdedigbaar is.
-          </p>
+      <section className="py-6 px-6 md:px-8 bg-background">
+        <div className="container-wide"><div className="flex flex-wrap justify-center gap-6 md:gap-14 items-center">
+          <div className="flex items-center gap-2"><div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-cta text-cta" />)}</div><span className="text-sm font-semibold text-foreground">4.9 / 5</span><span className="text-xs" style={{ color: '#4a5568' }}>Google Reviews</span></div>
+          <div className="text-center"><span className="text-lg font-bold text-foreground">25.000+</span><span className="text-xs ml-1" style={{ color: '#4a5568' }}>voertuigen getaxeerd</span></div>
+          <div className="text-center"><span className="text-lg font-bold text-foreground">13 jaar</span><span className="text-xs ml-1" style={{ color: '#4a5568' }}>ervaring</span></div>
+          <div className="text-center"><span className="text-lg font-bold text-foreground">98%</span><span className="text-xs ml-1" style={{ color: '#4a5568' }}>akkoord bij controle</span></div>
+        </div></div>
+      </section>
+
+      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+        <div className="container-wide"><div className="grid md:grid-cols-2 gap-8">
+          <div><h2 className="text-xl md:text-2xl font-semibold mb-5">Wat kun je verwachten?</h2><div className="space-y-3">{["Onafhankelijke beoordeling per motor", "Duidelijke uitleg over de gekozen methode", "Onderbouwing die standhoudt bij controle", "Geen wensbedragen of vooraf bepaalde uitkomsten"].map((item, i) => (<div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}><div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(255,117,31,0.12)' }}><CheckCircle className="w-4 h-4 text-cta" /></div><span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span></div>))}</div></div>
+          <div><h2 className="text-xl md:text-2xl font-semibold mb-5">Wat hebben wij nodig?</h2><div className="space-y-3">{["Buitenlands kenteken of chassisnummer", "Aankoopfactuur", "Actuele kilometerstand", "Info over staat, schade en onderhoud"].map((item, i) => (<div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}><div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}><CheckCircle className="w-4 h-4 text-primary" /></div><span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span></div>))}</div></div>
+        </div></div>
+      </section>
+
+      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: '#1d3c71' }}>
+        <div className="container-wide text-center">
+          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">BPM netjes en onafhankelijk laten regelen?</h2>
+          <p className="text-[15px] mb-6" style={{ color: 'rgba(255,255,255,0.75)' }}>Vraag vrijblijvend een BPM-taxatie aan voor je motor.</p>
+          <Button variant="cta" size="lg" onClick={scrollToForm}>BPM-taxatie motor aanvragen<ArrowDown className="w-4 h-4 ml-2" /></Button>
         </div>
       </section>
 
-      {/* Wat hebben wij van je nodig */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Wat hebben wij van je nodig?
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            Voor een correcte vaststelling van de BPM hebben wij vooraf volledige en juiste voertuiggegevens nodig. Dit betreft onder meer:
-          </p>
-          <ul className="space-y-2 text-foreground/90 mb-6">
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>het buitenlandse kenteken of chassisnummer</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>de aankoopfactuur</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>de actuele kilometerstand</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>recente foto's van de motor</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>informatie over staat, schade en onderhoud</span>
-            </li>
-          </ul>
-          <p className="text-foreground/90 leading-relaxed">
-            Volledige informatie is noodzakelijk om het BPM-dossier zorgvuldig en verdedigbaar op te bouwen. Onvolledige of onjuiste gegevens kunnen leiden tot vertraging of aanvullende vragen bij de aangifte.
-          </p>
-        </div>
+      <section className="py-10 md:py-14 px-6 md:px-8 bg-background" ref={formRef}>
+        <div className="container-wide"><div className="text-center mb-8"><h2 className="text-2xl md:text-3xl font-semibold mb-2">BPM-taxatie motor aanvragen</h2><p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>Vul het formulier in en wij bepalen de juiste aanpak voor jouw situatie.</p></div>
+        <div className="grid md:grid-cols-[1fr_380px] gap-8"><div><IntakeForm serviceType="bpm-taxatie motor" formTitle="BPM-taxatie motor aanvragen" formSubtext="Vul onderstaand formulier zo volledig mogelijk in." toelichtingPlaceholder="Geef hier de beschikbare informatie over de motor en de import." submitButtonText="BPM-taxatie motor aanvragen" /></div><ContactSidebar /></div></div>
       </section>
 
-      {/* Belangrijk om te weten */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Belangrijk om te weten vóór de BPM-aangifte
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            De staat van de motor op het moment van taxatie is bepalend voor de vastgestelde afschrijving. Werkzaamheden of herstel die nog gepland staan, moeten daarom vóór de taxatiedatum zijn uitgevoerd.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            Een BPM-taxatierapport heeft een beperkte geldigheidsduur. Het rapport moet actueel zijn op het moment van de aangifte.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            Juiste aankoopgegevens zijn essentieel. De aankoopfactuur en eventuele buitenlandse documenten vormen een belangrijk onderdeel van het dossier.
-          </p>
-          <p className="text-foreground/90 leading-relaxed">
-            Houd er rekening mee dat de Belastingdienst BPM-aangiftes kan controleren. Een zorgvuldig en transparant opgebouwd dossier verkleint het risico op discussie achteraf.
-          </p>
-        </div>
+      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+        <div className="container-wide"><div className="card-elevated p-8 md:p-10 max-w-3xl mx-auto"><div className="flex items-center gap-3 mb-4"><div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}><Shield className="w-5 h-5 text-primary" /></div><h2 className="text-xl font-semibold">Onafhankelijk en juridisch geborgd</h2></div><ul className="space-y-2 text-sm" style={{ color: '#4a5568' }}><li>• Aangesloten bij Federatie TMV, VRT Register en FEHAC</li><li>• Geen vooraf afgesproken uitkomsten</li><li>• Rapportages zijn transparant en controleerbaar</li><li>• Samenwerking met gespecialiseerde BPM-jurist</li></ul></div></div>
       </section>
 
-      {/* Onafhankelijkheid, expertise en juridische borging */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Onafhankelijkheid, expertise en juridische borging
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            Automobiel Taxaties werkt als onafhankelijk taxateur. De taxaties worden uitgevoerd door een taxateur die is geregistreerd bij de Vereniging van Register-Taxateurs (VRT) en is aangesloten bij de Taxateursvereniging voor Motorvoertuigen (TMV).
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            De vakkennis wordt actief onderhouden en toegepast bij iedere taxatie. Er worden geen vooraf afgesproken uitkomsten of wensbedragen gehanteerd.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            BPM-taxaties en onderbouwingen worden zorgvuldig opgebouwd met het oog op controle achteraf door de Belastingdienst. De rapportages zijn transparant, controleerbaar en inhoudelijk verdedigbaar opgesteld.
-          </p>
-          <p className="text-foreground/90 leading-relaxed">
-            Wanneer er vragen ontstaan of een inhoudelijke discussie volgt, werken wij samen met een jurist die is gespecialiseerd in BPM- en fiscale voertuigwaarderingen, zodat de onderbouwing ook juridisch standhoudt.
-          </p>
-        </div>
-      </section>
-
-      {/* Form section */}
-      <section className="section-padding bg-muted/30" ref={formRef}>
-        <div className="container-narrow">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
-              BPM-taxatie voor motoren aanvragen
-            </h2>
-            <p className="text-foreground/90 leading-relaxed">
-              Wil je de BPM bij import van een motor zorgvuldig laten vaststellen, dan kun je hieronder een aanvraag indienen. Op basis van de aangeleverde gegevens beoordelen wij of een BPM-taxatie noodzakelijk is.
-            </p>
-          </div>
-          <IntakeForm 
-            serviceType="bpm-taxatie motor" 
-            formTitle="BPM-taxatie motor aanvragen"
-            toelichtingPlaceholder="Geef hier de beschikbare informatie over de motor en de import."
-            submitButtonText="BPM-taxatie motor aanvragen"
-          />
-        </div>
-      </section>
-
-      {/* Terug naar overzicht */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow text-center">
-          <Button variant="secondary-action" size="sm" asChild>
-            <Link to="/bpm-taxatie" className="inline-flex items-center gap-2">
-              Terug naar BPM-taxatie overzicht
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Button>
-        </div>
-      </section>
       <SiteFooter />
       <WhatsAppButton />
     </div>

@@ -1,341 +1,103 @@
 import { useRef } from "react";
-import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
+import ContactSidebar from "@/components/ContactSidebar";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowDown, CheckCircle, Shield, Star } from "lucide-react";
 import heroCamper from "@/assets/hero-camper.jpg";
 
 const BpmCamperTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
-
-  const scrollToForm = () => {
-    formRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta
-        title="BPM Camper Taxatie | Import Camper | Automobieltaxaties"
-        description="BPM-taxatie voor geïmporteerde campers. Erkend taxateur bepaalt de juiste methode voor de laagst haalbare BPM."
-      />
+      <PageMeta title="BPM Camper Taxatie | Import Camper | Automobieltaxaties" description="BPM-taxatie voor geïmporteerde campers. Erkend taxateur bepaalt de juiste methode voor de laagst haalbare BPM." />
       <SiteHeader />
-      <LandingHero
-        subtitle="BPM-TAXATIE CAMPER"
-        title="Zorgvuldig vastgestelde BPM bij import van een camper"
-        description="Bij import van een camper uit het buitenland moet BPM worden aangegeven. De wijze waarop de BPM wordt vastgesteld, heeft direct invloed op de BPM-aangifte en de onderbouwing richting de Belastingdienst."
-        ctaText="BPM-taxatie camper aanvragen"
-        onCtaClick={scrollToForm}
-        heroImage={heroCamper}
-      />
+      <LandingHero subtitle="BPM-TAXATIE CAMPER" title="Zorgvuldig vastgestelde BPM bij import van een camper" description="Bij import van een camper uit het buitenland moet BPM worden aangegeven. De wijze waarop de BPM wordt vastgesteld, heeft direct invloed op de BPM-aangifte en de onderbouwing richting de Belastingdienst." ctaText="BPM-taxatie camper aanvragen" onCtaClick={scrollToForm} heroImage={heroCamper} />
 
-      {/* Waarom vraagt BPM bij campers extra aandacht */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Waarom vraagt BPM bij campers extra aandacht?
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            Campers wijken in veel opzichten af van standaard personenvoertuigen. De opbouw, inrichting en het gebruik van een camper zorgen ervoor dat afschrijvingstabellen of koerslijsten niet altijd een realistisch beeld geven van de werkelijke waarde.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            Dit kan bijvoorbeeld spelen wanneer:
-          </p>
-          <ul className="space-y-2 text-foreground/90 mb-6">
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>de camper een afwijkende of bijzondere opbouw heeft</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>de inrichting of uitrusting invloed heeft op de waarde</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>het gebruikspatroon afwijkt van wat gangbaar is</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>standaardmethodes geen reëel of verdedigbaar beeld geven</span>
-            </li>
-          </ul>
-          <p className="text-foreground/90 leading-relaxed">
-            In deze situaties vraagt het vaststellen van de BPM om specifieke aandacht en een zorgvuldige afweging van de toe te passen methode.
-          </p>
-        </div>
+      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+        <div className="container-wide"><div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-3">Waarom vraagt BPM bij campers extra aandacht?</h2>
+          <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>Campers wijken in veel opzichten af van standaard personenvoertuigen. De opbouw, inrichting en het gebruik zorgen ervoor dat afschrijvingstabellen of koerslijsten niet altijd een realistisch beeld geven.</p>
+        </div></div>
       </section>
 
-      {/* Wanneer is een BPM-taxatie logisch */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Wanneer is een BPM-taxatie bij een camper logisch?
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            Wanneer de BPM bij import van een camper niet realistisch kan worden vastgesteld via een afschrijvingstabel of koerslijst, is een BPM-taxatie de meest logische en verdedigbare methode.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            Dit speelt bijvoorbeeld wanneer:
-          </p>
-          <ul className="space-y-2 text-foreground/90 mb-6">
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>de staat van de camper afwijkt van wat gangbaar is voor dit type voertuig</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>de inrichting of opbouw invloed heeft op de waarde</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>standaardmethodes geen reëel beeld geven van de werkelijke afschrijving</span>
-            </li>
-          </ul>
-          <p className="text-foreground/90 leading-relaxed">
-            In deze situaties is een BPM-taxatierapport de meest passende manier om de afschrijving inhoudelijk verdedigbaar vast te stellen.
-          </p>
-        </div>
-      </section>
-
-      {/* Wat houdt een BPM-taxatie in */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Wat houdt een BPM-taxatie voor een camper in?
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            Een BPM-taxatie is gebaseerd op een fysieke inspectie van de camper. Daarbij wordt gekeken naar de werkelijke staat van het voertuig, inclusief de opbouw, inrichting en eventuele bijzonderheden.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            De afschrijving wordt onderbouwd in een BPM-taxatierapport. Dit rapport vormt onderdeel van de BPM-aangifte en maakt inzichtelijk hoe de waarde tot stand is gekomen.
-          </p>
-          <p className="text-foreground/90 leading-relaxed">
-            Op deze manier is de aangifte inhoudelijk controleerbaar en verdedigbaar bij eventuele vragen van de Belastingdienst.
-          </p>
-        </div>
-      </section>
-
-      {/* Werkwijze */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
-            Onze werkwijze bij BPM voor campers
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-10">
-            Het BPM-traject voor een camper verloopt bij ons volgens een vaste en overzichtelijke werkwijze. Zo weet je vooraf waar je aan toe bent.
-          </p>
-
-          <div className="space-y-8">
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                1
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Aanleveren van voertuig- en aankoopgegevens</h3>
-                <p className="text-foreground/90">
-                  Je levert de beschikbare gegevens aan, waaronder het buitenlandse kenteken of chassisnummer, de aankoopfactuur en recente informatie over de staat van de camper.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                2
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Beoordelen welke BPM-methode fiscaal logisch en verdedigbaar is</h3>
-                <p className="text-foreground/90">
-                  Op basis van de aangeleverde informatie beoordelen wij welke methode passend is: afschrijvingstabel, koerslijst of BPM-taxatie.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                3
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Uitvoeren van de gekozen methode</h3>
-                <p className="text-foreground/90">
-                  De gekozen methode wordt zorgvuldig uitgevoerd. Bij een taxatie vindt een fysieke inspectie plaats waarin de werkelijke staat van de camper wordt vastgelegd.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                4
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Opstellen van de volledige BPM-aangifte</h3>
-                <p className="text-foreground/90">
-                  De BPM-aangifte wordt opgesteld op basis van de vastgestelde waarde en de gekozen methode. Bij een taxatie vormt het BPM-taxatierapport onderdeel van het dossier.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                5
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Oplevering per e-mail</h3>
-                <p className="text-foreground/90">
-                  Je ontvangt de BPM-aangifte en eventuele bijbehorende documenten per e-mail. Het dossier is daarmee klaar voor indiening bij de Belastingdienst.
-                </p>
-              </div>
-            </div>
+      <section className="py-10 md:py-12 px-6 md:px-8 bg-background">
+        <div className="container-wide"><div className="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-2">Wanneer nodig</p>
+            <h2 className="text-2xl md:text-3xl font-semibold mb-3">Wanneer is een BPM-taxatie logisch?</h2>
+            <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>Wanneer standaardmethodes geen realistisch en verdedigbaar beeld geven van de werkelijke afschrijving van de camper.</p>
           </div>
-        </div>
-      </section>
-
-      {/* Wat kun je van ons verwachten */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Wat kun je van ons verwachten?
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            Bij Automobiel Taxaties begeleiden wij het BPM-traject voor campers zorgvuldig en inhoudelijk onderbouwd. Per voertuig beoordelen wij welke methode fiscaal logisch en verdedigbaar is.
-          </p>
-          <ul className="space-y-2 text-foreground/90 mb-6">
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>een onafhankelijke beoordeling per camper</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>geen wensbedragen of vooraf afgesproken uitkomsten</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>duidelijke uitleg over de gekozen methode</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>onderbouwing die is ingericht op controle door de Belastingdienst</span>
-            </li>
-          </ul>
-          <p className="text-foreground/90 leading-relaxed">
-            Wij werken zonder vooraf vastgestelde uitkomsten en richten ons op een dossier dat inhoudelijk verdedigbaar is.
-          </p>
-        </div>
-      </section>
-
-      {/* Wat hebben wij van je nodig */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Wat hebben wij van je nodig?
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            Voor een correcte vaststelling van de BPM hebben wij vooraf volledige en juiste voertuiggegevens nodig. Dit betreft onder meer:
-          </p>
-          <ul className="space-y-2 text-foreground/90 mb-6">
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>het buitenlandse kenteken of chassisnummer</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>de aankoopfactuur</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>de actuele kilometerstand</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>informatie over staat, gebruik en eventuele schade</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>buitenlandse documenten (indien van toepassing)</span>
-            </li>
-          </ul>
-          <p className="text-foreground/90 leading-relaxed">
-            Volledige informatie is noodzakelijk om het BPM-dossier zorgvuldig en verdedigbaar op te bouwen. Onvolledige of onjuiste gegevens kunnen leiden tot vertraging of aanvullende vragen bij de aangifte.
-          </p>
-        </div>
-      </section>
-
-      {/* Belangrijk om te weten */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Belangrijk om te weten vóór de BPM-aangifte
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            De staat van de camper op het moment van taxatie is bepalend voor de vastgestelde afschrijving. Werkzaamheden of herstel die nog gepland staan, moeten daarom vóór de taxatiedatum zijn uitgevoerd.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            Een BPM-taxatierapport heeft een beperkte geldigheidsduur. Het rapport moet actueel zijn op het moment van de aangifte. Bij twijfel informeren wij je hierover vooraf.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            Juiste aankoopgegevens zijn essentieel. De aankoopfactuur en eventuele buitenlandse documenten vormen een belangrijk onderdeel van het dossier.
-          </p>
-          <p className="text-foreground/90 leading-relaxed">
-            Houd er rekening mee dat de Belastingdienst BPM-aangiftes kan controleren. Een zorgvuldig en transparant opgebouwd dossier verkleint het risico op discussie achteraf.
-          </p>
-        </div>
-      </section>
-
-      {/* Onafhankelijkheid, expertise en juridische borging */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Onafhankelijkheid, expertise en juridische borging
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            Automobiel Taxaties werkt als onafhankelijk taxateur. De taxaties worden uitgevoerd door een taxateur die is geregistreerd bij de Vereniging van Register-Taxateurs (VRT) en is aangesloten bij de Taxateursvereniging voor Motorvoertuigen (TMV).
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            Voor specialistische voertuigwaarderingen, zoals campers met bijzondere opbouw of inrichting, wordt gewerkt binnen de richtlijnen van de FEHAC. De vakkennis wordt actief onderhouden en toegepast bij iedere taxatie.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            De rapportages zijn zorgvuldig opgebouwd, transparant en inhoudelijk verdedigbaar. Wanneer er vragen ontstaan of een inhoudelijke discussie volgt, werken wij samen met een jurist die is gespecialiseerd in BPM- en fiscale voertuigwaarderingen.
-          </p>
-          <p className="text-foreground/90 leading-relaxed">
-            Er worden geen vooraf afgesproken uitkomsten of wensbedragen gehanteerd.
-          </p>
-        </div>
-      </section>
-
-      {/* Form section */}
-      <section className="section-padding bg-muted/30" ref={formRef}>
-        <div className="container-narrow">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
-              BPM-taxatie voor campers aanvragen
-            </h2>
-            <p className="text-foreground/90 leading-relaxed">
-              Wil je de BPM bij import van een camper zorgvuldig laten vaststellen, dan kun je hieronder een aanvraag indienen. Op basis van de aangeleverde gegevens beoordelen wij welke BPM-methode passend is.
-            </p>
+          <div className="grid grid-cols-2 gap-4">
+            {[{ label: "Bijzondere opbouw", desc: "Afwijkend van standaard" }, { label: "Inrichting", desc: "Invloed op de waarde" }, { label: "Afwijkend gebruik", desc: "Anders dan gangbaar" }, { label: "Standaard ontoereikend", desc: "Tabel of koerslijst past niet" }].map((item, i) => (
+              <div key={i} className="card-elevated p-5 text-center cursor-default transition-transform duration-200 hover:-translate-y-1">
+                <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                <p className="text-xs mt-0.5" style={{ color: '#4a5568' }}>{item.desc}</p>
+              </div>
+            ))}
           </div>
-          <IntakeForm 
-            serviceType="bpm-taxatie camper" 
-            formTitle="BPM-taxatie camper aanvragen"
-            toelichtingPlaceholder="Geef hier de beschikbare informatie over de camper en de import."
-            submitButtonText="BPM-taxatie camper aanvragen"
-          />
+        </div></div>
+      </section>
+
+      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+        <div className="container-wide"><div className="text-center mb-8">
+          <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-2">Werkwijze</p>
+          <h2 className="text-2xl md:text-3xl font-semibold">Onze werkwijze in 5 stappen</h2>
+        </div>
+        <div className="grid md:grid-cols-5 gap-5">
+          {[{ step: 1, title: "Gegevens aanleveren", desc: "Kenteken, chassisnummer, factuur" }, { step: 2, title: "Methode beoordelen", desc: "Per camper de juiste aanpak" }, { step: 3, title: "Uitvoering", desc: "Fysieke inspectie indien nodig" }, { step: 4, title: "Aangifte opstellen", desc: "Compleet en controleerbaar" }, { step: 5, title: "Oplevering", desc: "Per e-mail, klaar voor indiening" }].map((s) => (
+            <div key={s.step} className="text-center"><div className="step-badge mx-auto mb-3">{s.step}</div><h4 className="font-semibold text-sm mb-1 text-foreground">{s.title}</h4><p className="text-xs leading-relaxed" style={{ color: '#4a5568' }}>{s.desc}</p></div>
+          ))}
+        </div></div>
+      </section>
+
+      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: '#1d3c71' }}>
+        <div className="container-wide text-center">
+          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">BPM bij import van een camper?</h2>
+          <p className="text-[15px] mb-6 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>Wij beoordelen per camper welke methode het meest verdedigbaar is.</p>
+          <Button variant="cta" size="lg" onClick={scrollToForm}>BPM-taxatie camper aanvragen<ArrowDown className="w-4 h-4 ml-2" /></Button>
         </div>
       </section>
 
-      {/* Terug naar overzicht */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow text-center">
-          <Button variant="secondary-action" size="sm" asChild>
-            <Link to="/bpm-taxatie" className="inline-flex items-center gap-2">
-              Terug naar BPM-taxatie overzicht
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Button>
+      <section className="py-6 px-6 md:px-8 bg-background">
+        <div className="container-wide"><div className="flex flex-wrap justify-center gap-6 md:gap-14 items-center">
+          <div className="flex items-center gap-2"><div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-cta text-cta" />)}</div><span className="text-sm font-semibold text-foreground">4.9 / 5</span><span className="text-xs" style={{ color: '#4a5568' }}>Google Reviews</span></div>
+          <div className="text-center"><span className="text-lg font-bold text-foreground">25.000+</span><span className="text-xs ml-1" style={{ color: '#4a5568' }}>voertuigen getaxeerd</span></div>
+          <div className="text-center"><span className="text-lg font-bold text-foreground">13 jaar</span><span className="text-xs ml-1" style={{ color: '#4a5568' }}>ervaring</span></div>
+          <div className="text-center"><span className="text-lg font-bold text-foreground">98%</span><span className="text-xs ml-1" style={{ color: '#4a5568' }}>akkoord bij controle</span></div>
+        </div></div>
+      </section>
+
+      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+        <div className="container-wide"><div className="grid md:grid-cols-2 gap-8">
+          <div><h2 className="text-xl md:text-2xl font-semibold mb-5">Wat kun je verwachten?</h2><div className="space-y-3">{["Onafhankelijke beoordeling per camper", "Duidelijke uitleg over de gekozen methode", "Onderbouwing die standhoudt bij controle", "Geen wensbedragen of vooraf bepaalde uitkomsten"].map((item, i) => (<div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}><div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(255,117,31,0.12)' }}><CheckCircle className="w-4 h-4 text-cta" /></div><span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span></div>))}</div></div>
+          <div><h2 className="text-xl md:text-2xl font-semibold mb-5">Wat hebben wij nodig?</h2><div className="space-y-3">{["Buitenlands kenteken of chassisnummer", "Aankoopfactuur van de camper", "Actuele kilometerstand", "Info over staat, gebruik en eventuele schade"].map((item, i) => (<div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}><div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}><CheckCircle className="w-4 h-4 text-primary" /></div><span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span></div>))}</div></div>
+        </div></div>
+      </section>
+
+      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: '#1d3c71' }}>
+        <div className="container-wide text-center">
+          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">BPM netjes en onafhankelijk laten regelen?</h2>
+          <p className="text-[15px] mb-6" style={{ color: 'rgba(255,255,255,0.75)' }}>Vraag vrijblijvend een BPM-taxatie aan voor je camper.</p>
+          <Button variant="cta" size="lg" onClick={scrollToForm}>BPM-taxatie camper aanvragen<ArrowDown className="w-4 h-4 ml-2" /></Button>
         </div>
       </section>
+
+      <section className="py-10 md:py-14 px-6 md:px-8 bg-background" ref={formRef}>
+        <div className="container-wide"><div className="text-center mb-8"><h2 className="text-2xl md:text-3xl font-semibold mb-2">BPM-taxatie camper aanvragen</h2><p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>Vul het formulier in en wij bepalen de juiste aanpak voor jouw situatie.</p></div>
+        <div className="grid md:grid-cols-[1fr_380px] gap-8"><div><IntakeForm serviceType="bpm-taxatie camper" formTitle="BPM-taxatie camper aanvragen" formSubtext="Vul onderstaand formulier zo volledig mogelijk in." toelichtingPlaceholder="Geef hier de beschikbare informatie over de camper en de import." submitButtonText="BPM-taxatie camper aanvragen" /></div><ContactSidebar /></div></div>
+      </section>
+
+      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+        <div className="container-wide"><div className="card-elevated p-8 md:p-10 max-w-3xl mx-auto"><div className="flex items-center gap-3 mb-4"><div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}><Shield className="w-5 h-5 text-primary" /></div><h2 className="text-xl font-semibold">Onafhankelijk en juridisch geborgd</h2></div><ul className="space-y-2 text-sm" style={{ color: '#4a5568' }}><li>• Aangesloten bij Federatie TMV, VRT Register en FEHAC</li><li>• Geen vooraf afgesproken uitkomsten</li><li>• Rapportages zijn transparant en controleerbaar</li><li>• Samenwerking met gespecialiseerde BPM-jurist</li></ul></div></div>
+      </section>
+
       <SiteFooter />
       <WhatsAppButton />
     </div>
