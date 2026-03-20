@@ -557,8 +557,8 @@ const Index = () => {
               },
               {
                 icon: Award,
-                title: "Erkend en juridisch verdedigbaar",
-                text: "Ons rapport is opgesteld door een notarieel beëdigd TMV Register Taxateur. Het staat bij bezwaar, beroep en navorderingen van de Belastingdienst. Klanten die twijfelden aan een rapport elders, kwamen bij ons terecht en kregen gelijk.",
+                title: "Erkend en betrouwbaar",
+                text: "Aangesloten bij Federatie TMV, VRT Register en FEHAC. Dat betekent actuele marktkennis, een onafhankelijke werkwijze en persoonlijke ondersteuning als de Belastingdienst vragen heeft.",
               },
               {
                 icon: Handshake,
