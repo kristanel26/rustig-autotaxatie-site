@@ -315,7 +315,7 @@ const BpmTaxatie = () => {
                 </li>
                 <li className="flex items-center gap-3">
                   <MessageCircle className="w-4 h-4 shrink-0 opacity-70" />
-                  <a href="https://wa.me/31629182258" className="hover:underline">06 29182258</a>
+                  <a href="https://wa.me/31650694978" className="hover:underline">06 506 949 78</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="w-4 h-4 shrink-0 opacity-70" />
@@ -330,7 +330,7 @@ const BpmTaxatie = () => {
                 Liever direct contact? Wij reageren binnen één werkdag.
               </p>
               <a
-                href="https://wa.me/31629182258"
+                href="https://wa.me/31650694978"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-6 flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"

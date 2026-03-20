@@ -4,10 +4,15 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import { Link } from "react-router-dom";
 import { ArrowRight, AlertTriangle, Info } from "lucide-react";
+import stepCarShopping from "@/assets/step-car-shopping.jpg";
+import erikHero from "@/assets/erik-bpm-taxatie-hero.jpg";
+import stepRdw from "@/assets/step-rdw-inspection.jpg";
+import stepHappyOwner from "@/assets/step-happy-car-owner.jpg";
 
-const steps = [
+const steps: { number: number; title: string; image?: string; content: React.ReactNode }[] = [
   {
     number: 1,
+    image: stepCarShopping,
     title: "Begin met het zoeken van jouw toekomstige auto",
     content: (
       <>
@@ -29,6 +34,7 @@ const steps = [
   },
   {
     number: 3,
+    image: erikHero,
     title: "Laat het voertuig taxeren door Automobiel Taxaties",
     content: (
       <p>Voordat je naar de RDW gaat voor de keuring, laat je het voertuig eerst taxeren. Dit is een belangrijk aandachtspunt: een taxatierapport is alleen geldig als de opname door de taxateur heeft plaatsgevonden binnen één maand voorafgaand aan de RDW-keuring. Is dit niet het geval, dan wordt het rapport afgekeurd en berekent de Belastingdienst de BPM op basis van de forfaitaire afschrijving. Dat is meestal aanzienlijk ongunstiger. Plan je taxatie daarom op tijd. Eerst taxeren, dan keuren.</p>
@@ -36,6 +42,7 @@ const steps = [
   },
   {
     number: 4,
+    image: stepRdw,
     title: "Voertuig keuren bij de RDW",
     content: (
       <p>Is het voertuig in Nederland en heb je de buitenlandse kentekenpapieren? Dan moet het voertuig gekeurd worden bij de RDW. Doe dit zo snel mogelijk na de taxatie. Wil je hierbij worden ontzorgd? Laat het ons weten, we helpen graag.</p>
@@ -88,6 +95,7 @@ const steps = [
   },
   {
     number: 10,
+    image: stepHappyOwner,
     title: "Kenteken ontvangen",
     content: (
       <p>Na betaling geeft de Belastingdienst het fiscaal akkoord af aan de RDW. Je ontvangt het nieuwe kenteken en de kentekencard. Het enige wat je dan nog hoeft te doen is een set kentekenplaten laten maken en monteren.</p>
@@ -134,24 +142,39 @@ const StappenplanBpmAangifte = () => {
               className="py-12 md:py-16"
               style={{ background: i % 2 === 1 ? '#f7f8fa' : '#ffffff' }}
             >
-              <div className="max-w-4xl mx-auto px-6 lg:px-8 flex gap-6 md:gap-8">
-                {/* Step number circle */}
-                <div className="shrink-0">
-                  <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg"
-                    style={{ background: '#1d3c71' }}
-                  >
-                    {step.number}
+              <div className="max-w-4xl mx-auto px-6 lg:px-8">
+                <div className={`flex gap-6 md:gap-8 ${step.image ? 'flex-col md:flex-row' : ''}`}>
+                  {/* Step number + text */}
+                  <div className="flex gap-6 md:gap-8 flex-1 min-w-0">
+                    <div className="shrink-0">
+                      <div
+                        className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg"
+                        style={{ background: '#1d3c71' }}
+                      >
+                        {step.number}
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <h2 className="text-xl md:text-2xl font-bold mb-4" style={{ color: '#1d3c71', fontFamily: "'Playfair Display', serif" }}>
+                        {step.title}
+                      </h2>
+                      <div className="text-foreground/80 leading-relaxed">
+                        {step.content}
+                      </div>
+                    </div>
                   </div>
-                </div>
-                {/* Content */}
-                <div className="flex-1">
-                  <h2 className="text-xl md:text-2xl font-bold mb-4" style={{ color: '#1d3c71', fontFamily: "'Playfair Display', serif" }}>
-                    {step.title}
-                  </h2>
-                  <div className="text-foreground/80 leading-relaxed">
-                    {step.content}
-                  </div>
+                  {/* Optional image */}
+                  {step.image && (
+                    <div className="shrink-0 md:w-[480px] md:max-w-[480px]">
+                      <img
+                        src={step.image}
+                        alt={step.title}
+                        className="w-full rounded-lg shadow-md object-cover"
+                        style={{ maxHeight: 320 }}
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             </section>
