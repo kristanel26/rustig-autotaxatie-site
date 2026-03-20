@@ -145,8 +145,8 @@ const VerzekeringstaxatieInfo = () => {
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 rounded-full" style={{ background: 'rgba(255,255,255,0.05)' }} />
                 <item.icon style={{ width: 40, height: 40, color: '#ffffff' }} className="mb-4" />
                 <h3 className="font-bold mb-1.5" style={{ fontFamily: 'Inter, sans-serif', fontSize: 18, color: '#ffffff' }}>{item.title}</h3>
-                <p className="mb-4" style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, lineHeight: 1.6, color: '#adafc7' }}>{item.desc}</p>
-                <span className="inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all font-semibold" style={{ fontFamily: 'Inter, sans-serif', fontSize: 14, color: '#ff751f' }}>
+                <p className="mb-2" style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, lineHeight: 1.6, color: '#adafc7' }}>{item.desc}</p>
+                <span className="inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all font-semibold opacity-0 group-hover:opacity-100 duration-200" style={{ fontFamily: 'Inter, sans-serif', fontSize: 14, color: '#ff751f' }}>
                   Bekijken <ArrowRight className="w-3.5 h-3.5" />
                 </span>
               </Link>
