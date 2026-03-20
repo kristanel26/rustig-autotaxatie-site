@@ -219,6 +219,7 @@ const BpmTaxatie = () => {
               </div>
             </div>
             <div>
+              <div className="mb-3" style={{ width: 48, height: 3, background: '#ff751f', borderRadius: 2 }} />
               <h3 className="text-xl font-semibold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>Wat hebben wij nodig?</h3>
               <div className="space-y-4">
                 {nodigItems.map((item, i) => (
