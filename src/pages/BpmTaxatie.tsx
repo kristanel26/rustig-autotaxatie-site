@@ -175,37 +175,8 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* Vergelijkingstabel */}
-      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 96, paddingBottom: 96 }}>
-        <div className="container-wide">
-          <div className="text-center mb-10">
-            {sectionLabel("Vergelijking")}
-            <h2 className="text-2xl md:text-3xl font-semibold" style={{ fontFamily: 'Playfair Display, serif' }}>Wat is het verschil?</h2>
-          </div>
-          <div className="overflow-hidden" style={{ borderRadius: 12, boxShadow: '0 4px 24px rgba(0,0,0,0.07)' }}>
-            {/* Header */}
-            <div className="grid grid-cols-2">
-              <div className="px-6 py-4 font-semibold text-[14px]" style={{ background: '#f0f0f0', color: '#666' }}>
-                Een online BPM berekening
-              </div>
-              <div className="px-6 py-4 font-semibold text-[14px] text-white" style={{ background: '#1d3c71' }}>
-                Een taxatierapport van Automobiel Taxaties
-              </div>
-            </div>
-            {/* Rows */}
-            {vergelijkingRows.map((row, i) => (
-              <div key={i} className="grid grid-cols-2" style={{ background: i % 2 === 0 ? '#ffffff' : '#fafafa' }}>
-                <div className="px-6 py-4 text-[14px] border-r" style={{ color: '#666', borderColor: '#eee' }}>
-                  {row.left}
-                </div>
-                <div className="px-6 py-4 text-[14px] font-bold" style={{ color: '#1d3c71' }}>
-                  {row.right}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
+
 
       {/* 4 — Werkwijze – wit */}
       <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96 }}>
