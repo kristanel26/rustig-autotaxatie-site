@@ -19,6 +19,7 @@ const LandingHero = ({
   ctaText,
   onCtaClick,
   heroImage,
+  children,
 }: LandingHeroProps) => {
   return (
     <section className="relative min-h-[85vh] flex items-center overflow-hidden">
