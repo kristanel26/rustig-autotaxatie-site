@@ -141,6 +141,7 @@ const App = () => (
           <Toaster />
           <Sonner />
           <RouterProvider router={router} />
+          <ChatWidget />
         </TooltipProvider>
       </AuthProvider>
     </QueryClientProvider>
