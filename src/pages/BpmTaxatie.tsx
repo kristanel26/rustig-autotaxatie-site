@@ -50,7 +50,7 @@ const BpmTaxatie = () => {
       />
 
       {/* BPM Calculator — direct na hero */}
-      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 96, paddingBottom: 96 }}>
+      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 72, paddingBottom: 72 }}>
         <div className="container-wide">
           <div className="mb-8">
             {sectionLabel("BPM Calculator")}
