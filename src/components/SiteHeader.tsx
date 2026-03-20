@@ -185,8 +185,9 @@ const SiteHeader = () => {
         {/* Mobile nav */}
         {mobileOpen && (
           <nav className="xl:hidden mt-3 pb-4 border-t border-border pt-4 space-y-1">
-            {navLinks.map((link) => (
-              link.dropdown ? (
+            {navLinks.map((link) => {
+              const subLinks = link.dropdown === "verzekering" ? verzekeringSubLinks : link.dropdown === "bpm" ? bpmSubLinks : null;
+              return subLinks ? (
                 <div key={link.href}>
                   <Link
                     to={link.href}
@@ -199,7 +200,7 @@ const SiteHeader = () => {
                     {link.label}
                   </Link>
                   <div className="ml-4 space-y-0.5">
-                    {verzekeringSubLinks.map((sub) => (
+                    {subLinks.map((sub) => (
                       <Link
                         key={sub.href}
                         to={sub.href}
