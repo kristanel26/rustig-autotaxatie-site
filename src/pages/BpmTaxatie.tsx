@@ -216,6 +216,32 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
+      {/* Stats bar */}
+      <section style={{ background: '#f7f8fa', borderTop: '1px solid #e0e6ed', borderBottom: '1px solid #e0e6ed', padding: '32px 0' }}>
+        <div className="container-wide px-6 md:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0">
+            {[
+              { value: "4,9", label: "GOOGLE REVIEWS", stars: true },
+              { value: "25.000+", label: "VOERTUIGEN GETAXEERD" },
+              { value: "13 jaar", label: "ERVARING" },
+              { value: "Landelijk", label: "ACTIEF" },
+            ].map((stat, i) => (
+              <div key={i} className={`text-center ${i > 0 ? 'md:border-l' : ''}`} style={{ borderColor: '#dde3ea' }}>
+                {stat.stars && (
+                  <div className="flex justify-center mb-1">
+                    {[...Array(5)].map((_, j) => (
+                      <Star key={j} className="w-5 h-5" style={{ color: '#ff751f', fill: '#ff751f' }} />
+                    ))}
+                  </div>
+                )}
+                <p className="font-bold" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36, color: '#1d3c71' }}>{stat.value}</p>
+                <p className="uppercase" style={{ fontFamily: 'Inter, sans-serif', fontSize: 12, letterSpacing: '0.1em', color: '#888' }}>{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* 5 — Verwachtingen + Nodig – kaartjes */}
       <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 72, paddingBottom: 72 }}>
         <div className="container-wide">
@@ -228,10 +254,10 @@ const BpmTaxatie = () => {
                   <div
                     key={i}
                     className="flex items-center gap-4 bg-white"
-                    style={{ borderRadius: 10, padding: '18px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}
+                    style={{ borderRadius: 10, padding: '16px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}
                   >
                     <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
-                    <span className="text-[15px] leading-normal" style={{ color: '#333' }}>{item}</span>
+                    <span className="text-[15px] leading-normal" style={{ fontFamily: 'Inter, sans-serif', color: '#1a1a1a' }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -244,10 +270,10 @@ const BpmTaxatie = () => {
                   <div
                     key={i}
                     className="flex items-center gap-4 bg-white"
-                    style={{ borderRadius: 10, padding: '18px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}
+                    style={{ borderRadius: 10, padding: '16px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}
                   >
                     <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
-                    <span className="text-[15px] leading-normal" style={{ color: '#333' }}>{item}</span>
+                    <span className="text-[15px] leading-normal" style={{ fontFamily: 'Inter, sans-serif', color: '#1a1a1a' }}>{item}</span>
                   </div>
                 ))}
               </div>

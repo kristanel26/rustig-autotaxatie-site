@@ -10,7 +10,7 @@ import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight, ArrowDown, Shield, BadgeCheck, ClipboardCheck, ThumbsUp,
-  Caravan, Car, Bike, UtensilsCrossed, Clock, MapPin, Award, CheckCircle, Calendar, AlertTriangle,
+  Caravan, Car, Bike, UtensilsCrossed, Clock, MapPin, Award, CheckCircle, Calendar, AlertTriangle, Star,
 } from "lucide-react";
 import ContactSidebar from "@/components/ContactSidebar";
 import heroVerzekeringstaxatie from "@/assets/hero-verzekeringstaxatie.png";
