@@ -121,6 +121,7 @@ const FAQ = () => {
           </p>
         </div>
       </section>
+      <UspBar />
 
       {/* FAQ content */}
       <section className="py-12 md:py-16 px-6 md:px-8 bg-background">

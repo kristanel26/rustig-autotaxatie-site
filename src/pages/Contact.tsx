@@ -41,6 +41,7 @@ const Contact = () => {
           </p>
         </div>
       </section>
+      <UspBar />
 
       {/* Wizard + sidebar */}
       <section className="py-16 md:py-24 px-6 lg:px-8 bg-white">
