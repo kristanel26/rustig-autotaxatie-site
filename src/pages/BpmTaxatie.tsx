@@ -372,7 +372,7 @@ const BpmTaxatie = () => {
                 <h3 className="text-base font-semibold">Onafhankelijk en juridisch geborgd</h3>
               </div>
               <ul className="space-y-1.5 text-sm" style={{ color: '#4a5568' }}>
-                <li>• Geregistreerd bij VRT en aangesloten bij TMV</li>
+                <li>• Aangesloten bij Federatie TMV, VRT Register en FEHAC</li>
                 <li>• Geen vooraf afgesproken uitkomsten</li>
                 <li>• Rapportages zijn transparant en controleerbaar</li>
                 <li>• Samenwerking met gespecialiseerde BPM-jurist</li>

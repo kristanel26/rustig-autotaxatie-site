@@ -8,6 +8,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowDown, CheckCircle, Shield, Truck, Car, Bike, UtensilsCrossed, Clock } from "lucide-react";
+import ContactSidebar from "@/components/ContactSidebar";
 import heroCarInspection from "@/assets/hero-car-inspection.jpg";
 
 const VerzekeringstaxatieInfo = () => {
