@@ -64,7 +64,7 @@ const BpmTaxatie = () => {
       </section>
 
       {/* 1 — Intro – wit */}
-      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96 }}>
+      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 72, paddingBottom: 72 }}>
         <div className="container-wide">
           <div className="grid md:grid-cols-[1fr_400px] gap-12 items-center">
             <div>
