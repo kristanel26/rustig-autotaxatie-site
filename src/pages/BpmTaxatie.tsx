@@ -263,7 +263,7 @@ const BpmTaxatie = () => {
                 compact={true}
               />
             </div>
-            <div className="rounded-2xl p-10 text-white self-start" style={{ background: '#1d3c71' }}>
+            <div className="rounded-2xl p-10 text-white flex flex-col" style={{ background: '#1d3c71' }}>
               <h3 className="text-lg font-semibold mb-5">Direct contact</h3>
               <ul className="space-y-3.5 text-sm">
                 <li className="flex items-center gap-3">
