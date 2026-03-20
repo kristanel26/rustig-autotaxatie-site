@@ -132,22 +132,19 @@ const VerzekeringstaxatieInfo = () => {
               <Link
                 key={i}
                 to={item.link}
-                className="group bg-white rounded-xl transition-all duration-200 hover:-translate-y-[3px]"
+                className="group relative overflow-hidden rounded-xl transition-all duration-200 hover:-translate-y-[3px]"
                 style={{
-                  boxShadow: '0 4px 16px rgba(0,0,0,0.07)',
-                  padding: '28px 24px',
+                  background: '#1d3c71',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                  padding: '32px 24px',
                 }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 28px rgba(0,0,0,0.12)'; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 16px rgba(0,0,0,0.07)'; }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = '#2a4f8a'; (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 32px rgba(0,0,0,0.22)'; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = '#1d3c71'; (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(0,0,0,0.15)'; }}
               >
-                <div
-                  className="flex items-center justify-center rounded-full mb-4"
-                  style={{ width: 64, height: 64, background: '#EBF2FB' }}
-                >
-                  <item.icon style={{ width: 28, height: 28, color: '#1d3c71' }} />
-                </div>
-                <h3 className="font-bold mb-1.5" style={{ fontFamily: 'Inter, sans-serif', fontSize: 17, color: '#1d3c71' }}>{item.title}</h3>
-                <p className="mb-4" style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, lineHeight: 1.6, color: '#666' }}>{item.desc}</p>
+                <div className="absolute -bottom-6 -right-6 w-24 h-24 rounded-full" style={{ background: 'rgba(255,255,255,0.05)' }} />
+                <item.icon style={{ width: 40, height: 40, color: '#ffffff' }} className="mb-4" />
+                <h3 className="font-bold mb-1.5" style={{ fontFamily: 'Inter, sans-serif', fontSize: 18, color: '#ffffff' }}>{item.title}</h3>
+                <p className="mb-4" style={{ fontFamily: 'Inter, sans-serif', fontSize: 13, lineHeight: 1.6, color: '#adafc7' }}>{item.desc}</p>
                 <span className="inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all font-semibold" style={{ fontFamily: 'Inter, sans-serif', fontSize: 14, color: '#ff751f' }}>
                   Bekijken <ArrowRight className="w-3.5 h-3.5" />
                 </span>
