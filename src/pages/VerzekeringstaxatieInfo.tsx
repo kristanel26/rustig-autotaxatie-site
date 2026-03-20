@@ -5,6 +5,7 @@ import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowDown, CheckCircle, Shield, Truck, Car, Bike, UtensilsCrossed, Clock } from "lucide-react";
 import heroCarInspection from "@/assets/hero-car-inspection.jpg";
