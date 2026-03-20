@@ -26,12 +26,6 @@ const diensten = [
   { title: "Schadevaststelling", sub: "Na een incident", href: "/schadevaststelling", icon: FaCarCrash },
 ];
 
-const usps = [
-  { icon: Shield, title: "Erkend taxateur", sub: "Aangesloten bij Federatie TMV, VRT Register en FEHAC" },
-  { icon: MapPin, title: "Op locatie bij je", sub: "Werkzaam in het grootste gedeelte van Nederland" },
-  { icon: ScaleIcon, title: "Juridisch verdedigbaar", sub: "Gedegen onderbouwing, verdedigbaar bij bezwaar en beroep" },
-  { icon: Users, title: "Direct contact", sub: "Persoonlijk en snel geholpen, zonder omwegen" },
-];
 
 const reviews = [
   { name: "Marco V.", text: "Uitstekende service. Rapport was snel klaar en zeer professioneel opgesteld. De BPM-besparing was aanzienlijk." },
