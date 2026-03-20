@@ -9,7 +9,7 @@ import erikHero from "@/assets/erik-bpm-taxatie-hero.jpg";
 import stepRdw from "@/assets/step-rdw-inspection.jpg";
 import stepHappyOwner from "@/assets/step-happy-car-owner.jpg";
 
-const steps = [
+const steps: { number: number; title: string; image?: string; content: React.ReactNode }[] = [
   {
     number: 1,
     image: stepCarShopping,
