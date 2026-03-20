@@ -63,7 +63,7 @@ const LandingHero = ({
               {subtitle}
             </p>
           </div>
-          <h1 className="heading-display text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-[1.1] animate-slide-up text-balance">
+          <h1 className="heading-display text-white mb-6 leading-[1.1] animate-slide-up text-balance" style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 700 }}>
             {title}
           </h1>
           <div className="text-lg md:text-xl text-white/75 mb-10 max-w-2xl animate-slide-up leading-relaxed" style={{ animationDelay: "100ms" }}>
