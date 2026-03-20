@@ -88,7 +88,7 @@ const BpmTaxatie = () => {
       </section>
 
       {/* 2 — Voor wie – donkerblauw */}
-      <section className="px-6 md:px-8" style={{ background: '#1d3c71', paddingTop: 96, paddingBottom: 96 }}>
+      <section className="px-6 md:px-8" style={{ background: '#1d3c71', paddingTop: 72, paddingBottom: 72 }}>
         <div className="container-wide">
           <div className="text-center mb-10">
             <p className="uppercase font-semibold mb-2" style={{ fontSize: 12, letterSpacing: '0.1em', color: '#ff751f' }}>Voor wie</p>
