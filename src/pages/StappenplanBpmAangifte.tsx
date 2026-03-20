@@ -4,6 +4,10 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import { Link } from "react-router-dom";
 import { ArrowRight, AlertTriangle, Info } from "lucide-react";
+import stepCarShopping from "@/assets/step-car-shopping.jpg";
+import erikHero from "@/assets/erik-bpm-taxatie-hero.jpg";
+import stepRdw from "@/assets/step-rdw-inspection.jpg";
+import stepHappyOwner from "@/assets/step-happy-car-owner.jpg";
 
 const steps = [
   {
