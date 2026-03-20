@@ -270,7 +270,7 @@ const BpmTaxatie = () => {
         <div className="container-wide">
           <div className="text-center" style={{ marginBottom: 48 }}>
             {sectionLabel("Aanvragen")}
-            <h2 className="text-2xl md:text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>BPM-aangifte laten uitvoeren</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>BPM-aangifte laten uitvoeren</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
               Vul het formulier in en wij bepalen de juiste aanpak voor jouw situatie.
             </p>
