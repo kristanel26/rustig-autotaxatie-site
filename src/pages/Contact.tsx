@@ -39,6 +39,12 @@ const Contact = () => {
           <p className="text-lg text-primary-foreground/70 max-w-2xl">
             Vul het formulier in en wij nemen binnen één werkdag contact met je op. Of bel direct voor persoonlijk advies.
           </p>
+          <a href="tel:+31854832461" className="inline-block mt-4">
+            <button className="btn-outline-white">
+              <Phone className="w-5 h-5" />
+              085 483 2461
+            </button>
+          </a>
         </div>
       </section>
       <UspBar />
