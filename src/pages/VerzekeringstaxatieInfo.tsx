@@ -31,7 +31,7 @@ const VerzekeringstaxatieInfo = () => {
         description="Zorg dat je voertuig voor de juiste waarde verzekerd is. Wij taxeren op locatie, door heel Nederland."
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
-        heroImage={heroCarInspection}
+        heroImage={heroVerzekeringstaxatie}
       />
 
       {/* Waarom */}
