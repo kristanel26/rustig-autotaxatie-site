@@ -7,7 +7,10 @@ import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowDown, CheckCircle, Shield, Truck, Car, Bike, UtensilsCrossed, Clock } from "lucide-react";
+import {
+  ArrowRight, ArrowDown, Shield, BadgeCheck, ClipboardCheck, ThumbsUp,
+  Truck, Car, Bike, UtensilsCrossed, Clock, MapPin,
+} from "lucide-react";
 import ContactSidebar from "@/components/ContactSidebar";
 import heroVerzekeringstaxatie from "@/assets/hero-verzekeringstaxatie.png";
 
@@ -18,6 +21,29 @@ const VerzekeringstaxatieInfo = () => {
     formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const waaromCards = [
+    { icon: Shield, title: "Geen discussie achteraf", desc: "De waarde staat vooraf vast in het rapport." },
+    { icon: BadgeCheck, title: "Uitkering op werkelijke waarde", desc: "Niet op dagwaarde, maar op de getaxeerde waarde." },
+    { icon: ClipboardCheck, title: "Waarde vastgelegd op basis van staat", desc: "Inclusief aanpassingen, opties en gebruik." },
+    { icon: ThumbsUp, title: "Geaccepteerd door verzekeraars", desc: "Ons rapport voldoet aan de eisen van alle grote verzekeraars." },
+  ];
+
+  const voertuigTypes = [
+    { icon: Truck, title: "Camper", desc: "Bij aanpassingen of zelfbouw", link: "/camper-taxatie" },
+    { icon: Car, title: "Oldtimer", desc: "Originaliteit, staat en gebruik", link: "/oldtimer-taxatie" },
+    { icon: Clock, title: "Youngtimer", desc: "Afwijkende waarde t.o.v. standaard", link: "/youngtimer-taxatie" },
+    { icon: Bike, title: "Motor", desc: "Verzekerde waarde vooraf vastleggen", link: "/motor-taxatie" },
+    { icon: UtensilsCrossed, title: "Foodtruck", desc: "Inrichting en apparatuur meegerekend", link: "/foodtruck-taxatie" },
+  ];
+
+  const stappen = [
+    { step: 1, title: "Gegevens aanleveren", desc: "Type, bouwjaar en gebruik van het voertuig" },
+    { step: 2, title: "Fysieke inspectie", desc: "Staat, uitvoering, opties en bijzonderheden" },
+    { step: 3, title: "Waarde vaststellen", desc: "Op basis van inspectie en marktgegevens" },
+    { step: 4, title: "Rapport opstellen", desc: "Duidelijk hoe de waarde tot stand is gekomen" },
+    { step: 5, title: "Oplevering", desc: "Klaar voor gebruik bij de verzekering" },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <PageMeta
@@ -25,6 +51,8 @@ const VerzekeringstaxatieInfo = () => {
         description="Professionele verzekeringstaxatie voor oldtimers, youngtimers, campers en motoren. Erkend rapport voor je verzekeringspolis. Op locatie door heel Nederland."
       />
       <SiteHeader />
+
+      {/* HERO */}
       <LandingHero
         subtitle="Automobiel Taxaties"
         title="Verzekeringstaxatie"
@@ -32,64 +60,87 @@ const VerzekeringstaxatieInfo = () => {
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroVerzekeringstaxatie}
-      />
+      >
+        <p className="flex items-center gap-2 text-white/60 text-sm">
+          <MapPin className="w-4 h-4" />
+          Landelijk actief — op locatie bij jou
+        </p>
+      </LandingHero>
 
-      {/* Waarom */}
-      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+      {/* WAAROM TAXEREN — 2×2 kaartjes */}
+      <section className="py-16 md:py-24 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div>
-              <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Waarom taxeren</p>
-              <h2 className="text-2xl md:text-3xl font-semibold mb-4">Een taxatierapport voorkomt problemen</h2>
-              <p className="text-[15px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
-                Met een verzekeringstaxatie wordt de waarde vooraf vastgelegd. Bij schade of diefstal wordt uitgekeerd op basis van de getaxeerde waarde, niet een dagwaarde.
-              </p>
-              <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
-                Ideaal voor campers, oldtimers, motoren en andere voertuigen waarvan de waarde niet vanzelf spreekt.
-              </p>
-            </div>
-            <div>
-              <ul className="space-y-3">
-                {[
-                  "Geen discussie achteraf over de waarde",
-                  "Uitkering op basis van getaxeerde waarde",
-                  "Waarde vastgelegd op basis van werkelijke staat",
-                  "Geaccepteerd door verzekeraars",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-cta flex-shrink-0 mt-0.5" />
-                    <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="text-center mb-12">
+            <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-3" style={{ color: '#ff751f', fontFamily: 'Inter, sans-serif' }}>
+              Waarom taxeren
+            </p>
+            <h2 className="font-playfair text-[28px] md:text-[36px] font-bold" style={{ color: '#1a1a1a' }}>
+              Een taxatierapport voorkomt problemen
+            </h2>
+          </div>
+
+          <div className="max-w-3xl mx-auto mb-10">
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '17px', lineHeight: 1.75, color: '#3a3a3a' }}>
+              Met een verzekeringstaxatie wordt de waarde vooraf vastgelegd. Bij schade of diefstal wordt uitgekeerd op basis van de getaxeerde waarde, niet een dagwaarde. Ideaal voor campers, oldtimers, motoren en andere voertuigen waarvan de waarde niet vanzelf spreekt.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-5 max-w-4xl mx-auto">
+            {waaromCards.map((card, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-xl p-6 transition-shadow duration-200"
+                style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
+              >
+                <div
+                  className="inline-flex items-center justify-center w-11 h-11 rounded-full mb-4"
+                  style={{ background: '#EBF2FB' }}
+                >
+                  <card.icon className="w-5 h-5" style={{ color: '#1d3c71' }} />
+                </div>
+                <h3 className="font-semibold text-[16px] mb-1.5" style={{ color: '#1d3c71' }}>{card.title}</h3>
+                <p className="text-[14px] leading-relaxed" style={{ color: '#666' }}>{card.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Per voertuigtype */}
-      <section className="py-12 md:py-16 px-6 md:px-8 bg-background">
+      {/* VOERTUIGTYPES GRID */}
+      <section className="py-16 md:py-24 px-6 md:px-8 bg-background">
         <div className="container-wide">
-          <div className="text-center mb-10">
-            <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Per voertuigtype</p>
-            <h2 className="text-2xl md:text-3xl font-semibold">Verzekeringstaxatie per voertuigtype</h2>
+          <div className="text-center mb-12">
+            <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-3" style={{ color: '#ff751f', fontFamily: 'Inter, sans-serif' }}>
+              Per voertuigtype
+            </p>
+            <h2 className="font-playfair text-[28px] md:text-[36px] font-bold" style={{ color: '#1a1a1a' }}>
+              Verzekeringstaxatie per voertuigtype
+            </h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { icon: Truck, title: "Camper", desc: "Bij aanpassingen of zelfbouw", link: "/camper-taxatie" },
-              { icon: Car, title: "Oldtimer", desc: "Originaliteit, staat en gebruik", link: "/oldtimer-taxatie" },
-              { icon: Clock, title: "Youngtimer", desc: "Afwijkende waarde t.o.v. standaard", link: "/youngtimer-taxatie" },
-              { icon: Bike, title: "Motor", desc: "Verzekerde waarde vooraf vastleggen", link: "/motor-taxatie" },
-              { icon: UtensilsCrossed, title: "Foodtruck", desc: "Inrichting en apparatuur meegerekend", link: "/foodtruck-taxatie" },
-            ].map((item, i) => (
-              <Link key={i} to={item.link} className="card-elevated p-6 group cursor-pointer">
-                <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-3" style={{ background: 'rgba(29,60,113,0.08)' }}>
-                  <item.icon className="w-5 h-5 text-primary" />
+            {voertuigTypes.map((item, i) => (
+              <Link
+                key={i}
+                to={item.link}
+                className="group rounded-xl p-7 transition-all duration-200 hover:-translate-y-[3px]"
+                style={{
+                  background: 'linear-gradient(180deg, #ffffff 0%, #f0f5fb 100%)',
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.07)',
+                  minHeight: '180px',
+                }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 28px rgba(0,0,0,0.12)'; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 16px rgba(0,0,0,0.07)'; }}
+              >
+                <div
+                  className="inline-flex items-center justify-center w-[52px] h-[52px] rounded-full mb-4"
+                  style={{ background: '#EBF2FB' }}
+                >
+                  <item.icon className="w-6 h-6" style={{ color: '#1d3c71' }} />
                 </div>
-                <h3 className="text-sm font-semibold mb-1">{item.title}</h3>
-                <p className="text-xs leading-relaxed mb-3" style={{ color: '#4a5568' }}>{item.desc}</p>
-                <span className="text-xs font-semibold text-cta inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Bekijken <ArrowRight className="w-3 h-3" />
+                <h3 className="font-bold text-[17px] mb-1.5" style={{ color: '#1d3c71' }}>{item.title}</h3>
+                <p className="text-[14px] leading-relaxed mb-4" style={{ color: '#666' }}>{item.desc}</p>
+                <span className="text-[14px] font-semibold inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all" style={{ color: '#ff751f' }}>
+                  Bekijken <ArrowRight className="w-4 h-4" />
                 </span>
               </Link>
             ))}
@@ -97,37 +148,93 @@ const VerzekeringstaxatieInfo = () => {
         </div>
       </section>
 
-      {/* Werkwijze */}
-      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+      {/* STAPPENPLAN met verbindingslijn */}
+      <section className="py-16 md:py-24 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
-          <div className="text-center mb-10">
-            <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Werkwijze</p>
-            <h2 className="text-2xl md:text-3xl font-semibold">Onze werkwijze in 5 stappen</h2>
+          <div className="text-center mb-12">
+            <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-3" style={{ color: '#ff751f', fontFamily: 'Inter, sans-serif' }}>
+              Werkwijze
+            </p>
+            <h2 className="font-playfair text-[28px] md:text-[36px] font-bold" style={{ color: '#1a1a1a' }}>
+              Onze werkwijze in 5 stappen
+            </h2>
           </div>
-          <div className="grid md:grid-cols-5 gap-6">
-            {[
-              { step: 1, title: "Gegevens aanleveren", desc: "Type, bouwjaar en gebruik van het voertuig" },
-              { step: 2, title: "Fysieke inspectie", desc: "Staat, uitvoering, opties en bijzonderheden" },
-              { step: 3, title: "Waarde vaststellen", desc: "Op basis van inspectie en marktgegevens" },
-              { step: 4, title: "Rapport opstellen", desc: "Duidelijk hoe de waarde tot stand is gekomen" },
-              { step: 5, title: "Oplevering", desc: "Klaar voor gebruik bij de verzekering" },
-            ].map((s) => (
-              <div key={s.step} className="text-center">
-                <div className="step-badge mx-auto mb-4">{s.step}</div>
-                <h4 className="font-semibold text-sm mb-1 text-foreground">{s.title}</h4>
-                <p className="text-xs leading-relaxed" style={{ color: '#4a5568' }}>{s.desc}</p>
+
+          {/* Desktop: horizontal with connecting line */}
+          <div className="hidden md:block">
+            <div className="relative">
+              {/* Connecting line */}
+              <div
+                className="absolute top-[24px] left-[10%] right-[10%] h-[2px]"
+                style={{ background: '#698db3' }}
+              />
+              <div className="grid grid-cols-5 gap-6 relative">
+                {stappen.map((s) => (
+                  <div key={s.step} className="text-center">
+                    <div
+                      className="relative z-10 mx-auto mb-5 flex items-center justify-center rounded-full text-white font-bold"
+                      style={{
+                        width: '48px',
+                        height: '48px',
+                        background: '#1d3c71',
+                        fontSize: '18px',
+                      }}
+                    >
+                      {s.step}
+                    </div>
+                    <h4 className="font-bold text-[15px] mb-1" style={{ fontFamily: 'Inter, sans-serif', color: '#1a1a1a' }}>
+                      {s.title}
+                    </h4>
+                    <p className="text-[13px] leading-[1.6]" style={{ color: '#666' }}>{s.desc}</p>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+          </div>
+
+          {/* Mobile: vertical with connecting line */}
+          <div className="md:hidden">
+            <div className="relative pl-10">
+              {/* Vertical line */}
+              <div
+                className="absolute left-[23px] top-0 bottom-0 w-[2px]"
+                style={{ background: '#698db3' }}
+              />
+              <div className="space-y-8">
+                {stappen.map((s) => (
+                  <div key={s.step} className="relative flex gap-5">
+                    <div
+                      className="relative z-10 flex-shrink-0 flex items-center justify-center rounded-full text-white font-bold"
+                      style={{
+                        width: '48px',
+                        height: '48px',
+                        background: '#1d3c71',
+                        fontSize: '18px',
+                        marginLeft: '-25px',
+                      }}
+                    >
+                      {s.step}
+                    </div>
+                    <div className="pt-2">
+                      <h4 className="font-bold text-[15px] mb-1" style={{ color: '#1a1a1a' }}>{s.title}</h4>
+                      <p className="text-[13px] leading-[1.6]" style={{ color: '#666' }}>{s.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA blok */}
-      <section className="py-14 md:py-20 px-6 md:px-8" style={{ background: '#1d3c71' }}>
+      {/* CTA BLOK */}
+      <section className="py-16 md:py-24 px-6 md:px-8" style={{ background: '#1d3c71' }}>
         <div className="container-wide text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">Verzekeringstaxatie aanvragen?</h2>
-          <p className="text-base mb-8" style={{ color: 'rgba(255,255,255,0.75)' }}>
-            Vooraf zekerheid over de waarde van je voertuig.
+          <h2 className="font-playfair text-[28px] md:text-[36px] font-bold text-white mb-3">
+            Verzekeringstaxatie aanvragen?
+          </h2>
+          <p className="text-[17px] mb-8 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.75)', lineHeight: 1.75 }}>
+            Wij stellen de waarde vast op basis van de werkelijke staat van jouw voertuig.
           </p>
           <Button variant="cta" size="lg" onClick={scrollToForm}>
             Verzekeringstaxatie aanvragen
@@ -136,17 +243,25 @@ const VerzekeringstaxatieInfo = () => {
         </div>
       </section>
 
-      {/* Acceptatie */}
-      <section className="py-12 md:py-16 px-6 md:px-8 bg-background">
+      {/* ACCEPTATIE */}
+      <section className="py-16 md:py-24 px-6 md:px-8 bg-background">
         <div className="container-wide">
-          <div className="card-elevated p-8 md:p-10 max-w-3xl mx-auto">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}>
-                <Shield className="w-5 h-5 text-primary" />
+          <div
+            className="p-8 md:p-10 max-w-3xl mx-auto rounded-xl"
+            style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
+          >
+            <div className="flex items-center gap-3 mb-5">
+              <div
+                className="w-11 h-11 rounded-full flex items-center justify-center"
+                style={{ background: '#EBF2FB' }}
+              >
+                <Shield className="w-5 h-5" style={{ color: '#1d3c71' }} />
               </div>
-              <h2 className="text-xl font-semibold">Acceptatie en geldigheid</h2>
+              <h2 className="font-playfair text-[22px] font-bold" style={{ color: '#1a1a1a' }}>
+                Acceptatie en geldigheid
+              </h2>
             </div>
-            <ul className="space-y-2 text-sm" style={{ color: '#4a5568' }}>
+            <ul className="space-y-2.5 text-[15px]" style={{ color: '#4a5568' }}>
               <li>• Aangesloten bij Federatie TMV, VRT Register en FEHAC</li>
               <li>• Geaccepteerd door verzekeraars</li>
               <li>• Geldigheid 2 tot 3 jaar — informeer bij jouw verzekeraar</li>
@@ -155,17 +270,22 @@ const VerzekeringstaxatieInfo = () => {
         </div>
       </section>
 
-      {/* Formulier — 65/35 layout */}
-      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }} ref={formRef}>
+      {/* FORMULIER — 65/35 layout */}
+      <section className="py-16 md:py-24 px-6 md:px-8" style={{ background: '#f7f8fa' }} ref={formRef}>
         <div className="container-wide">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-3">Verzekeringstaxatie aanvragen</h2>
+          <div className="text-center mb-12">
+            <h2 className="font-playfair text-[28px] md:text-[36px] font-bold mb-3" style={{ color: '#1a1a1a' }}>
+              Verzekeringstaxatie aanvragen
+            </h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
               Vul het formulier in en we nemen binnen één werkdag contact met je op.
             </p>
           </div>
           <div className="grid md:grid-cols-[1fr_380px] gap-8 items-stretch">
-            <div>
+            <div
+              className="rounded-[14px] overflow-hidden"
+              style={{ boxShadow: '0 6px 32px rgba(0,0,0,0.09)' }}
+            >
               <IntakeForm
                 serviceType="verzekeringstaxatie"
                 formTitle="Verzekeringstaxatie aanvragen"
