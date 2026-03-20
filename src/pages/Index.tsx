@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PageMeta from "@/components/PageMeta";
 import { Link } from "react-router-dom";
-import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, ChevronRight, Search, MessageCircle, Handshake } from "lucide-react";
+import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, ChevronRight, Search, MessageCircle, Handshake, Caravan } from "lucide-react";
 import UspBar from "@/components/UspBar";
 import { FaFileInvoiceDollar, FaBalanceScale, FaClock, FaCar, FaTruck, FaMotorcycle, FaUtensils, FaCarCrash } from "react-icons/fa";
 import erikPhoto from "@/assets/erik-elderson.png";
