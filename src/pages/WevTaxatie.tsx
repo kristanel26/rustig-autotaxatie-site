@@ -185,7 +185,7 @@ const WevTaxatie = () => {
               <h2 className="text-xl font-semibold">Onafhankelijk en fiscaal verdedigbaar</h2>
             </div>
             <ul className="space-y-2 text-sm" style={{ color: '#4a5568' }}>
-              <li>• Geregistreerd bij VRT en aangesloten bij TMV</li>
+              <li>• Aangesloten bij Federatie TMV, VRT Register en FEHAC</li>
               <li>• Geen vooraf afgesproken uitkomsten of wensbedragen</li>
               <li>• Rapportages zijn transparant, controleerbaar en verdedigbaar</li>
               <li>• Onafhankelijkheid is essentieel bij fiscale waarderingen</li>
