@@ -53,14 +53,7 @@ const steps: { number: number; title: string; image?: string; content: React.Rea
     image: stepDocuments,
     title: "Wat hebben wij van je nodig?",
     content: (
-      <>
-        <p className="mb-3">Om de aangifte op te stellen hebben wij nodig:</p>
-        <ul className="list-disc pl-5 space-y-1">
-          <li>Je NAW-gegevens</li>
-          <li>Een kopie van de buitenlandse kentekenpapieren en het CvO van de auto</li>
-          <li>De aankoopfactuur</li>
-        </ul>
-      </>
+      <p>Om de aangifte op te stellen hebben wij je NAW-gegevens nodig, een kopie van de buitenlandse kentekenpapieren en het CvO van de auto, en de aankoopfactuur.</p>
     ),
   },
   {
