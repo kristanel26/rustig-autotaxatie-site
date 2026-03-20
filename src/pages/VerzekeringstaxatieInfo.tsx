@@ -7,6 +7,7 @@ import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
+import StatsBar from "@/components/StatsBar";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight, ArrowDown, Shield, BadgeCheck, ClipboardCheck, ThumbsUp,
@@ -237,31 +238,7 @@ const VerzekeringstaxatieInfo = () => {
         </div>
       </section>
 
-      {/* Stats bar */}
-      <section style={{ background: '#f7f8fa', borderTop: '1px solid #e0e6ed', borderBottom: '1px solid #e0e6ed', padding: '32px 0' }}>
-        <div className="container-wide px-6 md:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0">
-            {[
-              { value: "4,9", label: "GOOGLE REVIEWS", stars: true },
-              { value: "25.000+", label: "VOERTUIGEN GETAXEERD" },
-              { value: "13 jaar", label: "ERVARING" },
-              { value: "Landelijk", label: "ACTIEF" },
-            ].map((stat, i) => (
-              <div key={i} className={`text-center ${i > 0 ? 'md:border-l' : ''}`} style={{ borderColor: '#dde3ea' }}>
-                {stat.stars && (
-                  <div className="flex justify-center mb-1">
-                    {[...Array(5)].map((_, j) => (
-                      <Star key={j} className="w-5 h-5" style={{ color: '#ff751f', fill: '#ff751f' }} />
-                    ))}
-                  </div>
-                )}
-                <p className="font-bold" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36, color: '#1d3c71' }}>{stat.value}</p>
-                <p className="uppercase" style={{ fontFamily: 'Inter, sans-serif', fontSize: 12, letterSpacing: '0.1em', color: '#888' }}>{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <StatsBar />
 
       {/* Verwachtingen + Nodig */}
       <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 72, paddingBottom: 72 }}>

@@ -9,7 +9,8 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, ArrowRight, CheckCircle, Star, Award, Calendar, Wrench, Hammer, TrendingUp, FileCheck, ShieldCheck, Info } from "lucide-react";
+import { ArrowDown, ArrowRight, CheckCircle, Award, Calendar, Wrench, Hammer, TrendingUp, FileCheck, ShieldCheck, Info } from "lucide-react";
+import StatsBar from "@/components/StatsBar";
 import heroCamper from "@/assets/hero-camper.jpg";
 
 const CamperTaxatie = () => {
@@ -210,60 +211,7 @@ const CamperTaxatie = () => {
         </div>
       </section>
 
-      {/* Statistieken balk */}
-      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', borderTop: '1px solid #e0e6ed', borderBottom: '1px solid #e0e6ed' }}>
-        <div className="container-wide py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
-            {[
-              {
-                content: (
-                  <>
-                    <div className="flex justify-center mb-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5" style={{ color: '#ff751f', fill: '#ff751f' }} />
-                      ))}
-                    </div>
-                    <span className="heading-display text-[36px] font-bold" style={{ color: '#1d3c71' }}>4.9</span>
-                    <span className="uppercase text-[12px] font-medium tracking-[0.1em]" style={{ color: '#888' }}>Google Reviews</span>
-                  </>
-                ),
-              },
-              {
-                content: (
-                  <>
-                    <span className="heading-display text-[36px] font-bold" style={{ color: '#1d3c71' }}>25.000+</span>
-                    <span className="uppercase text-[12px] font-medium tracking-[0.1em]" style={{ color: '#888' }}>Voertuigen getaxeerd</span>
-                  </>
-                ),
-              },
-              {
-                content: (
-                  <>
-                    <span className="heading-display text-[36px] font-bold" style={{ color: '#1d3c71' }}>13 jaar</span>
-                    <span className="uppercase text-[12px] font-medium tracking-[0.1em]" style={{ color: '#888' }}>Ervaring</span>
-                  </>
-                ),
-              },
-              {
-                content: (
-                  <>
-                    <span className="heading-display text-[36px] font-bold" style={{ color: '#1d3c71' }}>Landelijk</span>
-                    <span className="uppercase text-[12px] font-medium tracking-[0.1em]" style={{ color: '#888' }}>Actief</span>
-                  </>
-                ),
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="flex flex-col items-center justify-center text-center py-4"
-                style={{ borderRight: i < 3 ? '1px solid #dde3ea' : 'none' }}
-              >
-                {item.content}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <StatsBar />
 
       {/* Verwachtingen + Nodig */}
       <section className="py-14 md:py-16 px-6 md:px-8 bg-background">
@@ -297,44 +245,6 @@ const CamperTaxatie = () => {
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
-        <div className="container-wide text-center">
-          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Zekerheid over de waarde van je camper?</h2>
-          <p className="text-[15px] mb-6" style={{ color: 'rgba(255,255,255,0.75)' }}>
-            Vraag vrijblijvend een verzekeringstaxatie aan.
-          </p>
-          <Button variant="cta" size="lg" onClick={scrollToForm}>
-            Verzekeringstaxatie aanvragen
-            <ArrowDown className="w-4 h-4 ml-2" />
-          </Button>
-        </div>
-      </section>
-
-      {/* Formulier — 65/35 layout */}
-      <section className="py-14 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
-        <div className="container-wide">
-          <div className="text-center mb-8">
-            <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>AANVRAGEN</p>
-            <h2 className="heading-display text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1d3c71' }}>Verzekeringstaxatie aanvragen</h2>
-            <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
-              Vul het formulier in en wij nemen binnen één werkdag contact met je op.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-[1fr_380px] gap-8">
-            <div>
-              <IntakeForm
-                serviceType="camperverzekeringstaxatie"
-                formTitle="Verzekeringstaxatie aanvragen"
-                formSubtext="Vul onderstaand formulier zo volledig mogelijk in."
-                submitButtonText="Verzekeringstaxatie aanvragen"
-              />
-            </div>
-            <ContactSidebar />
-          </div>
-        </div>
-      </section>
-
       {/* Acceptatie — 3 kaartjes */}
       <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
@@ -356,6 +266,44 @@ const CamperTaxatie = () => {
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#555', lineHeight: 1.65 }}>{card.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
+        <div className="container-wide text-center">
+          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Zekerheid over de waarde van je camper?</h2>
+          <p className="text-[15px] mb-6" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            Vraag vrijblijvend een verzekeringstaxatie aan.
+          </p>
+          <Button variant="cta" size="lg" onClick={scrollToForm}>
+            Verzekeringstaxatie aanvragen
+            <ArrowDown className="w-4 h-4 ml-2" />
+          </Button>
+        </div>
+      </section>
+
+      {/* Formulier */}
+      <section className="py-14 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
+        <div className="container-wide">
+          <div className="text-center mb-8">
+            <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>AANVRAGEN</p>
+            <h2 className="heading-display text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1d3c71' }}>Verzekeringstaxatie aanvragen</h2>
+            <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
+              Vul het formulier in en wij nemen binnen één werkdag contact met je op.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-[1fr_380px] gap-8">
+            <div>
+              <IntakeForm
+                serviceType="camperverzekeringstaxatie"
+                formTitle="Verzekeringstaxatie aanvragen"
+                formSubtext="Vul onderstaand formulier zo volledig mogelijk in."
+                submitButtonText="Verzekeringstaxatie aanvragen"
+              />
+            </div>
+            <ContactSidebar />
           </div>
         </div>
       </section>
