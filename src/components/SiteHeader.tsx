@@ -3,6 +3,10 @@ import { Phone, Menu, X, ChevronDown, Mail, MapPin } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import logo from "@/assets/logo-automobiel-taxaties.png";
 
+const bpmSubLinks = [
+  { label: "Stappenplan BPM aangifte", href: "/stappenplan-bpm-aangifte" },
+];
+
 const verzekeringSubLinks = [
   { label: "Camper", href: "/camper-taxatie" },
   { label: "Oldtimer", href: "/oldtimer-taxatie" },
@@ -14,8 +18,8 @@ const verzekeringSubLinks = [
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "BPM Taxatie", href: "/bpm-taxatie" },
-  { label: "Verzekeringstaxatie", href: "/verzekeringstaxatie-info", dropdown: true },
+  { label: "BPM Taxatie", href: "/bpm-taxatie", dropdown: "bpm" },
+  { label: "Verzekeringstaxatie", href: "/verzekeringstaxatie-info", dropdown: "verzekering" },
   { label: "WEV Taxatie", href: "/wev-taxatie" },
   { label: "Werkwijze", href: "/werkwijze" },
   { label: "Over ons", href: "/over-ons" },
@@ -28,8 +32,9 @@ const navLinks = [
 const SiteHeader = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const bpmDropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -40,8 +45,11 @@ const SiteHeader = () => {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setDropdownOpen(false);
+      if (
+        dropdownRef.current && !dropdownRef.current.contains(e.target as Node) &&
+        bpmDropdownRef.current && !bpmDropdownRef.current.contains(e.target as Node)
+      ) {
+        setOpenDropdown(null);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -50,11 +58,12 @@ const SiteHeader = () => {
 
   useEffect(() => {
     setMobileOpen(false);
-    setDropdownOpen(false);
+    setOpenDropdown(null);
   }, [location.pathname]);
 
   const isActive = (href: string) => location.pathname === href;
   const isVerzekeringActive = verzekeringSubLinks.some(s => location.pathname === s.href);
+  const isBpmActive = bpmSubLinks.some(s => location.pathname === s.href);
 
   return (
     <>
@@ -94,19 +103,23 @@ const SiteHeader = () => {
 
           {/* Desktop nav */}
           <nav className="hidden xl:flex items-center gap-0.5">
-            {navLinks.map((link) => (
-              link.dropdown ? (
-                <div key={link.href} className="relative" ref={dropdownRef}>
+            {navLinks.map((link) => {
+              const subLinks = link.dropdown === "verzekering" ? verzekeringSubLinks : link.dropdown === "bpm" ? bpmSubLinks : null;
+              const isDropdownActive = link.dropdown === "verzekering" ? isVerzekeringActive : link.dropdown === "bpm" ? isBpmActive : false;
+              const ref = link.dropdown === "bpm" ? bpmDropdownRef : link.dropdown === "verzekering" ? dropdownRef : undefined;
+
+              return subLinks ? (
+                <div key={link.href} className="relative" ref={ref}>
                   <button
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    onClick={() => setOpenDropdown(openDropdown === link.dropdown ? null : (link.dropdown as string))}
                     className={`nav-link px-3 py-2 flex items-center gap-1 ${
-                      isActive(link.href) || isVerzekeringActive ? "active" : ""
+                      isActive(link.href) || isDropdownActive ? "active" : ""
                     }`}
                   >
                     {link.label}
-                    <ChevronDown className={`w-3.5 h-3.5 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform ${openDropdown === link.dropdown ? "rotate-180" : ""}`} />
                   </button>
-                  {dropdownOpen && (
+                  {openDropdown === link.dropdown && (
                     <div className="absolute top-full left-0 mt-2 bg-white rounded-[14px] shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-border py-2 min-w-[220px] z-50">
                       <Link
                         to={link.href}
@@ -115,7 +128,7 @@ const SiteHeader = () => {
                         Overzicht
                       </Link>
                       <div className="h-px bg-border mx-3 my-1" />
-                      {verzekeringSubLinks.map((sub) => (
+                      {subLinks.map((sub) => (
                         <Link
                           key={sub.href}
                           to={sub.href}
@@ -139,8 +152,8 @@ const SiteHeader = () => {
                 >
                   {link.label}
                 </Link>
-              )
-            ))}
+              );
+            })}
           </nav>
 
           <div className="hidden xl:flex items-center gap-3">
@@ -172,8 +185,9 @@ const SiteHeader = () => {
         {/* Mobile nav */}
         {mobileOpen && (
           <nav className="xl:hidden mt-3 pb-4 border-t border-border pt-4 space-y-1">
-            {navLinks.map((link) => (
-              link.dropdown ? (
+            {navLinks.map((link) => {
+              const subLinks = link.dropdown === "verzekering" ? verzekeringSubLinks : link.dropdown === "bpm" ? bpmSubLinks : null;
+              return subLinks ? (
                 <div key={link.href}>
                   <Link
                     to={link.href}
@@ -186,7 +200,7 @@ const SiteHeader = () => {
                     {link.label}
                   </Link>
                   <div className="ml-4 space-y-0.5">
-                    {verzekeringSubLinks.map((sub) => (
+                    {subLinks.map((sub) => (
                       <Link
                         key={sub.href}
                         to={sub.href}
@@ -213,8 +227,8 @@ const SiteHeader = () => {
                 >
                   {link.label}
                 </Link>
-              )
-            ))}
+              );
+            })}
             <div className="pt-3 px-4">
               <Link to="/contact" className="block">
                 <button className="btn-cta w-full !text-sm">

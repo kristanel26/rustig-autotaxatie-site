@@ -22,6 +22,7 @@ import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
+import StappenplanBpmAangifte from "./pages/StappenplanBpmAangifte";
 
 // Internal pages
 import Login from "./pages/internal/Login";
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
   { path: "/contact", element: <Contact /> },
   { path: "/faq", element: <FAQ /> },
   { path: "/blog", element: <Blog /> },
+  { path: "/stappenplan-bpm-aangifte", element: <StappenplanBpmAangifte /> },
   
   // Internal routes - Login is public
   { path: "/intern/login", element: <Login /> },
