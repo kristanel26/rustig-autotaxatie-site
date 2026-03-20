@@ -167,17 +167,17 @@ const Index = () => {
 
       {/* ── BPM CALCULATOR ── */}
       <section className="py-16 md:py-24 px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-stretch">
-          <div className="flex flex-col">
-            <h2
-              className="heading-display font-bold mb-4"
-              style={{ fontSize: 'clamp(30px, 3.5vw, 44px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#1a1a1a' }}
-            >
-              Bereken je BPM indicatie
-            </h2>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 400, lineHeight: 1.70, color: '#4a5568', maxWidth: 540 }} className="mb-6">
-              Gebruik onze calculator voor een eerste indicatie van de BPM-kosten bij import. Let op: een berekening is geen taxatie en biedt geen juridische onderbouwing.
-            </p>
+        <div className="max-w-7xl mx-auto">
+          <h2
+            className="heading-display font-bold mb-4"
+            style={{ fontSize: 'clamp(30px, 3.5vw, 44px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#1a1a1a' }}
+          >
+            Bereken je BPM indicatie
+          </h2>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 400, lineHeight: 1.70, color: '#4a5568', maxWidth: 540 }} className="mb-8">
+            Gebruik onze calculator voor een eerste indicatie van de BPM-kosten bij import. Let op: een berekening is geen taxatie en biedt geen juridische onderbouwing.
+          </p>
+          <div className="grid md:grid-cols-2 gap-8 items-stretch">
             <div
               className="rounded-[14px] p-7 bg-white flex-1"
               style={{
