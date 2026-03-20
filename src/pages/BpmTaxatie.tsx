@@ -7,7 +7,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import { Users, FileText, Shield, ClipboardCheck, Table, BarChart3, Search, ArrowDown, Star, CheckCircle, Scale, Phone, Mail, Clock, MessageCircle, Quote } from "lucide-react";
-import erikInspectie from "@/assets/erik-inspectie.jpg";
+import erikHeroBpm from "@/assets/erik-hero-bpm.jpg";
 
 const BpmTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -15,6 +15,20 @@ const BpmTaxatie = () => {
   const scrollToForm = () => {
     formRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const verwachtItems = [
+    "Onafhankelijke beoordeling per voertuig",
+    "Duidelijke uitleg over de gekozen methode",
+    "Onderbouwing die standhoudt bij controle",
+    "Geen wensbedragen of vooraf bepaalde uitkomsten",
+  ];
+
+  const nodigItems = [
+    "Buitenlands kenteken of chassisnummer",
+    "Aankoopfactuur van het voertuig",
+    "Actuele kilometerstand",
+    "Info over schade, gebruik en onderhoud",
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -29,10 +43,10 @@ const BpmTaxatie = () => {
         description="Per voertuig bepalen wij welke methode fiscaal het meest logisch en verdedigbaar is. Zodat de aangifte klopt en standhoudt bij controle."
         ctaText="BPM-aangifte aanvragen"
         onCtaClick={scrollToForm}
-        heroImage={erikInspectie}
+        heroImage={erikHeroBpm}
       />
 
-      {/* Korte intro — compact */}
+      {/* Korte intro */}
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide">
           <div className="max-w-3xl mx-auto text-center">
@@ -44,7 +58,7 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* Voor wie — compact */}
+      {/* Voor wie */}
       <section className="py-10 md:py-12 px-6 md:px-8 bg-background">
         <div className="container-wide">
           <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -78,7 +92,7 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* Drie methodes — compact */}
+      {/* Drie methodes */}
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide">
           <div className="text-center mb-8">
@@ -150,7 +164,7 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* Werkwijze — compact */}
+      {/* Werkwijze */}
       <section className="py-10 md:py-12 px-6 md:px-8 bg-background">
         <div className="container-wide">
           <div className="text-center mb-8">
@@ -201,7 +215,7 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* Trust balk — compact */}
+      {/* Trust balk */}
       <section className="py-6 px-6 md:px-8 bg-background">
         <div className="container-wide">
           <div className="flex flex-wrap justify-center gap-6 md:gap-14 items-center">
@@ -230,77 +244,43 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* Verwachtingen + Nodig — compact */}
+      {/* Verwachtingen + Nodig — KAARTJES MET VINKJES */}
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide">
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h2 className="text-xl md:text-2xl font-semibold mb-3">Wat kun je verwachten?</h2>
-              <ul className="space-y-2.5">
-                {[
-                  "Onafhankelijke beoordeling per voertuig",
-                  "Duidelijke uitleg over de gekozen methode",
-                  "Onderbouwing die standhoudt bij controle",
-                  "Geen wensbedragen of vooraf bepaalde uitkomsten",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2.5">
-                    <CheckCircle className="w-5 h-5 text-cta flex-shrink-0 mt-0.5" />
+              <h2 className="text-xl md:text-2xl font-semibold mb-5">Wat kun je verwachten?</h2>
+              <div className="space-y-3">
+                {verwachtItems.map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4"
+                    style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}
+                  >
+                    <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(255,117,31,0.12)' }}>
+                      <CheckCircle className="w-4 h-4 text-cta" />
+                    </div>
                     <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
             <div>
-              <h2 className="text-xl md:text-2xl font-semibold mb-3">Wat hebben wij nodig?</h2>
-              <ul className="space-y-2.5">
-                {[
-                  "Buitenlands kenteken of chassisnummer",
-                  "Aankoopfactuur van het voertuig",
-                  "Actuele kilometerstand",
-                  "Info over schade, gebruik en onderhoud",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2.5">
-                    <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+              <h2 className="text-xl md:text-2xl font-semibold mb-5">Wat hebben wij nodig?</h2>
+              <div className="space-y-3">
+                {nodigItems.map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4"
+                    style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}
+                  >
+                    <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}>
+                      <CheckCircle className="w-4 h-4 text-primary" />
+                    </div>
                     <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
-                  </li>
+                  </div>
                 ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Belangrijk + Onafhankelijkheid — compact */}
-      <section className="py-10 md:py-12 px-6 md:px-8 bg-background">
-        <div className="container-wide">
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="card-elevated p-6">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(255,117,31,0.1)' }}>
-                  <ClipboardCheck className="w-5 h-5 text-cta" />
-                </div>
-                <h3 className="text-base font-semibold">Belangrijk om te weten</h3>
               </div>
-              <ul className="space-y-1.5 text-sm" style={{ color: '#4a5568' }}>
-                <li>• De BPM wordt vastgesteld op basis van de staat op moment van aangifte</li>
-                <li>• Een taxatierapport heeft beperkte geldigheid</li>
-                <li>• Het voertuig moet in getaxeerde staat blijven tot na verwerking</li>
-                <li>• Volledige en juiste aankoopgegevens zijn essentieel</li>
-              </ul>
-            </div>
-            <div className="card-elevated p-6">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}>
-                  <Shield className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="text-base font-semibold">Onafhankelijk en juridisch geborgd</h3>
-              </div>
-              <ul className="space-y-1.5 text-sm" style={{ color: '#4a5568' }}>
-                <li>• Geregistreerd bij VRT en aangesloten bij TMV</li>
-                <li>• Geen vooraf afgesproken uitkomsten</li>
-                <li>• Rapportages zijn transparant en controleerbaar</li>
-                <li>• Samenwerking met gespecialiseerde BPM-jurist</li>
-              </ul>
             </div>
           </div>
         </div>
@@ -366,6 +346,54 @@ const BpmTaxatie = () => {
               <p className="mt-5 text-xs italic" style={{ color: 'rgba(255,255,255,0.6)' }}>
                 Liever direct contact? Wij reageren binnen één werkdag.
               </p>
+              <a
+                href="https://wa.me/31629182258"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                style={{ background: '#25D366' }}
+              >
+                <svg viewBox="0 0 24 24" className="w-5 h-5 fill-white">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+                App ons direct
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Belangrijk + Onafhankelijkheid — eenmalig */}
+      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+        <div className="container-wide">
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="card-elevated p-6">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(255,117,31,0.1)' }}>
+                  <ClipboardCheck className="w-5 h-5 text-cta" />
+                </div>
+                <h3 className="text-base font-semibold">Belangrijk om te weten</h3>
+              </div>
+              <ul className="space-y-1.5 text-sm" style={{ color: '#4a5568' }}>
+                <li>• De BPM wordt vastgesteld op basis van de staat op moment van aangifte</li>
+                <li>• Een taxatierapport heeft beperkte geldigheid</li>
+                <li>• Het voertuig moet in getaxeerde staat blijven tot na verwerking</li>
+                <li>• Volledige en juiste aankoopgegevens zijn essentieel</li>
+              </ul>
+            </div>
+            <div className="card-elevated p-6">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}>
+                  <Shield className="w-5 h-5 text-primary" />
+                </div>
+                <h3 className="text-base font-semibold">Onafhankelijk en juridisch geborgd</h3>
+              </div>
+              <ul className="space-y-1.5 text-sm" style={{ color: '#4a5568' }}>
+                <li>• Geregistreerd bij VRT en aangesloten bij TMV</li>
+                <li>• Geen vooraf afgesproken uitkomsten</li>
+                <li>• Rapportages zijn transparant en controleerbaar</li>
+                <li>• Samenwerking met gespecialiseerde BPM-jurist</li>
+              </ul>
             </div>
           </div>
         </div>
