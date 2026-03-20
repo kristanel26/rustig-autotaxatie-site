@@ -186,7 +186,7 @@ const BpmTaxatie = () => {
             <h2 className="text-2xl md:text-3xl font-semibold" style={{ fontFamily: 'Playfair Display, serif' }}>Onze werkwijze in 5 stappen</h2>
           </div>
           <div className="grid md:grid-cols-5 gap-8 relative">
-            <div className="hidden md:block absolute" style={{ top: 26, left: 'calc(10% + 26px)', right: 'calc(10% + 26px)', height: 2, background: 'linear-gradient(to right, #ff751f, #1d3c71)', zIndex: 0 }} />
+            <div className="hidden md:block absolute" style={{ top: 26, left: 'calc(10% + 26px)', right: 'calc(10% + 26px)', height: 2, background: '#ff751f', zIndex: 0 }} />
             {[
               { step: 1, title: "Gegevens aanleveren", desc: "Kenteken, chassisnummer, factuur en documenten" },
               { step: 2, title: "Methode beoordelen", desc: "Per voertuig de fiscaal logische aanpak bepalen" },
