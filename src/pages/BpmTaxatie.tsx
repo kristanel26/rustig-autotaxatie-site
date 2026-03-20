@@ -255,7 +255,7 @@ const BpmTaxatie = () => {
       </section>
 
       {/* 6 — Formulier – wit */}
-      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96 }} ref={formRef}>
+      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 72, paddingBottom: 72 }} ref={formRef}>
         <div className="container-wide">
           <div className="text-center" style={{ marginBottom: 48 }}>
             {sectionLabel("Aanvragen")}
