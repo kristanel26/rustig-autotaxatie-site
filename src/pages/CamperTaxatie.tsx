@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
 import ContactSidebar from "@/components/ContactSidebar";
@@ -8,7 +9,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, CheckCircle, Shield, Star } from "lucide-react";
+import { ArrowDown, ArrowRight, CheckCircle, Shield, Star, Award, Calendar } from "lucide-react";
 import heroCamper from "@/assets/hero-camper.jpg";
 
 const CamperTaxatie = () => {
@@ -32,6 +33,12 @@ const CamperTaxatie = () => {
     "Facturen van aanpassingen, accessoires of zelfbouw",
   ];
 
+  const acceptatieCards = [
+    { icon: Award, title: "Federatie TMV, VRT Register en FEHAC", desc: "Aangesloten bij de erkende brancheorganisaties" },
+    { icon: CheckCircle, title: "Geaccepteerd door verzekeraars", desc: "Rapporten geaccepteerd door verzekeraars" },
+    { icon: Calendar, title: "Geldigheid 3 tot 5 jaar", desc: "Check bij jouw verzekeraar naar de exacte geldigheidsduur" },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <PageMeta
@@ -50,7 +57,7 @@ const CamperTaxatie = () => {
       <UspBar />
 
       {/* Korte intro */}
-      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-2xl md:text-3xl font-semibold mb-3">Waarom een verzekeringstaxatie voor je camper?</h2>
@@ -62,7 +69,7 @@ const CamperTaxatie = () => {
       </section>
 
       {/* Voor wie */}
-      <section className="py-10 md:py-12 px-6 md:px-8 bg-background">
+      <section className="py-14 md:py-16 px-6 md:px-8 bg-background">
         <div className="container-wide">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
@@ -93,26 +100,54 @@ const CamperTaxatie = () => {
       </section>
 
       {/* Werkwijze */}
-      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
           <div className="text-center mb-8">
             <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-2">Werkwijze</p>
             <h2 className="text-2xl md:text-3xl font-semibold">Onze werkwijze in 5 stappen</h2>
           </div>
-          <div className="grid md:grid-cols-5 gap-5">
-            {[
-              { step: 1, title: "Gegevens aanleveren", desc: "Type, bouwjaar en gebruik van de camper" },
-              { step: 2, title: "Fysieke inspectie", desc: "Staat, uitvoering, opties en bijzonderheden" },
-              { step: 3, title: "Waarde vaststellen", desc: "Op basis van inspectie en marktgegevens" },
-              { step: 4, title: "Rapport opstellen", desc: "Duidelijk hoe de waarde tot stand is gekomen" },
-              { step: 5, title: "Oplevering", desc: "Digitaal, klaar voor de verzekeraar" },
-            ].map((s) => (
-              <div key={s.step} className="text-center">
-                <div className="step-badge mx-auto mb-3">{s.step}</div>
-                <h4 className="font-semibold text-sm mb-1 text-foreground">{s.title}</h4>
-                <p className="text-xs leading-relaxed" style={{ color: '#4a5568' }}>{s.desc}</p>
-              </div>
-            ))}
+          <div className="relative">
+            {/* Verbindingslijn */}
+            <div className="hidden md:block absolute top-[26px] left-[10%] right-[10%] h-[2px]" style={{ background: '#ff751f' }} />
+            <div className="grid md:grid-cols-5 gap-5 relative">
+              {[
+                { step: 1, title: "Gegevens aanleveren", desc: "Type, bouwjaar en gebruik van de camper" },
+                { step: 2, title: "Fysieke inspectie", desc: "Staat, uitvoering, opties en bijzonderheden" },
+                { step: 3, title: "Waarde vaststellen", desc: "Op basis van inspectie en marktgegevens" },
+                { step: 4, title: "Rapport opstellen", desc: "Duidelijk hoe de waarde tot stand is gekomen" },
+                { step: 5, title: "Oplevering", desc: "Digitaal, klaar voor de verzekeraar" },
+              ].map((s) => (
+                <div key={s.step} className="text-center relative z-10">
+                  <div
+                    className="w-[52px] h-[52px] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold text-[20px]"
+                    style={{ background: '#1d3c71' }}
+                  >
+                    {s.step}
+                  </div>
+                  <h4 className="font-semibold text-sm mb-1 text-foreground">{s.title}</h4>
+                  <p className="text-xs leading-relaxed" style={{ color: '#666' }}>{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Knoppen onder stappenplan */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+            <Button variant="cta" size="lg" onClick={scrollToForm}>
+              Verzekeringstaxatie aanvragen
+              <ArrowDown className="w-4 h-4 ml-2" />
+            </Button>
+            <Link to="/camper-taxatie-stappenplan">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-2 font-medium"
+                style={{ borderColor: '#1d3c71', color: '#1d3c71' }}
+              >
+                Bekijk het volledige stappenplan
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -170,31 +205,29 @@ const CamperTaxatie = () => {
       </section>
 
       {/* Verwachtingen + Nodig */}
-      <section className="py-10 md:py-12 px-6 md:px-8 bg-background">
+      <section className="py-14 md:py-16 px-6 md:px-8 bg-background">
         <div className="container-wide">
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h2 className="text-xl md:text-2xl font-semibold mb-5">Wat kun je verwachten?</h2>
-              <div className="space-y-3">
+              <div className="w-[40px] h-[3px] mb-3" style={{ background: '#ff751f' }} />
+              <h2 className="heading-display text-[22px] font-bold mb-5" style={{ color: '#1d3c71' }}>Wat kun je verwachten?</h2>
+              <div className="space-y-[10px]">
                 {verwachtItems.map((item, i) => (
-                  <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
-                    <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(255,117,31,0.12)' }}>
-                      <CheckCircle className="w-4 h-4 text-cta" />
-                    </div>
-                    <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
+                  <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-[18px]" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
+                    <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#333', lineHeight: 1.5 }}>{item}</span>
                   </div>
                 ))}
               </div>
             </div>
             <div>
-              <h2 className="text-xl md:text-2xl font-semibold mb-5">Wat hebben wij nodig?</h2>
-              <div className="space-y-3">
+              <div className="w-[40px] h-[3px] mb-3" style={{ background: '#ff751f' }} />
+              <h2 className="heading-display text-[22px] font-bold mb-5" style={{ color: '#1d3c71' }}>Wat hebben wij nodig?</h2>
+              <div className="space-y-[10px]">
                 {nodigItems.map((item, i) => (
-                  <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
-                    <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}>
-                      <CheckCircle className="w-4 h-4 text-primary" />
-                    </div>
-                    <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
+                  <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-[18px]" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
+                    <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#333', lineHeight: 1.5 }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -218,7 +251,7 @@ const CamperTaxatie = () => {
       </section>
 
       {/* Formulier — 65/35 layout */}
-      <section className="py-10 md:py-14 px-6 md:px-8 bg-background" ref={formRef}>
+      <section className="py-14 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
         <div className="container-wide">
           <div className="text-center mb-8">
             <h2 className="text-2xl md:text-3xl font-semibold mb-2">Verzekeringstaxatie aanvragen</h2>
@@ -240,22 +273,30 @@ const CamperTaxatie = () => {
         </div>
       </section>
 
-      {/* Acceptatie */}
-      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+      {/* Acceptatie — 3 kaartjes */}
+      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
-          <div className="card-elevated p-8 md:p-10 max-w-3xl mx-auto">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}>
-                <Shield className="w-5 h-5 text-primary" />
+          <div className="text-center mb-8">
+            <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>Acceptatie</p>
+            <h2 className="heading-display text-[22px] font-bold" style={{ color: '#1d3c71' }}>Acceptatie en geldigheid</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {acceptatieCards.map((card, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-[12px] p-7 text-center transition-all duration-200 hover:-translate-y-[3px]"
+                style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}
+              >
+                <div
+                  className="w-[56px] h-[56px] rounded-full flex items-center justify-center mx-auto mb-4"
+                  style={{ background: '#EBF2FB' }}
+                >
+                  <card.icon className="w-6 h-6" style={{ color: '#1d3c71' }} />
+                </div>
+                <h3 className="font-bold text-[17px] mb-2" style={{ fontFamily: "'Inter', sans-serif", color: '#1d3c71' }}>{card.title}</h3>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#555', lineHeight: 1.65 }}>{card.desc}</p>
               </div>
-              <h2 className="text-xl font-semibold">Acceptatie en geldigheid</h2>
-            </div>
-            <ul className="space-y-2 text-sm" style={{ color: '#4a5568' }}>
-              <li>• Aangesloten bij Federatie TMV, VRT Register en FEHAC</li>
-              <li>• Rapporten geaccepteerd door verzekeraars</li>
-              <li>• Geldigheid doorgaans 3 tot 5 jaar (check je verzekeraar)</li>
-              <li>• Onafhankelijk en zorgvuldig onderbouwd</li>
-            </ul>
+            ))}
           </div>
         </div>
       </section>

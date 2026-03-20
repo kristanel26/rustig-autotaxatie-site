@@ -24,6 +24,7 @@ import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
 import StappenplanBpmAangifte from "./pages/StappenplanBpmAangifte";
+import CamperTaxatieStappenplan from "./pages/CamperTaxatieStappenplan";
 
 // Internal pages
 import Login from "./pages/internal/Login";
@@ -63,6 +64,7 @@ const router = createBrowserRouter([
   { path: "/faq", element: <FAQ /> },
   { path: "/blog", element: <Blog /> },
   { path: "/stappenplan-bpm-aangifte", element: <StappenplanBpmAangifte /> },
+  { path: "/camper-taxatie-stappenplan", element: <CamperTaxatieStappenplan /> },
   
   // Internal routes - Login is public
   { path: "/intern/login", element: <Login /> },
