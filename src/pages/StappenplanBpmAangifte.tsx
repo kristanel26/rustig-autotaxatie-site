@@ -11,6 +11,7 @@ import stepRdw from "@/assets/step-rdw-inspection.jpg";
 import stepHappyOwner from "@/assets/step-happy-car-owner.jpg";
 import stepAangifteFormulier from "@/assets/bpm-aangifte-formulier.png";
 import stepTransport from "@/assets/step-transport.png";
+import stepReportProcessing from "@/assets/step-report-processing.png";
 
 const steps: { number: number; title: string; image?: string; content: React.ReactNode }[] = [
   {
