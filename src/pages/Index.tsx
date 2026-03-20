@@ -5,6 +5,9 @@ import { FaFileInvoiceDollar, FaBalanceScale, FaClock, FaCar, FaTruck, FaMotorcy
 import erikPhoto from "@/assets/erik-elderson.png";
 import erikInspectie from "@/assets/erik-inspectie.jpg";
 import heroImage from "@/assets/hero-homepage.jpg";
+import heroBpm from "@/assets/hero-bpm.jpg";
+import heroOldtimer from "@/assets/hero-oldtimer.jpg";
+import heroFoodtruck from "@/assets/hero-foodtruck.jpg";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -614,20 +617,31 @@ const Index = () => {
             Wat onze klanten zeggen
           </h2>
           <div className="grid md:grid-cols-3 gap-6 mb-10">
-            {reviews.map((review, i) => (
-              <div key={i} className="card-elevated bg-white p-7">
-                <div className="flex gap-0.5 mb-3" style={{ fontSize: 18, color: '#ff751f' }}>
-                  ★★★★★
+            {reviews.map((review, i) => {
+              const initials = review.name.split(' ').map(n => n[0]).filter(c => c && c === c.toUpperCase()).join('');
+              return (
+                <div key={i} className="card-elevated bg-white p-7">
+                  <div className="flex gap-0.5 mb-3" style={{ fontSize: 18, color: '#ff751f' }}>
+                    ★★★★★
+                  </div>
+                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#4a5568', fontStyle: 'italic', lineHeight: 1.70 }} className="mb-4">
+                    "{review.text}"
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="flex-shrink-0 flex items-center justify-center rounded-full"
+                      style={{ width: 44, height: 44, background: '#1d3c71', color: '#ffffff', fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 700 }}
+                    >
+                      {initials}
+                    </div>
+                    <div>
+                      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: '#1a1a1a', display: 'block' }}>{review.name}</span>
+                      <span style={{ fontSize: 11, color: '#698db3', fontWeight: 400 }}>Geverifieerde klant</span>
+                    </div>
+                  </div>
                 </div>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#4a5568', fontStyle: 'italic', lineHeight: 1.70 }} className="mb-4">
-                  "{review.text}"
-                </p>
-                <div className="flex items-center gap-2">
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: '#1a1a1a' }}>{review.name}</span>
-                  <span style={{ fontSize: 11, color: '#698db3', fontWeight: 400 }}>Geverifieerde klant</span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           <div className="text-center flex items-center justify-center gap-2">
             <span style={{ fontSize: 20, color: '#ff751f' }}>★★★★★</span>
@@ -648,30 +662,45 @@ const Index = () => {
           </h2>
           <div className="grid md:grid-cols-3 gap-6 mb-10">
             {[
-              { date: "12 maart 2026", label: "BPM Nieuws", title: "Nieuwe BPM-tarieven per 1 april 2026", intro: "De Belastingdienst heeft de nieuwe forfaitaire tabel gepubliceerd. Wat dit betekent voor importeurs." },
-              { date: "28 februari 2026", label: "Jurisprudentie", title: "Uitspraak rechtbank over taxatiemethode", intro: "Een recente uitspraak bevestigt de geldigheid van fysieke inspectie als grondslag voor BPM-bepaling." },
-              { date: "15 februari 2026", label: "Diensten", title: "Verzekeringstaxatie nu ook voor foodtrucks", intro: "Wij hebben ons dienstenaanbod uitgebreid met taxaties specifiek voor mobiele horecavoertuigen." },
+              { date: "12 maart 2026", label: "BPM Nieuws", title: "Nieuwe BPM-tarieven per 1 april 2026", intro: "De Belastingdienst heeft de nieuwe forfaitaire tabel gepubliceerd. Wat dit betekent voor importeurs.", image: heroBpm },
+              { date: "28 februari 2026", label: "Jurisprudentie", title: "Uitspraak rechtbank over taxatiemethode", intro: "Een recente uitspraak bevestigt de geldigheid van fysieke inspectie als grondslag voor BPM-bepaling.", image: heroOldtimer },
+              { date: "15 februari 2026", label: "Diensten", title: "Verzekeringstaxatie nu ook voor foodtrucks", intro: "Wij hebben ons dienstenaanbod uitgebreid met taxaties specifiek voor mobiele horecavoertuigen.", image: heroFoodtruck },
             ].map((item, i) => (
               <div
                 key={i}
-                className="card-elevated bg-white p-7"
-                style={{ borderTop: '3px solid #1d3c71', borderRadius: '0 0 14px 14px' }}
+                className="card-elevated bg-white overflow-hidden group"
+                style={{ borderRadius: 14 }}
               >
-                <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.10em', textTransform: 'uppercase' as const, color: '#ff751f', marginBottom: 6, display: 'block' }}>
-                  {item.label}
-                </span>
-                <p className="text-xs mb-2" style={{ color: '#698db3' }}>{item.date}</p>
-                <h3 style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 600, color: '#1d3c71' }} className="mb-2">{item.title}</h3>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.72, color: '#4a5568' }} className="mb-3 line-clamp-2">{item.intro}</p>
-                <span className="text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all cursor-pointer" style={{ color: '#ff751f' }}>
-                  Lees meer <ArrowRight className="w-3.5 h-3.5" />
-                </span>
+                <div className="w-full h-[180px] overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover object-center transition-transform duration-400 group-hover:scale-[1.04]"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-7">
+                  <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.10em', textTransform: 'uppercase' as const, color: '#ff751f', marginBottom: 6, display: 'block' }}>
+                    {item.label}
+                  </span>
+                  <p className="text-xs mb-2" style={{ color: '#698db3' }}>{item.date}</p>
+                  <h3 style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 600, color: '#1d3c71' }} className="mb-2">{item.title}</h3>
+                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.72, color: '#4a5568' }} className="mb-3 line-clamp-2">{item.intro}</p>
+                  <span className="text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all cursor-pointer" style={{ color: '#ff751f' }}>
+                    Lees meer <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </div>
               </div>
             ))}
           </div>
           <div className="text-center">
             <Link to="/nieuws">
-              <button className="font-semibold px-6 py-3 rounded-md transition-colors" style={{ border: '2px solid #1d3c71', color: '#1d3c71', background: 'transparent' }}>
+              <button
+                className="font-semibold px-8 py-3 rounded-md transition-all duration-200 border-none cursor-pointer"
+                style={{ background: '#ff751f', color: '#ffffff', fontSize: 14, height: 48, boxShadow: '0 3px 12px rgba(255,117,31,0.30)' }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = '#e8651a'; e.currentTarget.style.boxShadow = '0 5px 16px rgba(255,117,31,0.42)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = '#ff751f'; e.currentTarget.style.boxShadow = '0 3px 12px rgba(255,117,31,0.30)'; }}
+              >
                 Bekijk al het nieuws
               </button>
             </Link>
