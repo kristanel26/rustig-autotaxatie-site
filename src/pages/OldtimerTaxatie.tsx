@@ -19,6 +19,10 @@ const OldtimerTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="Oldtimer Taxatie | Erkend Rapport | Automobieltaxaties"
+        description="Professionele oldtimer taxatie voor verzekering en waardebepaling. Oog voor detail en historie. Op locatie door heel Nederland."
+      />
       <SiteHeader />
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE OLDTIMER"

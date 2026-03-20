@@ -98,6 +98,10 @@ const faqItems = [
 const FAQ = () => {
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="Veelgestelde Vragen over BPM en Taxaties | Automobieltaxaties"
+        description="Antwoorden op de meest gestelde vragen over BPM-aangifte, taxatierapporten, oldtimers, kosten en levertijden."
+      />
       <SiteHeader />
 
       {/* Hero */}

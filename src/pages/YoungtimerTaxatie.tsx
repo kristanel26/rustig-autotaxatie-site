@@ -19,6 +19,10 @@ const YoungtimerTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="Youngtimer Taxatie | Voertuigen Vanaf 15 Jaar | Automobieltaxaties"
+        description="Erkende youngtimer taxatie voor verzekering en BPM. Specialist in voertuigen van 15 jaar en ouder. Gratis advies aanvragen."
+      />
       <SiteHeader />
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE YOUNGTIMER"

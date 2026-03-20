@@ -19,6 +19,10 @@ const VerzekeringstaxatieInfo = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="Verzekeringstaxatie | Erkende Waardebepaling | Automobieltaxaties"
+        description="Professionele verzekeringstaxatie voor oldtimers, youngtimers, campers en motoren. Erkend rapport voor je verzekeringspolis. Op locatie door heel Nederland."
+      />
       <SiteHeader />
       <LandingHero
         subtitle="Verzekeringstaxatie"

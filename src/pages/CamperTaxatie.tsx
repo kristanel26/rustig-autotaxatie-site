@@ -19,6 +19,10 @@ const CamperTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="Camper Taxatie | Erkende Waardebepaling | Automobieltaxaties"
+        description="Professionele camper taxatie door een specialist in de campermarkt. Erkend rapport voor je verzekeringspolis. Op locatie bij je camper."
+      />
       <SiteHeader />
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE CAMPER"

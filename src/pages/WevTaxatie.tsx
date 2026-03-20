@@ -19,6 +19,10 @@ const WevTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="WEV Taxatie | Werkelijke Economische Waarde | Automobieltaxaties"
+        description="Objectieve WEV taxatie voor fiscale en juridische doeleinden. Erkend taxatierapport door register taxateur Erik Elderson."
+      />
       <SiteHeader />
       <LandingHero
         subtitle="WEV-TAXATIE"

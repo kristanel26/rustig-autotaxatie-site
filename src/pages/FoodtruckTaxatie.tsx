@@ -19,6 +19,10 @@ const FoodtruckTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="Foodtruck Taxatie | Mobiele Horeca Waardebepaling | Automobieltaxaties"
+        description="Specialist in taxatie van foodtrucks en mobiele horecavoertuigen. Erkend rapport voor verzekering en financiering."
+      />
       <SiteHeader />
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE FOODTRUCK"

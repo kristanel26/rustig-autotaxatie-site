@@ -19,6 +19,10 @@ const MotorTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="Motor Taxatie | Professionele Motorfiets Taxatie | Automobieltaxaties"
+        description="Erkende taxatie van motorfietsen voor verzekering en waardebepaling. Register taxateur op locatie door heel Nederland."
+      />
       <SiteHeader />
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE MOTOR"
