@@ -63,6 +63,7 @@ const steps: { number: number; title: string; image?: string; content: React.Rea
   },
   {
     number: 6,
+    image: stepReportProcessing,
     title: "Wij stellen de BPM aangifte op",
     content: (
       <p>Na de inspectie verwerken wij alle gegevens zorgvuldig tot een compleet rapport. Na afhandeling ontvang je het taxatierapport per e-mail.</p>
