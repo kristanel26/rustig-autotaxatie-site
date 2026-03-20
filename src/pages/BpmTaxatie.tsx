@@ -108,20 +108,20 @@ const BpmTaxatie = () => {
                 key={i}
                 className="text-center cursor-default"
                 style={{
-                  padding: 28,
+                  padding: '32px 24px',
                   borderRadius: 14,
                   background: 'rgba(255,255,255,0.08)',
                   border: '1px solid rgba(255,255,255,0.15)',
-                  transition: 'transform 200ms ease, background 200ms ease',
+                  transition: 'transform 200ms ease, background 200ms ease, border-color 200ms ease',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.background = 'rgba(255,255,255,0.13)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.borderColor = '#698db3'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; }}
               >
-                <div className="inline-flex items-center justify-center w-10 h-10 rounded-full mb-3" style={{ background: 'rgba(255,255,255,0.12)' }}>
-                  <item.icon className="w-5 h-5 text-white" />
+                <div className="mx-auto flex items-center justify-center rounded-full mb-4" style={{ width: 64, height: 64, background: '#EBF2FB' }}>
+                  <item.icon style={{ width: 28, height: 28, color: '#1d3c71' }} />
                 </div>
                 <p className="font-bold text-[16px] mb-1 text-white">{item.label}</p>
-                <p className="text-[14px]" style={{ color: 'rgba(255,255,255,0.6)' }}>{item.desc}</p>
+                <p className="text-[13px]" style={{ color: '#adafc7' }}>{item.desc}</p>
               </div>
             ))}
           </div>
