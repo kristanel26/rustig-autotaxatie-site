@@ -109,7 +109,7 @@ const ChatWidget = () => {
         <div
           className="fixed z-[60] flex flex-col overflow-hidden"
           style={{
-            bottom: 96,
+            bottom: 104,
             right: 24,
             width: 390,
             height: 620,
