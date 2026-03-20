@@ -85,7 +85,7 @@ const faqItems = [
       },
       {
         q: "Wanneer ben je erkend taxateur?",
-        a: "Een erkend taxateur is geregistreerd bij een erkende beroepsorganisatie zoals het TMV of VRT. Erik Elderson is notarieel beëdigd TMV Register-Taxateur en Register-Taxateur VRT.",
+        a: "Een erkend taxateur is geregistreerd bij een erkende beroepsorganisatie. Erik Elderson is aangesloten bij Federatie TMV, VRT Register en FEHAC.",
       },
       {
         q: "Welke stappen moet ik nemen na ontvangst van het taxatierapport?",
