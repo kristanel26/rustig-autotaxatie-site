@@ -42,6 +42,7 @@ const steps = [
   },
   {
     number: 4,
+    image: stepRdw,
     title: "Voertuig keuren bij de RDW",
     content: (
       <p>Is het voertuig in Nederland en heb je de buitenlandse kentekenpapieren? Dan moet het voertuig gekeurd worden bij de RDW. Doe dit zo snel mogelijk na de taxatie. Wil je hierbij worden ontzorgd? Laat het ons weten, we helpen graag.</p>
