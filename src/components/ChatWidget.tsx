@@ -9,7 +9,7 @@ const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/auto-assiste
 const ChatWidget = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "assistant", content: "Hoi! Ik ben de AutoAssistent van Automobiel Taxaties. Waar kan ik je mee helpen?" },
+    { role: "assistant", content: "Hoi! Ik ben de assistent van Erik. Vraag me gerust alles over BPM, belastingen of verzekeringen." },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
