@@ -155,21 +155,26 @@ const VerzekeringstaxatieInfo = () => {
         </div>
       </section>
 
-      {/* Formulier */}
+      {/* Formulier — 65/35 layout */}
       <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }} ref={formRef}>
-        <div className="container-narrow">
+        <div className="container-wide">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-semibold mb-3">Verzekeringstaxatie aanvragen</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
               Vul het formulier in en we nemen binnen één werkdag contact met je op.
             </p>
           </div>
-          <IntakeForm
-            serviceType="verzekeringstaxatie"
-            formTitle="Verzekeringstaxatie aanvragen"
-            formSubtext="Vul onderstaand formulier in."
-            toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig."
-          />
+          <div className="grid md:grid-cols-[1fr_380px] gap-8">
+            <div>
+              <IntakeForm
+                serviceType="verzekeringstaxatie"
+                formTitle="Verzekeringstaxatie aanvragen"
+                formSubtext="Vul onderstaand formulier in."
+                toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig."
+              />
+            </div>
+            <ContactSidebar />
+          </div>
         </div>
       </section>
 
