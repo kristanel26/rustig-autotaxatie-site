@@ -10,7 +10,7 @@ import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight, ArrowDown, Shield, BadgeCheck, ClipboardCheck, ThumbsUp,
-  Caravan, Car, Bike, UtensilsCrossed, Clock, MapPin, Award, CheckCircle, Calendar,
+  Caravan, Car, Bike, UtensilsCrossed, Clock, MapPin, Award, CheckCircle, Calendar, AlertTriangle,
 } from "lucide-react";
 import ContactSidebar from "@/components/ContactSidebar";
 import heroVerzekeringstaxatie from "@/assets/hero-verzekeringstaxatie.png";
@@ -35,6 +35,7 @@ const VerzekeringstaxatieInfo = () => {
     { icon: Clock, title: "Youngtimer", desc: "Afwijkende waarde t.o.v. standaard", link: "/youngtimer-taxatie" },
     { icon: Bike, title: "Motor", desc: "Verzekerde waarde vooraf vastleggen", link: "/motor-taxatie" },
     { icon: UtensilsCrossed, title: "Foodtruck", desc: "Inrichting en apparatuur meegerekend", link: "/foodtruck-taxatie" },
+    { icon: AlertTriangle, title: "Schadevaststelling", desc: "Na een incident", link: "/schadevaststelling" },
   ];
 
   const acceptatieCards = [
