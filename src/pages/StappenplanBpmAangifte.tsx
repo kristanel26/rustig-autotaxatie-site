@@ -102,6 +102,7 @@ const steps: { number: number; title: string; image?: string; content: React.Rea
   },
   {
     number: 9,
+    image: stepBelastingdienstEmail,
     title: "Betaalbericht van de Belastingdienst",
     content: (
       <p>Je ontvangt een betaalbericht van de Belastingdienst per e-mail. Je mag de betaaldatum zelf bepalen. Hoe eerder de betaling is afgehandeld, hoe sneller je het voertuig op Nederlands kenteken hebt.</p>
