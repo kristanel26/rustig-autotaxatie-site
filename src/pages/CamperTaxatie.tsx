@@ -211,60 +211,7 @@ const CamperTaxatie = () => {
         </div>
       </section>
 
-      {/* Statistieken balk */}
-      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', borderTop: '1px solid #e0e6ed', borderBottom: '1px solid #e0e6ed' }}>
-        <div className="container-wide py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
-            {[
-              {
-                content: (
-                  <>
-                    <div className="flex justify-center mb-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5" style={{ color: '#ff751f', fill: '#ff751f' }} />
-                      ))}
-                    </div>
-                    <span className="heading-display text-[36px] font-bold" style={{ color: '#1d3c71' }}>4.9</span>
-                    <span className="uppercase text-[12px] font-medium tracking-[0.1em]" style={{ color: '#888' }}>Google Reviews</span>
-                  </>
-                ),
-              },
-              {
-                content: (
-                  <>
-                    <span className="heading-display text-[36px] font-bold" style={{ color: '#1d3c71' }}>25.000+</span>
-                    <span className="uppercase text-[12px] font-medium tracking-[0.1em]" style={{ color: '#888' }}>Voertuigen getaxeerd</span>
-                  </>
-                ),
-              },
-              {
-                content: (
-                  <>
-                    <span className="heading-display text-[36px] font-bold" style={{ color: '#1d3c71' }}>13 jaar</span>
-                    <span className="uppercase text-[12px] font-medium tracking-[0.1em]" style={{ color: '#888' }}>Ervaring</span>
-                  </>
-                ),
-              },
-              {
-                content: (
-                  <>
-                    <span className="heading-display text-[36px] font-bold" style={{ color: '#1d3c71' }}>Landelijk</span>
-                    <span className="uppercase text-[12px] font-medium tracking-[0.1em]" style={{ color: '#888' }}>Actief</span>
-                  </>
-                ),
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="flex flex-col items-center justify-center text-center py-4"
-                style={{ borderRight: i < 3 ? '1px solid #dde3ea' : 'none' }}
-              >
-                {item.content}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <StatsBar />
 
       {/* Verwachtingen + Nodig */}
       <section className="py-14 md:py-16 px-6 md:px-8 bg-background">
