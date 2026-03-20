@@ -39,8 +39,8 @@ const VerzekeringstaxatieInfo = () => {
         <div className="container-wide">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Waarom</p>
-              <h2 className="text-2xl md:text-3xl font-semibold mb-4">Zekerheid over de waarde</h2>
+              <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Waarom taxeren</p>
+              <h2 className="text-2xl md:text-3xl font-semibold mb-4">Een taxatierapport voorkomt problemen</h2>
               <p className="text-[15px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
                 Met een verzekeringstaxatie wordt de waarde vooraf vastgelegd. Bij schade of diefstal wordt uitgekeerd op basis van de getaxeerde waarde, niet een dagwaarde.
               </p>
