@@ -315,7 +315,7 @@ const BpmTaxatie = () => {
                 </li>
                 <li className="flex items-center gap-3">
                   <MessageCircle className="w-4 h-4 shrink-0 opacity-70" />
-                  <a href="https://wa.me/31629182258" className="hover:underline">06 29182258</a>
+                  <a href="https://wa.me/31650694978" className="hover:underline">06 506 949 78</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="w-4 h-4 shrink-0 opacity-70" />
