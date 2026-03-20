@@ -32,12 +32,6 @@ const BpmTaxatie = () => {
     "Info over schade, gebruik en onderhoud",
   ];
 
-  const vergelijkingRows = [
-    { left: "Gebaseerd op software", right: "Fysieke inspectie op locatie" },
-    { left: "Geen opname van het voertuig", right: "Lakdiktemetingen, schadecalculatie, fotodossier" },
-    { left: "Niet bruikbaar als officieel tegenbewijs", right: "Officieel erkend, verdedigbaar bij bezwaar" },
-    { left: "Gratis, maar zonder garantie", right: "Betaald, maar juridisch waterdicht" },
-  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -60,7 +54,7 @@ const BpmTaxatie = () => {
         <div className="container-wide">
           <div className="mb-8">
             {sectionLabel("BPM Calculator")}
-            <h2 className="font-semibold mb-2" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36 }}>Bereken je BPM indicatie</h2>
+            <h2 className="font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36, color: '#1d3c71' }}>Bereken je BPM indicatie</h2>
             <p className="text-[15px]" style={{ color: '#4a5568', maxWidth: 540 }}>
               Gebruik onze calculator voor een eerste indicatie van de BPM-kosten bij import. Let op: een berekening is geen taxatie en biedt geen juridische onderbouwing.
             </p>
@@ -76,7 +70,7 @@ const BpmTaxatie = () => {
             <div>
               {sectionLabel("BPM-taxatie")}
               <div className="mb-4" style={{ width: 48, height: 3, background: '#ff751f', borderRadius: 2 }} />
-              <h2 className="font-semibold mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36 }}>BPM bij import van voertuigen</h2>
+              <h2 className="font-bold mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36, color: '#1d3c71' }}>BPM bij import van voertuigen</h2>
               <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
                 Bij import van een voertuig uit het buitenland moet BPM worden aangegeven. De manier waarop de BPM wordt vastgesteld verschilt per situatie en heeft direct invloed op de onderbouwing richting de Belastingdienst.
               </p>
@@ -98,7 +92,7 @@ const BpmTaxatie = () => {
         <div className="container-wide">
           <div className="text-center mb-10">
             <p className="uppercase font-semibold mb-2" style={{ fontSize: 12, letterSpacing: '0.1em', color: '#ff751f' }}>Voor wie</p>
-            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>Voor wie is dit bedoeld?</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>Voor wie is dit bedoeld?</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: 'rgba(255,255,255,0.7)' }}>
               Voor autobedrijven, handelaren en importeurs die het BPM-traject correct willen laten uitvoeren. Ook particulieren die zekerheid willen over de methode en onderbouwing.
             </p>
@@ -139,7 +133,7 @@ const BpmTaxatie = () => {
         <div className="container-wide">
           <div className="text-center mb-10">
             {sectionLabel("Methodes")}
-            <h2 className="text-2xl md:text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>Drie methodes om BPM vast te stellen</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>Drie methodes om BPM vast te stellen</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
               De Belastingdienst staat meerdere methodes toe. Welke van toepassing is, hangt af van het voertuig en de staat.
             </p>
@@ -175,47 +169,18 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* Vergelijkingstabel */}
-      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 96, paddingBottom: 96 }}>
-        <div className="container-wide">
-          <div className="text-center mb-10">
-            {sectionLabel("Vergelijking")}
-            <h2 className="text-2xl md:text-3xl font-semibold" style={{ fontFamily: 'Playfair Display, serif' }}>Wat is het verschil?</h2>
-          </div>
-          <div className="overflow-hidden" style={{ borderRadius: 12, boxShadow: '0 4px 24px rgba(0,0,0,0.07)' }}>
-            {/* Header */}
-            <div className="grid grid-cols-2">
-              <div className="px-6 py-4 font-semibold text-[14px]" style={{ background: '#f0f0f0', color: '#666' }}>
-                Een online BPM berekening
-              </div>
-              <div className="px-6 py-4 font-semibold text-[14px] text-white" style={{ background: '#1d3c71' }}>
-                Een taxatierapport van Automobiel Taxaties
-              </div>
-            </div>
-            {/* Rows */}
-            {vergelijkingRows.map((row, i) => (
-              <div key={i} className="grid grid-cols-2" style={{ background: i % 2 === 0 ? '#ffffff' : '#fafafa' }}>
-                <div className="px-6 py-4 text-[14px] border-r" style={{ color: '#666', borderColor: '#eee' }}>
-                  {row.left}
-                </div>
-                <div className="px-6 py-4 text-[14px] font-bold" style={{ color: '#1d3c71' }}>
-                  {row.right}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
+
 
       {/* 4 — Werkwijze – wit */}
       <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96 }}>
         <div className="container-wide">
           <div className="text-center mb-12">
             {sectionLabel("Werkwijze")}
-            <h2 className="text-2xl md:text-3xl font-semibold" style={{ fontFamily: 'Playfair Display, serif' }}>Onze werkwijze in 5 stappen</h2>
+            <h2 className="text-2xl md:text-3xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>Onze werkwijze in 5 stappen</h2>
           </div>
           <div className="grid md:grid-cols-5 gap-8 relative">
-            <div className="hidden md:block absolute" style={{ top: 26, left: 'calc(10% + 26px)', right: 'calc(10% + 26px)', height: 2, background: 'linear-gradient(to right, #ff751f, #1d3c71)', zIndex: 0 }} />
+            <div className="hidden md:block absolute" style={{ top: 26, left: 'calc(10% + 26px)', right: 'calc(10% + 26px)', height: 2, background: '#ff751f', zIndex: 0 }} />
             {[
               { step: 1, title: "Gegevens aanleveren", desc: "Kenteken, chassisnummer, factuur en documenten" },
               { step: 2, title: "Methode beoordelen", desc: "Per voertuig de fiscaal logische aanpak bepalen" },
@@ -299,7 +264,7 @@ const BpmTaxatie = () => {
         <div className="container-wide">
           <div className="text-center" style={{ marginBottom: 48 }}>
             {sectionLabel("Aanvragen")}
-            <h2 className="text-2xl md:text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>BPM-aangifte laten uitvoeren</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>BPM-aangifte laten uitvoeren</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
               Vul het formulier in en wij bepalen de juiste aanpak voor jouw situatie.
             </p>
