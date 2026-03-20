@@ -96,7 +96,7 @@ const CamperTaxatie = () => {
                 Je hebt net een nieuwe camper gekocht of na maanden klussen is jouw zelfbouw camper eindelijk klaar. Je staat er wellicht niet direct bij stil, maar jouw camper kan op verschillende manieren schade oplopen. Bijvoorbeeld door brand of storm, inbraak, vandalisme of een aanrijding. Een kloppend taxatierapport en een goede verzekering zijn dus belangrijk om zorgeloos op pad te gaan.
               </p>
               <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 17, lineHeight: 1.75, color: '#3a3a3a' }}>
-                Een taxatie is eigenlijk de enige manier om ervoor te zorgen dat je de camper voor de juiste waarde verzekert. Met een taxatierapport krijg je bij calamiteiten uitgekeerd waarop je recht hebt — op basis van de taxatiewaarde, niet de dagwaarde. Bijkomend voordeel is dat je premie betaalt over de getaxeerde waarde, waardoor je onder- of oververzekering voorkomt.
+                Een taxatie is eigenlijk de enige manier om ervoor te zorgen dat je de camper voor de juiste waarde verzekert. Met een taxatierapport krijg je bij calamiteiten uitgekeerd waarop je recht hebt, op basis van de taxatiewaarde en niet de dagwaarde. Bijkomend voordeel is dat je premie betaalt over de getaxeerde waarde, waardoor je onder- of oververzekering voorkomt.
               </p>
             </div>
             <div className="rounded-[12px] p-8 flex flex-col" style={{ background: '#1d3c71' }}>
