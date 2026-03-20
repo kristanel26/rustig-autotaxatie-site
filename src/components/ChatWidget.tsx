@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send } from "lucide-react";
+import erikPhoto from "@/assets/erik-elderson.png";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -126,12 +127,11 @@ const ChatWidget = () => {
             style={{ background: "#1d3c71" }}
           >
             <div className="flex items-center gap-3">
-              <div
-                className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm"
-                style={{ background: "rgba(255,255,255,0.15)" }}
-              >
-                AT
-              </div>
+              <img
+                src={erikPhoto}
+                alt="Erik Elderson"
+                className="w-10 h-10 rounded-full object-cover"
+              />
               <div>
                 <p className="text-white font-semibold text-sm">AutoAssistent</p>
                 <p className="text-[11px]" style={{ color: "rgba(255,255,255,0.6)" }}>
