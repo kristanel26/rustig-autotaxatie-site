@@ -135,11 +135,12 @@ const BpmTaxatie = () => {
                   borderRadius: 14,
                   padding: 32,
                   borderTop: '3px solid #1d3c71',
+                  borderBottom: '3px solid #ff751f',
                   boxShadow: '0 4px 24px rgba(0,0,0,0.07)',
-                  transition: 'transform 200ms ease, box-shadow 200ms ease',
+                  transition: 'transform 200ms ease, box-shadow 200ms ease, border 200ms ease',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.12)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.07)'; }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.12)'; e.currentTarget.style.borderBottom = '3px solid transparent'; e.currentTarget.style.borderTop = '3px solid #ff751f'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.07)'; e.currentTarget.style.borderBottom = '3px solid #ff751f'; e.currentTarget.style.borderTop = '3px solid #1d3c71'; }}
               >
                 <div className="inline-flex items-center justify-center rounded-full mb-4" style={{ width: 48, height: 48, background: '#EBF2FB' }}>
                   <method.icon style={{ width: 24, height: 24, color: '#1d3c71' }} />
