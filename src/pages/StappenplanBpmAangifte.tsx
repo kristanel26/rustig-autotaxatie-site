@@ -135,70 +135,68 @@ const StappenplanBpmAangifte = () => {
       </section>
 
       {/* Steps Timeline */}
-      <div className="max-w-4xl mx-auto px-6 lg:px-8">
-        {steps.map((step, i) => (
-          <div key={step.number}>
-            <section
-              className="py-12 md:py-16"
-              style={{ background: i % 2 === 1 ? '#f7f8fa' : '#ffffff' }}
-            >
-              <div className="max-w-4xl mx-auto px-6 lg:px-8">
-                <div className={`flex gap-6 md:gap-8 ${step.image ? 'flex-col md:flex-row' : ''}`}>
-                  {/* Step number + text */}
-                  <div className="flex gap-6 md:gap-8 flex-1 min-w-0">
-                    <div className="shrink-0">
-                      <div
-                        className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg"
-                        style={{ background: '#1d3c71' }}
-                      >
-                        {step.number}
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <h2 className="text-xl md:text-2xl font-bold mb-4" style={{ color: '#1d3c71', fontFamily: "'Playfair Display', serif" }}>
-                        {step.title}
-                      </h2>
-                      <div className="text-foreground/80 leading-relaxed">
-                        {step.content}
-                      </div>
+      {steps.map((step, i) => (
+        <div key={step.number}>
+          <section
+            className="py-12 md:py-16"
+            style={{ background: i % 2 === 1 ? '#f7f8fa' : '#ffffff' }}
+          >
+            <div className="max-w-5xl mx-auto px-6 lg:px-8">
+              <div className={`flex gap-6 md:gap-10 ${step.image ? 'flex-col md:flex-row md:items-start' : ''}`}>
+                {/* Step number + text */}
+                <div className="flex gap-5 md:gap-6 flex-1 min-w-0">
+                  <div className="shrink-0">
+                    <div
+                      className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg"
+                      style={{ background: '#1d3c71' }}
+                    >
+                      {step.number}
                     </div>
                   </div>
-                  {/* Optional image */}
-                  {step.image && (
-                    <div className="shrink-0 md:w-[480px] md:max-w-[480px]">
-                      <img
-                        src={step.image}
-                        alt={step.title}
-                        className="w-full rounded-lg shadow-md object-cover"
-                        style={{ maxHeight: 320 }}
-                        loading="lazy"
-                      />
+                  <div className="flex-1">
+                    <h2 className="text-xl md:text-2xl font-bold mb-4" style={{ color: '#1d3c71', fontFamily: "'Playfair Display', serif" }}>
+                      {step.title}
+                    </h2>
+                    <div className="text-foreground/80 leading-relaxed">
+                      {step.content}
                     </div>
-                  )}
+                  </div>
                 </div>
+                {/* Optional image */}
+                {step.image && (
+                  <div className="shrink-0 md:w-[360px]">
+                    <img
+                      src={step.image}
+                      alt={step.title}
+                      className="w-full rounded-lg shadow-md object-cover"
+                      style={{ maxHeight: 240 }}
+                      loading="lazy"
+                    />
+                  </div>
+                )}
               </div>
-            </section>
+            </div>
+          </section>
 
-            {/* Attention block after step 2 */}
-            {step.number === 2 && (
-              <div className="max-w-4xl mx-auto px-6 lg:px-8 py-6">
-                <div
-                  className="rounded-xl p-6 flex gap-4 items-start"
-                  style={{ background: '#FFF8E1', borderLeft: '4px solid #FF751F' }}
-                >
-                  <AlertTriangle className="w-6 h-6 shrink-0 mt-0.5" style={{ color: '#FF751F' }} />
-                  <p className="text-sm font-medium" style={{ color: '#5D4E37' }}>
-                    Vanaf dit moment dienen alle onderstaande stappen binnen één maand te zijn afgerond.
-                  </p>
-                </div>
+          {/* Attention block after step 2 */}
+          {step.number === 2 && (
+            <div className="max-w-5xl mx-auto px-6 lg:px-8 py-6">
+              <div
+                className="rounded-xl p-6 flex gap-4 items-start"
+                style={{ background: '#FFF8E1', borderLeft: '4px solid #FF751F' }}
+              >
+                <AlertTriangle className="w-6 h-6 shrink-0 mt-0.5" style={{ color: '#FF751F' }} />
+                <p className="text-sm font-medium" style={{ color: '#5D4E37' }}>
+                  Vanaf dit moment dienen alle onderstaande stappen binnen één maand te zijn afgerond.
+                </p>
               </div>
-            )}
-          </div>
-        ))}
-      </div>
+            </div>
+          )}
+        </div>
+      ))}
 
       {/* Info block after all steps */}
-      <div className="max-w-4xl mx-auto px-6 lg:px-8 py-8">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 py-8">
         <div
           className="rounded-xl p-6 flex gap-4 items-start"
           style={{ background: '#EBF2FB', borderLeft: '4px solid #1d3c71' }}
