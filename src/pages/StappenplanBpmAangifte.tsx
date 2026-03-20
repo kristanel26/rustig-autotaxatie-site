@@ -177,12 +177,11 @@ const StappenplanBpmAangifte = () => {
                 </div>
                 {/* Optional image */}
                 {step.image && (
-                  <div className="shrink-0 md:w-[360px]">
+                  <div className="shrink-0 md:w-[360px] h-[240px]">
                     <img
                       src={step.image}
                       alt={step.title}
-                      className="w-full rounded-lg shadow-md object-cover"
-                      style={{ maxHeight: 240 }}
+                      className="w-full h-full rounded-lg shadow-md object-cover"
                       loading="lazy"
                     />
                   </div>
