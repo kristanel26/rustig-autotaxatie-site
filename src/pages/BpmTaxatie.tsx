@@ -7,7 +7,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import { Users, FileText, Shield, ClipboardCheck, Table, BarChart3, Search, ArrowDown, Star, CheckCircle, Scale, Phone, Mail, Clock, MessageCircle, Quote } from "lucide-react";
-import erikHeroBpm from "@/assets/erik-hero-bpm.jpg";
+import erikHeroBpm from "@/assets/erik-bpm-taxatie-hero.jpg";
 
 const BpmTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
