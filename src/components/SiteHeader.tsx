@@ -103,19 +103,23 @@ const SiteHeader = () => {
 
           {/* Desktop nav */}
           <nav className="hidden xl:flex items-center gap-0.5">
-            {navLinks.map((link) => (
-              link.dropdown ? (
-                <div key={link.href} className="relative" ref={dropdownRef}>
+            {navLinks.map((link) => {
+              const subLinks = link.dropdown === "verzekering" ? verzekeringSubLinks : link.dropdown === "bpm" ? bpmSubLinks : null;
+              const isDropdownActive = link.dropdown === "verzekering" ? isVerzekeringActive : link.dropdown === "bpm" ? isBpmActive : false;
+              const ref = link.dropdown === "bpm" ? bpmDropdownRef : link.dropdown === "verzekering" ? dropdownRef : undefined;
+
+              return subLinks ? (
+                <div key={link.href} className="relative" ref={ref}>
                   <button
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    onClick={() => setOpenDropdown(openDropdown === link.dropdown ? null : (link.dropdown as string))}
                     className={`nav-link px-3 py-2 flex items-center gap-1 ${
-                      isActive(link.href) || isVerzekeringActive ? "active" : ""
+                      isActive(link.href) || isDropdownActive ? "active" : ""
                     }`}
                   >
                     {link.label}
-                    <ChevronDown className={`w-3.5 h-3.5 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform ${openDropdown === link.dropdown ? "rotate-180" : ""}`} />
                   </button>
-                  {dropdownOpen && (
+                  {openDropdown === link.dropdown && (
                     <div className="absolute top-full left-0 mt-2 bg-white rounded-[14px] shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-border py-2 min-w-[220px] z-50">
                       <Link
                         to={link.href}
@@ -124,7 +128,7 @@ const SiteHeader = () => {
                         Overzicht
                       </Link>
                       <div className="h-px bg-border mx-3 my-1" />
-                      {verzekeringSubLinks.map((sub) => (
+                      {subLinks.map((sub) => (
                         <Link
                           key={sub.href}
                           to={sub.href}

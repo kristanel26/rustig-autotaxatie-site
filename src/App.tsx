@@ -61,6 +61,7 @@ const router = createBrowserRouter([
   { path: "/contact", element: <Contact /> },
   { path: "/faq", element: <FAQ /> },
   { path: "/blog", element: <Blog /> },
+  { path: "/stappenplan-bpm-aangifte", element: <StappenplanBpmAangifte /> },
   
   // Internal routes - Login is public
   { path: "/intern/login", element: <Login /> },
