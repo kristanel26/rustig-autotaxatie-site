@@ -143,7 +143,7 @@ const StappenplanBpmAangifte = () => {
               style={{ background: i % 2 === 1 ? '#f7f8fa' : '#ffffff' }}
             >
               <div className="max-w-4xl mx-auto px-6 lg:px-8">
-                <div className={`flex gap-6 md:gap-8 ${(step as any).image ? 'flex-col md:flex-row' : ''}`}>
+                <div className={`flex gap-6 md:gap-8 ${step.image ? 'flex-col md:flex-row' : ''}`}>
                   {/* Step number + text */}
                   <div className="flex gap-6 md:gap-8 flex-1 min-w-0">
                     <div className="shrink-0">
@@ -164,10 +164,10 @@ const StappenplanBpmAangifte = () => {
                     </div>
                   </div>
                   {/* Optional image */}
-                  {(step as any).image && (
+                  {step.image && (
                     <div className="shrink-0 md:w-[480px] md:max-w-[480px]">
                       <img
-                        src={(step as any).image}
+                        src={step.image}
                         alt={step.title}
                         className="w-full rounded-lg shadow-md object-cover"
                         style={{ maxHeight: 320 }}
