@@ -84,6 +84,7 @@ const steps: { number: number; title: string; image?: string; content: React.Rea
   },
   {
     number: 8,
+    image: stepVehicleParked,
     title: "Laat het voertuig in getaxeerde staat",
     content: (
       <>
