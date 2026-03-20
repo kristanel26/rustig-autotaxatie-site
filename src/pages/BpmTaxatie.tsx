@@ -172,7 +172,7 @@ const BpmTaxatie = () => {
 
 
       {/* 4 — Werkwijze – wit */}
-      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96 }}>
+      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 72, paddingBottom: 72 }}>
         <div className="container-wide">
           <div className="text-center mb-12">
             {sectionLabel("Werkwijze")}
