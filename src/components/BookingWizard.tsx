@@ -231,7 +231,7 @@ const BookingWizard = () => {
         <div>
           <h3 className="heading-display text-xl font-semibold mb-6" style={{ color: '#1a1a1a' }}>Wanneer en waar?</h3>
           <div style={{ marginBottom: 20 }}>
-            <label style={labelStyle}>Postcode voertuig *</label>
+            <label style={labelStyle}>Postcode locatie voertuig *</label>
             <input
               value={form.postcode}
               onChange={e => set("postcode", e.target.value)}
@@ -240,10 +240,32 @@ const BookingWizard = () => {
               onFocus={handleFocus}
               onBlur={handleBlur}
             />
-            <p style={hintStyle}>Wij komen naar je toe</p>
+            <p style={hintStyle}>Wij komen naar jouw locatie toe voor de inspectie.</p>
           </div>
           <div style={{ marginBottom: 20 }}>
-            <label style={labelStyle}>Voorkeursdatum</label>
+            <label style={labelStyle}>Stad / gemeente *</label>
+            <input
+              value={form.stad}
+              onChange={e => set("stad", e.target.value)}
+              placeholder="bijv. Amsterdam, Rotterdam, Druten"
+              style={inputStyle}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            />
+          </div>
+          <div style={{ marginBottom: 20 }}>
+            <label style={labelStyle}>Straat en huisnummer (optioneel)</label>
+            <input
+              value={form.adres}
+              onChange={e => set("adres", e.target.value)}
+              placeholder="Hoofdstraat 12"
+              style={inputStyle}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            />
+          </div>
+          <div style={{ marginBottom: 20 }}>
+            <label style={labelStyle}>Voorkeursdatum *</label>
             <input
               type="date"
               value={form.datum}
