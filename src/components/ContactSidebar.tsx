@@ -32,7 +32,7 @@ const ContactSidebar = () => {
         href="https://wa.me/31650694978"
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-6 flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+        className="mt-auto flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
         style={{ background: '#25D366' }}
       >
         <svg viewBox="0 0 24 24" className="w-5 h-5 fill-white">

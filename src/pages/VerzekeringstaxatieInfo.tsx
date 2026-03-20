@@ -164,13 +164,14 @@ const VerzekeringstaxatieInfo = () => {
               Vul het formulier in en we nemen binnen één werkdag contact met je op.
             </p>
           </div>
-          <div className="grid md:grid-cols-[1fr_380px] gap-8">
+          <div className="grid md:grid-cols-[1fr_380px] gap-8 items-stretch">
             <div>
               <IntakeForm
                 serviceType="verzekeringstaxatie"
                 formTitle="Verzekeringstaxatie aanvragen"
                 formSubtext="Vul onderstaand formulier in."
                 toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig."
+                submitButtonText="Aanvraag indienen"
               />
             </div>
             <ContactSidebar />
