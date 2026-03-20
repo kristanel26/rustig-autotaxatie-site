@@ -5,6 +5,9 @@ import { FaFileInvoiceDollar, FaBalanceScale, FaClock, FaCar, FaTruck, FaMotorcy
 import erikPhoto from "@/assets/erik-elderson.png";
 import erikInspectie from "@/assets/erik-inspectie.jpg";
 import heroImage from "@/assets/hero-homepage.jpg";
+import heroBpm from "@/assets/hero-bpm.jpg";
+import heroOldtimer from "@/assets/hero-oldtimer.jpg";
+import heroFoodtruck from "@/assets/hero-foodtruck.jpg";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
