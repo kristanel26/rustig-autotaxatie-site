@@ -32,12 +32,6 @@ const BpmTaxatie = () => {
     "Info over schade, gebruik en onderhoud",
   ];
 
-  const vergelijkingRows = [
-    { left: "Gebaseerd op software", right: "Fysieke inspectie op locatie" },
-    { left: "Geen opname van het voertuig", right: "Lakdiktemetingen, schadecalculatie, fotodossier" },
-    { left: "Niet bruikbaar als officieel tegenbewijs", right: "Officieel erkend, verdedigbaar bij bezwaar" },
-    { left: "Gratis, maar zonder garantie", right: "Betaald, maar juridisch waterdicht" },
-  ];
 
   return (
     <div className="min-h-screen bg-background">
