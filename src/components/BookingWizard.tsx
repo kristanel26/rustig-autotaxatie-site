@@ -1,18 +1,16 @@
 import { useState } from "react";
-import { Calculator, Shield, Scale as ScaleIcon, Caravan, Car, Bike, Truck, Check, ArrowRight, ArrowLeft } from "lucide-react";
-import { FaCarCrash } from "react-icons/fa";
-
-const SchadevaststellingIcon = () => <FaCarCrash size={24} />;
+import { Check, ArrowRight, ArrowLeft } from "lucide-react";
+import { FaFileInvoiceDollar, FaBalanceScale, FaClock, FaCar, FaTruck, FaMotorcycle, FaUtensils, FaCarCrash } from "react-icons/fa";
 
 const taxatieOptions = [
-  { value: "bpm", label: "BPM Taxatie", icon: Calculator },
-  { value: "wev", label: "WEV Taxatie", icon: ScaleIcon },
-  { value: "oldtimer", label: "Oldtimer Taxatie", icon: Car },
-  { value: "youngtimer", label: "Youngtimer Taxatie", icon: Car },
-  { value: "camper", label: "Camper Taxatie", icon: Caravan },
-  { value: "motor", label: "Motor Taxatie", icon: Bike },
-  { value: "foodtruck", label: "Foodtruck Taxatie", icon: Truck },
-  { value: "schadevaststelling", label: "Schadevaststelling", icon: SchadevaststellingIcon },
+  { value: "bpm", label: "BPM Taxatie", icon: FaFileInvoiceDollar },
+  { value: "wev", label: "WEV Taxatie", icon: FaBalanceScale },
+  { value: "oldtimer", label: "Oldtimer Taxatie", icon: FaClock },
+  { value: "youngtimer", label: "Youngtimer Taxatie", icon: FaCar },
+  { value: "camper", label: "Camper Taxatie", icon: FaTruck },
+  { value: "motor", label: "Motor Taxatie", icon: FaMotorcycle },
+  { value: "foodtruck", label: "Foodtruck Taxatie", icon: FaUtensils },
+  { value: "schadevaststelling", label: "Schadevaststelling", icon: FaCarCrash },
 ];
 
 const steps = ["Type taxatie", "Voertuig", "Locatie & datum", "Contact"];
