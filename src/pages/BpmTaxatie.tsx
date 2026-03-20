@@ -53,6 +53,7 @@ const BpmTaxatie = () => {
           <div className="grid md:grid-cols-[1fr_400px] gap-12 items-center">
             <div>
               {sectionLabel("BPM-taxatie")}
+              <div className="mb-4" style={{ width: 48, height: 3, background: '#ff751f', borderRadius: 2 }} />
               <h2 className="font-semibold mb-4" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36 }}>BPM bij import van voertuigen</h2>
               <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
                 Bij import van een voertuig uit het buitenland moet BPM worden aangegeven. De manier waarop de BPM wordt vastgesteld verschilt per situatie en heeft direct invloed op de onderbouwing richting de Belastingdienst.
@@ -134,11 +135,12 @@ const BpmTaxatie = () => {
                   borderRadius: 14,
                   padding: 32,
                   borderTop: '3px solid #1d3c71',
+                  borderBottom: '3px solid #ff751f',
                   boxShadow: '0 4px 24px rgba(0,0,0,0.07)',
-                  transition: 'transform 200ms ease, box-shadow 200ms ease',
+                  transition: 'transform 200ms ease, box-shadow 200ms ease, border 200ms ease',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.12)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.07)'; }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.12)'; e.currentTarget.style.borderBottom = '3px solid transparent'; e.currentTarget.style.borderTop = '3px solid #ff751f'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.07)'; e.currentTarget.style.borderBottom = '3px solid #ff751f'; e.currentTarget.style.borderTop = '3px solid #1d3c71'; }}
               >
                 <div className="inline-flex items-center justify-center rounded-full mb-4" style={{ width: 48, height: 48, background: '#EBF2FB' }}>
                   <method.icon style={{ width: 24, height: 24, color: '#1d3c71' }} />
@@ -159,7 +161,7 @@ const BpmTaxatie = () => {
             <h2 className="text-2xl md:text-3xl font-semibold" style={{ fontFamily: 'Playfair Display, serif' }}>Onze werkwijze in 5 stappen</h2>
           </div>
           <div className="grid md:grid-cols-5 gap-8 relative">
-            <div className="hidden md:block absolute" style={{ top: 26, left: 'calc(10% + 26px)', right: 'calc(10% + 26px)', height: 2, background: '#698db3', zIndex: 0 }} />
+            <div className="hidden md:block absolute" style={{ top: 26, left: 'calc(10% + 26px)', right: 'calc(10% + 26px)', height: 2, background: 'linear-gradient(to right, #ff751f, #1d3c71)', zIndex: 0 }} />
             {[
               { step: 1, title: "Gegevens aanleveren", desc: "Kenteken, chassisnummer, factuur en documenten" },
               { step: 2, title: "Methode beoordelen", desc: "Per voertuig de fiscaal logische aanpak bepalen" },
@@ -197,12 +199,9 @@ const BpmTaxatie = () => {
       {/* 5 — Verwachtingen + Nodig – wit */}
       <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96 }}>
         <div className="container-wide">
-          <div className="text-center mb-10">
-            {sectionLabel("Wat je mag verwachten")}
-            <h2 className="text-2xl md:text-3xl font-semibold" style={{ fontFamily: 'Playfair Display, serif' }}>Duidelijkheid vooraf</h2>
-          </div>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
+              <div className="mb-3" style={{ width: 48, height: 3, background: '#ff751f', borderRadius: 2 }} />
               <h3 className="text-xl font-semibold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>Wat kun je verwachten?</h3>
               <div className="space-y-4">
                 {verwachtItems.map((item, i) => (
@@ -220,6 +219,7 @@ const BpmTaxatie = () => {
               </div>
             </div>
             <div>
+              <div className="mb-3" style={{ width: 48, height: 3, background: '#ff751f', borderRadius: 2 }} />
               <h3 className="text-xl font-semibold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>Wat hebben wij nodig?</h3>
               <div className="space-y-4">
                 {nodigItems.map((item, i) => (

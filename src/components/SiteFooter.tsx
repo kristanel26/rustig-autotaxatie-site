@@ -147,7 +147,7 @@ const SiteFooter = () => {
       </footer>
 
       {/* Certifications bar */}
-      <div className="bg-[hsl(216,58%,22%)] py-5 px-6 lg:px-10 border-t border-white/10">
+      <div className="bg-[hsl(216,58%,22%)] py-5 px-6 lg:px-10" style={{ borderTop: '2px solid #ff751f' }}>
         <div className="max-w-[1100px] mx-auto flex flex-wrap items-center justify-center gap-12">
           {[
             { name: "Federatie TMV", sub: "Erkend Taxateur" },
