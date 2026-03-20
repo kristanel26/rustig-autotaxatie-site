@@ -13,6 +13,7 @@ import stepAangifteFormulier from "@/assets/bpm-aangifte-formulier.png";
 import stepTransport from "@/assets/step-transport.png";
 import stepReportProcessing from "@/assets/step-report-processing.png";
 import stepBelastingdienstEmail from "@/assets/step-belastingdienst-email.png";
+import stepVehicleParked from "@/assets/step-vehicle-parked.png";
 
 const steps: { number: number; title: string; image?: string; content: React.ReactNode }[] = [
   {
@@ -83,6 +84,7 @@ const steps: { number: number; title: string; image?: string; content: React.Rea
   },
   {
     number: 8,
+    image: stepVehicleParked,
     title: "Laat het voertuig in getaxeerde staat",
     content: (
       <>
