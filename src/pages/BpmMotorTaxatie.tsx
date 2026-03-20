@@ -16,7 +16,7 @@ const BpmMotorTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta title="BPM Motor Taxatie | Import Motor | Automobieltaxaties" description="BPM-taxatie voor geïmporteerde motorfietsen. Erkend taxateur op locatie voor de laagst haalbare BPM." />
+      <PageMeta title="BPM Motor Taxatie | Import Motor | Automobiel Taxaties" description="BPM-taxatie voor geïmporteerde motorfietsen. Erkend taxateur op locatie voor de laagst haalbare BPM." />
       <SiteHeader />
       <LandingHero subtitle="BPM-TAXATIE MOTOR" title="Zorgvuldig vastgestelde BPM bij import van een motor" description="Wanneer je een motor uit het buitenland importeert, moet er BPM worden aangegeven. De hoogte van dat bedrag hangt af van de manier waarop de afschrijving wordt vastgesteld." ctaText="BPM-taxatie motor aanvragen" onCtaClick={scrollToForm} heroImage={heroMotor} />
 

@@ -171,7 +171,7 @@ const SiteFooter = () => {
       {/* Copyright */}
       <div className="bg-[hsl(216,58%,18%)] py-4 px-6">
         <p className="text-center text-white/50 text-xs">
-          &copy; {new Date().getFullYear()} Automobieltaxaties.nl &mdash; KvK 71468889 &mdash; BTW NL858727493B01
+          &copy; {new Date().getFullYear()} Automobiel Taxaties &mdash; KvK 71468889 &mdash; BTW NL858727493B01
         </p>
       </div>
     </>
