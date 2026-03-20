@@ -12,6 +12,7 @@ import stepHappyOwner from "@/assets/step-happy-car-owner.jpg";
 const steps = [
   {
     number: 1,
+    image: stepCarShopping,
     title: "Begin met het zoeken van jouw toekomstige auto",
     content: (
       <>
