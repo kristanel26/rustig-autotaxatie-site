@@ -75,7 +75,7 @@ const CamperTaxatie = () => {
               </p>
             </div>
             <div className="rounded-[14px] p-8 flex flex-col items-center justify-center text-center" style={{ background: '#1d3c71', minHeight: 200 }}>
-              <FileShield className="w-12 h-12 text-white mb-4" />
+              <ShieldCheck className="w-12 h-12 text-white mb-4" />
               <p className="text-white font-bold text-[17px] leading-snug max-w-[260px]">
                 De waarde staat vooraf vast. Geen discussie bij schade of diefstal.
               </p>
