@@ -199,12 +199,9 @@ const BpmTaxatie = () => {
       {/* 5 — Verwachtingen + Nodig – wit */}
       <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96 }}>
         <div className="container-wide">
-          <div className="text-center mb-10">
-            {sectionLabel("Wat je mag verwachten")}
-            <h2 className="text-2xl md:text-3xl font-semibold" style={{ fontFamily: 'Playfair Display, serif' }}>Duidelijkheid vooraf</h2>
-          </div>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
+              <div className="mb-3" style={{ width: 48, height: 3, background: '#ff751f', borderRadius: 2 }} />
               <h3 className="text-xl font-semibold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>Wat kun je verwachten?</h3>
               <div className="space-y-4">
                 {verwachtItems.map((item, i) => (
