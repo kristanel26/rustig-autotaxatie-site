@@ -14,16 +14,9 @@ const steps: { number: number; title: string; image?: string; content: React.Rea
   {
     number: 1,
     image: stepCarShopping,
-    title: "Begin met het zoeken van jouw toekomstige auto",
+    title: "Het voertuig",
     content: (
-      <>
-        <p className="mb-3">Je kunt zoeken via verschillende platforms, afhankelijk van het land:</p>
-        <ul className="list-disc pl-5 space-y-1">
-          <li>Voor Duitsland: <a href="https://www.mobile.de" target="_blank" rel="noopener noreferrer" className="text-[hsl(var(--primary))] underline hover:no-underline">www.mobile.de</a> en <a href="https://www.autoscout24.de" target="_blank" rel="noopener noreferrer" className="text-[hsl(var(--primary))] underline hover:no-underline">www.autoscout24.de</a></li>
-          <li>Voor Europa breed: <a href="https://www.autoscout24.eu" target="_blank" rel="noopener noreferrer" className="text-[hsl(var(--primary))] underline hover:no-underline">www.autoscout24.eu</a></li>
-          <li>Voor België: <a href="https://www.autoscout24.be" target="_blank" rel="noopener noreferrer" className="text-[hsl(var(--primary))] underline hover:no-underline">www.autoscout24.be</a></li>
-        </ul>
-      </>
+      <p>Heb je al een voertuig op het oog of heb je er al één gekocht in het buitenland? Dan begint het proces hier. Particulieren zoeken vaak via platforms zoals <a href="https://www.mobile.de" target="_blank" rel="noopener noreferrer" className="text-[hsl(var(--primary))] underline hover:no-underline">www.mobile.de</a>, <a href="https://www.autoscout24.de" target="_blank" rel="noopener noreferrer" className="text-[hsl(var(--primary))] underline hover:no-underline">www.autoscout24.de</a>, <a href="https://www.autoscout24.be" target="_blank" rel="noopener noreferrer" className="text-[hsl(var(--primary))] underline hover:no-underline">www.autoscout24.be</a> of <a href="https://www.autoscout24.eu" target="_blank" rel="noopener noreferrer" className="text-[hsl(var(--primary))] underline hover:no-underline">www.autoscout24.eu</a>. Dealers, importeurs en handelaren starten doorgaans vanuit hun eigen inkoopkanalen. In alle gevallen geldt: zodra het voertuig naar Nederland komt, moet BPM worden aangegeven.</p>
     ),
   },
   {
