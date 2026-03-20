@@ -74,6 +74,9 @@ const CamperTaxatie = () => {
               <p className="text-[15px] leading-relaxed mb-5" style={{ color: '#4a5568' }}>
                 Bij veel verzekeraars is een taxatierapport vereist wanneer de waarde van een camper afwijkt van standaard verzekeringsbedragen. Met een taxatierapport wordt de waarde vooraf vastgelegd, zodat bij schade of diefstal geen discussie ontstaat.
               </p>
+              <p className="text-[15px] leading-relaxed mb-5" style={{ color: '#4a5568' }}>
+                Je hebt net een nieuwe camper gekocht of na maanden klussen is jouw zelfbouw camper eindelijk klaar. Een kloppend taxatierapport en een goede verzekering zijn belangrijk om zorgeloos op pad te gaan.
+              </p>
             </div>
             <div className="rounded-[12px] p-8 flex flex-col" style={{ background: '#1d3c71' }}>
               <div className="flex items-center justify-center rounded-full mb-4 mx-auto" style={{ width: 48, height: 48, background: '#EBF2FB' }}>
@@ -81,13 +84,6 @@ const CamperTaxatie = () => {
               </div>
               <p className="text-white font-bold text-[18px] text-center leading-[1.4] mb-4">De waarde staat vooraf vast. Geen discussie bij schade of diefstal.</p>
               <div className="mb-5" style={{ borderBottom: '1px solid rgba(255,255,255,0.2)' }} />
-              <h3 className="text-white font-bold text-[16px] text-center mb-4">Waarom is een goede taxatie belangrijk?</h3>
-              <p className="text-[14px] leading-[1.65] mb-3" style={{ color: 'rgba(255,255,255,0.85)' }}>
-                Een taxatie is eigenlijk de enige manier om ervoor te zorgen dat je de camper voor de juiste waarde verzekert. Met een taxatierapport krijg je bij calamiteiten uitgekeerd waarop je recht hebt, op basis van de taxatiewaarde en niet de dagwaarde.
-              </p>
-              <p className="text-[14px] leading-[1.65] mb-6" style={{ color: 'rgba(255,255,255,0.85)' }}>
-                Bijkomend voordeel is dat je premie betaalt over de getaxeerde waarde, waardoor je onder- of oververzekering voorkomt. Het taxatierapport is afhankelijk van de verzekeraar 2 tot 3 jaar geldig.
-              </p>
               <div className="space-y-3 mb-6">
                 {[
                   "Uitkering op taxatiewaarde, niet dagwaarde",
