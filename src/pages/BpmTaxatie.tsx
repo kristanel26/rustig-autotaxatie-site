@@ -98,7 +98,7 @@ const BpmTaxatie = () => {
         <div className="container-wide">
           <div className="text-center mb-10">
             <p className="uppercase font-semibold mb-2" style={{ fontSize: 12, letterSpacing: '0.1em', color: '#ff751f' }}>Voor wie</p>
-            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>Voor wie is dit bedoeld?</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>Voor wie is dit bedoeld?</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: 'rgba(255,255,255,0.7)' }}>
               Voor autobedrijven, handelaren en importeurs die het BPM-traject correct willen laten uitvoeren. Ook particulieren die zekerheid willen over de methode en onderbouwing.
             </p>
