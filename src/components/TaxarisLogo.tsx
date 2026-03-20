@@ -43,7 +43,7 @@ const TaxarisLogo: React.FC<TaxarisLogoProps> = ({
   return (
     <img
       src={src}
-      alt="Taxaris — Automobiel Taxatiesoftware"
+      alt="Taxaris, Automobiel Taxatiesoftware"
       height={height}
       style={{ height, width: 'auto' }}
       className={className}

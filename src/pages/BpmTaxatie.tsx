@@ -155,7 +155,7 @@ const BpmTaxatie = () => {
         <div className="container-wide text-center">
           <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">Wil je weten welke methode voor jou het gunstigst is?</h2>
           <p className="text-[15px] mb-6 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>
-            Wij beoordelen per voertuig welke aanpak het meest verdedigbaar is — en geven je vrijblijvend advies.
+            Wij beoordelen per voertuig welke aanpak het meest verdedigbaar is en geven je vrijblijvend advies.
           </p>
           <Button variant="cta" size="lg" onClick={scrollToForm}>
             Gratis advies aanvragen
