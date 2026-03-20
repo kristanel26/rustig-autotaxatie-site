@@ -6,7 +6,7 @@ import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
-import { Users, FileText, Shield, ClipboardCheck, Table, BarChart3, Search, ArrowDown, Star, CheckCircle, Scale, Phone, Mail, Clock, MessageCircle, Quote } from "lucide-react";
+import { Users, FileText, Shield, ClipboardCheck, Table, BarChart3, Search, ArrowDown, Star, CheckCircle, Scale, Phone, Mail, Clock, MessageCircle } from "lucide-react";
 import erikHeroBpm from "@/assets/erik-bpm-taxatie-hero.jpg";
 
 const BpmTaxatie = () => {
@@ -50,7 +50,7 @@ const BpmTaxatie = () => {
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-3">BPM bij import van voertuigen</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>BPM bij import van voertuigen</h2>
             <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
               Bij import van een voertuig uit het buitenland moet BPM worden aangegeven. De manier waarop de BPM wordt vastgesteld verschilt per situatie en heeft direct invloed op de onderbouwing richting de Belastingdienst.
             </p>
@@ -64,7 +64,7 @@ const BpmTaxatie = () => {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-2">Voor wie</p>
-              <h2 className="text-2xl md:text-3xl font-semibold mb-3">Voor wie is dit bedoeld?</h2>
+              <h2 className="text-2xl md:text-3xl font-semibold mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>Voor wie is dit bedoeld?</h2>
               <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
                 Voor autobedrijven, handelaren en importeurs die het BPM-traject correct willen laten uitvoeren. Ook particulieren die zekerheid willen over de methode en onderbouwing.
               </p>
@@ -97,7 +97,7 @@ const BpmTaxatie = () => {
         <div className="container-wide">
           <div className="text-center mb-8">
             <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-2">Methodes</p>
-            <h2 className="text-2xl md:text-3xl font-semibold mb-2">Drie methodes om BPM vast te stellen</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>Drie methodes om BPM vast te stellen</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
               De Belastingdienst staat meerdere methodes toe. Welke van toepassing is, hangt af van het voertuig en de staat.
             </p>
@@ -125,11 +125,16 @@ const BpmTaxatie = () => {
             ].map((method, i) => (
               <div
                 key={i}
-                className="card-elevated p-6 relative"
-                style={method.featured ? {
-                  borderLeft: '4px solid #ff751f',
-                  background: '#EBF2FB',
-                } : {}}
+                className="bg-white relative"
+                style={{
+                  borderRadius: 14,
+                  padding: 28,
+                  boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
+                  ...(method.featured ? {
+                    borderLeft: '4px solid #ff751f',
+                    background: '#EBF2FB',
+                  } : {}),
+                }}
               >
                 {method.featured && (
                   <span
@@ -139,10 +144,10 @@ const BpmTaxatie = () => {
                     Aanbevolen
                   </span>
                 )}
-                <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl mb-4" style={{ background: method.featured ? 'rgba(255,117,31,0.12)' : 'rgba(29,60,113,0.08)' }}>
-                  <method.icon className={`w-5 h-5 ${method.featured ? 'text-cta' : 'text-primary'}`} />
+                <div className="inline-flex items-center justify-center rounded-xl mb-4" style={{ width: 44, height: 44, background: method.featured ? 'rgba(255,117,31,0.12)' : 'rgba(29,60,113,0.08)' }}>
+                  <method.icon style={{ width: 22, height: 22 }} className={method.featured ? 'text-cta' : 'text-primary'} />
                 </div>
-                <h3 className="text-lg font-semibold mb-1.5">{method.title}</h3>
+                <h3 className="text-lg font-bold mb-1.5" style={{ color: '#1d3c71' }}>{method.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: '#4a5568' }}>{method.desc}</p>
               </div>
             ))}
@@ -151,9 +156,9 @@ const BpmTaxatie = () => {
       </section>
 
       {/* Mid-page CTA */}
-      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: '#1d3c71' }}>
+      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(to right, #1d3c71, #2a4f8a)' }}>
         <div className="container-wide text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">Wil je weten welke methode voor jou het gunstigst is?</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>Wil je weten welke methode voor jou het gunstigst is?</h2>
           <p className="text-[15px] mb-6 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>
             Wij beoordelen per voertuig welke aanpak het meest verdedigbaar is en geven je vrijblijvend advies.
           </p>
@@ -169,7 +174,7 @@ const BpmTaxatie = () => {
         <div className="container-wide">
           <div className="text-center mb-8">
             <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-2">Werkwijze</p>
-            <h2 className="text-2xl md:text-3xl font-semibold">Onze werkwijze in 5 stappen</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold" style={{ fontFamily: 'Playfair Display, serif' }}>Onze werkwijze in 5 stappen</h2>
           </div>
           <div className="grid md:grid-cols-5 gap-5">
             {[
@@ -178,9 +183,28 @@ const BpmTaxatie = () => {
               { step: 3, title: "Uitvoering", desc: "Aangifte op basis van tabel, koerslijst of taxatie" },
               { step: 4, title: "Aangifte opstellen", desc: "Compleet en controleerbaar opgebouwd" },
               { step: 5, title: "Oplevering", desc: "Per e-mail, klaar om te ondertekenen en versturen" },
-            ].map((s) => (
-              <div key={s.step} className="text-center">
-                <div className="step-badge mx-auto mb-3">{s.step}</div>
+            ].map((s, i, arr) => (
+              <div key={s.step} className="text-center relative">
+                {/* Connecting line */}
+                {i < arr.length - 1 && (
+                  <div
+                    className="hidden md:block absolute top-[22px] left-[calc(50%+22px)] h-[2px]"
+                    style={{
+                      width: 'calc(100% - 44px)',
+                      right: 0,
+                      left: 'auto',
+                      background: '#698db3',
+                      transform: 'translateX(calc(50% + 22px))',
+                      zIndex: 0,
+                    }}
+                  />
+                )}
+                <div
+                  className="mx-auto mb-3 flex items-center justify-center rounded-full text-white font-bold text-base relative z-10"
+                  style={{ width: 44, height: 44, background: '#1d3c71', fontFamily: 'Playfair Display, serif' }}
+                >
+                  {s.step}
+                </div>
                 <h4 className="font-semibold text-sm mb-1 text-foreground">{s.title}</h4>
                 <p className="text-xs leading-relaxed" style={{ color: '#4a5568' }}>{s.desc}</p>
               </div>
@@ -199,46 +223,46 @@ const BpmTaxatie = () => {
       </section>
 
       {/* Trust balk */}
-      <section className="py-6 px-6 md:px-8 bg-background">
+      <section className="py-8 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
-          <div className="flex flex-wrap justify-center gap-6 md:gap-14 items-center">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-wrap justify-center items-center divide-x divide-border">
+            <div className="flex items-center gap-2 px-6 md:px-10 py-2">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-3.5 h-3.5 fill-cta text-cta" />
+                  <Star key={i} className="w-4 h-4 fill-cta text-cta" />
                 ))}
               </div>
-              <span className="text-sm font-semibold text-foreground">4.9 / 5</span>
-              <span className="text-xs" style={{ color: '#4a5568' }}>Google Reviews</span>
+              <span className="text-2xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>4,9</span>
+              <span className="text-xs" style={{ color: '#4a5568' }}>/ 5 Google Reviews</span>
             </div>
-            <div className="text-center">
-              <span className="text-lg font-bold text-foreground">25.000+</span>
-              <span className="text-xs ml-1" style={{ color: '#4a5568' }}>voertuigen getaxeerd</span>
+            <div className="text-center px-6 md:px-10 py-2">
+              <span className="text-2xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>25.000+</span>
+              <span className="text-xs ml-1.5 block md:inline" style={{ color: '#4a5568' }}>voertuigen getaxeerd</span>
             </div>
-            <div className="text-center">
-              <span className="text-lg font-bold text-foreground">13 jaar</span>
-              <span className="text-xs ml-1" style={{ color: '#4a5568' }}>ervaring</span>
+            <div className="text-center px-6 md:px-10 py-2">
+              <span className="text-2xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>13 jaar</span>
+              <span className="text-xs ml-1.5 block md:inline" style={{ color: '#4a5568' }}>ervaring</span>
             </div>
-            <div className="text-center">
-              <span className="text-lg font-bold text-foreground">98%</span>
-              <span className="text-xs ml-1" style={{ color: '#4a5568' }}>akkoord bij controle</span>
+            <div className="text-center px-6 md:px-10 py-2">
+              <span className="text-2xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>98%</span>
+              <span className="text-xs ml-1.5 block md:inline" style={{ color: '#4a5568' }}>akkoord bij controle</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Verwachtingen + Nodig — KAARTJES MET VINKJES */}
+      {/* Verwachtingen + Nodig */}
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide">
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h2 className="text-xl md:text-2xl font-semibold mb-5">Wat kun je verwachten?</h2>
+              <h2 className="text-xl md:text-2xl font-semibold mb-5" style={{ fontFamily: 'Playfair Display, serif' }}>Wat kun je verwachten?</h2>
               <div className="space-y-3">
                 {verwachtItems.map((item, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4"
-                    style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}
+                    className="flex items-center gap-4 bg-white px-5 py-4"
+                    style={{ borderRadius: 10, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}
                   >
                     <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(255,117,31,0.12)' }}>
                       <CheckCircle className="w-4 h-4 text-cta" />
@@ -249,13 +273,13 @@ const BpmTaxatie = () => {
               </div>
             </div>
             <div>
-              <h2 className="text-xl md:text-2xl font-semibold mb-5">Wat hebben wij nodig?</h2>
+              <h2 className="text-xl md:text-2xl font-semibold mb-5" style={{ fontFamily: 'Playfair Display, serif' }}>Wat hebben wij nodig?</h2>
               <div className="space-y-3">
                 {nodigItems.map((item, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4"
-                    style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}
+                    className="flex items-center gap-4 bg-white px-5 py-4"
+                    style={{ borderRadius: 10, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}
                   >
                     <div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}>
                       <CheckCircle className="w-4 h-4 text-primary" />
@@ -270,9 +294,9 @@ const BpmTaxatie = () => {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: '#1d3c71' }}>
+      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(to right, #1d3c71, #2a4f8a)' }}>
         <div className="container-wide text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">BPM netjes en onafhankelijk laten regelen?</h2>
+          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3" style={{ fontFamily: 'Playfair Display, serif' }}>BPM netjes en onafhankelijk laten regelen?</h2>
           <p className="text-[15px] mb-6" style={{ color: 'rgba(255,255,255,0.75)' }}>
             Vraag vrijblijvend een BPM-aangifte aan. Wij beoordelen de juiste methode voor jouw situatie.
           </p>
@@ -283,11 +307,11 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* Formulier — 65/35 layout */}
+      {/* Formulier */}
       <section className="py-10 md:py-14 px-6 md:px-8 bg-background" ref={formRef}>
         <div className="container-wide">
           <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-2">BPM-aangifte laten uitvoeren</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>BPM-aangifte laten uitvoeren</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
               Vul het formulier in en wij bepalen de juiste aanpak voor jouw situatie.
             </p>
@@ -346,16 +370,19 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* Belangrijk + Onafhankelijkheid — eenmalig */}
+      {/* Belangrijk + Onafhankelijkheid */}
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide">
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="card-elevated p-6">
+            <div
+              className="bg-white"
+              style={{ borderRadius: 14, padding: 28, boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}
+            >
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(255,117,31,0.1)' }}>
-                  <ClipboardCheck className="w-5 h-5 text-cta" />
+                <div className="flex items-center justify-center rounded-xl" style={{ width: 44, height: 44, background: 'rgba(255,117,31,0.1)' }}>
+                  <ClipboardCheck style={{ width: 22, height: 22, color: '#1d3c71' }} />
                 </div>
-                <h3 className="text-base font-semibold">Belangrijk om te weten</h3>
+                <h3 className="text-base font-semibold" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>Belangrijk om te weten</h3>
               </div>
               <ul className="space-y-1.5 text-sm" style={{ color: '#4a5568' }}>
                 <li>• De BPM wordt vastgesteld op basis van de staat op moment van aangifte</li>
@@ -364,12 +391,15 @@ const BpmTaxatie = () => {
                 <li>• Volledige en juiste aankoopgegevens zijn essentieel</li>
               </ul>
             </div>
-            <div className="card-elevated p-6">
+            <div
+              className="bg-white"
+              style={{ borderRadius: 14, padding: 28, boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}
+            >
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}>
-                  <Shield className="w-5 h-5 text-primary" />
+                <div className="flex items-center justify-center rounded-xl" style={{ width: 44, height: 44, background: 'rgba(29,60,113,0.08)' }}>
+                  <Shield style={{ width: 22, height: 22, color: '#1d3c71' }} />
                 </div>
-                <h3 className="text-base font-semibold">Onafhankelijk en juridisch geborgd</h3>
+                <h3 className="text-base font-semibold" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>Onafhankelijk en juridisch geborgd</h3>
               </div>
               <ul className="space-y-1.5 text-sm" style={{ color: '#4a5568' }}>
                 <li>• Aangesloten bij Federatie TMV, VRT Register en FEHAC</li>
