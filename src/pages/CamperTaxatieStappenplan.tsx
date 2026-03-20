@@ -1,57 +1,62 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
-import { Button } from "@/components/ui/button";
-import { Phone, FileCheck, MapPin, Wrench, ChevronDown } from "lucide-react";
-import heroCamper from "@/assets/hero-camper.jpg";
+import { Link } from "react-router-dom";
+import { ArrowRight, Info, Phone } from "lucide-react";
+import stepAanvraag from "@/assets/step-camper-aanvraag.jpg";
+import stepInspectie from "@/assets/step-camper-inspectie.jpg";
+import stepWaarde from "@/assets/step-camper-waarde.jpg";
+import stepRapport from "@/assets/step-camper-rapport.jpg";
+import stepVerzekering from "@/assets/step-camper-verzekering.jpg";
 
-const steps = [
+const steps: { number: number; title: string; image: string; content: React.ReactNode }[] = [
   {
     number: 1,
+    image: stepAanvraag,
     title: "Aanvraag indienen",
-    content: "Vul het formulier in of bel ons op 085 483 2461. We bespreken je situatie en plannen de inspectie op een moment dat jou past.",
+    content: (
+      <p>Vul het aanvraagformulier in op de website of bel ons op 085 483 2461. Geef het type camper, bouwjaar en het doel van de taxatie door. Wij nemen binnen één werkdag contact met je op om een afspraak in te plannen.</p>
+    ),
   },
   {
     number: 2,
+    image: stepInspectie,
     title: "Inspectie op locatie",
-    content: "Erik komt naar jouw camper toe. Staat, uitvoering, aanpassingen en zelfbouw worden beoordeeld. Je hoeft nergens naartoe.",
+    content: (
+      <p>Erik komt naar jouw camper toe, door heel Nederland. Tijdens de inspectie worden de staat, uitvoering, aanpassingen, zelfbouw en bijzonderheden opgenomen. Lakdiktemetingen worden uitgevoerd en er wordt een uitgebreid fotodossier aangelegd.</p>
+    ),
   },
   {
     number: 3,
+    image: stepWaarde,
     title: "Waarde vaststellen",
-    content: "Op basis van marktgegevens, staat en bijzonderheden stellen we de verzekeringswaarde vast. Volledig onafhankelijk en onderbouwd.",
+    content: (
+      <p>Op basis van de inspectie, marktgegevens en de staat van de camper wordt de taxatiewaarde vastgesteld. Aanpassingen, accessoires en zelfbouw worden meegenomen in de waardering.</p>
+    ),
   },
   {
     number: 4,
+    image: stepRapport,
     title: "Rapport opstellen",
-    content: "Je ontvangt een volledig onderbouwd taxatierapport, inclusief fotodossier. Klaar voor gebruik bij je verzekeraar.",
+    content: (
+      <p>Het taxatierapport wordt digitaal opgesteld. Het rapport bevat de vastgestelde waarde, een fotodossier, lakdiktemeting en een beschrijving van de staat van de camper. Het rapport is opgesteld door een erkend taxateur.</p>
+    ),
   },
   {
     number: 5,
+    image: stepVerzekering,
     title: "Verzekering regelen",
-    content: "Het rapport lever je aan bij je verzekeraar. Geldigheid doorgaans 3 tot 5 jaar. Informeer bij jouw verzekeraar.",
+    content: (
+      <p>Met het taxatierapport ga je naar je verzekeraar. De verzekering wordt afgesloten op de getaxeerde waarde. Zo ben je bij schade of diefstal verzekerd voor de werkelijke waarde van je camper, niet de dagwaarde.</p>
+    ),
   },
 ];
 
-const infoCards = [
-  { icon: FileCheck, title: "Rapport geldig 3 tot 5 jaar", desc: "Informeer bij jouw verzekeraar naar de exacte geldigheidsduur" },
-  { icon: MapPin, title: "Taxatie op locatie bij jou", desc: "Erik komt naar jouw camper toe, door heel Nederland" },
-  { icon: Wrench, title: "Aanpassingen meegerekend", desc: "Zelfbouw, accessoires en inbouw worden meegenomen in de waarde" },
-];
-
 const CamperTaxatieStappenplan = () => {
-  const [openStep, setOpenStep] = useState<number | null>(null);
-
-  const toggleStep = (n: number) => {
-    setOpenStep(openStep === n ? null : n);
-  };
-
   return (
-    <div className="min-h-screen bg-background">
+    <>
       <PageMeta
         title="Stappenplan Campertaxatie | Automobiel Taxaties"
         description="Van aanvraag tot rapport. Zo verloopt de verzekeringstaxatie van je camper. Bekijk het volledige stappenplan."
@@ -59,155 +64,125 @@ const CamperTaxatieStappenplan = () => {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="relative min-h-[420px] md:min-h-[480px] flex items-center">
-        <div className="absolute inset-0">
-          <img src={heroCamper} alt="Camper taxatie" className="w-full h-full object-cover" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(29,60,113,0.88) 0%, rgba(29,60,113,0.55) 100%)' }} />
-        </div>
-        <div className="relative z-10 w-full px-6 md:px-8 py-16 md:py-20">
-          <div className="container-wide max-w-3xl">
-            <p
-              className="uppercase font-semibold mb-3"
-              style={{ fontSize: 11, letterSpacing: '0.15em', color: '#ff751f' }}
-            >
-              VERZEKERINGSTAXATIE CAMPER
-            </p>
-            <h1
-              className="heading-display font-bold text-white mb-4"
-              style={{ fontSize: 'clamp(32px, 4vw, 48px)', lineHeight: 1.15, letterSpacing: '-0.02em' }}
-            >
-              Zo verloopt de campertaxatie
-            </h1>
-            <p className="text-white/75 mb-8" style={{ fontSize: 'clamp(15px, 1.6vw, 18px)', lineHeight: 1.7, maxWidth: 520 }}>
-              Van aanvraag tot rapport. Wij regelen het op locatie bij jou.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link to="/camper-taxatie">
-                <Button variant="cta" size="lg">
-                  Verzekeringstaxatie aanvragen
-                </Button>
-              </Link>
-              <a href="tel:0854832461">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-2 border-white text-white hover:bg-white/10 font-medium"
-                >
-                  <Phone className="w-4 h-4 mr-2" />
-                  085 483 2461
-                </Button>
-              </a>
-            </div>
+      <section className="relative overflow-hidden" style={{ background: '#1d3c71' }}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28 relative z-10">
+          <p className="text-white/70 text-sm font-medium tracking-wider uppercase mb-4">VERZEKERINGSTAXATIE CAMPER</p>
+          <h1
+            className="text-white font-bold mb-6"
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2rem, 4vw, 3.2rem)', lineHeight: 1.15 }}
+          >
+            Zo verloopt de campertaxatie
+          </h1>
+          <p className="text-white/80 text-lg max-w-[550px] mb-8" style={{ lineHeight: 1.7 }}>
+            Van aanvraag tot rapport. Wij regelen het op locatie bij jou.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link to="/camper-taxatie">
+              <button className="btn-cta flex items-center gap-2">
+                Verzekeringstaxatie aanvragen
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </Link>
+            <a href="tel:+31854832461">
+              <button className="btn-outline-white">
+                <Phone className="w-5 h-5" />
+                085 483 2461
+              </button>
+            </a>
           </div>
         </div>
       </section>
       <UspBar />
 
-      {/* Stappenplan */}
-      <section className="py-16 md:py-20 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
-        <div className="container-wide max-w-3xl">
-          <div className="text-center mb-12">
-            <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>Stappenplan</p>
-            <h2 className="heading-display text-[28px] md:text-[32px] font-bold" style={{ color: '#1d3c71' }}>
-              Van aanvraag tot rapport
-            </h2>
-          </div>
+      {/* Steps label */}
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-16 pb-4">
+        <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>STAPPENPLAN</p>
+        <h2 className="text-[28px] md:text-[32px] font-bold" style={{ color: '#1d3c71', fontFamily: "'Playfair Display', serif" }}>
+          Van aanvraag tot rapport
+        </h2>
+      </div>
 
-          <div className="relative">
-            {/* Verbindingslijn */}
-            <div
-              className="absolute left-[26px] top-[26px] bottom-[26px] w-[2px]"
-              style={{ background: '#ff751f' }}
-            />
-
-            <div className="space-y-0">
-              {steps.map((step) => (
-                <div key={step.number} className="relative pl-16">
-                  {/* Cirkel */}
+      {/* Steps Timeline */}
+      {steps.map((step, i) => (
+        <section
+          key={step.number}
+          className="py-12 md:py-16"
+          style={{ background: i % 2 === 1 ? '#f7f8fa' : '#ffffff' }}
+        >
+          <div className="max-w-5xl mx-auto px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-10">
+              {/* Step number + text */}
+              <div className="flex gap-5 md:gap-6 flex-1 min-w-0">
+                <div className="shrink-0">
                   <div
-                    className="absolute left-0 top-0 w-[52px] h-[52px] rounded-full flex items-center justify-center text-white font-bold text-[20px] z-10"
+                    className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg"
                     style={{ background: '#1d3c71' }}
                   >
                     {step.number}
                   </div>
-
-                  {/* Content */}
-                  <button
-                    onClick={() => toggleStep(step.number)}
-                    className="w-full text-left bg-white rounded-[12px] mb-4 transition-all duration-200 hover:-translate-y-[2px]"
-                    style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}
-                  >
-                    <div className="flex items-center justify-between px-6 py-5">
-                      <h3 className="font-bold text-[16px]" style={{ fontFamily: "'Inter', sans-serif", color: '#1d3c71' }}>
-                        {step.title}
-                      </h3>
-                      <ChevronDown
-                        className="w-5 h-5 transition-transform duration-200 flex-shrink-0"
-                        style={{
-                          color: '#698db3',
-                          transform: openStep === step.number ? 'rotate(180deg)' : 'rotate(0deg)',
-                        }}
-                      />
-                    </div>
-                    {openStep === step.number && (
-                      <div className="px-6 pb-5 pt-0">
-                        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#555', lineHeight: 1.7 }}>
-                          {step.content}
-                        </p>
-                      </div>
-                    )}
-                  </button>
                 </div>
-              ))}
+                <div className="flex-1">
+                  <h2 className="text-xl md:text-2xl font-bold mb-4" style={{ color: '#1d3c71', fontFamily: "'Playfair Display', serif" }}>
+                    {step.title}
+                  </h2>
+                  <div className="text-foreground/80 leading-relaxed">
+                    {step.content}
+                  </div>
+                </div>
+              </div>
+              {/* Image */}
+              <div className="shrink-0 md:w-[360px] h-[240px]">
+                <img
+                  src={step.image}
+                  alt={step.title}
+                  className="w-full h-full rounded-lg shadow-md object-cover"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ))}
 
-      {/* Drie infokaartjes */}
-      <section className="py-14 md:py-16 px-6 md:px-8 bg-white">
-        <div className="container-wide">
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {infoCards.map((card, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-[12px] p-7 text-center transition-all duration-200 hover:-translate-y-[3px]"
-                style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}
-              >
-                <div
-                  className="w-[56px] h-[56px] rounded-full flex items-center justify-center mx-auto mb-4"
-                  style={{ background: '#EBF2FB' }}
-                >
-                  <card.icon className="w-6 h-6" style={{ color: '#1d3c71' }} />
-                </div>
-                <h3 className="font-bold text-[17px] mb-2" style={{ fontFamily: "'Inter', sans-serif", color: '#1d3c71' }}>{card.title}</h3>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#555', lineHeight: 1.65 }}>{card.desc}</p>
-              </div>
-            ))}
+      {/* Info block */}
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 py-8">
+        <div
+          className="rounded-xl p-6 flex gap-4 items-start"
+          style={{ background: '#EBF2FB', borderLeft: '4px solid #1d3c71' }}
+        >
+          <Info className="w-6 h-6 shrink-0 mt-0.5" style={{ color: '#1d3c71' }} />
+          <div className="text-sm leading-relaxed" style={{ color: '#1d3c71' }}>
+            <p className="mb-2">Het taxatierapport is 2 tot 3 jaar geldig. Check bij jouw verzekeraar naar de exacte geldigheidsduur.</p>
+            <p className="mb-2">Aanpassingen en zelfbouw worden alleen meegenomen als je de facturen of documentatie kunt overleggen.</p>
+            <p>Wil je zekerheid over de waarde? Plan de taxatie voordat je de verzekering afsluit.</p>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* CTA blok */}
-      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#1d3c71' }}>
-        <div className="container-wide text-center">
-          <h2 className="heading-display text-[24px] md:text-[28px] font-bold text-white mb-3">
+      {/* Dark blue CTA block */}
+      <section className="py-16 md:py-20" style={{ background: '#1d3c71' }}>
+        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
+          <h2
+            className="text-white font-bold mb-6"
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.5rem, 3vw, 2.2rem)' }}
+          >
             Zekerheid over de waarde van je camper?
           </h2>
-          <p className="text-[15px] mb-8 max-w-lg mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>
+          <p className="text-white/80 text-lg mb-8">
             Vraag vrijblijvend een verzekeringstaxatie aan.
           </p>
           <Link to="/camper-taxatie">
-            <Button variant="cta" size="lg">
+            <button className="btn-cta flex items-center gap-2 mx-auto">
               Verzekeringstaxatie aanvragen
-            </Button>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </Link>
         </div>
       </section>
 
       <SiteFooter />
       <WhatsAppButton />
-    </div>
+    </>
   );
 };
 
