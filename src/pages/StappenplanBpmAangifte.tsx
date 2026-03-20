@@ -95,6 +95,7 @@ const steps = [
   },
   {
     number: 10,
+    image: stepHappyOwner,
     title: "Kenteken ontvangen",
     content: (
       <p>Na betaling geeft de Belastingdienst het fiscaal akkoord af aan de RDW. Je ontvangt het nieuwe kenteken en de kentekencard. Het enige wat je dan nog hoeft te doen is een set kentekenplaten laten maken en monteren.</p>
