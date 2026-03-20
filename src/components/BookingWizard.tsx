@@ -36,7 +36,7 @@ const BookingWizard = () => {
   const canNext = () => {
     if (step === 0) return !!form.type;
     if (step === 1) return !!form.merk_model;
-    if (step === 2) return !!form.postcode;
+    if (step === 2) return !!form.postcode && !!form.stad;
     if (step === 3) return !!form.naam && !!form.telefoon;
     return true;
   };
