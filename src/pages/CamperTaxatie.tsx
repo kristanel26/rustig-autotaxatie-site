@@ -10,6 +10,7 @@ import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, ArrowRight, CheckCircle, Star, Award, Calendar, Wrench, Hammer, TrendingUp, FileCheck, ShieldCheck, Info } from "lucide-react";
+import StatsBar from "@/components/StatsBar";
 import heroCamper from "@/assets/hero-camper.jpg";
 
 const CamperTaxatie = () => {
