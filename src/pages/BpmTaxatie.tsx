@@ -50,7 +50,7 @@ const BpmTaxatie = () => {
       />
 
       {/* BPM Calculator — direct na hero */}
-      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 96, paddingBottom: 96 }}>
+      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 72, paddingBottom: 72 }}>
         <div className="container-wide">
           <div className="mb-8">
             {sectionLabel("BPM Calculator")}
@@ -64,7 +64,7 @@ const BpmTaxatie = () => {
       </section>
 
       {/* 1 — Intro – wit */}
-      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96 }}>
+      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 72, paddingBottom: 72 }}>
         <div className="container-wide">
           <div className="grid md:grid-cols-[1fr_400px] gap-12 items-center">
             <div>
@@ -88,7 +88,7 @@ const BpmTaxatie = () => {
       </section>
 
       {/* 2 — Voor wie – donkerblauw */}
-      <section className="px-6 md:px-8" style={{ background: '#1d3c71', paddingTop: 96, paddingBottom: 96 }}>
+      <section className="px-6 md:px-8" style={{ background: '#1d3c71', paddingTop: 72, paddingBottom: 72 }}>
         <div className="container-wide">
           <div className="text-center mb-10">
             <p className="uppercase font-semibold mb-2" style={{ fontSize: 12, letterSpacing: '0.1em', color: '#ff751f' }}>Voor wie</p>
@@ -108,20 +108,20 @@ const BpmTaxatie = () => {
                 key={i}
                 className="text-center cursor-default"
                 style={{
-                  padding: 28,
+                  padding: '32px 24px',
                   borderRadius: 14,
                   background: 'rgba(255,255,255,0.08)',
                   border: '1px solid rgba(255,255,255,0.15)',
-                  transition: 'transform 200ms ease, background 200ms ease',
+                  transition: 'transform 200ms ease, background 200ms ease, border-color 200ms ease',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.background = 'rgba(255,255,255,0.13)'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.borderColor = '#698db3'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; }}
               >
-                <div className="inline-flex items-center justify-center w-10 h-10 rounded-full mb-3" style={{ background: 'rgba(255,255,255,0.12)' }}>
-                  <item.icon className="w-5 h-5 text-white" />
+                <div className="mx-auto flex items-center justify-center rounded-full mb-4" style={{ width: 64, height: 64, background: '#EBF2FB' }}>
+                  <item.icon style={{ width: 28, height: 28, color: '#1d3c71' }} />
                 </div>
                 <p className="font-bold text-[16px] mb-1 text-white">{item.label}</p>
-                <p className="text-[14px]" style={{ color: 'rgba(255,255,255,0.6)' }}>{item.desc}</p>
+                <p className="text-[13px]" style={{ color: '#adafc7' }}>{item.desc}</p>
               </div>
             ))}
           </div>
@@ -129,7 +129,7 @@ const BpmTaxatie = () => {
       </section>
 
       {/* 3 — Drie methodes – wit */}
-      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96 }}>
+      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 72, paddingBottom: 72 }}>
         <div className="container-wide">
           <div className="text-center mb-10">
             {sectionLabel("Methodes")}
@@ -148,21 +148,20 @@ const BpmTaxatie = () => {
                 key={i}
                 className="bg-white"
                 style={{
-                  borderRadius: 14,
-                  padding: 32,
-                  borderTop: '3px solid #1d3c71',
+                  borderRadius: 12,
+                  padding: 28,
                   borderBottom: '3px solid #ff751f',
-                  boxShadow: '0 4px 24px rgba(0,0,0,0.07)',
-                  transition: 'transform 200ms ease, box-shadow 200ms ease, border 200ms ease',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                  transition: 'transform 200ms ease, box-shadow 200ms ease',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.12)'; e.currentTarget.style.borderBottom = '3px solid transparent'; e.currentTarget.style.borderTop = '3px solid #ff751f'; }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.07)'; e.currentTarget.style.borderBottom = '3px solid #ff751f'; e.currentTarget.style.borderTop = '3px solid #1d3c71'; }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.12)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)'; }}
               >
-                <div className="inline-flex items-center justify-center rounded-full mb-4" style={{ width: 48, height: 48, background: '#EBF2FB' }}>
+                <div className="inline-flex items-center justify-center rounded-full mb-4" style={{ width: 56, height: 56, background: '#EBF2FB' }}>
                   <method.icon style={{ width: 24, height: 24, color: '#1d3c71' }} />
                 </div>
-                <h3 className="font-bold mb-2" style={{ color: '#1d3c71', fontFamily: 'Playfair Display, serif', fontSize: 18 }}>{method.title}</h3>
-                <p className="text-[14px]" style={{ color: '#4a5568', lineHeight: 1.6 }}>{method.desc}</p>
+                <h3 className="font-bold mb-2" style={{ color: '#1d3c71', fontFamily: 'Inter, sans-serif', fontSize: 17 }}>{method.title}</h3>
+                <p className="text-[14px]" style={{ color: '#555', lineHeight: 1.65 }}>{method.desc}</p>
               </div>
             ))}
           </div>
@@ -173,7 +172,7 @@ const BpmTaxatie = () => {
 
 
       {/* 4 — Werkwijze – wit */}
-      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96 }}>
+      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 72, paddingBottom: 72 }}>
         <div className="container-wide">
           <div className="text-center mb-12">
             {sectionLabel("Werkwijze")}
@@ -216,41 +215,37 @@ const BpmTaxatie = () => {
       </section>
 
       {/* 5 — Verwachtingen + Nodig – kaartjes */}
-      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 96, paddingBottom: 96 }}>
+      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 72, paddingBottom: 72 }}>
         <div className="container-wide">
           <div className="grid md:grid-cols-2 gap-12">
             <div>
-              <div className="mb-3" style={{ width: 48, height: 3, background: '#ff751f', borderRadius: 2 }} />
-              <h3 className="text-xl font-semibold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>Wat kun je verwachten?</h3>
-              <div className="space-y-4">
+              <div className="mb-3" style={{ width: 40, height: 3, background: '#ff751f', borderRadius: 2 }} />
+              <h3 className="font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif', fontSize: 22, color: '#1d3c71' }}>Wat kun je verwachten?</h3>
+              <div className="flex flex-col gap-[10px]">
                 {verwachtItems.map((item, i) => (
                   <div
                     key={i}
                     className="flex items-center gap-4 bg-white"
-                    style={{ borderRadius: 10, padding: 20, boxShadow: '0 2px 10px rgba(0,0,0,0.07)' }}
+                    style={{ borderRadius: 10, padding: '18px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}
                   >
-                    <div className="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(255,117,31,0.12)' }}>
-                      <CheckCircle className="w-[18px] h-[18px]" style={{ color: '#ff751f' }} />
-                    </div>
-                    <span className="text-[15px]" style={{ color: '#374151' }}>{item}</span>
+                    <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
+                    <span className="text-[15px] leading-normal" style={{ color: '#333' }}>{item}</span>
                   </div>
                 ))}
               </div>
             </div>
             <div>
-              <div className="mb-3" style={{ width: 48, height: 3, background: '#ff751f', borderRadius: 2 }} />
-              <h3 className="text-xl font-semibold mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>Wat hebben wij nodig?</h3>
-              <div className="space-y-4">
+              <div className="mb-3" style={{ width: 40, height: 3, background: '#ff751f', borderRadius: 2 }} />
+              <h3 className="font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif', fontSize: 22, color: '#1d3c71' }}>Wat hebben wij nodig?</h3>
+              <div className="flex flex-col gap-[10px]">
                 {nodigItems.map((item, i) => (
                   <div
                     key={i}
                     className="flex items-center gap-4 bg-white"
-                    style={{ borderRadius: 10, padding: 20, boxShadow: '0 2px 10px rgba(0,0,0,0.07)' }}
+                    style={{ borderRadius: 10, padding: '18px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}
                   >
-                    <div className="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(255,117,31,0.12)' }}>
-                      <CheckCircle className="w-[18px] h-[18px]" style={{ color: '#ff751f' }} />
-                    </div>
-                    <span className="text-[15px]" style={{ color: '#374151' }}>{item}</span>
+                    <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
+                    <span className="text-[15px] leading-normal" style={{ color: '#333' }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -260,7 +255,7 @@ const BpmTaxatie = () => {
       </section>
 
       {/* 6 — Formulier – wit */}
-      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96 }} ref={formRef}>
+      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 72, paddingBottom: 72 }} ref={formRef}>
         <div className="container-wide">
           <div className="text-center" style={{ marginBottom: 48 }}>
             {sectionLabel("Aanvragen")}
@@ -282,7 +277,7 @@ const BpmTaxatie = () => {
                 compact={true}
               />
             </div>
-            <div className="rounded-2xl p-10 text-white flex flex-col" style={{ background: '#1d3c71' }}>
+            <div className="rounded-2xl p-10 text-white flex flex-col h-full" style={{ background: '#1d3c71' }}>
               <h3 className="text-lg font-semibold mb-5">Direct contact</h3>
               <ul className="space-y-3.5 text-sm">
                 <li className="flex items-center gap-3">
@@ -291,7 +286,7 @@ const BpmTaxatie = () => {
                 </li>
                 <li className="flex items-center gap-3">
                   <MessageCircle className="w-4 h-4 shrink-0 opacity-70" />
-                  <a href="https://wa.me/31650694978" className="hover:underline">06 506 949 78</a>
+                  <a href="https://wa.me/31650694978" className="hover:underline">06 50694978</a>
                 </li>
                 <li className="flex items-center gap-3">
                   <Mail className="w-4 h-4 shrink-0 opacity-70" />
