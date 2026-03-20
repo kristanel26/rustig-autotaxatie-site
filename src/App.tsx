@@ -22,6 +22,7 @@ import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
+import StappenplanBpmAangifte from "./pages/StappenplanBpmAangifte";
 
 // Internal pages
 import Login from "./pages/internal/Login";

@@ -32,8 +32,9 @@ const navLinks = [
 const SiteHeader = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const bpmDropdownRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -44,8 +45,11 @@ const SiteHeader = () => {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setDropdownOpen(false);
+      if (
+        dropdownRef.current && !dropdownRef.current.contains(e.target as Node) &&
+        bpmDropdownRef.current && !bpmDropdownRef.current.contains(e.target as Node)
+      ) {
+        setOpenDropdown(null);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -54,11 +58,12 @@ const SiteHeader = () => {
 
   useEffect(() => {
     setMobileOpen(false);
-    setDropdownOpen(false);
+    setOpenDropdown(null);
   }, [location.pathname]);
 
   const isActive = (href: string) => location.pathname === href;
   const isVerzekeringActive = verzekeringSubLinks.some(s => location.pathname === s.href);
+  const isBpmActive = bpmSubLinks.some(s => location.pathname === s.href);
 
   return (
     <>
