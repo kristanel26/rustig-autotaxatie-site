@@ -160,8 +160,8 @@ const CamperTaxatie = () => {
               <span className="text-xs ml-1" style={{ color: '#4a5568' }}>ervaring</span>
             </div>
             <div className="text-center">
-              <span className="text-lg font-bold text-foreground">98%</span>
-              <span className="text-xs ml-1" style={{ color: '#4a5568' }}>akkoord bij controle</span>
+              <span className="text-lg font-bold text-foreground">Landelijk</span>
+              <span className="text-xs ml-1" style={{ color: '#4a5568' }}>actief</span>
             </div>
           </div>
         </div>
