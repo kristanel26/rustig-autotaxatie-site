@@ -30,7 +30,7 @@ const LandingHero = ({
             alt=""
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--primary))]/90 via-[hsl(var(--primary))]/75 to-[hsl(var(--primary))]/40" />
+          <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.55)' }} />
         </div>
       ) : (
         <div className="absolute inset-0 hero-section" />
