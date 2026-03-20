@@ -182,7 +182,7 @@ export function ReportCompletenessCheck({
                 PDF genereren & afronden...
               </>
             ) : (
-              '✓ Rapport is volledig — afronden en PDF genereren?'
+              '✓ Rapport is volledig, afronden en PDF genereren?'
             )}
           </button>
         )}

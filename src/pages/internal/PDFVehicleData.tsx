@@ -279,7 +279,7 @@ const PDFVehicleData = () => {
             <DataRow label="Gebruik" value={report.gebruik || '-'} source="Taxateur" />
             <DataRow label="Stalling" value={
               report.stalling 
-                ? `${report.stalling === 'binnen' ? 'Binnen' : report.stalling === 'buiten' ? 'Buiten' : report.stalling === 'onbekend' ? 'Onbekend' : report.stalling}${report.stalling_toelichting ? ` — ${report.stalling_toelichting}` : ''}`
+                ? `${report.stalling === 'binnen' ? 'Binnen' : report.stalling === 'buiten' ? 'Buiten' : report.stalling === 'onbekend' ? 'Onbekend' : report.stalling}${report.stalling_toelichting ? `, ${report.stalling_toelichting}` : ''}`
                 : '-'
             } source="Taxateur" />
             <DataRow label="Staat bij opname" value={report.staat_bij_opname || '-'} source="Taxateur" />

@@ -514,7 +514,7 @@ const ReportDetail = () => {
                     <p className="text-sm font-medium text-gold-lt">Stalling</p>
                     <p className="font-medium capitalize">
                       {report.stalling 
-                        ? `${report.stalling === 'binnen' ? 'Binnen' : report.stalling === 'buiten' ? 'Buiten' : report.stalling === 'onbekend' ? 'Onbekend' : report.stalling}${report.stalling_toelichting ? ` — ${report.stalling_toelichting}` : ''}`
+                        ? `${report.stalling === 'binnen' ? 'Binnen' : report.stalling === 'buiten' ? 'Buiten' : report.stalling === 'onbekend' ? 'Onbekend' : report.stalling}${report.stalling_toelichting ? `, ${report.stalling_toelichting}` : ''}`
                         : '-'}
                     </p>
                   </div>
