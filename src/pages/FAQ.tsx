@@ -3,6 +3,7 @@ import { ArrowLeft, Phone, Mail, MessageCircle } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
