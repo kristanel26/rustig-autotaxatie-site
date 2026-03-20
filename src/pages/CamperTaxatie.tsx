@@ -65,16 +65,24 @@ const CamperTaxatie = () => {
       <UspBar />
 
       {/* Waarom taxeren */}
-      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#ffffff' }}>
-        <div className="container-wide" style={{ maxWidth: 760 }}>
-          <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>WAAROM TAXEREN</p>
-          <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>Waarom een verzekeringstaxatie voor je camper?</h2>
-          <p className="text-[15px] leading-relaxed mb-5" style={{ color: '#4a5568' }}>
-            Bij veel verzekeraars is een taxatierapport vereist wanneer de waarde van een camper afwijkt van standaard verzekeringsbedragen. Met een taxatierapport wordt de waarde vooraf vastgelegd, zodat bij schade of diefstal geen discussie ontstaat.
-          </p>
-          <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
-            Je hebt net een nieuwe camper gekocht of na maanden klussen is jouw zelfbouw camper eindelijk klaar. Je staat er wellicht niet direct bij stil, maar jouw camper kan op verschillende manieren schade oplopen. Bijvoorbeeld door brand of storm, inbraak, vandalisme of een aanrijding. Een kloppend taxatierapport en een goede verzekering zijn dus belangrijk om zorgeloos op pad te gaan.
-          </p>
+      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
+        <div className="container-wide">
+          <div className="grid md:grid-cols-[1fr_0.7fr] gap-8 items-start">
+            <div>
+              <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>WAAROM TAXEREN</p>
+              <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>Waarom een verzekeringstaxatie voor je camper?</h2>
+              <p className="text-[15px] leading-relaxed mb-5" style={{ color: '#4a5568' }}>
+                Bij veel verzekeraars is een taxatierapport vereist wanneer de waarde van een camper afwijkt van standaard verzekeringsbedragen. Met een taxatierapport wordt de waarde vooraf vastgelegd, zodat bij schade of diefstal geen discussie ontstaat.
+              </p>
+              <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
+                Je hebt net een nieuwe camper gekocht of na maanden klussen is jouw zelfbouw camper eindelijk klaar. Je staat er wellicht niet direct bij stil, maar jouw camper kan op verschillende manieren schade oplopen. Bijvoorbeeld door brand of storm, inbraak, vandalisme of een aanrijding. Een kloppend taxatierapport en een goede verzekering zijn dus belangrijk om zorgeloos op pad te gaan.
+              </p>
+            </div>
+            <div className="rounded-[12px] p-8 flex flex-col items-center justify-center" style={{ background: '#1d3c71' }}>
+              <ShieldCheck className="w-12 h-12 text-white mb-4" />
+              <p className="text-white font-bold text-[18px] text-center leading-[1.4]">De waarde staat vooraf vast. Geen discussie bij schade of diefstal.</p>
+            </div>
+          </div>
         </div>
       </section>
 
