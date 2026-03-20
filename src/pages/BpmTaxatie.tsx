@@ -139,7 +139,7 @@ const BpmTaxatie = () => {
         <div className="container-wide">
           <div className="text-center mb-10">
             {sectionLabel("Methodes")}
-            <h2 className="text-2xl md:text-3xl font-semibold mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>Drie methodes om BPM vast te stellen</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>Drie methodes om BPM vast te stellen</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
               De Belastingdienst staat meerdere methodes toe. Welke van toepassing is, hangt af van het voertuig en de staat.
             </p>
