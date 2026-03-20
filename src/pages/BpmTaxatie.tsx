@@ -6,7 +6,7 @@ import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
-import { Users, FileText, Shield, ClipboardCheck, Table, BarChart3, Search, ArrowDown, Star, CheckCircle, Scale } from "lucide-react";
+import { Users, FileText, Shield, ClipboardCheck, Table, BarChart3, Search, ArrowDown, Star, CheckCircle, Scale, Phone, Mail, Clock, MessageCircle } from "lucide-react";
 import erikInspectie from "@/assets/erik-inspectie.jpg";
 
 const BpmTaxatie = () => {
@@ -57,16 +57,20 @@ const BpmTaxatie = () => {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { icon: Users, label: "Autobedrijven" },
-                { icon: Scale, label: "Handelaren" },
-                { icon: FileText, label: "Importeurs" },
-                { icon: Shield, label: "Particulieren" },
+                { icon: Users, label: "Autobedrijven", desc: "Dealers en garagebedrijven" },
+                { icon: Scale, label: "Handelaren", desc: "Import- en exporthandel" },
+                { icon: FileText, label: "Importeurs", desc: "Professionele voertuigimport" },
+                { icon: Shield, label: "Particulieren", desc: "Privé-import uit het buitenland" },
               ].map((item, i) => (
-                <div key={i} className="card-elevated p-5 text-center">
+                <div
+                  key={i}
+                  className="card-elevated p-5 text-center cursor-default transition-transform duration-200 hover:-translate-y-1"
+                >
                   <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-3" style={{ background: 'rgba(29,60,113,0.08)' }}>
                     <item.icon className="w-5 h-5 text-primary" />
                   </div>
                   <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                  <p className="text-xs mt-1" style={{ color: '#4a5568' }}>{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -90,21 +94,39 @@ const BpmTaxatie = () => {
                 icon: Table,
                 title: "Afschrijvingstabel",
                 desc: "Een forfaitaire tabel op basis van de leeftijd van het voertuig. Houdt geen rekening met de werkelijke staat.",
+                featured: false,
               },
               {
                 icon: BarChart3,
                 title: "Koerslijst",
                 desc: "Een gestandaardiseerde waardebepaling op basis van merk, model en uitvoering. Geen individuele beoordeling.",
+                featured: false,
               },
               {
                 icon: Search,
                 title: "BPM-taxatierapport",
                 desc: "Een onderbouwing op basis van fysieke inspectie door een geregistreerd taxateur. De werkelijke staat is het uitgangspunt.",
+                featured: true,
               },
             ].map((method, i) => (
-              <div key={i} className="card-elevated p-7">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5" style={{ background: 'rgba(29,60,113,0.08)' }}>
-                  <method.icon className="w-6 h-6 text-primary" />
+              <div
+                key={i}
+                className="card-elevated p-7 relative"
+                style={method.featured ? {
+                  borderLeft: '4px solid #ff751f',
+                  background: '#EBF2FB',
+                } : {}}
+              >
+                {method.featured && (
+                  <span
+                    className="absolute top-4 right-4 text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full"
+                    style={{ background: '#ff751f', color: '#fff' }}
+                  >
+                    Aanbevolen
+                  </span>
+                )}
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5" style={{ background: method.featured ? 'rgba(255,117,31,0.12)' : 'rgba(29,60,113,0.08)' }}>
+                  <method.icon className={`w-6 h-6 ${method.featured ? 'text-cta' : 'text-primary'}`} />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{method.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: '#4a5568' }}>{method.desc}</p>
@@ -258,23 +280,55 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* Formulier */}
+      {/* Formulier — 65/35 layout */}
       <section className="py-12 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
-        <div className="container-narrow">
+        <div className="container-wide">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-semibold mb-3">BPM-aangifte laten uitvoeren</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
               Vul het formulier in en wij bepalen de juiste aanpak voor jouw situatie.
             </p>
           </div>
-          <IntakeForm
-            serviceType="BPM-aangifte"
-            formTitle="Aanvraag BPM-aangifte"
-            formSubtext="Vul onderstaand formulier zo volledig mogelijk in."
-            toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig en de import."
-            submitButtonText="Aanvraag indienen"
-            showVoertuigType={true}
-          />
+          <div className="grid md:grid-cols-[1fr_380px] gap-8">
+            <div>
+              <IntakeForm
+                serviceType="BPM-aangifte"
+                formTitle="Aanvraag BPM-aangifte"
+                formSubtext="Vul onderstaand formulier zo volledig mogelijk in."
+                toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig en de import."
+                submitButtonText="Aanvraag indienen"
+                showVoertuigType={true}
+              />
+            </div>
+            {/* Contact sidebar */}
+            <div
+              className="rounded-2xl p-10 text-white self-start"
+              style={{ background: '#1d3c71' }}
+            >
+              <h3 className="text-lg font-semibold mb-6">Direct contact</h3>
+              <ul className="space-y-4 text-sm">
+                <li className="flex items-center gap-3">
+                  <Phone className="w-4 h-4 shrink-0 opacity-70" />
+                  <a href="tel:+31854832461" className="hover:underline">085 483 2461</a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <MessageCircle className="w-4 h-4 shrink-0 opacity-70" />
+                  <a href="https://wa.me/31629182258" className="hover:underline">06 29182258</a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Mail className="w-4 h-4 shrink-0 opacity-70" />
+                  <a href="mailto:algemeen@automobieltaxaties.nl" className="hover:underline text-[13px]">algemeen@automobieltaxaties.nl</a>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Clock className="w-4 h-4 shrink-0 opacity-70" />
+                  <span>ma - vr 8:30 – 17:00</span>
+                </li>
+              </ul>
+              <p className="mt-6 text-xs italic" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                Liever direct contact? Wij reageren binnen één werkdag.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

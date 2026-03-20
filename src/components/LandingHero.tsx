@@ -30,7 +30,7 @@ const LandingHero = ({
             alt=""
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--primary))]/90 via-[hsl(var(--primary))]/75 to-[hsl(var(--primary))]/40" />
+          <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.55)' }} />
         </div>
       ) : (
         <div className="absolute inset-0 hero-section" />
@@ -63,7 +63,7 @@ const LandingHero = ({
               {subtitle}
             </p>
           </div>
-          <h1 className="heading-display text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-[1.1] animate-slide-up text-balance">
+          <h1 className="heading-display text-white mb-6 leading-[1.1] animate-slide-up text-balance" style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 700 }}>
             {title}
           </h1>
           <div className="text-lg md:text-xl text-white/75 mb-10 max-w-2xl animate-slide-up leading-relaxed" style={{ animationDelay: "100ms" }}>
@@ -78,21 +78,8 @@ const LandingHero = ({
         </div>
       </div>
 
-      {/* Bottom wave decoration */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg
-          viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-auto"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0 120L48 110C96 100 192 80 288 70C384 60 480 60 576 65C672 70 768 80 864 85C960 90 1056 90 1152 85C1248 80 1344 70 1392 65L1440 60V120H1392C1344 120 1248 120 1152 120C1056 120 960 120 864 120C768 120 672 120 576 120C480 120 384 120 288 120C192 120 96 120 48 120H0Z"
-            fill="hsl(var(--background))"
-          />
-        </svg>
-      </div>
+      {/* Straight bottom edge */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-background" />
     </section>
   );
 };
