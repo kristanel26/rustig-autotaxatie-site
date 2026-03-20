@@ -11,7 +11,7 @@ import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, ArrowRight, CheckCircle, Award, Calendar, Wrench, Hammer, TrendingUp, FileCheck, Info } from "lucide-react";
 import StatsBar from "@/components/StatsBar";
-import heroCamper from "@/assets/hero-camper.jpg";
+import heroCamper from "@/assets/hero-camper-new.jpg";
 
 const CamperTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
