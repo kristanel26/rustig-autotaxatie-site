@@ -6,7 +6,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowDown, CheckCircle, Shield, Truck, Car, Bike, UtensilsCrossed, Clock } from "lucide-react";
 import heroCarInspection from "@/assets/hero-car-inspection.jpg";
 
 const VerzekeringstaxatieInfo = () => {
@@ -21,261 +21,148 @@ const VerzekeringstaxatieInfo = () => {
       <SiteHeader />
       <LandingHero
         subtitle="Verzekeringstaxatie"
-        title="Wanneer is een verzekeringstaxatie nodig?"
-        description="Vooraf duidelijkheid over de waarde van je voertuig. Zodat bij schade of diefstal geen discussie ontstaat."
+        title="Vooraf duidelijkheid over de waarde van je voertuig"
+        description="Zodat bij schade of diefstal geen discussie ontstaat. De waarde wordt vooraf vastgelegd in een taxatierapport."
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroCarInspection}
       />
 
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <div className="prose prose-lg max-w-none">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-8">
-              Zekerheid over de waarde van je voertuig
-            </h2>
-            <div className="space-y-6 text-foreground/90 leading-relaxed">
-              <p>
-                Een verzekeringstaxatie is er voor wie vooraf duidelijkheid wil over de waarde van zijn voertuig. Zodat bij schade of diefstal geen discussie ontstaat over wat het voertuig waard was.
+      {/* Waarom */}
+      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+        <div className="container-wide">
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+            <div>
+              <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Waarom</p>
+              <h2 className="text-2xl md:text-3xl font-semibold mb-4">Zekerheid over de waarde</h2>
+              <p className="text-[15px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
+                Met een verzekeringstaxatie wordt de waarde vooraf vastgelegd. Bij schade of diefstal wordt uitgekeerd op basis van de getaxeerde waarde, niet een dagwaarde.
               </p>
-              
-              <p>
-                Dat is vooral prettig wanneer je niet wilt dat er wordt gekeken naar een dagwaarde, maar naar een waarde die vooraf is vastgesteld en vastgelegd in een taxatierapport. Die waarde vormt de basis voor de verzekering.
+              <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
+                Ideaal voor campers, oldtimers, motoren en andere voertuigen waarvan de waarde niet vanzelf spreekt.
               </p>
-              
-              <p>
-                Veel mensen kiezen daarom voor een verzekeringstaxatie wanneer zij hun voertuig met een gerust gevoel willen gebruiken. Omdat ze weten dat de waarde klopt en goed is vastgelegd, ongeacht wat er gebeurt.
-              </p>
-              
-              <p>
-                Dat kan gaan om een camper, een oldtimer, een motor of een ander voertuig waarvan de waarde niet zomaar vanzelf spreekt.
-              </p>
-              
-              <p>
-                Met een verzekeringstaxatie is die waarde vooraf helder. Zo weet je waar je aan toe bent en wordt bij schade of diefstal uitgekeerd op basis van de getaxeerde waarde.
-              </p>
+            </div>
+            <div>
+              <ul className="space-y-3">
+                {[
+                  "Geen discussie achteraf over de waarde",
+                  "Uitkering op basis van getaxeerde waarde",
+                  "Waarde vastgelegd op basis van werkelijke staat",
+                  "Geaccepteerd door verzekeraars",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-cta flex-shrink-0 mt-0.5" />
+                    <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section-padding bg-secondary/30">
-        <div className="container-narrow">
-          <div className="prose prose-lg max-w-none">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-              Wat kun je verwachten van een verzekeringstaxatie?
-            </h2>
-            <div className="space-y-6 text-foreground/90 leading-relaxed">
-              <p>
-                Een verzekeringstaxatie legt de waarde van het voertuig vast op basis van de werkelijke staat en uitvoering op het moment van taxeren.
-              </p>
-              <p>
-                Die waarde wordt vastgelegd in een taxatierapport dat wordt gebruikt voor de verzekering, zodat bij schade of diefstal geen discussie ontstaat over de verzekerde waarde.
-              </p>
-            </div>
-
-            <div className="mt-12">
-              <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
-                Verzekeringstaxatie per voertuigtype
-              </h2>
-              <p className="text-foreground/90 leading-relaxed mb-8">
-                Een verzekeringstaxatie wordt uitgevoerd voor verschillende typen voertuigen. De werkwijze is in de basis gelijk, maar de aandachtspunten verschillen per voertuig.
-              </p>
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">Camper verzekeringstaxatie</h3>
-                  <p className="text-foreground/90 mt-1 mb-3">
-                    Voor campers waarbij zekerheid gewenst is over de waarde, bijvoorbeeld bij aanpassingen of zelfbouw.
-                  </p>
-                  <div className="inline-block bg-[#ADAFC7]/15 p-2 rounded-lg">
-                    <Button variant="secondary-action" size="sm" asChild>
-                      <Link to="/camper-taxatie" className="inline-flex items-center gap-2">
-                        Camperverzekeringstaxatie bekijken
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                      </Link>
-                    </Button>
-                  </div>
+      {/* Per voertuigtype */}
+      <section className="py-12 md:py-16 px-6 md:px-8 bg-background">
+        <div className="container-wide">
+          <div className="text-center mb-10">
+            <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Per voertuigtype</p>
+            <h2 className="text-2xl md:text-3xl font-semibold">Verzekeringstaxatie per voertuigtype</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              { icon: Truck, title: "Camper", desc: "Bij aanpassingen of zelfbouw", link: "/camper-taxatie" },
+              { icon: Car, title: "Oldtimer", desc: "Originaliteit, staat en gebruik", link: "/oldtimer-taxatie" },
+              { icon: Clock, title: "Youngtimer", desc: "Afwijkende waarde t.o.v. standaard", link: "/youngtimer-taxatie" },
+              { icon: Bike, title: "Motor", desc: "Verzekerde waarde vooraf vastleggen", link: "/motor-taxatie" },
+              { icon: UtensilsCrossed, title: "Foodtruck", desc: "Inrichting en apparatuur meegerekend", link: "/foodtruck-taxatie" },
+            ].map((item, i) => (
+              <Link key={i} to={item.link} className="card-elevated p-6 group cursor-pointer">
+                <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-3" style={{ background: 'rgba(29,60,113,0.08)' }}>
+                  <item.icon className="w-5 h-5 text-primary" />
                 </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">Oldtimer verzekeringstaxatie</h3>
-                  <p className="text-foreground/90 mt-1 mb-3">
-                    Voor oldtimers waarbij originaliteit, staat en gebruik een belangrijke rol spelen.
-                  </p>
-                  <div className="inline-block bg-[#ADAFC7]/15 p-2 rounded-lg">
-                    <Button variant="secondary-action" size="sm" asChild>
-                      <Link to="/oldtimer-taxatie" className="inline-flex items-center gap-2">
-                        Oldtimerverzekeringstaxatie bekijken
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">Youngtimer verzekeringstaxatie</h3>
-                  <p className="text-foreground/90 mt-1 mb-3">
-                    Voor youngtimers waarvan de waarde afwijkt van standaard verzekeringsbedragen.
-                  </p>
-                  <div className="inline-block bg-[#ADAFC7]/15 p-2 rounded-lg">
-                    <Button variant="secondary-action" size="sm" asChild>
-                      <Link to="/youngtimer-taxatie" className="inline-flex items-center gap-2">
-                        Youngtimerverzekeringstaxatie bekijken
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">Motor verzekeringstaxatie</h3>
-                  <p className="text-foreground/90 mt-1 mb-3">
-                    Voor motoren waarbij de verzekerde waarde vooraf duidelijk moet zijn vastgelegd.
-                  </p>
-                  <div className="inline-block bg-[#ADAFC7]/15 p-2 rounded-lg">
-                    <Button variant="secondary-action" size="sm" asChild>
-                      <Link to="/motor-taxatie" className="inline-flex items-center gap-2">
-                        Motorverzekeringstaxatie bekijken
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">Foodtruck verzekeringstaxatie</h3>
-                  <p className="text-foreground/90 mt-1 mb-3">
-                    Voor foodtrucks waarbij de inrichting, apparatuur en opbouw de waarde bepalen.
-                  </p>
-                  <div className="inline-block bg-[#ADAFC7]/15 p-2 rounded-lg">
-                    <Button variant="secondary-action" size="sm" asChild>
-                      <Link to="/foodtruck-taxatie" className="inline-flex items-center gap-2">
-                        Foodtruckverzekeringstaxatie bekijken
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                      </Link>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
+                <h3 className="text-sm font-semibold mb-1">{item.title}</h3>
+                <p className="text-xs leading-relaxed mb-3" style={{ color: '#4a5568' }}>{item.desc}</p>
+                <span className="text-xs font-semibold text-cta inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                  Bekijken <ArrowRight className="w-3 h-3" />
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <div className="prose prose-lg max-w-none">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
-              Onze werkwijze bij een verzekeringstaxatie
-            </h2>
-            <div className="space-y-6 text-foreground/90 leading-relaxed mb-10">
-              <p>
-                Een verzekeringstaxatie verloopt bij ons volgens een vaste en overzichtelijke werkwijze. Zo weet je vooraf waar je aan toe bent en wordt de waarde van het voertuig zorgvuldig vastgelegd.
-              </p>
-              <p>
-                De verzekeringstaxaties worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt. Dat zie je terug in de manier waarop het voertuig wordt beoordeeld en het rapport wordt opgebouwd.
-              </p>
-            </div>
-
-            <div className="space-y-8">
-              <div className="flex gap-4">
-                <div className="step-badge flex-shrink-0">
-                  1
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Aanleveren van basisgegevens</h3>
-                  <p className="text-foreground/90">
-                    Je levert de beschikbare gegevens over het voertuig aan, zoals het type, bouwjaar en het gebruik. Deze informatie vormt de basis voor de taxatie en de verdere planning.
-                  </p>
-                </div>
+      {/* Werkwijze */}
+      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+        <div className="container-wide">
+          <div className="text-center mb-10">
+            <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Werkwijze</p>
+            <h2 className="text-2xl md:text-3xl font-semibold">Onze werkwijze in 5 stappen</h2>
+          </div>
+          <div className="grid md:grid-cols-5 gap-6">
+            {[
+              { step: 1, title: "Gegevens aanleveren", desc: "Type, bouwjaar en gebruik van het voertuig" },
+              { step: 2, title: "Fysieke inspectie", desc: "Staat, uitvoering, opties en bijzonderheden" },
+              { step: 3, title: "Waarde vaststellen", desc: "Op basis van inspectie en marktgegevens" },
+              { step: 4, title: "Rapport opstellen", desc: "Duidelijk hoe de waarde tot stand is gekomen" },
+              { step: 5, title: "Oplevering", desc: "Klaar voor gebruik bij de verzekering" },
+            ].map((s) => (
+              <div key={s.step} className="text-center">
+                <div className="step-badge mx-auto mb-4">{s.step}</div>
+                <h4 className="font-semibold text-sm mb-1 text-foreground">{s.title}</h4>
+                <p className="text-xs leading-relaxed" style={{ color: '#4a5568' }}>{s.desc}</p>
               </div>
-
-              <div className="flex gap-4">
-                <div className="step-badge flex-shrink-0">
-                  2
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Fysieke inspectie van het voertuig</h3>
-                  <p className="text-foreground/90">
-                    Het voertuig wordt fysiek geïnspecteerd. Tijdens deze inspectie wordt gekeken naar de staat, de uitvoering, aanwezige opties en eventuele bijzonderheden. Dit is een essentieel onderdeel van een verzekeringstaxatie.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="step-badge flex-shrink-0">
-                  3
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Vaststellen van de waarde</h3>
-                  <p className="text-foreground/90">
-                    Op basis van de inspectie en relevante marktgegevens wordt de waarde van het voertuig vastgesteld. Deze waarde wordt zorgvuldig onderbouwd en afgestemd op het doel van de taxatie.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="step-badge flex-shrink-0">
-                  4
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Opstellen van het taxatierapport</h3>
-                  <p className="text-foreground/90">
-                    De bevindingen en de vastgestelde waarde worden vastgelegd in een verzekeringstaxatierapport. In het rapport is duidelijk te volgen hoe de waarde tot stand is gekomen.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="step-badge flex-shrink-0">
-                  5
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Oplevering van het rapport</h3>
-                  <p className="text-foreground/90">
-                    Je ontvangt het taxatierapport en kunt dit gebruiken voor de verzekering. De waarde is daarmee vooraf vastgelegd, zodat hierover later geen onduidelijkheid ontstaat.
-                  </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="section-padding bg-secondary/30">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Acceptatie door verzekeraars en geldigheid van het rapport
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            Automobiel Taxaties werkt als onafhankelijk taxateur. De taxaties worden uitgevoerd door een taxateur die is geregistreerd bij de Vereniging van Register-Taxateurs (VRT) en is aangesloten bij de Taxateursvereniging voor Motorvoertuigen (TMV).
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            Voor specialistische voertuigwaarderingen, zoals oldtimers en klassiekers, wordt gewerkt binnen de richtlijnen van de FEHAC. De vakkennis wordt actief onderhouden en toegepast bij iedere taxatie. Rapportages zijn zorgvuldig opgebouwd, controleerbaar en bedoeld voor gebruik in fiscale, administratieve en verzekeringscontext.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            Deze registraties zijn voor verzekeraars een belangrijk uitgangspunt bij het accepteren van taxatierapporten. Onze taxatierapporten worden door verzekeraars gebruikt om de verzekerde waarde van voertuigen vast te leggen.
-          </p>
-          <p className="text-foreground/90 leading-relaxed">
-            Een verzekeringstaxatierapport is doorgaans 3 tot 5 jaar geldig. De exacte geldigheid verschilt per verzekeraar en polis. Informeer hier altijd naar bij je verzekeraar.
-          </p>
-        </div>
-      </section>
-
-      <section className="section-padding bg-secondary/30">
-        <div className="container-narrow text-center">
-          <p className="text-lg text-foreground/90 mb-6">
-            Wil je een verzekeringstaxatie laten uitvoeren, dan kun je hieronder eenvoudig een aanvraag indienen.
+      {/* CTA blok */}
+      <section className="py-14 md:py-20 px-6 md:px-8" style={{ background: '#1d3c71' }}>
+        <div className="container-wide text-center">
+          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">Verzekeringstaxatie aanvragen?</h2>
+          <p className="text-base mb-8" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            Vooraf zekerheid over de waarde van je voertuig.
           </p>
           <Button variant="cta" size="lg" onClick={scrollToForm}>
             Verzekeringstaxatie aanvragen
-            <ArrowRight className="w-4 h-4 ml-2" />
+            <ArrowDown className="w-4 h-4 ml-2" />
           </Button>
         </div>
       </section>
 
-      <section className="section-padding bg-background" ref={formRef}>
+      {/* Acceptatie */}
+      <section className="py-12 md:py-16 px-6 md:px-8 bg-background">
+        <div className="container-wide">
+          <div className="card-elevated p-8 md:p-10 max-w-3xl mx-auto">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}>
+                <Shield className="w-5 h-5 text-primary" />
+              </div>
+              <h2 className="text-xl font-semibold">Acceptatie en geldigheid</h2>
+            </div>
+            <ul className="space-y-2 text-sm" style={{ color: '#4a5568' }}>
+              <li>• Geregistreerd bij VRT en aangesloten bij TMV</li>
+              <li>• Werkt binnen FEHAC-richtlijnen voor klassiekers</li>
+              <li>• Rapporten geaccepteerd door verzekeraars</li>
+              <li>• Geldigheid doorgaans 3 tot 5 jaar (check je verzekeraar)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Formulier */}
+      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }} ref={formRef}>
         <div className="container-narrow">
-          <IntakeForm 
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-semibold mb-3">Verzekeringstaxatie aanvragen</h2>
+            <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
+              Vul het formulier in en we nemen binnen één werkdag contact met je op.
+            </p>
+          </div>
+          <IntakeForm
             serviceType="verzekeringstaxatie"
             formTitle="Verzekeringstaxatie aanvragen"
-            formSubtext="Vul onderstaand formulier in en we nemen binnen één werkdag contact met je op."
+            formSubtext="Vul onderstaand formulier in."
             toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig."
           />
         </div>

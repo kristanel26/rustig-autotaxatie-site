@@ -6,7 +6,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowDown, CheckCircle, Shield, Building2, RefreshCw, FileText, Search, BarChart3 } from "lucide-react";
 import serviceWev from "@/assets/service-wev.jpg";
 
 const WevTaxatie = () => {
@@ -22,250 +22,184 @@ const WevTaxatie = () => {
       <LandingHero
         subtitle="WEV-TAXATIE"
         title="Een zorgvuldig vastgestelde waarde voor fiscale doeleinden"
-        description="Een WEV-taxatie wordt gebruikt wanneer de waarde van een voertuig fiscaal moet worden vastgesteld. Dat speelt bijvoorbeeld bij het overbrengen van een voertuig van zakelijk naar privé, van privé naar zakelijk of bij andere fiscale momenten waarbij de Belastingdienst een onderbouwde waarde verlangt."
+        description="Voor situaties waarin de Belastingdienst een onderbouwde voertuigwaarde verlangt. Objectief, controleerbaar en verdedigbaar."
         ctaText="WEV-taxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={serviceWev}
       />
 
-
-      {/* Wanneer is een WEV-taxatie nodig */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Wanneer is een WEV-taxatie nodig?
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            Een WEV-taxatie is nodig wanneer de waarde van een voertuig fiscaal moet worden vastgesteld en niet kan worden gebaseerd op een willekeurige verkoopprijs of globale schatting.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            Dat is onder andere het geval:
-          </p>
-          <ul className="space-y-2 text-foreground/90 mb-6">
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>bij overgang van een voertuig van zakelijk naar privé</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>bij inbreng van een privévoertuig in de onderneming</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>bij beëindiging of wijziging van ondernemingsvorm</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>bij fiscale herstructurering of administratiecorrecties</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>wanneer de Belastingdienst om een onderbouwde waardevaststelling vraagt</span>
-            </li>
-          </ul>
-          <p className="text-foreground/90 leading-relaxed">
-            In deze situaties is een objectieve en goed onderbouwde WEV-taxatie essentieel om discussie achteraf te voorkomen.
-          </p>
+      {/* Wanneer nodig - visuele kaarten */}
+      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+        <div className="container-wide">
+          <div className="text-center mb-10">
+            <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Wanneer nodig</p>
+            <h2 className="text-2xl md:text-3xl font-semibold mb-3">Wanneer is een WEV-taxatie nodig?</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              { icon: Building2, label: "Zakelijk naar privé", desc: "Voertuig overbrengen naar privébezit" },
+              { icon: RefreshCw, label: "Privé naar zakelijk", desc: "Inbreng van een privévoertuig in de onderneming" },
+              { icon: FileText, label: "Wijziging ondernemingsvorm", desc: "Bij beëindiging of herstructurering" },
+              { icon: BarChart3, label: "Administratiecorrecties", desc: "Bij fiscale herstructurering" },
+              { icon: Search, label: "Verzoek Belastingdienst", desc: "Wanneer een onderbouwde waarde gevraagd wordt" },
+              { icon: Shield, label: "Controle voorkomen", desc: "Een objectieve waarde voorkomt discussie achteraf" },
+            ].map((item, i) => (
+              <div key={i} className="card-elevated p-6">
+                <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-3" style={{ background: 'rgba(29,60,113,0.08)' }}>
+                  <item.icon className="w-5 h-5 text-primary" />
+                </div>
+                <h3 className="text-sm font-semibold mb-1">{item.label}</h3>
+                <p className="text-xs leading-relaxed" style={{ color: '#4a5568' }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Wat houdt een WEV-taxatie in */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Wat houdt een WEV-taxatie in?
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            WEV staat voor Waarde in het Economisch Verkeer. Dat is de waarde die een voertuig zou hebben bij verkoop op de vrije markt, tussen onafhankelijke partijen, rekening houdend met de staat van het voertuig op dat moment.
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            Bij een WEV-taxatie wordt onder andere gekeken naar:
-          </p>
-          <ul className="space-y-2 text-foreground/90 mb-6">
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>de technische en cosmetische staat van het voertuig</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>kilometerstand, uitvoering en opties</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>onderhoud en gebruik</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>marktgegevens van vergelijkbare voertuigen</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-primary mt-1">•</span>
-              <span>de context waarin de waarde fiscaal wordt toegepast</span>
-            </li>
-          </ul>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            De uitkomst wordt vastgelegd in een taxatierapport dat controleerbaar en uitlegbaar is.
-          </p>
-          <p className="text-foreground/90 leading-relaxed">
-            Het WEV-taxatierapport dient als onderbouwing voor je eigen administratie en kan bij een eventuele controle door de Belastingdienst worden overlegd om de gehanteerde waarde te verantwoorden.
-          </p>
-        </div>
-      </section>
-
-      {/* Werkwijze */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
-            Onze werkwijze bij een WEV-taxatie
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-10">
-            Een WEV-taxatie verloopt bij ons volgens een vaste en zorgvuldige werkwijze, zodat de vastgestelde waarde goed verdedigbaar is.
-          </p>
-
-          <div className="space-y-8">
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                1
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Aanleveren van gegevens</h3>
-                <p className="text-foreground/90">
-                  Je levert de voertuiggegevens aan, zoals kenteken, merk, type, bouwjaar en kilometerstand. Daarnaast geef je aan in welke fiscale context de WEV-taxatie wordt gebruikt, bijvoorbeeld bij overgang van zakelijk naar privé of bij inbreng in de onderneming.
-                </p>
-              </div>
+      {/* Wat houdt het in - twee kolommen */}
+      <section className="py-12 md:py-16 px-6 md:px-8 bg-background">
+        <div className="container-wide">
+          <div className="grid md:grid-cols-2 gap-10 items-start">
+            <div>
+              <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Wat is WEV</p>
+              <h2 className="text-2xl md:text-3xl font-semibold mb-4">Wat houdt een WEV-taxatie in?</h2>
+              <p className="text-[15px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
+                WEV staat voor Waarde in het Economisch Verkeer: de waarde die een voertuig zou hebben bij verkoop op de vrije markt, tussen onafhankelijke partijen.
+              </p>
+              <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
+                De uitkomst wordt vastgelegd in een controleerbaar taxatierapport dat dient als onderbouwing voor je administratie en bij controle door de Belastingdienst.
+              </p>
             </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                2
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Fysieke inspectie van het voertuig</h3>
-                <p className="text-foreground/90">
-                  Het voertuig wordt fysiek geïnspecteerd. De staat op dat moment is bepalend voor de vastgestelde waarde.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                3
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Vaststellen van de WEV</h3>
-                <p className="text-foreground/90">
-                  Op basis van inspectie en marktgegevens bepalen wij de Waarde in het Economisch Verkeer.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                4
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Opstellen van het taxatierapport</h3>
-                <p className="text-foreground/90">
-                  De waardebepaling en onderbouwing worden vastgelegd in een helder en controleerbaar taxatierapport.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold">
-                5
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">Oplevering van het rapport</h3>
-                <p className="text-foreground/90">
-                  Je ontvangt het WEV-taxatierapport digitaal en kunt dit gebruiken voor je administratie of richting de Belastingdienst.
-                </p>
-              </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Hierbij wordt gekeken naar:</h3>
+              <ul className="space-y-3">
+                {[
+                  "Technische en cosmetische staat",
+                  "Kilometerstand, uitvoering en opties",
+                  "Onderhoud en gebruik",
+                  "Marktgegevens van vergelijkbare voertuigen",
+                  "Fiscale context van de waardering",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-cta flex-shrink-0 mt-0.5" />
+                    <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
-
-          <p className="text-foreground/90 leading-relaxed mt-10">
-            De taxaties worden uitgevoerd door een geregistreerd taxateur die zijn vakkennis actief onderhoudt.
-          </p>
         </div>
       </section>
 
-      {/* Belangrijk om te weten */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-narrow">
-          <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-4">
-            Belangrijk om te weten vóór een WEV-taxatie
-          </h3>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            De staat van het voertuig op de dag van taxatie is bepalend voor de vastgestelde waarde. Werkzaamheden, herstel of aanpassingen die nog gepland staan, moeten daarom vóór de taxatiedatum zijn uitgevoerd.
-          </p>
-          <p className="text-foreground/90 leading-relaxed">
-            Zo wordt de waarde vastgesteld op basis van de daadwerkelijke situatie en blijft de taxatie fiscaal verdedigbaar.
-          </p>
+      {/* Werkwijze stappen */}
+      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+        <div className="container-wide">
+          <div className="text-center mb-10">
+            <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Werkwijze</p>
+            <h2 className="text-2xl md:text-3xl font-semibold">Onze werkwijze in 5 stappen</h2>
+          </div>
+          <div className="grid md:grid-cols-5 gap-6">
+            {[
+              { step: 1, title: "Gegevens aanleveren", desc: "Kenteken, type, bouwjaar en fiscale context" },
+              { step: 2, title: "Fysieke inspectie", desc: "De staat op dat moment is bepalend voor de waarde" },
+              { step: 3, title: "WEV vaststellen", desc: "Op basis van inspectie en marktgegevens" },
+              { step: 4, title: "Rapport opstellen", desc: "Helder en controleerbaar taxatierapport" },
+              { step: 5, title: "Oplevering", desc: "Digitaal, klaar voor administratie of Belastingdienst" },
+            ].map((s) => (
+              <div key={s.step} className="text-center">
+                <div className="step-badge mx-auto mb-4">{s.step}</div>
+                <h4 className="font-semibold text-sm mb-1 text-foreground">{s.title}</h4>
+                <p className="text-xs leading-relaxed" style={{ color: '#4a5568' }}>{s.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Wat hebben wij van je nodig */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-4">
-            Wat hebben wij van je nodig?
-          </h3>
-          <p className="text-foreground/90 leading-relaxed mb-6">
-            Om een WEV-taxatie zorgvuldig te kunnen uitvoeren, ontvangen wij graag de volgende gegevens:
+      {/* CTA blok */}
+      <section className="py-14 md:py-20 px-6 md:px-8" style={{ background: '#1d3c71' }}>
+        <div className="container-wide text-center">
+          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">WEV-taxatie nodig?</h2>
+          <p className="text-base mb-8" style={{ color: 'rgba(255,255,255,0.75)' }}>
+            Vraag vrijblijvend aan. Wij plannen de taxatie op basis van jouw situatie.
           </p>
-          <ol className="space-y-3 text-foreground/90">
-            <li className="flex items-start gap-3">
-              <span className="font-semibold text-primary min-w-[24px]">1.</span>
-              <span>Naam en contactgegevens</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="font-semibold text-primary min-w-[24px]">2.</span>
-              <span>Voertuiggegevens (kenteken, merk, type, bouwjaar, kilometerstand)</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="font-semibold text-primary min-w-[24px]">3.</span>
-              <span>Fiscale context (bijv. overgang zakelijk naar privé, inbreng in onderneming)</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="font-semibold text-primary min-w-[24px]">4.</span>
-              <span>Relevante documentatie (onderhoudsboekje, facturen van uitgevoerde werkzaamheden)</span>
-            </li>
-          </ol>
+          <Button variant="cta" size="lg" onClick={scrollToForm}>
+            WEV-taxatie aanvragen
+            <ArrowDown className="w-4 h-4 ml-2" />
+          </Button>
         </div>
       </section>
 
-      {/* Onafhankelijk en fiscaal verdedigbaar */}
-      <section className="section-padding bg-muted/30">
-        <div className="container-narrow">
-          <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
-            Onafhankelijk en fiscaal verdedigbaar
-          </h2>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            Automobiel Taxaties werkt als onafhankelijk taxateur. De taxaties worden uitgevoerd door een taxateur die is geregistreerd bij de Vereniging van Register-Taxateurs (VRT) en is aangesloten bij de Taxateursvereniging voor Motorvoertuigen (TMV).
-          </p>
-          <p className="text-foreground/90 leading-relaxed mb-4">
-            De vakkennis wordt actief onderhouden en toegepast bij iedere taxatie. Rapportages zijn zorgvuldig opgebouwd, controleerbaar en bedoeld voor gebruik in fiscale, administratieve en verzekeringscontext. Er worden geen vooraf afgesproken uitkomsten of wensbedragen gehanteerd.
-          </p>
-          <p className="text-foreground/90 leading-relaxed">
-            Die onafhankelijkheid is essentieel bij fiscale waarderingen en voorkomt discussie bij controle achteraf.
-          </p>
+      {/* Belangrijk + Nodig - twee kolommen */}
+      <section className="py-12 md:py-16 px-6 md:px-8 bg-background">
+        <div className="container-wide">
+          <div className="grid md:grid-cols-2 gap-10">
+            <div>
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">Belangrijk om te weten</h2>
+              <ul className="space-y-3">
+                {[
+                  "De staat op de dag van taxatie is bepalend",
+                  "Werkzaamheden moeten vóór de taxatiedatum zijn uitgevoerd",
+                  "Zo blijft de taxatie fiscaal verdedigbaar",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-cta flex-shrink-0 mt-0.5" />
+                    <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">Wat hebben wij nodig?</h2>
+              <ul className="space-y-3">
+                {[
+                  "Naam en contactgegevens",
+                  "Voertuiggegevens (kenteken, merk, type, bouwjaar, km-stand)",
+                  "Fiscale context (bijv. zakelijk naar privé)",
+                  "Relevante documentatie (onderhoudsboekje, facturen)",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Form section */}
-      <section className="section-padding bg-muted/30" ref={formRef}>
+      {/* Onafhankelijk */}
+      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+        <div className="container-wide">
+          <div className="card-elevated p-8 md:p-10 max-w-3xl mx-auto">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}>
+                <Shield className="w-5 h-5 text-primary" />
+              </div>
+              <h2 className="text-xl font-semibold">Onafhankelijk en fiscaal verdedigbaar</h2>
+            </div>
+            <ul className="space-y-2 text-sm" style={{ color: '#4a5568' }}>
+              <li>• Geregistreerd bij VRT en aangesloten bij TMV</li>
+              <li>• Geen vooraf afgesproken uitkomsten of wensbedragen</li>
+              <li>• Rapportages zijn transparant, controleerbaar en verdedigbaar</li>
+              <li>• Onafhankelijkheid is essentieel bij fiscale waarderingen</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Formulier */}
+      <section className="py-12 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
         <div className="container-narrow">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
-              WEV-taxatie aanvragen
-            </h2>
-            <p className="text-foreground/90 leading-relaxed">
-              Heb je een WEV-taxatie nodig voor een fiscale of administratieve situatie, dan kun je hieronder een aanvraag indienen. Op basis van de aangeleverde informatie plannen wij de taxatie in.
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-semibold mb-3">WEV-taxatie aanvragen</h2>
+            <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
+              Vul het formulier in en wij plannen de taxatie op basis van de aangeleverde informatie.
             </p>
           </div>
-          <IntakeForm 
-            serviceType="WEV-taxatie" 
+          <IntakeForm
+            serviceType="WEV-taxatie"
             formTitle="WEV-taxatie aanvragen"
             toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig en de fiscale context."
             submitButtonText="WEV-taxatie aanvragen"
@@ -273,17 +207,6 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* Terug naar overzicht */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow text-center">
-          <Button variant="secondary-action" size="sm" asChild>
-            <Link to="/" className="inline-flex items-center gap-2">
-              Terug naar homepage
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Button>
-        </div>
-      </section>
       <SiteFooter />
       <WhatsAppButton />
     </div>
