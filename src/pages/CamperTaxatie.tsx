@@ -9,7 +9,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, ArrowRight, CheckCircle, Shield, Star, Award, Calendar } from "lucide-react";
+import { ArrowDown, ArrowRight, CheckCircle, Star, Award, Calendar, Wrench, Hammer, TrendingUp, FileCheck, FileShield } from "lucide-react";
 import heroCamper from "@/assets/hero-camper.jpg";
 
 const CamperTaxatie = () => {
@@ -31,6 +31,13 @@ const CamperTaxatie = () => {
     "De kentekencard van het voertuig",
     "Onderhoudsboekje of servicehistorie (indien aanwezig)",
     "Facturen van aanpassingen, accessoires of zelfbouw",
+  ];
+
+  const wanneerCards = [
+    { icon: Wrench, label: "Aanpassingen", desc: "Extra's of accessoires ingebouwd" },
+    { icon: Hammer, label: "Zelfbouw", desc: "Bijzondere of eigen uitvoeringen" },
+    { icon: TrendingUp, label: "Afwijkende waarde", desc: "Hoger dan standaard bedragen" },
+    { icon: FileCheck, label: "Eis verzekeraar", desc: "Verzekeraar vraagt om taxatie" },
   ];
 
   const acceptatieCards = [
@@ -56,42 +63,51 @@ const CamperTaxatie = () => {
       />
       <UspBar />
 
-      {/* Korte intro */}
-      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+      {/* Waarom taxeren — twee kolommen */}
+      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-3">Waarom een verzekeringstaxatie voor je camper?</h2>
-            <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
-              Bij veel verzekeraars is een taxatierapport vereist wanneer de waarde van een camper afwijkt van standaard verzekeringsbedragen. Met een taxatierapport wordt de waarde vooraf vastgelegd, zodat bij schade of diefstal geen discussie ontstaat.
-            </p>
+          <div className="grid md:grid-cols-[1fr_0.7fr] gap-8 items-center">
+            <div>
+              <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>WAAROM TAXEREN</p>
+              <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>Waarom een verzekeringstaxatie voor je camper?</h2>
+              <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
+                Bij veel verzekeraars is een taxatierapport vereist wanneer de waarde van een camper afwijkt van standaard verzekeringsbedragen. Met een taxatierapport wordt de waarde vooraf vastgelegd, zodat bij schade of diefstal geen discussie ontstaat.
+              </p>
+            </div>
+            <div className="rounded-[14px] p-8 flex flex-col items-center justify-center text-center" style={{ background: '#1d3c71', minHeight: 200 }}>
+              <FileShield className="w-12 h-12 text-white mb-4" />
+              <p className="text-white font-bold text-[17px] leading-snug max-w-[260px]">
+                De waarde staat vooraf vast. Geen discussie bij schade of diefstal.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Voor wie */}
+      {/* Wanneer nodig */}
       <section className="py-14 md:py-16 px-6 md:px-8 bg-background">
         <div className="container-wide">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
-              <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-2">Wanneer nodig</p>
-              <h2 className="text-2xl md:text-3xl font-semibold mb-3">Wanneer is een taxatie nodig?</h2>
+              <div className="w-[40px] h-[3px] mb-3" style={{ background: '#ff751f' }} />
+              <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>WANNEER NODIG</p>
+              <h2 className="heading-display text-2xl md:text-3xl font-bold mb-3" style={{ color: '#1d3c71' }}>Wanneer is een taxatie nodig?</h2>
               <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
                 Een verzekeringstaxatie is relevant wanneer de waarde van je camper niet vanzelfsprekend is voor de verzekeraar.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              {[
-                { label: "Aanpassingen", desc: "Extra's of accessoires ingebouwd" },
-                { label: "Zelfbouw", desc: "Bijzondere of eigen uitvoeringen" },
-                { label: "Afwijkende waarde", desc: "Hoger dan standaard bedragen" },
-                { label: "Eis verzekeraar", desc: "Verzekeraar vraagt om taxatie" },
-              ].map((item, i) => (
+              {wanneerCards.map((item, i) => (
                 <div
                   key={i}
-                  className="card-elevated p-5 text-center cursor-default transition-transform duration-200 hover:-translate-y-1"
+                  className="bg-white rounded-[12px] p-6 text-center cursor-default transition-all duration-200 hover:-translate-y-[2px]"
+                  style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}
                 >
-                  <p className="text-sm font-semibold text-foreground">{item.label}</p>
-                  <p className="text-xs mt-0.5" style={{ color: '#4a5568' }}>{item.desc}</p>
+                  <div className="w-[48px] h-[48px] rounded-full flex items-center justify-center mx-auto mb-3" style={{ background: '#EBF2FB' }}>
+                    <item.icon className="w-[22px] h-[22px]" style={{ color: '#1d3c71' }} />
+                  </div>
+                  <p className="font-bold text-[15px] mb-1" style={{ fontFamily: "'Inter', sans-serif", color: '#1d3c71' }}>{item.label}</p>
+                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#666' }}>{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -103,11 +119,10 @@ const CamperTaxatie = () => {
       <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
           <div className="text-center mb-8">
-            <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-2">Werkwijze</p>
-            <h2 className="text-2xl md:text-3xl font-semibold">Onze werkwijze in 5 stappen</h2>
+            <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>WERKWIJZE</p>
+            <h2 className="heading-display text-2xl md:text-3xl font-bold" style={{ color: '#1d3c71' }}>Onze werkwijze in 5 stappen</h2>
           </div>
           <div className="relative">
-            {/* Verbindingslijn */}
             <div className="hidden md:block absolute top-[26px] left-[10%] right-[10%] h-[2px]" style={{ background: '#ff751f' }} />
             <div className="grid md:grid-cols-5 gap-5 relative">
               {[
@@ -118,32 +133,23 @@ const CamperTaxatie = () => {
                 { step: 5, title: "Oplevering", desc: "Digitaal, klaar voor de verzekeraar" },
               ].map((s) => (
                 <div key={s.step} className="text-center relative z-10">
-                  <div
-                    className="w-[52px] h-[52px] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold text-[20px]"
-                    style={{ background: '#1d3c71' }}
-                  >
+                  <div className="w-[52px] h-[52px] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold text-[20px]" style={{ background: '#1d3c71' }}>
                     {s.step}
                   </div>
-                  <h4 className="font-semibold text-sm mb-1 text-foreground">{s.title}</h4>
-                  <p className="text-xs leading-relaxed" style={{ color: '#666' }}>{s.desc}</p>
+                  <h4 className="font-bold text-[15px] mb-1" style={{ fontFamily: "'Inter', sans-serif", color: '#1d3c71' }}>{s.title}</h4>
+                  <p className="text-[13px] leading-relaxed" style={{ color: '#666' }}>{s.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Knoppen onder stappenplan */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
             <Button variant="cta" size="lg" onClick={scrollToForm}>
               Verzekeringstaxatie aanvragen
               <ArrowDown className="w-4 h-4 ml-2" />
             </Button>
             <Link to="/camper-taxatie-stappenplan">
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-2 font-medium"
-                style={{ borderColor: '#1d3c71', color: '#1d3c71' }}
-              >
+              <Button variant="outline" size="lg" className="border-2 font-medium" style={{ borderColor: '#1d3c71', color: '#1d3c71' }}>
                 Bekijk het volledige stappenplan
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
@@ -153,9 +159,9 @@ const CamperTaxatie = () => {
       </section>
 
       {/* Mid-page CTA */}
-      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: '#1d3c71' }}>
+      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
         <div className="container-wide text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">Verzekeringstaxatie voor je camper?</h2>
+          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Verzekeringstaxatie voor je camper?</h2>
           <p className="text-[15px] mb-6 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>
             Vooraf zekerheid over de waarde. Wij plannen de taxatie op locatie bij je camper.
           </p>
@@ -166,40 +172,57 @@ const CamperTaxatie = () => {
         </div>
       </section>
 
-      {/* Reviews placeholder */}
-      <section className="py-10 md:py-12 px-6 md:px-8 bg-background">
-        <div className="container-wide">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-sm font-medium" style={{ color: '#4a5568' }}>[REVIEWS AANLEVEREN DOOR OPDRACHTGEVER]</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust balk */}
-      <section className="py-6 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
-        <div className="container-wide">
-          <div className="flex flex-wrap justify-center gap-6 md:gap-14 items-center">
-            <div className="flex items-center gap-2">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-3.5 h-3.5 fill-cta text-cta" />
-                ))}
+      {/* Statistieken balk */}
+      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', borderTop: '1px solid #e0e6ed', borderBottom: '1px solid #e0e6ed' }}>
+        <div className="container-wide py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-0">
+            {[
+              {
+                content: (
+                  <>
+                    <div className="flex justify-center mb-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-5 h-5" style={{ color: '#ff751f', fill: '#ff751f' }} />
+                      ))}
+                    </div>
+                    <span className="heading-display text-[36px] font-bold" style={{ color: '#1d3c71' }}>4.9</span>
+                    <span className="uppercase text-[12px] font-medium tracking-[0.1em]" style={{ color: '#888' }}>Google Reviews</span>
+                  </>
+                ),
+              },
+              {
+                content: (
+                  <>
+                    <span className="heading-display text-[36px] font-bold" style={{ color: '#1d3c71' }}>25.000+</span>
+                    <span className="uppercase text-[12px] font-medium tracking-[0.1em]" style={{ color: '#888' }}>Voertuigen getaxeerd</span>
+                  </>
+                ),
+              },
+              {
+                content: (
+                  <>
+                    <span className="heading-display text-[36px] font-bold" style={{ color: '#1d3c71' }}>13 jaar</span>
+                    <span className="uppercase text-[12px] font-medium tracking-[0.1em]" style={{ color: '#888' }}>Ervaring</span>
+                  </>
+                ),
+              },
+              {
+                content: (
+                  <>
+                    <span className="heading-display text-[36px] font-bold" style={{ color: '#1d3c71' }}>Landelijk</span>
+                    <span className="uppercase text-[12px] font-medium tracking-[0.1em]" style={{ color: '#888' }}>Actief</span>
+                  </>
+                ),
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="flex flex-col items-center justify-center text-center py-4"
+                style={{ borderRight: i < 3 ? '1px solid #dde3ea' : 'none' }}
+              >
+                {item.content}
               </div>
-              <span className="text-sm font-semibold text-foreground">4.9 / 5</span>
-              <span className="text-xs" style={{ color: '#4a5568' }}>Google Reviews</span>
-            </div>
-            <div className="text-center">
-              <span className="text-lg font-bold text-foreground">25.000+</span>
-              <span className="text-xs ml-1" style={{ color: '#4a5568' }}>voertuigen getaxeerd</span>
-            </div>
-            <div className="text-center">
-              <span className="text-lg font-bold text-foreground">13 jaar</span>
-              <span className="text-xs ml-1" style={{ color: '#4a5568' }}>ervaring</span>
-            </div>
-            <div className="text-center">
-              <span className="text-lg font-bold text-foreground">Landelijk</span>
-              <span className="text-xs ml-1" style={{ color: '#4a5568' }}>actief</span>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -213,9 +236,9 @@ const CamperTaxatie = () => {
               <h2 className="heading-display text-[22px] font-bold mb-5" style={{ color: '#1d3c71' }}>Wat kun je verwachten?</h2>
               <div className="space-y-[10px]">
                 {verwachtItems.map((item, i) => (
-                  <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-[18px]" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
+                  <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
                     <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#333', lineHeight: 1.5 }}>{item}</span>
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1a1a1a', lineHeight: 1.5 }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -225,9 +248,9 @@ const CamperTaxatie = () => {
               <h2 className="heading-display text-[22px] font-bold mb-5" style={{ color: '#1d3c71' }}>Wat hebben wij nodig?</h2>
               <div className="space-y-[10px]">
                 {nodigItems.map((item, i) => (
-                  <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-[18px]" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
+                  <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
                     <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#333', lineHeight: 1.5 }}>{item}</span>
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1a1a1a', lineHeight: 1.5 }}>{item}</span>
                   </div>
                 ))}
               </div>
@@ -237,9 +260,9 @@ const CamperTaxatie = () => {
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: '#1d3c71' }}>
+      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
         <div className="container-wide text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">Zekerheid over de waarde van je camper?</h2>
+          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Zekerheid over de waarde van je camper?</h2>
           <p className="text-[15px] mb-6" style={{ color: 'rgba(255,255,255,0.75)' }}>
             Vraag vrijblijvend een verzekeringstaxatie aan.
           </p>
@@ -254,7 +277,8 @@ const CamperTaxatie = () => {
       <section className="py-14 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
         <div className="container-wide">
           <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-2">Verzekeringstaxatie aanvragen</h2>
+            <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>AANVRAGEN</p>
+            <h2 className="heading-display text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1d3c71' }}>Verzekeringstaxatie aanvragen</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
               Vul het formulier in en wij nemen binnen één werkdag contact met je op.
             </p>
@@ -277,7 +301,7 @@ const CamperTaxatie = () => {
       <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
           <div className="text-center mb-8">
-            <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>Acceptatie</p>
+            <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>ACCEPTATIE</p>
             <h2 className="heading-display text-[22px] font-bold" style={{ color: '#1d3c71' }}>Acceptatie en geldigheid</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
@@ -287,10 +311,7 @@ const CamperTaxatie = () => {
                 className="bg-white rounded-[12px] p-7 text-center transition-all duration-200 hover:-translate-y-[3px]"
                 style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}
               >
-                <div
-                  className="w-[56px] h-[56px] rounded-full flex items-center justify-center mx-auto mb-4"
-                  style={{ background: '#EBF2FB' }}
-                >
+                <div className="w-[56px] h-[56px] rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: '#EBF2FB' }}>
                   <card.icon className="w-6 h-6" style={{ color: '#1d3c71' }} />
                 </div>
                 <h3 className="font-bold text-[17px] mb-2" style={{ fontFamily: "'Inter', sans-serif", color: '#1d3c71' }}>{card.title}</h3>
