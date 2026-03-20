@@ -75,6 +75,11 @@ const LandingHero = ({
               <ArrowDown className="w-5 h-5 ml-2" />
             </Button>
           </div>
+          {children && (
+            <div className="animate-slide-up mt-5" style={{ animationDelay: "300ms" }}>
+              {children}
+            </div>
+          )}
         </div>
       </div>
 
