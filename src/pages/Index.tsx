@@ -381,7 +381,7 @@ const Index = () => {
               {[
                 { num: "25.000+", label: "Voertuigen getaxeerd" },
                 { num: "13 jaar", label: "Ervaring" },
-                { num: "98%", label: "Geaccepteerd" },
+                { num: "Landelijk", label: "Actief" },
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col">
                   <span className="heading-display" style={{ fontSize: 32, fontWeight: 700, color: '#ffffff', lineHeight: 1, letterSpacing: '-0.02em' }}>{stat.num}</span>
@@ -588,7 +588,7 @@ const Index = () => {
             {[
               { num: "25.000+", label: "Voertuigen getaxeerd" },
               { num: "13 jaar", label: "Ervaring in voertuigtaxaties" },
-              { num: "98%", label: "Rapporten geaccepteerd door Belastingdienst" },
+              { num: "Landelijk", label: "Actief door heel Nederland" },
             ].map((stat, i) => (
               <div key={i} className={`text-center py-6 ${i > 0 ? "border-l" : ""}`} style={{ borderColor: 'rgba(255,255,255,0.15)' }}>
                 <p

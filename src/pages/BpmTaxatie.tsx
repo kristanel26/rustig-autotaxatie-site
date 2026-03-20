@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
+import BpmCalculator from "@/components/BpmCalculator";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -31,6 +32,13 @@ const BpmTaxatie = () => {
     "Info over schade, gebruik en onderhoud",
   ];
 
+  const vergelijkingRows = [
+    { left: "Gebaseerd op software", right: "Fysieke inspectie op locatie" },
+    { left: "Geen opname van het voertuig", right: "Lakdiktemetingen, schadecalculatie, fotodossier" },
+    { left: "Niet bruikbaar als officieel tegenbewijs", right: "Officieel erkend, verdedigbaar bij bezwaar" },
+    { left: "Gratis, maar zonder garantie", right: "Betaald, maar juridisch waterdicht" },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <PageMeta
@@ -46,6 +54,20 @@ const BpmTaxatie = () => {
         onCtaClick={scrollToForm}
         heroImage={erikHeroBpm}
       />
+
+      {/* BPM Calculator — direct na hero */}
+      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 96, paddingBottom: 96 }}>
+        <div className="container-wide">
+          <div className="mb-8">
+            {sectionLabel("BPM Calculator")}
+            <h2 className="font-semibold mb-2" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36 }}>Bereken je BPM indicatie</h2>
+            <p className="text-[15px]" style={{ color: '#4a5568', maxWidth: 540 }}>
+              Gebruik onze calculator voor een eerste indicatie van de BPM-kosten bij import. Let op: een berekening is geen taxatie en biedt geen juridische onderbouwing.
+            </p>
+          </div>
+          <BpmCalculator />
+        </div>
+      </section>
 
       {/* 1 — Intro – wit */}
       <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96 }}>
@@ -153,8 +175,40 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* 4 — Werkwijze – lichtgrijs */}
+      {/* Vergelijkingstabel */}
       <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 96, paddingBottom: 96 }}>
+        <div className="container-wide">
+          <div className="text-center mb-10">
+            {sectionLabel("Vergelijking")}
+            <h2 className="text-2xl md:text-3xl font-semibold" style={{ fontFamily: 'Playfair Display, serif' }}>Wat is het verschil?</h2>
+          </div>
+          <div className="overflow-hidden" style={{ borderRadius: 12, boxShadow: '0 4px 24px rgba(0,0,0,0.07)' }}>
+            {/* Header */}
+            <div className="grid grid-cols-2">
+              <div className="px-6 py-4 font-semibold text-[14px]" style={{ background: '#f0f0f0', color: '#666' }}>
+                Een online BPM berekening
+              </div>
+              <div className="px-6 py-4 font-semibold text-[14px] text-white" style={{ background: '#1d3c71' }}>
+                Een taxatierapport van Automobiel Taxaties
+              </div>
+            </div>
+            {/* Rows */}
+            {vergelijkingRows.map((row, i) => (
+              <div key={i} className="grid grid-cols-2" style={{ background: i % 2 === 0 ? '#ffffff' : '#fafafa' }}>
+                <div className="px-6 py-4 text-[14px] border-r" style={{ color: '#666', borderColor: '#eee' }}>
+                  {row.left}
+                </div>
+                <div className="px-6 py-4 text-[14px] font-bold" style={{ color: '#1d3c71' }}>
+                  {row.right}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4 — Werkwijze – wit */}
+      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96 }}>
         <div className="container-wide">
           <div className="text-center mb-12">
             {sectionLabel("Werkwijze")}
@@ -196,8 +250,8 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* 5 — Verwachtingen + Nodig – wit */}
-      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96 }}>
+      {/* 5 — Verwachtingen + Nodig – kaartjes */}
+      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 96, paddingBottom: 96 }}>
         <div className="container-wide">
           <div className="grid md:grid-cols-2 gap-12">
             <div>
@@ -208,7 +262,7 @@ const BpmTaxatie = () => {
                   <div
                     key={i}
                     className="flex items-center gap-4 bg-white"
-                    style={{ borderRadius: 10, borderLeft: '3px solid #ff751f', padding: 20, boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}
+                    style={{ borderRadius: 10, padding: 20, boxShadow: '0 2px 10px rgba(0,0,0,0.07)' }}
                   >
                     <div className="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(255,117,31,0.12)' }}>
                       <CheckCircle className="w-[18px] h-[18px]" style={{ color: '#ff751f' }} />
@@ -226,7 +280,7 @@ const BpmTaxatie = () => {
                   <div
                     key={i}
                     className="flex items-center gap-4 bg-white"
-                    style={{ borderRadius: 10, borderLeft: '3px solid #ff751f', padding: 20, boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}
+                    style={{ borderRadius: 10, padding: 20, boxShadow: '0 2px 10px rgba(0,0,0,0.07)' }}
                   >
                     <div className="w-9 h-9 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(255,117,31,0.12)' }}>
                       <CheckCircle className="w-[18px] h-[18px]" style={{ color: '#ff751f' }} />
@@ -240,8 +294,8 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* 6 — Formulier – lichtgrijs */}
-      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 96, paddingBottom: 96 }} ref={formRef}>
+      {/* 6 — Formulier – wit */}
+      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 96, paddingBottom: 96 }} ref={formRef}>
         <div className="container-wide">
           <div className="text-center" style={{ marginBottom: 48 }}>
             {sectionLabel("Aanvragen")}
@@ -287,10 +341,10 @@ const BpmTaxatie = () => {
                 Liever direct contact? Wij reageren binnen één werkdag.
               </p>
               <a
-                href="https://wa.me/31650694978"
+                href="https://wa.me/31629182258"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                className="flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90 w-full"
                 style={{ background: '#25D366', marginTop: 'auto' }}
               >
                 <svg viewBox="0 0 24 24" className="w-5 h-5 fill-white">
