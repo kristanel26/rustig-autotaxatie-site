@@ -12,6 +12,8 @@ interface IntakeFormProps {
   toelichtingPlaceholder?: string;
   submitButtonText?: string;
   showVoertuigType?: boolean;
+  hideKenteken?: boolean;
+  compact?: boolean;
   onSuccess?: () => void;
 }
 
@@ -22,6 +24,8 @@ const IntakeForm = ({
   toelichtingPlaceholder,
   submitButtonText,
   showVoertuigType = false,
+  hideKenteken = false,
+  compact = false,
   onSuccess 
 }: IntakeFormProps) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -36,7 +40,6 @@ const IntakeForm = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would send to a backend
     setIsSubmitted(true);
     onSuccess?.();
   };
@@ -50,9 +53,12 @@ const IntakeForm = ({
     }));
   };
 
+  const inputHeight = compact ? "h-10" : "h-12";
+  const padding = compact ? "p-6" : "p-8 md:p-12";
+
   if (isSubmitted) {
     return (
-      <div className="card-elevated p-8 md:p-12 text-center animate-fade-in">
+      <div className={`card-elevated ${padding} text-center animate-fade-in`}>
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent/10 mb-6">
           <CheckCircle className="w-8 h-8 text-accent" />
         </div>
@@ -66,7 +72,7 @@ const IntakeForm = ({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="card-elevated p-8 md:p-12 animate-slide-up">
+    <form onSubmit={handleSubmit} className={`card-elevated ${padding} animate-slide-up`}>
       <div className="mb-8">
         <h3 className="text-2xl font-semibold mb-2">{formTitle || `Vraag een ${serviceType} aan`}</h3>
         <p className="text-muted-foreground">
@@ -85,7 +91,7 @@ const IntakeForm = ({
               value={formData.naam}
               onChange={handleChange}
               required
-              className="h-12"
+              className={inputHeight}
             />
           </div>
           <div className="space-y-2">
@@ -98,12 +104,12 @@ const IntakeForm = ({
               value={formData.telefoon}
               onChange={handleChange}
               required
-              className="h-12"
+              className={inputHeight}
             />
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        {hideKenteken ? (
           <div className="space-y-2">
             <Label htmlFor="email">E-mailadres</Label>
             <Input
@@ -114,21 +120,37 @@ const IntakeForm = ({
               value={formData.email}
               onChange={handleChange}
               required
-              className="h-12"
+              className={inputHeight}
             />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="kenteken">Kenteken (optioneel)</Label>
-            <Input
-              id="kenteken"
-              name="kenteken"
-              placeholder="Indien bekend"
-              value={formData.kenteken}
-              onChange={handleChange}
-              className="h-12"
-            />
+        ) : (
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <Label htmlFor="email">E-mailadres</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="je@emailadres.nl"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className={inputHeight}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="kenteken">Kenteken (optioneel)</Label>
+              <Input
+                id="kenteken"
+                name="kenteken"
+                placeholder="Indien bekend"
+                value={formData.kenteken}
+                onChange={handleChange}
+                className={inputHeight}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
         {showVoertuigType && (
           <div className="space-y-2">
@@ -139,7 +161,7 @@ const IntakeForm = ({
               placeholder="Personenauto, bedrijfsauto, camper, motor"
               value={formData.voertuigType}
               onChange={handleChange}
-              className="h-12"
+              className={inputHeight}
             />
           </div>
         )}
@@ -157,7 +179,13 @@ const IntakeForm = ({
           />
         </div>
 
-        <Button type="submit" variant="cta" size="xl" className="w-full">
+        <Button
+          type="submit"
+          variant="cta"
+          size="xl"
+          className="w-full"
+          style={compact ? { height: 44 } : undefined}
+        >
           {submitButtonText || "Verstuur aanvraag"}
         </Button>
 
