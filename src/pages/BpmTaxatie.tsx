@@ -5,7 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Users, FileText, Shield, ClipboardCheck, List, AlertTriangle } from "lucide-react";
-import heroBpm from "@/assets/hero-bpm.jpg";
+import erikInspectie from "@/assets/erik-inspectie.jpg";
 const BpmTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
 
