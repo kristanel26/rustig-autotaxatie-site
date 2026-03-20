@@ -183,7 +183,7 @@ const BpmTaxatie = () => {
         <div className="container-wide">
           <div className="text-center mb-12">
             {sectionLabel("Werkwijze")}
-            <h2 className="text-2xl md:text-3xl font-semibold" style={{ fontFamily: 'Playfair Display, serif' }}>Onze werkwijze in 5 stappen</h2>
+            <h2 className="text-2xl md:text-3xl font-bold" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>Onze werkwijze in 5 stappen</h2>
           </div>
           <div className="grid md:grid-cols-5 gap-8 relative">
             <div className="hidden md:block absolute" style={{ top: 26, left: 'calc(10% + 26px)', right: 'calc(10% + 26px)', height: 2, background: '#ff751f', zIndex: 0 }} />
