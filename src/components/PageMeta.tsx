@@ -29,7 +29,7 @@ const PageMeta = ({ title, description }: PageMetaProps) => {
 
     return () => {
       // Reset to defaults on unmount
-      document.title = "Automobieltaxaties, Erkend taxatiebureau";
+      document.title = "Automobiel Taxaties, Erkend taxatiebureau";
     };
   }, [title, description]);
 
