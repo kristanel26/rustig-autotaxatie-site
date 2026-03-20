@@ -617,20 +617,31 @@ const Index = () => {
             Wat onze klanten zeggen
           </h2>
           <div className="grid md:grid-cols-3 gap-6 mb-10">
-            {reviews.map((review, i) => (
-              <div key={i} className="card-elevated bg-white p-7">
-                <div className="flex gap-0.5 mb-3" style={{ fontSize: 18, color: '#ff751f' }}>
-                  ★★★★★
+            {reviews.map((review, i) => {
+              const initials = review.name.split(' ').map(n => n[0]).filter(c => c && c === c.toUpperCase()).join('');
+              return (
+                <div key={i} className="card-elevated bg-white p-7">
+                  <div className="flex gap-0.5 mb-3" style={{ fontSize: 18, color: '#ff751f' }}>
+                    ★★★★★
+                  </div>
+                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#4a5568', fontStyle: 'italic', lineHeight: 1.70 }} className="mb-4">
+                    "{review.text}"
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="flex-shrink-0 flex items-center justify-center rounded-full"
+                      style={{ width: 44, height: 44, background: '#1d3c71', color: '#ffffff', fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 700 }}
+                    >
+                      {initials}
+                    </div>
+                    <div>
+                      <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: '#1a1a1a', display: 'block' }}>{review.name}</span>
+                      <span style={{ fontSize: 11, color: '#698db3', fontWeight: 400 }}>Geverifieerde klant</span>
+                    </div>
+                  </div>
                 </div>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#4a5568', fontStyle: 'italic', lineHeight: 1.70 }} className="mb-4">
-                  "{review.text}"
-                </p>
-                <div className="flex items-center gap-2">
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: '#1a1a1a' }}>{review.name}</span>
-                  <span style={{ fontSize: 11, color: '#698db3', fontWeight: 400 }}>Geverifieerde klant</span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           <div className="text-center flex items-center justify-center gap-2">
             <span style={{ fontSize: 20, color: '#ff751f' }}>★★★★★</span>
