@@ -9,6 +9,7 @@ import erikHero from "@/assets/erik-bpm-taxatie-hero.jpg";
 import stepRdw from "@/assets/step-rdw-inspection.jpg";
 import stepHappyOwner from "@/assets/step-happy-car-owner.jpg";
 import stepAangifteFormulier from "@/assets/bpm-aangifte-formulier.png";
+import stepTransport from "@/assets/step-transport.png";
 
 const steps: { number: number; title: string; image?: string; content: React.ReactNode }[] = [
   {
