@@ -49,6 +49,7 @@ const BpmTaxatie = () => {
         onCtaClick={scrollToForm}
         heroImage={erikHeroBpm}
       />
+      <UspBar />
 
       {/* BPM Calculator — direct na hero */}
       <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 72, paddingBottom: 72 }}>

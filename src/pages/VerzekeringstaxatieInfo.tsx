@@ -67,6 +67,7 @@ const VerzekeringstaxatieInfo = () => {
           Landelijk actief — op locatie bij jou
         </p>
       </LandingHero>
+      <UspBar />
 
       {/* WAAROM TAXEREN — 2×2 kaartjes */}
       <section className="py-16 md:py-24 px-6 md:px-8" style={{ background: '#f7f8fa' }}>

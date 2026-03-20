@@ -34,8 +34,8 @@ const WevTaxatie = () => {
         onCtaClick={scrollToForm}
         heroImage={serviceWev}
       />
+      <UspBar />
 
-      {/* Wanneer nodig - visuele kaarten */}
       <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide">
           <div className="text-center mb-10">
