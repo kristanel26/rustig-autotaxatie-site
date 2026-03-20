@@ -61,7 +61,7 @@ const Blog = () => {
   return (
     <div className="min-h-screen bg-white">
       <PageMeta
-        title="Blog & Kennisbank | BPM Nieuws en Tips | Automobieltaxaties"
+        title="Blog & Kennisbank | BPM Nieuws en Tips | Automobiel Taxaties"
         description="Praktische informatie over BPM, taxaties en voertuigwaardering. Nieuws over wetgeving, jurisprudentie en belastingwijzigingen."
       />
       <SiteHeader />

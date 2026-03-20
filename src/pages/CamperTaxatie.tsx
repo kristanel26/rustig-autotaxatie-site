@@ -34,7 +34,7 @@ const CamperTaxatie = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageMeta
-        title="Camper Taxatie | Erkende Waardebepaling | Automobieltaxaties"
+        title="Camper Taxatie | Erkende Waardebepaling | Automobiel Taxaties"
         description="Professionele camper taxatie door een specialist in de campermarkt. Erkend rapport voor je verzekeringspolis. Op locatie bij je camper."
       />
       <SiteHeader />

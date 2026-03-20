@@ -67,7 +67,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-white">
       <PageMeta
-        title="BPM Taxatie & Voertuigtaxaties | Automobieltaxaties"
+        title="BPM Taxatie & Voertuigtaxaties | Automobiel Taxaties"
         description="Erkend taxatiebureau voor BPM-aangifte, verzekeringstaxatie en WEV taxatie. Erik Elderson taxeert op locatie door heel Nederland. 25.000+ voertuigen getaxeerd."
       />
       <SiteHeader />
@@ -88,14 +88,14 @@ const Index = () => {
                 fontFamily: "'Inter', sans-serif",
                 fontSize: 12,
                 fontWeight: 700,
-                letterSpacing: '0.14em',
+                letterSpacing: '0.10em',
                 textTransform: 'uppercase' as const,
                 color: '#ff751f',
                 lineHeight: 1,
               }}
             >
               <span style={{ display: 'inline-block', width: 28, height: 2, background: '#ff751f', flexShrink: 0 }} />
-              Erkend taxatiebureau &mdash; landelijk actief
+              Automobiel Taxaties
             </p>
             <h1
               className="animate-slide-up delay-100 heading-display text-white font-bold mb-6"
@@ -121,7 +121,7 @@ const Index = () => {
                 maxWidth: 540,
               }}
             >
-              Automobieltaxaties is het erkende taxatiebureau voor merkdealers, importeurs en particulieren. Wij komen bij je op locatie, door heel Nederland.
+              Automobiel Taxaties is het erkende taxatiebureau voor merkdealers, importeurs en particulieren. Wij komen bij je op locatie, door heel Nederland.
             </p>
             <div className="animate-slide-up delay-300 flex flex-col sm:flex-row gap-3 items-center">
               <Link to="/contact">
@@ -302,7 +302,7 @@ const Index = () => {
             <div className="rounded-2xl overflow-hidden relative" style={{ marginTop: -40, boxShadow: '0 24px 64px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.20)' }}>
               <img
                 src={erikPhoto}
-                alt="Erik Elderson, Automobieltaxaties"
+                alt="Erik Elderson, Automobiel Taxaties"
                 className="w-full block"
                 style={{ height: 520, objectFit: 'cover', objectPosition: 'center top', filter: 'contrast(1.05) brightness(0.98)' }}
                 loading="lazy"
@@ -346,7 +346,7 @@ const Index = () => {
 
             <div className="space-y-3.5 mb-7">
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
-                In 2013 startte Erik Elderson Automobieltaxaties vanuit een eenvoudige overtuiging: een taxatierapport moet kloppen, en de klant verdient eerlijk advies.
+                In 2013 startte Erik Elderson Automobiel Taxaties vanuit een eenvoudige overtuiging: een taxatierapport moet kloppen, en de klant verdient eerlijk advies.
               </p>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
                 Na jarenlange ervaring in de taxatiebranche wist Erik precies wat hij anders wilde doen. Geen aannames, geen haastwerk. Elk voertuig verdient een grondige fysieke inspectie, met lakdiktemetingen, schadecalculatie en een volledig fotodossier als basis.

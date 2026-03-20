@@ -29,7 +29,7 @@ const FoodtruckTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta title="Foodtruck Taxatie | Mobiele Horeca Waardebepaling | Automobieltaxaties" description="Specialist in taxatie van foodtrucks en mobiele horecavoertuigen. Erkend rapport voor verzekering en financiering." />
+      <PageMeta title="Foodtruck Taxatie | Mobiele Horeca Waardebepaling | Automobiel Taxaties" description="Specialist in taxatie van foodtrucks en mobiele horecavoertuigen. Erkend rapport voor verzekering en financiering." />
       <SiteHeader />
       <LandingHero subtitle="VERZEKERINGSTAXATIE FOODTRUCK" title="Zekerheid over de waarde van je foodtruck" description="Je foodtruck is meer dan alleen een voertuig. Met een verzekeringstaxatie leg je vast wat het op dit moment werkelijk waard is. Die waarde vormt de basis voor de verzekering, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde." ctaText="Verzekeringstaxatie aanvragen" onCtaClick={scrollToForm} heroImage={heroFoodtruck} />
 

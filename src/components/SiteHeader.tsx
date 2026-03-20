@@ -97,7 +97,8 @@ const SiteHeader = () => {
             <img
               src={logo}
               alt="Automobiel Taxaties"
-              className="h-12 w-auto transition-all duration-300 group-hover:opacity-80"
+              style={{ width: 140, height: 'auto' }}
+              className="transition-all duration-300 group-hover:opacity-80"
             />
           </Link>
 

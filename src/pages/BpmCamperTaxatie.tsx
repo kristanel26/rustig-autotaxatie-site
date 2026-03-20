@@ -16,7 +16,7 @@ const BpmCamperTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta title="BPM Camper Taxatie | Import Camper | Automobieltaxaties" description="BPM-taxatie voor geïmporteerde campers. Erkend taxateur bepaalt de juiste methode voor de laagst haalbare BPM." />
+      <PageMeta title="BPM Camper Taxatie | Import Camper | Automobiel Taxaties" description="BPM-taxatie voor geïmporteerde campers. Erkend taxateur bepaalt de juiste methode voor de laagst haalbare BPM." />
       <SiteHeader />
       <LandingHero subtitle="BPM-TAXATIE CAMPER" title="Zorgvuldig vastgestelde BPM bij import van een camper" description="Bij import van een camper uit het buitenland moet BPM worden aangegeven. De wijze waarop de BPM wordt vastgesteld, heeft direct invloed op de BPM-aangifte en de onderbouwing richting de Belastingdienst." ctaText="BPM-taxatie camper aanvragen" onCtaClick={scrollToForm} heroImage={heroCamper} />
 
