@@ -224,7 +224,7 @@ const ChatWidget = () => {
         onClick={() => setOpen(!open)}
         className="fixed z-[60] flex items-center justify-center text-white transition-all duration-200 hover:scale-105"
         style={{
-          bottom: 24,
+          bottom: 96,
           right: 24,
           width: 62,
           height: 62,
