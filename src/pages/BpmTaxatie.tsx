@@ -60,7 +60,7 @@ const BpmTaxatie = () => {
         <div className="container-wide">
           <div className="mb-8">
             {sectionLabel("BPM Calculator")}
-            <h2 className="font-semibold mb-2" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36 }}>Bereken je BPM indicatie</h2>
+            <h2 className="font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36, color: '#1d3c71' }}>Bereken je BPM indicatie</h2>
             <p className="text-[15px]" style={{ color: '#4a5568', maxWidth: 540 }}>
               Gebruik onze calculator voor een eerste indicatie van de BPM-kosten bij import. Let op: een berekening is geen taxatie en biedt geen juridische onderbouwing.
             </p>
