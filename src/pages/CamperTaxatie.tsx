@@ -5,6 +5,7 @@ import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import heroCamper from "@/assets/hero-camper.jpg";
@@ -18,6 +19,10 @@ const CamperTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="Camper Taxatie | Erkende Waardebepaling | Automobieltaxaties"
+        description="Professionele camper taxatie door een specialist in de campermarkt. Erkend rapport voor je verzekeringspolis. Op locatie bij je camper."
+      />
       <SiteHeader />
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE CAMPER"

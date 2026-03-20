@@ -5,6 +5,7 @@ import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import heroMotor from "@/assets/hero-motor.jpg";
@@ -18,6 +19,10 @@ const BpmMotorTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="BPM Motor Taxatie | Import Motor | Automobieltaxaties"
+        description="BPM-taxatie voor geïmporteerde motorfietsen. Erkend taxateur op locatie voor de laagst haalbare BPM."
+      />
       <SiteHeader />
       <LandingHero
         subtitle="BPM-TAXATIE MOTOR"

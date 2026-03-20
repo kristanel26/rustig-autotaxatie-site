@@ -5,6 +5,7 @@ import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import heroCamper from "@/assets/hero-camper.jpg";
@@ -18,6 +19,10 @@ const BpmCamperTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="BPM Camper Taxatie | Import Camper | Automobieltaxaties"
+        description="BPM-taxatie voor geïmporteerde campers. Erkend taxateur bepaalt de juiste methode voor de laagst haalbare BPM."
+      />
       <SiteHeader />
       <LandingHero
         subtitle="BPM-TAXATIE CAMPER"

@@ -5,6 +5,7 @@ import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import heroMotor from "@/assets/hero-motor.jpg";
@@ -18,6 +19,10 @@ const MotorTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="Motor Taxatie | Professionele Motorfiets Taxatie | Automobieltaxaties"
+        description="Erkende taxatie van motorfietsen voor verzekering en waardebepaling. Register taxateur op locatie door heel Nederland."
+      />
       <SiteHeader />
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE MOTOR"

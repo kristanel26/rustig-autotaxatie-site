@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PageMeta from "@/components/PageMeta";
 
 const categories = ["Alle artikelen", "BPM & Import", "Oldtimers & Youngtimers", "Verzekeringstaxatie", "Wetgeving", "Tips & Uitleg"];
 
@@ -59,6 +60,10 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <PageMeta
+        title="Blog & Kennisbank | BPM Nieuws en Tips | Automobieltaxaties"
+        description="Praktische informatie over BPM, taxaties en voertuigwaardering. Nieuws over wetgeving, jurisprudentie en belastingwijzigingen."
+      />
       <SiteHeader />
 
       {/* Hero */}

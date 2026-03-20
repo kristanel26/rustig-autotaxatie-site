@@ -4,11 +4,16 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BookingWizard from "@/components/BookingWizard";
+import PageMeta from "@/components/PageMeta";
 import erikPhoto from "@/assets/erik-elderson.png";
 
 const Contact = () => {
   return (
     <div className="min-h-screen bg-white">
+      <PageMeta
+        title="Contact | Automobieltaxaties | 085 483 2461"
+        description="Neem contact op met Automobieltaxaties. Bel 085 483 2461 of stuur een bericht. Erik reageert binnen één werkdag. Locatie: Druten."
+      />
       <SiteHeader />
 
       {/* Hero */}

@@ -3,6 +3,7 @@ import { ArrowLeft, Phone, Mail, MessageCircle } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -97,6 +98,10 @@ const faqItems = [
 const FAQ = () => {
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="Veelgestelde Vragen over BPM en Taxaties | Automobieltaxaties"
+        description="Antwoorden op de meest gestelde vragen over BPM-aangifte, taxatierapporten, oldtimers, kosten en levertijden."
+      />
       <SiteHeader />
 
       {/* Hero */}

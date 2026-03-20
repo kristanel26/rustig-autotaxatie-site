@@ -4,6 +4,7 @@ import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import PageMeta from "@/components/PageMeta";
 import { Button } from "@/components/ui/button";
 import { Users, FileText, Shield, ClipboardCheck, Table, BarChart3, Search, ArrowDown, Star, CheckCircle, Scale } from "lucide-react";
 import erikInspectie from "@/assets/erik-inspectie.jpg";
@@ -17,6 +18,10 @@ const BpmTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <PageMeta
+        title="BPM Taxatie bij Import | Laagste BPM | Automobieltaxaties"
+        description="De laagst haalbare BPM voor je importvoertuig. Fysieke inspectie op locatie door een erkend TMV en VRT register taxateur. Gratis advies aanvragen."
+      />
       <SiteHeader />
       <LandingHero
         subtitle="BPM-taxatie"
