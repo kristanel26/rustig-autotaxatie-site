@@ -9,7 +9,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, ArrowRight, CheckCircle, Award, Calendar, Wrench, Hammer, TrendingUp, FileCheck, ShieldCheck } from "lucide-react";
+import { ArrowDown, ArrowRight, CheckCircle, Award, Calendar, Wrench, Hammer, TrendingUp, FileCheck, Info } from "lucide-react";
 import StatsBar from "@/components/StatsBar";
 import heroCamper from "@/assets/hero-camper.jpg";
 
@@ -78,9 +78,27 @@ const CamperTaxatie = () => {
                 Je hebt net een nieuwe camper gekocht of na maanden klussen is jouw zelfbouw camper eindelijk klaar. Je staat er wellicht niet direct bij stil, maar jouw camper kan op verschillende manieren schade oplopen. Bijvoorbeeld door brand of storm, inbraak, vandalisme of een aanrijding. Een kloppend taxatierapport en een goede verzekering zijn dus belangrijk om zorgeloos op pad te gaan.
               </p>
             </div>
-            <div className="rounded-[12px] p-8 flex flex-col items-center justify-center" style={{ background: '#1d3c71' }}>
-              <ShieldCheck className="w-12 h-12 text-white mb-4" />
-              <p className="text-white font-bold text-[18px] text-center leading-[1.4]">De waarde staat vooraf vast. Geen discussie bij schade of diefstal.</p>
+            <div className="rounded-[12px] p-8 flex flex-col" style={{ background: '#1d3c71' }}>
+              <div className="flex items-center justify-center rounded-full mb-4 mx-auto" style={{ width: 48, height: 48, background: 'rgba(255,255,255,0.15)' }}>
+                <Info className="w-6 h-6 text-white" />
+              </div>
+              <p className="text-white font-bold text-[18px] text-center leading-[1.4] mb-4">De waarde staat vooraf vast. Geen discussie bij schade of diefstal.</p>
+              <div className="mb-5" style={{ borderBottom: '1px solid rgba(255,255,255,0.2)' }} />
+              <div className="space-y-3 mb-6">
+                {[
+                  "Uitkering op taxatiewaarde, niet dagwaarde",
+                  "Premie betalen over de juiste waarde",
+                  "Rapport 2 tot 3 jaar geldig, check je verzekeraar",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: '#ff751f' }} />
+                    <span className="text-white text-[14px] leading-snug">{item}</span>
+                  </div>
+                ))}
+              </div>
+              <Button variant="cta" className="w-full" onClick={scrollToForm}>
+                Verzekeringstaxatie aanvragen
+              </Button>
             </div>
           </div>
         </div>
