@@ -34,6 +34,7 @@ const steps = [
   },
   {
     number: 3,
+    image: erikHero,
     title: "Laat het voertuig taxeren door Automobiel Taxaties",
     content: (
       <p>Voordat je naar de RDW gaat voor de keuring, laat je het voertuig eerst taxeren. Dit is een belangrijk aandachtspunt: een taxatierapport is alleen geldig als de opname door de taxateur heeft plaatsgevonden binnen één maand voorafgaand aan de RDW-keuring. Is dit niet het geval, dan wordt het rapport afgekeurd en berekent de Belastingdienst de BPM op basis van de forfaitaire afschrijving. Dat is meestal aanzienlijk ongunstiger. Plan je taxatie daarom op tijd. Eerst taxeren, dan keuren.</p>
