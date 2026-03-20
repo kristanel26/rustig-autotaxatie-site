@@ -24,7 +24,7 @@ const PageMeta = ({ title, description }: PageMetaProps) => {
     setMeta("og:title", title, true);
     setMeta("og:description", description, true);
     setMeta("og:type", "website", true);
-    setMeta("og:site_name", "Automobieltaxaties", true);
+    setMeta("og:site_name", "Automobiel Taxaties", true);
     setMeta("og:locale", "nl_NL", true);
 
     return () => {
