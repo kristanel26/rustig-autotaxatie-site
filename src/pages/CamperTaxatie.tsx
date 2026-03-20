@@ -47,6 +47,7 @@ const CamperTaxatie = () => {
         onCtaClick={scrollToForm}
         heroImage={heroCamper}
       />
+      <UspBar />
 
       {/* Korte intro */}
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
