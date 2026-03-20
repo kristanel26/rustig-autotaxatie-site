@@ -80,7 +80,19 @@ const steps: { number: number; title: string; image?: string; content: React.Rea
     number: 8,
     title: "Laat het voertuig in getaxeerde staat",
     content: (
-      <p>Je dient het voertuig 6 werkdagen in de staat te laten zoals het is getaxeerd. Let op: deze 6 werkdagen gaan pas in op de dag van ontvangst van de BPM-aangifte door de Belastingdienst.</p>
+      <>
+        <p className="mb-3">Je dient het voertuig 6 werkdagen in exact dezelfde staat te laten als op het moment van taxatie. Herstel dus geen schade, poets niet bij en voer geen wijzigingen door.</p>
+        <p className="mb-4">Let op: deze 6 werkdagen gaan pas in op de dag dat de Belastingdienst de BPM-aangifte ontvangt, niet op de dag dat jij die verstuurt.</p>
+        <div
+          className="flex gap-3 items-start"
+          style={{ background: '#fff3e8', borderLeft: '4px solid #FF751F', borderRadius: 8, padding: '16px 20px' }}
+        >
+          <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5" style={{ color: '#FF751F' }} />
+          <p className="text-sm font-medium" style={{ color: '#5D4E37' }}>
+            Wordt het voertuig toch aangepast of gerepareerd binnen deze periode? Dan kan de Belastingdienst de taxatie ongeldig verklaren en de BPM opnieuw vaststellen op basis van de forfaitaire tabel.
+          </p>
+        </div>
+      </>
     ),
   },
   {
