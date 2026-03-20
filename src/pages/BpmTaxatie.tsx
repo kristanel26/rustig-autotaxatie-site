@@ -22,7 +22,7 @@ const BpmTaxatie = () => {
         description="Wanneer je een voertuig uit het buitenland importeert en in Nederland wilt registreren, moet er BPM worden aangegeven. De manier waarop de BPM wordt vastgesteld, verschilt per situatie en heeft direct invloed op de onderbouwing richting de Belastingdienst."
         ctaText="BPM-aangifte aanvragen"
         onCtaClick={scrollToForm}
-        heroImage={heroBpm}
+        heroImage={erikInspectie}
       />
 
       {/* Inleidende uitleg: BPM bij import van voertuigen */}
