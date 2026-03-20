@@ -3,6 +3,10 @@ import { Phone, Menu, X, ChevronDown, Mail, MapPin } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import logo from "@/assets/logo-automobiel-taxaties.png";
 
+const bpmSubLinks = [
+  { label: "Stappenplan BPM aangifte", href: "/stappenplan-bpm-aangifte" },
+];
+
 const verzekeringSubLinks = [
   { label: "Camper", href: "/camper-taxatie" },
   { label: "Oldtimer", href: "/oldtimer-taxatie" },
@@ -14,8 +18,8 @@ const verzekeringSubLinks = [
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "BPM Taxatie", href: "/bpm-taxatie" },
-  { label: "Verzekeringstaxatie", href: "/verzekeringstaxatie-info", dropdown: true },
+  { label: "BPM Taxatie", href: "/bpm-taxatie", dropdown: "bpm" },
+  { label: "Verzekeringstaxatie", href: "/verzekeringstaxatie-info", dropdown: "verzekering" },
   { label: "WEV Taxatie", href: "/wev-taxatie" },
   { label: "Werkwijze", href: "/werkwijze" },
   { label: "Over ons", href: "/over-ons" },
