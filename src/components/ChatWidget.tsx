@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { MessageCircle, X, Send } from "lucide-react";
+import erikPhoto from "@/assets/erik-elderson.png";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
