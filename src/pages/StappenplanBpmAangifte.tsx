@@ -177,6 +177,7 @@ const StappenplanBpmAangifte = () => {
                   )}
                 </div>
               </div>
+            </section>
 
             {/* Attention block after step 2 */}
             {step.number === 2 && (
