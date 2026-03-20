@@ -194,21 +194,26 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* Formulier */}
+      {/* Formulier — 65/35 layout */}
       <section className="py-12 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
-        <div className="container-narrow">
+        <div className="container-wide">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-semibold mb-3">WEV-taxatie aanvragen</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
               Vul het formulier in en wij plannen de taxatie op basis van de aangeleverde informatie.
             </p>
           </div>
-          <IntakeForm
-            serviceType="WEV-taxatie"
-            formTitle="WEV-taxatie aanvragen"
-            toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig en de fiscale context."
-            submitButtonText="WEV-taxatie aanvragen"
-          />
+          <div className="grid md:grid-cols-[1fr_380px] gap-8">
+            <div>
+              <IntakeForm
+                serviceType="WEV-taxatie"
+                formTitle="WEV-taxatie aanvragen"
+                toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig en de fiscale context."
+                submitButtonText="WEV-taxatie aanvragen"
+              />
+            </div>
+            <ContactSidebar />
+          </div>
         </div>
       </section>
 
