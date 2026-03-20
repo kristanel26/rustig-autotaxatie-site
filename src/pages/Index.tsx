@@ -302,7 +302,7 @@ const Index = () => {
             <div className="rounded-2xl overflow-hidden relative" style={{ marginTop: -40, boxShadow: '0 24px 64px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.20)' }}>
               <img
                 src={erikPhoto}
-                alt="Erik Elderson, Automobieltaxaties"
+                alt="Erik Elderson, Automobiel Taxaties"
                 className="w-full block"
                 style={{ height: 520, objectFit: 'cover', objectPosition: 'center top', filter: 'contrast(1.05) brightness(0.98)' }}
                 loading="lazy"
