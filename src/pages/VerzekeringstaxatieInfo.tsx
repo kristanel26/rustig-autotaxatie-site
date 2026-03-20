@@ -26,9 +26,9 @@ const VerzekeringstaxatieInfo = () => {
       />
       <SiteHeader />
       <LandingHero
-        subtitle="Verzekeringstaxatie"
-        title="Vooraf duidelijkheid over de waarde van je voertuig"
-        description="Zodat bij schade of diefstal geen discussie ontstaat. De waarde wordt vooraf vastgelegd in een taxatierapport."
+        subtitle="Automobiel Taxaties"
+        title="Verzekeringstaxatie"
+        description="Zorg dat je voertuig voor de juiste waarde verzekerd is. Wij taxeren op locatie, door heel Nederland."
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroCarInspection}
@@ -39,8 +39,8 @@ const VerzekeringstaxatieInfo = () => {
         <div className="container-wide">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Waarom</p>
-              <h2 className="text-2xl md:text-3xl font-semibold mb-4">Zekerheid over de waarde</h2>
+              <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Waarom taxeren</p>
+              <h2 className="text-2xl md:text-3xl font-semibold mb-4">Een taxatierapport voorkomt problemen</h2>
               <p className="text-[15px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
                 Met een verzekeringstaxatie wordt de waarde vooraf vastgelegd. Bij schade of diefstal wordt uitgekeerd op basis van de getaxeerde waarde, niet een dagwaarde.
               </p>
@@ -148,9 +148,8 @@ const VerzekeringstaxatieInfo = () => {
             </div>
             <ul className="space-y-2 text-sm" style={{ color: '#4a5568' }}>
               <li>• Aangesloten bij Federatie TMV, VRT Register en FEHAC</li>
-              <li>• Werkt binnen FEHAC-richtlijnen voor klassiekers</li>
-              <li>• Rapporten geaccepteerd door verzekeraars</li>
-              <li>• Geldigheid doorgaans 3 tot 5 jaar (check je verzekeraar)</li>
+              <li>• Geaccepteerd door verzekeraars</li>
+              <li>• Geldigheid 2 tot 3 jaar — informeer bij jouw verzekeraar</li>
             </ul>
           </div>
         </div>
@@ -165,13 +164,14 @@ const VerzekeringstaxatieInfo = () => {
               Vul het formulier in en we nemen binnen één werkdag contact met je op.
             </p>
           </div>
-          <div className="grid md:grid-cols-[1fr_380px] gap-8">
+          <div className="grid md:grid-cols-[1fr_380px] gap-8 items-stretch">
             <div>
               <IntakeForm
                 serviceType="verzekeringstaxatie"
                 formTitle="Verzekeringstaxatie aanvragen"
                 formSubtext="Vul onderstaand formulier in."
                 toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig."
+                submitButtonText="Aanvraag indienen"
               />
             </div>
             <ContactSidebar />
