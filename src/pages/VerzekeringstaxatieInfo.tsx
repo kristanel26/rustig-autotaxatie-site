@@ -26,9 +26,9 @@ const VerzekeringstaxatieInfo = () => {
       />
       <SiteHeader />
       <LandingHero
-        subtitle="Verzekeringstaxatie"
-        title="Vooraf duidelijkheid over de waarde van je voertuig"
-        description="Zodat bij schade of diefstal geen discussie ontstaat. De waarde wordt vooraf vastgelegd in een taxatierapport."
+        subtitle="Automobiel Taxaties"
+        title="Verzekeringstaxatie"
+        description="Zorg dat je voertuig voor de juiste waarde verzekerd is. Wij taxeren op locatie, door heel Nederland."
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroCarInspection}
