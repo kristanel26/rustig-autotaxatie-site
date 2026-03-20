@@ -23,6 +23,8 @@ const BookingWizard = () => {
     merk_model: "",
     kenteken: "",
     postcode: "",
+    stad: "",
+    adres: "",
     datum: "",
     naam: "",
     telefoon: "",
