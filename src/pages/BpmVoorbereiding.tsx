@@ -20,6 +20,7 @@ const BpmVoorbereiding = () => {
       <PageMeta title="BPM Voorbereiding | Vooraf Weten Wat Je Betaalt | Automobiel Taxaties" description="Overweeg je een auto te importeren? Met een BPM voorbereiding weet je vooraf precies wat de totale kosten zijn." />
       <SiteHeader />
       <LandingHero subtitle="BPM voorbereiding" title="Weet wat je gaat betalen vóórdat je koopt" description="Overweeg je een auto te importeren? Met een BPM voorbereiding weet je vooraf precies wat de totale kosten zijn. Zo voorkom je verrassingen en kun je een goede beslissing nemen." ctaText="Start je BPM berekening" onCtaClick={scrollToForm} heroImage={heroBpm} />
+      <UspBar />
 
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide"><div className="max-w-3xl mx-auto text-center">
