@@ -4,7 +4,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Link } from "react-router-dom";
-import { ArrowRight, AlertTriangle, Info } from "lucide-react";
+import { ArrowRight, AlertTriangle, Info, Phone } from "lucide-react";
 import stepCarShopping from "@/assets/step-car-shopping.jpg";
 import stepDocuments from "@/assets/step-documents-needed.png";
 import erikHero from "@/assets/erik-bpm-taxatie-hero.jpg";
