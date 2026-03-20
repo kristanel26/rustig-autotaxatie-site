@@ -30,7 +30,7 @@ const VerzekeringstaxatieInfo = () => {
   ];
 
   const voertuigTypes = [
-    { icon: Truck, title: "Camper", desc: "Bij aanpassingen of zelfbouw", link: "/camper-taxatie" },
+    { icon: Caravan, title: "Camper", desc: "Bij aanpassingen of zelfbouw", link: "/camper-taxatie" },
     { icon: Car, title: "Oldtimer", desc: "Originaliteit, staat en gebruik", link: "/oldtimer-taxatie" },
     { icon: Clock, title: "Youngtimer", desc: "Afwijkende waarde t.o.v. standaard", link: "/youngtimer-taxatie" },
     { icon: Bike, title: "Motor", desc: "Verzekerde waarde vooraf vastleggen", link: "/motor-taxatie" },
