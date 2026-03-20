@@ -146,7 +146,7 @@ const VerzekeringstaxatieInfo = () => {
               <h2 className="text-xl font-semibold">Acceptatie en geldigheid</h2>
             </div>
             <ul className="space-y-2 text-sm" style={{ color: '#4a5568' }}>
-              <li>• Geregistreerd bij VRT en aangesloten bij TMV</li>
+              <li>• Aangesloten bij Federatie TMV, VRT Register en FEHAC</li>
               <li>• Werkt binnen FEHAC-richtlijnen voor klassiekers</li>
               <li>• Rapporten geaccepteerd door verzekeraars</li>
               <li>• Geldigheid doorgaans 3 tot 5 jaar (check je verzekeraar)</li>
