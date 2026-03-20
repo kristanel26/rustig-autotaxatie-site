@@ -8,6 +8,7 @@ import stepCarShopping from "@/assets/step-car-shopping.jpg";
 import erikHero from "@/assets/erik-bpm-taxatie-hero.jpg";
 import stepRdw from "@/assets/step-rdw-inspection.jpg";
 import stepHappyOwner from "@/assets/step-happy-car-owner.jpg";
+import stepAangifteFormulier from "@/assets/bpm-aangifte-formulier.png";
 
 const steps: { number: number; title: string; image?: string; content: React.ReactNode }[] = [
   {
@@ -71,6 +72,7 @@ const steps: { number: number; title: string; image?: string; content: React.Rea
   },
   {
     number: 7,
+    image: stepAangifteFormulier,
     title: "Wat doe je na ontvangst van het rapport?",
     content: (
       <>
