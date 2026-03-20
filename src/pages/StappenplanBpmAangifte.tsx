@@ -47,6 +47,7 @@ const steps: { number: number; title: string; image?: string; content: React.Rea
   },
   {
     number: 5,
+    image: stepDocuments,
     title: "Wat hebben wij van je nodig?",
     content: (
       <>
