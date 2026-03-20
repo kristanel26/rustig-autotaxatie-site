@@ -94,8 +94,7 @@ const LandingHero = ({
         </div>
       </div>
 
-      {/* Straight bottom edge */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-background" />
+      {/* Straight bottom edge removed — USP bar connects seamlessly */}
     </section>
   );
 };
