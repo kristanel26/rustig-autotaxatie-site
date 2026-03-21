@@ -100,10 +100,10 @@ const Nieuws = () => {
 
       {/* Content */}
       <section className="py-14 md:py-20 px-6 lg:px-8" style={{ background: '#f7f8fa' }}>
-        <div className="mx-auto flex flex-col lg:flex-row gap-10" style={{ maxWidth: 960 }}>
+        <div className="mx-auto flex flex-col lg:flex-row" style={{ maxWidth: 1200, padding: '0 40px', gap: '2%' }}>
 
           {/* Main list */}
-          <div className="flex-1 min-w-0 bg-white rounded-lg" style={{ padding: '8px 24px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
+          <div style={{ flex: '0 0 70%', minWidth: 0 }}>
             {loading ? (
               <div className="space-y-4 py-4">
                 {[1, 2, 3, 4].map((i) => (
