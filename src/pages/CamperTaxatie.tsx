@@ -57,7 +57,7 @@ const CamperTaxatie = () => {
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE CAMPER"
         title="Zekerheid over de waarde van je camper"
-        description="Je camper is meer dan alleen een voertuig. Met een verzekeringstaxatie leg je vast wat het op dit moment werkelijk waard is. Die waarde vormt de basis voor de verzekering, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde."
+        description="Met een verzekeringstaxatie leg je de waarde vooraf vast. Wij komen op locatie bij je camper."
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroCamper}
