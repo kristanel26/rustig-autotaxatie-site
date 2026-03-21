@@ -9,7 +9,7 @@ import erikPhoto from "@/assets/erik-over-ons.png";
 import heroOverOns from "@/assets/hero-over-ons.jpg";
 import stepAanvraag from "@/assets/erik-aanvraag.png";
 import stepAdvies from "@/assets/step-advies.png";
-import stepInspectie from "@/assets/step-inspectie.jpg";
+import stepInspectie from "@/assets/step-inspectie.png";
 import stepRapport from "@/assets/step-rapport.jpg";
 import stepAfhandeling from "@/assets/step-afhandeling.jpg";
 
