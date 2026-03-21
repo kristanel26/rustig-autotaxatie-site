@@ -28,8 +28,8 @@ const WevTaxatie = () => {
       <SiteHeader />
       <LandingHero
         subtitle="WEV-TAXATIE"
-        title="Een zorgvuldig vastgestelde waarde voor fiscale doeleinden"
-        description="Voor situaties waarin de Belastingdienst een onderbouwde voertuigwaarde verlangt. Objectief, controleerbaar en verdedigbaar."
+        title="Werkelijke waarde. Fiscaal verdedigbaar."
+        description="Objectieve waardebepaling voor de Belastingdienst, bij zakelijke of fiscale vraagstukken."
         ctaText="WEV-taxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={serviceWev}

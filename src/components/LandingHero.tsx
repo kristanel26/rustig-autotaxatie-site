@@ -74,7 +74,7 @@ const LandingHero = ({
           <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 560 }} className="mb-10 animate-slide-up" >
             {description}
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: "200ms" }}>
+          <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: "200ms", marginBottom: 40 }}>
             <Button variant="hero" size="xl" onClick={onCtaClick}>
               {ctaText}
               <ArrowDown className="w-5 h-5 ml-2" />
