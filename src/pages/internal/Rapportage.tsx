@@ -24,9 +24,9 @@ interface ReportRow {
 const MONTH_LABELS = ['Jan', 'Feb', 'Mrt', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'];
 
 const TYPE_COLORS: Record<string, string> = {
-  klassieker: 'hsl(var(--gold))',
-  camper: 'hsl(210, 70%, 55%)',
-  wev: 'hsl(150, 60%, 45%)',
+  klassieker: '#1d3c71',
+  camper: '#ff751f',
+  wev: '#698db3',
 };
 
 const BILLABLE_STATUSES = ['gereed', 'verzonden'];
