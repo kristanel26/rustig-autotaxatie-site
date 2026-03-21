@@ -10,7 +10,7 @@ import heroOverOns from "@/assets/hero-over-ons.jpg";
 import stepAanvraag from "@/assets/erik-aanvraag.png";
 import stepAdvies from "@/assets/step-advies.png";
 import stepInspectie from "@/assets/step-inspectie.png";
-import stepRapport from "@/assets/step-rapport.jpg";
+import stepRapport from "@/assets/step-rapport.png";
 import stepAfhandeling from "@/assets/step-regelen.png";
 
 const diensten = [
