@@ -46,57 +46,58 @@ const Contact = () => {
 
       {/* Wizard + sidebar */}
       <section className="py-16 md:py-24 px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-[340px_1fr] gap-10 items-start">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-[340px_1fr] gap-10" style={{ alignItems: 'stretch' }}>
           {/* Sidebar — one unified blue card */}
           <div
-            className="rounded-[12px] p-8 text-white"
+            className="rounded-[12px] p-8 text-white flex flex-col"
             style={{
               background: '#1d3c71',
               backgroundImage: 'radial-gradient(ellipse at 20% 50%, rgba(105,141,179,0.15) 0%, transparent 60%)',
+              justifyContent: 'space-between',
             }}
           >
-            {/* Erik profile */}
-            <div className="flex items-center gap-4 mb-5">
-              <img src={erikPhoto} alt="Erik Elderson" className="w-[72px] h-[72px] rounded-full object-cover" loading="lazy" />
-              <div>
-                <p className="font-bold text-[18px]">Erik Elderson</p>
-                <p style={{ fontSize: 13, opacity: 0.8, lineHeight: 1.5, marginTop: 2 }}>Eigenaar — Notarieel Beëdigd TMV Register-Taxateur — Register-Taxateur VRT</p>
+            <div>
+              {/* Erik profile — centered photo */}
+              <div className="flex flex-col items-center text-center mb-6">
+                <img src={erikPhoto} alt="Erik Elderson" className="w-[96px] h-[96px] rounded-full object-cover mb-4" loading="lazy" />
+                <p className="font-bold text-[20px]">Erik Elderson</p>
+                <p style={{ fontSize: 13, opacity: 0.85, lineHeight: 1.5, marginTop: 4, maxWidth: 260 }}>Eigenaar — Notarieel Beëdigd TMV Register-Taxateur — Register-Taxateur VRT</p>
+              </div>
+
+              <div style={{ height: 1, background: 'rgba(255,255,255,0.15)', margin: '20px 0' }} />
+
+              {/* Contact details */}
+              <div className="space-y-3" style={{ fontSize: 15 }}>
+                <a href="tel:+31854832461" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                  <Phone className="w-4 h-4 shrink-0" style={{ opacity: 0.7 }} />
+                  <span className="font-bold">085 483 2461</span>
+                </a>
+                <a href="tel:+31650694978" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                  <Phone className="w-4 h-4 shrink-0" style={{ opacity: 0.7 }} />
+                  <span>06 50694978</span>
+                </a>
+                <a href="mailto:erik@automobieltaxaties.nl" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                  <Mail className="w-4 h-4 shrink-0" style={{ opacity: 0.7 }} />
+                  <span>erik@automobieltaxaties.nl</span>
+                </a>
+                <div className="flex items-center gap-3">
+                  <Clock className="w-4 h-4 shrink-0" style={{ opacity: 0.7 }} />
+                  <span>ma-vr 8:30 – 17:00</span>
+                </div>
+              </div>
+
+              <div style={{ height: 1, background: 'rgba(255,255,255,0.15)', margin: '20px 0' }} />
+
+              {/* Business details */}
+              <p className="uppercase mb-2" style={{ fontSize: 11, letterSpacing: '0.1em', opacity: 0.6 }}>BEDRIJFSGEGEVENS</p>
+              <div className="space-y-1" style={{ fontSize: 13, opacity: 0.75 }}>
+                <p>KvK: 71468889</p>
+                <p>BTW: NL858727493B01</p>
               </div>
             </div>
 
-            <div style={{ height: 1, background: 'rgba(255,255,255,0.15)', margin: '20px 0' }} />
-
-            {/* Contact details */}
-            <div className="space-y-3" style={{ fontSize: 15 }}>
-              <a href="tel:+31854832461" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-                <Phone className="w-4 h-4" style={{ opacity: 0.7 }} />
-                <span className="font-bold">085 483 2461</span>
-              </a>
-              <a href="tel:+31650694978" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-                <Phone className="w-4 h-4" style={{ opacity: 0.7 }} />
-                <span>06 50694978</span>
-              </a>
-              <a href="mailto:erik@automobieltaxaties.nl" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-                <Mail className="w-4 h-4" style={{ opacity: 0.7 }} />
-                <span>erik@automobieltaxaties.nl</span>
-              </a>
-              <div className="flex items-center gap-3">
-                <Clock className="w-4 h-4" style={{ opacity: 0.7 }} />
-                <span>ma-vr 8:30 – 17:00</span>
-              </div>
-            </div>
-
-            <div style={{ height: 1, background: 'rgba(255,255,255,0.15)', margin: '20px 0' }} />
-
-            {/* Business details */}
-            <p className="uppercase mb-2" style={{ fontSize: 11, letterSpacing: '0.1em', opacity: 0.6 }}>BEDRIJFSGEGEVENS</p>
-            <div className="space-y-1" style={{ fontSize: 13, opacity: 0.75 }}>
-              <p>KvK: 71468889</p>
-              <p>BTW: NL858727493B01</p>
-            </div>
-
-            {/* CTA button */}
-            <a href="tel:+31854832461" className="block mt-6">
+            {/* CTA button — always at bottom */}
+            <a href="tel:+31854832461" className="block mt-8">
               <button
                 className="w-full font-bold text-[15px] rounded-lg transition-colors"
                 style={{ background: '#ff751f', color: '#fff', height: 48, border: 'none', cursor: 'pointer', boxShadow: '0 3px 12px rgba(255,117,31,0.35)' }}
