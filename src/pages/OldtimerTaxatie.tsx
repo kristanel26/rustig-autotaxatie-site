@@ -9,7 +9,7 @@ import SiteFooter from "@/components/SiteFooter";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, CheckCircle, Award, Calendar, Info, Search, TrendingUp, FileCheck } from "lucide-react";
+import { ArrowDown, ArrowRight, CheckCircle, Award, Calendar, Info, Search, TrendingUp, FileCheck } from "lucide-react";
 import StatsBar from "@/components/StatsBar";
 import heroOldtimer from "@/assets/hero-oldtimer.png";
 
