@@ -6,6 +6,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import heroNieuws from "@/assets/hero-nieuws.jpg";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import { nl } from "date-fns/locale";
@@ -72,11 +73,12 @@ const Nieuws = () => {
       <SiteHeader />
 
       {/* Hero */}
-      <section
-        className="flex items-center justify-center px-6 lg:px-8 text-center"
-        style={{ background: '#1d3c71', minHeight: 280 }}
-      >
-        <div>
+      <section className="relative overflow-hidden flex items-center justify-center px-6 lg:px-8 text-center" style={{ minHeight: 320 }}>
+        <div className="absolute inset-0">
+          <img src={heroNieuws} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />
+        </div>
+        <div className="relative z-10">
           <span
             className="inline-block mb-3 font-semibold uppercase"
             style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: '0.15em', color: '#ff751f' }}

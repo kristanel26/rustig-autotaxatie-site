@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import UspBar from "@/components/UspBar";
 import { format } from "date-fns";
 import { nl } from "date-fns/locale";
+import heroBlog from "@/assets/hero-blog.jpg";
 
 const categories = ["Alle artikelen", "BPM & Import", "Oldtimers & Youngtimers", "Verzekeringstaxatie", "Wetgeving", "Tips & Uitleg"];
 
@@ -64,19 +65,22 @@ const Blog = () => {
       <SiteHeader />
 
       {/* Hero */}
-      <section
-        className="py-20 md:py-28 px-6 lg:px-8 text-center"
-        style={{ background: '#1d3c71' }}
-      >
-        <h1
-          className="heading-display font-bold mb-4"
-          style={{ fontSize: 'clamp(36px, 4vw, 52px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#ffffff' }}
-        >
-          Blog & Kennisbank
-        </h1>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(16px, 1.8vw, 19px)', color: 'rgba(255,255,255,0.72)', lineHeight: 1.70, maxWidth: 540 }} className="mx-auto">
-          Praktische informatie over BPM, taxaties en voertuigwaardering.
-        </p>
+      <section className="relative overflow-hidden py-20 md:py-28 px-6 lg:px-8 text-center">
+        <div className="absolute inset-0">
+          <img src={heroBlog} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />
+        </div>
+        <div className="relative z-10">
+          <h1
+            className="heading-display font-bold mb-4"
+            style={{ fontSize: 'clamp(36px, 4vw, 52px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#ffffff' }}
+          >
+            Blog & Kennisbank
+          </h1>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(16px, 1.8vw, 19px)', color: 'rgba(255,255,255,0.72)', lineHeight: 1.70, maxWidth: 540 }} className="mx-auto">
+            Praktische informatie over BPM, taxaties en voertuigwaardering.
+          </p>
+        </div>
       </section>
       <UspBar />
 
