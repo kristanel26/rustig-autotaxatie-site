@@ -183,7 +183,7 @@ const OldtimerTaxatie = () => {
         <div className="container-wide text-center">
           <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Verzekeringstaxatie voor je oldtimer?</h2>
           <p className="text-[15px] mb-6 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>
-            Vooraf zekerheid over de waarde. Wij plannen de taxatie op locatie.
+            Vooraf zekerheid over de waarde. Wij plannen de taxatie op locatie bij jou.
           </p>
           <Button variant="cta" size="lg" onClick={scrollToForm}>
             Verzekeringstaxatie aanvragen
