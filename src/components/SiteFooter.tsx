@@ -132,7 +132,7 @@ const SiteFooter = () => {
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Clock className="w-4 h-4 shrink-0" />
-                  ma-vr 8:30 - 17:00
+                  ma-vr 8:30 – 17:00
                 </li>
               </ul>
             </div>
