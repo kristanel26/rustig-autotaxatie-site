@@ -70,36 +70,42 @@ const Nieuws = () => {
         description="Actuele berichten over wijzigingen in wet- en regelgeving, uitspraken en BPM-tarieven."
       />
       <SiteHeader />
+
+      {/* Hero */}
+      <section
+        className="flex items-center justify-center px-6 lg:px-8 text-center"
+        style={{ background: '#1d3c71', minHeight: 280 }}
+      >
+        <div>
+          <span
+            className="inline-block mb-3 font-semibold uppercase"
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: '0.15em', color: '#ff751f' }}
+          >
+            NIEUWS
+          </span>
+          <h1
+            className="font-bold mb-3"
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(30px, 4vw, 44px)', lineHeight: 1.2, color: '#ffffff' }}
+          >
+            BPM nieuws en jurisprudentie
+          </h1>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 18, color: 'rgba(255,255,255,0.7)', lineHeight: 1.65, maxWidth: 600 }} className="mx-auto">
+            Actuele berichten over wijzigingen in wet- en regelgeving, uitspraken en BPM-tarieven.
+          </p>
+        </div>
+      </section>
+
       <UspBar />
       <div style={{ height: 4, background: '#ff751f', width: '100%' }} />
 
-      {/* Compact Hero */}
-      <section style={{ background: '#1d3c71' }} className="py-14 md:py-16 px-6 lg:px-8 text-center">
-        <span
-          className="inline-block mb-3 font-semibold uppercase"
-          style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: '0.15em', color: '#ff751f' }}
-        >
-          NIEUWS
-        </span>
-        <h1
-          className="font-bold mb-3"
-          style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 3.5vw, 42px)', lineHeight: 1.2, color: '#ffffff' }}
-        >
-          BPM nieuws en jurisprudentie
-        </h1>
-        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(15px, 1.5vw, 17px)', color: 'rgba(255,255,255,0.7)', lineHeight: 1.65, maxWidth: 560 }} className="mx-auto">
-          Actuele berichten over wijzigingen in wet- en regelgeving, uitspraken en BPM-tarieven.
-        </p>
-      </section>
-
       {/* Content */}
-      <section className="py-14 md:py-20 px-6 lg:px-8 bg-white">
-        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12">
+      <section className="py-14 md:py-20 px-6 lg:px-8" style={{ background: '#f7f8fa' }}>
+        <div className="mx-auto flex flex-col lg:flex-row gap-10" style={{ maxWidth: 960 }}>
 
           {/* Main list */}
-          <div className="flex-1 min-w-0">
+          <div className="flex-1 min-w-0 bg-white rounded-lg" style={{ padding: '8px 24px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
             {loading ? (
-              <div className="space-y-4">
+              <div className="space-y-4 py-4">
                 {[1, 2, 3, 4].map((i) => (
                   <div key={i} className="h-14 bg-gray-100 rounded animate-pulse" />
                 ))}
@@ -112,7 +118,7 @@ const Nieuws = () => {
               <div>
                 {filtered.map((article, i) => (
                   <div key={article.id}>
-                    <div className="flex items-center gap-0 py-4">
+                    <div className="flex items-center gap-0" style={{ padding: '20px 0' }}>
                       {/* Date */}
                       <span
                         className="shrink-0 text-right pr-4"
@@ -151,7 +157,7 @@ const Nieuws = () => {
                       </Link>
                     </div>
                     {i < filtered.length - 1 && (
-                      <div style={{ height: 1, background: '#eef1f5' }} />
+                      <div style={{ height: 1, background: '#eef0f3' }} />
                     )}
                   </div>
                 ))}
@@ -160,7 +166,10 @@ const Nieuws = () => {
           </div>
 
           {/* Sidebar */}
-          <aside className="lg:w-[240px] shrink-0">
+          <aside
+            className="lg:w-[260px] shrink-0 self-start"
+            style={{ background: '#ffffff', borderRadius: 8, boxShadow: '0 2px 10px rgba(0,0,0,0.07)', padding: 24 }}
+          >
             {/* Categories */}
             <div className="mb-8">
               <span
