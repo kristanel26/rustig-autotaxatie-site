@@ -75,42 +75,22 @@ const OverOns = () => {
 
       {/* ── HERO with background image ── */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 320, minHeight: 320, maxHeight: 320 }}>
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroOverOns})` }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroOverOns})` }} />
         <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.75)' }} />
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28 relative z-10">
-          <p
-            className="mb-4"
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 11,
-              fontWeight: 700,
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color: '#ff751f',
-            }}
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
+          <div style={{ width: 32, height: 2, background: '#ff751f', marginBottom: 12 }} />
+          <span
+            className="inline-block mb-3"
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#ff751f' }}
           >
             OVER ONS
-          </p>
+          </span>
           <h1
-            className="font-bold text-white mb-5"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(32px, 4vw, 56px)', lineHeight: 1.15 }}
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(32px, 4vw, 56px)', fontWeight: 700, lineHeight: 1.15, color: '#ffffff', maxWidth: 700 }}
           >
             Automobiel Taxaties
           </h1>
-          <p
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 'clamp(16px, 1.6vw, 18px)',
-              fontWeight: 400,
-              lineHeight: 1.7,
-              color: 'rgba(255,255,255,0.80)',
-              maxWidth: 560,
-            }}
-            className="mb-8"
-          >
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 600, marginTop: 16 }}>
             Automobiel Taxaties is Erik Elderson. Erkend taxateur voor BPM, verzekeringstaxatie, WEV-taxatie en schadevaststelling, werkzaam in het grootste gedeelte van Nederland.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
