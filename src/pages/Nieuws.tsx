@@ -2,94 +2,226 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import UspBar from "@/components/UspBar";
 import PageMeta from "@/components/PageMeta";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { format } from "date-fns";
+import { nl } from "date-fns/locale";
 
-const articles = [
-  {
-    date: "10 maart 2026",
-    title: "BPM-tarieven 2026: wat verandert er voor importeurs?",
-    excerpt: "Per 1 januari 2026 zijn de BPM-tarieven opnieuw aangepast. Wij zetten de belangrijkste wijzigingen voor je op een rij.",
-  },
-  {
-    date: "18 februari 2026",
-    title: "Uitspraak rechtbank: taxatierapport wint van forfaitaire berekening",
-    excerpt: "Een recente uitspraak bevestigt dat een onderbouwd taxatierapport zwaarder weegt dan de standaard afschrijvingstabel van de Belastingdienst.",
-  },
-  {
-    date: "4 februari 2026",
-    title: "Wanneer is een koerslijst niet voldoende?",
-    excerpt: "Voor voertuigen met schade, hoge kilometerstand of bijzondere uitvoering biedt een koerslijst onvoldoende onderbouwing bij bezwaar.",
-  },
-];
+const sidebarCategories = ["BPM", "Wetgeving", "Jurisprudentie", "Verzekeringstaxatie"];
+const archiveYears = ["2026", "2025"];
+
+interface Article {
+  id: string;
+  title: string;
+  slug: string;
+  category: string;
+  published_at: string | null;
+}
 
 const Nieuws = () => {
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [activeYear, setActiveYear] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      const { data, error } = await supabase
+        .from("articles")
+        .select("id, title, slug, category, published_at")
+        .eq("status", "published")
+        .order("published_at", { ascending: false });
+
+      if (!error && data) setArticles(data);
+      setLoading(false);
+    };
+    fetchArticles();
+  }, []);
+
+  const filtered = articles.filter((a) => {
+    if (activeCategory && a.category !== activeCategory) return false;
+    if (activeYear && a.published_at && !a.published_at.startsWith(activeYear)) return false;
+    return true;
+  });
+
+  const formatDate = (dateStr: string | null) => {
+    if (!dateStr) return "";
+    return format(new Date(dateStr), "d MMM yyyy", { locale: nl });
+  };
+
+  const getCategoryLabel = (cat: string) => {
+    const map: Record<string, string> = {
+      "BPM & Import": "BPM",
+      "Oldtimers & Youngtimers": "OLDTIMERS",
+      "Verzekeringstaxatie": "VERZEKERING",
+      "Wetgeving": "WETGEVING",
+      "Tips & Uitleg": "TIPS",
+    };
+    return map[cat] || cat.toUpperCase();
+  };
+
   return (
     <>
       <PageMeta
         title="BPM Nieuws en Jurisprudentie | Taxaris"
-        description="Blijf op de hoogte van wijzigingen in de BPM-regelgeving en recente uitspraken."
+        description="Actuele berichten over wijzigingen in wet- en regelgeving, uitspraken en BPM-tarieven."
       />
       <SiteHeader />
       <UspBar />
+      <div style={{ height: 4, background: '#ff751f', width: '100%' }} />
 
-      {/* Hero */}
-      <section className="bg-[hsl(var(--navy))] py-20 text-white">
-        <div className="container mx-auto max-w-5xl px-4 text-center">
-          <span className="mb-4 inline-block font-inter text-[11px] font-semibold uppercase tracking-[0.15em] text-[hsl(var(--cta))]">
-            NIEUWS
-          </span>
-          <h1 className="font-playfair text-4xl font-bold leading-tight md:text-5xl">
-            BPM nieuws en jurisprudentie
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl font-inter text-base leading-relaxed text-white/80 md:text-lg">
-            Blijf op de hoogte van wijzigingen in de BPM-regelgeving en recente uitspraken.
-          </p>
-        </div>
+      {/* Compact Hero */}
+      <section style={{ background: '#1d3c71' }} className="py-14 md:py-16 px-6 lg:px-8 text-center">
+        <span
+          className="inline-block mb-3 font-semibold uppercase"
+          style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: '0.15em', color: '#ff751f' }}
+        >
+          NIEUWS
+        </span>
+        <h1
+          className="font-bold mb-3"
+          style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 3.5vw, 42px)', lineHeight: 1.2, color: '#ffffff' }}
+        >
+          BPM nieuws en jurisprudentie
+        </h1>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(15px, 1.5vw, 17px)', color: 'rgba(255,255,255,0.7)', lineHeight: 1.65, maxWidth: 560 }} className="mx-auto">
+          Actuele berichten over wijzigingen in wet- en regelgeving, uitspraken en BPM-tarieven.
+        </p>
       </section>
 
-      {/* Articles */}
-      <section className="bg-background py-20">
-        <div className="container mx-auto max-w-5xl px-4">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {articles.map((article, i) => (
-              <div
-                key={i}
-                className="rounded-[10px] bg-card p-6 shadow-[0_2px_10px_rgba(0,0,0,0.07)] transition-shadow hover:shadow-md"
-              >
-                <span className="font-inter text-sm text-muted-foreground">{article.date}</span>
-                <h3 className="mt-2 font-inter text-lg font-bold text-[hsl(var(--navy))]">
-                  {article.title}
-                </h3>
-                <p className="mt-2 line-clamp-2 font-inter text-[15px] leading-relaxed text-muted-foreground">
-                  {article.excerpt}
-                </p>
-                <span className="mt-4 inline-flex items-center gap-1 font-inter text-sm font-semibold text-[hsl(var(--cta))] hover:underline cursor-pointer">
-                  Lees meer <ArrowRight className="h-4 w-4" />
-                </span>
+      {/* Content */}
+      <section className="py-14 md:py-20 px-6 lg:px-8 bg-white">
+        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-12">
+
+          {/* Main list */}
+          <div className="flex-1 min-w-0">
+            {loading ? (
+              <div className="space-y-4">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="h-14 bg-gray-100 rounded animate-pulse" />
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            ) : filtered.length === 0 ? (
+              <p style={{ color: '#698db3', fontSize: 16, fontFamily: "'Inter', sans-serif" }} className="py-10 text-center">
+                Geen nieuwsberichten gevonden.
+              </p>
+            ) : (
+              <div>
+                {filtered.map((article, i) => (
+                  <div key={article.id}>
+                    <div className="flex items-center gap-0 py-4">
+                      {/* Date */}
+                      <span
+                        className="shrink-0 text-right pr-4"
+                        style={{ width: 120, fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#8a9bb5' }}
+                      >
+                        {formatDate(article.published_at)}
+                      </span>
 
-      {/* CTA */}
-      <section className="bg-[hsl(var(--navy))] py-16">
-        <div className="container mx-auto max-w-3xl px-4 text-center">
-          <h2 className="font-playfair text-3xl font-bold text-white">
-            Vragen over uw BPM-aangifte?
-          </h2>
-          <p className="mt-3 font-inter text-base text-white/80">
-            Neem contact op voor een vrijblijvend gesprek.
-          </p>
-          <Button variant="cta" size="lg" className="mt-6" asChild>
-            <Link to="/contact">Contact opnemen</Link>
-          </Button>
+                      {/* Vertical divider */}
+                      <div className="shrink-0 self-stretch" style={{ width: 1, background: '#dde3ea' }} />
+
+                      {/* Category badge */}
+                      <span
+                        className="shrink-0 ml-4 mr-4 inline-block rounded-full px-2.5 py-0.5 font-bold uppercase"
+                        style={{ fontSize: 10, letterSpacing: '0.08em', background: 'rgba(255,117,31,0.12)', color: '#ff751f' }}
+                      >
+                        {getCategoryLabel(article.category)}
+                      </span>
+
+                      {/* Title */}
+                      <Link
+                        to={`/blog/${article.slug}`}
+                        className="flex-1 min-w-0 font-semibold hover:underline truncate"
+                        style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1d3c71', lineHeight: 1.4 }}
+                      >
+                        {article.title}
+                      </Link>
+
+                      {/* Read more */}
+                      <Link
+                        to={`/blog/${article.slug}`}
+                        className="shrink-0 ml-4 inline-flex items-center gap-1 font-semibold hover:gap-2 transition-all"
+                        style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#ff751f' }}
+                      >
+                        Lees meer <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
+                    {i < filtered.length - 1 && (
+                      <div style={{ height: 1, background: '#eef1f5' }} />
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Sidebar */}
+          <aside className="lg:w-[240px] shrink-0">
+            {/* Categories */}
+            <div className="mb-8">
+              <span
+                className="block mb-3 font-bold uppercase"
+                style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: '0.12em', color: '#1d3c71' }}
+              >
+                Categorieën
+              </span>
+              <div className="space-y-1">
+                {sidebarCategories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
+                    className="block w-full text-left px-3 py-2 rounded-md text-sm transition-colors"
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: 14,
+                      color: activeCategory === cat ? '#ff751f' : '#4a5568',
+                      background: activeCategory === cat ? 'rgba(255,117,31,0.08)' : 'transparent',
+                      fontWeight: activeCategory === cat ? 600 : 400,
+                    }}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Archive */}
+            <div>
+              <span
+                className="block mb-3 font-bold uppercase"
+                style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: '0.12em', color: '#1d3c71' }}
+              >
+                Archief
+              </span>
+              <div className="space-y-1">
+                {archiveYears.map((year) => (
+                  <button
+                    key={year}
+                    onClick={() => setActiveYear(activeYear === year ? null : year)}
+                    className="block w-full text-left px-3 py-2 rounded-md text-sm transition-colors"
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: 14,
+                      color: activeYear === year ? '#ff751f' : '#4a5568',
+                      background: activeYear === year ? 'rgba(255,117,31,0.08)' : 'transparent',
+                      fontWeight: activeYear === year ? 600 : 400,
+                    }}
+                  >
+                    {year}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </aside>
         </div>
       </section>
 
       <SiteFooter />
+      <WhatsAppButton />
     </>
   );
 };
