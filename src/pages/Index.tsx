@@ -1,3 +1,4 @@
+import WhatsAppButton from "@/components/WhatsAppButton";
 import React, { useState } from "react";
 import PageMeta from "@/components/PageMeta";
 import { Link } from "react-router-dom";
@@ -716,6 +717,7 @@ const Index = () => {
 
 
       <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 };

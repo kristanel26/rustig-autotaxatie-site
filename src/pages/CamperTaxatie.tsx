@@ -1,3 +1,4 @@
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
@@ -289,6 +290,7 @@ const CamperTaxatie = () => {
       </section>
 
       <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 };
