@@ -1,6 +1,7 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Phone, Mail, MessageCircle } from "lucide-react";
+import heroFaq from "@/assets/hero-faq.jpg";
 import UspBar from "@/components/UspBar";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
