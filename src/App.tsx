@@ -69,6 +69,7 @@ const router = createBrowserRouter([
   { path: "/camper-taxatie-stappenplan", element: <CamperTaxatieStappenplan /> },
   { path: "/nieuws", element: <Nieuws /> },
   { path: "/over-ons", element: <OverOns /> },
+  { path: "/werkwijze", element: <Navigate to="/over-ons" replace /> },
   
   // Internal routes - Login is public
   { path: "/intern/login", element: <Login /> },
