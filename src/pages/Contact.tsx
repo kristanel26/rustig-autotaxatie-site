@@ -19,7 +19,7 @@ const Contact = () => {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="relative overflow-hidden py-16 md:py-24 px-6 md:px-8">
+      <section className="relative overflow-hidden py-16 md:py-24 px-6 md:px-8 flex items-center" style={{ minHeight: 320 }}>
         <div className="absolute inset-0">
           <img src={heroContact} alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />
