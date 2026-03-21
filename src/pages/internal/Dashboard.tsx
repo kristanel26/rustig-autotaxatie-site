@@ -53,10 +53,10 @@ interface SearchResult {
 }
 
 const STATUS_CONFIG = [
-  { key: 'concept', label: 'Concept', color: 'bg-zinc-500', border: 'border-zinc-500/30', headerBg: 'bg-zinc-500/10', text: 'text-zinc-400' },
-  { key: 'in_behandeling', label: 'In behandeling', color: 'bg-blue-500', border: 'border-blue-500/30', headerBg: 'bg-blue-500/10', text: 'text-blue-400' },
-  { key: 'gereed', label: 'Gereed', color: 'bg-emerald-500', border: 'border-emerald-500/30', headerBg: 'bg-emerald-500/10', text: 'text-emerald-400' },
-  { key: 'verzonden', label: 'Verzonden', color: 'bg-amber-500', border: 'border-amber-500/30', headerBg: 'bg-amber-500/10', text: 'text-amber-400' },
+  { key: 'concept', label: 'Concept', color: 'bg-[#698db3]', border: 'border-[#dde3ea]', headerBg: 'bg-[#f7f8fa]', text: 'text-[#698db3]' },
+  { key: 'in_behandeling', label: 'In behandeling', color: 'bg-[#ff751f]', border: 'border-[#dde3ea]', headerBg: 'bg-[#fff3e0]', text: 'text-[#ff751f]' },
+  { key: 'gereed', label: 'Gereed', color: 'bg-[#1d7a3a]', border: 'border-[#dde3ea]', headerBg: 'bg-[#e6f4ea]', text: 'text-[#1d7a3a]' },
+  { key: 'verzonden', label: 'Verzonden', color: 'bg-[#1d3c71]', border: 'border-[#dde3ea]', headerBg: 'bg-[#EBF2FB]', text: 'text-[#1d3c71]' },
 ] as const;
 
 const REPORT_TYPES: { type: ReportType; label: string; sub: string; icon: typeof Car }[] = [
