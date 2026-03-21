@@ -116,7 +116,7 @@ const SiteFooter = () => {
               <ul className="space-y-3 text-sm text-white/70">
                 <li className="flex items-start gap-2.5">
                   <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                  <span>Leigraaf 160<br />6651 GJ Druten</span>
+                  <span>Van Heemstraweg 123<br />6651 GJ Druten</span>
                 </li>
                 <li>
                   <a href="tel:+31854832461" className="flex items-center gap-2.5 hover:text-white transition-colors">

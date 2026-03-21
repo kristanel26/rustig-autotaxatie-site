@@ -265,7 +265,7 @@ const PDFCover = () => {
         <img src={logoAutomobiel} alt="Automobiel Taxaties" style={{ height: '7mm', width: 'auto', display: 'block', marginBottom: '2mm' }} />
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <span style={{ fontSize: '0.65rem', color: C.labels }}>
-            Leigraaf 160, 6651 GJ Druten &nbsp;|&nbsp; KvK: 95549269 &nbsp;|&nbsp; BTW: NL003366178B93 &nbsp;|&nbsp; TMV: 33106 &nbsp;|&nbsp; VRT: 22-523-M
+            Van Heemstraweg 123, 6651 KH Druten &nbsp;|&nbsp; KvK: 95549269 &nbsp;|&nbsp; BTW: NL003366178B93 &nbsp;|&nbsp; TMV: 33106 &nbsp;|&nbsp; VRT: 22-523-M
           </span>
           <span style={{ fontSize: '0.7rem', color: C.labels, whiteSpace: 'nowrap' }}>Pagina 1 van 8</span>
         </div>

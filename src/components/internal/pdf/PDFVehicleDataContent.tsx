@@ -182,7 +182,7 @@ const PDFVehicleDataContent = ({ report, pageNumber = 2, totalPages = 10 }: PDFV
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Text style={{ fontSize: 8, fontFamily: 'Helvetica-Bold', color: '#000000' }}>Automobiel Taxaties</Text>
           <Text style={{ fontSize: 8, color: '#000000', marginHorizontal: 4 }}>|</Text>
-          <Text style={{ fontSize: 8, color: '#000000' }}>Leigraaf 160, 6651 GJ Druten</Text>
+          <Text style={{ fontSize: 8, color: '#000000' }}>Van Heemstraweg 123, 6651 KH Druten</Text>
           <Text style={{ fontSize: 8, color: '#000000', marginHorizontal: 4 }}>|</Text>
           <Text style={{ fontSize: 8, color: '#000000' }}>KVK: 95549269</Text>
         </View>

@@ -88,7 +88,7 @@ const Contact = () => {
                 </a>
                 <div className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 mt-0.5" style={{ color: '#698db3' }} />
-                  <span>Leigraaf 160, 6651 GJ Druten</span>
+                  <span>Van Heemstraweg 123, 6651 KH Druten</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Clock className="w-4 h-4 mt-0.5" style={{ color: '#698db3' }} />

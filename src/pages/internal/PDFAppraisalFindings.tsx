@@ -519,7 +519,7 @@ const PDFAppraisalFindings = () => {
         <div style={{ fontSize: '7px', color: '#000000' }}>
           <span style={{ fontWeight: 600 }}>Automobiel Taxaties</span>
           <span style={{ margin: '0 4px' }}>|</span>
-          Leigraaf 160, 6651 GJ Druten
+          Van Heemstraweg 123, 6651 KH Druten
           <span style={{ margin: '0 4px' }}>|</span>
           KVK: 95549269
         </div>
