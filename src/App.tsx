@@ -68,6 +68,7 @@ const router = createBrowserRouter([
   { path: "/blog", element: <Blog /> },
   { path: "/stappenplan-bpm-aangifte", element: <StappenplanBpmAangifte /> },
   { path: "/camper-taxatie-stappenplan", element: <CamperTaxatieStappenplan /> },
+  { path: "/verzekering-stappenplan", element: <VerzekeringstaxatieStappenplan /> },
   { path: "/nieuws", element: <Nieuws /> },
   { path: "/over-ons", element: <OverOns /> },
   { path: "/werkwijze", element: <Navigate to="/over-ons" replace /> },
