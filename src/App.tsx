@@ -66,6 +66,7 @@ const router = createBrowserRouter([
   { path: "/blog", element: <Blog /> },
   { path: "/stappenplan-bpm-aangifte", element: <StappenplanBpmAangifte /> },
   { path: "/camper-taxatie-stappenplan", element: <CamperTaxatieStappenplan /> },
+  { path: "/nieuws", element: <Nieuws /> },
   
   // Internal routes - Login is public
   { path: "/intern/login", element: <Login /> },
