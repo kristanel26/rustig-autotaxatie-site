@@ -6,7 +6,7 @@ import { Phone, Car, Shield, Scale, Wrench, ArrowRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import erikPhoto from "@/assets/erik-over-ons.png";
-import heroOverOns from "@/assets/hero-over-ons.jpg";
+import heroOverOns from "@/assets/hero-overons.png";
 import stepAanvraag from "@/assets/erik-aanvraag.png";
 import stepAdvies from "@/assets/step-advies.jpg";
 import stepInspectie from "@/assets/step-inspectie.jpg";
@@ -75,7 +75,7 @@ const OverOns = () => {
 
       {/* ── HERO with background image ── */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroOverOns})` }} />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroOverOns})`, objectPosition: 'center top' }} />
         <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.75)' }} />
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
           <div style={{ width: 32, height: 2, background: '#ff751f', marginBottom: 12 }} />
@@ -90,8 +90,8 @@ const OverOns = () => {
           >
             Automobiel Taxaties
           </h1>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 600, marginTop: 16 }}>
-            Automobiel Taxaties is Erik Elderson. Erkend taxateur voor BPM, verzekeringstaxatie, WEV-taxatie en schadevaststelling, werkzaam in het grootste gedeelte van Nederland.
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 560, marginTop: 16 }}>
+            Advies binnen één werkdag
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link to="/contact">
