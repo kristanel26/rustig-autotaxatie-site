@@ -100,10 +100,10 @@ const Nieuws = () => {
 
       {/* Content */}
       <section className="py-14 md:py-20 px-6 lg:px-8" style={{ background: '#f7f8fa' }}>
-        <div className="mx-auto flex flex-col lg:flex-row gap-10" style={{ maxWidth: 960 }}>
+        <div className="mx-auto flex flex-col lg:flex-row" style={{ maxWidth: 1200, padding: '0 40px', gap: '2%' }}>
 
           {/* Main list */}
-          <div className="flex-1 min-w-0 bg-white rounded-lg" style={{ padding: '8px 24px', boxShadow: '0 2px 10px rgba(0,0,0,0.05)' }}>
+          <div style={{ flex: '0 0 70%', minWidth: 0 }}>
             {loading ? (
               <div className="space-y-4 py-4">
                 {[1, 2, 3, 4].map((i) => (
@@ -118,7 +118,7 @@ const Nieuws = () => {
               <div>
                 {filtered.map((article, i) => (
                   <div key={article.id}>
-                    <div className="flex items-center gap-0" style={{ padding: '20px 0' }}>
+                    <div className="flex items-start gap-0" style={{ padding: '20px 0' }}>
                       {/* Date */}
                       <span
                         className="shrink-0 text-right pr-4"
@@ -141,8 +141,8 @@ const Nieuws = () => {
                       {/* Title */}
                       <Link
                         to={`/blog/${article.slug}`}
-                        className="flex-1 min-w-0 font-semibold hover:underline truncate"
-                        style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1d3c71', lineHeight: 1.4 }}
+                        className="flex-1 min-w-0 font-semibold hover:underline"
+                        style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1d3c71', lineHeight: 1.5 }}
                       >
                         {article.title}
                       </Link>
@@ -167,8 +167,8 @@ const Nieuws = () => {
 
           {/* Sidebar */}
           <aside
-            className="lg:w-[260px] shrink-0 self-start"
-            style={{ background: '#ffffff', borderRadius: 8, boxShadow: '0 2px 10px rgba(0,0,0,0.07)', padding: 24 }}
+            className="self-start"
+            style={{ flex: '0 0 28%', background: '#ffffff', borderRadius: 8, boxShadow: '0 2px 10px rgba(0,0,0,0.07)', padding: 24 }}
           >
             {/* Categories */}
             <div className="mb-8">
