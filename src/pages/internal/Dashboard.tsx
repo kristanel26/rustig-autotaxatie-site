@@ -98,10 +98,10 @@ const DraggableCard = ({
       {...attributes}
       {...listeners}
       onClick={onClick}
-      className="w-full text-left p-3 rounded-lg bg-[#0a0d14] border border-[#253047] hover:border-[#c9a84c]/50 hover:bg-[#0f1320] transition-all duration-150 group cursor-grab active:cursor-grabbing"
+      className="w-full text-left p-3 rounded-lg bg-white border border-[#dde3ea] hover:border-[#1d3c71] hover:shadow-[0_2px_10px_rgba(0,0,0,0.07)] transition-all duration-150 group cursor-grab active:cursor-grabbing"
     >
       <div className="flex items-center justify-between mb-1">
-        <span className="text-xs font-mono font-medium text-muted-foreground">{report.report_number}</span>
+        <span className="text-xs font-mono font-medium text-[#666]">{report.report_number}</span>
         {report.report_type && (
           <Badge variant="secondary" className="text-[9px] px-1.5 py-0">{report.report_type.toUpperCase()}</Badge>
         )}
