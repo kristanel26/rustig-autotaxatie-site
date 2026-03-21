@@ -221,12 +221,12 @@ const Reports = () => {
                               <Avatar className="h-5 w-5">
                                 <AvatarFallback className="text-[9px] font-semibold bg-primary/20 text-primary">{appraiser.initials}</AvatarFallback>
                               </Avatar>
-                              <span className="text-xs text-[#9CA3AF]">{appraiser.displayName}</span>
+                              <span className="text-xs text-[#666]">{appraiser.displayName}</span>
                             </div>
-                          ) : <span className="text-xs text-[#9CA3AF]">—</span>}
+                          ) : <span className="text-xs text-[#666]">—</span>}
                         </TableCell>
                       )}
-                      <TableCell className="text-xs text-[#9CA3AF]">{formatDate(report.inspection_date)}</TableCell>
+                      <TableCell className="text-xs text-[#666]">{formatDate(report.inspection_date)}</TableCell>
                     </TableRow>
                   );
                 })

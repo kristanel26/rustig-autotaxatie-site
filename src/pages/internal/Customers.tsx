@@ -314,26 +314,26 @@ const Customers = () => {
             ) : (
               <Table>
                 <TableHeader>
-                  <TableRow>
-                    <TableHead className="text-white font-bold">Naam</TableHead>
-                    <TableHead className="hidden sm:table-cell text-white font-bold">Bedrijf</TableHead>
-                    <TableHead className="hidden md:table-cell text-white font-bold">Plaats</TableHead>
-                    <TableHead className="hidden lg:table-cell text-white font-bold">E-mail</TableHead>
-                    <TableHead className="hidden lg:table-cell text-white font-bold">Telefoon</TableHead>
-                    <TableHead className="w-[60px] text-white font-bold">Type</TableHead>
+                  <TableRow className="bg-[#f7f8fa]">
+                    <TableHead className="text-[#1d3c71] font-bold">Naam</TableHead>
+                    <TableHead className="hidden sm:table-cell text-[#1d3c71] font-bold">Bedrijf</TableHead>
+                    <TableHead className="hidden md:table-cell text-[#1d3c71] font-bold">Plaats</TableHead>
+                    <TableHead className="hidden lg:table-cell text-[#1d3c71] font-bold">E-mail</TableHead>
+                    <TableHead className="hidden lg:table-cell text-[#1d3c71] font-bold">Telefoon</TableHead>
+                    <TableHead className="w-[60px] text-[#1d3c71] font-bold">Type</TableHead>
                     <TableHead className="w-[80px]"></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filtered.map((c) => (
-                    <TableRow key={c.id} className="cursor-pointer" onClick={() => navigate(`/intern/klanten/${c.id}`)}>
-                      <TableCell className="font-medium text-white">{displayName(c)}</TableCell>
-                      <TableCell className="hidden sm:table-cell text-sm text-white">
-                        {c.company_name || <span className="text-[#9CA3AF]">-</span>}
+                    <TableRow key={c.id} className="cursor-pointer hover:bg-[#f7f8fa]" onClick={() => navigate(`/intern/klanten/${c.id}`)}>
+                      <TableCell className="font-medium text-[#1a1a1a]">{displayName(c)}</TableCell>
+                      <TableCell className="hidden sm:table-cell text-sm text-[#1a1a1a]">
+                        {c.company_name || <span className="text-[#666]">-</span>}
                       </TableCell>
-                      <TableCell className="hidden md:table-cell text-sm text-white">{c.city || <span className="text-[#9CA3AF]">-</span>}</TableCell>
-                      <TableCell className="hidden lg:table-cell text-sm text-[#c9a84c]">{c.email || <span className="text-[#9CA3AF]">-</span>}</TableCell>
-                      <TableCell className="hidden lg:table-cell text-sm font-mono text-white">{c.phone || <span className="text-[#9CA3AF]">-</span>}</TableCell>
+                      <TableCell className="hidden md:table-cell text-sm text-[#1a1a1a]">{c.city || <span className="text-[#666]">-</span>}</TableCell>
+                      <TableCell className="hidden lg:table-cell text-sm text-[#1d3c71]">{c.email || <span className="text-[#666]">-</span>}</TableCell>
+                      <TableCell className="hidden lg:table-cell text-sm font-mono text-[#1a1a1a]">{c.phone || <span className="text-[#666]">-</span>}</TableCell>
                       <TableCell>
                         {c.customer_type === 'zakelijk' ? (
                           <Badge variant="outline" className="text-xs gap-1">
