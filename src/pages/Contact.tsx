@@ -47,61 +47,65 @@ const Contact = () => {
       {/* Wizard + sidebar */}
       <section className="py-16 md:py-24 px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-[340px_1fr] gap-10 items-start">
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <div
-              className="rounded-[14px] p-8 text-white"
-              style={{
-                background: '#1d3c71',
-                backgroundImage: 'radial-gradient(ellipse at 20% 50%, rgba(105,141,179,0.20) 0%, transparent 60%)',
-              }}
-            >
-              <h3 className="heading-display text-xl font-semibold mb-3">Liever direct bellen?</h3>
-              <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: 14, lineHeight: 1.7 }} className="mb-1">
-                Erik staat klaar voor persoonlijk advies.
-              </p>
-              <a href="tel:+31854832461" className="text-white font-bold text-lg block mt-4 hover:underline">
-                <Phone className="w-4 h-4 inline mr-2" />
-                085 483 2461
+          {/* Sidebar — one unified blue card */}
+          <div
+            className="rounded-[12px] p-8 text-white"
+            style={{
+              background: '#1d3c71',
+              backgroundImage: 'radial-gradient(ellipse at 20% 50%, rgba(105,141,179,0.15) 0%, transparent 60%)',
+            }}
+          >
+            {/* Erik profile */}
+            <div className="flex items-center gap-4 mb-5">
+              <img src={erikPhoto} alt="Erik Elderson" className="w-[72px] h-[72px] rounded-full object-cover" loading="lazy" />
+              <div>
+                <p className="font-bold text-[18px]">Erik Elderson</p>
+                <p style={{ fontSize: 13, opacity: 0.8, lineHeight: 1.5, marginTop: 2 }}>Eigenaar — Notarieel Beëdigd TMV Register-Taxateur — Register-Taxateur VRT</p>
+              </div>
+            </div>
+
+            <div style={{ height: 1, background: 'rgba(255,255,255,0.15)', margin: '20px 0' }} />
+
+            {/* Contact details */}
+            <div className="space-y-3" style={{ fontSize: 15 }}>
+              <a href="tel:+31854832461" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <Phone className="w-4 h-4" style={{ opacity: 0.7 }} />
+                <span className="font-bold">085 483 2461</span>
               </a>
-            </div>
-
-            <div className="rounded-[14px] p-8" style={{ background: '#f0f4f8' }}>
-              <div className="flex gap-4 mb-4">
-                <img src={erikPhoto} alt="Erik Elderson" className="w-14 h-14 rounded-full object-cover" loading="lazy" />
-                <div>
-                  <p className="font-semibold text-sm" style={{ color: '#1a1a1a' }}>Erik Elderson</p>
-                  <p className="text-xs leading-relaxed" style={{ color: '#698db3' }}>Eigenaar — Notarieel Beëdigd TMV Register-Taxateur — Register-Taxateur VRT</p>
-                </div>
-              </div>
-              <div className="space-y-3 text-sm" style={{ color: '#4a5568' }}>
-                <a href="tel:+31650694978" className="flex items-center gap-2 hover:text-[#1d3c71] transition-colors">
-                  <Phone className="w-4 h-4" style={{ color: '#698db3' }} />
-                  06 50694978
-                </a>
-                <a href="mailto:erik@automobieltaxaties.nl" className="flex items-center gap-2 hover:text-[#1d3c71] transition-colors">
-                  <Mail className="w-4 h-4" style={{ color: '#698db3' }} />
-                  erik@automobieltaxaties.nl
-                </a>
-                <div className="flex items-start gap-2">
-                  <MapPin className="w-4 h-4 mt-0.5" style={{ color: '#698db3' }} />
-                  <span>Leigraaf 160, 6651 GJ Druten</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Clock className="w-4 h-4 mt-0.5" style={{ color: '#698db3' }} />
-                  <span>ma-vr 8:30 – 17:00</span>
-                </div>
+              <a href="tel:+31650694978" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <Phone className="w-4 h-4" style={{ opacity: 0.7 }} />
+                <span>06 50694978</span>
+              </a>
+              <a href="mailto:erik@automobieltaxaties.nl" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <Mail className="w-4 h-4" style={{ opacity: 0.7 }} />
+                <span>erik@automobieltaxaties.nl</span>
+              </a>
+              <div className="flex items-center gap-3">
+                <Clock className="w-4 h-4" style={{ opacity: 0.7 }} />
+                <span>ma-vr 8:30 – 17:00</span>
               </div>
             </div>
 
-            <div className="rounded-[14px] p-6" style={{ border: '1px solid #e2e8f0' }}>
-              <h4 className="text-sm font-semibold mb-2" style={{ color: '#1a1a1a' }}>Bedrijfsgegevens</h4>
-              <div className="space-y-1 text-xs" style={{ color: '#698db3' }}>
-                <p>KvK: 71468889</p>
-                <p>BTW: NL858727493B01</p>
-                
-              </div>
+            <div style={{ height: 1, background: 'rgba(255,255,255,0.15)', margin: '20px 0' }} />
+
+            {/* Business details */}
+            <p className="uppercase mb-2" style={{ fontSize: 11, letterSpacing: '0.1em', opacity: 0.6 }}>BEDRIJFSGEGEVENS</p>
+            <div className="space-y-1" style={{ fontSize: 13, opacity: 0.75 }}>
+              <p>KvK: 71468889</p>
+              <p>BTW: NL858727493B01</p>
             </div>
+
+            {/* CTA button */}
+            <a href="tel:+31854832461" className="block mt-6">
+              <button
+                className="w-full font-bold text-[15px] rounded-lg transition-colors"
+                style={{ background: '#ff751f', color: '#fff', height: 48, border: 'none', cursor: 'pointer', boxShadow: '0 3px 12px rgba(255,117,31,0.35)' }}
+                onMouseEnter={e => e.currentTarget.style.background = '#e8651a'}
+                onMouseLeave={e => e.currentTarget.style.background = '#ff751f'}
+              >
+                Bel direct: 085 483 2461
+              </button>
+            </a>
           </div>
 
           {/* Wizard card */}
