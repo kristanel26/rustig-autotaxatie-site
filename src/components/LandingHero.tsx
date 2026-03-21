@@ -62,16 +62,16 @@ const LandingHero = ({
 
       <div className="container-wide w-full px-6 md:px-8 py-16 md:py-24 relative z-10">
         <div className="max-w-3xl">
-          <div className="flex items-center gap-3 mb-6 animate-fade-in">
-            <div className="accent-line" />
-            <p className="text-white/80 font-semibold uppercase tracking-widest text-xs">
+          <div className="mb-6 animate-fade-in">
+            <div style={{ width: 32, height: 2, background: '#ff751f', marginBottom: 12 }} />
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase' as const, color: '#ff751f' }}>
               {subtitle}
             </p>
           </div>
-          <h1 className="heading-display text-white mb-6 leading-[1.1] animate-slide-up text-balance" style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 700 }}>
+          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 700, lineHeight: 1.1, color: '#ffffff', maxWidth: 700 }} className="mb-6 animate-slide-up text-balance">
             {title}
           </h1>
-          <div className="text-lg md:text-xl text-white/75 mb-10 max-w-2xl animate-slide-up leading-relaxed" style={{ animationDelay: "100ms" }}>
+          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 600 }} className="mb-10 animate-slide-up" >
             {description}
           </div>
           <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: "200ms" }}>
