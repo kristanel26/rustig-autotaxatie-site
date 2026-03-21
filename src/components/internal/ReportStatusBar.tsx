@@ -31,8 +31,8 @@ export function ReportStatusBar({ status, onChange, disabled }: ReportStatusBarP
               'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1',
               'disabled:opacity-50 disabled:cursor-not-allowed',
               status === opt.value
-                ? 'bg-[#C9A84C] border-[#C9A84C] text-[#0e0e0f] font-medium'
-                : 'bg-transparent border-[rgba(255,255,255,0.15)] text-[#7a7870] hover:border-[rgba(255,255,255,0.3)]'
+                ? 'bg-[#ff751f] border-[#ff751f] text-white font-medium'
+                : 'bg-white border-[#dde3ea] text-[#666] hover:border-[#1d3c71]'
             )}
           >
             {opt.label}
@@ -46,13 +46,13 @@ export function ReportStatusBar({ status, onChange, disabled }: ReportStatusBarP
 export function getStatusBadgeProps(status: string | null) {
   switch (status) {
     case 'in_behandeling':
-      return { label: 'In behandeling', className: 'bg-[#c9a84c] text-white border-[#c9a84c]' };
+      return { label: 'In behandeling', className: 'bg-[#fff3e0] text-[#ff751f] border-[#ff751f]/20' };
     case 'gereed':
-      return { label: 'Gereed', className: 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border-emerald-500/20' };
+      return { label: 'Gereed', className: 'bg-[#e6f4ea] text-[#1d7a3a] border-[#1d7a3a]/20' };
     case 'verzonden':
-      return { label: 'Verzonden', className: 'bg-blue-500/15 text-blue-700 dark:text-blue-400 border-blue-500/20' };
+      return { label: 'Verzonden', className: 'bg-[#EBF2FB] text-[#1d3c71] border-[#1d3c71]/20' };
     case 'concept':
     default:
-      return { label: 'Concept', className: 'bg-muted text-muted-foreground border-muted' };
+      return { label: 'Concept', className: 'bg-[#f7f8fa] text-[#698db3] border-[#698db3]/20' };
   }
 }
