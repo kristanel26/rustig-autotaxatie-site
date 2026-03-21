@@ -241,15 +241,15 @@ export default function Rapportage() {
               <div className="h-[350px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={chartData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--s800))" />
-                    <XAxis dataKey="month" tick={{ fill: 'hsl(var(--s400))', fontSize: 12 }} />
-                    <YAxis allowDecimals={false} tick={{ fill: 'hsl(var(--s400))', fontSize: 12 }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#dde3ea" />
+                    <XAxis dataKey="month" tick={{ fill: '#666', fontSize: 12 }} />
+                    <YAxis allowDecimals={false} tick={{ fill: '#666', fontSize: 12 }} />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: 'hsl(var(--s900))',
-                        border: '1px solid hsl(var(--s700))',
+                        backgroundColor: '#ffffff',
+                        border: '1px solid #dde3ea',
                         borderRadius: '8px',
-                        color: 'white',
+                        color: '#1a1a1a',
                       }}
                     />
                     <Legend />
