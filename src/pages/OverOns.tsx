@@ -91,7 +91,7 @@ const OverOns = () => {
             Automobiel Taxaties
           </h1>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 560, marginTop: 16 }}>
-            Advies binnen één werkdag
+            Automobiel Taxaties is Erik Elderson. Erkend taxateur voor BPM, verzekeringstaxatie, WEV-taxatie en schadevaststelling, werkzaam in het grootste gedeelte van Nederland.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link to="/contact">
