@@ -77,17 +77,21 @@ const Contact = () => {
                 <img src={erikPhoto} alt="Erik Elderson" className="w-14 h-14 rounded-full object-cover" loading="lazy" />
                 <div>
                   <p className="font-semibold text-sm" style={{ color: '#1a1a1a' }}>Erik Elderson</p>
-                  <p className="text-xs" style={{ color: '#698db3' }}>Eigenaar · TMV Register Taxateur</p>
+                  <p className="text-xs leading-relaxed" style={{ color: '#698db3' }}>Eigenaar — Notarieel Beëdigd TMV Register-Taxateur — Register-Taxateur VRT</p>
                 </div>
               </div>
               <div className="space-y-3 text-sm" style={{ color: '#4a5568' }}>
+                <a href="tel:+31650694978" className="flex items-center gap-2 hover:text-[#1d3c71] transition-colors">
+                  <Phone className="w-4 h-4" style={{ color: '#698db3' }} />
+                  06 50694978
+                </a>
                 <a href="mailto:erik@automobieltaxaties.nl" className="flex items-center gap-2 hover:text-[#1d3c71] transition-colors">
                   <Mail className="w-4 h-4" style={{ color: '#698db3' }} />
                   erik@automobieltaxaties.nl
                 </a>
                 <div className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 mt-0.5" style={{ color: '#698db3' }} />
-                  <span>Van Heemstraweg 123, 6651 KH Druten</span>
+                  <span>Leigraaf 160, 6651 GJ Druten</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Clock className="w-4 h-4 mt-0.5" style={{ color: '#698db3' }} />
