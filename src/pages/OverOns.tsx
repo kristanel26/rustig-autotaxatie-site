@@ -8,7 +8,7 @@ import SiteFooter from "@/components/SiteFooter";
 import erikPhoto from "@/assets/erik-over-ons.png";
 import heroOverOns from "@/assets/hero-overons.png";
 import stepAanvraag from "@/assets/erik-aanvraag.png";
-import stepAdvies from "@/assets/step-advies.jpg";
+import stepAdvies from "@/assets/step-advies.png";
 import stepInspectie from "@/assets/step-inspectie.jpg";
 import stepRapport from "@/assets/step-rapport.jpg";
 import stepAfhandeling from "@/assets/step-afhandeling.jpg";
