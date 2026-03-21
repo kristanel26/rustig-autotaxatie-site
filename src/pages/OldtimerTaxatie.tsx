@@ -9,7 +9,7 @@ import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, CheckCircle, Shield, Star } from "lucide-react";
-import heroOldtimer from "@/assets/hero-oldtimer.jpg";
+import heroOldtimer from "@/assets/hero-oldtimer.png";
 
 const OldtimerTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
