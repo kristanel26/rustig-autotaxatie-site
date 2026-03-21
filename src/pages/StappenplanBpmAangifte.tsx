@@ -1,6 +1,5 @@
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Link } from "react-router-dom";
@@ -251,7 +250,6 @@ const StappenplanBpmAangifte = () => {
       </section>
 
       <SiteFooter />
-      <WhatsAppButton />
     </>
   );
 };

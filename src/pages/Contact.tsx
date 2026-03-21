@@ -3,7 +3,6 @@ import { Phone, Mail, MapPin, Clock, ArrowLeft } from "lucide-react";
 import UspBar from "@/components/UspBar";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import BookingWizard from "@/components/BookingWizard";
 import PageMeta from "@/components/PageMeta";
 import erikPhoto from "@/assets/erik-elderson.png";
@@ -120,7 +119,6 @@ const Contact = () => {
       </section>
 
       <SiteFooter />
-      <WhatsAppButton />
     </div>
   );
 };

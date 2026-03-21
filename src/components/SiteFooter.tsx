@@ -125,12 +125,6 @@ const SiteFooter = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="https://wa.me/31650694978" className="flex items-center gap-2.5 hover:text-white transition-colors">
-                    <Phone className="w-4 h-4 shrink-0" />
-                    WhatsApp: 06 506 949 78
-                  </a>
-                </li>
-                <li>
                   <a href="mailto:algemeen@automobieltaxaties.nl" className="flex items-center gap-2.5 hover:text-white transition-colors">
                     <Mail className="w-4 h-4 shrink-0" />
                     algemeen@automobieltaxaties.nl

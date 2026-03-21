@@ -5,7 +5,6 @@ import IntakeForm from "@/components/IntakeForm";
 import BpmCalculator from "@/components/BpmCalculator";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import StatsBar from "@/components/StatsBar";
@@ -323,7 +322,6 @@ const BpmTaxatie = () => {
       </section>
 
       <SiteFooter />
-      <WhatsAppButton />
     </div>
   );
 };

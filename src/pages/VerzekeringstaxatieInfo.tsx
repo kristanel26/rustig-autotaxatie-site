@@ -4,7 +4,6 @@ import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import StatsBar from "@/components/StatsBar";
@@ -349,7 +348,6 @@ const VerzekeringstaxatieInfo = () => {
       </section>
 
       <SiteFooter />
-      <WhatsAppButton />
     </div>
   );
 };
