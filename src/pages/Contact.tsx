@@ -53,17 +53,7 @@ const Contact = () => {
 
       {/* Wizard + sidebar */}
       <section className="py-16 md:py-24 px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_340px] gap-10 items-start">
-          {/* Wizard card */}
-          <div
-            className="rounded-2xl p-8 sm:p-12 bg-white"
-            style={{
-              boxShadow: '0 4px 32px rgba(29,60,113,0.09), 0 1px 8px rgba(0,0,0,0.04)',
-            }}
-          >
-            <BookingWizard />
-          </div>
-
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-[340px_1fr] gap-10 items-start">
           {/* Sidebar */}
           <div className="space-y-6">
             <div
@@ -115,6 +105,16 @@ const Contact = () => {
                 
               </div>
             </div>
+          </div>
+
+          {/* Wizard card */}
+          <div
+            className="rounded-2xl p-8 sm:p-12 bg-white"
+            style={{
+              boxShadow: '0 4px 32px rgba(29,60,113,0.09), 0 1px 8px rgba(0,0,0,0.04)',
+            }}
+          >
+            <BookingWizard />
           </div>
         </div>
       </section>
