@@ -53,7 +53,7 @@ const Contact = () => {
 
       {/* Wizard + sidebar */}
       <section className="py-16 md:py-24 px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1fr_340px] gap-10 items-start">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-[340px_1fr] gap-10 items-start">
           {/* Wizard card */}
           <div
             className="rounded-2xl p-8 sm:p-12 bg-white"
