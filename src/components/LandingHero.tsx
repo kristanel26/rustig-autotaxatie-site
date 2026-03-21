@@ -11,6 +11,7 @@ interface LandingHeroProps {
   children?: ReactNode;
   heroImage?: string;
   showPhoneButton?: boolean;
+  compact?: boolean;
 }
 
 const LandingHero = ({
@@ -22,9 +23,10 @@ const LandingHero = ({
   heroImage,
   children,
   showPhoneButton = true,
+  compact = false,
 }: LandingHeroProps) => {
   return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+    <section className={`relative flex items-center overflow-hidden ${compact ? '' : 'min-h-[85vh]'}`} style={compact ? { minHeight: 320 } : undefined}>
       {/* Background: image or gradient */}
       {heroImage ? (
         <div className="absolute inset-0">
