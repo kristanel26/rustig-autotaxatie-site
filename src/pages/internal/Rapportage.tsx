@@ -274,12 +274,12 @@ export default function Rapportage() {
                 <CardContent className="pt-6">
                   <Table>
                     <TableHeader>
-                      <TableRow>
-                        <TableHead className="text-white font-bold">Maand</TableHead>
-                        <TableHead className="text-right text-white font-bold">KLS</TableHead>
-                        <TableHead className="text-right text-white font-bold">CAM</TableHead>
-                        <TableHead className="text-right text-white font-bold">WEV</TableHead>
-                        <TableHead className="text-right text-white font-bold">Totaal</TableHead>
+                      <TableRow className="bg-[#f7f8fa]">
+                        <TableHead className="text-[#1d3c71] font-bold">Maand</TableHead>
+                        <TableHead className="text-right text-[#1d3c71] font-bold">KLS</TableHead>
+                        <TableHead className="text-right text-[#1d3c71] font-bold">CAM</TableHead>
+                        <TableHead className="text-right text-[#1d3c71] font-bold">WEV</TableHead>
+                        <TableHead className="text-right text-[#1d3c71] font-bold">Totaal</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
