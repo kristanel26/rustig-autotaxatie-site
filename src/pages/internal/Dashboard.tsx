@@ -130,15 +130,15 @@ const DraggableCard = ({
 
 /* ─── Overlay Card (shown while dragging) ─── */
 const OverlayCard = ({ report }: { report: ReportRow }) => (
-  <div className="w-[260px] p-3 rounded-lg bg-[#0a0d14] border-2 border-[#c9a84c] shadow-xl shadow-[#c9a84c]/10">
+  <div className="w-[260px] p-3 rounded-lg bg-white border-2 border-[#1d3c71] shadow-xl">
     <div className="flex items-center justify-between mb-1">
-      <span className="text-xs font-mono font-medium text-muted-foreground">{report.report_number}</span>
+      <span className="text-xs font-mono font-medium text-[#666]">{report.report_number}</span>
       {report.report_type && (
         <Badge variant="secondary" className="text-[9px] px-1.5 py-0">{report.report_type.toUpperCase()}</Badge>
       )}
     </div>
-    <p className="text-sm font-medium text-foreground truncate">{vehicleLabel(report)}</p>
-    <span className="text-xs font-mono text-muted-foreground">{report.license_plate || '-'}</span>
+    <p className="text-sm font-medium text-[#1a1a1a] truncate">{vehicleLabel(report)}</p>
+    <span className="text-xs font-mono text-[#666]">{report.license_plate || '-'}</span>
   </div>
 );
 
