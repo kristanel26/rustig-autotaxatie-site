@@ -7,6 +7,7 @@ import SiteFooter from "@/components/SiteFooter";
 import BookingWizard from "@/components/BookingWizard";
 import PageMeta from "@/components/PageMeta";
 import erikPhoto from "@/assets/erik-elderson.png";
+import heroContact from "@/assets/hero-contact.jpg";
 
 const Contact = () => {
   return (
