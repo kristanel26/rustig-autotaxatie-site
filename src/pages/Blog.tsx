@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import UspBar from "@/components/UspBar";
 import { format } from "date-fns";
 import { nl } from "date-fns/locale";
+import heroBlog from "@/assets/hero-blog.jpg";
 
 const categories = ["Alle artikelen", "BPM & Import", "Oldtimers & Youngtimers", "Verzekeringstaxatie", "Wetgeving", "Tips & Uitleg"];
 
