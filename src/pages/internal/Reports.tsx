@@ -201,16 +201,16 @@ const Reports = () => {
                 sortedReports.map((report) => {
                   const appraiser = getAppraiserById(report.assigned_to);
                   return (
-                    <TableRow key={report.id} className="cursor-pointer hover:bg-muted/50" onClick={() => navigate(`/intern/rapport/${report.id}`)}>
-                      <TableCell className="font-medium font-mono text-xs text-[#c9a84c]">{report.report_number}</TableCell>
+                    <TableRow key={report.id} className="cursor-pointer hover:bg-[#f7f8fa]" onClick={() => navigate(`/intern/rapport/${report.id}`)}>
+                      <TableCell className="font-medium font-mono text-xs text-[#1d3c71]">{report.report_number}</TableCell>
                       <TableCell>
-                        <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
+                        <Badge variant="secondary" className="text-[10px] px-1.5 py-0 bg-[#EBF2FB] text-[#1d3c71]">
                           {TYPE_LABELS[report.report_type || ''] || (report.report_type?.toUpperCase() || '-')}
                         </Badge>
                       </TableCell>
-                      <TableCell className="font-mono text-xs text-white">{formatLicensePlate(report.license_plate)}</TableCell>
-                      <TableCell className="text-sm truncate max-w-[200px] text-white">{getVehicleDisplay(report)}</TableCell>
-                      <TableCell className="text-sm truncate max-w-[200px] text-white">{getCustomerDisplay(report)}</TableCell>
+                      <TableCell className="font-mono text-xs text-[#1a1a1a]">{formatLicensePlate(report.license_plate)}</TableCell>
+                      <TableCell className="text-sm truncate max-w-[200px] text-[#1a1a1a]">{getVehicleDisplay(report)}</TableCell>
+                      <TableCell className="text-sm truncate max-w-[200px] text-[#1a1a1a]">{getCustomerDisplay(report)}</TableCell>
                       <TableCell>
                         {(() => { const s = getStatusBadgeProps(report.status); return <Badge variant="outline" className={`text-xs ${s.className}`}>{s.label}</Badge>; })()}
                       </TableCell>
