@@ -25,6 +25,7 @@ import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
 import StappenplanBpmAangifte from "./pages/StappenplanBpmAangifte";
 import CamperTaxatieStappenplan from "./pages/CamperTaxatieStappenplan";
+import VerzekeringstaxatieStappenplan from "./pages/VerzekeringstaxatieStappenplan";
 import Nieuws from "./pages/Nieuws";
 import OverOns from "./pages/OverOns";
 
