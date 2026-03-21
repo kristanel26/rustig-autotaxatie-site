@@ -161,7 +161,7 @@ const DroppableColumn = ({
   return (
     <div
       ref={setNodeRef}
-      className={`rounded-xl border ${col.border} bg-[#111827]/60 flex flex-col min-h-[400px] transition-all duration-200 ${isOver ? 'ring-2 ring-[#c9a84c]/50 bg-[#111827]/80' : ''}`}
+      className={`rounded-xl border ${col.border} bg-white flex flex-col min-h-[400px] transition-all duration-200 shadow-[0_2px_10px_rgba(0,0,0,0.07)] ${isOver ? 'ring-2 ring-[#1d3c71]/30' : ''}`}
     >
       <div className={`flex items-center justify-between px-4 py-3 rounded-t-xl ${col.headerBg}`}>
         <div className="flex items-center gap-2">
