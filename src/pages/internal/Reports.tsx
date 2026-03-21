@@ -168,18 +168,18 @@ const Reports = () => {
         </div>
 
         {/* Reports Table */}
-        <div className="bg-background rounded-lg border border-border">
+        <div className="bg-white rounded-lg border border-[#dde3ea] shadow-[0_2px_10px_rgba(0,0,0,0.07)]">
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead className="w-[120px] text-white font-bold">Rapportnr.</TableHead>
-                <TableHead className="w-[60px] text-white font-bold">Type</TableHead>
-                <TableHead className="w-[100px] text-white font-bold">Kenteken</TableHead>
-                <TableHead className="text-white font-bold">Voertuig</TableHead>
-                <TableHead className="text-white font-bold">Klant</TableHead>
-                <TableHead className="w-[130px] text-white font-bold">Status</TableHead>
-                {hasAnyAssigned && <TableHead className="w-[100px] text-white font-bold">Toegewezen</TableHead>}
-                <TableHead className="w-[140px] text-white font-bold">Inspectiedatum</TableHead>
+              <TableRow className="bg-[#f7f8fa]">
+                <TableHead className="w-[120px] text-[#1d3c71] font-bold">Rapportnr.</TableHead>
+                <TableHead className="w-[60px] text-[#1d3c71] font-bold">Type</TableHead>
+                <TableHead className="w-[100px] text-[#1d3c71] font-bold">Kenteken</TableHead>
+                <TableHead className="text-[#1d3c71] font-bold">Voertuig</TableHead>
+                <TableHead className="text-[#1d3c71] font-bold">Klant</TableHead>
+                <TableHead className="w-[130px] text-[#1d3c71] font-bold">Status</TableHead>
+                {hasAnyAssigned && <TableHead className="w-[100px] text-[#1d3c71] font-bold">Toegewezen</TableHead>}
+                <TableHead className="w-[140px] text-[#1d3c71] font-bold">Inspectiedatum</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
