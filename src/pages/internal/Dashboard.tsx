@@ -443,18 +443,18 @@ const Dashboard = () => {
               key={type}
               onClick={() => handleCreate(type)}
               disabled={isCreating !== null}
-              className="group relative flex items-center gap-4 p-5 rounded-xl border-2 border-[#253047] bg-[#111827] hover:border-[#c9a84c] transition-all duration-200 text-left disabled:opacity-50"
+              className="group relative flex items-center gap-4 p-5 rounded-xl border-2 border-[#dde3ea] bg-white hover:border-[#1d3c71] hover:shadow-[0_4px_16px_rgba(29,60,113,0.1)] transition-all duration-200 text-left disabled:opacity-50"
             >
               {isCreating === type ? (
-                <Loader2 className="h-8 w-8 animate-spin text-[#c9a84c]" />
+                <Loader2 className="h-8 w-8 animate-spin text-[#1d3c71]" />
               ) : (
-                <Icon className="h-8 w-8 text-[#c9a84c] shrink-0" />
+                <Icon className="h-8 w-8 text-[#1d3c71] shrink-0" />
               )}
               <div>
-                <p className="text-lg font-bold text-[#c9a84c] tracking-wide">{label}</p>
-                <p className="text-sm text-muted-foreground">{sub}</p>
+                <p className="text-lg font-bold text-[#1d3c71] tracking-wide">{label}</p>
+                <p className="text-sm text-[#666]">{sub}</p>
               </div>
-              <span className="absolute top-3 right-4 text-[10px] text-muted-foreground uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">+ Nieuw</span>
+              <span className="absolute top-3 right-4 text-[10px] text-[#666] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">+ Nieuw</span>
             </button>
           ))}
         </div>
