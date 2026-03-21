@@ -8,7 +8,7 @@ const StatsBar = () => (
           { value: "4,9", label: "GOOGLE REVIEWS", stars: true },
           { value: "25.000+", label: "VOERTUIGEN GETAXEERD" },
           { value: "13 jaar", label: "ERVARING" },
-          { value: "Landelijk", label: "ACTIEF" },
+          { value: "Landelijk", label: "WERKZAAM IN GROOT DEEL VAN NL" },
         ].map((stat, i) => (
           <div key={i} className={`text-center ${i > 0 ? 'md:border-l' : ''}`} style={{ borderColor: '#e0e6ed' }}>
             {stat.stars && (
