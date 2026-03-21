@@ -25,6 +25,7 @@ import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
 import StappenplanBpmAangifte from "./pages/StappenplanBpmAangifte";
 import CamperTaxatieStappenplan from "./pages/CamperTaxatieStappenplan";
+import VerzekeringstaxatieStappenplan from "./pages/VerzekeringstaxatieStappenplan";
 import Nieuws from "./pages/Nieuws";
 import OverOns from "./pages/OverOns";
 
@@ -67,6 +68,7 @@ const router = createBrowserRouter([
   { path: "/blog", element: <Blog /> },
   { path: "/stappenplan-bpm-aangifte", element: <StappenplanBpmAangifte /> },
   { path: "/camper-taxatie-stappenplan", element: <CamperTaxatieStappenplan /> },
+  { path: "/verzekering-stappenplan", element: <VerzekeringstaxatieStappenplan /> },
   { path: "/nieuws", element: <Nieuws /> },
   { path: "/over-ons", element: <OverOns /> },
   { path: "/werkwijze", element: <Navigate to="/over-ons" replace /> },

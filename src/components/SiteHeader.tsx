@@ -14,6 +14,7 @@ const verzekeringSubLinks = [
   { label: "Motor", href: "/motor-taxatie" },
   { label: "Foodtruck", href: "/foodtruck-taxatie" },
   { label: "Schadevaststelling", href: "/schadevaststelling" },
+  { label: "Stappenplan verzekeringstaxatie", href: "/verzekering-stappenplan" },
 ];
 
 const navLinks = [
