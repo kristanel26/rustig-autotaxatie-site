@@ -134,17 +134,16 @@ const FAQ = () => {
         <div className="max-w-3xl mx-auto">
           <div className="space-y-10">
             {faqItems.map((category, catIndex) => (
-              <div key={catIndex} style={{ marginTop: catIndex === 0 ? 0 : 48 }}>
+              <div key={catIndex} style={{ marginTop: catIndex === 0 ? 0 : 56 }}>
                 <div className="flex justify-center mb-5">
                   <span
-                    className="inline-block font-bold"
+                    className="inline-block font-bold text-white"
                     style={{
                       fontFamily: "'Playfair Display', serif",
-                      fontSize: 18,
-                      color: '#1d3c71',
-                      background: '#EBF2FB',
+                      fontSize: 20,
+                      background: '#1d3c71',
                       borderRadius: 30,
-                      padding: '8px 24px',
+                      padding: '10px 32px',
                     }}
                   >
                     {category.category}
