@@ -10,8 +10,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import { nl } from "date-fns/locale";
 
-const sidebarCategories = ["BPM", "Wetgeving", "Jurisprudentie", "Verzekeringstaxatie"];
-const archiveYears = ["2026", "2025"];
+const filterCategories = [
+  "Alle berichten", "BPM", "Wetgeving", "Jurisprudentie",
+  "Verzekeringstaxatie", "Oldtimers", "Tips",
+];
 
 interface Article {
   id: string;
@@ -21,11 +23,21 @@ interface Article {
   published_at: string | null;
 }
 
+const getCategoryLabel = (cat: string) => {
+  const map: Record<string, string> = {
+    "BPM & Import": "BPM",
+    "Oldtimers & Youngtimers": "OLDTIMERS",
+    "Verzekeringstaxatie": "VERZEKERING",
+    "Wetgeving": "WETGEVING",
+    "Tips & Uitleg": "TIPS",
+  };
+  return map[cat] || cat.toUpperCase();
+};
+
 const Nieuws = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [activeYear, setActiveYear] = useState<string | null>(null);
+  const [activeFilter, setActiveFilter] = useState("Alle berichten");
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -34,7 +46,6 @@ const Nieuws = () => {
         .select("id, title, slug, category, published_at")
         .eq("status", "published")
         .order("published_at", { ascending: false });
-
       if (!error && data) setArticles(data);
       setLoading(false);
     };
@@ -42,25 +53,14 @@ const Nieuws = () => {
   }, []);
 
   const filtered = articles.filter((a) => {
-    if (activeCategory && a.category !== activeCategory) return false;
-    if (activeYear && a.published_at && !a.published_at.startsWith(activeYear)) return false;
-    return true;
+    if (activeFilter === "Alle berichten") return true;
+    const label = getCategoryLabel(a.category);
+    return label === activeFilter.toUpperCase();
   });
 
   const formatDate = (dateStr: string | null) => {
     if (!dateStr) return "";
     return format(new Date(dateStr), "d MMM yyyy", { locale: nl });
-  };
-
-  const getCategoryLabel = (cat: string) => {
-    const map: Record<string, string> = {
-      "BPM & Import": "BPM",
-      "Oldtimers & Youngtimers": "OLDTIMERS",
-      "Verzekeringstaxatie": "VERZEKERING",
-      "Wetgeving": "WETGEVING",
-      "Tips & Uitleg": "TIPS",
-    };
-    return map[cat] || cat.toUpperCase();
   };
 
   return (
@@ -98,134 +98,115 @@ const Nieuws = () => {
       <UspBar />
       <div style={{ height: 4, background: '#ff751f', width: '100%' }} />
 
-      {/* Content */}
-      <section className="py-14 md:py-20 px-6 lg:px-8" style={{ background: '#f7f8fa' }}>
-        <div className="mx-auto flex flex-col lg:flex-row" style={{ maxWidth: 1200, padding: '0 40px', gap: '2%' }}>
+      {/* News cards */}
+      <section style={{ background: '#f7f8fa', padding: '80px 40px' }}>
+        <div style={{ maxWidth: 960, margin: '0 auto' }}>
 
-          {/* Main list */}
-          <div style={{ flex: '0 0 70%', minWidth: 0 }}>
-            {loading ? (
-              <div className="space-y-4 py-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="h-14 bg-gray-100 rounded animate-pulse" />
-                ))}
-              </div>
-            ) : filtered.length === 0 ? (
-              <p style={{ color: '#698db3', fontSize: 16, fontFamily: "'Inter', sans-serif" }} className="py-10 text-center">
-                Geen nieuwsberichten gevonden.
-              </p>
-            ) : (
-              <div>
-                {filtered.map((article, i) => (
-                  <div key={article.id}>
-                    <div className="flex items-start gap-0" style={{ padding: '20px 0' }}>
-                      {/* Date */}
-                      <span
-                        className="shrink-0 text-right pr-4"
-                        style={{ width: 120, fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#8a9bb5' }}
-                      >
-                        {formatDate(article.published_at)}
-                      </span>
-
-                      {/* Vertical divider */}
-                      <div className="shrink-0 self-stretch" style={{ width: 1, background: '#dde3ea' }} />
-
-                      {/* Category badge */}
-                      <span
-                        className="shrink-0 ml-4 mr-4 inline-block rounded-full px-2.5 py-0.5 font-bold uppercase"
-                        style={{ fontSize: 10, letterSpacing: '0.08em', background: 'rgba(255,117,31,0.12)', color: '#ff751f' }}
-                      >
-                        {getCategoryLabel(article.category)}
-                      </span>
-
-                      {/* Title */}
-                      <Link
-                        to={`/blog/${article.slug}`}
-                        className="flex-1 min-w-0 font-semibold hover:underline"
-                        style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1d3c71', lineHeight: 1.5 }}
-                      >
-                        {article.title}
-                      </Link>
-
-                      {/* Read more */}
-                      <Link
-                        to={`/blog/${article.slug}`}
-                        className="shrink-0 ml-4 inline-flex items-center gap-1 font-semibold hover:gap-2 transition-all"
-                        style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#ff751f' }}
-                      >
-                        Lees meer <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                    </div>
-                    {i < filtered.length - 1 && (
-                      <div style={{ height: 1, background: '#eef0f3' }} />
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
+          {/* Category filter pills */}
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {filterCategories.map((cat) => {
+              const isActive = activeFilter === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setActiveFilter(cat)}
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 13,
+                    fontWeight: isActive ? 600 : 400,
+                    padding: '8px 20px',
+                    borderRadius: 30,
+                    border: isActive ? 'none' : '1px solid #dde3ea',
+                    background: isActive ? '#1d3c71' : '#f7f8fa',
+                    color: isActive ? '#ffffff' : '#1d3c71',
+                    cursor: 'pointer',
+                    transition: 'all 200ms ease',
+                  }}
+                >
+                  {cat}
+                </button>
+              );
+            })}
           </div>
 
-          {/* Sidebar */}
-          <aside
-            className="self-start"
-            style={{ flex: '0 0 28%', background: '#ffffff', borderRadius: 8, boxShadow: '0 2px 10px rgba(0,0,0,0.07)', padding: 24 }}
-          >
-            {/* Categories */}
-            <div className="mb-8">
-              <span
-                className="block mb-3 font-bold uppercase"
-                style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: '0.12em', color: '#1d3c71' }}
-              >
-                Categorieën
-              </span>
-              <div className="space-y-1">
-                {sidebarCategories.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
-                    className="block w-full text-left px-3 py-2 rounded-md text-sm transition-colors"
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: 14,
-                      color: activeCategory === cat ? '#ff751f' : '#4a5568',
-                      background: activeCategory === cat ? 'rgba(255,117,31,0.08)' : 'transparent',
-                      fontWeight: activeCategory === cat ? 600 : 400,
-                    }}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
+          {/* Article cards */}
+          {loading ? (
+            <div className="space-y-4">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="h-20 rounded-lg animate-pulse" style={{ background: '#e8ebf0' }} />
+              ))}
             </div>
+          ) : filtered.length === 0 ? (
+            <p className="text-center py-16" style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, color: '#698db3' }}>
+              Geen nieuwsberichten gevonden.
+            </p>
+          ) : (
+            <div className="flex flex-col gap-4">
+              {filtered.map((article) => (
+                <Link
+                  key={article.id}
+                  to={`/blog/${article.slug}`}
+                  className="group flex items-start gap-0 no-underline"
+                  style={{
+                    background: '#ffffff',
+                    borderRadius: 10,
+                    boxShadow: '0 2px 10px rgba(0,0,0,0.06)',
+                    padding: '28px 32px',
+                    borderLeft: '3px solid transparent',
+                    transition: 'all 200ms ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.10)';
+                    e.currentTarget.style.borderLeftColor = '#ff751f';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = '0 2px 10px rgba(0,0,0,0.06)';
+                    e.currentTarget.style.borderLeftColor = 'transparent';
+                  }}
+                >
+                  {/* Date */}
+                  <span
+                    className="shrink-0"
+                    style={{ width: 100, fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#8a9bb5', paddingTop: 2 }}
+                  >
+                    {formatDate(article.published_at)}
+                  </span>
 
-            {/* Archive */}
-            <div>
-              <span
-                className="block mb-3 font-bold uppercase"
-                style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: '0.12em', color: '#1d3c71' }}
-              >
-                Archief
-              </span>
-              <div className="space-y-1">
-                {archiveYears.map((year) => (
-                  <button
-                    key={year}
-                    onClick={() => setActiveYear(activeYear === year ? null : year)}
-                    className="block w-full text-left px-3 py-2 rounded-md text-sm transition-colors"
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: 14,
-                      color: activeYear === year ? '#ff751f' : '#4a5568',
-                      background: activeYear === year ? 'rgba(255,117,31,0.08)' : 'transparent',
-                      fontWeight: activeYear === year ? 600 : 400,
-                    }}
+                  {/* Badge + Title */}
+                  <div className="flex-1 min-w-0 px-4">
+                    <span
+                      className="inline-block mb-1.5 uppercase font-semibold"
+                      style={{
+                        fontFamily: "'Inter', sans-serif",
+                        fontSize: 11,
+                        letterSpacing: '0.06em',
+                        background: '#EBF2FB',
+                        color: '#1d3c71',
+                        borderRadius: 20,
+                        padding: '3px 12px',
+                      }}
+                    >
+                      {getCategoryLabel(article.category)}
+                    </span>
+                    <p
+                      className="font-semibold"
+                      style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: '#1d3c71', lineHeight: 1.5, margin: 0 }}
+                    >
+                      {article.title}
+                    </p>
+                  </div>
+
+                  {/* Read more */}
+                  <span
+                    className="shrink-0 inline-flex items-center gap-1 font-semibold group-hover:gap-2 transition-all self-center"
+                    style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#ff751f', whiteSpace: 'nowrap' }}
                   >
-                    {year}
-                  </button>
-                ))}
-              </div>
+                    Lees meer <ArrowRight className="w-3.5 h-3.5" />
+                  </span>
+                </Link>
+              ))}
             </div>
-          </aside>
+          )}
         </div>
       </section>
 
