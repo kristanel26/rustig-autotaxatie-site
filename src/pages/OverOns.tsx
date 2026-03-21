@@ -6,9 +6,9 @@ import { Phone, Car, Shield, Scale, Wrench, ArrowRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import erikPhoto from "@/assets/erik-over-ons.png";
-import heroOverOns from "@/assets/hero-overons.png";
+import heroOverOns from "@/assets/hero-over-ons.jpg";
 import stepAanvraag from "@/assets/erik-aanvraag.png";
-import stepAdvies from "@/assets/step-advies.jpg";
+import stepAdvies from "@/assets/step-advies.png";
 import stepInspectie from "@/assets/step-inspectie.jpg";
 import stepRapport from "@/assets/step-rapport.jpg";
 import stepAfhandeling from "@/assets/step-afhandeling.jpg";
@@ -91,7 +91,7 @@ const OverOns = () => {
             Automobiel Taxaties
           </h1>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 560, marginTop: 16 }}>
-            Advies binnen één werkdag
+            Automobiel Taxaties is Erik Elderson. Erkend taxateur voor BPM, verzekeringstaxatie, WEV-taxatie en schadevaststelling, werkzaam in het grootste gedeelte van Nederland.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Link to="/contact">
