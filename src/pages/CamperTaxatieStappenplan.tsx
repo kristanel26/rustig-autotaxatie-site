@@ -65,7 +65,11 @@ const CamperTaxatieStappenplan = () => {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="relative overflow-hidden" style={{ background: '#1d3c71' }}>
+      <section className="relative overflow-hidden" style={{ minHeight: 320 }}>
+        <div className="absolute inset-0">
+          <img src={heroCamperStappenplan} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />
+        </div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28 relative z-10">
           <p className="text-white/70 text-sm font-medium tracking-wider uppercase mb-4">VERZEKERINGSTAXATIE CAMPER</p>
           <h1
