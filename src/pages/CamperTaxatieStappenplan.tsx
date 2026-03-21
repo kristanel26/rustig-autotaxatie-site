@@ -1,3 +1,4 @@
+import WhatsAppButton from "@/components/WhatsAppButton";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import PageMeta from "@/components/PageMeta";
@@ -180,6 +181,7 @@ const CamperTaxatieStappenplan = () => {
       </section>
 
       <SiteFooter />
+      <WhatsAppButton />
     </>
   );
 };

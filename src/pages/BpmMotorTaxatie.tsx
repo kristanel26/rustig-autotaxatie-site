@@ -1,3 +1,4 @@
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { useRef } from "react";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
@@ -100,6 +101,7 @@ const BpmMotorTaxatie = () => {
       </section>
 
       <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Phone, Mail, MessageCircle } from "lucide-react";
 import UspBar from "@/components/UspBar";
@@ -181,6 +182,7 @@ const FAQ = () => {
       </section>
 
       <SiteFooter />
+      <WhatsAppButton />
     </div>
   );
 };
