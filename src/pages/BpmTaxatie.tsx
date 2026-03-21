@@ -298,7 +298,7 @@ const BpmTaxatie = () => {
                 </li>
                 <li className="flex items-center gap-3">
                   <Clock className="w-4 h-4 shrink-0 opacity-70" />
-                  <span>ma - vr 8:30 – 17:00</span>
+                  <span>ma-vr 8:30 – 17:00</span>
                 </li>
               </ul>
               <p className="mt-5 text-xs italic" style={{ color: 'rgba(255,255,255,0.6)' }}>
