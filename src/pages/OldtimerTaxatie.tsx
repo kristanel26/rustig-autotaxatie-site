@@ -1,5 +1,6 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
 import ContactSidebar from "@/components/ContactSidebar";
