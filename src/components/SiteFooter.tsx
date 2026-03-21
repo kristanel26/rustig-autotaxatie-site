@@ -7,7 +7,7 @@ const dienstenLinks = [
   { label: "BPM Taxatie", href: "/bpm-taxatie" },
   { label: "Verzekeringstaxatie", href: "/verzekeringstaxatie-info" },
   { label: "WEV Taxatie", href: "/wev-taxatie" },
-  { label: "Werkwijze", href: "/werkwijze" },
+  
   { label: "Over ons", href: "/over-ons" },
   { label: "FAQ", href: "/faq" },
   { label: "Nieuws", href: "/nieuws" },
