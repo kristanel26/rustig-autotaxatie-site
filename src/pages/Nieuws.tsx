@@ -167,8 +167,8 @@ const Nieuws = () => {
 
           {/* Sidebar */}
           <aside
-            className="lg:w-[260px] shrink-0 self-start"
-            style={{ background: '#ffffff', borderRadius: 8, boxShadow: '0 2px 10px rgba(0,0,0,0.07)', padding: 24 }}
+            className="self-start"
+            style={{ flex: '0 0 28%', background: '#ffffff', borderRadius: 8, boxShadow: '0 2px 10px rgba(0,0,0,0.07)', padding: 24 }}
           >
             {/* Categories */}
             <div className="mb-8">
