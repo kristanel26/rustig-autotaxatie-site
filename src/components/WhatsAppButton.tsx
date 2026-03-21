@@ -1,10 +1,11 @@
 const WhatsAppButton = () => {
   return (
     <a
-      href="https://wa.me/31650694978"
+      href="https://wa.me/31629182258"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.25)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.3)] hover:scale-105 transition-all duration-200"
+      className="fixed right-6 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.25)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.3)] hover:scale-105 transition-all duration-200"
+      style={{ bottom: 90 }}
       aria-label="WhatsApp"
     >
       <svg viewBox="0 0 24 24" className="w-7 h-7 text-white fill-current">
