@@ -4,7 +4,6 @@ import IntakeForm from "@/components/IntakeForm";
 import ContactSidebar from "@/components/ContactSidebar";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
@@ -101,7 +100,6 @@ const BpmCamperTaxatie = () => {
       </section>
 
       <SiteFooter />
-      <WhatsAppButton />
     </div>
   );
 };

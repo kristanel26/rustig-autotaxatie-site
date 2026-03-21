@@ -3,7 +3,6 @@ import { Phone, Mail, MapPin, Clock, ArrowLeft } from "lucide-react";
 import UspBar from "@/components/UspBar";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import BookingWizard from "@/components/BookingWizard";
 import PageMeta from "@/components/PageMeta";
 import erikPhoto from "@/assets/erik-elderson.png";
@@ -112,7 +111,7 @@ const Contact = () => {
               <div className="space-y-1 text-xs" style={{ color: '#698db3' }}>
                 <p>KvK: 71468889</p>
                 <p>BTW: NL858727493B01</p>
-                <p>IBAN: NL78RABO0151008833</p>
+                
               </div>
             </div>
           </div>
@@ -120,7 +119,6 @@ const Contact = () => {
       </section>
 
       <SiteFooter />
-      <WhatsAppButton />
     </div>
   );
 };

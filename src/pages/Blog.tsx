@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import { supabase } from "@/integrations/supabase/client";
 import UspBar from "@/components/UspBar";
@@ -187,7 +186,6 @@ const Blog = () => {
       </section>
 
       <SiteFooter />
-      <WhatsAppButton />
     </div>
   );
 };

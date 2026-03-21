@@ -5,7 +5,6 @@ import IntakeForm from "@/components/IntakeForm";
 import BpmCalculator from "@/components/BpmCalculator";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import StatsBar from "@/components/StatsBar";
@@ -299,7 +298,7 @@ const BpmTaxatie = () => {
                 </li>
                 <li className="flex items-center gap-3">
                   <Clock className="w-4 h-4 shrink-0 opacity-70" />
-                  <span>ma - vr 8:30 – 17:00</span>
+                  <span>ma-vr 8:30 – 17:00</span>
                 </li>
               </ul>
               <p className="mt-5 text-xs italic" style={{ color: 'rgba(255,255,255,0.6)' }}>
@@ -323,7 +322,6 @@ const BpmTaxatie = () => {
       </section>
 
       <SiteFooter />
-      <WhatsAppButton />
     </div>
   );
 };
