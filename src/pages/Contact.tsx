@@ -21,7 +21,7 @@ const Contact = () => {
       {/* Hero */}
       <section className="relative overflow-hidden py-16 md:py-24 px-6 md:px-8 flex items-center" style={{ height: 320, minHeight: 320, maxHeight: 320 }}>
         <div className="absolute inset-0">
-          <img src={heroContact} alt="" className="w-full h-full object-cover" />
+          <img src={heroContact} alt="" className="w-full h-full object-cover" style={{ objectPosition: 'center 20%' }} />
           <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />
         </div>
         <div className="container-wide relative z-10">
