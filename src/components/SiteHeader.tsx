@@ -21,7 +21,7 @@ const navLinks = [
   { label: "BPM Taxatie", href: "/bpm-taxatie", dropdown: "bpm" },
   { label: "Verzekeringstaxatie", href: "/verzekeringstaxatie-info", dropdown: "verzekering" },
   { label: "WEV Taxatie", href: "/wev-taxatie" },
-  { label: "Werkwijze", href: "/werkwijze" },
+  
   { label: "Over ons", href: "/over-ons" },
   { label: "FAQ", href: "/faq" },
   { label: "Nieuws", href: "/nieuws" },

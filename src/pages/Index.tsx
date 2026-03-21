@@ -361,7 +361,7 @@ const Index = () => {
             </div>
 
             <Link
-              to="/werkwijze"
+              to="/over-ons"
               className="text-sm font-semibold inline-flex items-center gap-1.5 transition-all hover:gap-2.5"
               style={{ color: '#ff751f' }}
             >
