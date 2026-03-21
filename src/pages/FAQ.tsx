@@ -143,14 +143,18 @@ const FAQ = () => {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="hero-section py-16 md:py-24 px-6 md:px-8">
-        <div className="container-wide">
-          <Link to="/" className="inline-flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground transition-colors mb-6">
+      <section className="relative overflow-hidden py-16 md:py-24 px-6 md:px-8">
+        <div className="absolute inset-0">
+          <img src={heroFaq} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />
+        </div>
+        <div className="container-wide relative z-10">
+          <Link to="/" className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors mb-6">
             <ArrowLeft className="w-4 h-4" />
             Terug naar home
           </Link>
           <p className="uppercase text-[11px] font-semibold tracking-[0.12em] mb-3" style={{ color: '#ff751f' }}>FAQ</p>
-          <h1 className="heading-display text-4xl md:text-5xl text-primary-foreground mb-4">
+          <h1 className="heading-display text-4xl md:text-5xl text-white mb-4">
             Veelgestelde vragen
           </h1>
           <p className="text-lg max-w-2xl" style={{ color: 'rgba(255,255,255,0.75)' }}>
