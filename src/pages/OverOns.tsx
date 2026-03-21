@@ -75,7 +75,7 @@ const OverOns = () => {
 
       {/* ── HERO with background image ── */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroOverOns})` }} />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroOverOns})`, objectPosition: 'center top' }} />
         <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.75)' }} />
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
           <div style={{ width: 32, height: 2, background: '#ff751f', marginBottom: 12 }} />
