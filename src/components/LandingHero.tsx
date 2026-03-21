@@ -71,7 +71,7 @@ const LandingHero = ({
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 700, lineHeight: 1.1, color: '#ffffff', maxWidth: 700 }} className="mb-6 animate-slide-up text-balance">
             {title}
           </h1>
-          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 600 }} className="mb-10 animate-slide-up" >
+          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 560 }} className="mb-10 animate-slide-up" >
             {description}
           </div>
           <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: "200ms" }}>
