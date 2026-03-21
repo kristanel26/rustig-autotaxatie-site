@@ -118,7 +118,7 @@ const Nieuws = () => {
               <div>
                 {filtered.map((article, i) => (
                   <div key={article.id}>
-                    <div className="flex items-center gap-0" style={{ padding: '20px 0' }}>
+                    <div className="flex items-start gap-0" style={{ padding: '20px 0' }}>
                       {/* Date */}
                       <span
                         className="shrink-0 text-right pr-4"
