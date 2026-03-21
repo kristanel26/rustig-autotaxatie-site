@@ -72,7 +72,7 @@ const SiteHeader = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 h-9 flex items-center justify-between">
           <span className="flex items-center gap-1.5">
             <MapPin className="w-3.5 h-3.5" />
-            Leigraaf 160, Druten
+            Van Heemstraweg 123, Druten
           </span>
           <a href="mailto:algemeen@automobieltaxaties.nl" className="hover:text-white/80 transition-colors">
             algemeen@automobieltaxaties.nl

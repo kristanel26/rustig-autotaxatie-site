@@ -352,7 +352,7 @@ const Login = () => {
                 lineHeight: 1.6,
               }}
             >
-              Automobiel Taxaties&ensp;|&ensp;Leigraaf 160 · Druten
+              Automobiel Taxaties&ensp;|&ensp;Van Heemstraweg 123 · Druten
             </p>
           </div>
 
