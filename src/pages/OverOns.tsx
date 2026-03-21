@@ -54,7 +54,7 @@ const stappen = [
   },
   {
     image: stepRapport,
-    title: "Rapport digitaal binnen 3 werkdagen",
+    title: "Rapport digitaal",
     text: "Na de inspectie ontvang je het taxatierapport per e-mail. Het rapport is officieel erkend, juridisch verdedigbaar en geschikt voor de Belastingdienst, verzekeraar of andere partijen.",
   },
   {
