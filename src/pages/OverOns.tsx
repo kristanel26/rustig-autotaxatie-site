@@ -6,7 +6,7 @@ import { Phone, Car, Shield, Scale, Wrench, ArrowRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import erikPhoto from "@/assets/erik-over-ons.png";
-import heroOverOns from "@/assets/hero-overons.png";
+import heroOverOns from "@/assets/hero-over-ons.jpg";
 import stepAanvraag from "@/assets/erik-aanvraag.png";
 import stepAdvies from "@/assets/step-advies.png";
 import stepInspectie from "@/assets/step-inspectie.jpg";
