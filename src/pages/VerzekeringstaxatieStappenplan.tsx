@@ -6,7 +6,7 @@ import UspBar from "@/components/UspBar";
 import { Link } from "react-router-dom";
 import { ArrowRight, Info, Phone } from "lucide-react";
 import heroImage from "@/assets/hero-verzekeringstaxatie.png";
-import stepAanvraag from "@/assets/step-aanvraag.jpg";
+import stepAanvraag from "@/assets/step-aanvraag.png";
 import stepAdvies from "@/assets/step-advies.png";
 import stepInspectie from "@/assets/step-inspectie.png";
 import stepRapport from "@/assets/step-rapport.png";
