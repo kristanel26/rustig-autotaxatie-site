@@ -24,9 +24,9 @@ interface ReportRow {
 const MONTH_LABELS = ['Jan', 'Feb', 'Mrt', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'];
 
 const TYPE_COLORS: Record<string, string> = {
-  klassieker: 'hsl(var(--gold))',
-  camper: 'hsl(210, 70%, 55%)',
-  wev: 'hsl(150, 60%, 45%)',
+  klassieker: '#1d3c71',
+  camper: '#ff751f',
+  wev: '#698db3',
 };
 
 const BILLABLE_STATUSES = ['gereed', 'verzonden'];
@@ -217,7 +217,7 @@ export default function Rapportage() {
             </Label>
           </div>
         </div>
-        <Button variant="outline" onClick={handleExport} className="gap-2 text-white">
+        <Button variant="outline" onClick={handleExport} className="gap-2 text-[#1d3c71]">
           <Download className="w-4 h-4" />
           Exporteer naar Excel
         </Button>
@@ -241,15 +241,15 @@ export default function Rapportage() {
               <div className="h-[350px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={chartData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--s800))" />
-                    <XAxis dataKey="month" tick={{ fill: 'hsl(var(--s400))', fontSize: 12 }} />
-                    <YAxis allowDecimals={false} tick={{ fill: 'hsl(var(--s400))', fontSize: 12 }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#dde3ea" />
+                    <XAxis dataKey="month" tick={{ fill: '#666', fontSize: 12 }} />
+                    <YAxis allowDecimals={false} tick={{ fill: '#666', fontSize: 12 }} />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: 'hsl(var(--s900))',
-                        border: '1px solid hsl(var(--s700))',
+                        backgroundColor: '#ffffff',
+                        border: '1px solid #dde3ea',
                         borderRadius: '8px',
-                        color: 'white',
+                        color: '#1a1a1a',
                       }}
                     />
                     <Legend />
@@ -265,8 +265,8 @@ export default function Rapportage() {
           {/* ── Tables ── */}
           <Tabs defaultValue="maand" className="space-y-4">
             <TabsList className="bg-transparent border-none h-auto p-0 gap-2">
-              <TabsTrigger value="maand" className="rounded-[6px] border border-[rgba(201,168,76,0.3)] bg-transparent text-[#7a7870] px-[18px] py-[6px] font-normal shadow-none data-[state=active]:bg-[#C9A84C] data-[state=active]:border-[#C9A84C] data-[state=active]:text-[#0e0e0f] data-[state=active]:font-medium data-[state=active]:shadow-none">Maandtabel</TabsTrigger>
-              <TabsTrigger value="gebruiker" className="rounded-[6px] border border-[rgba(201,168,76,0.3)] bg-transparent text-[#7a7870] px-[18px] py-[6px] font-normal shadow-none data-[state=active]:bg-[#C9A84C] data-[state=active]:border-[#C9A84C] data-[state=active]:text-[#0e0e0f] data-[state=active]:font-medium data-[state=active]:shadow-none">Per Gebruiker</TabsTrigger>
+              <TabsTrigger value="maand" className="rounded-[6px] border border-[#dde3ea] bg-white text-[#666] px-[18px] py-[6px] font-normal shadow-none data-[state=active]:bg-[#ff751f] data-[state=active]:border-[#ff751f] data-[state=active]:text-white data-[state=active]:font-medium data-[state=active]:shadow-none">Maandtabel</TabsTrigger>
+              <TabsTrigger value="gebruiker" className="rounded-[6px] border border-[#dde3ea] bg-white text-[#666] px-[18px] py-[6px] font-normal shadow-none data-[state=active]:bg-[#ff751f] data-[state=active]:border-[#ff751f] data-[state=active]:text-white data-[state=active]:font-medium data-[state=active]:shadow-none">Per Gebruiker</TabsTrigger>
             </TabsList>
 
             <TabsContent value="maand">
@@ -274,12 +274,12 @@ export default function Rapportage() {
                 <CardContent className="pt-6">
                   <Table>
                     <TableHeader>
-                      <TableRow>
-                        <TableHead className="text-white font-bold">Maand</TableHead>
-                        <TableHead className="text-right text-white font-bold">KLS</TableHead>
-                        <TableHead className="text-right text-white font-bold">CAM</TableHead>
-                        <TableHead className="text-right text-white font-bold">WEV</TableHead>
-                        <TableHead className="text-right text-white font-bold">Totaal</TableHead>
+                      <TableRow className="bg-[#f7f8fa]">
+                        <TableHead className="text-[#1d3c71] font-bold">Maand</TableHead>
+                        <TableHead className="text-right text-[#1d3c71] font-bold">KLS</TableHead>
+                        <TableHead className="text-right text-[#1d3c71] font-bold">CAM</TableHead>
+                        <TableHead className="text-right text-[#1d3c71] font-bold">WEV</TableHead>
+                        <TableHead className="text-right text-[#1d3c71] font-bold">Totaal</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>

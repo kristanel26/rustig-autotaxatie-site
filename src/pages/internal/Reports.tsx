@@ -168,18 +168,18 @@ const Reports = () => {
         </div>
 
         {/* Reports Table */}
-        <div className="bg-background rounded-lg border border-border">
+        <div className="bg-white rounded-lg border border-[#dde3ea] shadow-[0_2px_10px_rgba(0,0,0,0.07)]">
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead className="w-[120px] text-white font-bold">Rapportnr.</TableHead>
-                <TableHead className="w-[60px] text-white font-bold">Type</TableHead>
-                <TableHead className="w-[100px] text-white font-bold">Kenteken</TableHead>
-                <TableHead className="text-white font-bold">Voertuig</TableHead>
-                <TableHead className="text-white font-bold">Klant</TableHead>
-                <TableHead className="w-[130px] text-white font-bold">Status</TableHead>
-                {hasAnyAssigned && <TableHead className="w-[100px] text-white font-bold">Toegewezen</TableHead>}
-                <TableHead className="w-[140px] text-white font-bold">Inspectiedatum</TableHead>
+              <TableRow className="bg-[#f7f8fa]">
+                <TableHead className="w-[120px] text-[#1d3c71] font-bold">Rapportnr.</TableHead>
+                <TableHead className="w-[60px] text-[#1d3c71] font-bold">Type</TableHead>
+                <TableHead className="w-[100px] text-[#1d3c71] font-bold">Kenteken</TableHead>
+                <TableHead className="text-[#1d3c71] font-bold">Voertuig</TableHead>
+                <TableHead className="text-[#1d3c71] font-bold">Klant</TableHead>
+                <TableHead className="w-[130px] text-[#1d3c71] font-bold">Status</TableHead>
+                {hasAnyAssigned && <TableHead className="w-[100px] text-[#1d3c71] font-bold">Toegewezen</TableHead>}
+                <TableHead className="w-[140px] text-[#1d3c71] font-bold">Inspectiedatum</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -201,16 +201,16 @@ const Reports = () => {
                 sortedReports.map((report) => {
                   const appraiser = getAppraiserById(report.assigned_to);
                   return (
-                    <TableRow key={report.id} className="cursor-pointer hover:bg-muted/50" onClick={() => navigate(`/intern/rapport/${report.id}`)}>
-                      <TableCell className="font-medium font-mono text-xs text-[#c9a84c]">{report.report_number}</TableCell>
+                    <TableRow key={report.id} className="cursor-pointer hover:bg-[#f7f8fa]" onClick={() => navigate(`/intern/rapport/${report.id}`)}>
+                      <TableCell className="font-medium font-mono text-xs text-[#1d3c71]">{report.report_number}</TableCell>
                       <TableCell>
-                        <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
+                        <Badge variant="secondary" className="text-[10px] px-1.5 py-0 bg-[#EBF2FB] text-[#1d3c71]">
                           {TYPE_LABELS[report.report_type || ''] || (report.report_type?.toUpperCase() || '-')}
                         </Badge>
                       </TableCell>
-                      <TableCell className="font-mono text-xs text-white">{formatLicensePlate(report.license_plate)}</TableCell>
-                      <TableCell className="text-sm truncate max-w-[200px] text-white">{getVehicleDisplay(report)}</TableCell>
-                      <TableCell className="text-sm truncate max-w-[200px] text-white">{getCustomerDisplay(report)}</TableCell>
+                      <TableCell className="font-mono text-xs text-[#1a1a1a]">{formatLicensePlate(report.license_plate)}</TableCell>
+                      <TableCell className="text-sm truncate max-w-[200px] text-[#1a1a1a]">{getVehicleDisplay(report)}</TableCell>
+                      <TableCell className="text-sm truncate max-w-[200px] text-[#1a1a1a]">{getCustomerDisplay(report)}</TableCell>
                       <TableCell>
                         {(() => { const s = getStatusBadgeProps(report.status); return <Badge variant="outline" className={`text-xs ${s.className}`}>{s.label}</Badge>; })()}
                       </TableCell>
@@ -221,12 +221,12 @@ const Reports = () => {
                               <Avatar className="h-5 w-5">
                                 <AvatarFallback className="text-[9px] font-semibold bg-primary/20 text-primary">{appraiser.initials}</AvatarFallback>
                               </Avatar>
-                              <span className="text-xs text-[#9CA3AF]">{appraiser.displayName}</span>
+                              <span className="text-xs text-[#666]">{appraiser.displayName}</span>
                             </div>
-                          ) : <span className="text-xs text-[#9CA3AF]">—</span>}
+                          ) : <span className="text-xs text-[#666]">—</span>}
                         </TableCell>
                       )}
-                      <TableCell className="text-xs text-[#9CA3AF]">{formatDate(report.inspection_date)}</TableCell>
+                      <TableCell className="text-xs text-[#666]">{formatDate(report.inspection_date)}</TableCell>
                     </TableRow>
                   );
                 })

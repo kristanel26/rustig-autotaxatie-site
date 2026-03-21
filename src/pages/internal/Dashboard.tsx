@@ -53,10 +53,10 @@ interface SearchResult {
 }
 
 const STATUS_CONFIG = [
-  { key: 'concept', label: 'Concept', color: 'bg-zinc-500', border: 'border-zinc-500/30', headerBg: 'bg-zinc-500/10', text: 'text-zinc-400' },
-  { key: 'in_behandeling', label: 'In behandeling', color: 'bg-blue-500', border: 'border-blue-500/30', headerBg: 'bg-blue-500/10', text: 'text-blue-400' },
-  { key: 'gereed', label: 'Gereed', color: 'bg-emerald-500', border: 'border-emerald-500/30', headerBg: 'bg-emerald-500/10', text: 'text-emerald-400' },
-  { key: 'verzonden', label: 'Verzonden', color: 'bg-amber-500', border: 'border-amber-500/30', headerBg: 'bg-amber-500/10', text: 'text-amber-400' },
+  { key: 'concept', label: 'Concept', color: 'bg-[#698db3]', border: 'border-[#dde3ea]', headerBg: 'bg-[#f7f8fa]', text: 'text-[#698db3]' },
+  { key: 'in_behandeling', label: 'In behandeling', color: 'bg-[#ff751f]', border: 'border-[#dde3ea]', headerBg: 'bg-[#fff3e0]', text: 'text-[#ff751f]' },
+  { key: 'gereed', label: 'Gereed', color: 'bg-[#1d7a3a]', border: 'border-[#dde3ea]', headerBg: 'bg-[#e6f4ea]', text: 'text-[#1d7a3a]' },
+  { key: 'verzonden', label: 'Verzonden', color: 'bg-[#1d3c71]', border: 'border-[#dde3ea]', headerBg: 'bg-[#EBF2FB]', text: 'text-[#1d3c71]' },
 ] as const;
 
 const REPORT_TYPES: { type: ReportType; label: string; sub: string; icon: typeof Car }[] = [
@@ -98,19 +98,19 @@ const DraggableCard = ({
       {...attributes}
       {...listeners}
       onClick={onClick}
-      className="w-full text-left p-3 rounded-lg bg-[#0a0d14] border border-[#253047] hover:border-[#c9a84c]/50 hover:bg-[#0f1320] transition-all duration-150 group cursor-grab active:cursor-grabbing"
+      className="w-full text-left p-3 rounded-lg bg-white border border-[#dde3ea] hover:border-[#1d3c71] hover:shadow-[0_2px_10px_rgba(0,0,0,0.07)] transition-all duration-150 group cursor-grab active:cursor-grabbing"
     >
       <div className="flex items-center justify-between mb-1">
-        <span className="text-xs font-mono font-medium text-muted-foreground">{report.report_number}</span>
+        <span className="text-xs font-mono font-medium text-[#666]">{report.report_number}</span>
         {report.report_type && (
           <Badge variant="secondary" className="text-[9px] px-1.5 py-0">{report.report_type.toUpperCase()}</Badge>
         )}
       </div>
-      <p className="text-sm font-medium text-foreground truncate">{vehicleLabel(report)}</p>
+      <p className="text-sm font-medium text-[#1a1a1a] truncate">{vehicleLabel(report)}</p>
       <div className="flex items-end justify-between mt-1.5">
         <div className="flex flex-col gap-0.5">
-          <span className="text-xs font-mono text-muted-foreground">{report.license_plate || '-'}</span>
-          <span className="text-[10px] text-muted-foreground">{formatDate(report.updated_at)}</span>
+          <span className="text-xs font-mono text-[#666]">{report.license_plate || '-'}</span>
+          <span className="text-[10px] text-[#666]">{formatDate(report.updated_at)}</span>
         </div>
         {appraiserInitials ? (
           <Avatar className="h-6 w-6 shrink-0">
@@ -130,15 +130,15 @@ const DraggableCard = ({
 
 /* ─── Overlay Card (shown while dragging) ─── */
 const OverlayCard = ({ report }: { report: ReportRow }) => (
-  <div className="w-[260px] p-3 rounded-lg bg-[#0a0d14] border-2 border-[#c9a84c] shadow-xl shadow-[#c9a84c]/10">
+  <div className="w-[260px] p-3 rounded-lg bg-white border-2 border-[#1d3c71] shadow-xl">
     <div className="flex items-center justify-between mb-1">
-      <span className="text-xs font-mono font-medium text-muted-foreground">{report.report_number}</span>
+      <span className="text-xs font-mono font-medium text-[#666]">{report.report_number}</span>
       {report.report_type && (
         <Badge variant="secondary" className="text-[9px] px-1.5 py-0">{report.report_type.toUpperCase()}</Badge>
       )}
     </div>
-    <p className="text-sm font-medium text-foreground truncate">{vehicleLabel(report)}</p>
-    <span className="text-xs font-mono text-muted-foreground">{report.license_plate || '-'}</span>
+    <p className="text-sm font-medium text-[#1a1a1a] truncate">{vehicleLabel(report)}</p>
+    <span className="text-xs font-mono text-[#666]">{report.license_plate || '-'}</span>
   </div>
 );
 
@@ -161,7 +161,7 @@ const DroppableColumn = ({
   return (
     <div
       ref={setNodeRef}
-      className={`rounded-xl border ${col.border} bg-[#111827]/60 flex flex-col min-h-[400px] transition-all duration-200 ${isOver ? 'ring-2 ring-[#c9a84c]/50 bg-[#111827]/80' : ''}`}
+      className={`rounded-xl border ${col.border} bg-white flex flex-col min-h-[400px] transition-all duration-200 shadow-[0_2px_10px_rgba(0,0,0,0.07)] ${isOver ? 'ring-2 ring-[#1d3c71]/30' : ''}`}
     >
       <div className={`flex items-center justify-between px-4 py-3 rounded-t-xl ${col.headerBg}`}>
         <div className="flex items-center gap-2">
@@ -443,18 +443,18 @@ const Dashboard = () => {
               key={type}
               onClick={() => handleCreate(type)}
               disabled={isCreating !== null}
-              className="group relative flex items-center gap-4 p-5 rounded-xl border-2 border-[#253047] bg-[#111827] hover:border-[#c9a84c] transition-all duration-200 text-left disabled:opacity-50"
+              className="group relative flex items-center gap-4 p-5 rounded-xl border-2 border-[#dde3ea] bg-white hover:border-[#1d3c71] hover:shadow-[0_4px_16px_rgba(29,60,113,0.1)] transition-all duration-200 text-left disabled:opacity-50"
             >
               {isCreating === type ? (
-                <Loader2 className="h-8 w-8 animate-spin text-[#c9a84c]" />
+                <Loader2 className="h-8 w-8 animate-spin text-[#1d3c71]" />
               ) : (
-                <Icon className="h-8 w-8 text-[#c9a84c] shrink-0" />
+                <Icon className="h-8 w-8 text-[#1d3c71] shrink-0" />
               )}
               <div>
-                <p className="text-lg font-bold text-[#c9a84c] tracking-wide">{label}</p>
-                <p className="text-sm text-muted-foreground">{sub}</p>
+                <p className="text-lg font-bold text-[#1d3c71] tracking-wide">{label}</p>
+                <p className="text-sm text-[#666]">{sub}</p>
               </div>
-              <span className="absolute top-3 right-4 text-[10px] text-muted-foreground uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">+ Nieuw</span>
+              <span className="absolute top-3 right-4 text-[10px] text-[#666] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">+ Nieuw</span>
             </button>
           ))}
         </div>

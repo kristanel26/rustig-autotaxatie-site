@@ -109,55 +109,49 @@
     --sidebar-ring: 211 33% 56%;
   }
 
-  /* ── TAXARIS INTERNAL THEME ── */
+  /* ── AUTOMOBIEL TAXATIES INTERNAL THEME (light) ── */
   .intern-theme {
-    --background: 222 47% 5%;        /* #0a0d14 */
-    --foreground: 0 0% 95%;          /* near white */
-    --card: 222 33% 9%;              /* #111827 ~ s900 */
-    --card-foreground: 0 0% 95%;
-    --popover: 222 33% 9%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 43 50% 54%;           /* #c9a84c gold */
-    --primary-foreground: 222 47% 5%;
-    --secondary: 220 30% 16%;        /* #1a2235 ~ s800 */
+    --background: 220 20% 97%;       /* #f7f8fa */
+    --foreground: 0 0% 10%;          /* #1a1a1a */
+    --card: 0 0% 100%;               /* #ffffff */
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 216 58% 28%;           /* #1d3c71 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 216 58% 28%;         /* #1d3c71 for secondary buttons */
     --secondary-foreground: 0 0% 100%;
-    --muted: 220 30% 16%;
-    --muted-foreground: 220 15% 70%; /* readable gray - not too dim */
-    --accent: 43 50% 54%;            /* gold */
-    --accent-foreground: 222 47% 5%;
-    --destructive: 0 84% 60%;        /* #ef4444 */
+    --muted: 220 20% 97%;             /* #f7f8fa */
+    --muted-foreground: 0 0% 40%;     /* #666666 */
+    --accent: 21 100% 56%;            /* #ff751f */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     --warning: 38 92% 50%;
     --warning-foreground: 38 100% 15%;
-    --border: 221 27% 21%;           /* #253047 ~ s700 */
-    --input: 221 27% 21%;
-    --ring: 43 50% 54%;
+    --border: 213 20% 87%;            /* #dde3ea */
+    --input: 213 20% 85%;             /* #ccd3db */
+    --ring: 216 58% 28%;
 
-    /* Taxaris custom tokens */
-    --gold: 43 50% 54%;
-    --gold-lt: 43 51% 63%;           /* #dbb966 */
-    --gold-xlt: 46 76% 74%;          /* #edd98a */
-    --s900: 222 33% 9%;
-    --s800: 220 30% 16%;
-    --s700: 221 27% 21%;
-    --s600: 217 24% 33%;
-    --s500: 217 22% 70%;
-    --s400: 216 22% 80%;
-    --s300: 216 26% 88%;
-    --s200: 213 33% 90%;
-    --intern-green: 160 64% 40%;     /* #10b981 */
-    --intern-amber: 38 92% 50%;      /* #f59e0b */
+    /* AT brand tokens */
+    --at-navy: 216 58% 28%;           /* #1d3c71 */
+    --at-orange: 21 100% 56%;         /* #ff751f */
+    --at-blue-accent: 211 33% 56%;    /* #698db3 */
+    --at-blue-muted: 210 37% 67%;     /* #8eacc9 */
+    --at-blue-light: 210 33% 91%;     /* #EBF2FB */
   }
 
   /* Label styling for intern theme */
   .intern-theme label,
   .intern-theme .label-gold {
-    color: hsl(var(--gold-lt));
+    color: hsl(0 0% 27%);             /* #444 */
+    font-weight: 500;
+    font-size: 13px;
   }
 
-  /* Date input styling for dark theme */
+  /* Date input styling for light theme */
   .intern-theme input[type="date"] {
-    color-scheme: dark;
+    color-scheme: light;
   }
 }
 
@@ -178,15 +172,16 @@
     letter-spacing: -0.01em;
   }
 
-  /* Override for internal pages */
+  /* Override for internal pages — use Inter for clean professional look */
   .intern-theme h1,
   .intern-theme h2,
   .intern-theme h3,
   .intern-theme h4,
   .intern-theme h5,
   .intern-theme h6 {
-    font-family: 'DM Sans', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     letter-spacing: normal;
+    color: hsl(216 58% 28%);
   }
 
   /* Display headings get the serif font */
