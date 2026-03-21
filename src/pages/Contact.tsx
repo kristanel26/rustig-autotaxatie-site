@@ -1,6 +1,6 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Clock, ArrowLeft } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import UspBar from "@/components/UspBar";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
