@@ -106,11 +106,11 @@ const DraggableCard = ({
           <Badge variant="secondary" className="text-[9px] px-1.5 py-0">{report.report_type.toUpperCase()}</Badge>
         )}
       </div>
-      <p className="text-sm font-medium text-foreground truncate">{vehicleLabel(report)}</p>
+      <p className="text-sm font-medium text-[#1a1a1a] truncate">{vehicleLabel(report)}</p>
       <div className="flex items-end justify-between mt-1.5">
         <div className="flex flex-col gap-0.5">
-          <span className="text-xs font-mono text-muted-foreground">{report.license_plate || '-'}</span>
-          <span className="text-[10px] text-muted-foreground">{formatDate(report.updated_at)}</span>
+          <span className="text-xs font-mono text-[#666]">{report.license_plate || '-'}</span>
+          <span className="text-[10px] text-[#666]">{formatDate(report.updated_at)}</span>
         </div>
         {appraiserInitials ? (
           <Avatar className="h-6 w-6 shrink-0">
