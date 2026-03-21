@@ -11,7 +11,7 @@ import stepAanvraag from "@/assets/erik-aanvraag.png";
 import stepAdvies from "@/assets/step-advies.png";
 import stepInspectie from "@/assets/step-inspectie.png";
 import stepRapport from "@/assets/step-rapport.jpg";
-import stepAfhandeling from "@/assets/step-afhandeling.jpg";
+import stepAfhandeling from "@/assets/step-regelen.png";
 
 const diensten = [
   {
