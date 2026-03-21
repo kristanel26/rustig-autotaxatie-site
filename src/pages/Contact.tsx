@@ -37,7 +37,9 @@ const Contact = () => {
             Taxatie aanvragen
           </h1>
           <p className="text-lg text-primary-foreground/70 max-w-2xl">
-            Vul het formulier in en wij nemen binnen één werkdag contact met je op. Of bel direct voor persoonlijk advies.
+            Vul het formulier in en wij nemen binnen één werkdag contact met je op.
+            <br />
+            Of bel direct voor persoonlijk advies.
           </p>
           <a href="tel:+31854832461" className="inline-block mt-4">
             <button className="btn-outline-white">
