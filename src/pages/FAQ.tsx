@@ -134,10 +134,21 @@ const FAQ = () => {
         <div className="max-w-3xl mx-auto">
           <div className="space-y-10">
             {faqItems.map((category, catIndex) => (
-              <div key={catIndex}>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="accent-line" />
-                  <h2 className="text-xl md:text-2xl font-semibold">{category.category}</h2>
+              <div key={catIndex} style={{ marginTop: catIndex === 0 ? 0 : 48 }}>
+                <div className="flex justify-center mb-5">
+                  <span
+                    className="inline-block font-bold"
+                    style={{
+                      fontFamily: "'Playfair Display', serif",
+                      fontSize: 18,
+                      color: '#1d3c71',
+                      background: '#EBF2FB',
+                      borderRadius: 30,
+                      padding: '8px 24px',
+                    }}
+                  >
+                    {category.category}
+                  </span>
                 </div>
                 <Accordion type="single" collapsible className="w-full">
                   {category.questions.map((item, qIndex) => (
