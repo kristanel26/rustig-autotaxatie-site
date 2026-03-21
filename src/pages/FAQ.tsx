@@ -86,20 +86,20 @@ const FAQ = () => {
           <img src={heroFaq} alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />
         </div>
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28 relative z-10 w-full">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
+          <div style={{ width: 32, height: 2, background: '#ff751f', marginBottom: 12 }} />
           <span
-            className="inline-block mb-3 font-semibold uppercase"
-            style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: '0.15em', color: '#ff751f' }}
+            className="inline-block mb-3"
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#ff751f' }}
           >
             FAQ
           </span>
           <h1
-            className="font-bold text-white mb-4"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(32px, 4vw, 48px)', lineHeight: 1.15 }}
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 700, lineHeight: 1.15, color: '#ffffff', maxWidth: 700 }}
           >
             Veelgestelde vragen
           </h1>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 18, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, maxWidth: 560 }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 600, marginTop: 16 }}>
             Alles wat je wilt weten over BPM, verzekeringstaxatie, WEV en schadevaststelling.
           </p>
         </div>

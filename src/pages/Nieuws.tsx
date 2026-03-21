@@ -73,25 +73,25 @@ const Nieuws = () => {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="relative overflow-hidden flex items-center justify-center px-6 lg:px-8 text-center" style={{ height: 320, minHeight: 320, maxHeight: 320 }}>
+      <section className="relative overflow-hidden flex items-center" style={{ height: 320, minHeight: 320, maxHeight: 320 }}>
         <div className="absolute inset-0">
           <img src={heroNieuws} alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />
         </div>
-        <div className="relative z-10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
+          <div style={{ width: 32, height: 2, background: '#ff751f', marginBottom: 12 }} />
           <span
-            className="inline-block mb-3 font-semibold uppercase"
-            style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: '0.15em', color: '#ff751f' }}
+            className="inline-block mb-3"
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#ff751f' }}
           >
             NIEUWS
           </span>
           <h1
-            className="font-bold mb-3"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(30px, 4vw, 44px)', lineHeight: 1.2, color: '#ffffff' }}
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 700, lineHeight: 1.15, color: '#ffffff', maxWidth: 700 }}
           >
             BPM nieuws en jurisprudentie
           </h1>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 18, color: 'rgba(255,255,255,0.7)', lineHeight: 1.65, maxWidth: 600 }} className="mx-auto">
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 600, marginTop: 16 }}>
             Actuele berichten over wijzigingen in wet- en regelgeving, uitspraken en BPM-tarieven.
           </p>
         </div>

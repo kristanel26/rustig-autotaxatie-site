@@ -65,19 +65,25 @@ const Blog = () => {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="relative overflow-hidden py-20 md:py-28 px-6 lg:px-8 text-center flex items-center justify-center" style={{ height: 320, minHeight: 320, maxHeight: 320 }}>
+      <section className="relative overflow-hidden flex items-center" style={{ height: 320, minHeight: 320, maxHeight: 320 }}>
         <div className="absolute inset-0">
           <img src={heroBlog} alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />
         </div>
-        <div className="relative z-10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
+          <div style={{ width: 32, height: 2, background: '#ff751f', marginBottom: 12 }} />
+          <span
+            className="inline-block mb-3"
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#ff751f' }}
+          >
+            BLOG
+          </span>
           <h1
-            className="heading-display font-bold mb-4"
-            style={{ fontSize: 'clamp(36px, 4vw, 52px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#ffffff' }}
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 700, lineHeight: 1.15, color: '#ffffff', maxWidth: 700 }}
           >
             Blog & Kennisbank
           </h1>
-          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(16px, 1.8vw, 19px)', color: 'rgba(255,255,255,0.72)', lineHeight: 1.70, maxWidth: 540 }} className="mx-auto">
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 600, marginTop: 16 }}>
             Praktische informatie over BPM, taxaties en voertuigwaardering.
           </p>
         </div>

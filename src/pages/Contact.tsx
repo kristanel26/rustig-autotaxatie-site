@@ -1,6 +1,6 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Clock, ArrowLeft } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import UspBar from "@/components/UspBar";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -19,33 +19,27 @@ const Contact = () => {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="relative overflow-hidden py-16 md:py-24 px-6 md:px-8 flex items-center" style={{ height: 320, minHeight: 320, maxHeight: 320 }}>
+      <section className="relative overflow-hidden flex items-center" style={{ height: 320, minHeight: 320, maxHeight: 320 }}>
         <div className="absolute inset-0">
           <img src={heroContact} alt="" className="w-full h-full object-cover" style={{ objectPosition: 'center 20%' }} />
           <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />
         </div>
-        <div className="container-wide relative z-10">
-          <Link to="/" className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors mb-6">
-            <ArrowLeft className="w-4 h-4" />
-            Terug naar home
-          </Link>
-          <div className="flex items-center gap-3 mb-4">
-            <div className="accent-line" />
-          </div>
-          <h1 className="heading-display text-4xl md:text-5xl text-white mb-4">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
+          <div style={{ width: 32, height: 2, background: '#ff751f', marginBottom: 12 }} />
+          <span
+            className="inline-block mb-3"
+            style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#ff751f' }}
+          >
+            CONTACT
+          </span>
+          <h1
+            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 700, lineHeight: 1.15, color: '#ffffff', maxWidth: 700 }}
+          >
             Taxatie aanvragen
           </h1>
-          <p className="text-lg text-white/70 max-w-2xl">
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 600, marginTop: 16 }}>
             Vul het formulier in en wij nemen binnen één werkdag contact met je op.
-            <br />
-            Of bel direct voor persoonlijk advies.
           </p>
-          <a href="tel:+31854832461" className="inline-block mt-4">
-            <button className="btn-outline-white">
-              <Phone className="w-5 h-5" />
-              085 483 2461
-            </button>
-          </a>
         </div>
       </section>
       <UspBar />
