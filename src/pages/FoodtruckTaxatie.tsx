@@ -32,7 +32,7 @@ const FoodtruckTaxatie = () => {
     <div className="min-h-screen bg-background">
       <PageMeta title="Foodtruck Taxatie | Mobiele Horeca Waardebepaling | Automobiel Taxaties" description="Specialist in taxatie van foodtrucks en mobiele horecavoertuigen. Erkend rapport voor verzekering en financiering." />
       <SiteHeader />
-      <LandingHero subtitle="VERZEKERINGSTAXATIE FOODTRUCK" title="Zekerheid over de waarde van je foodtruck" description="Je foodtruck is meer dan alleen een voertuig. Met een verzekeringstaxatie leg je vast wat het op dit moment werkelijk waard is. Die waarde vormt de basis voor de verzekering, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde." ctaText="Verzekeringstaxatie aanvragen" onCtaClick={scrollToForm} heroImage={heroFoodtruck} />
+      <LandingHero subtitle="VERZEKERINGSTAXATIE FOODTRUCK" title="Zekerheid over de waarde van je foodtruck" description="Je foodtruck is meer dan alleen een voertuig. Met een verzekeringstaxatie leg je vast wat het op dit moment werkelijk waard is. Die waarde vormt de basis voor de verzekering, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde." ctaText="Verzekeringstaxatie aanvragen" onCtaClick={scrollToForm} heroImage={heroFoodtruck} compact />
       <UspBar />
 
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>

@@ -69,6 +69,7 @@ const VerzekeringstaxatieInfo = () => {
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroVerzekeringstaxatie}
+        compact
       >
         <p className="flex items-center gap-2 text-white/60 text-sm">
           <MapPin className="w-4 h-4" />

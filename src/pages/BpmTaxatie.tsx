@@ -49,6 +49,7 @@ const BpmTaxatie = () => {
         ctaText="BPM-aangifte aanvragen"
         onCtaClick={scrollToForm}
         heroImage={erikHeroBpm}
+        compact
       />
       <UspBar />
 
