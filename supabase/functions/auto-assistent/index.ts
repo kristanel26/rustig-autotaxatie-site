@@ -30,7 +30,7 @@ Belangrijke feiten:
 - Automobiel Taxaties is opgericht door Erik Elderson, erkend taxateur (TMV nr. 33106, VRT nr. 22-523-M)
 - 13 jaar ervaring, 25.000+ voertuigen getaxeerd
 - Aangesloten bij Federatie TMV, VRT Register en FEHAC
-- Taxaties op locatie door heel Nederland
+- Taxaties op locatie in het grootste gedeelte van Nederland
 - Contact: 085 483 2461
 - E-mail: algemeen@automobieltaxaties.nl
 

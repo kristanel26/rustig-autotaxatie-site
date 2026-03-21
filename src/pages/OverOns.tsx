@@ -43,7 +43,7 @@ const stappen = [
   {
     icon: MapPin,
     title: "Fysieke inspectie op locatie",
-    text: "Erik komt naar het voertuig toe, door heel Nederland. De inspectie omvat lakdiktemetingen, staat- en schade-opname en een uitgebreid fotodossier. Voor elk type taxatie wordt de inspectie afgestemd op het doel.",
+    text: "Erik komt naar het voertuig toe, in het grootste gedeelte van Nederland. De inspectie omvat lakdiktemetingen, staat- en schade-opname en een uitgebreid fotodossier. Voor elk type taxatie wordt de inspectie afgestemd op het doel.",
   },
   {
     icon: FileCheck,
@@ -62,7 +62,7 @@ const OverOns = () => {
     <div className="min-h-screen bg-white">
       <PageMeta
         title="Over ons | Automobiel Taxaties"
-        description="Automobiel Taxaties is Erik Elderson. Erkend taxateur voor BPM, verzekeringstaxatie, WEV-taxatie en schadevaststelling, actief door heel Nederland."
+        description="Automobiel Taxaties is Erik Elderson. Erkend taxateur voor BPM, verzekeringstaxatie, WEV-taxatie en schadevaststelling, actief in het grootste gedeelte van Nederland."
       />
       <SiteHeader />
 
@@ -99,7 +99,7 @@ const OverOns = () => {
               maxWidth: 640,
             }}
           >
-            Automobiel Taxaties is Erik Elderson. Erkend taxateur voor BPM, verzekeringstaxatie, WEV-taxatie en schadevaststelling, actief door heel Nederland.
+            Automobiel Taxaties is Erik Elderson. Erkend taxateur voor BPM, verzekeringstaxatie, WEV-taxatie en schadevaststelling, actief in het grootste gedeelte van Nederland.
           </p>
         </div>
       </section>

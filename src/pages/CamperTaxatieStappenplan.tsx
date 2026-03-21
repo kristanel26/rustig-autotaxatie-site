@@ -25,7 +25,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     image: stepInspectie,
     title: "Inspectie op locatie",
     content: (
-      <p>Erik komt naar jouw camper toe, door heel Nederland. Tijdens de inspectie worden de staat, uitvoering, aanpassingen, zelfbouw en bijzonderheden opgenomen. Lakdiktemetingen worden uitgevoerd en er wordt een uitgebreid fotodossier aangelegd.</p>
+      <p>Erik komt naar jouw camper toe, in het grootste gedeelte van Nederland. Tijdens de inspectie worden de staat, uitvoering, aanpassingen, zelfbouw en bijzonderheden opgenomen. Lakdiktemetingen worden uitgevoerd en er wordt een uitgebreid fotodossier aangelegd.</p>
     ),
   },
   {
