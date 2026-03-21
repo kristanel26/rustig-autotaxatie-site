@@ -163,11 +163,17 @@ const OldtimerTaxatie = () => {
               ))}
             </div>
           </div>
-          <div className="flex justify-center mt-10">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
             <Button variant="cta" size="lg" onClick={scrollToForm}>
               Verzekeringstaxatie aanvragen
               <ArrowDown className="w-4 h-4 ml-2" />
             </Button>
+            <Link to="/verzekering-stappenplan">
+              <Button variant="outline" size="lg" className="border-2 font-medium" style={{ borderColor: '#1d3c71', color: '#1d3c71' }}>
+                Bekijk het volledige stappenplan
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
