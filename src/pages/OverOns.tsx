@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Phone, Car, Shield, Scale, Wrench, ArrowRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import erikPhoto from "@/assets/erik-elderson.png";
+import erikPhoto from "@/assets/erik-over-ons.png";
 import heroOverOns from "@/assets/hero-over-ons.jpg";
 import stepAanvraag from "@/assets/step-aanvraag.jpg";
 import stepAdvies from "@/assets/step-advies.jpg";
