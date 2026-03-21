@@ -1,5 +1,6 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
 import IntakeForm from "@/components/IntakeForm";
 import ContactSidebar from "@/components/ContactSidebar";
@@ -8,7 +9,7 @@ import SiteFooter from "@/components/SiteFooter";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, CheckCircle, Award, Calendar, Info, Search, TrendingUp, FileCheck } from "lucide-react";
+import { ArrowDown, ArrowRight, CheckCircle, Award, Calendar, Info, Search, TrendingUp, FileCheck } from "lucide-react";
 import StatsBar from "@/components/StatsBar";
 import heroOldtimer from "@/assets/hero-oldtimer.png";
 
@@ -162,11 +163,17 @@ const OldtimerTaxatie = () => {
               ))}
             </div>
           </div>
-          <div className="flex justify-center mt-10">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
             <Button variant="cta" size="lg" onClick={scrollToForm}>
               Verzekeringstaxatie aanvragen
               <ArrowDown className="w-4 h-4 ml-2" />
             </Button>
+            <Link to="/verzekering-stappenplan">
+              <Button variant="outline" size="lg" className="border-2 font-medium" style={{ borderColor: '#1d3c71', color: '#1d3c71' }}>
+                Bekijk het volledige stappenplan
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -176,7 +183,7 @@ const OldtimerTaxatie = () => {
         <div className="container-wide text-center">
           <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Verzekeringstaxatie voor je oldtimer?</h2>
           <p className="text-[15px] mb-6 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>
-            Vooraf zekerheid over de waarde. Wij plannen de taxatie op locatie.
+            Vooraf zekerheid over de waarde. Wij plannen de taxatie op locatie bij jou.
           </p>
           <Button variant="cta" size="lg" onClick={scrollToForm}>
             Verzekeringstaxatie aanvragen
