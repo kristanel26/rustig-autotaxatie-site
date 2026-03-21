@@ -1,13 +1,17 @@
 import { useState } from "react";
-import { Check, ArrowRight, ArrowLeft } from "lucide-react";
-import { FaFileInvoiceDollar, FaBalanceScale, FaClock, FaCar, FaTruck, FaMotorcycle, FaUtensils, FaCarCrash } from "react-icons/fa";
+import { Check, ArrowRight, ArrowLeft, Bus } from "lucide-react";
+import { FaFileInvoiceDollar, FaBalanceScale, FaClock, FaCar, FaMotorcycle, FaUtensils, FaCarCrash } from "react-icons/fa";
+
+const BusIcon = ({ size, style }: { size?: number; style?: React.CSSProperties }) => (
+  <Bus size={size || 28} style={style} />
+);
 
 const taxatieOptions = [
-  { value: "bpm", label: "BPM Taxatie", icon: FaFileInvoiceDollar },
+  { value: "bpm", label: "BPM Taxatie", icon: FaFileInvoiceDollar, badge: "MEEST GEKOZEN" },
   { value: "wev", label: "WEV Taxatie", icon: FaBalanceScale },
   { value: "oldtimer", label: "Oldtimer Taxatie", icon: FaClock },
   { value: "youngtimer", label: "Youngtimer Taxatie", icon: FaCar },
-  { value: "camper", label: "Camper Taxatie", icon: FaTruck },
+  { value: "camper", label: "Camper Taxatie", icon: BusIcon },
   { value: "motor", label: "Motor Taxatie", icon: FaMotorcycle },
   { value: "foodtruck", label: "Foodtruck Taxatie", icon: FaUtensils },
   { value: "schadevaststelling", label: "Schadevaststelling", icon: FaCarCrash },
