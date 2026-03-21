@@ -74,7 +74,7 @@ const OverOns = () => {
       <SiteHeader />
 
       {/* ── HERO with background image ── */}
-      <section className="relative overflow-hidden flex items-center" style={{ minHeight: 320 }}>
+      <section className="relative overflow-hidden flex items-center" style={{ height: 320, minHeight: 320, maxHeight: 320 }}>
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${heroOverOns})` }}

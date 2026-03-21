@@ -125,7 +125,7 @@ const StappenplanBpmAangifte = () => {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="relative overflow-hidden" style={{ minHeight: 320 }}>
+      <section className="relative overflow-hidden" style={{ height: 320, minHeight: 320, maxHeight: 320 }}>
         <div className="absolute inset-0">
           <img src={heroStappenplanBpm} alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />

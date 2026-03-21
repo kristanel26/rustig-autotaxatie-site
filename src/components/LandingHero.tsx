@@ -26,7 +26,7 @@ const LandingHero = ({
   compact = false,
 }: LandingHeroProps) => {
   return (
-    <section className={`relative flex items-center overflow-hidden ${compact ? '' : 'min-h-[85vh]'}`} style={compact ? { minHeight: 320 } : undefined}>
+    <section className={`relative flex items-center overflow-hidden ${compact ? '' : 'min-h-[85vh]'}`} style={compact ? { height: 320, minHeight: 320, maxHeight: 320 } : undefined}>
       {/* Background: image or gradient */}
       {heroImage ? (
         <div className="absolute inset-0">

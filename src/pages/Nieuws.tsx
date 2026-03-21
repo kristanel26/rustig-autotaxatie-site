@@ -73,7 +73,7 @@ const Nieuws = () => {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="relative overflow-hidden flex items-center justify-center px-6 lg:px-8 text-center" style={{ minHeight: 320 }}>
+      <section className="relative overflow-hidden flex items-center justify-center px-6 lg:px-8 text-center" style={{ height: 320, minHeight: 320, maxHeight: 320 }}>
         <div className="absolute inset-0">
           <img src={heroNieuws} alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />

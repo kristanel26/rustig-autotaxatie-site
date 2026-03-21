@@ -65,7 +65,7 @@ const Blog = () => {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="relative overflow-hidden py-20 md:py-28 px-6 lg:px-8 text-center flex items-center justify-center" style={{ minHeight: 320 }}>
+      <section className="relative overflow-hidden py-20 md:py-28 px-6 lg:px-8 text-center flex items-center justify-center" style={{ height: 320, minHeight: 320, maxHeight: 320 }}>
         <div className="absolute inset-0">
           <img src={heroBlog} alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />
