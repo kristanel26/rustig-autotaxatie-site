@@ -11,6 +11,7 @@ interface LandingHeroProps {
   children?: ReactNode;
   heroImage?: string;
   showPhoneButton?: boolean;
+  compact?: boolean;
 }
 
 const LandingHero = ({
