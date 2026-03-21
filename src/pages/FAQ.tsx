@@ -19,35 +19,83 @@ const faqItems = [
     questions: [
       {
         q: "Hoe verloopt een BPM-aangifte?",
-        a: "Je levert de basisgegevens aan via ons formulier of per mail. Wij bepalen de meest gunstige wijze van afdracht en maken, indien nodig, een taxatierapport op na een opname op locatie. Het rapport ontvang je digitaal, waarna je de aangifte kunt doen.",
+        a: "Plan een afspraak bij de RDW en laat het voertuig identificeren of keuren. Na de keuring ontvang je een formulier voor de aangifte van de RDW. Dit stuur je met de BPM-berekening op via de post, of laat beide documenten achter in de aangiftezuil van de Belastingdienst op het keuringsstation. Binnen een aantal dagen ontvang je een betaalbericht. Na betaling geeft de RDW het kentekenbewijs af. Het enige dat dan nog rest is het maken van een kentekenplaat.",
       },
       {
         q: "Moet ik BPM-aangifte doen voor een bestelauto?",
-        a: "Dat hangt af van het type bestelauto en het gebruik. Sommige bedrijfsvoertuigen zijn vrijgesteld van BPM. Neem contact met ons op, dan kijken we samen naar jouw situatie.",
+        a: "Ja. Voor een bestelauto tot 3.500 kg moet er ook BPM-aangifte worden gedaan. Ben je ondernemer en gebruik je de auto voor meer dan 10% van de kilometers voor je onderneming, dan betaal je geen BPM als de auto jonger is dan 5 jaar. Ben je geen ondernemer en is de auto jonger dan 5 jaar, dan betaal je wel BPM. Na 5 jaar is het te betalen BPM-bedrag € 0. Deze 5 jaar gaat in op de datum eerste toelating in welk land dan ook.",
       },
       {
         q: "Welke gegevens hebben jullie nodig voor een BPM-aangifte?",
-        a: "We hebben het kentekenbewijs (of buitenlands registratiebewijs), de aankoopfactuur en eventuele schadedocumentatie nodig. Via ons formulier kun je deze eenvoudig aanleveren.",
+        a: "Wij hebben je NAW-gegevens nodig, een kopie van de buitenlandse kentekenpapieren, het Certificaat van Overeenstemming (CvO) en de aankoopfactuur.",
       },
       {
         q: "Kunnen jullie de beste wijze van afdracht vooraf bepalen?",
-        a: "Ja, dat doen we standaard. Op basis van de voertuiggegevens berekenen we welke methode voor jou het voordeligst is: de afschrijvingstabel, een koerslijst of een taxatierapport.",
+        a: "Ja. Wij berekenen vooraf of de forfaitaire tabel, een koerslijst of een taxatierapport de laagste BPM oplevert voor jouw voertuig.",
       },
       {
-        q: "Hoeveel scheelt het als ik aangifte doe met een taxatierapport?",
-        a: "Dat verschilt per voertuig. Bij auto's met schade, hoge kilometerstand of specifieke kenmerken kan een taxatierapport aanzienlijk voordeliger zijn dan de standaard afschrijvingstabel. We berekenen het verschil graag vooraf voor je.",
+        q: "Hoeveel scheelt het als ik de aangifte doe met een taxatierapport?",
+        a: "Dit verschilt per voertuig. Bij schade, hoge kilometerstand of bovengemiddelde slijtage kan een taxatierapport aanzienlijk voordeliger zijn dan de forfaitaire tabel. Wij berekenen dit gratis vooraf.",
+      },
+      {
+        q: "Is een taxatierapport ook interessant bij jonge én oude auto's?",
+        a: "Ja. Bij jonge auto's is de BPM nog hoog, waardoor schade of slijtage relatief meer oplevert. Bij oudere auto's kan de werkelijke marktwaarde lager liggen dan de forfaitaire berekening suggereert.",
+      },
+      {
+        q: "Is een taxatierapport ook interessant bij lichte schade, zoals krassen en deuken?",
+        a: "Zeker. Ook lichte schade kan de waarde van het voertuig merkbaar verlagen. Wij beoordelen vooraf of een taxatierapport in jouw situatie zinvol is.",
+      },
+      {
+        q: "Geen schade, maar wel veel kilometers op de teller. Wat te doen?",
+        a: "Een hoge kilometerstand kan de waarde drukken ten opzichte van de forfaitaire tabel. Een koerslijst of taxatierapport kan dan voordeliger uitpakken. Neem contact op voor een gratis voorberekening.",
+      },
+      {
+        q: "Hoe werkt de BPM-aangifte op basis van een taxatierapport?",
+        a: "Na de fysieke inspectie stellen wij de rest-BPM vast op basis van de werkelijke staat van het voertuig. Dit rapport dien je in bij de Belastingdienst als onderbouwing van de aangifte. Het rapport is juridisch verdedigbaar.",
+      },
+      {
+        q: "Wat is belangrijk bij aangifte op basis van een koerslijst?",
+        a: "De koerslijst moet op de dag van de RDW-keuring geldig zijn. Wij controleren welke koerslijst het meest gunstig is voor jouw voertuig en zorgen dat alles correct wordt ingediend.",
+      },
+      {
+        q: "Hoe gaat de aangifte via de afschrijvingstabel van de Belastingdienst in zijn werk?",
+        a: "De Belastingdienst hanteert een vaste tabel die de afschrijving berekent op basis van de leeftijd van het voertuig. Dit is de eenvoudigste methode, maar niet altijd de voordeligste.",
       },
       {
         q: "Wat doe ik als de contrataxatie hoger uitvalt?",
-        a: "In dat geval kun je bezwaar maken. Wij ondersteunen je daarbij en onze jurist kan het rapport verdedigen als dat nodig is.",
+        a: "Je kunt bezwaar maken. Ons rapport is juridisch verdedigbaar en wij ondersteunen je bij bezwaarprocedures.",
       },
       {
         q: "Voert de Belastingdienst weleens een hertaxatie uit?",
-        a: "Ja, de Belastingdienst heeft het recht om binnen vijf jaar een hertaxatie uit te voeren. Daarom zorgen wij ervoor dat elk rapport zorgvuldig onderbouwd is en verdedigbaar blijft.",
+        a: "Ja. De Belastingdienst kan tot 5 jaar navorderen en een hertaxatie uitvoeren. Bij een hertaxatie ben je verplicht te verschijnen. Zonder aanwezigheid wordt geen fiscaal akkoord verleend.",
       },
       {
-        q: "Hoe lang is een taxatierapport geldig?",
-        a: "Een BPM-taxatierapport is één maand geldig na de opnamedatum. Zorg ervoor dat de aangifte binnen die periode wordt gedaan.",
+        q: "Hoe zit het met een naheffingsaanslag?",
+        a: "Als de Belastingdienst van mening is dat er te weinig BPM is betaald, kan zij een naheffingsaanslag opleggen. Dit kan tot 5 jaar na de aangifte. Een goed onderbouwd taxatierapport verkleint dit risico.",
+      },
+      {
+        q: "Wat verstaat de Belastingdienst onder nieuwe of bijna nieuwe voertuigen?",
+        a: "Voertuigen met minder dan 3.000 km op de teller worden door de Belastingdienst als nieuw beschouwd. Op nieuwe voertuigen mag geen afschrijving worden toegepast.",
+      },
+      {
+        q: "Mag je op auto's van buiten de EU ook aangifte doen met een taxatierapport?",
+        a: "Ja, dat mag. Voor voertuigen van buiten de EU gelden aanvullende eisen. Neem contact op voor advies over jouw specifieke situatie.",
+      },
+      {
+        q: "Hoe bepaalt de RDW de CO2-uitstoot van een auto buiten de EU?",
+        a: "De RDW hanteert een eigen meetmethode voor voertuigen zonder Europees typegoedkeuring. Dit kan invloed hebben op de BPM-berekening.",
+      },
+      {
+        q: "Zijn er aanpassingen nodig aan het voertuig bij import binnen de EU?",
+        a: "In principe niet, mits het voertuig al voldoet aan Europese typegoedkeuring. Bij twijfel raden wij aan dit vooraf te controleren bij de RDW.",
+      },
+      {
+        q: "Hoe kan ik het transport regelen van een import binnen de EU?",
+        a: "Je kunt de auto zelf ophalen of laten transporteren. Automobiel Taxaties heeft connecties die dit voor je kunnen verzorgen.",
+      },
+      {
+        q: "Welke stappen moet ik nemen na ontvangst van het taxatierapport?",
+        a: "Print het rapport in kleur. Ben je particulier, vul dan je BSN in. Vul de datum van de RDW-keuring in, onderteken het rapport en voeg de aankoopfactuur toe. Stuur alles op naar: Belastingdienst, Postbus 2710, 6401 DE Heerlen.",
       },
     ],
   },
@@ -56,11 +104,11 @@ const faqItems = [
     questions: [
       {
         q: "Hoe lang is een youngtimer- of oldtimer-taxatierapport geldig?",
-        a: "Een verzekeringstaxatierapport is doorgaans drie jaar geldig. Check bij je verzekeraar of zij andere voorwaarden hanteren.",
+        a: "Verzekeringstaxatierapporten zijn doorgaans 2 tot 3 jaar geldig. Check bij jouw verzekeraar naar de exacte geldigheidsduur, want dit verschilt per verzekeraar.",
       },
       {
         q: "Kunnen jullie taxeren op afstand?",
-        a: "Voor verzekeringstaxaties is een fysieke inspectie noodzakelijk. Alleen zo kunnen wij de werkelijke staat van het voertuig beoordelen en een betrouwbare waarde vaststellen.",
+        a: "Nee. Wij voeren altijd een fysieke inspectie uit op locatie bij het voertuig. Een taxatie op afstand of op basis van foto's is niet mogelijk en niet erkend.",
       },
     ],
   },
@@ -69,7 +117,7 @@ const faqItems = [
     questions: [
       {
         q: "Hoe wordt de waarde bepaald bij een WEV-taxatie?",
-        a: "Bij een WEV-taxatie bepalen we de waarde in het economisch verkeer op een specifieke peildatum. We gebruiken marktgegevens, vergelijkbare voertuigen en onze vakkennis om tot een objectieve waarde te komen.",
+        a: "De werkelijke economische waarde wordt bepaald op basis van een fysieke inspectie, actuele marktgegevens en de staat van het voertuig. Het rapport is onafhankelijk en officieel erkend.",
       },
     ],
   },
@@ -77,20 +125,8 @@ const faqItems = [
     category: "Algemeen",
     questions: [
       {
-        q: "Is een taxatierapport ook interessant bij jonge auto's?",
-        a: "Zeker. Ook bij relatief nieuwe auto's kan een taxatierapport relevant zijn, bijvoorbeeld bij BPM-import of bij verzekering van een bijzondere uitvoering.",
-      },
-      {
-        q: "Is een taxatierapport ook interessant bij lichte schade?",
-        a: "Ja. Zelfs kleine beschadigingen zoals krassen of deuken kunnen de waarde beïnvloeden en daarmee de BPM-afdracht verlagen.",
-      },
-      {
         q: "Wanneer ben je erkend taxateur?",
-        a: "Een erkend taxateur is geregistreerd bij een erkende beroepsorganisatie. Erik Elderson is aangesloten bij Federatie TMV, VRT Register en FEHAC.",
-      },
-      {
-        q: "Welke stappen moet ik nemen na ontvangst van het taxatierapport?",
-        a: "Na ontvangst controleer je het rapport en onderteken je het. Vervolgens kun je de aangifte doen bij de Belastingdienst. Wij begeleiden je graag bij het verdere proces.",
+        a: "Een erkend taxateur is geregistreerd bij een erkende brancheorganisatie zoals Federatie TMV of VRT Register. Erik Elderson is notarieel beëdigd TMV Register Taxateur en Register Taxateur VRT.",
       },
     ],
   },
