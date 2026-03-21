@@ -1,13 +1,17 @@
 import { useState } from "react";
-import { Check, ArrowRight, ArrowLeft } from "lucide-react";
-import { FaFileInvoiceDollar, FaBalanceScale, FaClock, FaCar, FaTruck, FaMotorcycle, FaUtensils, FaCarCrash } from "react-icons/fa";
+import { Check, ArrowRight, ArrowLeft, Bus } from "lucide-react";
+import { FaFileInvoiceDollar, FaBalanceScale, FaClock, FaCar, FaMotorcycle, FaUtensils, FaCarCrash } from "react-icons/fa";
+
+const BusIcon = ({ size, style }: { size?: number; style?: React.CSSProperties }) => (
+  <Bus size={size || 28} style={style} />
+);
 
 const taxatieOptions = [
-  { value: "bpm", label: "BPM Taxatie", icon: FaFileInvoiceDollar },
+  { value: "bpm", label: "BPM Taxatie", icon: FaFileInvoiceDollar, badge: "MEEST GEKOZEN" },
   { value: "wev", label: "WEV Taxatie", icon: FaBalanceScale },
   { value: "oldtimer", label: "Oldtimer Taxatie", icon: FaClock },
   { value: "youngtimer", label: "Youngtimer Taxatie", icon: FaCar },
-  { value: "camper", label: "Camper Taxatie", icon: FaTruck },
+  { value: "camper", label: "Camper Taxatie", icon: BusIcon },
   { value: "motor", label: "Motor Taxatie", icon: FaMotorcycle },
   { value: "foodtruck", label: "Foodtruck Taxatie", icon: FaUtensils },
   { value: "schadevaststelling", label: "Schadevaststelling", icon: FaCarCrash },
@@ -159,35 +163,46 @@ const BookingWizard = () => {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {taxatieOptions.map(opt => {
               const selected = form.type === opt.value;
+              const isBpm = opt.value === 'bpm';
               return (
                 <button
                   key={opt.value}
                   onClick={() => set("type", opt.value)}
-                  className="rounded-xl p-5 text-center transition-all cursor-pointer flex flex-col items-center gap-2.5"
+                  className="rounded-[10px] p-5 text-center transition-all duration-200 cursor-pointer flex flex-col items-center gap-2.5 relative"
                   style={{
-                    border: selected ? '2px solid #1d3c71' : '2px solid #e2e8f0',
-                    background: selected ? '#eef3fb' : '#ffffff',
-                    boxShadow: selected ? '0 4px 20px rgba(29,60,113,0.15)' : 'none',
+                    background: selected ? '#2a4f8f' : '#1d3c71',
+                    border: selected ? '2px solid #ff751f' : '2px solid transparent',
+                    boxShadow: selected ? '0 4px 20px rgba(255,117,31,0.25)' : '0 2px 8px rgba(0,0,0,0.15)',
+                    transform: selected ? 'translateY(-2px)' : 'translateY(0)',
                   }}
                   onMouseEnter={(e) => {
                     if (!selected) {
-                      e.currentTarget.style.borderColor = '#698db3';
-                      e.currentTarget.style.background = '#f7faff';
+                      e.currentTarget.style.background = '#2a4f8f';
                       e.currentTarget.style.transform = 'translateY(-2px)';
-                      e.currentTarget.style.boxShadow = '0 4px 16px rgba(29,60,113,0.10)';
+                      e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.20)';
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!selected) {
-                      e.currentTarget.style.borderColor = '#e2e8f0';
-                      e.currentTarget.style.background = '#ffffff';
+                      e.currentTarget.style.background = '#1d3c71';
                       e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.boxShadow = 'none';
+                      e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
                     }
                   }}
                 >
-                  <opt.icon size={28} style={{ color: selected ? '#1d3c71' : '#698db3', transition: 'color 200ms ease' }} />
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: '#1a1a1a' }}>{opt.label}</span>
+                  {isBpm && opt.badge && (
+                    <span style={{
+                      position: 'absolute', top: -10, right: -6,
+                      background: '#ff751f', color: '#fff',
+                      fontSize: 9, fontWeight: 800, fontFamily: "'Inter', sans-serif",
+                      padding: '3px 8px', borderRadius: 20, letterSpacing: '0.05em',
+                      boxShadow: '0 2px 6px rgba(255,117,31,0.4)',
+                    }}>
+                      {opt.badge}
+                    </span>
+                  )}
+                  <opt.icon size={28} style={{ color: '#ffffff', transition: 'color 200ms ease' }} />
+                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 600, color: '#ffffff' }}>{opt.label}</span>
                 </button>
               );
             })}

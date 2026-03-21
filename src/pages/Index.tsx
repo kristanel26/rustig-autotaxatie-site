@@ -2,7 +2,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import React, { useState } from "react";
 import PageMeta from "@/components/PageMeta";
 import { Link } from "react-router-dom";
-import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, ChevronRight, Search, MessageCircle, Handshake, Caravan } from "lucide-react";
+import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, ChevronRight, Search, MessageCircle, Handshake, Bus } from "lucide-react";
 import UspBar from "@/components/UspBar";
 import { FaFileInvoiceDollar, FaBalanceScale, FaClock, FaCar, FaMotorcycle, FaUtensils, FaCarCrash } from "react-icons/fa";
 import erikPhoto from "@/assets/erik-elderson.png";
@@ -20,7 +20,7 @@ const diensten = [
   { title: "WEV Taxatie", sub: "Fiscale waardebepaling", href: "/wev-taxatie", icon: FaBalanceScale },
   { title: "Oldtimer Taxatie", sub: "Klassieke voertuigen", href: "/oldtimer-taxatie", icon: FaClock },
   { title: "Youngtimer Taxatie", sub: "Voertuigen vanaf 15 jaar", href: "/youngtimer-taxatie", icon: FaCar },
-  { title: "Camper Taxatie", sub: "Campermarkt specialist", href: "/camper-taxatie", icon: Caravan },
+  { title: "Camper Taxatie", sub: "Campermarkt specialist", href: "/camper-taxatie", icon: Bus },
   { title: "Motor Taxatie", sub: "Motorfietsen", href: "/motor-taxatie", icon: FaMotorcycle },
   { title: "Foodtruck Taxatie", sub: "Mobiele horeca", href: "/foodtruck-taxatie", icon: FaUtensils },
   { title: "Schadevaststelling", sub: "Na een incident", href: "/schadevaststelling", icon: FaCarCrash },
