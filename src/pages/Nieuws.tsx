@@ -141,8 +141,8 @@ const Nieuws = () => {
                       {/* Title */}
                       <Link
                         to={`/blog/${article.slug}`}
-                        className="flex-1 min-w-0 font-semibold hover:underline truncate"
-                        style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1d3c71', lineHeight: 1.4 }}
+                        className="flex-1 min-w-0 font-semibold hover:underline"
+                        style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1d3c71', lineHeight: 1.5 }}
                       >
                         {article.title}
                       </Link>
