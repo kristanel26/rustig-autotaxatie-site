@@ -5,6 +5,7 @@ import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Link } from "react-router-dom";
 import { ArrowRight, Info, Phone } from "lucide-react";
+import heroCamperStappenplan from "@/assets/hero-camper-stappenplan.jpg";
 import stepAanvraag from "@/assets/step-camper-aanvraag.jpg";
 import stepInspectie from "@/assets/step-camper-inspectie.jpg";
 import stepWaarde from "@/assets/step-camper-waarde.jpg";
