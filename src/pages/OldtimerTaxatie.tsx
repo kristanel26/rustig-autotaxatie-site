@@ -30,7 +30,7 @@ const OldtimerTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta title="Oldtimer Taxatie | Erkend Rapport | Automobiel Taxaties" description="Professionele oldtimer taxatie voor verzekering en waardebepaling. Oog voor detail en historie. Op locatie door heel Nederland." />
+      <PageMeta title="Oldtimer Taxatie | Erkend Rapport | Automobiel Taxaties" description="Professionele oldtimer taxatie voor verzekering en waardebepaling. Oog voor detail en historie. Op locatie in het grootste gedeelte van Nederland." />
       <SiteHeader />
       <LandingHero subtitle="VERZEKERINGSTAXATIE OLDTIMER" title="Zekerheid over de waarde van je oldtimer" description="Je oldtimer is meer dan alleen een voertuig. Met een verzekeringstaxatie leg je vast wat het op dit moment werkelijk waard is. Die waarde vormt de basis voor de verzekering, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde." ctaText="Verzekeringstaxatie aanvragen" onCtaClick={scrollToForm} heroImage={heroOldtimer} />
       <UspBar />
@@ -89,7 +89,7 @@ const OldtimerTaxatie = () => {
           <div className="flex items-center gap-2"><div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-cta text-cta" />)}</div><span className="text-sm font-semibold text-foreground">4.9 / 5</span><span className="text-xs" style={{ color: '#4a5568' }}>Google Reviews</span></div>
           <div className="text-center"><span className="text-lg font-bold text-foreground">25.000+</span><span className="text-xs ml-1" style={{ color: '#4a5568' }}>voertuigen getaxeerd</span></div>
           <div className="text-center"><span className="text-lg font-bold text-foreground">13 jaar</span><span className="text-xs ml-1" style={{ color: '#4a5568' }}>ervaring</span></div>
-          <div className="text-center"><span className="text-lg font-bold text-foreground">Landelijk</span><span className="text-xs ml-1" style={{ color: '#4a5568' }}>actief</span></div>
+          <div className="text-center"><span className="text-lg font-bold text-foreground">Landelijk</span><span className="text-xs ml-1" style={{ color: '#4a5568' }}>werkzaam in groot deel van NL</span></div>
         </div></div>
       </section>
 

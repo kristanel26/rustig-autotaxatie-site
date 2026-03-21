@@ -79,7 +79,7 @@ const SiteFooter = () => {
               
               <img src={logo} alt="Automobiel Taxaties" className="h-[52px] w-auto mb-5 brightness-0 invert opacity-100" />
               <p className="text-white/70 text-sm leading-relaxed mb-6 text-left">
-                Erkend taxatiebureau voor BPM, verzekering en waardebepaling. Landelijk actief vanuit Druten.
+                Erkend taxatiebureau voor BPM, verzekering en waardebepaling. Werkzaam in het grootste gedeelte van Nederland vanuit Druten.
               </p>
               <div className="flex items-center gap-3 justify-start">
                 {(["facebook", "instagram", "linkedin", "youtube"] as const).map((social) => (

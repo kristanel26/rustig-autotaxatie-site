@@ -63,7 +63,7 @@ const Index = () => {
     <div className="min-h-screen bg-white">
       <PageMeta
         title="BPM Taxatie & Voertuigtaxaties | Automobiel Taxaties"
-        description="Erkend taxatiebureau voor BPM-aangifte, verzekeringstaxatie en WEV taxatie. Erik Elderson taxeert op locatie door heel Nederland. 25.000+ voertuigen getaxeerd."
+        description="Erkend taxatiebureau voor BPM-aangifte, verzekeringstaxatie en WEV taxatie. Erik Elderson taxeert op locatie in het grootste gedeelte van Nederland. 25.000+ voertuigen getaxeerd."
       />
       <SiteHeader />
 
@@ -116,7 +116,7 @@ const Index = () => {
                 maxWidth: 540,
               }}
             >
-              Automobiel Taxaties is het erkende taxatiebureau voor merkdealers, importeurs en particulieren. Wij komen bij je op locatie, door heel Nederland.
+              Automobiel Taxaties is het erkende taxatiebureau voor merkdealers, importeurs en particulieren. Wij komen bij je op locatie, in het grootste gedeelte van Nederland.
             </p>
             <div className="animate-slide-up delay-300 flex flex-col sm:flex-row gap-3 items-center">
               <Link to="/contact">
@@ -351,7 +351,7 @@ const Index = () => {
               {[
                 { num: "25.000+", label: "Voertuigen getaxeerd" },
                 { num: "13 jaar", label: "Ervaring" },
-                { num: "Landelijk", label: "Actief" },
+                { num: "Landelijk", label: "Werkzaam in groot deel van NL" },
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col">
                   <span className="heading-display" style={{ fontSize: 32, fontWeight: 700, color: '#ffffff', lineHeight: 1, letterSpacing: '-0.02em' }}>{stat.num}</span>
@@ -558,7 +558,7 @@ const Index = () => {
             {[
               { num: "25.000+", label: "Voertuigen getaxeerd" },
               { num: "13 jaar", label: "Ervaring in voertuigtaxaties" },
-              { num: "Landelijk", label: "Actief door heel Nederland" },
+              { num: "Landelijk", label: "Werkzaam in het grootste gedeelte van NL" },
             ].map((stat, i) => (
               <div key={i} className={`text-center py-6 ${i > 0 ? "border-l" : ""}`} style={{ borderColor: 'rgba(255,255,255,0.15)' }}>
                 <p
