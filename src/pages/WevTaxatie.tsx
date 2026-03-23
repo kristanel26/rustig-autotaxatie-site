@@ -459,19 +459,23 @@ const WevTaxatie = () => {
       <section className="py-14 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
         <div className="container-wide">
           <div className="text-center mb-8">
-            <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>AANVRAGEN</p>
-            <h2 className="heading-display text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1d3c71' }}>WEV-taxatie aanvragen</h2>
+            <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>CONTACT</p>
+            <h2 className="heading-display text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1d3c71' }}>Vrijblijvend contact opnemen</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
-              Vul het formulier in en wij plannen de taxatie op basis van de aangeleverde informatie.
+              Heb je een vraag over een WEV-taxatie of wil je een afspraak inplannen? Vul het formulier in en wij nemen binnen één werkdag contact met je op.
             </p>
           </div>
           <div className="grid md:grid-cols-[1fr_380px] gap-8">
             <div>
               <IntakeForm
                 serviceType="WEV-taxatie"
-                formTitle="WEV-taxatie aanvragen"
-                toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig en de fiscale context."
-                submitButtonText="WEV-taxatie aanvragen"
+                formTitle="Stel je vraag of vraag een taxatie aan"
+                formSubtext="Kenteken al bij de hand? Vul hem alvast in. Heb je een vraag? Omschrijf je situatie kort en wij kijken wat de beste aanpak is."
+                styledKenteken
+                toelichtingLabel="Jouw vraag of situatie"
+                toelichtingPlaceholder="Bijv: ik wil mijn zakelijke auto naar privé overbrengen, of: ik heb een youngtimer en wil weten wat de bijtelling wordt."
+                submitButtonText="Verstuur — wij nemen contact op"
+                footerText="We nemen binnen één werkdag contact met je op. Geen verplichtingen, gewoon een goed gesprek."
               />
             </div>
             <ContactSidebar />

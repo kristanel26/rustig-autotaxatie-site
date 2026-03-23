@@ -26,7 +26,10 @@ const ContactSidebar = () => {
         </li>
       </ul>
       <p className="mt-5 text-xs italic" style={{ color: 'rgba(255,255,255,0.6)' }}>
-        Liever direct contact? Wij reageren binnen één werkdag.
+        Liever direct bellen of appen? We helpen je graag verder.
+      </p>
+      <p className="mt-2 text-[13px]" style={{ color: 'rgba(255,255,255,0.5)' }}>
+        Geen verplichtingen. Wij kijken samen wat de slimste aanpak is voor jouw situatie.
       </p>
       <a
         href="https://wa.me/31650694978"
