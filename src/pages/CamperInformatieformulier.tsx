@@ -65,6 +65,22 @@ const CamperInformatieformulier = () => {
   const tog = (key: string) => setToggles(prev => ({ ...prev, [key]: !prev[key] }));
   const isOn = (key: string) => !!toggles[key];
 
+  const addPhotos = (files: FileList | null) => {
+    if (!files) return;
+    const newPhotos = Array.from(files)
+      .filter(f => f.size <= 10 * 1024 * 1024)
+      .slice(0, 20 - photos.length)
+      .map(file => ({ file, preview: URL.createObjectURL(file) }));
+    setPhotos(prev => [...prev, ...newPhotos].slice(0, 20));
+  };
+
+  const removePhoto = (index: number) => {
+    setPhotos(prev => {
+      URL.revokeObjectURL(prev[index].preview);
+      return prev.filter((_, i) => i !== index);
+    });
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!agreed) return;
