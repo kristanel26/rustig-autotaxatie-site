@@ -407,17 +407,17 @@ const WevTaxatie = () => {
       </section>
 
       {/* ── Formulier ────────────────────────────────────────── */}
-      <section className="py-14 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
+      <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 72, paddingBottom: 72 }} ref={formRef}>
         <div className="container-wide">
-          <div className="text-center mb-8">
-            <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>CONTACT</p>
-            <h2 className="heading-display text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1d3c71' }}>Vrijblijvend contact opnemen</h2>
+          <div className="text-center" style={{ marginBottom: 48 }}>
+            <p className="uppercase font-semibold mb-2" style={{ fontSize: 12, letterSpacing: '0.1em', color: '#ff751f' }}>CONTACT</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>Vrijblijvend contact opnemen</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
               Heb je een vraag over een WEV-taxatie of wil je een afspraak inplannen? Vul het formulier in en wij nemen binnen één werkdag contact met je op.
             </p>
           </div>
-          <div className="grid md:grid-cols-[1fr_380px] gap-8">
-            <div>
+          <div className="grid md:grid-cols-[1fr_380px] gap-8 items-stretch">
+            <div className="bg-white" style={{ borderRadius: 16, boxShadow: '0 8px 40px rgba(0,0,0,0.10)', overflow: 'hidden' }}>
               <IntakeForm
                 serviceType="WEV-taxatie"
                 formTitle="Stel je vraag of vraag een taxatie aan"
@@ -427,6 +427,7 @@ const WevTaxatie = () => {
                 toelichtingPlaceholder="Bijv: ik wil mijn zakelijke auto naar privé overbrengen, of: ik heb een youngtimer en wil weten wat de bijtelling wordt."
                 submitButtonText="Verstuur. Wij nemen contact op."
                 footerText="We nemen binnen één werkdag contact met je op. Geen verplichtingen, gewoon een goed gesprek."
+                compact={true}
               />
             </div>
             <ContactSidebar />
