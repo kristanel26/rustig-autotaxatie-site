@@ -222,7 +222,7 @@ const WevTaxatie = () => {
                 <div key={s.step} className="text-center relative z-10">
                   <div
                     className="w-[52px] h-[52px] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold text-[20px]"
-                    style={{ background: '#1d3c71', boxShadow: '0 0 0 3px #ff751f' }}
+                    style={{ background: '#1d3c71' }}
                   >
                     {s.step}
                   </div>
