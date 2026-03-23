@@ -8,7 +8,7 @@ import ContactSidebar from "@/components/ContactSidebar";
 import { Link } from "react-router-dom";
 import { ArrowRight, Info, Phone, CheckCircle, Mail } from "lucide-react";
 import heroImage from "@/assets/hero-verzekeringstaxatie.png";
-import stepAanvraag from "@/assets/step-aanvraag.png";
+import stepAanvraag from "@/assets/step-wev-contact.png";
 import stepAdvies from "@/assets/step-advies.png";
 import stepInspectie from "@/assets/step-inspectie.png";
 import stepRapport from "@/assets/step-rapport.png";
