@@ -15,6 +15,7 @@ import {
   TrendingUp, Gauge, Wrench, FileCheck, Info, Award, Users,
 } from "lucide-react";
 import ContactSidebar from "@/components/ContactSidebar";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import serviceWev from "@/assets/hero-wev-taxatie.png";
 
 /* ── Shared tiny component ────────────────────────────── */
@@ -373,6 +374,61 @@ const WevTaxatie = () => {
             WEV-taxatie aanvragen
             <ArrowDown className="w-4 h-4 ml-2" />
           </Button>
+        </div>
+      </section>
+
+      {/* ── FAQ sectie ──────────────────────────────────────── */}
+      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
+        <div className="max-w-[800px] mx-auto">
+          <div className="text-center mb-8">
+            <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>VEELGESTELDE VRAGEN</p>
+            <h2 className="heading-display text-2xl md:text-3xl font-bold" style={{ color: '#1d3c71' }}>Alles over de WEV-taxatie</h2>
+          </div>
+          <Accordion type="single" collapsible className="space-y-3">
+            {[
+              {
+                q: "Wat is een WEV-taxatie precies?",
+                a: "Een WEV-taxatie bepaalt de Waarde in het Economisch Verkeer van een voertuig. Dit is de prijs die het voertuig zou opbrengen bij verkoop op de vrije markt, op de dag van taxatie. De Belastingdienst vereist deze waardebepaling bij fiscale overdrachten en bijtellingsvraagstukken."
+              },
+              {
+                q: "Wanneer heb ik een WEV-taxatie nodig?",
+                a: "Een WEV-taxatie is nodig bij het overbrengen van een auto van zaak naar privé of omgekeerd, bij het berekenen van de bijtelling voor een youngtimer (15 jaar of ouder), bij erfenis of scheiding waarbij voertuigen onderdeel zijn van de boedelverdeling, en bij DGA-overdrachten tussen BV en privé."
+              },
+              {
+                q: "Hoe wordt de WEV bepaald?",
+                a: "De WEV wordt bepaald op basis van een fysieke inspectie van het voertuig, actuele marktgegevens en koerslijsten, de staat en het onderhoud op de dag van taxatie, en vergelijking met vergelijkbare voertuigen op de markt. Alle bevindingen worden samengevat in een transparant en controleerbaar rapport."
+              },
+              {
+                q: "Wat kost een WEV-taxatie?",
+                a: "De kosten van een WEV-taxatie zijn afhankelijk van het type voertuig en de situatie. Neem contact met ons op voor een vrijblijvende offerte. De kosten zijn voor ondernemers fiscaal aftrekbaar als zakelijke kosten."
+              },
+              {
+                q: "Hoe lang duurt een WEV-taxatie?",
+                a: "De fysieke inspectie duurt gemiddeld 30 tot 60 minuten, afhankelijk van het voertuig. Na de inspectie ontvang je het volledige taxatierapport binnen enkele werkdagen digitaal."
+              },
+              {
+                q: "Zijn de kosten van een WEV-taxatie fiscaal aftrekbaar?",
+                a: "Ja. Voor ondernemers zijn de kosten van een WEV-taxatie zakelijke kosten en daarmee fiscaal aftrekbaar. Je vraagt de taxatie aan om te voldoen aan de eisen van de Belastingdienst bij een zakelijke overdracht of de bijtellingberekening van een youngtimer."
+              },
+              {
+                q: "Hoe lang is een WEV-taxatierapport geldig?",
+                a: "Een WEV-taxatierapport is doorgaans 6 tot 12 maanden geldig, afhankelijk van de situatie waarvoor het wordt gebruikt. Voor de youngtimerregeling kan het voordelig zijn om jaarlijks opnieuw te laten taxeren: de WEV-waarde daalt elk jaar door gebruik en kilometers, waardoor ook de bijtelling elk jaar verder omlaag kan."
+              },
+              {
+                q: "Kan ik de WEV-waarde van mijn auto zelf bepalen?",
+                a: "Nee. De WEV moet worden vastgesteld door een erkend en onafhankelijk taxateur. Een autobedrijf kan een schatting maken, maar de Belastingdienst beschouwt autobedrijven niet als onafhankelijke partij voor fiscale waardebepalingen. Alleen een gecertificeerde taxateur, aangesloten bij bijvoorbeeld Federatie TMV of VRT Register, kan een rapport opstellen dat door de Belastingdienst wordt geaccepteerd."
+              },
+            ].map((item, i) => (
+              <AccordionItem key={i} value={`faq-${i}`} className="bg-white rounded-[10px] border-0 px-5" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
+                <AccordionTrigger className="text-[15px] font-semibold py-4 hover:no-underline" style={{ color: '#1d3c71' }}>
+                  {item.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-[14px] leading-relaxed pb-4" style={{ color: '#4a5568' }}>
+                  {item.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 
