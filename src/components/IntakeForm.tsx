@@ -164,9 +164,22 @@ const IntakeForm = ({
                     padding: '2px 0',
                   }}
                 >
-                  <div className="flex gap-[1px] flex-wrap justify-center" style={{ maxWidth: 14 }}>
-                    {[...Array(4)].map((_, i) => (
-                      <span key={i} style={{ color: '#FFD700', fontSize: 4, lineHeight: 1 }}>★</span>
+                  <div 
+                    className="flex items-center justify-center"
+                    style={{ 
+                      width: 14, height: 14, borderRadius: '50%', 
+                      border: '1px solid #FFD700',
+                      position: 'relative',
+                    }}
+                  >
+                    {[...Array(12)].map((_, i) => (
+                      <span 
+                        key={i} 
+                        style={{ 
+                          position: 'absolute', color: '#FFD700', fontSize: 3, lineHeight: 1,
+                          transform: `rotate(${i * 30}deg) translateY(-5px)`,
+                        }}
+                      >★</span>
                     ))}
                   </div>
                   <span className="text-white font-bold leading-none" style={{ fontSize: 10 }}>NL</span>
