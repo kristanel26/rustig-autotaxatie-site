@@ -145,30 +145,31 @@ const IntakeForm = ({
               />
             </div>
             <div>
-              <div className="rounded-lg px-4 py-3 mb-1" style={{ background: '#1d3c71' }}>
-                <p className="text-white text-sm font-semibold mb-2">Kenteken bekend? Vul hem alvast in.</p>
-                <div className="flex items-stretch rounded overflow-hidden" style={{ height: 44 }}>
-                  <div className="flex items-center justify-center px-2" style={{ background: '#003580', minWidth: 32 }}>
-                    <span className="text-white text-[11px] font-bold leading-none">NL</span>
-                  </div>
-                  <input
-                    id="kenteken"
-                    name="kenteken"
-                    placeholder="XX-123-X"
-                    value={formData.kenteken}
-                    onChange={handleChange}
-                    className="flex-1 border-0 outline-none px-3 text-[15px]"
-                    style={{
-                      background: '#f5c518',
-                      color: '#1a1a1a',
-                      fontWeight: 700,
-                      letterSpacing: '0.15em',
-                      textTransform: 'uppercase',
-                    }}
-                  />
+              <p className="text-[13px] mb-2" style={{ color: '#1a1a1a' }}>Kenteken bekend? Vul hem alvast in.</p>
+              <div className="flex items-stretch rounded overflow-hidden" style={{ height: 44 }}>
+                <div className="flex items-center justify-center" style={{ background: '#003DA5', minWidth: 32, borderRadius: '4px 0 0 4px' }}>
+                  <span className="text-white text-[11px] font-bold leading-none">NL</span>
                 </div>
+                <input
+                  id="kenteken"
+                  name="kenteken"
+                  placeholder="XX-123-X"
+                  value={formData.kenteken}
+                  onChange={handleChange}
+                  className="flex-1 outline-none px-3 text-[16px]"
+                  style={{
+                    background: '#FDC100',
+                    color: '#1a1a1a',
+                    fontWeight: 700,
+                    letterSpacing: '0.2em',
+                    textTransform: 'uppercase',
+                    border: '2px solid #1a1a1a',
+                    borderLeft: 'none',
+                    borderRadius: '0 4px 4px 0',
+                  }}
+                />
               </div>
-              <p className="text-xs text-muted-foreground ml-1">(optioneel)</p>
+              <p className="text-xs text-muted-foreground ml-1 mt-1">(optioneel)</p>
             </div>
           </>
         ) : (
