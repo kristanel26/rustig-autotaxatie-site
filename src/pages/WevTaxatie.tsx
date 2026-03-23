@@ -200,7 +200,7 @@ const WevTaxatie = () => {
                 <div className="space-y-1 text-[13px]" style={{ color: '#4a5568' }}>
                   <p>Cataloguswaarde: € 75.000</p>
                   <p>Bijtelling: 22% over € 75.000</p>
-                  <p className="font-bold" style={{ color: '#1d3c71' }}>Bijtelling per jaar: € 16.500</p>
+                  <p className="font-bold" style={{ color: '#c0392b' }}>Bijtelling per jaar: € 16.500</p>
                 </div>
               </div>
 
@@ -210,14 +210,16 @@ const WevTaxatie = () => {
                 <div className="space-y-1 text-[13px]" style={{ color: '#4a5568' }}>
                   <p>WEV (getaxeerde dagwaarde): € 8.000</p>
                   <p>Bijtelling: 35% over € 8.000</p>
-                  <p className="font-bold" style={{ color: '#1d3c71' }}>Bijtelling per jaar: € 2.800</p>
+                  <p className="font-bold" style={{ color: '#1d7a3a' }}>Bijtelling per jaar: € 2.800</p>
                 </div>
               </div>
 
-              <p className="font-bold text-[14px]" style={{ color: '#ff751f' }}>
-                Verschil: ruim € 13.700 per jaar minder bijtelling.
-              </p>
-              <p className="text-[11px] mt-3" style={{ color: '#888' }}>
+              <div className="pt-4" style={{ borderTop: '1px solid #ff751f' }}>
+                <p className="font-bold text-[16px]" style={{ color: '#ff751f' }}>
+                  Verschil: ruim € 13.700 per jaar minder bijtelling.
+                </p>
+              </div>
+              <p className="text-[11px] mt-3" style={{ color: '#999' }}>
                 Dit is een indicatief rekenvoorbeeld. De werkelijke besparing hangt af van de WEV en je belastingschijf.
               </p>
             </div>
