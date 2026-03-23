@@ -146,31 +146,51 @@ const IntakeForm = ({
             </div>
             <div>
               <p className="text-[13px] mb-2" style={{ color: '#1a1a1a' }}>Kenteken bekend? Vul hem alvast in.</p>
-              <div className="flex items-stretch rounded-md overflow-hidden" style={{ height: 36, maxWidth: 220 }}>
-                <div className="flex items-center justify-center" style={{ background: '#003DA5', minWidth: 28, borderRadius: '4px 0 0 4px' }}>
-                  <span className="text-white text-[9px] font-bold leading-none">NL</span>
+              <div 
+                className="flex items-stretch overflow-hidden"
+                style={{ 
+                  height: 42, 
+                  maxWidth: 200, 
+                  borderRadius: 6,
+                  border: '2.5px solid #1a1a1a',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
+                }}
+              >
+                <div 
+                  className="flex flex-col items-center justify-center gap-0.5"
+                  style={{ 
+                    background: '#003DA5', 
+                    minWidth: 26,
+                    padding: '2px 0',
+                  }}
+                >
+                  <div className="flex gap-[1px] flex-wrap justify-center" style={{ maxWidth: 14 }}>
+                    {[...Array(4)].map((_, i) => (
+                      <span key={i} style={{ color: '#FFD700', fontSize: 4, lineHeight: 1 }}>★</span>
+                    ))}
+                  </div>
+                  <span className="text-white font-bold leading-none" style={{ fontSize: 10 }}>NL</span>
                 </div>
                 <input
                   id="kenteken"
                   name="kenteken"
-                  placeholder="XX-123-X"
+                  placeholder="AB-123-C"
                   value={formData.kenteken}
                   onChange={handleChange}
-                  className="outline-none px-2 text-[14px]"
+                  className="outline-none px-3"
                   style={{
                     background: '#FDC100',
                     color: '#1a1a1a',
                     fontWeight: 700,
-                    letterSpacing: '0.15em',
+                    fontSize: 16,
+                    letterSpacing: '0.12em',
                     textTransform: 'uppercase',
-                    border: '2px solid #1a1a1a',
-                    borderLeft: 'none',
-                    borderRadius: '0 4px 4px 0',
                     width: '100%',
+                    fontFamily: "'DM Sans', sans-serif",
                   }}
                 />
               </div>
-              <p className="text-xs text-muted-foreground ml-1 mt-1">(optioneel)</p>
+              <p className="text-xs text-muted-foreground ml-1 mt-1.5">(optioneel)</p>
             </div>
           </>
         ) : (
