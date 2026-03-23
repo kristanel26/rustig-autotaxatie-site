@@ -486,7 +486,7 @@ const CamperInformatieformulier = () => {
                       >
                         <ImagePlus className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
                         <p className="text-sm font-medium text-foreground/70">Klik of sleep foto's hierheen</p>
-                        <p className="text-xs text-muted-foreground mt-1">JPG, PNG, HEIC — max 10 MB per foto, max 20 foto's</p>
+                        <p className="text-xs text-muted-foreground mt-1">JPG, PNG, HEIC. Max 10 MB per foto, max 20 foto's.</p>
                         <input ref={photoInputRef} type="file" multiple accept=".jpg,.jpeg,.png,.heic" className="hidden" onChange={e => addPhotos(e.target.files)} />
                       </div>
                       {photos.length > 0 && (
