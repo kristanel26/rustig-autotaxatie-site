@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import PageMeta from "@/components/PageMeta";
@@ -10,14 +10,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { CheckCircle, FileText, ShieldAlert, Wrench, Upload } from "lucide-react";
+import { CheckCircle, FileText, ShieldAlert, Wrench, Upload, X, ImagePlus } from "lucide-react";
 
 /* ───────── toggle + text field helper ───────── */
 const ToggleWithDetail = ({
-  label, checked, onCheckedChange, detailLabel, detailValue, onDetailChange, detailPlaceholder,
+  label, checked, onCheckedChange, detailLabel, detailValue, onDetailChange, remarkValue, onRemarkChange,
 }: {
   label: string; checked: boolean; onCheckedChange: (v: boolean) => void;
-  detailLabel?: string; detailValue?: string; onDetailChange?: (v: string) => void; detailPlaceholder?: string;
+  detailLabel?: string; detailValue?: string; onDetailChange?: (v: string) => void;
+  remarkValue?: string; onRemarkChange?: (v: string) => void;
 }) => (
   <div className="space-y-2">
     <div className="flex items-center justify-between">
@@ -26,10 +27,18 @@ const ToggleWithDetail = ({
     </div>
     {checked && detailLabel && (
       <Input
-        placeholder={detailPlaceholder || detailLabel}
+        placeholder={detailLabel}
         value={detailValue || ""}
         onChange={e => onDetailChange?.(e.target.value)}
         className="h-10"
+      />
+    )}
+    {checked && (
+      <Input
+        placeholder="Opmerking (optioneel)"
+        value={remarkValue || ""}
+        onChange={e => onRemarkChange?.(e.target.value)}
+        className="h-10 text-sm"
       />
     )}
   </div>
@@ -49,10 +58,28 @@ const CamperInformatieformulier = () => {
   // Simple form state — flat object for all fields
   const [f, setF] = useState<Record<string, string>>({});
   const [toggles, setToggles] = useState<Record<string, boolean>>({});
+  const [photos, setPhotos] = useState<{ file: File; preview: string }[]>([]);
+  const photoInputRef = useRef<HTMLInputElement>(null);
 
   const set = (key: string, val: string) => setF(prev => ({ ...prev, [key]: val }));
   const tog = (key: string) => setToggles(prev => ({ ...prev, [key]: !prev[key] }));
   const isOn = (key: string) => !!toggles[key];
+
+  const addPhotos = (files: FileList | null) => {
+    if (!files) return;
+    const newPhotos = Array.from(files)
+      .filter(f => f.size <= 10 * 1024 * 1024)
+      .slice(0, 20 - photos.length)
+      .map(file => ({ file, preview: URL.createObjectURL(file) }));
+    setPhotos(prev => [...prev, ...newPhotos].slice(0, 20));
+  };
+
+  const removePhoto = (index: number) => {
+    setPhotos(prev => {
+      URL.revokeObjectURL(prev[index].preview);
+      return prev.filter((_, i) => i !== index);
+    });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -195,6 +222,8 @@ const CamperInformatieformulier = () => {
                         detailLabel={item.detail}
                         detailValue={f[item.key + "_detail"] || ""}
                         onDetailChange={v => set(item.key + "_detail", v)}
+                        remarkValue={f[item.key + "_remark"] || ""}
+                        onRemarkChange={v => set(item.key + "_remark", v)}
                       />
                     ))}
                   </AccordionContent>
@@ -229,6 +258,8 @@ const CamperInformatieformulier = () => {
                         detailLabel={item.detail}
                         detailValue={f[item.key + "_detail"] || ""}
                         onDetailChange={v => set(item.key + "_detail", v)}
+                        remarkValue={f[item.key + "_remark"] || ""}
+                        onRemarkChange={v => set(item.key + "_remark", v)}
                       />
                     ))}
                   </AccordionContent>
@@ -271,6 +302,8 @@ const CamperInformatieformulier = () => {
                         detailLabel={item.detail}
                         detailValue={f[item.key + "_detail"] || ""}
                         onDetailChange={v => set(item.key + "_detail", v)}
+                        remarkValue={f[item.key + "_remark"] || ""}
+                        onRemarkChange={v => set(item.key + "_remark", v)}
                       />
                     ))}
                   </AccordionContent>
@@ -301,6 +334,8 @@ const CamperInformatieformulier = () => {
                         detailLabel={item.detail}
                         detailValue={f[item.key + "_detail"] || ""}
                         onDetailChange={v => set(item.key + "_detail", v)}
+                        remarkValue={f[item.key + "_remark"] || ""}
+                        onRemarkChange={v => set(item.key + "_remark", v)}
                       />
                     ))}
                   </AccordionContent>
@@ -309,11 +344,53 @@ const CamperInformatieformulier = () => {
                 {/* Sectie 7 */}
                 <AccordionItem value="aanvullend" className="border rounded-lg px-5">
                   <AccordionTrigger className="text-base font-semibold" style={{ color: '#1d3c71' }}>7. Aanvullende informatie</AccordionTrigger>
-                  <AccordionContent className="space-y-5 pt-2 pb-4">
+                   <AccordionContent className="space-y-5 pt-2 pb-4">
                     <div className="space-y-1.5">
                       <Label>Overige bijzonderheden, aanpassingen of opmerkingen</Label>
                       <Textarea rows={5} className="resize-none" value={f.opmerkingen||""} onChange={e=>set("opmerkingen",e.target.value)} />
                     </div>
+
+                    {/* Photo upload */}
+                    <div className="space-y-2">
+                      <Label>Foto's van de camper (optioneel)</Label>
+                      <div
+                        className="border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors hover:border-primary/50 hover:bg-muted/30"
+                        onClick={() => photoInputRef.current?.click()}
+                        onDragOver={e => { e.preventDefault(); e.currentTarget.classList.add("border-primary"); }}
+                        onDragLeave={e => e.currentTarget.classList.remove("border-primary")}
+                        onDrop={e => { e.preventDefault(); e.currentTarget.classList.remove("border-primary"); addPhotos(e.dataTransfer.files); }}
+                      >
+                        <ImagePlus className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
+                        <p className="text-sm font-medium text-foreground/70">Klik of sleep foto's hierheen</p>
+                        <p className="text-xs text-muted-foreground mt-1">JPG, PNG, HEIC — max 10 MB per foto, max 20 foto's</p>
+                        <input
+                          ref={photoInputRef}
+                          type="file"
+                          multiple
+                          accept=".jpg,.jpeg,.png,.heic"
+                          className="hidden"
+                          onChange={e => addPhotos(e.target.files)}
+                        />
+                      </div>
+                      {photos.length > 0 && (
+                        <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 mt-3">
+                          {photos.map((p, i) => (
+                            <div key={i} className="relative group aspect-square rounded-lg overflow-hidden border">
+                              <img src={p.preview} alt="" className="w-full h-full object-cover" />
+                              <button
+                                type="button"
+                                onClick={() => removePhoto(i)}
+                                className="absolute top-1 right-1 w-5 h-5 rounded-full bg-black/60 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                              >
+                                <X className="w-3 h-3" />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      <p className="text-xs text-muted-foreground">Upload foto's van de binnen- en buitenzijde, aanpassingen en bijzonderheden.</p>
+                    </div>
+
                     <div className="space-y-1.5">
                       <Label>Upload facturen, bonnen of documentatie (PDF, JPG, PNG — max 10 MB per bestand)</Label>
                       <Input type="file" multiple accept=".pdf,.jpg,.jpeg,.png" className="h-auto py-2" />
