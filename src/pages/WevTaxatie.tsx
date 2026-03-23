@@ -15,14 +15,13 @@ import {
   TrendingUp, Gauge, Wrench, FileCheck, Info, Award, Users,
 } from "lucide-react";
 import ContactSidebar from "@/components/ContactSidebar";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import serviceWev from "@/assets/hero-wev-taxatie.png";
 
 /* ── Shared tiny component ────────────────────────────── */
 const OrangeCheck = ({ text }: { text: string }) => (
   <li className="flex items-start gap-3">
-    <div className="w-[22px] h-[22px] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: 'rgba(255,117,31,0.12)' }}>
-      <CheckCircle className="w-[14px] h-[14px]" style={{ color: '#ff751f' }} />
+    <div className="w-[20px] h-[20px] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: 'rgba(255,117,31,0.12)' }}>
+      <CheckCircle className="w-[13px] h-[13px]" style={{ color: '#ff751f' }} />
     </div>
     <span className="text-[15px]" style={{ color: '#4a5568' }}>{text}</span>
   </li>
@@ -149,12 +148,13 @@ const WevTaxatie = () => {
             ].map((item, i) => (
               <div
                 key={i}
-                className="bg-white rounded-[12px] p-6 transition-all duration-200 hover:-translate-y-[2px] hover:shadow-lg"
+                className="bg-white rounded-[10px] p-6 transition-all duration-200 hover:-translate-y-[2px] hover:shadow-lg"
                 style={{
                   boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
-                  borderTop: '3px solid #ff751f',
-                  borderRadius: '3px 3px 12px 12px',
+                  borderLeft: '3px solid transparent',
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.borderLeftColor = '#ff751f')}
+                onMouseLeave={(e) => (e.currentTarget.style.borderLeftColor = 'transparent')}
               >
                 <div className="w-[48px] h-[48px] rounded-full flex items-center justify-center mb-3" style={{ background: '#EBF2FB' }}>
                   <item.icon className="w-[22px] h-[22px]" style={{ color: '#1d3c71' }} />
@@ -200,7 +200,7 @@ const WevTaxatie = () => {
                 <div className="space-y-1 text-[13px]" style={{ color: '#4a5568' }}>
                   <p>Cataloguswaarde: € 75.000</p>
                   <p>Bijtelling: 22% over € 75.000</p>
-                  <p className="font-bold" style={{ color: '#1d3c71' }}>Bijtelling per jaar: € 16.500</p>
+                  <p className="font-bold" style={{ color: '#c0392b' }}>Bijtelling per jaar: € 16.500</p>
                 </div>
               </div>
 
@@ -210,14 +210,16 @@ const WevTaxatie = () => {
                 <div className="space-y-1 text-[13px]" style={{ color: '#4a5568' }}>
                   <p>WEV (getaxeerde dagwaarde): € 8.000</p>
                   <p>Bijtelling: 35% over € 8.000</p>
-                  <p className="font-bold" style={{ color: '#1d3c71' }}>Bijtelling per jaar: € 2.800</p>
+                  <p className="font-bold" style={{ color: '#1d7a3a' }}>Bijtelling per jaar: € 2.800</p>
                 </div>
               </div>
 
-              <p className="font-bold text-[14px]" style={{ color: '#ff751f' }}>
-                Verschil: ruim € 13.700 per jaar minder bijtelling.
-              </p>
-              <p className="text-[11px] mt-3" style={{ color: '#888' }}>
+              <div className="pt-4" style={{ borderTop: '1px solid #ff751f' }}>
+                <p className="font-bold text-[16px]" style={{ color: '#ff751f' }}>
+                  Verschil: ruim € 13.700 per jaar minder bijtelling.
+                </p>
+              </div>
+              <p className="text-[11px] mt-3" style={{ color: '#999' }}>
                 Dit is een indicatief rekenvoorbeeld. De werkelijke besparing hangt af van de WEV en je belastingschijf.
               </p>
             </div>
@@ -240,7 +242,7 @@ const WevTaxatie = () => {
               <div className="w-[48px] h-[48px] rounded-full flex items-center justify-center mb-4" style={{ background: '#EBF2FB' }}>
                 <Scale className="w-[22px] h-[22px]" style={{ color: '#1d3c71' }} />
               </div>
-              <h3 className="font-bold text-[16px] mb-3" style={{ color: '#1d3c71' }}>Erfenis — eerlijke boedelverdeling</h3>
+              <h3 className="font-bold text-[16px] mb-3" style={{ color: '#1d3c71' }}>Erfenis: eerlijke boedelverdeling</h3>
               <p className="text-[14px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
                 Zijn er voertuigen betrokken bij een nalatenschap? Een WEV-taxatie geeft een heldere, objectieve waardebepaling op het moment van overlijden. Zo weet iedereen zeker dat de verdeling eerlijk verloopt en ontstaan er geen discussies achteraf tussen erfgenamen.
               </p>
@@ -256,9 +258,9 @@ const WevTaxatie = () => {
               <div className="w-[48px] h-[48px] rounded-full flex items-center justify-center mb-4" style={{ background: '#EBF2FB' }}>
                 <Users className="w-[22px] h-[22px]" style={{ color: '#1d3c71' }} />
               </div>
-              <h3 className="font-bold text-[16px] mb-3" style={{ color: '#1d3c71' }}>Scheiding — objectieve waarde bij boedelverdeling</h3>
+              <h3 className="font-bold text-[16px] mb-3" style={{ color: '#1d3c71' }}>Scheiding: objectieve waarde bij boedelverdeling</h3>
               <p className="text-[14px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
-                Gaan jullie uit elkaar en zijn er voertuigen onderdeel van de boedel? Een onafhankelijke WEV-taxatie zorgt voor een transparante en juridisch verdedigbare waardebepaling. Gaan jullie uit elkaar en zijn er voertuigen onderdeel van de boedel? Een onafhankelijke WEV-taxatie zorgt voor een transparante en juridisch verdedigbare waardebepaling. Geen discussie over wat de auto waard is. Een erkend taxateur stelt dit objectief vast.
+                Gaan jullie uit elkaar en zijn er voertuigen onderdeel van de boedel? Een onafhankelijke WEV-taxatie zorgt voor een transparante en juridisch verdedigbare waardebepaling. Geen discussie over wat de auto waard is. Een erkend taxateur stelt dit objectief vast.
               </p>
               <ul className="space-y-2">
                 <OrangeCheck text="Onafhankelijk en objectief vastgestelde waarde" />
@@ -286,8 +288,8 @@ const WevTaxatie = () => {
                   "Zo blijft de taxatie fiscaal verdedigbaar bij controle",
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
-                    <div className="w-[22px] h-[22px] rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,117,31,0.12)' }}>
-                      <CheckCircle className="w-[14px] h-[14px]" style={{ color: '#ff751f' }} />
+                    <div className="w-[20px] h-[20px] rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,117,31,0.12)' }}>
+                      <CheckCircle className="w-[13px] h-[13px]" style={{ color: '#ff751f' }} />
                     </div>
                     <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1a1a1a', lineHeight: 1.5 }}>{item}</span>
                   </div>
@@ -306,8 +308,8 @@ const WevTaxatie = () => {
                   "Eventuele schaderapporten of eerdere taxaties (indien aanwezig)",
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
-                    <div className="w-[22px] h-[22px] rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,117,31,0.12)' }}>
-                      <CheckCircle className="w-[14px] h-[14px]" style={{ color: '#ff751f' }} />
+                    <div className="w-[20px] h-[20px] rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,117,31,0.12)' }}>
+                      <CheckCircle className="w-[13px] h-[13px]" style={{ color: '#ff751f' }} />
                     </div>
                     <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1a1a1a', lineHeight: 1.5 }}>{item}</span>
                   </div>
@@ -374,61 +376,6 @@ const WevTaxatie = () => {
             WEV-taxatie aanvragen
             <ArrowDown className="w-4 h-4 ml-2" />
           </Button>
-        </div>
-      </section>
-
-      {/* ── FAQ sectie ──────────────────────────────────────── */}
-      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
-        <div className="max-w-[800px] mx-auto">
-          <div className="text-center mb-8">
-            <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>VEELGESTELDE VRAGEN</p>
-            <h2 className="heading-display text-2xl md:text-3xl font-bold" style={{ color: '#1d3c71' }}>Alles over de WEV-taxatie</h2>
-          </div>
-          <Accordion type="single" collapsible className="space-y-3">
-            {[
-              {
-                q: "Wat is een WEV-taxatie precies?",
-                a: "Een WEV-taxatie bepaalt de Waarde in het Economisch Verkeer van een voertuig. Dit is de prijs die het voertuig zou opbrengen bij verkoop op de vrije markt, op de dag van taxatie. De Belastingdienst vereist deze waardebepaling bij fiscale overdrachten en bijtellingsvraagstukken."
-              },
-              {
-                q: "Wanneer heb ik een WEV-taxatie nodig?",
-                a: "Een WEV-taxatie is nodig bij het overbrengen van een auto van zaak naar privé of omgekeerd, bij het berekenen van de bijtelling voor een youngtimer (15 jaar of ouder), bij erfenis of scheiding waarbij voertuigen onderdeel zijn van de boedelverdeling, en bij DGA-overdrachten tussen BV en privé."
-              },
-              {
-                q: "Hoe wordt de WEV bepaald?",
-                a: "De WEV wordt bepaald op basis van een fysieke inspectie van het voertuig, actuele marktgegevens en koerslijsten, de staat en het onderhoud op de dag van taxatie, en vergelijking met vergelijkbare voertuigen op de markt. Alle bevindingen worden samengevat in een transparant en controleerbaar rapport."
-              },
-              {
-                q: "Wat kost een WEV-taxatie?",
-                a: "De kosten van een WEV-taxatie zijn afhankelijk van het type voertuig en de situatie. Neem contact met ons op voor een vrijblijvende offerte. De kosten zijn voor ondernemers fiscaal aftrekbaar als zakelijke kosten."
-              },
-              {
-                q: "Hoe lang duurt een WEV-taxatie?",
-                a: "De fysieke inspectie duurt gemiddeld 30 tot 60 minuten, afhankelijk van het voertuig. Na de inspectie ontvang je het volledige taxatierapport binnen enkele werkdagen digitaal."
-              },
-              {
-                q: "Zijn de kosten van een WEV-taxatie fiscaal aftrekbaar?",
-                a: "Ja. Voor ondernemers zijn de kosten van een WEV-taxatie zakelijke kosten en daarmee fiscaal aftrekbaar. Je vraagt de taxatie aan om te voldoen aan de eisen van de Belastingdienst bij een zakelijke overdracht of de bijtellingberekening van een youngtimer."
-              },
-              {
-                q: "Hoe lang is een WEV-taxatierapport geldig?",
-                a: "Een WEV-taxatierapport is doorgaans 6 tot 12 maanden geldig, afhankelijk van de situatie waarvoor het wordt gebruikt. Voor de youngtimerregeling kan het voordelig zijn om jaarlijks opnieuw te laten taxeren: de WEV-waarde daalt elk jaar door gebruik en kilometers, waardoor ook de bijtelling elk jaar verder omlaag kan."
-              },
-              {
-                q: "Kan ik de WEV-waarde van mijn auto zelf bepalen?",
-                a: "Nee. De WEV moet worden vastgesteld door een erkend en onafhankelijk taxateur. Een autobedrijf kan een schatting maken, maar de Belastingdienst beschouwt autobedrijven niet als onafhankelijke partij voor fiscale waardebepalingen. Alleen een gecertificeerde taxateur, aangesloten bij bijvoorbeeld Federatie TMV of VRT Register, kan een rapport opstellen dat door de Belastingdienst wordt geaccepteerd."
-              },
-            ].map((item, i) => (
-              <AccordionItem key={i} value={`faq-${i}`} className="bg-white rounded-[10px] border-0 px-5" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
-                <AccordionTrigger className="text-[15px] font-semibold py-4 hover:no-underline" style={{ color: '#1d3c71' }}>
-                  {item.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-[14px] leading-relaxed pb-4" style={{ color: '#4a5568' }}>
-                  {item.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
         </div>
       </section>
 
