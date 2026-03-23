@@ -7,12 +7,13 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Info, Phone } from "lucide-react";
 import heroCamperStappenplan from "@/assets/hero-camper-stappenplan.jpg";
 import stepAanvraag from "@/assets/step-camper-aanvraag.jpg";
+import stepFormulier from "@/assets/step-camper-formulier.jpg";
 import stepInspectie from "@/assets/step-camper-inspectie.jpg";
 import stepWaarde from "@/assets/step-camper-waarde.jpg";
 import stepRapport from "@/assets/step-camper-rapport.jpg";
 import stepVerzekering from "@/assets/step-camper-verzekering.jpg";
 
-const steps: { number: number; title: string; image: string; content: React.ReactNode }[] = [
+const steps: { number: number; title: string; image: string; content: React.ReactNode; cta?: { label: string; href: string } }[] = [
   {
     number: 1,
     image: stepAanvraag,
@@ -23,6 +24,15 @@ const steps: { number: number; title: string; image: string; content: React.Reac
   },
   {
     number: 2,
+    image: stepFormulier,
+    title: "Online informatieformulier invullen",
+    content: (
+      <p>Jij kent jouw camper van binnen en buiten. Om een zo volledig en compleet mogelijk taxatierapport te maken, vragen wij je vooraf een online informatieformulier in te vullen. Hierin geef je informatie over de technische staat, aanpassingen, accessoires, beveiliging en eventuele verbouwingen. Heb je facturen van aangebrachte accessoires of uitgevoerde reparaties? Upload deze dan via het formulier. Lukt dit niet? Geen probleem, de taxateur bespreekt dit tijdens de inspectie met je door.</p>
+    ),
+    cta: { label: "Vul het informatieformulier in", href: "/camper-informatieformulier" },
+  },
+  {
+    number: 3,
     image: stepInspectie,
     title: "Inspectie op locatie",
     content: (
@@ -30,7 +40,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     ),
   },
   {
-    number: 3,
+    number: 4,
     image: stepWaarde,
     title: "Waarde vaststellen",
     content: (
@@ -38,7 +48,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     ),
   },
   {
-    number: 4,
+    number: 5,
     image: stepRapport,
     title: "Rapport opstellen",
     content: (
@@ -46,7 +56,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     ),
   },
   {
-    number: 5,
+    number: 6,
     image: stepVerzekering,
     title: "Verzekering regelen",
     content: (
@@ -54,7 +64,6 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     ),
   },
 ];
-
 const CamperTaxatieStappenplan = () => {
   return (
     <>
@@ -133,6 +142,19 @@ const CamperTaxatieStappenplan = () => {
                   <div className="text-foreground/80 leading-relaxed">
                     {step.content}
                   </div>
+                  {step.cta && (
+                    <Link to={step.cta.href} className="inline-block mt-4">
+                      <button
+                        className="flex items-center gap-2 rounded-lg border-2 px-5 py-2.5 text-sm font-semibold transition-colors"
+                        style={{ borderColor: '#ff751f', color: '#ff751f' }}
+                        onMouseEnter={e => { e.currentTarget.style.background = '#ff751f'; e.currentTarget.style.color = '#fff'; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#ff751f'; }}
+                      >
+                        {step.cta.label}
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+                    </Link>
+                  )}
                 </div>
               </div>
               {/* Image */}

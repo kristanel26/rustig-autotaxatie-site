@@ -28,6 +28,7 @@ import CamperTaxatieStappenplan from "./pages/CamperTaxatieStappenplan";
 import VerzekeringstaxatieStappenplan from "./pages/VerzekeringstaxatieStappenplan";
 import Nieuws from "./pages/Nieuws";
 import OverOns from "./pages/OverOns";
+import CamperInformatieformulier from "./pages/CamperInformatieformulier";
 
 // Internal pages
 import Login from "./pages/internal/Login";
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
   { path: "/blog", element: <Blog /> },
   { path: "/stappenplan-bpm-aangifte", element: <StappenplanBpmAangifte /> },
   { path: "/camper-taxatie-stappenplan", element: <CamperTaxatieStappenplan /> },
+  { path: "/camper-informatieformulier", element: <CamperInformatieformulier /> },
   { path: "/verzekering-stappenplan", element: <VerzekeringstaxatieStappenplan /> },
   { path: "/nieuws", element: <Nieuws /> },
   { path: "/over-ons", element: <OverOns /> },
