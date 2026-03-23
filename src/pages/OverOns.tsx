@@ -169,7 +169,7 @@ const OverOns = () => {
             </h2>
 
             <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 400, color: '#698db3', lineHeight: 1.6 }} className="mb-4">
-              Eigenaar — Notarieel Beëdigd TMV Register-Taxateur — Register-Taxateur VRT
+              Eigenaar, Notarieel Beëdigd TMV Register-Taxateur, Register-Taxateur VRT
             </p>
 
             {/* Certification badges */}
