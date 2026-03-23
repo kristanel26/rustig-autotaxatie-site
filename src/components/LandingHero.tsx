@@ -22,6 +22,7 @@ const LandingHero = ({
   ctaText,
   onCtaClick,
   heroImage,
+  heroImagePosition,
   children,
   showPhoneButton = true,
   compact = false,
