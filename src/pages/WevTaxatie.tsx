@@ -290,6 +290,8 @@ const WevTaxatie = () => {
         </div>
       </section>
 
+      <StatsBar />
+
       {/* Formulier */}
       <section className="py-14 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
         <div className="container-wide">
