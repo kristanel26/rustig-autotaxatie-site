@@ -24,10 +24,13 @@ const IntakeForm = ({
   serviceType, 
   formTitle,
   formSubtext,
+  toelichtingLabel,
   toelichtingPlaceholder,
   submitButtonText,
+  footerText,
   showVoertuigType = false,
   hideKenteken = false,
+  styledKenteken = false,
   compact = false,
   onSuccess 
 }: IntakeFormProps) => {
