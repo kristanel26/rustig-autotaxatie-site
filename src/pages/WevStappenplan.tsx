@@ -83,9 +83,9 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     title: "Je ontvangt het digitale rapport",
     content: (
       <div>
-        <p className="mb-4">Je ontvangt het volledige, ondertekende taxatierapport digitaal binnen 3 werkdagen na de inspectie. Het rapport is direct bruikbaar voor je administratie of aangifte bij de Belastingdienst. Stuur het door naar je accountant of gebruik het als onderbouwing bij de overdracht.</p>
+        <p className="mb-4">Je ontvangt het volledige, ondertekende taxatierapport digitaal binnen enkele werkdagen na de inspectie. Het rapport is direct bruikbaar voor je administratie of aangifte bij de Belastingdienst. Stuur het door naar je accountant of gebruik het als onderbouwing bij de overdracht.</p>
         <ul className="space-y-2">
-          <CheckItem text="Rapport digitaal binnen 3 werkdagen" />
+          <CheckItem text="Rapport digitaal binnen enkele werkdagen" />
           <CheckItem text="Volledig ondertekend door erkend taxateur" />
           <CheckItem text="Direct bruikbaar voor administratie en aangifte" />
         </ul>
