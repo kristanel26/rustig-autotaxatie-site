@@ -12,7 +12,7 @@ import stepAanvraag from "@/assets/step-wev-contact.png";
 import stepAdvies from "@/assets/step-advies.png";
 import stepInspectie from "@/assets/step-wev-inspectie.png";
 import stepRapport from "@/assets/step-rapport.png";
-import stepWaarde from "@/assets/step-camper-waarde.jpg";
+import stepWaarde from "@/assets/step-wev-waarde.png";
 
 const CheckItem = ({ text }: { text: string }) => (
   <li className="flex items-start gap-3">
