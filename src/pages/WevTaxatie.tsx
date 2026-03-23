@@ -272,55 +272,6 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* ── Belangrijk om te weten + Wat hebben wij nodig ─────── */}
-      <section className="py-14 md:py-16 px-6 md:px-8 bg-background">
-        <div className="container-wide">
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <div className="w-[40px] h-[3px] mb-3" style={{ background: '#ff751f' }} />
-              <h2 className="heading-display text-[22px] font-bold mb-5" style={{ color: '#1d3c71' }}>Belangrijk om te weten</h2>
-              <div className="space-y-[10px]">
-                {[
-                  "De staat van het voertuig op de dag van taxatie is bepalend",
-                  "Werkzaamheden moeten vóór de taxatiedatum zijn uitgevoerd. Niet achteraf.",
-                  "De cataloguswaarde inclusief btw en bpm vormt altijd de basis",
-                  "Accessoires aangebracht vóór kentekentoekenning tellen mee in de waarde",
-                  "Zo blijft de taxatie fiscaal verdedigbaar bij controle",
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
-                    <div className="w-[20px] h-[20px] rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,117,31,0.12)' }}>
-                      <CheckCircle className="w-[13px] h-[13px]" style={{ color: '#ff751f' }} />
-                    </div>
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1a1a1a', lineHeight: 1.5 }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <div className="w-[40px] h-[3px] mb-3" style={{ background: '#ff751f' }} />
-              <h2 className="heading-display text-[22px] font-bold mb-5" style={{ color: '#1d3c71' }}>Wat hebben wij nodig?</h2>
-              <div className="space-y-[10px]">
-                {[
-                  "Naam en contactgegevens",
-                  "Voertuiggegevens: kenteken, merk, type, bouwjaar en kilometerstand",
-                  "Fiscale context: bijv. zakelijk naar privé of privé naar zakelijk",
-                  "Relevante documentatie: onderhoudsboekje, facturen van accessoires",
-                  "Eventuele schaderapporten of eerdere taxaties (indien aanwezig)",
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
-                    <div className="w-[20px] h-[20px] rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,117,31,0.12)' }}>
-                      <CheckCircle className="w-[13px] h-[13px]" style={{ color: '#ff751f' }} />
-                    </div>
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1a1a1a', lineHeight: 1.5 }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Werkwijze 5 stappen ──────────────────────────────── */}
       <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
           <div className="text-center mb-8">
