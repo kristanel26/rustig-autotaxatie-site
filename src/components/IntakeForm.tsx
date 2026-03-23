@@ -129,6 +129,48 @@ const IntakeForm = ({
               className={inputHeight}
             />
           </div>
+        ) : styledKenteken ? (
+          <>
+            <div className="space-y-2">
+              <Label htmlFor="email">E-mailadres</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="je@emailadres.nl"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className={inputHeight}
+              />
+            </div>
+            <div>
+              <div className="rounded-lg px-4 py-3 mb-1" style={{ background: '#1d3c71' }}>
+                <p className="text-white text-sm font-semibold mb-2">Kenteken bekend? Vul hem alvast in.</p>
+                <div className="flex items-stretch rounded overflow-hidden" style={{ height: 44 }}>
+                  <div className="flex items-center justify-center px-2" style={{ background: '#003580', minWidth: 32 }}>
+                    <span className="text-white text-[11px] font-bold leading-none">NL</span>
+                  </div>
+                  <input
+                    id="kenteken"
+                    name="kenteken"
+                    placeholder="XX-123-X"
+                    value={formData.kenteken}
+                    onChange={handleChange}
+                    className="flex-1 border-0 outline-none px-3 text-[15px]"
+                    style={{
+                      background: '#f5c518',
+                      color: '#1a1a1a',
+                      fontWeight: 700,
+                      letterSpacing: '0.15em',
+                      textTransform: 'uppercase',
+                    }}
+                  />
+                </div>
+              </div>
+              <p className="text-xs text-muted-foreground ml-1">(optioneel)</p>
+            </div>
+          </>
         ) : (
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
