@@ -381,21 +381,25 @@ const WevTaxatie = () => {
 
       <StatsBar />
 
-      {/* ── SECTIE D — Erkend rapport brede balk ─────────────── */}
-      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#EBF2FB' }}>
-        <div className="max-w-[900px] mx-auto">
-          <div className="grid sm:grid-cols-3 gap-8">
+      {/* ── SECTIE D — Erkend rapport kaartjes ────────────────── */}
+      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
+        <div className="container-wide">
+          <div className="text-center mb-10">
+            <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>ONAFHANKELIJKHEID</p>
+            <h2 className="heading-display text-2xl md:text-3xl font-bold" style={{ color: '#1d3c71' }}>Onafhankelijk en fiscaal verdedigbaar</h2>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-6">
             {[
               { icon: Award, title: "Federatie TMV, VRT Register en FEHAC", desc: "Aangesloten bij alle erkende brancheorganisaties voor voertuigtaxateurs in Nederland." },
               { icon: ShieldCheck, title: "Geen vooraf afgesproken uitkomsten", desc: "Wij taxeren volledig onafhankelijk. Geen wensbedragen, geen afgesproken waardes. Dat is essentieel bij fiscale waarderingen." },
               { icon: FileCheck, title: "Transparant en controleerbaar", desc: "Elk rapport is stevig onderbouwd met marktdata, koerslijsten en inspectieresultaten. Verdedigbaar bij bezwaar en beroep." },
             ].map((col, i) => (
-              <div key={i} className="text-center">
-                <div className="w-[48px] h-[48px] rounded-full flex items-center justify-center mx-auto mb-3" style={{ background: 'rgba(29,60,113,0.12)' }}>
+              <div key={i} className="bg-white text-center" style={{ borderRadius: 10, boxShadow: '0 2px 10px rgba(0,0,0,0.07)', padding: 28 }}>
+                <div className="w-[48px] h-[48px] rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: '#EBF2FB' }}>
                   <col.icon className="w-[22px] h-[22px]" style={{ color: '#1d3c71' }} />
                 </div>
-                <h3 className="font-bold text-[15px] mb-2" style={{ color: '#1d3c71' }}>{col.title}</h3>
-                <p className="text-[13px] leading-relaxed" style={{ color: '#4a5568' }}>{col.desc}</p>
+                <h3 className="font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", fontSize: 17, color: '#1d3c71', marginTop: 16 }}>{col.title}</h3>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#555', lineHeight: 1.6 }}>{col.desc}</p>
               </div>
             ))}
           </div>
@@ -421,7 +425,7 @@ const WevTaxatie = () => {
                 styledKenteken
                 toelichtingLabel="Jouw vraag of situatie"
                 toelichtingPlaceholder="Bijv: ik wil mijn zakelijke auto naar privé overbrengen, of: ik heb een youngtimer en wil weten wat de bijtelling wordt."
-                submitButtonText="Verstuur — wij nemen contact op"
+                submitButtonText="Verstuur. Wij nemen contact op."
                 footerText="We nemen binnen één werkdag contact met je op. Geen verplichtingen, gewoon een goed gesprek."
               />
             </div>
