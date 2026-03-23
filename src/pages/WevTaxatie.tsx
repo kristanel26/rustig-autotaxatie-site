@@ -273,6 +273,18 @@ const WevTaxatie = () => {
               ))}
             </div>
           </div>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
+            <Button variant="cta" size="lg" onClick={scrollToForm}>
+              WEV-taxatie aanvragen
+              <ArrowDown className="w-4 h-4 ml-2" />
+            </Button>
+            <Link to="/wev-stappenplan">
+              <Button variant="outline" size="lg" className="border-2" style={{ borderColor: '#1d3c71', color: '#1d3c71' }}>
+                Meer weten? Bekijk het stappenplan
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 

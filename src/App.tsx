@@ -64,6 +64,7 @@ const router = createBrowserRouter([
   { path: "/bpm-motor-taxatie", element: <BpmMotorTaxatie /> },
   { path: "/bpm-camper-taxatie", element: <BpmCamperTaxatie /> },
   { path: "/wev-taxatie", element: <WevTaxatie /> },
+  { path: "/wev-stappenplan", element: <WevStappenplan /> },
   { path: "/verzekeringstaxatie-info", element: <VerzekeringstaxatieInfo /> },
   { path: "/contact", element: <Contact /> },
   { path: "/faq", element: <FAQ /> },
