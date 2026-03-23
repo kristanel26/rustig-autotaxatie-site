@@ -82,7 +82,7 @@ const WevTaxatie = () => {
           <div className="grid md:grid-cols-[1fr_0.7fr] gap-8 items-start">
             <div>
               <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>WAT IS WEV</p>
-              <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>Waarde in het Economisch Verkeer — wat betekent dat?</h2>
+              <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>Waarde in het Economisch Verkeer: wat betekent dat?</h2>
               <p className="text-[15px] leading-relaxed mb-5" style={{ color: '#4a5568' }}>
                 WEV staat voor Waarde in het Economisch Verkeer. Dit is de prijs waarvoor een voertuig normaliter door de meestbiedende koper zou worden overgenomen bij vrijwillige verkoop tussen onafhankelijke partijen.
               </p>
