@@ -146,9 +146,9 @@ const IntakeForm = ({
             </div>
             <div>
               <p className="text-[13px] mb-2" style={{ color: '#1a1a1a' }}>Kenteken bekend? Vul hem alvast in.</p>
-              <div className="flex items-stretch rounded overflow-hidden" style={{ height: 44 }}>
-                <div className="flex items-center justify-center" style={{ background: '#003DA5', minWidth: 32, borderRadius: '4px 0 0 4px' }}>
-                  <span className="text-white text-[11px] font-bold leading-none">NL</span>
+              <div className="flex items-stretch rounded-md overflow-hidden" style={{ height: 36, maxWidth: 220 }}>
+                <div className="flex items-center justify-center" style={{ background: '#003DA5', minWidth: 28, borderRadius: '4px 0 0 4px' }}>
+                  <span className="text-white text-[9px] font-bold leading-none">NL</span>
                 </div>
                 <input
                   id="kenteken"
@@ -156,16 +156,17 @@ const IntakeForm = ({
                   placeholder="XX-123-X"
                   value={formData.kenteken}
                   onChange={handleChange}
-                  className="flex-1 outline-none px-3 text-[16px]"
+                  className="outline-none px-2 text-[14px]"
                   style={{
                     background: '#FDC100',
                     color: '#1a1a1a',
                     fontWeight: 700,
-                    letterSpacing: '0.2em',
+                    letterSpacing: '0.15em',
                     textTransform: 'uppercase',
                     border: '2px solid #1a1a1a',
                     borderLeft: 'none',
                     borderRadius: '0 4px 4px 0',
+                    width: '100%',
                   }}
                 />
               </div>
