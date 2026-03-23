@@ -256,7 +256,7 @@ const WevTaxatie = () => {
               <div className="w-[48px] h-[48px] rounded-full flex items-center justify-center mb-4" style={{ background: '#EBF2FB' }}>
                 <Users className="w-[22px] h-[22px]" style={{ color: '#1d3c71' }} />
               </div>
-              <h3 className="font-bold text-[16px] mb-3" style={{ color: '#1d3c71' }}>Scheiding — objectieve waarde bij boedelverdeling</h3>
+              <h3 className="font-bold text-[16px] mb-3" style={{ color: '#1d3c71' }}>Scheiding: objectieve waarde bij boedelverdeling</h3>
               <p className="text-[14px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
                 Gaan jullie uit elkaar en zijn er voertuigen onderdeel van de boedel? Een onafhankelijke WEV-taxatie zorgt voor een transparante en juridisch verdedigbare waardebepaling. Gaan jullie uit elkaar en zijn er voertuigen onderdeel van de boedel? Een onafhankelijke WEV-taxatie zorgt voor een transparante en juridisch verdedigbare waardebepaling. Geen discussie over wat de auto waard is. Een erkend taxateur stelt dit objectief vast.
               </p>
