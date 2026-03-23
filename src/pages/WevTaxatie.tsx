@@ -11,7 +11,6 @@ import StatsBar from "@/components/StatsBar";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowDown, CheckCircle, Shield, Building2, RefreshCw, FileText, Search, BarChart3, TrendingUp, Gauge, Wrench, FileCheck, Info } from "lucide-react";
 import ContactSidebar from "@/components/ContactSidebar";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import serviceWev from "@/assets/service-wev.jpg";
 
 const WevTaxatie = () => {
