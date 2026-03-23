@@ -58,6 +58,8 @@ const CamperInformatieformulier = () => {
   // Simple form state — flat object for all fields
   const [f, setF] = useState<Record<string, string>>({});
   const [toggles, setToggles] = useState<Record<string, boolean>>({});
+  const [photos, setPhotos] = useState<{ file: File; preview: string }[]>([]);
+  const photoInputRef = useRef<HTMLInputElement>(null);
 
   const set = (key: string, val: string) => setF(prev => ({ ...prev, [key]: val }));
   const tog = (key: string) => setToggles(prev => ({ ...prev, [key]: !prev[key] }));
