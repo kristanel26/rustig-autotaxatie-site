@@ -18,6 +18,7 @@ import BpmTaxatie from "./pages/BpmTaxatie";
 import BpmMotorTaxatie from "./pages/BpmMotorTaxatie";
 import BpmCamperTaxatie from "./pages/BpmCamperTaxatie";
 import WevTaxatie from "./pages/WevTaxatie";
+import WevStappenplan from "./pages/WevStappenplan";
 import VerzekeringstaxatieInfo from "./pages/VerzekeringstaxatieInfo";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
@@ -63,6 +64,7 @@ const router = createBrowserRouter([
   { path: "/bpm-motor-taxatie", element: <BpmMotorTaxatie /> },
   { path: "/bpm-camper-taxatie", element: <BpmCamperTaxatie /> },
   { path: "/wev-taxatie", element: <WevTaxatie /> },
+  { path: "/wev-stappenplan", element: <WevStappenplan /> },
   { path: "/verzekeringstaxatie-info", element: <VerzekeringstaxatieInfo /> },
   { path: "/contact", element: <Contact /> },
   { path: "/faq", element: <FAQ /> },
