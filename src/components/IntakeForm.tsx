@@ -9,10 +9,13 @@ interface IntakeFormProps {
   serviceType: string;
   formTitle?: string;
   formSubtext?: string;
+  toelichtingLabel?: string;
   toelichtingPlaceholder?: string;
   submitButtonText?: string;
+  footerText?: string;
   showVoertuigType?: boolean;
   hideKenteken?: boolean;
+  styledKenteken?: boolean;
   compact?: boolean;
   onSuccess?: () => void;
 }
