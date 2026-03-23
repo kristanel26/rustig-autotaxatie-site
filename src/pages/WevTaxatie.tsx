@@ -11,7 +11,7 @@ import StatsBar from "@/components/StatsBar";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowDown, CheckCircle, Shield, Building2, RefreshCw, FileText, Search, BarChart3, TrendingUp, Gauge, Wrench, FileCheck, Info } from "lucide-react";
 import ContactSidebar from "@/components/ContactSidebar";
-import serviceWev from "@/assets/service-wev.jpg";
+import serviceWev from "@/assets/hero-wev-taxatie.png";
 
 const WevTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
