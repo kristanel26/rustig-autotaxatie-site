@@ -157,31 +157,25 @@ const IntakeForm = ({
                 }}
               >
                 <div 
-                  className="flex flex-col items-center justify-center gap-0.5"
+                  className="flex flex-col items-center justify-center"
                   style={{ 
                     background: '#003DA5', 
-                    minWidth: 26,
-                    padding: '2px 0',
+                    minWidth: 30,
+                    padding: '3px 0',
+                    gap: 2,
                   }}
                 >
-                  <div 
-                    className="flex items-center justify-center"
-                    style={{ 
-                      width: 14, height: 14, borderRadius: '50%', 
-                      border: '1px solid #FFD700',
-                      position: 'relative',
-                    }}
-                  >
-                    {[...Array(12)].map((_, i) => (
-                      <span 
-                        key={i} 
-                        style={{ 
-                          position: 'absolute', color: '#FFD700', fontSize: 3, lineHeight: 1,
-                          transform: `rotate(${i * 30}deg) translateY(-5px)`,
-                        }}
-                      >★</span>
-                    ))}
-                  </div>
+                  <svg width="16" height="16" viewBox="0 0 16 16" style={{ display: 'block' }}>
+                    <circle cx="8" cy="8" r="6.5" fill="none" stroke="#FFD700" strokeWidth="0.6" />
+                    {[...Array(12)].map((_, i) => {
+                      const angle = (i * 30 - 90) * (Math.PI / 180);
+                      const x = 8 + 5.2 * Math.cos(angle);
+                      const y = 8 + 5.2 * Math.sin(angle);
+                      return (
+                        <text key={i} x={x} y={y} fill="#FFD700" fontSize="3.5" textAnchor="middle" dominantBaseline="central">★</text>
+                      );
+                    })}
+                  </svg>
                   <span className="text-white font-bold leading-none" style={{ fontSize: 10 }}>NL</span>
                 </div>
                 <input
