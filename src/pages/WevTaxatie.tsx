@@ -164,7 +164,7 @@ const WevTaxatie = () => {
               <div className="space-y-[10px]">
                 {[
                   "De staat van het voertuig op de dag van taxatie is bepalend",
-                  "Werkzaamheden moeten vóór de taxatiedatum zijn uitgevoerd — niet achteraf",
+                  "Werkzaamheden moeten vóór de taxatiedatum zijn uitgevoerd. Niet achteraf.",
                   "De cataloguswaarde inclusief btw en bpm vormt altijd de basis",
                   "Accessoires aangebracht vóór kentekentoekenning tellen mee in de waarde",
                   "Zo blijft de taxatie fiscaal verdedigbaar bij controle",

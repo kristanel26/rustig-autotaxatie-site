@@ -486,7 +486,7 @@ const CamperInformatieformulier = () => {
                       >
                         <ImagePlus className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
                         <p className="text-sm font-medium text-foreground/70">Klik of sleep foto's hierheen</p>
-                        <p className="text-xs text-muted-foreground mt-1">JPG, PNG, HEIC — max 10 MB per foto, max 20 foto's</p>
+                        <p className="text-xs text-muted-foreground mt-1">JPG, PNG, HEIC. Max 10 MB per foto, max 20 foto's.</p>
                         <input ref={photoInputRef} type="file" multiple accept=".jpg,.jpeg,.png,.heic" className="hidden" onChange={e => addPhotos(e.target.files)} />
                       </div>
                       {photos.length > 0 && (
@@ -505,7 +505,7 @@ const CamperInformatieformulier = () => {
                     </div>
 
                     <div className="space-y-1.5">
-                      <Label>Upload facturen, bonnen of documentatie (PDF, JPG, PNG — max 10 MB per bestand)</Label>
+                      <Label>Upload facturen, bonnen of documentatie (PDF, JPG, PNG, max 10 MB per bestand)</Label>
                       <Input type="file" multiple accept=".pdf,.jpg,.jpeg,.png" className="h-auto py-2" />
                     </div>
                   </AccordionContent>
