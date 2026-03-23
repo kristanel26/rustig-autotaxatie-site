@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import PageMeta from "@/components/PageMeta";
@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { CheckCircle, FileText, ShieldAlert, Wrench, Upload } from "lucide-react";
+import { CheckCircle, FileText, ShieldAlert, Wrench, Upload, X, ImagePlus } from "lucide-react";
 
 /* ───────── toggle + text field helper ───────── */
 const ToggleWithDetail = ({
