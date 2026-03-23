@@ -34,6 +34,7 @@ const WevTaxatie = () => {
         ctaText="WEV-taxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={serviceWev}
+        heroImagePosition="center 20%"
         compact
       />
       <UspBar />
