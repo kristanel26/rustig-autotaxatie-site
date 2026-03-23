@@ -7,8 +7,9 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
+import StatsBar from "@/components/StatsBar";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowDown, CheckCircle, Shield, Building2, RefreshCw, FileText, Search, BarChart3, TrendingUp, Gauge, Wrench, FileCheck } from "lucide-react";
+import { ArrowRight, ArrowDown, CheckCircle, Shield, Building2, RefreshCw, FileText, Search, BarChart3, TrendingUp, Gauge, Wrench, FileCheck, Info } from "lucide-react";
 import ContactSidebar from "@/components/ContactSidebar";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import serviceWev from "@/assets/service-wev.jpg";
@@ -38,12 +39,12 @@ const WevTaxatie = () => {
       />
       <UspBar />
 
-      {/* Wanneer nodig — ongewijzigd */}
-      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+      {/* Wanneer nodig */}
+      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
           <div className="text-center mb-10">
-            <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Wanneer nodig</p>
-            <h2 className="text-2xl md:text-3xl font-semibold mb-3">Wanneer is een WEV-taxatie nodig?</h2>
+            <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>WANNEER NODIG</p>
+            <h2 className="heading-display text-2xl md:text-3xl font-bold mb-3" style={{ color: '#1d3c71' }}>Wanneer is een WEV-taxatie nodig?</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
@@ -54,34 +55,46 @@ const WevTaxatie = () => {
               { icon: Search, label: "Verzoek Belastingdienst", desc: "Wanneer een onderbouwde waarde gevraagd wordt" },
               { icon: Shield, label: "Controle voorkomen", desc: "Een objectieve waarde voorkomt discussie achteraf" },
             ].map((item, i) => (
-              <div key={i} className="card-elevated p-6">
-                <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-3" style={{ background: 'rgba(29,60,113,0.08)' }}>
-                  <item.icon className="w-5 h-5 text-primary" />
+              <div
+                key={i}
+                className="bg-white rounded-[12px] p-6 transition-all duration-200 hover:-translate-y-[2px] hover:shadow-lg"
+                style={{
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
+                  borderLeft: '3px solid transparent',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.borderLeftColor = '#ff751f')}
+                onMouseLeave={(e) => (e.currentTarget.style.borderLeftColor = 'transparent')}
+              >
+                <div className="w-[48px] h-[48px] rounded-full flex items-center justify-center mb-3" style={{ background: '#EBF2FB' }}>
+                  <item.icon className="w-[22px] h-[22px]" style={{ color: '#1d3c71' }} />
                 </div>
-                <h3 className="text-sm font-semibold mb-1">{item.label}</h3>
-                <p className="text-xs leading-relaxed" style={{ color: '#4a5568' }}>{item.desc}</p>
+                <h3 className="font-bold text-[15px] mb-1" style={{ fontFamily: "'Inter', sans-serif", color: '#1d3c71' }}>{item.label}</h3>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#666' }}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* NIEUW — Sectie 1: Wat is WEV? */}
-      <section className="py-12 md:py-16 px-6 md:px-8 bg-background">
+      {/* Wat is WEV? — 60/40 */}
+      <section className="py-14 md:py-16 px-6 md:px-8 bg-background">
         <div className="container-wide">
-          <div className="grid md:grid-cols-[3fr_2fr] gap-10 items-start">
+          <div className="grid md:grid-cols-[1fr_0.7fr] gap-8 items-start">
             <div>
-              <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Wat is WEV</p>
-              <h2 className="font-display text-2xl md:text-3xl font-semibold mb-4 text-primary">Waarde in het Economisch Verkeer — wat betekent dat?</h2>
-              <p className="text-[15px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
+              <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>WAT IS WEV</p>
+              <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>Waarde in het Economisch Verkeer — wat betekent dat?</h2>
+              <p className="text-[15px] leading-relaxed mb-5" style={{ color: '#4a5568' }}>
                 WEV staat voor Waarde in het Economisch Verkeer. Dit is de prijs waarvoor een voertuig normaliter door de meestbiedende koper zou worden overgenomen bij vrijwillige verkoop tussen onafhankelijke partijen.
               </p>
               <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
                 Voor de Belastingdienst vormt de WEV de grondslag voor de verrekening van het privégebruik van een auto. De basis is altijd de oorspronkelijke cataloguswaarde inclusief btw en bpm, inclusief alle accessoires die zijn aangebracht vóór het toekennen van het kenteken aan het voertuig.
               </p>
             </div>
-            <div className="rounded-[10px] p-7" style={{ background: '#EBF2FB' }}>
-              <h3 className="font-semibold text-primary mb-4">Waarvoor gebruikt de Belastingdienst de WEV?</h3>
+            <div className="rounded-[12px] p-8" style={{ background: '#EBF2FB', boxShadow: '0 4px 20px rgba(29,60,113,0.08)' }}>
+              <div className="flex items-center justify-center rounded-full mb-4 mx-auto" style={{ width: 48, height: 48, background: 'rgba(29,60,113,0.12)' }}>
+                <Info className="w-6 h-6" style={{ color: '#1d3c71' }} />
+              </div>
+              <h3 className="font-semibold text-center mb-4" style={{ color: '#1d3c71' }}>Waarvoor gebruikt de Belastingdienst de WEV?</h3>
               <ul className="space-y-3">
                 {[
                   "Grondslag voor verrekening privégebruik auto",
@@ -90,7 +103,9 @@ const WevTaxatie = () => {
                   "Referentie bij controle door de Belastingdienst",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-cta flex-shrink-0 mt-0.5" />
+                    <div className="w-[22px] h-[22px] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: 'rgba(255,117,31,0.12)' }}>
+                      <CheckCircle className="w-[14px] h-[14px]" style={{ color: '#ff751f' }} />
+                    </div>
                     <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
                   </li>
                 ))}
@@ -100,12 +115,12 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* NIEUW — Sectie 2: Hoe bepalen wij de waarde? */}
-      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
+      {/* Hoe bepalen wij de waarde? */}
+      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
           <div className="text-center mb-10">
-            <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Onze werkwijze</p>
-            <h2 className="font-display text-2xl md:text-3xl font-semibold mb-3 text-primary">Hoe bepalen wij de waarde van jouw voertuig?</h2>
+            <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>ONZE WERKWIJZE</p>
+            <h2 className="heading-display text-2xl md:text-3xl font-bold mb-3" style={{ color: '#1d3c71' }}>Hoe bepalen wij de waarde van jouw voertuig?</h2>
             <p className="text-[15px] max-w-[600px] mx-auto" style={{ color: '#4a5568' }}>
               Onze taxateurs combineren marktdata, fysieke inspectie en erkende koerslijsten tot één helder rapport.
             </p>
@@ -119,25 +134,34 @@ const WevTaxatie = () => {
               { icon: FileCheck, title: "Cataloguswaarde als basis", desc: "De oorspronkelijke cataloguswaarde inclusief btw, bpm en aangebrachte accessoires vormt het vertrekpunt van de berekening." },
               { icon: Shield, title: "Onderbouwd en controleerbaar", desc: "Alle bevindingen worden samengevoegd in een transparant rapport dat controleerbaar en verdedigbaar is bij de Belastingdienst." },
             ].map((item, i) => (
-              <div key={i} className="bg-white rounded-[10px] p-6" style={{ boxShadow: '0 2px 10px rgba(0,0,0,0.07)' }}>
-                <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-3" style={{ background: 'rgba(29,60,113,0.08)' }}>
-                  <item.icon className="w-5 h-5 text-primary" />
+              <div
+                key={i}
+                className="bg-white rounded-[12px] p-6 transition-all duration-200 hover:-translate-y-[2px] hover:shadow-lg"
+                style={{
+                  boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
+                  borderTop: '3px solid #ff751f',
+                  borderRadius: '3px 3px 12px 12px',
+                }}
+              >
+                <div className="w-[48px] h-[48px] rounded-full flex items-center justify-center mb-3" style={{ background: '#EBF2FB' }}>
+                  <item.icon className="w-[22px] h-[22px]" style={{ color: '#1d3c71' }} />
                 </div>
-                <h3 className="text-sm font-semibold mb-1 text-primary">{item.title}</h3>
-                <p className="text-xs leading-relaxed" style={{ color: '#4a5568' }}>{item.desc}</p>
+                <h3 className="font-bold text-[15px] mb-1" style={{ fontFamily: "'Inter', sans-serif", color: '#1d3c71' }}>{item.title}</h3>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#666', lineHeight: 1.65 }}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* NIEUW — Sectie 3: Belangrijk om te weten + Wat hebben wij nodig */}
-      <section className="py-12 md:py-16 px-6 md:px-8 bg-background">
+      {/* Belangrijk om te weten + Wat hebben wij nodig */}
+      <section className="py-14 md:py-16 px-6 md:px-8 bg-background">
         <div className="container-wide">
-          <div className="grid md:grid-cols-2 gap-10">
+          <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h3 className="font-display text-xl md:text-2xl font-semibold mb-4 text-primary">Belangrijk om te weten</h3>
-              <ul className="space-y-3">
+              <div className="w-[40px] h-[3px] mb-3" style={{ background: '#ff751f' }} />
+              <h2 className="heading-display text-[22px] font-bold mb-5" style={{ color: '#1d3c71' }}>Belangrijk om te weten</h2>
+              <div className="space-y-[10px]">
                 {[
                   "De staat van het voertuig op de dag van taxatie is bepalend",
                   "Werkzaamheden moeten vóór de taxatiedatum zijn uitgevoerd — niet achteraf",
@@ -145,16 +169,19 @@ const WevTaxatie = () => {
                   "Accessoires aangebracht vóór kentekentoekenning tellen mee in de waarde",
                   "Zo blijft de taxatie fiscaal verdedigbaar bij controle",
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-cta flex-shrink-0 mt-0.5" />
-                    <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
-                  </li>
+                  <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
+                    <div className="w-[22px] h-[22px] rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,117,31,0.12)' }}>
+                      <CheckCircle className="w-[14px] h-[14px]" style={{ color: '#ff751f' }} />
+                    </div>
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1a1a1a', lineHeight: 1.5 }}>{item}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
             <div>
-              <h3 className="font-display text-xl md:text-2xl font-semibold mb-4 text-primary">Wat hebben wij nodig?</h3>
-              <ul className="space-y-3">
+              <div className="w-[40px] h-[3px] mb-3" style={{ background: '#ff751f' }} />
+              <h2 className="heading-display text-[22px] font-bold mb-5" style={{ color: '#1d3c71' }}>Wat hebben wij nodig?</h2>
+              <div className="space-y-[10px]">
                 {[
                   "Naam en contactgegevens",
                   "Voertuiggegevens: kenteken, merk, type, bouwjaar en kilometerstand",
@@ -162,23 +189,25 @@ const WevTaxatie = () => {
                   "Relevante documentatie: onderhoudsboekje, facturen van accessoires",
                   "Eventuele schaderapporten of eerdere taxaties (indien aanwezig)",
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-cta flex-shrink-0 mt-0.5" />
-                    <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
-                  </li>
+                  <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
+                    <div className="w-[22px] h-[22px] rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,117,31,0.12)' }}>
+                      <CheckCircle className="w-[14px] h-[14px]" style={{ color: '#ff751f' }} />
+                    </div>
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1a1a1a', lineHeight: 1.5 }}>{item}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* NIEUW — Sectie 4: FAQ */}
-      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
+      {/* FAQ */}
+      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
           <div className="text-center mb-10">
-            <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Veelgestelde vragen</p>
-            <h2 className="font-display text-2xl md:text-3xl font-semibold text-primary">Veelgestelde vragen over de WEV-taxatie</h2>
+            <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>VEELGESTELDE VRAGEN</p>
+            <h2 className="heading-display text-2xl md:text-3xl font-bold" style={{ color: '#1d3c71' }}>Veelgestelde vragen over de WEV-taxatie</h2>
           </div>
           <div className="max-w-[780px] mx-auto">
             <Accordion type="single" collapsible className="space-y-3">
@@ -189,11 +218,22 @@ const WevTaxatie = () => {
                 { q: "Waar voeren jullie de taxatie uit?", a: "Wij komen op locatie bij jou — thuis, op je bedrijfsadres of bij een garage. Wij zijn werkzaam in het grootste gedeelte van Nederland." },
                 { q: "Is het rapport geldig als tegenbewijs bij de Belastingdienst?", a: "Het rapport is opgesteld door een Notarieel Beëdigd TMV Register-Taxateur en Register-Taxateur VRT en is stevig onderbouwd met marktdata, inspectieresultaten en koerslijsten. Het vormt daarmee een solide en controleerbare basis bij je aangifte of bij een eventueel bezwaar. De uiteindelijke beoordeling ligt altijd bij de Belastingdienst zelf." },
               ].map((faq, i) => (
-                <AccordionItem key={i} value={`faq-${i}`} className="rounded-lg border-0 overflow-hidden" style={{ background: '#e8ecf1' }}>
-                  <AccordionTrigger className="px-5 py-4 text-[15px] font-semibold text-left hover:no-underline" style={{ color: '#1d3c71' }}>
+                <AccordionItem
+                  key={i}
+                  value={`faq-${i}`}
+                  className="bg-white rounded-[8px] overflow-hidden data-[state=open]:shadow-md transition-all duration-200"
+                  style={{ border: '1px solid #e8ecf0' }}
+                >
+                  <AccordionTrigger
+                    className="px-5 py-4 text-[16px] font-semibold text-left hover:no-underline"
+                    style={{ color: '#1a1a1a' }}
+                  >
                     {faq.q}
                   </AccordionTrigger>
-                  <AccordionContent className="px-5 pb-5 text-[15px] leading-relaxed bg-white border-l-4" style={{ borderColor: '#1d3c71', color: '#4a5568' }}>
+                  <AccordionContent
+                    className="px-5 pb-5 text-[15px] leading-[1.7] border-l-4"
+                    style={{ borderColor: '#1d3c71', color: '#555' }}
+                  >
                     {faq.a}
                   </AccordionContent>
                 </AccordionItem>
@@ -203,36 +243,44 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* Werkwijze stappen — ongewijzigd */}
-      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+      {/* Werkwijze 5 stappen */}
+      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
-          <div className="text-center mb-10">
-            <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Werkwijze</p>
-            <h2 className="text-2xl md:text-3xl font-semibold">Onze werkwijze in 5 stappen</h2>
+          <div className="text-center mb-8">
+            <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>WERKWIJZE</p>
+            <h2 className="heading-display text-2xl md:text-3xl font-bold" style={{ color: '#1d3c71' }}>Onze werkwijze in 5 stappen</h2>
           </div>
-          <div className="grid md:grid-cols-5 gap-6">
-            {[
-              { step: 1, title: "Gegevens aanleveren", desc: "Kenteken, type, bouwjaar en fiscale context" },
-              { step: 2, title: "Fysieke inspectie", desc: "De staat op dat moment is bepalend voor de waarde" },
-              { step: 3, title: "WEV vaststellen", desc: "Op basis van inspectie en marktgegevens" },
-              { step: 4, title: "Rapport opstellen", desc: "Helder en controleerbaar taxatierapport" },
-              { step: 5, title: "Oplevering", desc: "Digitaal, klaar voor administratie of Belastingdienst" },
-            ].map((s) => (
-              <div key={s.step} className="text-center">
-                <div className="step-badge mx-auto mb-4">{s.step}</div>
-                <h4 className="font-semibold text-sm mb-1 text-foreground">{s.title}</h4>
-                <p className="text-xs leading-relaxed" style={{ color: '#4a5568' }}>{s.desc}</p>
-              </div>
-            ))}
+          <div className="relative">
+            <div className="hidden md:block absolute top-[26px] left-[10%] right-[10%] h-[2px]" style={{ background: '#698db3' }} />
+            <div className="grid md:grid-cols-5 gap-5 relative">
+              {[
+                { step: 1, title: "Gegevens aanleveren", desc: "Kenteken, type, bouwjaar en fiscale context" },
+                { step: 2, title: "Fysieke inspectie", desc: "De staat op dat moment is bepalend voor de waarde" },
+                { step: 3, title: "WEV vaststellen", desc: "Op basis van inspectie en marktgegevens" },
+                { step: 4, title: "Rapport opstellen", desc: "Helder en controleerbaar taxatierapport" },
+                { step: 5, title: "Oplevering", desc: "Digitaal, klaar voor administratie of Belastingdienst" },
+              ].map((s) => (
+                <div key={s.step} className="text-center relative z-10">
+                  <div
+                    className="w-[52px] h-[52px] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold text-[20px]"
+                    style={{ background: '#1d3c71', boxShadow: '0 0 0 3px #ff751f' }}
+                  >
+                    {s.step}
+                  </div>
+                  <h4 className="font-bold text-[15px] mb-1" style={{ fontFamily: "'Inter', sans-serif", color: '#1a1a1a' }}>{s.title}</h4>
+                  <p className="text-[13px] leading-relaxed" style={{ color: '#666' }}>{s.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA blok — ongewijzigd */}
-      <section className="py-14 md:py-20 px-6 md:px-8" style={{ background: '#1d3c71' }}>
+      {/* CTA blok */}
+      <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
         <div className="container-wide text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">WEV-taxatie nodig?</h2>
-          <p className="text-base mb-8" style={{ color: 'rgba(255,255,255,0.75)' }}>
+          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">WEV-taxatie nodig?</h2>
+          <p className="text-[15px] mb-6 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>
             Vraag vrijblijvend aan. Wij plannen de taxatie op basis van jouw situatie.
           </p>
           <Button variant="cta" size="lg" onClick={scrollToForm}>
@@ -242,31 +290,12 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* Onafhankelijk — ongewijzigd */}
-      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
+      {/* Formulier */}
+      <section className="py-14 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
         <div className="container-wide">
-          <div className="card-elevated p-8 md:p-10 max-w-3xl mx-auto">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}>
-                <Shield className="w-5 h-5 text-primary" />
-              </div>
-              <h2 className="text-xl font-semibold">Onafhankelijk en fiscaal verdedigbaar</h2>
-            </div>
-            <ul className="space-y-2 text-sm" style={{ color: '#4a5568' }}>
-              <li>• Aangesloten bij Federatie TMV, VRT Register en FEHAC</li>
-              <li>• Geen vooraf afgesproken uitkomsten of wensbedragen</li>
-              <li>• Rapportages zijn transparant, controleerbaar en verdedigbaar</li>
-              <li>• Onafhankelijkheid is essentieel bij fiscale waarderingen</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Formulier — ongewijzigd */}
-      <section className="py-12 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
-        <div className="container-wide">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-semibold mb-3">WEV-taxatie aanvragen</h2>
+          <div className="text-center mb-8">
+            <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>AANVRAGEN</p>
+            <h2 className="heading-display text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1d3c71' }}>WEV-taxatie aanvragen</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
               Vul het formulier in en wij plannen de taxatie op basis van de aangeleverde informatie.
             </p>
