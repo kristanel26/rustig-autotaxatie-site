@@ -357,7 +357,57 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* ── Formulier ────────────────────────────────────────── */}
+      {/* ── Belangrijk om te weten + Wat hebben wij nodig ─────── */}
+      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 72, paddingBottom: 72 }}>
+        <div className="container-wide">
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <div className="mb-3" style={{ width: 40, height: 3, background: '#ff751f', borderRadius: 2 }} />
+              <h3 className="font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif', fontSize: 22, color: '#1d3c71' }}>Belangrijk om te weten</h3>
+              <div className="flex flex-col gap-[10px]">
+                {[
+                  "De staat van het voertuig op de dag van taxatie is bepalend",
+                  "Werkzaamheden moeten vóór de taxatiedatum zijn uitgevoerd. Niet achteraf.",
+                  "De cataloguswaarde inclusief btw en bpm vormt altijd de basis",
+                  "Accessoires aangebracht vóór kentekentoekenning tellen mee in de waarde",
+                  "Zo blijft de taxatie fiscaal verdedigbaar bij controle",
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-4 bg-white"
+                    style={{ borderRadius: 10, padding: '16px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}
+                  >
+                    <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
+                    <span className="text-[15px] leading-normal" style={{ fontFamily: 'Inter, sans-serif', color: '#1a1a1a' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="mb-3" style={{ width: 40, height: 3, background: '#ff751f', borderRadius: 2 }} />
+              <h3 className="font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif', fontSize: 22, color: '#1d3c71' }}>Wat hebben wij nodig?</h3>
+              <div className="flex flex-col gap-[10px]">
+                {[
+                  "Naam en contactgegevens",
+                  "Voertuiggegevens: kenteken, merk, type, bouwjaar en kilometerstand",
+                  "Fiscale context: bijv. zakelijk naar privé of privé naar zakelijk",
+                  "Relevante documentatie: onderhoudsboekje, facturen van accessoires",
+                  "Eventuele schaderapporten of eerdere taxaties (indien aanwezig)",
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-4 bg-white"
+                    style={{ borderRadius: 10, padding: '16px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}
+                  >
+                    <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
+                    <span className="text-[15px] leading-normal" style={{ fontFamily: 'Inter, sans-serif', color: '#1a1a1a' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 72, paddingBottom: 72 }} ref={formRef}>
         <div className="container-wide">
           <div className="text-center" style={{ marginBottom: 48 }}>
