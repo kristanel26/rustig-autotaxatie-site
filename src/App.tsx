@@ -28,6 +28,7 @@ import CamperTaxatieStappenplan from "./pages/CamperTaxatieStappenplan";
 import VerzekeringstaxatieStappenplan from "./pages/VerzekeringstaxatieStappenplan";
 import Nieuws from "./pages/Nieuws";
 import OverOns from "./pages/OverOns";
+import CamperInformatieformulier from "./pages/CamperInformatieformulier";
 
 // Internal pages
 import Login from "./pages/internal/Login";
