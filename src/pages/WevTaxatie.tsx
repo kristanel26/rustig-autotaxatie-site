@@ -15,6 +15,7 @@ import {
   TrendingUp, Gauge, Wrench, FileCheck, Info, Award, Users,
 } from "lucide-react";
 import ContactSidebar from "@/components/ContactSidebar";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import serviceWev from "@/assets/hero-wev-taxatie.png";
 
 /* ── Shared tiny component ────────────────────────────── */
