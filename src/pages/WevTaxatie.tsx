@@ -240,7 +240,7 @@ const WevTaxatie = () => {
               <div className="w-[48px] h-[48px] rounded-full flex items-center justify-center mb-4" style={{ background: '#EBF2FB' }}>
                 <Scale className="w-[22px] h-[22px]" style={{ color: '#1d3c71' }} />
               </div>
-              <h3 className="font-bold text-[16px] mb-3" style={{ color: '#1d3c71' }}>Erfenis — eerlijke boedelverdeling</h3>
+              <h3 className="font-bold text-[16px] mb-3" style={{ color: '#1d3c71' }}>Erfenis: eerlijke boedelverdeling</h3>
               <p className="text-[14px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
                 Zijn er voertuigen betrokken bij een nalatenschap? Een WEV-taxatie geeft een heldere, objectieve waardebepaling op het moment van overlijden. Zo weet iedereen zeker dat de verdeling eerlijk verloopt en ontstaan er geen discussies achteraf tussen erfgenamen.
               </p>
