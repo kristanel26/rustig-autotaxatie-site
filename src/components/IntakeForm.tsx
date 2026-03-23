@@ -215,7 +215,7 @@ const IntakeForm = ({
         )}
 
         <div className="space-y-2">
-          <Label htmlFor="bericht">Toelichting</Label>
+          <Label htmlFor="bericht">{toelichtingLabel || "Toelichting"}</Label>
           <Textarea
             id="bericht"
             name="bericht"
