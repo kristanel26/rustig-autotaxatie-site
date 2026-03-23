@@ -18,6 +18,7 @@ import BpmTaxatie from "./pages/BpmTaxatie";
 import BpmMotorTaxatie from "./pages/BpmMotorTaxatie";
 import BpmCamperTaxatie from "./pages/BpmCamperTaxatie";
 import WevTaxatie from "./pages/WevTaxatie";
+import WevStappenplan from "./pages/WevStappenplan";
 import VerzekeringstaxatieInfo from "./pages/VerzekeringstaxatieInfo";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
