@@ -9,9 +9,33 @@ import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import StatsBar from "@/components/StatsBar";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowDown, CheckCircle, Shield, Building2, RefreshCw, FileText, Search, BarChart3, TrendingUp, Gauge, Wrench, FileCheck, Info } from "lucide-react";
+import {
+  ArrowRight, ArrowDown, CheckCircle, Shield, Building2, Car, Scale,
+  ShieldCheck, ArrowLeftRight, ArrowRightLeft, FileText, Search, BarChart3,
+  TrendingUp, Gauge, Wrench, FileCheck, Info, Award, Users,
+} from "lucide-react";
 import ContactSidebar from "@/components/ContactSidebar";
 import serviceWev from "@/assets/hero-wev-taxatie.png";
+
+/* ── Shared tiny component ────────────────────────────── */
+const OrangeCheck = ({ text }: { text: string }) => (
+  <li className="flex items-start gap-3">
+    <div className="w-[22px] h-[22px] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: 'rgba(255,117,31,0.12)' }}>
+      <CheckCircle className="w-[14px] h-[14px]" style={{ color: '#ff751f' }} />
+    </div>
+    <span className="text-[15px]" style={{ color: '#4a5568' }}>{text}</span>
+  </li>
+);
+
+/* ── Data ─────────────────────────────────────────────── */
+const wanneerNodigCards = [
+  { icon: ArrowLeftRight, label: "Zakelijk naar privé", desc: "Wil je als ondernemer je zakelijke auto naar privé overbrengen? Een WEV-taxatierapport bepaalt de juiste overdrachtsprijs en voorkomt discussies met de Belastingdienst." },
+  { icon: ArrowRightLeft, label: "Privé naar zakelijk", desc: "Zet je een privéauto op de zaak? Dan is de WEV de grondslag voor de verrekening van het privégebruik. Een taxatierapport zorgt voor een correcte en verdedigbare administratie." },
+  { icon: Car, label: "Youngtimer zakelijk rijden", desc: "Rijd je zakelijk in een auto van 15 jaar of ouder? Dan betaal je bijtelling over de WEV in plaats van de cataloguswaarde. Een lagere WEV betekent direct minder bijtelling. Een taxatierapport onderbouwt deze waarde tegenover de Belastingdienst." },
+  { icon: Building2, label: "BV en DGA", desc: "Draag je als directeur-grootaandeelhouder een voertuig over van je BV naar privé of omgekeerd? De Belastingdienst vereist een objectieve waardebepaling door een erkend taxateur voor een correcte en transparante boeking." },
+  { icon: Scale, label: "Erfenis en scheiding", desc: "Zijn er voertuigen betrokken bij een erfenis of echtscheiding? Een WEV-taxatie geeft een heldere, objectieve waardebepaling die zorgt voor een eerlijke boedelverdeling zonder discussies tussen de betrokken partijen." },
+  { icon: ShieldCheck, label: "Controle voorkomen", desc: "Een objectief taxatierapport van een erkend taxateur is je beste bescherming bij een boekencontrole. De Belastingdienst accepteert geen zelf bepaalde of geschatte waardes." },
+];
 
 const WevTaxatie = () => {
   const formRef = useRef<HTMLDivElement>(null);
@@ -39,7 +63,7 @@ const WevTaxatie = () => {
       />
       <UspBar />
 
-      {/* Wanneer nodig */}
+      {/* ── SECTIE A — Wanneer nodig (6 verbeterde kaartjes) ────── */}
       <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
           <div className="text-center mb-10">
@@ -47,17 +71,10 @@ const WevTaxatie = () => {
             <h2 className="heading-display text-2xl md:text-3xl font-bold mb-3" style={{ color: '#1d3c71' }}>Wanneer is een WEV-taxatie nodig?</h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { icon: Building2, label: "Zakelijk naar privé", desc: "Voertuig overbrengen naar privébezit" },
-              { icon: RefreshCw, label: "Privé naar zakelijk", desc: "Inbreng van een privévoertuig in de onderneming" },
-              { icon: FileText, label: "Wijziging ondernemingsvorm", desc: "Bij beëindiging of herstructurering" },
-              { icon: BarChart3, label: "Administratiecorrecties", desc: "Bij fiscale herstructurering" },
-              { icon: Search, label: "Verzoek Belastingdienst", desc: "Wanneer een onderbouwde waarde gevraagd wordt" },
-              { icon: Shield, label: "Controle voorkomen", desc: "Een objectieve waarde voorkomt discussie achteraf" },
-            ].map((item, i) => (
+            {wanneerNodigCards.map((item, i) => (
               <div
                 key={i}
-                className="bg-white rounded-[12px] p-6 transition-all duration-200 hover:-translate-y-[2px] hover:shadow-lg"
+                className="bg-white rounded-[10px] p-6 transition-all duration-200 hover:-translate-y-[2px] hover:shadow-lg"
                 style={{
                   boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
                   borderLeft: '3px solid transparent',
@@ -68,15 +85,15 @@ const WevTaxatie = () => {
                 <div className="w-[48px] h-[48px] rounded-full flex items-center justify-center mb-3" style={{ background: '#EBF2FB' }}>
                   <item.icon className="w-[22px] h-[22px]" style={{ color: '#1d3c71' }} />
                 </div>
-                <h3 className="font-bold text-[15px] mb-1" style={{ fontFamily: "'Inter', sans-serif", color: '#1d3c71' }}>{item.label}</h3>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#666' }}>{item.desc}</p>
+                <h3 className="font-bold text-[15px] mb-2" style={{ fontFamily: "'Inter', sans-serif", color: '#1d3c71' }}>{item.label}</h3>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#666', lineHeight: 1.65 }}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Wat is WEV? — 60/40 */}
+      {/* ── Wat is WEV? — 60/40 ──────────────────────────────── */}
       <section className="py-14 md:py-16 px-6 md:px-8 bg-background">
         <div className="container-wide">
           <div className="grid md:grid-cols-[1fr_0.7fr] gap-8 items-start">
@@ -102,12 +119,7 @@ const WevTaxatie = () => {
                   "Uitgangspunt bij inbreng privéauto in de onderneming",
                   "Referentie bij controle door de Belastingdienst",
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <div className="w-[22px] h-[22px] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: 'rgba(255,117,31,0.12)' }}>
-                      <CheckCircle className="w-[14px] h-[14px]" style={{ color: '#ff751f' }} />
-                    </div>
-                    <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
-                  </li>
+                  <OrangeCheck key={i} text={item} />
                 ))}
               </ul>
             </div>
@@ -115,7 +127,7 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* Hoe bepalen wij de waarde? */}
+      {/* ── Hoe bepalen wij de waarde? ───────────────────────── */}
       <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
           <div className="text-center mb-10">
@@ -154,7 +166,110 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* Belangrijk om te weten + Wat hebben wij nodig */}
+      {/* ── SECTIE B — Youngtimerregeling (60/40, wit) ────────── */}
+      <section className="py-14 md:py-16 px-6 md:px-8 bg-background">
+        <div className="container-wide">
+          <div className="grid md:grid-cols-[1fr_0.7fr] gap-8 items-start">
+            <div>
+              <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>YOUNGTIMERREGELING</p>
+              <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>
+                Zakelijk rijden in een youngtimer? De WEV bepaalt je bijtelling.
+              </h2>
+              <p className="text-[15px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
+                Een youngtimer is een auto van 15 jaar of ouder. Voor zakelijke rijders geldt een bijzondere bijtellingsregeling: in plaats van de gebruikelijke bijtelling over de cataloguswaarde, betaal je slechts 35% bijtelling over de WEV — de actuele dagwaarde van het voertuig.
+              </p>
+              <p className="text-[15px] leading-relaxed mb-5" style={{ color: '#4a5568' }}>
+                Hoe lager de WEV, hoe lager je maandelijkse bijtelling. Een correct en erkend WEV-taxatierapport is verplicht om deze regeling te mogen toepassen. Zonder rapport kan de Belastingdienst de bijtelling op basis van de cataloguswaarde berekenen, wat aanzienlijk duurder uitpakt.
+              </p>
+              <ul className="space-y-3">
+                <OrangeCheck text="Bijtelling berekend over de actuele dagwaarde, niet de catalogusprijs" />
+                <OrangeCheck text="Rapport verplicht om de youngtimerregeling te mogen toepassen" />
+                <OrangeCheck text="Jaarlijks opnieuw laten taxeren kan de bijtelling verder verlagen" />
+              </ul>
+            </div>
+
+            {/* Rekenvoorbeeld kaartje */}
+            <div className="rounded-[10px] p-6" style={{ background: '#EBF2FB' }}>
+              <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>REKENVOORBEELD</p>
+              <h3 className="font-bold text-[16px] mb-5" style={{ color: '#1d3c71' }}>Youngtimer vs. nieuwe auto</h3>
+
+              {/* Nieuwe auto */}
+              <div className="mb-4 pb-4" style={{ borderBottom: '1px solid rgba(29,60,113,0.12)' }}>
+                <p className="font-semibold text-[14px] mb-2" style={{ color: '#1d3c71' }}>Nieuwe auto</p>
+                <div className="space-y-1 text-[13px]" style={{ color: '#4a5568' }}>
+                  <p>Cataloguswaarde: € 75.000</p>
+                  <p>Bijtelling: 22% over € 75.000</p>
+                  <p className="font-bold" style={{ color: '#1d3c71' }}>Bijtelling per jaar: € 16.500</p>
+                </div>
+              </div>
+
+              {/* Youngtimer */}
+              <div className="mb-5">
+                <p className="font-semibold text-[14px] mb-2" style={{ color: '#1d3c71' }}>Youngtimer (zelfde auto, 16 jaar oud)</p>
+                <div className="space-y-1 text-[13px]" style={{ color: '#4a5568' }}>
+                  <p>WEV (getaxeerde dagwaarde): € 8.000</p>
+                  <p>Bijtelling: 35% over € 8.000</p>
+                  <p className="font-bold" style={{ color: '#1d3c71' }}>Bijtelling per jaar: € 2.800</p>
+                </div>
+              </div>
+
+              <p className="font-bold text-[14px]" style={{ color: '#ff751f' }}>
+                Verschil: ruim € 13.700 per jaar minder bijtelling.
+              </p>
+              <p className="text-[11px] mt-3" style={{ color: '#888' }}>
+                Dit is een indicatief rekenvoorbeeld. De werkelijke besparing hangt af van de WEV en je belastingschijf.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTIE C — Erfenis en scheiding (50/50, lichtgrijs) ── */}
+      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
+        <div className="container-wide">
+          <div className="text-center mb-10">
+            <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>ANDERE SITUATIES</p>
+            <h2 className="heading-display text-2xl md:text-3xl font-bold" style={{ color: '#1d3c71' }}>
+              Een WEV-taxatie is ook nuttig bij erfenis of scheiding
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Erfenis */}
+            <div className="bg-white rounded-[10px] p-7" style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}>
+              <div className="w-[48px] h-[48px] rounded-full flex items-center justify-center mb-4" style={{ background: '#EBF2FB' }}>
+                <Scale className="w-[22px] h-[22px]" style={{ color: '#1d3c71' }} />
+              </div>
+              <h3 className="font-bold text-[16px] mb-3" style={{ color: '#1d3c71' }}>Erfenis — eerlijke boedelverdeling</h3>
+              <p className="text-[14px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
+                Zijn er voertuigen betrokken bij een nalatenschap? Een WEV-taxatie geeft een heldere, objectieve waardebepaling op het moment van overlijden. Zo weet iedereen zeker dat de verdeling eerlijk verloopt en ontstaan er geen discussies achteraf tussen erfgenamen.
+              </p>
+              <ul className="space-y-2">
+                <OrangeCheck text="Objectieve waardebepaling op peildatum" />
+                <OrangeCheck text="Erkend rapport als basis voor de aangifte erfbelasting" />
+                <OrangeCheck text="Voorkomt conflicten tussen erfgenamen" />
+              </ul>
+            </div>
+
+            {/* Scheiding */}
+            <div className="bg-white rounded-[10px] p-7" style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.08)' }}>
+              <div className="w-[48px] h-[48px] rounded-full flex items-center justify-center mb-4" style={{ background: '#EBF2FB' }}>
+                <Users className="w-[22px] h-[22px]" style={{ color: '#1d3c71' }} />
+              </div>
+              <h3 className="font-bold text-[16px] mb-3" style={{ color: '#1d3c71' }}>Scheiding — objectieve waarde bij boedelverdeling</h3>
+              <p className="text-[14px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
+                Gaan jullie uit elkaar en zijn er voertuigen onderdeel van de boedel? Een onafhankelijke WEV-taxatie zorgt voor een transparante en juridisch verdedigbare waardebepaling. Geen discussie over wat de auto waard is — een erkend taxateur stelt dit objectief vast.
+              </p>
+              <ul className="space-y-2">
+                <OrangeCheck text="Onafhankelijk en objectief vastgestelde waarde" />
+                <OrangeCheck text="Erkend rapport bruikbaar bij notaris en rechtbank" />
+                <OrangeCheck text="Voorkomt langdurige discussies over autowaarde" />
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Belangrijk om te weten + Wat hebben wij nodig ─────── */}
       <section className="py-14 md:py-16 px-6 md:px-8 bg-background">
         <div className="container-wide">
           <div className="grid md:grid-cols-2 gap-8">
@@ -202,7 +317,7 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* Werkwijze 5 stappen */}
+      {/* ── Werkwijze 5 stappen ──────────────────────────────── */}
       <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
           <div className="text-center mb-8">
@@ -247,7 +362,7 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* CTA blok */}
+      {/* ── CTA blok ─────────────────────────────────────────── */}
       <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
         <div className="container-wide text-center">
           <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">WEV-taxatie nodig?</h2>
@@ -263,7 +378,28 @@ const WevTaxatie = () => {
 
       <StatsBar />
 
-      {/* Formulier */}
+      {/* ── SECTIE D — Erkend rapport brede balk ─────────────── */}
+      <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#EBF2FB' }}>
+        <div className="max-w-[900px] mx-auto">
+          <div className="grid sm:grid-cols-3 gap-8">
+            {[
+              { icon: Award, title: "Federatie TMV, VRT Register en FEHAC", desc: "Aangesloten bij alle erkende brancheorganisaties voor voertuigtaxateurs in Nederland." },
+              { icon: ShieldCheck, title: "Geen vooraf afgesproken uitkomsten", desc: "Wij taxeren volledig onafhankelijk. Geen wensbedragen, geen afgesproken waardes. Dat is essentieel bij fiscale waarderingen." },
+              { icon: FileCheck, title: "Transparant en controleerbaar", desc: "Elk rapport is stevig onderbouwd met marktdata, koerslijsten en inspectieresultaten. Verdedigbaar bij bezwaar en beroep." },
+            ].map((col, i) => (
+              <div key={i} className="text-center">
+                <div className="w-[48px] h-[48px] rounded-full flex items-center justify-center mx-auto mb-3" style={{ background: 'rgba(29,60,113,0.12)' }}>
+                  <col.icon className="w-[22px] h-[22px]" style={{ color: '#1d3c71' }} />
+                </div>
+                <h3 className="font-bold text-[15px] mb-2" style={{ color: '#1d3c71' }}>{col.title}</h3>
+                <p className="text-[13px] leading-relaxed" style={{ color: '#4a5568' }}>{col.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Formulier ────────────────────────────────────────── */}
       <section className="py-14 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
         <div className="container-wide">
           <div className="text-center mb-8">
