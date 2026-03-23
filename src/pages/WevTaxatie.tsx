@@ -288,8 +288,8 @@ const WevTaxatie = () => {
                   "Zo blijft de taxatie fiscaal verdedigbaar bij controle",
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
-                    <div className="w-[22px] h-[22px] rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,117,31,0.12)' }}>
-                      <CheckCircle className="w-[14px] h-[14px]" style={{ color: '#ff751f' }} />
+                    <div className="w-[20px] h-[20px] rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,117,31,0.12)' }}>
+                      <CheckCircle className="w-[13px] h-[13px]" style={{ color: '#ff751f' }} />
                     </div>
                     <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1a1a1a', lineHeight: 1.5 }}>{item}</span>
                   </div>
@@ -308,8 +308,8 @@ const WevTaxatie = () => {
                   "Eventuele schaderapporten of eerdere taxaties (indien aanwezig)",
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
-                    <div className="w-[22px] h-[22px] rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,117,31,0.12)' }}>
-                      <CheckCircle className="w-[14px] h-[14px]" style={{ color: '#ff751f' }} />
+                    <div className="w-[20px] h-[20px] rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(255,117,31,0.12)' }}>
+                      <CheckCircle className="w-[13px] h-[13px]" style={{ color: '#ff751f' }} />
                     </div>
                     <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1a1a1a', lineHeight: 1.5 }}>{item}</span>
                   </div>
