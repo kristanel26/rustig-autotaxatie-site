@@ -240,6 +240,8 @@ const CamperInformatieformulier = () => {
                         detailLabel={item.detail}
                         detailValue={f[item.key + "_detail"] || ""}
                         onDetailChange={v => set(item.key + "_detail", v)}
+                        remarkValue={f[item.key + "_remark"] || ""}
+                        onRemarkChange={v => set(item.key + "_remark", v)}
                       />
                     ))}
                   </AccordionContent>
