@@ -202,47 +202,6 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
-        <div className="container-wide">
-          <div className="text-center mb-10">
-            <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>VEELGESTELDE VRAGEN</p>
-            <h2 className="heading-display text-2xl md:text-3xl font-bold" style={{ color: '#1d3c71' }}>Veelgestelde vragen over de WEV-taxatie</h2>
-          </div>
-          <div className="max-w-[780px] mx-auto">
-            <Accordion type="single" collapsible className="space-y-3">
-              {[
-                { q: "Wat is het verschil tussen WEV en dagwaarde?", a: "De WEV (Waarde Economisch Verkeer) is de prijs bij vrijwillige verkoop tussen onafhankelijke partijen onder normale omstandigheden. De dagwaarde is een bredere term die ook in andere contexten wordt gebruikt. Voor fiscale doeleinden gebruikt de Belastingdienst de WEV als grondslag, niet de dagwaarde." },
-                { q: "Wanneer heb ik een WEV-taxatie nodig?", a: "Je hebt een WEV-taxatie nodig als je een zakelijke auto naar privé wil overbrengen, een privéauto op de zaak wil zetten, of als een voertuig wordt overgedragen tussen een BV en haar aandeelhouder of directeur-grootaandeelhouder. Een objectief rapport voorkomt discussies met de Belastingdienst." },
-                { q: "Hoe lang duurt de taxatie en wanneer ontvang ik het rapport?", a: "De fysieke inspectie duurt gemiddeld 30 tot 45 minuten. Je ontvangt het volledige, ondertekende taxatierapport digitaal binnen 3 werkdagen na de inspectie. Het rapport is direct bruikbaar voor je administratie of aangifte." },
-                { q: "Waar voeren jullie de taxatie uit?", a: "Wij komen op locatie bij jou. Thuis, op je bedrijfsadres of bij een garage. Wij zijn werkzaam in het grootste gedeelte van Nederland." },
-                { q: "Is het rapport geldig als tegenbewijs bij de Belastingdienst?", a: "Het rapport is opgesteld door een Notarieel Beëdigd TMV Register-Taxateur en Register-Taxateur VRT en is stevig onderbouwd met marktdata, inspectieresultaten en koerslijsten. Het vormt daarmee een solide en controleerbare basis bij je aangifte of bij een eventueel bezwaar. De uiteindelijke beoordeling ligt altijd bij de Belastingdienst zelf." },
-              ].map((faq, i) => (
-                <AccordionItem
-                  key={i}
-                  value={`faq-${i}`}
-                  className="bg-white rounded-[8px] overflow-hidden data-[state=open]:shadow-md transition-all duration-200"
-                  style={{ border: '1px solid #e8ecf0' }}
-                >
-                  <AccordionTrigger
-                    className="px-5 py-4 text-[16px] font-semibold text-left hover:no-underline"
-                    style={{ color: '#1a1a1a' }}
-                  >
-                    {faq.q}
-                  </AccordionTrigger>
-                  <AccordionContent
-                    className="px-5 pb-5 text-[15px] leading-[1.7] border-l-4"
-                    style={{ borderColor: '#1d3c71', color: '#555' }}
-                  >
-                    {faq.a}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </div>
-        </div>
-      </section>
-
       {/* Werkwijze 5 stappen */}
       <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
