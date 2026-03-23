@@ -176,7 +176,7 @@ const WevTaxatie = () => {
                 Zakelijk rijden in een youngtimer? De WEV bepaalt je bijtelling.
               </h2>
               <p className="text-[15px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
-                Een youngtimer is een auto van 15 jaar of ouder. Voor zakelijke rijders geldt een bijzondere bijtellingsregeling: in plaats van de gebruikelijke bijtelling over de cataloguswaarde, betaal je slechts 35% bijtelling over de WEV — de actuele dagwaarde van het voertuig.
+                Een youngtimer is een auto van 15 jaar of ouder. Voor zakelijke rijders geldt een bijzondere bijtellingsregeling: in plaats van de gebruikelijke bijtelling over de cataloguswaarde, betaal je slechts 35% bijtelling over de WEV, de actuele dagwaarde van het voertuig.
               </p>
               <p className="text-[15px] leading-relaxed mb-5" style={{ color: '#4a5568' }}>
                 Hoe lager de WEV, hoe lager je maandelijkse bijtelling. Een correct en erkend WEV-taxatierapport is verplicht om deze regeling te mogen toepassen. Zonder rapport kan de Belastingdienst de bijtelling op basis van de cataloguswaarde berekenen, wat aanzienlijk duurder uitpakt.
@@ -257,7 +257,7 @@ const WevTaxatie = () => {
               </div>
               <h3 className="font-bold text-[16px] mb-3" style={{ color: '#1d3c71' }}>Scheiding — objectieve waarde bij boedelverdeling</h3>
               <p className="text-[14px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
-                Gaan jullie uit elkaar en zijn er voertuigen onderdeel van de boedel? Een onafhankelijke WEV-taxatie zorgt voor een transparante en juridisch verdedigbare waardebepaling. Geen discussie over wat de auto waard is — een erkend taxateur stelt dit objectief vast.
+                Gaan jullie uit elkaar en zijn er voertuigen onderdeel van de boedel? Een onafhankelijke WEV-taxatie zorgt voor een transparante en juridisch verdedigbare waardebepaling. Gaan jullie uit elkaar en zijn er voertuigen onderdeel van de boedel? Een onafhankelijke WEV-taxatie zorgt voor een transparante en juridisch verdedigbare waardebepaling. Geen discussie over wat de auto waard is. Een erkend taxateur stelt dit objectief vast.
               </p>
               <ul className="space-y-2">
                 <OrangeCheck text="Onafhankelijk en objectief vastgestelde waarde" />
