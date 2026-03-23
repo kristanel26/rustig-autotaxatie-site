@@ -10,6 +10,7 @@ interface LandingHeroProps {
   onCtaClick: () => void;
   children?: ReactNode;
   heroImage?: string;
+  heroImagePosition?: string;
   showPhoneButton?: boolean;
   compact?: boolean;
 }
