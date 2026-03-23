@@ -21,8 +21,8 @@ import serviceWev from "@/assets/hero-wev-taxatie.png";
 /* ── Shared tiny component ────────────────────────────── */
 const OrangeCheck = ({ text }: { text: string }) => (
   <li className="flex items-start gap-3">
-    <div className="w-[22px] h-[22px] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: 'rgba(255,117,31,0.12)' }}>
-      <CheckCircle className="w-[14px] h-[14px]" style={{ color: '#ff751f' }} />
+    <div className="w-[20px] h-[20px] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: 'rgba(255,117,31,0.12)' }}>
+      <CheckCircle className="w-[13px] h-[13px]" style={{ color: '#ff751f' }} />
     </div>
     <span className="text-[15px]" style={{ color: '#4a5568' }}>{text}</span>
   </li>
