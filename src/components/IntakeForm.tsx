@@ -238,7 +238,7 @@ const IntakeForm = ({
         </Button>
 
         <p className="text-sm text-muted-foreground text-center">
-          We gaan zorgvuldig om met je gegevens en gebruiken deze alleen voor het verwerken van je aanvraag.
+          {footerText || "We gaan zorgvuldig om met je gegevens en gebruiken deze alleen voor het verwerken van je aanvraag."}
         </p>
       </div>
     </form>
