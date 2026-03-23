@@ -168,7 +168,7 @@ const WevStappenplan = () => {
       </section>
 
       {/* Steps label */}
-      <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-16 pb-4" style={{ background: '#f7f8fa' }}>
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-16 pb-4 text-center" style={{ background: '#f7f8fa' }}>
         <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>WERKWIJZE</p>
         <h2 className="text-[28px] md:text-[32px] font-bold" style={{ color: '#1d3c71', fontFamily: "'Playfair Display', serif" }}>
           In 5 stappen naar jouw WEV-taxatierapport
