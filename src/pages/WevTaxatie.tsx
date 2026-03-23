@@ -209,7 +209,7 @@ const WevTaxatie = () => {
             <h2 className="heading-display text-2xl md:text-3xl font-bold" style={{ color: '#1d3c71' }}>Onze werkwijze in 5 stappen</h2>
           </div>
           <div className="relative">
-            <div className="hidden md:block absolute top-[26px] left-[10%] right-[10%] h-[2px]" style={{ background: '#698db3' }} />
+            <div className="hidden md:block absolute top-[22px] left-[10%] right-[10%] h-[2px]" style={{ background: '#ff751f' }} />
             <div className="grid md:grid-cols-5 gap-5 relative">
               {[
                 { step: 1, title: "Gegevens aanleveren", desc: "Kenteken, type, bouwjaar en fiscale context" },
@@ -220,7 +220,7 @@ const WevTaxatie = () => {
               ].map((s) => (
                 <div key={s.step} className="text-center relative z-10">
                   <div
-                    className="w-[52px] h-[52px] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold text-[20px]"
+                    className="w-[44px] h-[44px] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold text-[18px]"
                     style={{ background: '#1d3c71' }}
                   >
                     {s.step}
