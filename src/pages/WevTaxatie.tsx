@@ -149,12 +149,13 @@ const WevTaxatie = () => {
             ].map((item, i) => (
               <div
                 key={i}
-                className="bg-white rounded-[12px] p-6 transition-all duration-200 hover:-translate-y-[2px] hover:shadow-lg"
+                className="bg-white rounded-[10px] p-6 transition-all duration-200 hover:-translate-y-[2px] hover:shadow-lg"
                 style={{
                   boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
-                  borderTop: '3px solid #ff751f',
-                  borderRadius: '3px 3px 12px 12px',
+                  borderLeft: '3px solid transparent',
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.borderLeftColor = '#ff751f')}
+                onMouseLeave={(e) => (e.currentTarget.style.borderLeftColor = 'transparent')}
               >
                 <div className="w-[48px] h-[48px] rounded-full flex items-center justify-center mb-3" style={{ background: '#EBF2FB' }}>
                   <item.icon className="w-[22px] h-[22px]" style={{ color: '#1d3c71' }} />
