@@ -343,7 +343,7 @@ const OverOns = () => {
             Ik wil alleen tevreden klanten. Dat bereik ik door eerlijk te zijn, afspraken na te komen en echt te luisteren.
           </p>
           <p className="font-bold text-white text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
-            Erik Elderson — Eigenaar Automobiel Taxaties
+            Erik Elderson, Eigenaar Automobiel Taxaties
           </p>
         </div>
       </section>

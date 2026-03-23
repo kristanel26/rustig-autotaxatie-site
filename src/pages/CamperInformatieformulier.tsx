@@ -505,7 +505,7 @@ const CamperInformatieformulier = () => {
                     </div>
 
                     <div className="space-y-1.5">
-                      <Label>Upload facturen, bonnen of documentatie (PDF, JPG, PNG — max 10 MB per bestand)</Label>
+                      <Label>Upload facturen, bonnen of documentatie (PDF, JPG, PNG, max 10 MB per bestand)</Label>
                       <Input type="file" multiple accept=".pdf,.jpg,.jpeg,.png" className="h-auto py-2" />
                     </div>
                   </AccordionContent>
