@@ -8,8 +8,9 @@ import SiteFooter from "@/components/SiteFooter";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ArrowDown, CheckCircle, Shield, Building2, RefreshCw, FileText, Search, BarChart3 } from "lucide-react";
+import { ArrowRight, ArrowDown, CheckCircle, Shield, Building2, RefreshCw, FileText, Search, BarChart3, TrendingUp, Gauge, Wrench, FileCheck } from "lucide-react";
 import ContactSidebar from "@/components/ContactSidebar";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import serviceWev from "@/assets/service-wev.jpg";
 
 const WevTaxatie = () => {
@@ -37,6 +38,7 @@ const WevTaxatie = () => {
       />
       <UspBar />
 
+      {/* Wanneer nodig — ongewijzigd */}
       <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide">
           <div className="text-center mb-10">
@@ -64,29 +66,28 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* Wat houdt het in - twee kolommen */}
+      {/* NIEUW — Sectie 1: Wat is WEV? */}
       <section className="py-12 md:py-16 px-6 md:px-8 bg-background">
         <div className="container-wide">
-          <div className="grid md:grid-cols-2 gap-10 items-start">
+          <div className="grid md:grid-cols-[3fr_2fr] gap-10 items-start">
             <div>
               <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Wat is WEV</p>
-              <h2 className="text-2xl md:text-3xl font-semibold mb-4">Wat houdt een WEV-taxatie in?</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-semibold mb-4 text-primary">Waarde in het Economisch Verkeer — wat betekent dat?</h2>
               <p className="text-[15px] leading-relaxed mb-4" style={{ color: '#4a5568' }}>
-                WEV staat voor Waarde in het Economisch Verkeer: de waarde die een voertuig zou hebben bij verkoop op de vrije markt, tussen onafhankelijke partijen.
+                WEV staat voor Waarde in het Economisch Verkeer. Dit is de prijs waarvoor een voertuig normaliter door de meestbiedende koper zou worden overgenomen bij vrijwillige verkoop tussen onafhankelijke partijen.
               </p>
               <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
-                De uitkomst wordt vastgelegd in een controleerbaar taxatierapport dat dient als onderbouwing voor je administratie en bij controle door de Belastingdienst.
+                Voor de Belastingdienst vormt de WEV de grondslag voor de verrekening van het privégebruik van een auto. De basis is altijd de oorspronkelijke cataloguswaarde inclusief btw en bpm, inclusief alle accessoires die zijn aangebracht vóór het toekennen van het kenteken aan het voertuig.
               </p>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Hierbij wordt gekeken naar:</h3>
+            <div className="rounded-[10px] p-7" style={{ background: '#EBF2FB' }}>
+              <h3 className="font-semibold text-primary mb-4">Waarvoor gebruikt de Belastingdienst de WEV?</h3>
               <ul className="space-y-3">
                 {[
-                  "Technische en cosmetische staat",
-                  "Kilometerstand, uitvoering en opties",
-                  "Onderhoud en gebruik",
-                  "Marktgegevens van vergelijkbare voertuigen",
-                  "Fiscale context van de waardering",
+                  "Grondslag voor verrekening privégebruik auto",
+                  "Basis bij overdracht voertuig van zaak naar privé",
+                  "Uitgangspunt bij inbreng privéauto in de onderneming",
+                  "Referentie bij controle door de Belastingdienst",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-cta flex-shrink-0 mt-0.5" />
@@ -99,7 +100,110 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* Werkwijze stappen */}
+      {/* NIEUW — Sectie 2: Hoe bepalen wij de waarde? */}
+      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
+        <div className="container-wide">
+          <div className="text-center mb-10">
+            <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Onze werkwijze</p>
+            <h2 className="font-display text-2xl md:text-3xl font-semibold mb-3 text-primary">Hoe bepalen wij de waarde van jouw voertuig?</h2>
+            <p className="text-[15px] max-w-[600px] mx-auto" style={{ color: '#4a5568' }}>
+              Onze taxateurs combineren marktdata, fysieke inspectie en erkende koerslijsten tot één helder rapport.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              { icon: TrendingUp, title: "Meest gunstige koerslijst", desc: "We raadplegen meerdere erkende koerslijsten en kiezen de waardering die het meest gunstig is voor jouw situatie." },
+              { icon: Gauge, title: "Kilometerstand", desc: "De kilometerstand op de dag van taxatie is bepalend voor de waarde. Hoe meer kilometers, hoe lager de waarde doorgaans uitvalt." },
+              { icon: Search, title: "Fysieke inspectie", desc: "We inspecteren het voertuig op beschadigingen, krassen, deuken en oneffenheden. Dit bepaalt mede de eindwaarde." },
+              { icon: Wrench, title: "Courantheid en uitvoering", desc: "De vraag naar het specifieke merk, model en uitvoering op de tweedehandsmarkt wordt meegewogen in de waardebepaling." },
+              { icon: FileCheck, title: "Cataloguswaarde als basis", desc: "De oorspronkelijke cataloguswaarde inclusief btw, bpm en aangebrachte accessoires vormt het vertrekpunt van de berekening." },
+              { icon: Shield, title: "Onderbouwd en controleerbaar", desc: "Alle bevindingen worden samengevoegd in een transparant rapport dat controleerbaar en verdedigbaar is bij de Belastingdienst." },
+            ].map((item, i) => (
+              <div key={i} className="bg-white rounded-[10px] p-6" style={{ boxShadow: '0 2px 10px rgba(0,0,0,0.07)' }}>
+                <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-3" style={{ background: 'rgba(29,60,113,0.08)' }}>
+                  <item.icon className="w-5 h-5 text-primary" />
+                </div>
+                <h3 className="text-sm font-semibold mb-1 text-primary">{item.title}</h3>
+                <p className="text-xs leading-relaxed" style={{ color: '#4a5568' }}>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* NIEUW — Sectie 3: Belangrijk om te weten + Wat hebben wij nodig */}
+      <section className="py-12 md:py-16 px-6 md:px-8 bg-background">
+        <div className="container-wide">
+          <div className="grid md:grid-cols-2 gap-10">
+            <div>
+              <h3 className="font-display text-xl md:text-2xl font-semibold mb-4 text-primary">Belangrijk om te weten</h3>
+              <ul className="space-y-3">
+                {[
+                  "De staat van het voertuig op de dag van taxatie is bepalend",
+                  "Werkzaamheden moeten vóór de taxatiedatum zijn uitgevoerd — niet achteraf",
+                  "De cataloguswaarde inclusief btw en bpm vormt altijd de basis",
+                  "Accessoires aangebracht vóór kentekentoekenning tellen mee in de waarde",
+                  "Zo blijft de taxatie fiscaal verdedigbaar bij controle",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-cta flex-shrink-0 mt-0.5" />
+                    <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-display text-xl md:text-2xl font-semibold mb-4 text-primary">Wat hebben wij nodig?</h3>
+              <ul className="space-y-3">
+                {[
+                  "Naam en contactgegevens",
+                  "Voertuiggegevens: kenteken, merk, type, bouwjaar en kilometerstand",
+                  "Fiscale context: bijv. zakelijk naar privé of privé naar zakelijk",
+                  "Relevante documentatie: onderhoudsboekje, facturen van accessoires",
+                  "Eventuele schaderapporten of eerdere taxaties (indien aanwezig)",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-cta flex-shrink-0 mt-0.5" />
+                    <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NIEUW — Sectie 4: FAQ */}
+      <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
+        <div className="container-wide">
+          <div className="text-center mb-10">
+            <p className="uppercase text-[11px] font-semibold tracking-[0.12em] text-cta mb-3">Veelgestelde vragen</p>
+            <h2 className="font-display text-2xl md:text-3xl font-semibold text-primary">Veelgestelde vragen over de WEV-taxatie</h2>
+          </div>
+          <div className="max-w-[780px] mx-auto">
+            <Accordion type="single" collapsible className="space-y-3">
+              {[
+                { q: "Wat is het verschil tussen WEV en dagwaarde?", a: "De WEV (Waarde Economisch Verkeer) is de prijs bij vrijwillige verkoop tussen onafhankelijke partijen onder normale omstandigheden. De dagwaarde is een bredere term die ook in andere contexten wordt gebruikt. Voor fiscale doeleinden gebruikt de Belastingdienst de WEV als grondslag, niet de dagwaarde." },
+                { q: "Wanneer heb ik een WEV-taxatie nodig?", a: "Je hebt een WEV-taxatie nodig als je een zakelijke auto naar privé wil overbrengen, een privéauto op de zaak wil zetten, of als een voertuig wordt overgedragen tussen een BV en haar aandeelhouder of directeur-grootaandeelhouder. Een objectief rapport voorkomt discussies met de Belastingdienst." },
+                { q: "Hoe lang duurt de taxatie en wanneer ontvang ik het rapport?", a: "De fysieke inspectie duurt gemiddeld 30 tot 45 minuten. Je ontvangt het volledige, ondertekende taxatierapport digitaal binnen 3 werkdagen na de inspectie. Het rapport is direct bruikbaar voor je administratie of aangifte." },
+                { q: "Waar voeren jullie de taxatie uit?", a: "Wij komen op locatie bij jou — thuis, op je bedrijfsadres of bij een garage. Wij zijn werkzaam in het grootste gedeelte van Nederland." },
+                { q: "Is het rapport geldig als tegenbewijs bij de Belastingdienst?", a: "Het rapport is opgesteld door een Notarieel Beëdigd TMV Register-Taxateur en Register-Taxateur VRT en is stevig onderbouwd met marktdata, inspectieresultaten en koerslijsten. Het vormt daarmee een solide en controleerbare basis bij je aangifte of bij een eventueel bezwaar. De uiteindelijke beoordeling ligt altijd bij de Belastingdienst zelf." },
+              ].map((faq, i) => (
+                <AccordionItem key={i} value={`faq-${i}`} className="rounded-lg border-0 overflow-hidden" style={{ background: '#e8ecf1' }}>
+                  <AccordionTrigger className="px-5 py-4 text-[15px] font-semibold text-left hover:no-underline" style={{ color: '#1d3c71' }}>
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="px-5 pb-5 text-[15px] leading-relaxed bg-white border-l-4" style={{ borderColor: '#1d3c71', color: '#4a5568' }}>
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+        </div>
+      </section>
+
+      {/* Werkwijze stappen — ongewijzigd */}
       <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide">
           <div className="text-center mb-10">
@@ -124,7 +228,7 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* CTA blok */}
+      {/* CTA blok — ongewijzigd */}
       <section className="py-14 md:py-20 px-6 md:px-8" style={{ background: '#1d3c71' }}>
         <div className="container-wide text-center">
           <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">WEV-taxatie nodig?</h2>
@@ -138,46 +242,7 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* Belangrijk + Nodig - twee kolommen */}
-      <section className="py-12 md:py-16 px-6 md:px-8 bg-background">
-        <div className="container-wide">
-          <div className="grid md:grid-cols-2 gap-10">
-            <div>
-              <h2 className="text-xl md:text-2xl font-semibold mb-4">Belangrijk om te weten</h2>
-              <ul className="space-y-3">
-                {[
-                  "De staat op de dag van taxatie is bepalend",
-                  "Werkzaamheden moeten vóór de taxatiedatum zijn uitgevoerd",
-                  "Zo blijft de taxatie fiscaal verdedigbaar",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-cta flex-shrink-0 mt-0.5" />
-                    <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h2 className="text-xl md:text-2xl font-semibold mb-4">Wat hebben wij nodig?</h2>
-              <ul className="space-y-3">
-                {[
-                  "Naam en contactgegevens",
-                  "Voertuiggegevens (kenteken, merk, type, bouwjaar, km-stand)",
-                  "Fiscale context (bijv. zakelijk naar privé)",
-                  "Relevante documentatie (onderhoudsboekje, facturen)",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Onafhankelijk */}
+      {/* Onafhankelijk — ongewijzigd */}
       <section className="py-12 md:py-16 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide">
           <div className="card-elevated p-8 md:p-10 max-w-3xl mx-auto">
@@ -197,7 +262,7 @@ const WevTaxatie = () => {
         </div>
       </section>
 
-      {/* Formulier — 65/35 layout */}
+      {/* Formulier — ongewijzigd */}
       <section className="py-12 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
         <div className="container-wide">
           <div className="text-center mb-10">
