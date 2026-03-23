@@ -316,13 +316,19 @@ const Index = () => {
 
             <div className="space-y-3.5 mb-7">
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
-                In 2013 startte Erik Elderson Automobiel Taxaties vanuit een eenvoudige overtuiging: een taxatierapport moet kloppen, en de klant verdient eerlijk advies.
+                In 2013 startte Erik Elderson Automobiel Taxaties vanuit één overtuiging: een taxatierapport moet niet alleen kloppen, maar ook standhouden wanneer het wordt beoordeeld.
               </p>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
-                Na jarenlange ervaring in de taxatiebranche wist Erik precies wat hij anders wilde doen. Geen aannames, geen haastwerk. Elk voertuig verdient een grondige fysieke inspectie, met lakdiktemetingen, schadecalculatie en een volledig fotodossier als basis.
+                Die visie komt voort uit jarenlange ervaring in de taxatiebranche. Geen aannames of snelle conclusies, maar zorgvuldig werk dat onderbouwd en controleerbaar is.
               </p>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
-                Je krijgt altijd direct contact met Erik zelf. Geen callcenter, geen tussenpersoon.
+                Erik rijdt dagelijks door het land om voertuigen op te nemen. Met oog voor detail en aandacht voor het geheel. Van lakdiktemetingen tot schades en gebruikssporen, alles wordt vastgelegd in een compleet en verdedigbaar rapport.
+              </p>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
+                Je hebt altijd direct contact met Erik zelf. Hij verzorgt de opname, stelt het rapport op en is je aanspreekpunt. Duidelijk en zonder tussenpersonen.
+              </p>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
+                De rapporten worden opgesteld met het oog op gebruik richting Belastingdienst, verzekeraar of andere betrokken partijen. Zodat je vooraf zekerheid hebt en achteraf geen discussie.
               </p>
             </div>
 
