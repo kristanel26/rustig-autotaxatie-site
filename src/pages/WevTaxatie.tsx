@@ -425,7 +425,7 @@ const WevTaxatie = () => {
                 styledKenteken
                 toelichtingLabel="Jouw vraag of situatie"
                 toelichtingPlaceholder="Bijv: ik wil mijn zakelijke auto naar privé overbrengen, of: ik heb een youngtimer en wil weten wat de bijtelling wordt."
-                submitButtonText="Verstuur — wij nemen contact op"
+                submitButtonText="Verstuur. Wij nemen contact op."
                 footerText="We nemen binnen één werkdag contact met je op. Geen verplichtingen, gewoon een goed gesprek."
               />
             </div>
