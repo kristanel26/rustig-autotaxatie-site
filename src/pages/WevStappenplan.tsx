@@ -6,7 +6,7 @@ import UspBar from "@/components/UspBar";
 import IntakeForm from "@/components/IntakeForm";
 import ContactSidebar from "@/components/ContactSidebar";
 import { Link } from "react-router-dom";
-import { ArrowRight, Info, Phone, CheckCircle, Clock, AlertTriangle, Shield } from "lucide-react";
+import { ArrowRight, Info, Phone, CheckCircle, Mail } from "lucide-react";
 import heroImage from "@/assets/hero-verzekeringstaxatie.png";
 import stepAanvraag from "@/assets/step-aanvraag.png";
 import stepAdvies from "@/assets/step-advies.png";
