@@ -10,6 +10,7 @@ interface LandingHeroProps {
   onCtaClick: () => void;
   children?: ReactNode;
   heroImage?: string;
+  heroImagePosition?: string;
   showPhoneButton?: boolean;
   compact?: boolean;
 }
@@ -21,6 +22,7 @@ const LandingHero = ({
   ctaText,
   onCtaClick,
   heroImage,
+  heroImagePosition,
   children,
   showPhoneButton = true,
   compact = false,
@@ -34,6 +36,7 @@ const LandingHero = ({
             src={heroImage}
             alt=""
             className="w-full h-full object-cover"
+            style={heroImagePosition ? { objectPosition: heroImagePosition } : undefined}
           />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(29,60,113,0.85) 0%, rgba(29,60,113,0.85) 40%, rgba(29,60,113,0.55) 70%, rgba(29,60,113,0.25) 100%)' }} />
         </div>
