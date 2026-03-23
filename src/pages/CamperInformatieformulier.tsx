@@ -14,10 +14,11 @@ import { CheckCircle, FileText, ShieldAlert, Wrench, Upload, X, ImagePlus } from
 
 /* ───────── toggle + text field helper ───────── */
 const ToggleWithDetail = ({
-  label, checked, onCheckedChange, detailLabel, detailValue, onDetailChange, detailPlaceholder,
+  label, checked, onCheckedChange, detailLabel, detailValue, onDetailChange, remarkValue, onRemarkChange,
 }: {
   label: string; checked: boolean; onCheckedChange: (v: boolean) => void;
-  detailLabel?: string; detailValue?: string; onDetailChange?: (v: string) => void; detailPlaceholder?: string;
+  detailLabel?: string; detailValue?: string; onDetailChange?: (v: string) => void;
+  remarkValue?: string; onRemarkChange?: (v: string) => void;
 }) => (
   <div className="space-y-2">
     <div className="flex items-center justify-between">
@@ -26,10 +27,18 @@ const ToggleWithDetail = ({
     </div>
     {checked && detailLabel && (
       <Input
-        placeholder={detailPlaceholder || detailLabel}
+        placeholder={detailLabel}
         value={detailValue || ""}
         onChange={e => onDetailChange?.(e.target.value)}
         className="h-10"
+      />
+    )}
+    {checked && (
+      <Input
+        placeholder="Opmerking (optioneel)"
+        value={remarkValue || ""}
+        onChange={e => onRemarkChange?.(e.target.value)}
+        className="h-10 text-sm"
       />
     )}
   </div>
