@@ -24,7 +24,7 @@ import VerzekeringstaxatieInfo from "./pages/VerzekeringstaxatieInfo";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
-import Blog from "./pages/Blog";
+
 import StappenplanBpmAangifte from "./pages/StappenplanBpmAangifte";
 import CamperTaxatieStappenplan from "./pages/CamperTaxatieStappenplan";
 import VerzekeringstaxatieStappenplan from "./pages/VerzekeringstaxatieStappenplan";
