@@ -122,7 +122,7 @@ const IntakeForm = ({
               id="email"
               name="email"
               type="email"
-              placeholder="je@emailadres.nl"
+              placeholder="jouw@emailadres.nl"
               value={formData.email}
               onChange={handleChange}
               required
@@ -137,7 +137,7 @@ const IntakeForm = ({
                 id="email"
                 name="email"
                 type="email"
-                placeholder="je@emailadres.nl"
+                placeholder="jouw@emailadres.nl"
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -207,7 +207,7 @@ const IntakeForm = ({
                 id="email"
                 name="email"
                 type="email"
-                placeholder="je@emailadres.nl"
+                placeholder="jouw@emailadres.nl"
                 value={formData.email}
                 onChange={handleChange}
                 required
