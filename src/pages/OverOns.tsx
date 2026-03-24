@@ -9,6 +9,29 @@ import erikPhoto from "@/assets/erik-over-ons.png";
 import heroOverOns from "@/assets/hero-overons.png";
 
 const diensten = [
+  {
+    icon: Car,
+    title: "BPM Taxatie",
+    text: "Voor importeurs, dealers en particulieren die een gebruikt voertuig uit het buitenland invoeren. Wij stellen de laagst haalbare rest-BPM vast.",
+  },
+  {
+    icon: Shield,
+    title: "Verzekeringstaxatie",
+    text: "Voor campers, oldtimers, youngtimers, motors en foodtrucks. De waarde wordt vooraf vastgelegd zodat je bij schade of diefstal correct wordt uitbetaald.",
+  },
+  {
+    icon: Scale,
+    title: "WEV Taxatie",
+    text: "Werkelijke economische waardebepaling voor zakelijke doeleinden, aankoop, verkoop of geschillen. Onafhankelijk en officieel erkend.",
+  },
+  {
+    icon: Wrench,
+    title: "Schadevaststelling",
+    text: "Onafhankelijke vaststelling van schade aan voertuigen. Bruikbaar bij verzekeringsclaims, geschillen of aankoop van een voertuig met schade.",
+  },
+];
+
+const OverOns = () => {
   return (
     <div className="min-h-screen bg-white">
       <PageMeta
