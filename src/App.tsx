@@ -24,7 +24,7 @@ import VerzekeringstaxatieInfo from "./pages/VerzekeringstaxatieInfo";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
-import Blog from "./pages/Blog";
+
 import StappenplanBpmAangifte from "./pages/StappenplanBpmAangifte";
 import CamperTaxatieStappenplan from "./pages/CamperTaxatieStappenplan";
 import VerzekeringstaxatieStappenplan from "./pages/VerzekeringstaxatieStappenplan";
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
   { path: "/verzekeringstaxatie-info", element: <VerzekeringstaxatieInfo /> },
   { path: "/contact", element: <Contact /> },
   { path: "/faq", element: <FAQ /> },
-  { path: "/blog", element: <Blog /> },
+  { path: "/blog", element: <Navigate to="/nieuws" replace /> },
   { path: "/stappenplan-bpm-aangifte", element: <StappenplanBpmAangifte /> },
   { path: "/camper-taxatie-stappenplan", element: <CamperTaxatieStappenplan /> },
   { path: "/camper-informatieformulier", element: <CamperInformatieformulier /> },

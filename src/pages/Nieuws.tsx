@@ -4,71 +4,62 @@ import UspBar from "@/components/UspBar";
 import PageMeta from "@/components/PageMeta";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import heroNieuws from "@/assets/hero-nieuws.jpg";
 import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import { nl } from "date-fns/locale";
 
-const filterCategories = [
-  "Alle berichten", "BPM", "Wetgeving", "Jurisprudentie",
-  "Verzekeringstaxatie", "Oldtimers", "Tips",
-];
+const categories = ["Alle berichten", "BPM & Import", "Oldtimers & Youngtimers", "Verzekeringstaxatie", "Wetgeving", "Tips & Uitleg"];
 
 interface Article {
   id: string;
   title: string;
   slug: string;
   category: string;
+  excerpt: string | null;
   published_at: string | null;
+  featured: boolean;
 }
 
-const getCategoryLabel = (cat: string) => {
-  const map: Record<string, string> = {
-    "BPM & Import": "BPM",
-    "Oldtimers & Youngtimers": "OLDTIMERS",
-    "Verzekeringstaxatie": "VERZEKERING",
-    "Wetgeving": "WETGEVING",
-    "Tips & Uitleg": "TIPS",
-  };
-  return map[cat] || cat.toUpperCase();
-};
-
 const Nieuws = () => {
+  const [activeCategory, setActiveCategory] = useState("Alle berichten");
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeFilter, setActiveFilter] = useState("Alle berichten");
 
   useEffect(() => {
     const fetchArticles = async () => {
       const { data, error } = await supabase
         .from("articles")
-        .select("id, title, slug, category, published_at")
+        .select("id, title, slug, category, excerpt, published_at, featured")
         .eq("status", "published")
         .order("published_at", { ascending: false });
-      if (!error && data) setArticles(data);
+
+      if (!error && data) {
+        setArticles(data);
+      }
       setLoading(false);
     };
     fetchArticles();
   }, []);
 
-  const filtered = articles.filter((a) => {
-    if (activeFilter === "Alle berichten") return true;
-    const label = getCategoryLabel(a.category);
-    return label === activeFilter.toUpperCase();
-  });
+  const filtered = activeCategory === "Alle berichten"
+    ? articles
+    : articles.filter((a) => a.category === activeCategory);
+
+  const featured = filtered.find((a) => a.featured) || filtered[0];
+  const rest = filtered.filter((a) => a !== featured);
 
   const formatDate = (dateStr: string | null) => {
     if (!dateStr) return "";
-    return format(new Date(dateStr), "d MMM yyyy", { locale: nl });
+    return format(new Date(dateStr), "d MMMM yyyy", { locale: nl });
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-white">
       <PageMeta
-        title="BPM Nieuws en Jurisprudentie | Taxaris"
-        description="Actuele berichten over wijzigingen in wet- en regelgeving, uitspraken en BPM-tarieven."
+        title="Nieuws & Kennisbank | BPM, Taxaties en Wetgeving | Automobiel Taxaties"
+        description="Praktische informatie over BPM, taxaties en voertuigwaardering. Nieuws over wetgeving, jurisprudentie en belastingwijzigingen."
       />
       <SiteHeader />
 
@@ -89,132 +80,124 @@ const Nieuws = () => {
           <h1
             style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 700, lineHeight: 1.15, color: '#ffffff', maxWidth: 700 }}
           >
-            BPM nieuws en jurisprudentie
+            Nieuws & Kennisbank
           </h1>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 600, marginTop: 16 }}>
-            Actuele berichten over wijzigingen in wet- en regelgeving, uitspraken en BPM-tarieven.
+            Praktische informatie over BPM, taxaties en voertuigwaardering.
           </p>
         </div>
       </section>
-
       <UspBar />
-      <div style={{ height: 4, background: '#ff751f', width: '100%' }} />
 
-      {/* News cards */}
-      <section style={{ background: '#f7f8fa', padding: '80px 40px' }}>
-        <div style={{ maxWidth: 960, margin: '0 auto' }}>
+      {/* Category filter */}
+      <section className="bg-white border-b" style={{ borderColor: '#e2e8f0' }}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5 flex flex-wrap gap-2">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className="px-4 py-2 rounded-full text-sm font-medium transition-all"
+              style={{
+                background: activeCategory === cat ? '#1d3c71' : 'transparent',
+                color: activeCategory === cat ? '#ffffff' : '#4a5568',
+                border: activeCategory === cat ? 'none' : '1px solid #e2e8f0',
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </section>
 
-          {/* Category filter pills */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {filterCategories.map((cat) => {
-              const isActive = activeFilter === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setActiveFilter(cat)}
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: 13,
-                    fontWeight: isActive ? 600 : 400,
-                    padding: '8px 20px',
-                    borderRadius: 30,
-                    border: isActive ? 'none' : '1px solid #dde3ea',
-                    background: isActive ? '#1d3c71' : '#f7f8fa',
-                    color: isActive ? '#ffffff' : '#1d3c71',
-                    cursor: 'pointer',
-                    transition: 'all 200ms ease',
-                  }}
-                >
-                  {cat}
-                </button>
-              );
-            })}
-          </div>
+      {/* Articles */}
+      <section className="py-16 md:py-24 px-6 lg:px-8" style={{ background: '#f0f4f8' }}>
+        <div className="max-w-7xl mx-auto">
 
-          {/* Article cards */}
           {loading ? (
-            <div className="space-y-4">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="h-20 rounded-lg animate-pulse" style={{ background: '#e8ebf0' }} />
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="rounded-[14px] bg-white animate-pulse h-[280px]" />
               ))}
             </div>
           ) : filtered.length === 0 ? (
-            <p className="text-center py-16" style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, color: '#698db3' }}>
-              Geen nieuwsberichten gevonden.
+            <p className="text-center py-16" style={{ color: '#698db3', fontSize: 17 }}>
+              Geen artikelen gevonden in deze categorie.
             </p>
           ) : (
-            <div className="flex flex-col gap-4">
-              {filtered.map((article) => (
-                <Link
-                  key={article.id}
-                  to={`/blog/${article.slug}`}
-                  className="group flex items-start gap-0 no-underline"
-                  style={{
-                    background: '#ffffff',
-                    borderRadius: 10,
-                    boxShadow: '0 2px 10px rgba(0,0,0,0.06)',
-                    padding: '28px 32px',
-                    borderLeft: '3px solid transparent',
-                    transition: 'all 200ms ease',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.10)';
-                    e.currentTarget.style.borderLeftColor = '#ff751f';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = '0 2px 10px rgba(0,0,0,0.06)';
-                    e.currentTarget.style.borderLeftColor = 'transparent';
-                  }}
+            <>
+              {/* Featured article */}
+              {featured && (
+                <div
+                  className="rounded-[14px] overflow-hidden mb-10 bg-white transition-all duration-200 hover:-translate-y-1"
+                  style={{ boxShadow: '0 4px 24px rgba(29,60,113,0.08)' }}
                 >
-                  {/* Date */}
-                  <span
-                    className="shrink-0"
-                    style={{ width: 100, fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#8a9bb5', paddingTop: 2 }}
-                  >
-                    {formatDate(article.published_at)}
-                  </span>
-
-                  {/* Badge + Title */}
-                  <div className="flex-1 min-w-0 px-4">
-                    <span
-                      className="inline-block mb-1.5 uppercase font-semibold"
-                      style={{
-                        fontFamily: "'Inter', sans-serif",
-                        fontSize: 11,
-                        letterSpacing: '0.06em',
-                        background: '#EBF2FB',
-                        color: '#1d3c71',
-                        borderRadius: 20,
-                        padding: '3px 12px',
-                      }}
+                  <div className="grid md:grid-cols-2">
+                    <div
+                      className="h-[240px] md:h-auto relative"
+                      style={{ background: '#1d3c71', minHeight: 260 }}
                     >
-                      {getCategoryLabel(article.category)}
-                    </span>
-                    <p
-                      className="font-semibold"
-                      style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: '#1d3c71', lineHeight: 1.5, margin: 0 }}
-                    >
-                      {article.title}
-                    </p>
+                      <span
+                        className="absolute top-4 left-4 text-xs font-bold uppercase rounded-full px-3 py-1"
+                        style={{ background: '#ff751f', color: '#ffffff', letterSpacing: '0.06em' }}
+                      >
+                        {featured.category}
+                      </span>
+                    </div>
+                    <div className="p-8 md:p-10 flex flex-col justify-center">
+                      <p className="text-xs mb-2" style={{ color: '#698db3' }}>{formatDate(featured.published_at)}</p>
+                      <h2 className="heading-display font-bold mb-3" style={{ fontSize: 24, color: '#1a1a1a', lineHeight: 1.3 }}>
+                        {featured.title}
+                      </h2>
+                      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#4a5568', lineHeight: 1.70 }} className="mb-5">
+                        {featured.excerpt}
+                      </p>
+                      <span className="text-sm font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all cursor-pointer" style={{ color: '#ff751f' }}>
+                        Lees meer <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </div>
                   </div>
+                </div>
+              )}
 
-                  {/* Read more */}
-                  <span
-                    className="shrink-0 inline-flex items-center gap-1 font-semibold group-hover:gap-2 transition-all self-center"
-                    style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: '#ff751f', whiteSpace: 'nowrap' }}
+              {/* Grid */}
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {rest.map((article) => (
+                  <div
+                    key={article.id}
+                    className="rounded-[14px] overflow-hidden bg-white transition-all duration-200 hover:-translate-y-1 cursor-pointer"
+                    style={{ boxShadow: '0 4px 24px rgba(29,60,113,0.08)' }}
                   >
-                    Lees meer <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </Link>
-              ))}
-            </div>
+                    <div className="relative h-[180px]" style={{ background: '#1d3c71' }}>
+                      <span
+                        className="absolute top-4 left-4 text-xs font-bold uppercase rounded-full px-3 py-1"
+                        style={{ background: '#ff751f', color: '#ffffff', letterSpacing: '0.06em' }}
+                      >
+                        {article.category}
+                      </span>
+                    </div>
+                    <div className="p-6">
+                      <p className="text-xs mb-2" style={{ color: '#698db3' }}>{formatDate(article.published_at)}</p>
+                      <h3 className="heading-display font-semibold mb-2" style={{ fontSize: 18, color: '#1a1a1a', lineHeight: 1.3 }}>
+                        {article.title}
+                      </h3>
+                      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#4a5568', lineHeight: 1.65 }} className="mb-4 line-clamp-3">
+                        {article.excerpt}
+                      </p>
+                      <span className="text-sm font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all" style={{ color: '#ff751f' }}>
+                        Lees meer <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </section>
 
       <SiteFooter />
       <WhatsAppButton />
-    </>
+    </div>
   );
 };
 
