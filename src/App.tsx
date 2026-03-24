@@ -70,7 +70,7 @@ const router = createBrowserRouter([
   { path: "/verzekeringstaxatie-info", element: <VerzekeringstaxatieInfo /> },
   { path: "/contact", element: <Contact /> },
   { path: "/faq", element: <FAQ /> },
-  { path: "/blog", element: <Blog /> },
+  { path: "/blog", element: <Navigate to="/nieuws" replace /> },
   { path: "/stappenplan-bpm-aangifte", element: <StappenplanBpmAangifte /> },
   { path: "/camper-taxatie-stappenplan", element: <CamperTaxatieStappenplan /> },
   { path: "/camper-informatieformulier", element: <CamperInformatieformulier /> },
