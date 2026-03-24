@@ -60,6 +60,7 @@ const router = createBrowserRouter([
   { path: "/oldtimer-taxatie", element: <OldtimerTaxatie /> },
   { path: "/youngtimer-taxatie", element: <YoungtimerTaxatie /> },
   { path: "/foodtruck-taxatie", element: <FoodtruckTaxatie /> },
+  { path: "/schadevaststelling", element: <Schadevaststelling /> },
   { path: "/bpm-voorbereiding", element: <BpmVoorbereiding /> },
   { path: "/bpm-taxatie", element: <BpmTaxatie /> },
   { path: "/bpm-motor-taxatie", element: <BpmMotorTaxatie /> },
