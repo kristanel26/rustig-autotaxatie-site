@@ -95,30 +95,53 @@ const OverOns = () => {
 
         <div className="max-w-[1100px] mx-auto px-6 lg:px-10 grid md:grid-cols-[420px_1fr] gap-16 items-center">
           {/* Photo */}
-          <div className="relative hidden md:block">
-            <div className="absolute rounded-sm" style={{ left: -20, top: 40, bottom: 40, width: 4, background: 'linear-gradient(to bottom, #ff751f 0%, rgba(255,117,31,0.20) 100%)' }} />
-            <div className="rounded-2xl overflow-hidden relative" style={{ marginTop: -40, boxShadow: '0 24px 64px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.20)' }}>
-              <img
-                src={erikPhoto}
-                alt="Erik Elderson, Automobiel Taxaties"
-                className="w-full block"
-                style={{ height: 520, objectFit: 'cover', objectPosition: 'center top', filter: 'contrast(1.05) brightness(0.98)' }}
-                loading="lazy"
-              />
+          <div className="relative hidden md:flex flex-col gap-6">
+            <div className="relative">
+              <div className="absolute rounded-sm" style={{ left: -20, top: 40, bottom: 40, width: 4, background: 'linear-gradient(to bottom, #ff751f 0%, rgba(255,117,31,0.20) 100%)' }} />
+              <div className="rounded-2xl overflow-hidden relative" style={{ marginTop: -40, boxShadow: '0 24px 64px rgba(0,0,0,0.35), 0 8px 24px rgba(0,0,0,0.20)' }}>
+                <img
+                  src={erikPhoto}
+                  alt="Erik Elderson, Automobiel Taxaties"
+                  className="w-full block"
+                  style={{ height: 520, objectFit: 'cover', objectPosition: 'center top', filter: 'contrast(1.05) brightness(0.98)' }}
+                  loading="lazy"
+                />
+              </div>
+              <div
+                className="absolute flex flex-col items-center rounded-[10px]"
+                style={{
+                  bottom: 24,
+                  left: 24,
+                  background: 'rgba(29,60,113,0.92)',
+                  backdropFilter: 'blur(8px)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  padding: '12px 18px',
+                }}
+              >
+                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 28, fontWeight: 700, color: '#ff751f', lineHeight: 1 }}>2013</span>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', marginTop: 4 }}>Opgericht</span>
+              </div>
             </div>
-            <div
-              className="absolute flex flex-col items-center rounded-[10px]"
-              style={{
-                bottom: 24,
-                left: 24,
-                background: 'rgba(29,60,113,0.92)',
-                backdropFilter: 'blur(8px)',
-                border: '1px solid rgba(255,255,255,0.15)',
-                padding: '12px 18px',
-              }}
-            >
-              <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 28, fontWeight: 700, color: '#ff751f', lineHeight: 1 }}>2013</span>
-              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', marginTop: 4 }}>Opgericht</span>
+
+            {/* Inspectie foto kaart */}
+            <div className="rounded-[14px] overflow-hidden" style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.15)' }}>
+              <div className="w-full h-[220px] overflow-hidden">
+                <img
+                  src={erikInspectiePhoto}
+                  alt="Erik Elderson meet de lakdikte tijdens een taxatie"
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: '50% 30%' }}
+                  loading="lazy"
+                />
+              </div>
+              <div style={{ background: 'rgba(29,60,113,0.95)', padding: '24px 24px 28px', borderTop: '3px solid #ff751f' }}>
+                <h3 className="text-lg font-bold mb-2" style={{ color: '#ffffff', fontFamily: "'Playfair Display', serif" }}>
+                  Zorgvuldig en nauwkeurig
+                </h3>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: 'rgba(255,255,255,0.80)', lineHeight: 1.70 }}>
+                  Elke inspectie omvat lakdiktemetingen, schade-opname en een uitgebreid fotodossier. Alles wordt vastgelegd voor een compleet en verdedigbaar rapport.
+                </p>
+              </div>
             </div>
           </div>
 
