@@ -6,7 +6,7 @@ import { Phone, Car, Shield, Scale, Wrench, ArrowRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import erikPhoto from "@/assets/erik-over-ons.png";
-import erikInspectiePhoto from "@/assets/erik-inspectie-overons.jpg";
+
 import heroOverOns from "@/assets/hero-overons.png";
 
 const diensten = [
@@ -120,27 +120,6 @@ const OverOns = () => {
               >
                 <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 28, fontWeight: 700, color: '#ff751f', lineHeight: 1 }}>2013</span>
                 <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', marginTop: 4 }}>Opgericht</span>
-              </div>
-            </div>
-
-            {/* Inspectie foto kaart */}
-            <div className="rounded-[14px] overflow-hidden" style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.15)' }}>
-              <div className="w-full h-[220px] overflow-hidden">
-                <img
-                  src={erikInspectiePhoto}
-                  alt="Erik Elderson meet de lakdikte tijdens een taxatie"
-                  className="w-full h-full object-cover"
-                  style={{ objectPosition: '50% 30%' }}
-                  loading="lazy"
-                />
-              </div>
-              <div style={{ background: 'rgba(29,60,113,0.95)', padding: '24px 24px 28px', borderTop: '3px solid #ff751f' }}>
-                <h3 className="text-lg font-bold mb-2" style={{ color: '#ffffff', fontFamily: "'Playfair Display', serif" }}>
-                  Zorgvuldig en nauwkeurig
-                </h3>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: 'rgba(255,255,255,0.80)', lineHeight: 1.70 }}>
-                  Elke inspectie omvat lakdiktemetingen, schade-opname en een uitgebreid fotodossier. Alles wordt vastgelegd voor een compleet en verdedigbaar rapport.
-                </p>
               </div>
             </div>
           </div>
