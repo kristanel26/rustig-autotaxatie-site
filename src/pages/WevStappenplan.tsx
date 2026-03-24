@@ -203,7 +203,7 @@ const WevStappenplan = () => {
                 {[
                   "Onafhankelijke waardebepaling op basis van inspectie en marktdata",
                   "Erkend rapport bruikbaar voor administratie en aangifte",
-                  "Rapport digitaal binnen enkele werkdagen na inspectie",
+                  "Rapport digitaal binnen 3 werkdagen na inspectie",
                   "Verdedigbaar bij controle door de Belastingdienst",
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-4 bg-white" style={{ borderRadius: 10, padding: '16px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
