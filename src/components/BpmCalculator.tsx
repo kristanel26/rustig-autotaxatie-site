@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import erikInspectie from "@/assets/erik-inspectie-overons.jpg";
 
 const fuelOptions = [
   { value: "benzine", label: "Benzine" },
@@ -112,13 +113,21 @@ const BpmCalculator = ({
       {showAdviceCard && (
         <div
           className="rounded-[14px] overflow-hidden flex flex-col self-stretch"
-          style={{ background: '#1d3c71', boxShadow: '0 4px 24px rgba(29,60,113,0.12)' }}
+          style={{ boxShadow: '0 4px 24px rgba(29,60,113,0.12)' }}
         >
-          <div className="flex-1 flex flex-col justify-center" style={{ padding: '32px 28px' }}>
+          <div className="w-full h-[220px] overflow-hidden flex-shrink-0">
+            <img
+              src={erikInspectie}
+              alt="Erik Elderson fotografeert een auto tijdens taxatie"
+              className="w-full h-full object-cover"
+              style={{ objectPosition: '70% 20%' }}
+            />
+          </div>
+          <div className="flex-1 flex flex-col justify-center" style={{ background: '#1d3c71', padding: '28px 28px 32px' }}>
             <h3 className="heading-display text-xl font-bold mb-3" style={{ color: '#ffffff', lineHeight: 1.3 }}>
               {adviceTitle}
             </h3>
-            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: 'rgba(255,255,255,0.82)', lineHeight: 1.70 }} className="mb-6">
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: 'rgba(255,255,255,0.82)', lineHeight: 1.70 }} className="mb-5">
               {adviceText}
             </p>
             <Link to="/contact" className="self-start">
