@@ -133,8 +133,8 @@ const Nieuws = () => {
                 >
                   <div className="grid md:grid-cols-2">
                     <div
-                      className="h-[200px] md:h-auto relative"
-                      style={{ background: '#1d3c71', minHeight: 200 }}
+                      className="h-[160px] md:h-auto relative"
+                      style={{ background: '#1d3c71', minHeight: 160 }}
                     >
                       <span
                         className="absolute top-4 left-4 text-xs font-bold uppercase rounded-full px-3 py-1"
@@ -167,7 +167,7 @@ const Nieuws = () => {
                     className="rounded-[14px] overflow-hidden bg-white transition-all duration-200 hover:-translate-y-1 cursor-pointer"
                     style={{ boxShadow: '0 4px 24px rgba(29,60,113,0.08)' }}
                   >
-                    <div className="relative h-[160px]" style={{ background: '#1d3c71' }}>
+                    <div className="relative h-[120px]" style={{ background: '#1d3c71' }}>
                       <span
                         className="absolute top-4 left-4 text-xs font-bold uppercase rounded-full px-3 py-1"
                         style={{ background: '#ff751f', color: '#ffffff', letterSpacing: '0.06em' }}
