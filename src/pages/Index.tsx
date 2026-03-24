@@ -355,7 +355,7 @@ const Index = () => {
             <div className="flex gap-8 mb-8 pt-6" style={{ borderTop: '1px solid rgba(255,255,255,0.10)' }}>
               {[
                 { num: "25.000+", label: "Voertuigen getaxeerd" },
-                { num: "13 jaar", label: "Ervaring" },
+                { num: "15 jaar", label: "Ervaring" },
                 { num: "Landelijk", label: "Werkzaam in groot deel van NL" },
               ].map((stat, i) => (
                 <div key={i} className="flex flex-col">
@@ -510,7 +510,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center mb-14">
             <span className="block mb-4" style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,0.50)' }}>
-              Meer dan 13 jaar bewezen resultaat
+              Meer dan 15 jaar bewezen resultaat
             </span>
             <h2
               className="heading-display font-bold mb-4"
@@ -562,7 +562,7 @@ const Index = () => {
           <div className="grid grid-cols-3 gap-0 mb-12">
             {[
               { num: "25.000+", label: "Voertuigen getaxeerd" },
-              { num: "13 jaar", label: "Ervaring in voertuigtaxaties" },
+              { num: "15 jaar", label: "Ervaring in voertuigtaxaties" },
               { num: "Landelijk", label: "Werkzaam in het grootste gedeelte van NL" },
             ].map((stat, i) => (
               <div key={i} className={`text-center py-6 ${i > 0 ? "border-l" : ""}`} style={{ borderColor: 'rgba(255,255,255,0.15)' }}>
