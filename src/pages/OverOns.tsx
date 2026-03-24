@@ -7,64 +7,8 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import erikPhoto from "@/assets/erik-over-ons.png";
 import heroOverOns from "@/assets/hero-overons.png";
-import stepAanvraag from "@/assets/erik-aanvraag.png";
-import stepAdvies from "@/assets/step-advies.png";
-import stepInspectie from "@/assets/step-inspectie.png";
-import stepRapport from "@/assets/step-rapport.png";
-import stepAfhandeling from "@/assets/step-regelen.png";
 
 const diensten = [
-  {
-    icon: Car,
-    title: "BPM Taxatie",
-    text: "Voor importeurs, dealers en particulieren die een gebruikt voertuig uit het buitenland invoeren. Wij stellen de laagst haalbare rest-BPM vast.",
-  },
-  {
-    icon: Shield,
-    title: "Verzekeringstaxatie",
-    text: "Voor campers, oldtimers, youngtimers, motors en foodtrucks. De waarde wordt vooraf vastgelegd zodat je bij schade of diefstal correct wordt uitbetaald.",
-  },
-  {
-    icon: Scale,
-    title: "WEV Taxatie",
-    text: "Werkelijke economische waardebepaling voor zakelijke doeleinden, aankoop, verkoop of geschillen. Onafhankelijk en officieel erkend.",
-  },
-  {
-    icon: Wrench,
-    title: "Schadevaststelling",
-    text: "Onafhankelijke vaststelling van schade aan voertuigen. Bruikbaar bij verzekeringsclaims, geschillen of aankoop van een voertuig met schade.",
-  },
-];
-
-const stappen = [
-  {
-    image: stepAanvraag,
-    title: "Aanvraag indienen",
-    text: "Vul het aanvraagformulier in of bel ons. Geef het type voertuig en het doel van de taxatie door, of het nu gaat om BPM, verzekering, WEV of schadevaststelling. Wij nemen binnen één werkdag contact op.",
-  },
-  {
-    image: stepAdvies,
-    title: "Advies binnen één werkdag",
-    text: "Erik beoordeelt de aanvraag en geeft direct advies over de beste aanpak. Bij BPM-taxaties berekenen wij vooraf wat de laagst haalbare BPM is. Bij verzekeringstaxaties, WEV en schadevaststelling denken wij mee over de juiste methode voor jouw voertuig.",
-  },
-  {
-    image: stepInspectie,
-    title: "Fysieke inspectie op locatie",
-    text: "Erik komt naar het voertuig toe, in het grootste gedeelte van Nederland. De inspectie omvat lakdiktemetingen, staat- en schade-opname en een uitgebreid fotodossier. Voor elk type taxatie wordt de inspectie afgestemd op het doel.",
-  },
-  {
-    image: stepRapport,
-    title: "Rapport digitaal",
-    text: "Na de inspectie ontvang je het taxatierapport per e-mail. Het rapport is officieel erkend, juridisch verdedigbaar en geschikt voor de Belastingdienst, verzekeraar of andere partijen.",
-  },
-  {
-    image: stepAfhandeling,
-    title: "Aangifte of verzekering regelen",
-    text: "Met het rapport regel je de BPM-aangifte, sluit je de verzekering af op de getaxeerde waarde of gebruik je het rapport bij een geschil of aankoop. Wij helpen jou hier desgewenst bij.",
-  },
-];
-
-const OverOns = () => {
   return (
     <div className="min-h-screen bg-white">
       <PageMeta
