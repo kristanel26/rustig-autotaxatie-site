@@ -277,62 +277,6 @@ const OverOns = () => {
         </div>
       </section>
 
-      {/* ── WERKWIJZE — Premium BPM-stijl met foto's ── */}
-      <section className="bg-white">
-        <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-16 pb-4">
-          <div className="mx-auto mb-3 text-center" style={{ width: 40, height: 3, background: '#ff751f' }} />
-          <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2 text-center" style={{ color: '#ff751f' }}>
-            ONZE WERKWIJZE
-          </p>
-          <h2 className="text-[28px] md:text-[36px] font-bold text-center" style={{ color: '#1d3c71', fontFamily: "'Playfair Display', serif" }}>
-            Hoe werkt een taxatie?
-          </h2>
-        </div>
-
-        {stappen.map((stap, i) => (
-          <section
-            key={i}
-            className="py-12 md:py-16"
-            style={{ background: i % 2 === 1 ? '#f7f8fa' : '#ffffff' }}
-          >
-            <div className="max-w-5xl mx-auto px-6 lg:px-8">
-              <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-10">
-                {/* Step number + text */}
-                <div className="flex gap-5 md:gap-6 flex-1 min-w-0">
-                  <div className="shrink-0">
-                    <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg"
-                      style={{ background: '#1d3c71' }}
-                    >
-                      {i + 1}
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl md:text-[22px] font-bold mb-4" style={{ color: '#1d3c71', fontFamily: "'Playfair Display', serif" }}>
-                      {stap.title}
-                    </h3>
-                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, lineHeight: 1.75, color: '#4a5568' }}>
-                      {stap.text}
-                    </p>
-                  </div>
-                </div>
-                {/* Image */}
-                <div className="shrink-0 md:w-[360px] h-[240px]">
-                  <img
-                    src={stap.image}
-                    alt={stap.title}
-                    className="w-full h-full rounded-lg object-cover"
-                    style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.10)', borderRadius: 8 }}
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            </div>
-          </section>
-        ))}
-      </section>
-
-      {/* ── QUOTE BLOK ── */}
       <section className="py-16 md:py-20" style={{ background: '#1d3c71' }}>
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
           <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 64, color: '#ff751f', lineHeight: 1 }}>"</span>
