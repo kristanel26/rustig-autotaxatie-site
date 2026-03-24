@@ -256,46 +256,6 @@ const BpmTaxatie = () => {
         </div>
       </section>
 
-      {/* 5 — Verwachtingen + Nodig – kaartjes */}
-      <section className="px-6 md:px-8" style={{ background: '#ffffff', paddingTop: 72, paddingBottom: 72 }}>
-        <div className="container-wide">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <div className="mb-3" style={{ width: 40, height: 3, background: '#ff751f', borderRadius: 2 }} />
-              <h3 className="font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif', fontSize: 22, color: '#1d3c71' }}>Wat kun je verwachten?</h3>
-              <div className="flex flex-col gap-[10px]">
-                {verwachtItems.map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-4 bg-white"
-                    style={{ borderRadius: 10, padding: '16px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}
-                  >
-                    <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
-                    <span className="text-[15px] leading-normal" style={{ fontFamily: 'Inter, sans-serif', color: '#1a1a1a' }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <div className="mb-3" style={{ width: 40, height: 3, background: '#ff751f', borderRadius: 2 }} />
-              <h3 className="font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif', fontSize: 22, color: '#1d3c71' }}>Wat hebben wij nodig?</h3>
-              <div className="flex flex-col gap-[10px]">
-                {nodigItems.map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-4 bg-white"
-                    style={{ borderRadius: 10, padding: '16px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}
-                  >
-                    <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
-                    <span className="text-[15px] leading-normal" style={{ fontFamily: 'Inter, sans-serif', color: '#1a1a1a' }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* 6 — Formulier – wit */}
       <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 72, paddingBottom: 72 }} ref={formRef}>
         <div className="container-wide">
