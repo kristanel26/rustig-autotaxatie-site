@@ -7,11 +7,6 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import erikPhoto from "@/assets/erik-over-ons.png";
 import heroOverOns from "@/assets/hero-overons.png";
-import stepAanvraag from "@/assets/erik-aanvraag.png";
-import stepAdvies from "@/assets/step-advies.png";
-import stepInspectie from "@/assets/step-inspectie.png";
-import stepRapport from "@/assets/step-rapport.png";
-import stepAfhandeling from "@/assets/step-regelen.png";
 
 const diensten = [
   {
@@ -33,34 +28,6 @@ const diensten = [
     icon: Wrench,
     title: "Schadevaststelling",
     text: "Onafhankelijke vaststelling van schade aan voertuigen. Bruikbaar bij verzekeringsclaims, geschillen of aankoop van een voertuig met schade.",
-  },
-];
-
-const stappen = [
-  {
-    image: stepAanvraag,
-    title: "Aanvraag indienen",
-    text: "Vul het aanvraagformulier in of bel ons. Geef het type voertuig en het doel van de taxatie door, of het nu gaat om BPM, verzekering, WEV of schadevaststelling. Wij nemen binnen één werkdag contact op.",
-  },
-  {
-    image: stepAdvies,
-    title: "Advies binnen één werkdag",
-    text: "Erik beoordeelt de aanvraag en geeft direct advies over de beste aanpak. Bij BPM-taxaties berekenen wij vooraf wat de laagst haalbare BPM is. Bij verzekeringstaxaties, WEV en schadevaststelling denken wij mee over de juiste methode voor jouw voertuig.",
-  },
-  {
-    image: stepInspectie,
-    title: "Fysieke inspectie op locatie",
-    text: "Erik komt naar het voertuig toe, in het grootste gedeelte van Nederland. De inspectie omvat lakdiktemetingen, staat- en schade-opname en een uitgebreid fotodossier. Voor elk type taxatie wordt de inspectie afgestemd op het doel.",
-  },
-  {
-    image: stepRapport,
-    title: "Rapport digitaal",
-    text: "Na de inspectie ontvang je het taxatierapport per e-mail. Het rapport is officieel erkend, juridisch verdedigbaar en geschikt voor de Belastingdienst, verzekeraar of andere partijen.",
-  },
-  {
-    image: stepAfhandeling,
-    title: "Aangifte of verzekering regelen",
-    text: "Met het rapport regel je de BPM-aangifte, sluit je de verzekering af op de getaxeerde waarde of gebruik je het rapport bij een geschil of aankoop. Wij helpen jou hier desgewenst bij.",
   },
 ];
 
@@ -277,62 +244,6 @@ const OverOns = () => {
         </div>
       </section>
 
-      {/* ── WERKWIJZE — Premium BPM-stijl met foto's ── */}
-      <section className="bg-white">
-        <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-16 pb-4">
-          <div className="mx-auto mb-3 text-center" style={{ width: 40, height: 3, background: '#ff751f' }} />
-          <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2 text-center" style={{ color: '#ff751f' }}>
-            ONZE WERKWIJZE
-          </p>
-          <h2 className="text-[28px] md:text-[36px] font-bold text-center" style={{ color: '#1d3c71', fontFamily: "'Playfair Display', serif" }}>
-            Hoe werkt een taxatie?
-          </h2>
-        </div>
-
-        {stappen.map((stap, i) => (
-          <section
-            key={i}
-            className="py-12 md:py-16"
-            style={{ background: i % 2 === 1 ? '#f7f8fa' : '#ffffff' }}
-          >
-            <div className="max-w-5xl mx-auto px-6 lg:px-8">
-              <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-10">
-                {/* Step number + text */}
-                <div className="flex gap-5 md:gap-6 flex-1 min-w-0">
-                  <div className="shrink-0">
-                    <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg"
-                      style={{ background: '#1d3c71' }}
-                    >
-                      {i + 1}
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl md:text-[22px] font-bold mb-4" style={{ color: '#1d3c71', fontFamily: "'Playfair Display', serif" }}>
-                      {stap.title}
-                    </h3>
-                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, lineHeight: 1.75, color: '#4a5568' }}>
-                      {stap.text}
-                    </p>
-                  </div>
-                </div>
-                {/* Image */}
-                <div className="shrink-0 md:w-[360px] h-[240px]">
-                  <img
-                    src={stap.image}
-                    alt={stap.title}
-                    className="w-full h-full rounded-lg object-cover"
-                    style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.10)', borderRadius: 8 }}
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            </div>
-          </section>
-        ))}
-      </section>
-
-      {/* ── QUOTE BLOK ── */}
       <section className="py-16 md:py-20" style={{ background: '#1d3c71' }}>
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
           <span style={{ fontFamily: "'Playfair Display', serif", fontSize: 64, color: '#ff751f', lineHeight: 1 }}>"</span>
