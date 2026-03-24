@@ -84,7 +84,7 @@ const BpmVoorbereiding = () => {
 
       <section className="py-10 md:py-14 px-6 md:px-8 bg-background" ref={formRef}>
         <div className="container-wide"><div className="text-center mb-8"><h2 className="text-2xl md:text-3xl font-semibold mb-2">BPM voorbereiding aanvragen</h2><p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>Vul het formulier in en wij nemen binnen één werkdag contact met jou op.</p></div>
-        <div className="grid md:grid-cols-[1fr_380px] gap-8"><div><IntakeForm serviceType="BPM voorbereiding" formTitle="BPM voorbereiding aanvragen" formSubtext="Vul onderstaand formulier zo volledig mogelijk in." submitButtonText="BPM voorbereiding aanvragen" showVoertuigType={true} /></div><ContactSidebar /></div></div>
+        <div className="grid md:grid-cols-[1fr_380px] gap-8 items-stretch"><div><IntakeForm serviceType="BPM voorbereiding" formTitle="BPM voorbereiding aanvragen" formSubtext="Vul onderstaand formulier zo volledig mogelijk in." submitButtonText="BPM voorbereiding aanvragen" showVoertuigType={true} /></div><ContactSidebar /></div></div>
       </section>
 
       <SiteFooter />
