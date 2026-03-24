@@ -2,9 +2,8 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import React, { useState } from "react";
 import PageMeta from "@/components/PageMeta";
 import { Link } from "react-router-dom";
-import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, ChevronRight, Search, MessageCircle, Handshake, Bus } from "lucide-react";
+import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, ChevronRight, Search, MessageCircle, Handshake, Bus, FileText, Clock, Car, Bike, UtensilsCrossed, CarFront } from "lucide-react";
 import UspBar from "@/components/UspBar";
-import { FaFileInvoiceDollar, FaBalanceScale, FaClock, FaCar, FaMotorcycle, FaUtensils, FaCarCrash } from "react-icons/fa";
 import erikPhoto from "@/assets/erik-elderson.png";
 import erikInspectie from "@/assets/erik-inspectie.jpg";
 import heroImage from "@/assets/hero-homepage.jpg";
@@ -16,14 +15,14 @@ import SiteFooter from "@/components/SiteFooter";
 import BookingWizard from "@/components/BookingWizard";
 
 const diensten = [
-  { title: "BPM Taxatie", sub: "Importvoertuig", href: "/bpm-taxatie", icon: FaFileInvoiceDollar, accent: true },
-  { title: "WEV Taxatie", sub: "Fiscale waardebepaling", href: "/wev-taxatie", icon: FaBalanceScale },
-  { title: "Oldtimer Taxatie", sub: "Klassieke voertuigen", href: "/oldtimer-taxatie", icon: FaClock },
-  { title: "Youngtimer Taxatie", sub: "Voertuigen vanaf 15 jaar", href: "/youngtimer-taxatie", icon: FaCar },
+  { title: "BPM Taxatie", sub: "Importvoertuig", href: "/bpm-taxatie", icon: FileText, accent: true },
+  { title: "WEV Taxatie", sub: "Fiscale waardebepaling", href: "/wev-taxatie", icon: ScaleIcon },
+  { title: "Oldtimer Taxatie", sub: "Klassieke voertuigen", href: "/oldtimer-taxatie", icon: Clock },
+  { title: "Youngtimer Taxatie", sub: "Voertuigen vanaf 15 jaar", href: "/youngtimer-taxatie", icon: Car },
   { title: "Camper Taxatie", sub: "Campermarkt specialist", href: "/camper-taxatie", icon: Bus },
-  { title: "Motor Taxatie", sub: "Motorfietsen", href: "/motor-taxatie", icon: FaMotorcycle },
-  { title: "Foodtruck Taxatie", sub: "Mobiele horeca", href: "/foodtruck-taxatie", icon: FaUtensils },
-  { title: "Schadevaststelling", sub: "Na een incident", href: "/schadevaststelling", icon: FaCarCrash },
+  { title: "Motor Taxatie", sub: "Motorfietsen", href: "/motor-taxatie", icon: Bike },
+  { title: "Foodtruck Taxatie", sub: "Mobiele horeca", href: "/foodtruck-taxatie", icon: UtensilsCrossed },
+  { title: "Schadevaststelling", sub: "Na een incident", href: "/schadevaststelling", icon: CarFront },
 ];
 
 
