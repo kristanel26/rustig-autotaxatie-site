@@ -9,67 +9,67 @@ import SiteFooter from "@/components/SiteFooter";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, ArrowRight, CheckCircle, Award, Calendar, Info, Star, TrendingUp, FileCheck } from "lucide-react";
+import { ArrowDown, ArrowRight, CheckCircle, Award, Calendar, Info, AlertTriangle, ShieldCheck, TrendingUp, FileCheck } from "lucide-react";
 import StatsBar from "@/components/StatsBar";
-import heroYoungtimer from "@/assets/hero-youngtimer.jpg";
+import heroImage from "@/assets/hero-verzekeringstaxatie.png";
 
-const YoungtimerTaxatie = () => {
+const Schadevaststelling = () => {
   const formRef = useRef<HTMLDivElement>(null);
   const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: "smooth" });
 
   const wanneerCards = [
-    { icon: Star, label: "Goed onderhouden", desc: "Waarde hoger dan gemiddeld" },
-    { icon: Award, label: "Bijzondere uitvoering", desc: "Zeldzame opties of versie" },
-    { icon: TrendingUp, label: "Afwijkende waarde", desc: "Hoger dan standaard bedragen" },
-    { icon: FileCheck, label: "Eis verzekeraar", desc: "Verzekeraar vraagt om taxatie" },
+    { icon: AlertTriangle, label: "Na een incident", desc: "Aanrijding, storm of vandalisme" },
+    { icon: ShieldCheck, label: "Geschil verzekeraar", desc: "Onenigheid over schade-uitkering" },
+    { icon: TrendingUp, label: "Aankoop met schade", desc: "Waardebepaling voor of na aankoop" },
+    { icon: FileCheck, label: "Juridisch bewijs", desc: "Onderbouwing bij geschillen" },
   ];
 
   const acceptatieCards = [
-    { icon: Award, title: "Federatie TMV, VRT Register en FEHAC", desc: "Aangesloten bij de erkende brancheorganisaties" },
+    { icon: Award, title: "Federatie TMV en VRT Register", desc: "Aangesloten bij de erkende brancheorganisaties" },
     { icon: CheckCircle, title: "Geaccepteerd door verzekeraars", desc: "Rapporten geaccepteerd door verzekeraars" },
-    { icon: Calendar, title: "Geldigheid 2 tot 3 jaar", desc: "Check bij jouw verzekeraar naar de exacte geldigheidsduur" },
+    { icon: Calendar, title: "Onafhankelijk rapport", desc: "Bruikbaar bij geschillen en claims" },
   ];
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta title="Youngtimer Taxatie | Voertuigen Vanaf 15 Jaar | Automobiel Taxaties" description="Erkende youngtimer taxatie voor verzekering en BPM. Specialist in voertuigen van 15 jaar en ouder. Gratis advies aanvragen." />
+      <PageMeta title="Schadevaststelling | Onafhankelijke Schadebeoordeling | Automobiel Taxaties" description="Onafhankelijke schadevaststelling door een erkend taxateur. Bruikbaar bij verzekeringsclaims, geschillen of aankoop van een voertuig met schade." />
       <SiteHeader />
       <LandingHero
-        subtitle="VERZEKERINGSTAXATIE YOUNGTIMER"
-        title="Zekerheid over de waarde van je youngtimer"
-        description={<>Met een verzekeringstaxatie leg je de waarde vooraf vast.<br />Wij komen op locatie bij je youngtimer.</>}
-        ctaText="Verzekeringstaxatie aanvragen"
+        subtitle="SCHADEVASTSTELLING"
+        title="Onafhankelijke vaststelling van schade"
+        description={<>Een onafhankelijk rapport dat de schade en waardevermindering vastlegt.<br />Wij komen op locatie bij je voertuig.</>}
+        ctaText="Schadevaststelling aanvragen"
         onCtaClick={scrollToForm}
-        heroImage={heroYoungtimer}
+        heroImage={heroImage}
         compact
       />
       <UspBar />
 
-      {/* Waarom taxeren */}
+      {/* Waarom schadevaststelling */}
       <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
           <div className="grid md:grid-cols-[1fr_0.7fr] gap-8 items-start">
             <div>
-              <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>WAAROM TAXEREN</p>
-              <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>Waarom een verzekeringstaxatie voor je youngtimer?</h2>
+              <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>WAAROM SCHADEVASTSTELLING</p>
+              <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>Waarom een onafhankelijke schadevaststelling?</h2>
               <p className="text-[15px] leading-relaxed mb-5" style={{ color: '#4a5568' }}>
-                Je youngtimer is meer dan alleen een voertuig. Met een verzekeringstaxatie leg je vast wat het op dit moment werkelijk waard is. Die waarde vormt de basis voor de verzekering, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde.
+                Bij schade aan je voertuig wil je zekerheid over de omvang en de waardevermindering. Een onafhankelijk rapport legt alles vast: de aard en omvang van de schade, de herstelkosten en de eventuele waardevermindering na herstel.
               </p>
               <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
-                Bij veel verzekeraars is een taxatierapport vereist wanneer de waarde van een youngtimer afwijkt van standaard verzekeringsbedragen. Met een taxatierapport wordt de waarde vooraf vastgelegd, zodat bij schade of diefstal geen discussie ontstaat.
+                Dit rapport is bruikbaar bij verzekeringsclaims, geschillen met tegenpartijen of bij aankoop van een voertuig met bestaande schade. Onafhankelijk opgesteld, zonder belang bij de uitkomst.
               </p>
             </div>
             <div className="rounded-[12px] p-8 flex flex-col" style={{ background: '#1d3c71' }}>
               <div className="flex items-center justify-center rounded-full mb-4 mx-auto" style={{ width: 48, height: 48, background: 'rgba(255,255,255,0.15)' }}>
                 <Info className="w-6 h-6 text-white" />
               </div>
-              <p className="text-white font-bold text-[18px] text-center leading-[1.4] mb-4">De waarde staat vooraf vast. Geen discussie bij schade of diefstal.</p>
+              <p className="text-white font-bold text-[18px] text-center leading-[1.4] mb-4">Onafhankelijk vastgesteld. Bruikbaar bij claims en geschillen.</p>
               <div className="mb-5" style={{ borderBottom: '1px solid rgba(255,255,255,0.2)' }} />
               <div className="space-y-3 mb-6">
                 {[
-                  "Uitkering op taxatiewaarde, niet dagwaarde",
-                  "Premie betalen over de juiste waarde",
-                  "Rapport 2 tot 3 jaar geldig, check je verzekeraar",
+                  "Schadeomvang en herstelkosten vastgelegd",
+                  "Waardevermindering na herstel berekend",
+                  "Bruikbaar als bewijs bij geschillen",
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: '#ff751f' }} />
@@ -78,7 +78,7 @@ const YoungtimerTaxatie = () => {
                 ))}
               </div>
               <Button variant="cta" className="w-full" onClick={scrollToForm}>
-                Verzekeringstaxatie aanvragen
+                Schadevaststelling aanvragen
               </Button>
             </div>
           </div>
@@ -92,9 +92,9 @@ const YoungtimerTaxatie = () => {
             <div>
               <div className="w-[40px] h-[3px] mb-3" style={{ background: '#ff751f' }} />
               <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>WANNEER NODIG</p>
-              <h2 className="heading-display text-2xl md:text-3xl font-bold mb-3" style={{ color: '#1d3c71' }}>Wanneer is een taxatie nodig?</h2>
+              <h2 className="heading-display text-2xl md:text-3xl font-bold mb-3" style={{ color: '#1d3c71' }}>Wanneer is een schadevaststelling nodig?</h2>
               <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
-                Een verzekeringstaxatie is relevant wanneer de waarde van je youngtimer niet vanzelfsprekend is voor de verzekeraar.
+                Een onafhankelijke schadevaststelling is relevant bij diverse situaties rondom voertuigschade.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -127,11 +127,11 @@ const YoungtimerTaxatie = () => {
             <div className="hidden md:block absolute top-[26px] left-[10%] right-[10%] h-[2px]" style={{ background: '#ff751f' }} />
             <div className="grid md:grid-cols-5 gap-5 relative">
               {[
-                { step: 1, title: "Gegevens aanleveren", desc: "Type, bouwjaar en gebruik" },
-                { step: 2, title: "Fysieke inspectie", desc: "Staat, uitvoering en bijzonderheden" },
-                { step: 3, title: "Waarde vaststellen", desc: "Op basis van inspectie en marktgegevens" },
-                { step: 4, title: "Rapport opstellen", desc: "Duidelijk hoe de waarde tot stand is gekomen" },
-                { step: 5, title: "Oplevering", desc: "Digitaal, klaar voor de verzekeraar" },
+                { step: 1, title: "Gegevens aanleveren", desc: "Type, bouwjaar en aard van de schade" },
+                { step: 2, title: "Fysieke inspectie", desc: "Schade-inventarisatie op locatie" },
+                { step: 3, title: "Schade beoordelen", desc: "Omvang, herstelkosten en waardevermindering" },
+                { step: 4, title: "Rapport opstellen", desc: "Onderbouwd met foto's en bevindingen" },
+                { step: 5, title: "Oplevering", desc: "Digitaal, klaar voor gebruik" },
               ].map((s) => (
                 <div key={s.step} className="text-center relative z-10">
                   <div className="w-[52px] h-[52px] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold text-[20px]" style={{ background: '#1d3c71' }}>
@@ -145,15 +145,9 @@ const YoungtimerTaxatie = () => {
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
             <Button variant="cta" size="lg" onClick={scrollToForm}>
-              Verzekeringstaxatie aanvragen
+              Schadevaststelling aanvragen
               <ArrowDown className="w-4 h-4 ml-2" />
             </Button>
-            <Link to="/verzekering-stappenplan">
-              <Button variant="outline" size="lg" className="border-2 font-medium" style={{ borderColor: '#1d3c71', color: '#1d3c71' }}>
-                Bekijk het volledige stappenplan
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
           </div>
         </div>
       </section>
@@ -161,12 +155,12 @@ const YoungtimerTaxatie = () => {
       {/* Mid-page CTA */}
       <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
         <div className="container-wide text-center">
-          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Verzekeringstaxatie voor je youngtimer?</h2>
+          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Schade aan je voertuig?</h2>
           <p className="text-[15px] mb-6 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>
-            Vooraf zekerheid over de waarde. Wij plannen de taxatie op locatie bij jou.
+            Laat de schade onafhankelijk vaststellen. Wij komen op locatie.
           </p>
           <Button variant="cta" size="lg" onClick={scrollToForm}>
-            Verzekeringstaxatie aanvragen
+            Schadevaststelling aanvragen
             <ArrowDown className="w-4 h-4 ml-2" />
           </Button>
         </div>
@@ -202,12 +196,12 @@ const YoungtimerTaxatie = () => {
       {/* Bottom CTA */}
       <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
         <div className="container-wide text-center">
-          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Zekerheid over de waarde van je youngtimer?</h2>
+          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Zekerheid over de schade aan je voertuig?</h2>
           <p className="text-[15px] mb-6" style={{ color: 'rgba(255,255,255,0.75)' }}>
-            Vraag vrijblijvend een verzekeringstaxatie aan.
+            Vraag vrijblijvend een schadevaststelling aan.
           </p>
           <Button variant="cta" size="lg" onClick={scrollToForm}>
-            Verzekeringstaxatie aanvragen
+            Schadevaststelling aanvragen
             <ArrowDown className="w-4 h-4 ml-2" />
           </Button>
         </div>
@@ -218,7 +212,7 @@ const YoungtimerTaxatie = () => {
         <div className="container-wide">
           <div className="text-center mb-8">
             <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>AANVRAGEN</p>
-            <h2 className="heading-display text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1d3c71' }}>Verzekeringstaxatie aanvragen</h2>
+            <h2 className="heading-display text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1d3c71' }}>Schadevaststelling aanvragen</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
               Vul het formulier in en wij nemen binnen één werkdag contact met je op.
             </p>
@@ -226,10 +220,10 @@ const YoungtimerTaxatie = () => {
           <div className="grid md:grid-cols-[1fr_380px] gap-8">
             <div>
               <IntakeForm
-                serviceType="youngtimerverzekeringstaxatie"
-                formTitle="Verzekeringstaxatie aanvragen"
+                serviceType="schadevaststelling"
+                formTitle="Schadevaststelling aanvragen"
                 formSubtext="Vul onderstaand formulier zo volledig mogelijk in."
-                submitButtonText="Verzekeringstaxatie aanvragen"
+                submitButtonText="Schadevaststelling aanvragen"
                 styledKenteken
               />
             </div>
@@ -244,4 +238,4 @@ const YoungtimerTaxatie = () => {
   );
 };
 
-export default YoungtimerTaxatie;
+export default Schadevaststelling;
