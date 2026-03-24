@@ -163,19 +163,31 @@ const OverOns = () => {
 
             <div className="space-y-3.5 mb-7">
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
-                In 2013 startte Erik Elderson Automobiel Taxaties vanuit één overtuiging: een taxatierapport moet niet alleen kloppen, maar ook standhouden wanneer het wordt beoordeeld.
+                Automobiel Taxaties is in 2013 opgericht door Erik Elderson vanuit één duidelijke overtuiging: een taxatierapport moet niet alleen kloppen, maar ook standhouden wanneer het wordt beoordeeld.
               </p>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
-                Die visie komt voort uit jarenlange ervaring in de taxatiebranche. Geen aannames of snelle conclusies, maar zorgvuldig werk dat onderbouwd en controleerbaar is.
+                Die overtuiging komt voort uit jarenlange ervaring in de taxatiebranche. Geen aannames of snelle conclusies, maar zorgvuldig werk dat onderbouwd en controleerbaar is.
               </p>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
                 Erik rijdt dagelijks door het land om voertuigen op te nemen. Met oog voor detail en aandacht voor het geheel. Van lakdiktemetingen tot schades en gebruikssporen, alles wordt vastgelegd in een compleet en verdedigbaar rapport.
               </p>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
-                Je hebt altijd direct contact met Erik zelf. Hij verzorgt de opname, stelt het rapport op en is je aanspreekpunt. Duidelijk en zonder tussenpersonen.
+                De rapporten worden opgesteld met het oog op gebruik richting Belastingdienst, RDW, verzekeraars en andere betrokken partijen. Daarbij wordt gewerkt binnen de geldende richtlijnen, met onderbouwingen die controleerbaar zijn.
               </p>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
-                De rapporten worden opgesteld met het oog op gebruik richting Belastingdienst, verzekeraar of andere betrokken partijen. Zodat je vooraf zekerheid hebt en achteraf geen discussie.
+                In de praktijk betekent dit dat opdrachtgevers weten waar ze aan toe zijn, vooraf en achteraf.
+              </p>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
+                Veel klanten werken daarom langdurig met Automobiel Taxaties samen. Niet vanwege snelheid of uitkomst, maar omdat de werkwijze duidelijk is en de rapportages consequent op dezelfde zorgvuldige manier worden opgebouwd.
+              </p>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
+                Je hebt altijd direct contact met Erik zelf. Hij verzorgt de opname, stelt het rapport op en is jouw aanspreekpunt. Zonder tussenpersonen, zodat er geen ruis ontstaat en je snel duidelijkheid hebt.
+              </p>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
+                Uiteindelijk gaat het niet alleen om de waarde van een voertuig. Het gaat erom dat die waarde klopt, en dat je daarop kunt vertrouwen wanneer het ertoe doet.
+              </p>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
+                Wil je vooraf weten waar je aan toe bent? Dan kun je eenvoudig een taxatie aanvragen. Je krijgt altijd persoonlijk reactie, zodat je direct duidelijkheid hebt.
               </p>
             </div>
 
@@ -260,7 +272,7 @@ const OverOns = () => {
               marginTop: -20,
             }}
           >
-            Ik wil alleen tevreden klanten. Dat bereik ik door eerlijk te zijn, afspraken na te komen en echt te luisteren.
+            Een taxatierapport is pas goed als het ook bij controle overeind blijft. Daar teken ik voor.
           </p>
           <p className="font-bold text-white text-sm" style={{ fontFamily: "'Inter', sans-serif" }}>
             Erik Elderson, Eigenaar Automobiel Taxaties
