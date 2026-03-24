@@ -6,7 +6,7 @@ import { Phone, Car, Shield, Scale, Wrench, ArrowRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import erikPhoto from "@/assets/erik-over-ons.png";
-import erikInspectiePhoto from "@/assets/erik-inspectie-overons.jpg";
+
 import heroOverOns from "@/assets/hero-overons.png";
 
 const diensten = [
