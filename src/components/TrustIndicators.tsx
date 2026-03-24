@@ -14,7 +14,7 @@ const indicators = [
   {
     icon: Award,
     title: "Ruime ervaring",
-    description: "description: "Meer dan 15 jaar ervaring in voertuigwaarderingen",",
+    description: "Meer dan 15 jaar ervaring in voertuigwaarderingen",
   },
   {
     icon: Users,
