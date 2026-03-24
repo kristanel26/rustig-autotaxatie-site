@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import erikInspectie from "@/assets/erik-inspectie-overons.jpg";
 
 const fuelOptions = [
   { value: "benzine", label: "Benzine" },
