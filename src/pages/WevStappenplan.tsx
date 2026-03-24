@@ -191,6 +191,50 @@ const WevStappenplan = () => {
         </div>
       ))}
 
+
+      {/* Verwachten + Nodig */}
+      <section className="py-14 md:py-16 px-6 md:px-8 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <div className="mb-3" style={{ width: 40, height: 4, background: '#ff751f', borderRadius: 2 }} />
+              <h3 className="font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif', fontSize: 20, color: '#1d3c71', fontWeight: 700 }}>Wat kun je verwachten?</h3>
+              <div className="flex flex-col gap-[10px]">
+                {[
+                  "Onafhankelijke waardebepaling op basis van inspectie en marktdata",
+                  "Erkend rapport bruikbaar voor administratie en aangifte",
+                  "Rapport digitaal binnen enkele werkdagen na inspectie",
+                  "Verdedigbaar bij controle door de Belastingdienst",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4 bg-white" style={{ borderRadius: 10, padding: '16px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
+                    <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
+                    <span className="text-[15px] leading-normal" style={{ fontFamily: 'Inter, sans-serif', color: '#1a1a1a' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="mb-3" style={{ width: 40, height: 4, background: '#ff751f', borderRadius: 2 }} />
+              <h3 className="font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif', fontSize: 20, color: '#1d3c71', fontWeight: 700 }}>Wat hebben wij nodig?</h3>
+              <div className="flex flex-col gap-[10px]">
+                {[
+                  "Naam en contactgegevens",
+                  "Voertuiggegevens: kenteken, merk, type, bouwjaar en kilometerstand",
+                  "Fiscale context: bijv. zakelijk naar privé of privé naar zakelijk",
+                  "Relevante documentatie: onderhoudsboekje, facturen van accessoires",
+                  "Eventuele schaderapporten of eerdere taxaties (indien aanwezig)",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4 bg-white" style={{ borderRadius: 10, padding: '16px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
+                    <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
+                    <span className="text-[15px] leading-normal" style={{ fontFamily: 'Inter, sans-serif', color: '#1a1a1a' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Info block after all steps — same style as BPM */}
       <div className="max-w-5xl mx-auto px-6 lg:px-8 py-8">
         <div
