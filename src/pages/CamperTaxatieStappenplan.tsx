@@ -27,7 +27,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     image: stepFormulier,
     title: "Online informatieformulier invullen",
     content: (
-      <p>Jij kent jouw camper van binnen en buiten. Om een zo volledig en compleet mogelijk taxatierapport te maken, vragen wij je vooraf een online informatieformulier in te vullen. Hierin geef je informatie over de technische staat, aanpassingen, accessoires, beveiliging en eventuele verbouwingen. Heb je facturen van aangebrachte accessoires of uitgevoerde reparaties? Upload deze dan via het formulier. Lukt dit niet? Geen probleem, de taxateur bespreekt dit tijdens de inspectie met je door.</p>
+      <p>Jij kent jouw camper van binnen en buiten. Om een zo volledig en compleet mogelijk taxatierapport te maken, vragen wij jou vooraf een online informatieformulier in te vullen. Hierin geef je informatie over de technische staat, aanpassingen, accessoires, beveiliging en eventuele verbouwingen. Heb je facturen van aangebrachte accessoires of uitgevoerde reparaties? Upload deze dan via het formulier. Lukt dit niet? Geen probleem, de taxateur bespreekt dit tijdens de inspectie met jou door.</p>
     ),
     cta: { label: "Vul het informatieformulier in", href: "/camper-informatieformulier" },
   },

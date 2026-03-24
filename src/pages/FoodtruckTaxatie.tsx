@@ -37,7 +37,7 @@ const FoodtruckTaxatie = () => {
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE FOODTRUCK"
         title="Zekerheid over de waarde van jouw foodtruck"
-        description={<>Met een verzekeringstaxatie leg je de waarde vooraf vast.<br />Wij komen op locatie bij jouw foodtruck.</>}
+        description={<>Met een verzekeringstaxatie leg jij de waarde vooraf vast.<br />Wij komen op locatie bij jouw foodtruck.</>}
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroFoodtruck}
@@ -53,7 +53,7 @@ const FoodtruckTaxatie = () => {
               <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>WAAROM TAXEREN</p>
               <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>Waarom een verzekeringstaxatie voor jouw foodtruck?</h2>
               <p className="text-[15px] leading-relaxed mb-5" style={{ color: '#4a5568' }}>
-                Jouw foodtruck is meer dan alleen een voertuig. De inrichting, apparatuur en aanpassingen maken het uniek. Met een verzekeringstaxatie leg je de totale waarde vooraf vast, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde.
+                Jouw foodtruck is meer dan alleen een voertuig. De inrichting, apparatuur en aanpassingen maken het uniek. Met een verzekeringstaxatie leg jij de totale waarde vooraf vast, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde.
               </p>
               <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
                 Bij veel verzekeraars is een taxatierapport vereist wanneer de waarde van een foodtruck afwijkt van standaard verzekeringsbedragen. Met een taxatierapport wordt de waarde vooraf vastgelegd, zodat bij schade of diefstal geen discussie ontstaat.

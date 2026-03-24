@@ -93,7 +93,7 @@ const IntakeForm = ({
             <Input
               id="naam"
               name="naam"
-              placeholder="Je volledige naam"
+              placeholder="Jouw volledige naam"
               value={formData.naam}
               onChange={handleChange}
               required
