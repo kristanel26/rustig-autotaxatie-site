@@ -6,14 +6,14 @@ const BusIcon = ({ size, style }: { size?: number; style?: React.CSSProperties }
 );
 
 const taxatieOptions = [
-  { value: "bpm", label: "BPM Taxatie", icon: FaFileInvoiceDollar, badge: "MEEST GEKOZEN" },
-  { value: "wev", label: "WEV Taxatie", icon: FaBalanceScale },
-  { value: "oldtimer", label: "Oldtimer Taxatie", icon: FaClock },
-  { value: "youngtimer", label: "Youngtimer Taxatie", icon: FaCar },
+  { value: "bpm", label: "BPM Taxatie", icon: FileText, badge: "MEEST GEKOZEN" },
+  { value: "wev", label: "WEV Taxatie", icon: Scale },
+  { value: "oldtimer", label: "Oldtimer Taxatie", icon: Clock },
+  { value: "youngtimer", label: "Youngtimer Taxatie", icon: Car },
   { value: "camper", label: "Camper Taxatie", icon: BusIcon },
-  { value: "motor", label: "Motor Taxatie", icon: FaMotorcycle },
-  { value: "foodtruck", label: "Foodtruck Taxatie", icon: FaUtensils },
-  { value: "schadevaststelling", label: "Schadevaststelling", icon: FaCarCrash },
+  { value: "motor", label: "Motor Taxatie", icon: Bike },
+  { value: "foodtruck", label: "Foodtruck Taxatie", icon: UtensilsCrossed },
+  { value: "schadevaststelling", label: "Schadevaststelling", icon: CarFront },
 ];
 
 const steps = ["Type taxatie", "Voertuig", "Locatie & datum", "Contact"];
