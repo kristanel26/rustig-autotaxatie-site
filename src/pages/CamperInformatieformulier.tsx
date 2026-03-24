@@ -82,7 +82,7 @@ const CamperInformatieformulier = () => {
 
   return (
     <>
-      <PageMeta title="Camper Informatieformulier | Automobiel Taxaties" description="Vul het online informatieformulier in voor je campertaxatie. Help ons jouw camper zo volledig mogelijk in beeld te brengen." />
+      <PageMeta title="Camper Informatieformulier | Automobiel Taxaties" description="Vul het online informatieformulier in voor jou campertaxatie. Help ons jouw camper zo volledig mogelijk in beeld te brengen." />
       <SiteHeader />
 
       {/* Hero */}
@@ -519,7 +519,7 @@ const CamperInformatieformulier = () => {
                   <span className="text-sm text-foreground/80">Ik verklaar hierbij dat alles naar waarheid is ingevuld.</span>
                 </label>
                 <Button type="submit" variant="cta" size="xl" className="w-full" disabled={!agreed}>Informatieformulier verzenden</Button>
-                <p className="text-xs text-muted-foreground text-center">We gaan zorgvuldig om met je gegevens en gebruiken deze alleen voor het verwerken van je taxatie.</p>
+                <p className="text-xs text-muted-foreground text-center">We gaan zorgvuldig om met jouw gegevens en gebruiken deze alleen voor het verwerken van je taxatie.</p>
               </div>
             </form>
           )}

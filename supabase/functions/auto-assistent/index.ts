@@ -34,7 +34,7 @@ Belangrijke feiten:
 - Contact: 085 483 2461
 - E-mail: algemeen@automobieltaxaties.nl
 
-Regels voor je antwoorden:
+Regels voor jou antwoorden:
 - Geef altijd korte, directe antwoorden van maximaal 3 zinnen.
 - Gebruik GEEN markdown-opmaak: geen asterisken, geen bold, geen bullets met sterretjes of streepjes.
 - Schrijf in gewone lopende zinnen.

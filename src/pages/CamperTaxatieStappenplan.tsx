@@ -19,7 +19,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     image: stepAanvraag,
     title: "Aanvraag indienen",
     content: (
-      <p>Vul het aanvraagformulier in op de website of bel ons op 085 483 2461. Geef het type camper, bouwjaar en het doel van de taxatie door. Wij nemen binnen één werkdag contact met je op om een afspraak in te plannen.</p>
+      <p>Vul het aanvraagformulier in op de website of bel ons op 085 483 2461. Geef het type camper, bouwjaar en het doel van de taxatie door. Wij nemen binnen één werkdag contact met jou op om een afspraak in te plannen.</p>
     ),
   },
   {
@@ -60,7 +60,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     image: stepVerzekering,
     title: "Verzekering regelen",
     content: (
-      <p>Met het taxatierapport ga je naar je verzekeraar. De verzekering wordt afgesloten op de getaxeerde waarde. Zo ben je bij schade of diefstal verzekerd voor de werkelijke waarde van je camper, niet de dagwaarde.</p>
+      <p>Met het taxatierapport ga je naar jouw verzekeraar. De verzekering wordt afgesloten op de getaxeerde waarde. Zo ben je bij schade of diefstal verzekerd voor de werkelijke waarde van jouw camper, niet de dagwaarde.</p>
     ),
   },
 ];
@@ -69,7 +69,7 @@ const CamperTaxatieStappenplan = () => {
     <>
       <PageMeta
         title="Stappenplan Campertaxatie | Automobiel Taxaties"
-        description="Van aanvraag tot rapport. Zo verloopt de verzekeringstaxatie van je camper. Bekijk het volledige stappenplan."
+        description="Van aanvraag tot rapport. Zo verloopt de verzekeringstaxatie van jouw camper. Bekijk het volledige stappenplan."
       />
       <SiteHeader />
 
@@ -193,7 +193,7 @@ const CamperTaxatieStappenplan = () => {
             className="text-white font-bold mb-6"
             style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.5rem, 3vw, 2.2rem)' }}
           >
-            Zekerheid over de waarde van je camper?
+            Zekerheid over de waarde van jouw camper?
           </h2>
           <p className="text-white/80 text-lg mb-8">
             Vraag vrijblijvend een verzekeringstaxatie aan.

@@ -31,7 +31,7 @@ const steps: { number: number; title: string; image?: string; content: React.Rea
     image: stepTransport,
     title: "Transport regelen",
     content: (
-      <p>Je kunt de auto zelf ophalen of laten transporteren. Automobiel Taxaties heeft connecties die dit voor je kunnen verzorgen. Heb je hier vragen over? Stel ze gerust.</p>
+      <p>Je kunt de auto zelf ophalen of laten transporteren. Automobiel Taxaties heeft connecties die dit voor jou kunnen verzorgen. Heb je hier vragen over? Stel ze gerust.</p>
     ),
   },
   {

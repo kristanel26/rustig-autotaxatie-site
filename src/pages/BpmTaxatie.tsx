@@ -39,7 +39,7 @@ const BpmTaxatie = () => {
     <div className="min-h-screen bg-background">
       <PageMeta
         title="BPM Taxatie bij Import | Laagste BPM | Automobiel Taxaties"
-        description="De laagst haalbare BPM voor je importvoertuig. Fysieke inspectie op locatie door een erkend TMV en VRT register taxateur. Gratis advies aanvragen."
+        description="De laagst haalbare BPM voor jou importvoertuig. Fysieke inspectie op locatie door een erkend TMV en VRT register taxateur. Gratis advies aanvragen."
       />
       <SiteHeader />
       <LandingHero
@@ -58,7 +58,7 @@ const BpmTaxatie = () => {
         <div className="container-wide">
           <div className="mb-8">
             {sectionLabel("BPM Calculator")}
-            <h2 className="font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36, color: '#1d3c71' }}>Bereken je BPM indicatie</h2>
+            <h2 className="font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif', fontSize: 36, color: '#1d3c71' }}>Bereken jouw BPM indicatie</h2>
             <p className="text-[15px]" style={{ color: '#4a5568', maxWidth: 540 }}>
               Gebruik onze calculator voor een eerste indicatie van de BPM-kosten bij import. Let op: een berekening is geen taxatie en biedt geen juridische onderbouwing.
             </p>
@@ -263,7 +263,7 @@ const BpmTaxatie = () => {
             {sectionLabel("Aanvragen")}
             <h2 className="text-2xl md:text-3xl font-bold mb-2" style={{ fontFamily: 'Playfair Display, serif', color: '#1d3c71' }}>Vrijblijvend contact opnemen</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
-              Heb je een vraag over een BPM-aangifte of wil je een afspraak inplannen? Vul het formulier in en wij nemen binnen één werkdag contact met je op.
+              Heb je een vraag over een BPM-aangifte of wil je een afspraak inplannen? Vul het formulier in en wij nemen binnen één werkdag contact met jou op.
             </p>
           </div>
           <div className="grid md:grid-cols-[1fr_380px] gap-8 items-stretch">
@@ -271,11 +271,11 @@ const BpmTaxatie = () => {
               <IntakeForm
                 serviceType="BPM-aangifte"
                 formTitle="Stel je vraag of vraag een aangifte aan"
-                formSubtext="Heb je een vraag? Omschrijf je situatie kort en wij kijken wat de beste aanpak is."
+                formSubtext="Heb je een vraag? Omschrijf jouw situatie kort en wij kijken wat de beste aanpak is."
                 toelichtingLabel="Jouw vraag of situatie"
                 toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig en de import."
                 submitButtonText="Verstuur. Wij nemen contact op."
-                footerText="We nemen binnen één werkdag contact met je op. Geen verplichtingen, gewoon een goed gesprek."
+                footerText="We nemen binnen één werkdag contact met jou op. Geen verplichtingen, gewoon een goed gesprek."
                 showVoertuigType={true}
                 hideKenteken={true}
                 compact={true}

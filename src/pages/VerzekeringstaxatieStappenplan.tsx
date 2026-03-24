@@ -19,7 +19,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     image: stepAanvraag,
     title: "Aanvraag indienen",
     content: (
-      <p>Vul het aanvraagformulier in op de website of bel ons. Geef het type voertuig, bouwjaar en het doel van de taxatie door. Wij nemen binnen één werkdag contact met je op om een afspraak in te plannen.</p>
+      <p>Vul het aanvraagformulier in op de website of bel ons. Geef het type voertuig, bouwjaar en het doel van de taxatie door. Wij nemen binnen één werkdag contact met jou op om een afspraak in te plannen.</p>
     ),
   },
   {
@@ -59,7 +59,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     image: stepRegelen,
     title: "Verzekering regelen",
     content: (
-      <p>Met het taxatierapport ga je naar je verzekeraar. De verzekering wordt afgesloten op de getaxeerde waarde. Zo ben je bij schade of diefstal verzekerd voor de werkelijke waarde van je voertuig.</p>
+      <p>Met het taxatierapport ga je naar jouw verzekeraar. De verzekering wordt afgesloten op de getaxeerde waarde. Zo ben je bij schade of diefstal verzekerd voor de werkelijke waarde van jouw voertuig.</p>
     ),
   },
 ];
@@ -185,7 +185,7 @@ const VerzekeringstaxatieStappenplan = () => {
               <h3 className="font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif', fontSize: 20, color: '#1d3c71', fontWeight: 700 }}>Wat hebben wij nodig?</h3>
               <div className="flex flex-col gap-[10px]">
                 {[
-                  "Je naam en contactgegevens",
+                  "Jouw naam en contactgegevens",
                   "De kentekencard van het voertuig",
                   "Facturen van inrichting en apparatuur",
                   "Eventuele bijzonderheden (zelfbouw, aanpassingen)",
@@ -223,7 +223,7 @@ const VerzekeringstaxatieStappenplan = () => {
             className="text-white font-bold mb-6"
             style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.5rem, 3vw, 2.2rem)' }}
           >
-            Zekerheid over de waarde van je voertuig?
+            Zekerheid over de waarde van jouw voertuig?
           </h2>
           <p className="text-white/80 text-lg mb-8">
             Vraag vrijblijvend een verzekeringstaxatie aan.

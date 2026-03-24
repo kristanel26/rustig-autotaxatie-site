@@ -115,7 +115,7 @@ const Index = () => {
                 maxWidth: 540,
               }}
             >
-              Automobiel Taxaties is het erkende taxatiebureau voor merkdealers, importeurs en particulieren. Wij komen bij je op locatie, in het grootste gedeelte van Nederland.
+              Automobiel Taxaties is het erkende taxatiebureau voor merkdealers, importeurs en particulieren. Wij komen bij jou op locatie, in het grootste gedeelte van Nederland.
             </p>
             <div className="animate-slide-up delay-300 flex flex-col sm:flex-row gap-3 items-center">
               <Link to="/contact">
@@ -141,7 +141,7 @@ const Index = () => {
             className="heading-display font-bold mb-4"
             style={{ fontSize: 'clamp(30px, 3.5vw, 44px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#1a1a1a' }}
           >
-            Bereken je BPM indicatie
+            Bereken jouw BPM indicatie
           </h2>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, fontWeight: 400, lineHeight: 1.70, color: '#4a5568', maxWidth: 540 }} className="mb-8">
             Gebruik onze calculator voor een eerste indicatie van de BPM-kosten bij import. Let op: een berekening is geen taxatie en biedt geen juridische onderbouwing.
@@ -395,7 +395,7 @@ const Index = () => {
               className="heading-display font-bold mb-2.5"
               style={{ fontSize: 'clamp(30px, 3.5vw, 44px)', lineHeight: 1.15, letterSpacing: '-0.02em', color: '#1a1a1a' }}
             >
-              Wat kunnen wij voor je doen?
+              Wat kunnen wij voor jou doen?
             </h2>
             <p style={{ fontSize: 16, color: '#698db3' }}>
               Kies het type taxatie dat bij jouw voertuig past.
@@ -483,7 +483,7 @@ const Index = () => {
               Maak een afspraak
             </h2>
             <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.65)', maxWidth: 480, margin: '0 auto' }}>
-              Vul je gegevens in en Erik neemt binnen één werkdag contact met je op om de afspraak in te plannen.
+              Vul jouw gegevens in en Erik neemt binnen één werkdag contact met jou op om de afspraak in te plannen.
             </p>
           </div>
           <div
@@ -528,7 +528,7 @@ const Index = () => {
               {
                 icon: Search,
                 title: "Fysieke inspectie, geen software",
-                text: "Wij komen op locatie bij je voertuig. Lakdiktemetingen, schadecalculatie en een volledig fotodossier vormen de basis van elk rapport. Niet een algoritme, maar een erkende taxateur met twee ogen en vakkennis.",
+                text: "Wij komen op locatie bij jouw voertuig. Lakdiktemetingen, schadecalculatie en een volledig fotodossier vormen de basis van elk rapport. Niet een algoritme, maar een erkende taxateur met twee ogen en vakkennis.",
               },
               {
                 icon: Award,
@@ -704,7 +704,7 @@ const Index = () => {
             Vragen of een taxatie nodig?
           </h2>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(16px, 1.8vw, 19px)', fontWeight: 400, lineHeight: 1.70, color: 'rgba(255,255,255,0.72)' }} className="mb-10">
-            Neem contact op om jouw situatie te bespreken. We kijken graag mee welke taxatie bij je vraag past.
+            Neem contact op om jouw situatie te bespreken. We kijken graag mee welke taxatie bij jou vraag past.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <Link to="/contact">

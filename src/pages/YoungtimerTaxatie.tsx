@@ -36,8 +36,8 @@ const YoungtimerTaxatie = () => {
       <SiteHeader />
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE YOUNGTIMER"
-        title="Zekerheid over de waarde van je youngtimer"
-        description={<>Met een verzekeringstaxatie leg je de waarde vooraf vast.<br />Wij komen op locatie bij je youngtimer.</>}
+        title="Zekerheid over de waarde van jouw youngtimer"
+        description={<>Met een verzekeringstaxatie leg je de waarde vooraf vast.<br />Wij komen op locatie bij jouw youngtimer.</>}
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroYoungtimer}
@@ -51,9 +51,9 @@ const YoungtimerTaxatie = () => {
           <div className="grid md:grid-cols-[1fr_0.7fr] gap-8 items-start">
             <div>
               <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>WAAROM TAXEREN</p>
-              <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>Waarom een verzekeringstaxatie voor je youngtimer?</h2>
+              <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>Waarom een verzekeringstaxatie voor jouw youngtimer?</h2>
               <p className="text-[15px] leading-relaxed mb-5" style={{ color: '#4a5568' }}>
-                Je youngtimer is meer dan alleen een voertuig. Met een verzekeringstaxatie leg je vast wat het op dit moment werkelijk waard is. Die waarde vormt de basis voor de verzekering, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde.
+                Jouw youngtimer is meer dan alleen een voertuig. Met een verzekeringstaxatie leg je vast wat het op dit moment werkelijk waard is. Die waarde vormt de basis voor de verzekering, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde.
               </p>
               <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
                 Bij veel verzekeraars is een taxatierapport vereist wanneer de waarde van een youngtimer afwijkt van standaard verzekeringsbedragen. Met een taxatierapport wordt de waarde vooraf vastgelegd, zodat bij schade of diefstal geen discussie ontstaat.
@@ -69,7 +69,7 @@ const YoungtimerTaxatie = () => {
                 {[
                   "Uitkering op taxatiewaarde, niet dagwaarde",
                   "Premie betalen over de juiste waarde",
-                  "Rapport 2 tot 3 jaar geldig, check je verzekeraar",
+                  "Rapport 2 tot 3 jaar geldig, check jouw verzekeraar",
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: '#ff751f' }} />
@@ -94,7 +94,7 @@ const YoungtimerTaxatie = () => {
               <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>WANNEER NODIG</p>
               <h2 className="heading-display text-2xl md:text-3xl font-bold mb-3" style={{ color: '#1d3c71' }}>Wanneer is een taxatie nodig?</h2>
               <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
-                Een verzekeringstaxatie is relevant wanneer de waarde van je youngtimer niet vanzelfsprekend is voor de verzekeraar.
+                Een verzekeringstaxatie is relevant wanneer de waarde van jouw youngtimer niet vanzelfsprekend is voor de verzekeraar.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -161,7 +161,7 @@ const YoungtimerTaxatie = () => {
       {/* Mid-page CTA */}
       <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
         <div className="container-wide text-center">
-          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Verzekeringstaxatie voor je youngtimer?</h2>
+          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Verzekeringstaxatie voor jouw youngtimer?</h2>
           <p className="text-[15px] mb-6 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>
             Vooraf zekerheid over de waarde. Wij plannen de taxatie op locatie bij jou.
           </p>
@@ -202,7 +202,7 @@ const YoungtimerTaxatie = () => {
       {/* Bottom CTA */}
       <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
         <div className="container-wide text-center">
-          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Zekerheid over de waarde van je youngtimer?</h2>
+          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Zekerheid over de waarde van jouw youngtimer?</h2>
           <p className="text-[15px] mb-6" style={{ color: 'rgba(255,255,255,0.75)' }}>
             Vraag vrijblijvend een verzekeringstaxatie aan.
           </p>
@@ -220,7 +220,7 @@ const YoungtimerTaxatie = () => {
             <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>AANVRAGEN</p>
             <h2 className="heading-display text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1d3c71' }}>Verzekeringstaxatie aanvragen</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
-              Vul het formulier in en wij nemen binnen één werkdag contact met je op.
+              Vul het formulier in en wij nemen binnen één werkdag contact met jou op.
             </p>
           </div>
           <div className="grid md:grid-cols-[1fr_380px] gap-8">

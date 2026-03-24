@@ -68,9 +68,9 @@ const IntakeForm = ({
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent/10 mb-6">
           <CheckCircle className="w-8 h-8 text-accent" />
         </div>
-        <h3 className="text-2xl font-semibold mb-3">Bedankt voor je aanvraag</h3>
+        <h3 className="text-2xl font-semibold mb-3">Bedankt voor jouw aanvraag</h3>
         <p className="text-muted-foreground max-w-md mx-auto">
-          We nemen zo snel mogelijk contact met je op om de details te bespreken 
+          We nemen zo snel mogelijk contact met jou op om de details te bespreken 
           en een afspraak in te plannen.
         </p>
       </div>
@@ -82,7 +82,7 @@ const IntakeForm = ({
       <div className="mb-8">
         <h3 className="text-2xl font-semibold mb-2">{formTitle || `Vraag een ${serviceType} aan`}</h3>
         <p className="text-muted-foreground">
-          {formSubtext || "Vul onderstaand formulier in en we nemen binnen één werkdag contact met je op."}
+          {formSubtext || "Vul onderstaand formulier in en we nemen binnen één werkdag contact met jou op."}
         </p>
       </div>
 
@@ -149,7 +149,7 @@ const IntakeForm = ({
               <div 
                 className="flex items-stretch overflow-hidden"
                 style={{ 
-                  height: 48, 
+                  height: 52, 
                   maxWidth: 220,
                   borderRadius: 2,
                   border: '1px solid #CCA800',
@@ -159,7 +159,7 @@ const IntakeForm = ({
                   className="flex flex-col items-center justify-center shrink-0"
                   style={{ 
                     background: '#003DA5', 
-                    width: 36,
+                    width: 40,
                     padding: '4px 0',
                     gap: 1,
                   }}
@@ -183,16 +183,17 @@ const IntakeForm = ({
                   placeholder="XX-000-X"
                   value={formData.kenteken}
                   onChange={handleChange}
-                  className="outline-none px-3"
+                  className="outline-none px-3 flex items-center"
                   style={{
                     background: '#FFD700',
                     color: '#000000',
-                    fontWeight: 700,
-                    fontSize: 18,
-                    letterSpacing: '0.2em',
+                    fontWeight: 800,
+                    fontSize: 24,
+                    letterSpacing: '0.25em',
                     textTransform: 'uppercase',
                     width: '100%',
                     fontFamily: "'Courier New', 'Consolas', monospace",
+                    lineHeight: '52px',
                   }}
                 />
               </div>
@@ -246,7 +247,7 @@ const IntakeForm = ({
           <Textarea
             id="bericht"
             name="bericht"
-            placeholder={toelichtingPlaceholder || "Vertel kort over je situatie en wat je nodig hebt..."}
+            placeholder={toelichtingPlaceholder || "Vertel kort over jouw situatie en wat je nodig hebt..."}
             value={formData.bericht}
             onChange={handleChange}
             rows={4}
@@ -279,7 +280,7 @@ const IntakeForm = ({
         </div>
 
         <p className="text-sm text-muted-foreground text-center">
-          {footerText || "We gaan zorgvuldig om met je gegevens en gebruiken deze alleen voor het verwerken van je aanvraag."}
+          {footerText || "We gaan zorgvuldig om met jouw gegevens en gebruiken deze alleen voor het verwerken van jouw aanvraag."}
         </p>
       </div>
     </form>

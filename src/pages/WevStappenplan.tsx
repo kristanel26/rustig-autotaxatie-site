@@ -29,7 +29,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     image: stepAanvraag,
     title: "Je neemt contact op",
     content: (
-      <p>Maak een afspraak voor je WEV-taxatie. Dat kan telefonisch via 085 483 2461 of per e-mail via algemeen@automobieltaxaties.nl. We bespreken jouw situatie: gaat het om een overdracht van zaak naar privé, privé naar zaak, of iets anders? Op basis daarvan plannen we de taxatie.</p>
+      <p>Maak een afspraak voor jou WEV-taxatie. Dat kan telefonisch via 085 483 2461 of per e-mail via algemeen@automobieltaxaties.nl. We bespreken jouw situatie: gaat het om een overdracht van zaak naar privé, privé naar zaak, of iets anders? Op basis daarvan plannen we de taxatie.</p>
     ),
   },
   {
@@ -38,7 +38,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     title: "Wij taxeren jouw voertuig op locatie",
     content: (
       <div>
-        <p className="mb-4">Je laat je voertuig op locatie taxeren. Thuis, op je bedrijfsadres of bij een garage. Onze taxateur beoordeelt het voertuig van binnen en van buiten en maakt een volledig fotodossier. De staat op de dag van taxatie is bepalend voor de waarde.</p>
+        <p className="mb-4">Je laat jouw voertuig op locatie taxeren. Thuis, op je bedrijfsadres of bij een garage. Onze taxateur beoordeelt het voertuig van binnen en van buiten en maakt een volledig fotodossier. De staat op de dag van taxatie is bepalend voor de waarde.</p>
         <ul className="space-y-2">
           <CheckItem text="Visuele inspectie van carrosserie en interieur" />
           <CheckItem text="Controle op beschadigingen, krassen en deuken" />
@@ -83,7 +83,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     title: "Je ontvangt het digitale rapport",
     content: (
       <div>
-        <p className="mb-4">Je ontvangt het volledige, ondertekende taxatierapport digitaal binnen enkele werkdagen na de inspectie. Het rapport is direct bruikbaar voor je administratie of aangifte bij de Belastingdienst. Stuur het door naar je accountant of gebruik het als onderbouwing bij de overdracht.</p>
+        <p className="mb-4">Je ontvangt het volledige, ondertekende taxatierapport digitaal binnen enkele werkdagen na de inspectie. Het rapport is direct bruikbaar voor jou administratie of aangifte bij de Belastingdienst. Stuur het door naar je accountant of gebruik het als onderbouwing bij de overdracht.</p>
         <ul className="space-y-2">
           <CheckItem text="Rapport digitaal binnen enkele werkdagen" />
           <CheckItem text="Volledig ondertekend door erkend taxateur" />
@@ -243,7 +243,7 @@ const WevStappenplan = () => {
         >
           <Info className="w-6 h-6 shrink-0 mt-0.5" style={{ color: '#1d3c71' }} />
           <div className="text-sm leading-relaxed" style={{ color: '#1d3c71' }}>
-            <p className="mb-2">Het taxatierapport is geldig op de datum van inspectie. Gebruik het direct voor je administratie of aangifte.</p>
+            <p className="mb-2">Het taxatierapport is geldig op de datum van inspectie. Gebruik het direct voor jou administratie of aangifte.</p>
             <p className="mb-2">Werkzaamheden moeten vóór de taxatiedatum zijn uitgevoerd. Zo blijft het rapport fiscaal verdedigbaar.</p>
             <p>Houd er rekening mee dat de Belastingdienst tot 5 jaar kan navorderen. Een goed onderbouwd rapport beschermt je.</p>
           </div>

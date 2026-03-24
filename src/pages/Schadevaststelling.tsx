@@ -37,7 +37,7 @@ const Schadevaststelling = () => {
       <LandingHero
         subtitle="SCHADEVASTSTELLING"
         title="Onafhankelijke vaststelling van schade"
-        description={<>Een onafhankelijk rapport dat de schade en waardevermindering vastlegt.<br />Wij komen op locatie bij je voertuig.</>}
+        description={<>Een onafhankelijk rapport dat de schade en waardevermindering vastlegt.<br />Wij komen op locatie bij jouw voertuig.</>}
         ctaText="Schadevaststelling aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroImage}
@@ -53,7 +53,7 @@ const Schadevaststelling = () => {
               <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>WAAROM SCHADEVASTSTELLING</p>
               <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>Waarom een onafhankelijke schadevaststelling?</h2>
               <p className="text-[15px] leading-relaxed mb-5" style={{ color: '#4a5568' }}>
-                Bij schade aan je voertuig wil je zekerheid over de omvang en de waardevermindering. Een onafhankelijk rapport legt alles vast: de aard en omvang van de schade, de herstelkosten en de eventuele waardevermindering na herstel.
+                Bij schade aan jouw voertuig wil je zekerheid over de omvang en de waardevermindering. Een onafhankelijk rapport legt alles vast: de aard en omvang van de schade, de herstelkosten en de eventuele waardevermindering na herstel.
               </p>
               <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
                 Dit rapport is bruikbaar bij verzekeringsclaims, geschillen met tegenpartijen of bij aankoop van een voertuig met bestaande schade. Onafhankelijk opgesteld, zonder belang bij de uitkomst.
@@ -155,7 +155,7 @@ const Schadevaststelling = () => {
       {/* Mid-page CTA */}
       <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
         <div className="container-wide text-center">
-          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Schade aan je voertuig?</h2>
+          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Schade aan jouw voertuig?</h2>
           <p className="text-[15px] mb-6 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>
             Laat de schade onafhankelijk vaststellen. Wij komen op locatie.
           </p>
@@ -196,7 +196,7 @@ const Schadevaststelling = () => {
       {/* Bottom CTA */}
       <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
         <div className="container-wide text-center">
-          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Zekerheid over de schade aan je voertuig?</h2>
+          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Zekerheid over de schade aan jouw voertuig?</h2>
           <p className="text-[15px] mb-6" style={{ color: 'rgba(255,255,255,0.75)' }}>
             Vraag vrijblijvend een schadevaststelling aan.
           </p>
@@ -214,7 +214,7 @@ const Schadevaststelling = () => {
             <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>AANVRAGEN</p>
             <h2 className="heading-display text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1d3c71' }}>Schadevaststelling aanvragen</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
-              Vul het formulier in en wij nemen binnen één werkdag contact met je op.
+              Vul het formulier in en wij nemen binnen één werkdag contact met jou op.
             </p>
           </div>
           <div className="grid md:grid-cols-[1fr_380px] gap-8">

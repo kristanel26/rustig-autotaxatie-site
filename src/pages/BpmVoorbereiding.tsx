@@ -19,7 +19,7 @@ const BpmVoorbereiding = () => {
     <div className="min-h-screen bg-background">
       <PageMeta title="BPM Voorbereiding | Vooraf Weten Wat Je Betaalt | Automobiel Taxaties" description="Overweeg je een auto te importeren? Met een BPM voorbereiding weet je vooraf precies wat de totale kosten zijn." />
       <SiteHeader />
-      <LandingHero subtitle="BPM voorbereiding" title="Weet wat je gaat betalen vóórdat je koopt" description="Overweeg je een auto te importeren? Met een BPM voorbereiding weet je vooraf precies wat de totale kosten zijn. Zo voorkom je verrassingen en kun je een goede beslissing nemen." ctaText="Start je BPM berekening" onCtaClick={scrollToForm} heroImage={heroBpm} compact />
+      <LandingHero subtitle="BPM voorbereiding" title="Weet wat je gaat betalen vóórdat je koopt" description="Overweeg je een auto te importeren? Met een BPM voorbereiding weet je vooraf precies wat de totale kosten zijn. Zo voorkom je verrassingen en kun je een goede beslissing nemen." ctaText="Start jouw BPM berekening" onCtaClick={scrollToForm} heroImage={heroBpm} compact />
       <UspBar />
 
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
@@ -77,13 +77,13 @@ const BpmVoorbereiding = () => {
 
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
         <div className="container-wide"><div className="grid md:grid-cols-2 gap-8">
-          <div><h2 className="text-xl md:text-2xl font-semibold mb-5">Wat kun je verwachten?</h2><div className="space-y-3">{["Exacte berekening per methode", "Duidelijke uitleg welke het gunstigst is", "Overzicht binnen 24 uur", "Persoonlijk advies over je situatie"].map((item, i) => (<div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}><div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(255,117,31,0.12)' }}><CheckCircle className="w-4 h-4 text-cta" /></div><span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span></div>))}</div></div>
+          <div><h2 className="text-xl md:text-2xl font-semibold mb-5">Wat kun je verwachten?</h2><div className="space-y-3">{["Exacte berekening per methode", "Duidelijke uitleg welke het gunstigst is", "Overzicht binnen 24 uur", "Persoonlijk advies over jouw situatie"].map((item, i) => (<div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}><div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(255,117,31,0.12)' }}><CheckCircle className="w-4 h-4 text-cta" /></div><span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span></div>))}</div></div>
           <div><h2 className="text-xl md:text-2xl font-semibold mb-5">Wat hebben wij nodig?</h2><div className="space-y-3">{["Buitenlands kenteken of chassisnummer", "Merk, model en bouwjaar", "Brandstoftype en CO2-waarde", "Eventuele schade-informatie"].map((item, i) => (<div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}><div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}><CheckCircle className="w-4 h-4 text-primary" /></div><span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span></div>))}</div></div>
         </div></div>
       </section>
 
       <section className="py-10 md:py-14 px-6 md:px-8 bg-background" ref={formRef}>
-        <div className="container-wide"><div className="text-center mb-8"><h2 className="text-2xl md:text-3xl font-semibold mb-2">BPM voorbereiding aanvragen</h2><p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>Vul het formulier in en wij nemen binnen één werkdag contact met je op.</p></div>
+        <div className="container-wide"><div className="text-center mb-8"><h2 className="text-2xl md:text-3xl font-semibold mb-2">BPM voorbereiding aanvragen</h2><p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>Vul het formulier in en wij nemen binnen één werkdag contact met jou op.</p></div>
         <div className="grid md:grid-cols-[1fr_380px] gap-8"><div><IntakeForm serviceType="BPM voorbereiding" formTitle="BPM voorbereiding aanvragen" formSubtext="Vul onderstaand formulier zo volledig mogelijk in." submitButtonText="BPM voorbereiding aanvragen" showVoertuigType={true} /></div><ContactSidebar /></div></div>
       </section>
 
