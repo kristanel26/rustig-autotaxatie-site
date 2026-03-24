@@ -251,6 +251,7 @@ const CamperTaxatie = () => {
                 formTitle="Verzekeringstaxatie aanvragen"
                 formSubtext="Vul onderstaand formulier zo volledig mogelijk in."
                 submitButtonText="Verzekeringstaxatie aanvragen"
+                styledKenteken
               />
             </div>
             <ContactSidebar />
