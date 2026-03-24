@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Check, ArrowRight, ArrowLeft, Bus } from "lucide-react";
-import { FaFileInvoiceDollar, FaBalanceScale, FaClock, FaCar, FaMotorcycle, FaUtensils, FaCarCrash } from "react-icons/fa";
+import { Check, ArrowRight, ArrowLeft, Bus, FileText, Scale, Clock, Car, Bike, UtensilsCrossed, CarFront } from "lucide-react";
 
 const BusIcon = ({ size, style }: { size?: number; style?: React.CSSProperties }) => (
   <Bus size={size || 28} style={style} />
