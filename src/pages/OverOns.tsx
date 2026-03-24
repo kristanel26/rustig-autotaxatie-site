@@ -60,7 +60,7 @@ const stappen = [
   {
     image: stepAfhandeling,
     title: "Aangifte of verzekering regelen",
-    text: "Met het rapport regel je de BPM-aangifte, sluit je de verzekering af op de getaxeerde waarde of gebruik je het rapport bij een geschil of aankoop. Wij helpen je hier desgewenst bij.",
+    text: "Met het rapport regel je de BPM-aangifte, sluit je de verzekering af op de getaxeerde waarde of gebruik je het rapport bij een geschil of aankoop. Wij helpen jou hier desgewenst bij.",
   },
 ];
 

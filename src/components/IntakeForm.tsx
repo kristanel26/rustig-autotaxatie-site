@@ -68,9 +68,9 @@ const IntakeForm = ({
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent/10 mb-6">
           <CheckCircle className="w-8 h-8 text-accent" />
         </div>
-        <h3 className="text-2xl font-semibold mb-3">Bedankt voor je aanvraag</h3>
+        <h3 className="text-2xl font-semibold mb-3">Bedankt voor jouw aanvraag</h3>
         <p className="text-muted-foreground max-w-md mx-auto">
-          We nemen zo snel mogelijk contact met je op om de details te bespreken 
+          We nemen zo snel mogelijk contact met jou op om de details te bespreken 
           en een afspraak in te plannen.
         </p>
       </div>
@@ -82,7 +82,7 @@ const IntakeForm = ({
       <div className="mb-8">
         <h3 className="text-2xl font-semibold mb-2">{formTitle || `Vraag een ${serviceType} aan`}</h3>
         <p className="text-muted-foreground">
-          {formSubtext || "Vul onderstaand formulier in en we nemen binnen één werkdag contact met je op."}
+          {formSubtext || "Vul onderstaand formulier in en we nemen binnen één werkdag contact met jou op."}
         </p>
       </div>
 
@@ -247,7 +247,7 @@ const IntakeForm = ({
           <Textarea
             id="bericht"
             name="bericht"
-            placeholder={toelichtingPlaceholder || "Vertel kort over je situatie en wat je nodig hebt..."}
+            placeholder={toelichtingPlaceholder || "Vertel kort over jouw situatie en wat je nodig hebt..."}
             value={formData.bericht}
             onChange={handleChange}
             rows={4}
@@ -280,7 +280,7 @@ const IntakeForm = ({
         </div>
 
         <p className="text-sm text-muted-foreground text-center">
-          {footerText || "We gaan zorgvuldig om met je gegevens en gebruiken deze alleen voor het verwerken van je aanvraag."}
+          {footerText || "We gaan zorgvuldig om met jouw gegevens en gebruiken deze alleen voor het verwerken van jouw aanvraag."}
         </p>
       </div>
     </form>

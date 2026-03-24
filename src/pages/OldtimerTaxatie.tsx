@@ -25,7 +25,7 @@ const OldtimerTaxatie = () => {
   ];
 
   const nodigItems = [
-    "Je naam en contactgegevens",
+    "Jouw naam en contactgegevens",
     "De kentekencard van het voertuig",
     "Onderhoudsboekje of servicehistorie (indien aanwezig)",
     "Bijzonderheden in de historie (revisie, restauratie)",
@@ -53,8 +53,8 @@ const OldtimerTaxatie = () => {
       <SiteHeader />
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE OLDTIMER"
-        title="Zekerheid over de waarde van je oldtimer"
-        description={<>Met een verzekeringstaxatie leg je de waarde vooraf vast.<br />Wij komen op locatie bij je oldtimer.</>}
+        title="Zekerheid over de waarde van jouw oldtimer"
+        description={<>Met een verzekeringstaxatie leg je de waarde vooraf vast.<br />Wij komen op locatie bij jouw oldtimer.</>}
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroOldtimer}
@@ -68,7 +68,7 @@ const OldtimerTaxatie = () => {
           <div className="grid md:grid-cols-[1fr_0.7fr] gap-8 items-start">
             <div>
               <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>WAAROM TAXEREN</p>
-              <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>Waarom een verzekeringstaxatie voor je oldtimer?</h2>
+              <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>Waarom een verzekeringstaxatie voor jouw oldtimer?</h2>
               <p className="text-[15px] leading-relaxed mb-5" style={{ color: '#4a5568' }}>
                 Oldtimers zijn wat betreft technische kenmerken en onderhoudsbehoefte niet te vergelijken met moderne auto's. Deze verschillen vertalen zich ook naar de verzekering en betekent dat een oldtimerverzekering op een andere manier wordt samengesteld dan een standaardautoverzekering.
               </p>
@@ -89,7 +89,7 @@ const OldtimerTaxatie = () => {
                 {[
                   "Uitkering op taxatiewaarde, niet dagwaarde",
                   "Premie betalen over de juiste waarde",
-                  "Rapport 2 tot 3 jaar geldig, check je verzekeraar",
+                  "Rapport 2 tot 3 jaar geldig, check jouw verzekeraar",
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: '#ff751f' }} />
@@ -114,7 +114,7 @@ const OldtimerTaxatie = () => {
               <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>WANNEER NODIG</p>
               <h2 className="heading-display text-2xl md:text-3xl font-bold mb-3" style={{ color: '#1d3c71' }}>Wanneer is een taxatie nodig?</h2>
               <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
-                Een verzekeringstaxatie is relevant wanneer de waarde van je oldtimer niet vanzelfsprekend is voor de verzekeraar.
+                Een verzekeringstaxatie is relevant wanneer de waarde van jouw oldtimer niet vanzelfsprekend is voor de verzekeraar.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -181,7 +181,7 @@ const OldtimerTaxatie = () => {
       {/* Mid-page CTA */}
       <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
         <div className="container-wide text-center">
-          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Verzekeringstaxatie voor je oldtimer?</h2>
+          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Verzekeringstaxatie voor jouw oldtimer?</h2>
           <p className="text-[15px] mb-6 max-w-xl mx-auto" style={{ color: 'rgba(255,255,255,0.75)' }}>
             Vooraf zekerheid over de waarde. Wij plannen de taxatie op locatie bij jou.
           </p>
@@ -222,7 +222,7 @@ const OldtimerTaxatie = () => {
       {/* Bottom CTA */}
       <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: 'linear-gradient(135deg, #1d3c71 0%, #2a4f8a 100%)' }}>
         <div className="container-wide text-center">
-          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Zekerheid over de waarde van je oldtimer?</h2>
+          <h2 className="heading-display text-2xl md:text-3xl font-bold text-white mb-3">Zekerheid over de waarde van jouw oldtimer?</h2>
           <p className="text-[15px] mb-6" style={{ color: 'rgba(255,255,255,0.75)' }}>
             Vraag vrijblijvend een verzekeringstaxatie aan.
           </p>
@@ -240,7 +240,7 @@ const OldtimerTaxatie = () => {
             <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>AANVRAGEN</p>
             <h2 className="heading-display text-2xl md:text-3xl font-bold mb-2" style={{ color: '#1d3c71' }}>Verzekeringstaxatie aanvragen</h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
-              Vul het formulier in en wij nemen binnen één werkdag contact met je op.
+              Vul het formulier in en wij nemen binnen één werkdag contact met jou op.
             </p>
           </div>
           <div className="grid md:grid-cols-[1fr_380px] gap-8">

@@ -54,7 +54,7 @@ const BookingWizard = () => {
         </div>
         <h3 className="heading-display text-2xl font-bold mb-3" style={{ color: '#1a1a1a' }}>Bedankt!</h3>
         <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#4a5568', lineHeight: 1.7 }}>
-          Erik neemt binnen één werkdag telefonisch contact met je op.
+          Erik neemt binnen één werkdag telefonisch contact met jou op.
         </p>
       </div>
     );

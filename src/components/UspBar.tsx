@@ -3,7 +3,7 @@ import { Shield, MapPin, Scale as ScaleIcon, Users } from "lucide-react";
 
 const usps = [
   { icon: Shield, title: "Erkend taxateur", sub: "Aangesloten bij Federatie TMV, VRT Register en FEHAC" },
-  { icon: MapPin, title: "Op locatie bij je", sub: "Werkzaam in het grootste gedeelte van Nederland" },
+  { icon: MapPin, title: "Op locatie bij jou", sub: "Werkzaam in het grootste gedeelte van Nederland" },
   { icon: ScaleIcon, title: "Juridisch verdedigbaar", sub: "Gedegen onderbouwing, verdedigbaar bij bezwaar en beroep" },
   { icon: Users, title: "Direct contact", sub: "Persoonlijk en snel geholpen, zonder omwegen" },
 ];

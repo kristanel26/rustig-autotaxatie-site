@@ -86,7 +86,7 @@ const BpmMotorTaxatie = () => {
       <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: '#1d3c71' }}>
         <div className="container-wide text-center">
           <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">BPM netjes en onafhankelijk laten regelen?</h2>
-          <p className="text-[15px] mb-6" style={{ color: 'rgba(255,255,255,0.75)' }}>Vraag vrijblijvend een BPM-taxatie aan voor je motor.</p>
+          <p className="text-[15px] mb-6" style={{ color: 'rgba(255,255,255,0.75)' }}>Vraag vrijblijvend een BPM-taxatie aan voor jouw motor.</p>
           <Button variant="cta" size="lg" onClick={scrollToForm}>BPM-taxatie motor aanvragen<ArrowDown className="w-4 h-4 ml-2" /></Button>
         </div>
       </section>

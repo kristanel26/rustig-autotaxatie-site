@@ -39,7 +39,7 @@ const SiteFooter = () => {
   const handleNewsletter = (e: React.FormEvent) => {
     e.preventDefault();
     setEmail("");
-    alert("Bedankt voor je aanmelding.");
+    alert("Bedankt voor jou aanmelding.");
   };
 
   return (

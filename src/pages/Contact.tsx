@@ -38,7 +38,7 @@ const Contact = () => {
             Taxatie aanvragen
           </h1>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 600, marginTop: 16 }}>
-            Vul het formulier in en wij nemen binnen één werkdag contact met je op.
+            Vul het formulier in en wij nemen binnen één werkdag contact met jou op.
           </p>
         </div>
       </section>

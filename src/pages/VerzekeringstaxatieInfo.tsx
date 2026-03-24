@@ -57,7 +57,7 @@ const VerzekeringstaxatieInfo = () => {
     <div className="min-h-screen bg-background">
       <PageMeta
         title="Verzekeringstaxatie | Erkende Waardebepaling | Automobiel Taxaties"
-        description="Professionele verzekeringstaxatie voor oldtimers, youngtimers, campers en motoren. Erkend rapport voor je verzekeringspolis. Op locatie in het grootste gedeelte van Nederland."
+        description="Professionele verzekeringstaxatie voor oldtimers, youngtimers, campers en motoren. Erkend rapport voor jou verzekeringspolis. Op locatie in het grootste gedeelte van Nederland."
       />
       <SiteHeader />
 
@@ -65,7 +65,7 @@ const VerzekeringstaxatieInfo = () => {
       <LandingHero
         subtitle="Automobiel Taxaties"
         title="Verzekeringstaxatie"
-        description={<>Zorg dat je voertuig voor de juiste waarde verzekerd is.<br />Wij taxeren op locatie, in het grootste gedeelte van Nederland.</>}
+        description={<>Zorg dat jouw voertuig voor de juiste waarde verzekerd is.<br />Wij taxeren op locatie, in het grootste gedeelte van Nederland.</>}
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroVerzekeringstaxatie}
@@ -286,7 +286,7 @@ const VerzekeringstaxatieInfo = () => {
               Verzekeringstaxatie aanvragen
             </h2>
             <p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>
-              Vul het formulier in en we nemen binnen één werkdag contact met je op.
+              Vul het formulier in en we nemen binnen één werkdag contact met jou op.
             </p>
           </div>
           <div className="grid md:grid-cols-[1fr_380px] gap-8 items-stretch">
