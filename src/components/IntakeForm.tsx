@@ -130,7 +130,7 @@ const IntakeForm = ({
             />
           </div>
         ) : styledKenteken ? (
-          <>
+          <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="email">E-mailadres</Label>
               <Input
@@ -144,12 +144,13 @@ const IntakeForm = ({
                 className={inputHeight}
               />
             </div>
-            <div>
-              <p className="text-[13px] mb-2" style={{ color: '#1a1a1a' }}>Kenteken bekend? Vul hem alvast in.</p>
+            <div className="space-y-2">
+              <Label htmlFor="kenteken">Kenteken (optioneel)</Label>
               <div 
-                className="flex items-stretch overflow-hidden w-full"
+                className="flex items-stretch overflow-hidden"
                 style={{ 
                   height: 48, 
+                  maxWidth: 220,
                   borderRadius: 2,
                   border: '1px solid #CCA800',
                 }}
@@ -182,7 +183,7 @@ const IntakeForm = ({
                   placeholder="XX-000-X"
                   value={formData.kenteken}
                   onChange={handleChange}
-                  className="outline-none px-4"
+                  className="outline-none px-3"
                   style={{
                     background: '#FFD700',
                     color: '#000000',
@@ -195,9 +196,8 @@ const IntakeForm = ({
                   }}
                 />
               </div>
-              <p className="text-xs text-muted-foreground ml-1 mt-1.5">(optioneel)</p>
             </div>
-          </>
+          </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-2">
