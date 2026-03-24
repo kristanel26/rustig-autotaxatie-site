@@ -47,8 +47,8 @@ const ContactSidebar = () => {
         </div>
         <a href="tel:+31854832461" className="block">
           <button
-            className="w-full font-bold text-[15px] rounded-lg transition-colors"
-            style={{ background: '#ff751f', color: '#fff', height: 48, border: 'none', cursor: 'pointer', boxShadow: '0 3px 12px rgba(255,117,31,0.35)' }}
+            className="w-full font-semibold text-[15px] rounded-lg transition-colors"
+            style={{ background: '#ff751f', color: '#fff', height: 52, border: 'none', cursor: 'pointer', boxShadow: '0 3px 12px rgba(255,117,31,0.35)' }}
             onMouseEnter={e => e.currentTarget.style.background = '#e8651a'}
             onMouseLeave={e => e.currentTarget.style.background = '#ff751f'}
           >
