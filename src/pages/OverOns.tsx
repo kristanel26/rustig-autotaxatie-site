@@ -123,27 +123,6 @@ const OverOns = () => {
               </div>
             </div>
 
-            {/* Inspectie foto kaart */}
-            <div className="rounded-[14px] overflow-hidden" style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.15)' }}>
-              <div className="w-full h-[220px] overflow-hidden">
-                <img
-                  src={erikInspectiePhoto}
-                  alt="Erik Elderson meet de lakdikte tijdens een taxatie"
-                  className="w-full h-full object-cover"
-                  style={{ objectPosition: '50% 30%' }}
-                  loading="lazy"
-                />
-              </div>
-              <div style={{ background: 'rgba(29,60,113,0.95)', padding: '24px 24px 28px', borderTop: '3px solid #ff751f' }}>
-                <h3 className="text-lg font-bold mb-2" style={{ color: '#ffffff', fontFamily: "'Playfair Display', serif" }}>
-                  Zorgvuldig en nauwkeurig
-                </h3>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: 'rgba(255,255,255,0.80)', lineHeight: 1.70 }}>
-                  Elke inspectie omvat lakdiktemetingen, schade-opname en een uitgebreid fotodossier. Alles wordt vastgelegd voor een compleet en verdedigbaar rapport.
-                </p>
-              </div>
-            </div>
-          </div>
 
           {/* Text */}
           <div>
