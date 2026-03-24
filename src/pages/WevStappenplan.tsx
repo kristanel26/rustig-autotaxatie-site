@@ -305,7 +305,7 @@ const WevStappenplan = () => {
               Vul het formulier in en wij plannen de taxatie op basis van de aangeleverde informatie.
             </p>
           </div>
-          <div className="grid md:grid-cols-[1fr_380px] gap-8">
+          <div className="grid md:grid-cols-[1fr_380px] gap-8 items-stretch">
             <div>
               <IntakeForm
                 serviceType="WEV-taxatie"

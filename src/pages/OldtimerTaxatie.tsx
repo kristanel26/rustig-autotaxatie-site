@@ -243,7 +243,7 @@ const OldtimerTaxatie = () => {
               Vul het formulier in en wij nemen binnen één werkdag contact met jou op.
             </p>
           </div>
-          <div className="grid md:grid-cols-[1fr_380px] gap-8">
+          <div className="grid md:grid-cols-[1fr_380px] gap-8 items-stretch">
             <div>
               <IntakeForm
                 serviceType="oldtimerverzekeringstaxatie"
