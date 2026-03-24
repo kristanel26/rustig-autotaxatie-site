@@ -452,3 +452,8 @@
   .delay-300 { animation-delay: 0.3s; }
   .delay-400 { animation-delay: 0.4s; }
 }
+
+#kenteken::placeholder {
+  color: #999900 !important;
+  opacity: 1;
+}
