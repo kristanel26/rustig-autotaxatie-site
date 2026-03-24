@@ -133,8 +133,8 @@ const Nieuws = () => {
                 >
                   <div className="grid md:grid-cols-2">
                     <div
-                      className="h-[240px] md:h-auto relative"
-                      style={{ background: '#1d3c71', minHeight: 260 }}
+                      className="h-[200px] md:h-auto relative"
+                      style={{ background: '#1d3c71', minHeight: 200 }}
                     >
                       <span
                         className="absolute top-4 left-4 text-xs font-bold uppercase rounded-full px-3 py-1"
@@ -160,14 +160,14 @@ const Nieuws = () => {
               )}
 
               {/* Grid */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {rest.map((article) => (
                   <div
                     key={article.id}
                     className="rounded-[14px] overflow-hidden bg-white transition-all duration-200 hover:-translate-y-1 cursor-pointer"
                     style={{ boxShadow: '0 4px 24px rgba(29,60,113,0.08)' }}
                   >
-                    <div className="relative h-[180px]" style={{ background: '#1d3c71' }}>
+                    <div className="relative h-[160px]" style={{ background: '#1d3c71' }}>
                       <span
                         className="absolute top-4 left-4 text-xs font-bold uppercase rounded-full px-3 py-1"
                         style={{ background: '#ff751f', color: '#ffffff', letterSpacing: '0.06em' }}
@@ -175,7 +175,7 @@ const Nieuws = () => {
                         {article.category}
                       </span>
                     </div>
-                    <div className="p-6">
+                    <div className="p-4">
                       <p className="text-xs mb-2" style={{ color: '#698db3' }}>{formatDate(article.published_at)}</p>
                       <h3 className="heading-display font-semibold mb-2" style={{ fontSize: 18, color: '#1a1a1a', lineHeight: 1.3 }}>
                         {article.title}
