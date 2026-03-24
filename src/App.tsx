@@ -13,6 +13,7 @@ import MotorTaxatie from "./pages/MotorTaxatie";
 import OldtimerTaxatie from "./pages/OldtimerTaxatie";
 import YoungtimerTaxatie from "./pages/YoungtimerTaxatie";
 import FoodtruckTaxatie from "./pages/FoodtruckTaxatie";
+import Schadevaststelling from "./pages/Schadevaststelling";
 import BpmVoorbereiding from "./pages/BpmVoorbereiding";
 import BpmTaxatie from "./pages/BpmTaxatie";
 import BpmMotorTaxatie from "./pages/BpmMotorTaxatie";
