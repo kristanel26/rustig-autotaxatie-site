@@ -151,16 +151,15 @@ const IntakeForm = ({
                 style={{ 
                   height: 42, 
                   maxWidth: 200, 
-                  borderRadius: 6,
-                  border: '2.5px solid #1a1a1a',
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
+                  borderRadius: 4,
+                  border: '1px solid #CCA800',
                 }}
               >
                 <div 
                   className="flex flex-col items-center justify-center"
                   style={{ 
-                    background: '#003DA5', 
-                    minWidth: 30,
+                    background: '#003399', 
+                    minWidth: 28,
                     padding: '3px 0',
                     gap: 2,
                   }}
@@ -176,7 +175,7 @@ const IntakeForm = ({
                       );
                     })}
                   </svg>
-                  <span className="text-white font-bold leading-none" style={{ fontSize: 10 }}>NL</span>
+                  <span className="text-white leading-none" style={{ fontSize: 11, fontWeight: 700 }}>NL</span>
                 </div>
                 <input
                   id="kenteken"
@@ -186,11 +185,11 @@ const IntakeForm = ({
                   onChange={handleChange}
                   className="outline-none px-3"
                   style={{
-                    background: '#FDC100',
-                    color: '#1a1a1a',
+                    background: '#FFD700',
+                    color: '#000000',
                     fontWeight: 700,
                     fontSize: 16,
-                    letterSpacing: '0.12em',
+                    letterSpacing: '0.15em',
                     textTransform: 'uppercase',
                     width: '100%',
                     fontFamily: "'DM Sans', sans-serif",
