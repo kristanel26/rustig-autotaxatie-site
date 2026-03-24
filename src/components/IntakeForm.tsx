@@ -149,7 +149,7 @@ const IntakeForm = ({
               <div 
                 className="flex items-stretch overflow-hidden"
                 style={{ 
-                  height: 48, 
+                  height: 52, 
                   maxWidth: 220,
                   borderRadius: 2,
                   border: '1px solid #CCA800',
@@ -159,7 +159,7 @@ const IntakeForm = ({
                   className="flex flex-col items-center justify-center shrink-0"
                   style={{ 
                     background: '#003DA5', 
-                    width: 36,
+                    width: 40,
                     padding: '4px 0',
                     gap: 1,
                   }}
@@ -183,16 +183,17 @@ const IntakeForm = ({
                   placeholder="XX-000-X"
                   value={formData.kenteken}
                   onChange={handleChange}
-                  className="outline-none px-3"
+                  className="outline-none px-3 flex items-center"
                   style={{
                     background: '#FFD700',
                     color: '#000000',
-                    fontWeight: 700,
-                    fontSize: 18,
-                    letterSpacing: '0.2em',
+                    fontWeight: 800,
+                    fontSize: 24,
+                    letterSpacing: '0.25em',
                     textTransform: 'uppercase',
                     width: '100%',
                     fontFamily: "'Courier New', 'Consolas', monospace",
+                    lineHeight: '52px',
                   }}
                 />
               </div>
