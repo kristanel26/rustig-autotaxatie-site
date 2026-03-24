@@ -93,7 +93,7 @@ const BpmMotorTaxatie = () => {
 
       <section className="py-10 md:py-14 px-6 md:px-8 bg-background" ref={formRef}>
         <div className="container-wide"><div className="text-center mb-8"><h2 className="text-2xl md:text-3xl font-semibold mb-2">BPM-taxatie motor aanvragen</h2><p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>Vul het formulier in en wij bepalen de juiste aanpak voor jouw situatie.</p></div>
-        <div className="grid md:grid-cols-[1fr_380px] gap-8"><div><IntakeForm serviceType="bpm-taxatie motor" formTitle="BPM-taxatie motor aanvragen" formSubtext="Vul onderstaand formulier zo volledig mogelijk in." toelichtingPlaceholder="Geef hier de beschikbare informatie over de motor en de import." submitButtonText="BPM-taxatie motor aanvragen" /></div><ContactSidebar /></div></div>
+        <div className="grid md:grid-cols-[1fr_380px] gap-8 items-stretch"><div><IntakeForm serviceType="bpm-taxatie motor" formTitle="BPM-taxatie motor aanvragen" formSubtext="Vul onderstaand formulier zo volledig mogelijk in." toelichtingPlaceholder="Geef hier de beschikbare informatie over de motor en de import." submitButtonText="BPM-taxatie motor aanvragen" /></div><ContactSidebar /></div></div>
       </section>
 
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>

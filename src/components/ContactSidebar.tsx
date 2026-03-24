@@ -55,6 +55,8 @@ const ContactSidebar = () => {
             Bel direct: 085 483 2461
           </button>
         </a>
+        {/* Spacer to align with form buttons (matches privacy text height below form buttons) */}
+        <div className="h-10" />
       </div>
     </div>
   );
