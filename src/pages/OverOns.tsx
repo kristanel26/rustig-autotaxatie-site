@@ -122,7 +122,7 @@ const OverOns = () => {
                 <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, fontWeight: 600, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', marginTop: 4 }}>Opgericht</span>
               </div>
             </div>
-
+          </div>
 
           {/* Text */}
           <div>
