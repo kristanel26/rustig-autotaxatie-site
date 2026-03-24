@@ -109,7 +109,7 @@ const MotorTaxatie = () => {
 
       <section className="py-10 md:py-14 px-6 md:px-8 bg-background" ref={formRef}>
         <div className="container-wide"><div className="text-center mb-8"><h2 className="text-2xl md:text-3xl font-semibold mb-2">Verzekeringstaxatie aanvragen</h2><p className="text-[15px] max-w-2xl mx-auto" style={{ color: '#4a5568' }}>Vul het formulier in en wij nemen binnen één werkdag contact met je op.</p></div>
-        <div className="grid md:grid-cols-[1fr_380px] gap-8"><div><IntakeForm serviceType="motorverzekeringstaxatie" formTitle="Verzekeringstaxatie aanvragen" formSubtext="Vul onderstaand formulier zo volledig mogelijk in." submitButtonText="Verzekeringstaxatie aanvragen" /></div><ContactSidebar /></div></div>
+        <div className="grid md:grid-cols-[1fr_380px] gap-8"><div><div className="grid md:grid-cols-[1fr_380px] gap-8"><div><IntakeForm serviceType="motorverzekeringstaxatie" formTitle="Verzekeringstaxatie aanvragen" formSubtext="Vul onderstaand formulier zo volledig mogelijk in." submitButtonText="Verzekeringstaxatie aanvragen" styledKenteken /></div><ContactSidebar /></div></div></div><ContactSidebar /></div></div>
       </section>
 
       <section className="py-10 md:py-12 px-6 md:px-8" style={{ background: '#f0f4f8' }}>
