@@ -147,52 +147,51 @@ const IntakeForm = ({
             <div>
               <p className="text-[13px] mb-2" style={{ color: '#1a1a1a' }}>Kenteken bekend? Vul hem alvast in.</p>
               <div 
-                className="flex items-stretch overflow-hidden"
+                className="flex items-stretch overflow-hidden w-full"
                 style={{ 
-                  height: 42, 
-                  maxWidth: 200, 
-                  borderRadius: 4,
+                  height: 48, 
+                  borderRadius: 2,
                   border: '1px solid #CCA800',
                 }}
               >
                 <div 
-                  className="flex flex-col items-center justify-center"
+                  className="flex flex-col items-center justify-center shrink-0"
                   style={{ 
-                    background: '#003399', 
-                    minWidth: 28,
-                    padding: '3px 0',
-                    gap: 2,
+                    background: '#003DA5', 
+                    width: 36,
+                    padding: '4px 0',
+                    gap: 1,
                   }}
                 >
-                  <svg width="16" height="16" viewBox="0 0 16 16" style={{ display: 'block' }}>
-                    <circle cx="8" cy="8" r="6.5" fill="none" stroke="#FFD700" strokeWidth="0.6" />
+                  <svg width="18" height="18" viewBox="0 0 18 18" style={{ display: 'block' }}>
+                    <circle cx="9" cy="9" r="7" fill="none" stroke="#FFD700" strokeWidth="0.7" />
                     {[...Array(12)].map((_, i) => {
                       const angle = (i * 30 - 90) * (Math.PI / 180);
-                      const x = 8 + 5.2 * Math.cos(angle);
-                      const y = 8 + 5.2 * Math.sin(angle);
+                      const x = 9 + 5.6 * Math.cos(angle);
+                      const y = 9 + 5.6 * Math.sin(angle);
                       return (
-                        <text key={i} x={x} y={y} fill="#FFD700" fontSize="3.5" textAnchor="middle" dominantBaseline="central">★</text>
+                        <text key={i} x={x} y={y} fill="#FFD700" fontSize="3.2" textAnchor="middle" dominantBaseline="central">★</text>
                       );
                     })}
                   </svg>
-                  <span className="text-white leading-none" style={{ fontSize: 11, fontWeight: 700 }}>NL</span>
+                  <span className="text-white leading-none" style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.02em' }}>NL</span>
                 </div>
                 <input
                   id="kenteken"
                   name="kenteken"
-                  placeholder="AB-123-C"
+                  placeholder="XX-000-X"
                   value={formData.kenteken}
                   onChange={handleChange}
-                  className="outline-none px-3"
+                  className="outline-none px-4"
                   style={{
                     background: '#FFD700',
                     color: '#000000',
                     fontWeight: 700,
-                    fontSize: 16,
-                    letterSpacing: '0.15em',
+                    fontSize: 18,
+                    letterSpacing: '0.2em',
                     textTransform: 'uppercase',
                     width: '100%',
-                    fontFamily: "'DM Sans', sans-serif",
+                    fontFamily: "'Courier New', 'Consolas', monospace",
                   }}
                 />
               </div>
