@@ -300,6 +300,7 @@ const VerzekeringstaxatieInfo = () => {
                 formSubtext="Vul onderstaand formulier in."
                 toelichtingPlaceholder="Geef hier de beschikbare informatie over het voertuig."
                 submitButtonText="Aanvraag indienen"
+                styledKenteken
               />
             </div>
             <ContactSidebar />
