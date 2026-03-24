@@ -99,13 +99,6 @@ const MotorTaxatie = () => {
         </div></div>
       </section>
 
-      <section className="py-10 md:py-12 px-6 md:px-8 bg-background">
-        <div className="container-wide"><div className="grid md:grid-cols-2 gap-8">
-          <div><h2 className="text-xl md:text-2xl font-semibold mb-5">Wat kun je verwachten?</h2><div className="space-y-3">{verwachtItems.map((item, i) => (<div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}><div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(255,117,31,0.12)' }}><CheckCircle className="w-4 h-4 text-cta" /></div><span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span></div>))}</div></div>
-          <div><h2 className="text-xl md:text-2xl font-semibold mb-5">Wat hebben wij nodig?</h2><div className="space-y-3">{nodigItems.map((item, i) => (<div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}><div className="w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center" style={{ background: 'rgba(29,60,113,0.08)' }}><CheckCircle className="w-4 h-4 text-primary" /></div><span className="text-[15px]" style={{ color: '#4a5568' }}>{item}</span></div>))}</div></div>
-        </div></div>
-      </section>
-
       <section className="py-12 md:py-14 px-6 md:px-8" style={{ background: '#1d3c71' }}>
         <div className="container-wide text-center">
           <h2 className="text-2xl md:text-3xl font-semibold text-white mb-3">Zekerheid over de waarde van je motor?</h2>

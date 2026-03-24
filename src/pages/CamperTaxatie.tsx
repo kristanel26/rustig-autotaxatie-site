@@ -195,38 +195,6 @@ const CamperTaxatie = () => {
 
       <StatsBar />
 
-      {/* Verwachtingen + Nodig */}
-      <section className="py-14 md:py-16 px-6 md:px-8 bg-background">
-        <div className="container-wide">
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <div className="w-[40px] h-[3px] mb-3" style={{ background: '#ff751f' }} />
-              <h2 className="heading-display text-[22px] font-bold mb-5" style={{ color: '#1d3c71' }}>Wat kun je verwachten?</h2>
-              <div className="space-y-[10px]">
-                {verwachtItems.map((item, i) => (
-                  <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
-                    <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1a1a1a', lineHeight: 1.5 }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <div className="w-[40px] h-[3px] mb-3" style={{ background: '#ff751f' }} />
-              <h2 className="heading-display text-[22px] font-bold mb-5" style={{ color: '#1d3c71' }}>Wat hebben wij nodig?</h2>
-              <div className="space-y-[10px]">
-                {nodigItems.map((item, i) => (
-                  <div key={i} className="flex items-center gap-4 bg-white rounded-[10px] px-5 py-4" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
-                    <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#1a1a1a', lineHeight: 1.5 }}>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Acceptatie — 3 kaartjes */}
       <section className="py-14 md:py-16 px-6 md:px-8" style={{ background: '#f7f8fa' }}>
         <div className="container-wide">
