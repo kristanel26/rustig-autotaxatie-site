@@ -54,7 +54,7 @@ const OldtimerTaxatie = () => {
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE OLDTIMER"
         title="Zekerheid over de waarde van jouw oldtimer"
-        description={<>Met een verzekeringstaxatie leg je de waarde vooraf vast.<br />Wij komen op locatie bij jouw oldtimer.</>}
+        description={<>Met een verzekeringstaxatie leg jij de waarde vooraf vast.<br />Wij komen op locatie bij jouw oldtimer.</>}
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroOldtimer}

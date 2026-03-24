@@ -66,7 +66,7 @@ const faqItems = [
   {
     category: "Motoren",
     questions: [
-      { q: "Waarom mijn motor laten taxeren?", a: "De standaard dagwaarde doet bij bijzondere of goed onderhouden motoren vaak geen recht aan de werkelijke waarde. Met een taxatierapport leg je de waarde vooraf vast." },
+      { q: "Waarom mijn motor laten taxeren?", a: "De standaard dagwaarde doet bij bijzondere of goed onderhouden motoren vaak geen recht aan de werkelijke waarde. Met een taxatierapport leg jij de waarde vooraf vast." },
       { q: "Moet mijn motor WA-verzekerd worden getaxeerd?", a: "Ja, dat is verstandig. Een WA-verzekering dekt geen schade aan je eigen motor. Zonder taxatierapport heb je bij diefstal of total loss geen recht op een uitkering op basis van de werkelijke waarde." },
       { q: "Hoe vaak moet ik mijn motor laten taxeren?", a: "Doorgaans elke twee tot drie jaar. Vraag dit na bij jouw verzekeraar." },
       { q: "Is het nodig tijdens de restauratieperiode al een rapport te laten maken?", a: "Nee. Wacht tot de restauratie klaar is. De staat op de dag van taxatie is het uitgangspunt." },

@@ -37,7 +37,7 @@ const MotorTaxatie = () => {
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE MOTOR"
         title="Zekerheid over de waarde van jouw motor"
-        description={<>Met een verzekeringstaxatie leg je de waarde vooraf vast.<br />Wij komen op locatie bij jouw motor.</>}
+        description={<>Met een verzekeringstaxatie leg jij de waarde vooraf vast.<br />Wij komen op locatie bij jouw motor.</>}
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroMotor}
@@ -53,7 +53,7 @@ const MotorTaxatie = () => {
               <p className="uppercase text-[12px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f', fontFamily: "'Inter', sans-serif" }}>WAAROM TAXEREN</p>
               <h2 className="heading-display text-2xl md:text-3xl font-bold mb-4" style={{ color: '#1d3c71' }}>Waarom een verzekeringstaxatie voor jouw motor?</h2>
               <p className="text-[15px] leading-relaxed mb-5" style={{ color: '#4a5568' }}>
-                Jouw motor is meer dan alleen een voertuig. Met een verzekeringstaxatie leg je vast wat het op dit moment werkelijk waard is. Die waarde vormt de basis voor de verzekering, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde.
+                Jouw motor is meer dan alleen een voertuig. Met een verzekeringstaxatie leg jij vast wat het op dit moment werkelijk waard is. Die waarde vormt de basis voor de verzekering, zodat je bij schade of diefstal niet afhankelijk bent van een dagwaarde.
               </p>
               <p className="text-[15px] leading-relaxed" style={{ color: '#4a5568' }}>
                 Bij veel verzekeraars is een taxatierapport vereist wanneer de waarde van een motor afwijkt van standaard verzekeringsbedragen. Met een taxatierapport wordt de waarde vooraf vastgelegd, zodat bij schade of diefstal geen discussie ontstaat.
