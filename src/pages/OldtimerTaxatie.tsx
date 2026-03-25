@@ -1,6 +1,7 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BekijkOok from "@/components/BekijkOok";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
@@ -52,6 +53,7 @@ const OldtimerTaxatie = () => {
         title="Oldtimer Taxatie | Erkend Rapport | Automobiel Taxaties"
         description="Professionele oldtimer taxatie voor verzekering en waardebepaling. Oog voor detail en historie. Op locatie in het grootste gedeelte van Nederland."
       />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", "name": "Oldtimer Taxatie", "provider": { "@type": "Organization", "name": "Automobiel Taxaties" }, "areaServed": "Netherlands", "url": "https://www.automobieltaxaties.nl/oldtimer-taxatie" }} />
       <SiteHeader />
       <Breadcrumbs items={[{ label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" }, { label: "Oldtimer" }]} />
       <LandingHero

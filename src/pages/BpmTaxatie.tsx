@@ -1,6 +1,7 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BekijkOok from "@/components/BekijkOok";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
@@ -43,6 +44,7 @@ const BpmTaxatie = () => {
         title="BPM Taxatie bij Import | Laagste BPM | Automobiel Taxaties"
         description="De laagst haalbare BPM voor jou importvoertuig. Fysieke inspectie op locatie door een erkend TMV en VRT register taxateur. Gratis advies aanvragen."
       />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", "name": "BPM Taxatie", "provider": { "@type": "Organization", "name": "Automobiel Taxaties" }, "areaServed": "Netherlands", "url": "https://www.automobieltaxaties.nl/bpm-taxatie" }} />
       <SiteHeader />
       <Breadcrumbs items={[{ label: "BPM Taxatie" }]} />
       <LandingHero

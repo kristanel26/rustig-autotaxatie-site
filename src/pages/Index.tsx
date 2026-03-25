@@ -1,6 +1,7 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import React, { useState } from "react";
 import PageMeta from "@/components/PageMeta";
+import JsonLd from "@/components/JsonLd";
 import { Link } from "react-router-dom";
 import { ArrowRight, Phone, Shield, MapPin, Scale as ScaleIcon, Award, Users, Star, ChevronRight, Search, MessageCircle, Handshake, Bus, FileText, Clock, Car, Bike, UtensilsCrossed, CarFront } from "lucide-react";
 import UspBar from "@/components/UspBar";
@@ -64,6 +65,37 @@ const Index = () => {
         title="BPM Taxatie & Voertuigtaxaties | Automobiel Taxaties"
         description="Erkend taxatiebureau voor BPM-aangifte, verzekeringstaxatie en WEV taxatie. Erik Elderson taxeert op locatie in het grootste gedeelte van Nederland. 25.000+ voertuigen getaxeerd."
       />
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Automobiel Taxaties",
+        "description": "Erkend taxatiebureau voor BPM, verzekeringstaxatie en WEV-taxatie. Werkzaam in het grootste gedeelte van Nederland.",
+        "url": "https://www.automobieltaxaties.nl",
+        "telephone": "+31854832461",
+        "email": "algemeen@automobieltaxaties.nl",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Van Heemstraweg 123",
+          "addressLocality": "Druten",
+          "postalCode": "6651 KH",
+          "addressCountry": "NL"
+        },
+        "openingHoursSpecification": [{
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+          "opens": "08:30",
+          "closes": "17:00"
+        }],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "25000"
+        },
+        "founder": { "@type": "Person", "name": "Erik Elderson" },
+        "foundingDate": "2013",
+        "areaServed": "Netherlands",
+        "priceRange": "$$"
+      }} />
       <SiteHeader />
 
       {/* ── HERO ── */}
