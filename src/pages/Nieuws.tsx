@@ -4,21 +4,36 @@ import UspBar from "@/components/UspBar";
 import PageMeta from "@/components/PageMeta";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import heroNieuws from "@/assets/hero-nieuws.jpg";
 import nieuwsArtikelen from "@/data/nieuwsArtikelen";
 
 const categories = ["Alle berichten", "BPM & Import", "Jurisprudentie", "Wetgeving", "Tips & Uitleg"];
 
+const PAGE_SIZE = 9;
+
 const Nieuws = () => {
   const [activeCategory, setActiveCategory] = useState("Alle berichten");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
-  const filtered = activeCategory === "Alle berichten"
-    ? nieuwsArtikelen
-    : nieuwsArtikelen.filter((a) => a.category === activeCategory);
+  const filtered = useMemo(() =>
+    activeCategory === "Alle berichten"
+      ? nieuwsArtikelen
+      : nieuwsArtikelen.filter((a) => a.category === activeCategory),
+    [activeCategory]
+  );
+
+  // Reset visible count when category changes
+  const handleCategoryChange = (cat: string) => {
+    setActiveCategory(cat);
+    setVisibleCount(PAGE_SIZE);
+  };
 
   const featured = filtered[0];
   const rest = filtered.slice(1);
+  const visibleRest = rest.slice(0, visibleCount - 1); // -1 because featured counts as 1
+  const totalShown = Math.min(visibleCount, filtered.length);
+  const allLoaded = totalShown >= filtered.length;
 
   return (
     <div className="min-h-screen bg-white">
