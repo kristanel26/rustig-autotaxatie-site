@@ -69,10 +69,10 @@ const Nieuws = () => {
           <h1
             style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 700, lineHeight: 1.15, color: '#ffffff', maxWidth: 700 }}
           >
-            Nieuws & Kennisbank
+            BPM nieuws en jurisprudentie
           </h1>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 600, marginTop: 16 }}>
-            Praktische informatie over BPM, taxaties en voertuigwaardering.
+            Actuele berichten over wijzigingen in wet- en regelgeving, uitspraken en BPM-tarieven.
           </p>
         </div>
       </section>
