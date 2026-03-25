@@ -1,4 +1,5 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
+import BekijkOok from "@/components/BekijkOok";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
@@ -212,6 +213,8 @@ const MotorTaxatie = () => {
           </Button>
         </div>
       </section>
+
+      <BekijkOok links={["Camper taxatie", "Schadevaststelling", "Verzekeringstaxatie"]} />
 
       {/* Formulier */}
       <section className="py-14 md:py-16 px-6 md:px-8 bg-background" ref={formRef}>
