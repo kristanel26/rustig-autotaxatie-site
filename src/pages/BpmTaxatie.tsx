@@ -45,7 +45,6 @@ const BpmTaxatie = () => {
         description="De laagst haalbare BPM voor jou importvoertuig. Fysieke inspectie op locatie door een erkend TMV en VRT register taxateur. Gratis advies aanvragen."
       />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", "name": "BPM Taxatie", "provider": { "@type": "Organization", "name": "Automobiel Taxaties" }, "areaServed": "Netherlands", "url": "https://www.automobieltaxaties.nl/bpm-taxatie" }} />
-      />
       <SiteHeader />
       <Breadcrumbs items={[{ label: "BPM Taxatie" }]} />
       <LandingHero
