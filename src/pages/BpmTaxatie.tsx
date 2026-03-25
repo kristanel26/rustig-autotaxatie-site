@@ -54,6 +54,7 @@ const BpmTaxatie = () => {
         ctaText="BPM-aangifte aanvragen"
         onCtaClick={scrollToForm}
         heroImage={erikHeroBpm}
+        heroAlt="Voertuig import BPM-taxatie Nederland"
         compact
       />
       <UspBar />

@@ -63,6 +63,7 @@ const WevTaxatie = () => {
         ctaText="WEV-taxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={serviceWev}
+        heroAlt="WEV taxatie werkelijke economische waarde voertuig"
         heroImagePosition="center 20%"
         compact
       />

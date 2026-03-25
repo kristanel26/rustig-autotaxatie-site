@@ -46,6 +46,7 @@ const FoodtruckTaxatie = () => {
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroFoodtruck}
+        heroAlt="Foodtruck taxatie inclusief inrichting en apparatuur"
         compact
       />
       <UspBar />
