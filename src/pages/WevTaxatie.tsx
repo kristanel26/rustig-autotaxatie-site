@@ -358,6 +358,8 @@ const WevTaxatie = () => {
         </div>
       </section>
 
+      <BekijkOok links={["BPM Taxatie", "Schadevaststelling", "Verzekeringstaxatie"]} />
+
       <section className="px-6 md:px-8" style={{ background: '#f7f8fa', paddingTop: 72, paddingBottom: 72 }} ref={formRef}>
         <div className="container-wide">
           <div className="text-center" style={{ marginBottom: 48 }}>
