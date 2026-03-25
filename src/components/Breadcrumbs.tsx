@@ -9,7 +9,7 @@ interface BreadcrumbsProps {
   items: BreadcrumbItem[];
 }
 
-const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
+export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   const allItems: BreadcrumbItem[] = [{ label: "Home", href: "/" }, ...items];
   const parent = allItems.length >= 2 ? allItems[allItems.length - 2] : null;
 
@@ -53,6 +53,4 @@ const Breadcrumbs = ({ items }: BreadcrumbsProps) => {
       </div>
     </nav>
   );
-};
-
-export default Breadcrumbs;
+}
