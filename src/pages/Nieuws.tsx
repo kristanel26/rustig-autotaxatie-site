@@ -137,7 +137,7 @@ const Nieuws = () => {
 
               {/* Grid */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {rest.map((article) => (
+                {visibleRest.map((article) => (
                   <a
                     key={article.id}
                     href={article.url}
@@ -168,6 +168,38 @@ const Nieuws = () => {
                     </div>
                   </a>
                 ))}
+              </div>
+
+              {/* Load more */}
+              <div className="flex flex-col items-center mt-10 gap-3">
+                <p style={{ color: '#698db3', fontSize: 13 }}>
+                  {totalShown} van {filtered.length} artikelen weergegeven
+                </p>
+                {!allLoaded && (
+                  <button
+                    onClick={() => setVisibleCount((prev) => prev + PAGE_SIZE)}
+                    className="font-medium transition-all"
+                    style={{
+                      width: 220,
+                      height: 44,
+                      borderRadius: 7,
+                      border: '1px solid #1d3c71',
+                      background: 'transparent',
+                      color: '#1d3c71',
+                      fontSize: 14,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = '#1d3c71';
+                      e.currentTarget.style.color = '#ffffff';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'transparent';
+                      e.currentTarget.style.color = '#1d3c71';
+                    }}
+                  >
+                    Laad meer artikelen
+                  </button>
+                )}
               </div>
             </>
           )}
