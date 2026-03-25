@@ -50,8 +50,8 @@ const OldtimerTaxatie = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageMeta
-        title="Oldtimer Taxatie | Erkend Rapport | Automobiel Taxaties"
-        description="Professionele oldtimer taxatie voor verzekering en waardebepaling. Oog voor detail en historie. Op locatie in het grootste gedeelte van Nederland."
+        title="Oldtimer Taxatie | Waardebepaling voor klassieke voertuigen | Automobiel Taxaties"
+        description="Een oldtimer verdient een nauwkeurige waardebepaling. Wij taxeren op locatie en stellen een erkend rapport op voor verzekering of verkoop."
       />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", "name": "Oldtimer Taxatie", "provider": { "@type": "Organization", "name": "Automobiel Taxaties" }, "areaServed": "Netherlands", "url": "https://www.automobieltaxaties.nl/oldtimer-taxatie" }} />
       <SiteHeader />

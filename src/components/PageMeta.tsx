@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 interface PageMetaProps {
   title: string;
@@ -6,6 +7,8 @@ interface PageMetaProps {
 }
 
 const PageMeta = ({ title, description }: PageMetaProps) => {
+  const { pathname } = useLocation();
+
   useEffect(() => {
     document.title = title;
 
@@ -24,14 +27,14 @@ const PageMeta = ({ title, description }: PageMetaProps) => {
     setMeta("og:title", title, true);
     setMeta("og:description", description, true);
     setMeta("og:type", "website", true);
+    setMeta("og:url", `https://www.automobieltaxaties.nl${pathname}`, true);
     setMeta("og:site_name", "Automobiel Taxaties", true);
     setMeta("og:locale", "nl_NL", true);
 
     return () => {
-      // Reset to defaults on unmount
       document.title = "Automobiel Taxaties, Erkend taxatiebureau";
     };
-  }, [title, description]);
+  }, [title, description, pathname]);
 
   return null;
 };

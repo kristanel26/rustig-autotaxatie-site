@@ -53,8 +53,8 @@ const CamperTaxatie = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageMeta
-        title="Camper Taxatie | Erkende Waardebepaling | Automobiel Taxaties"
-        description="Professionele camper taxatie door een specialist in de campermarkt. Erkend rapport voor jou verzekeringspolis. Op locatie bij jouw camper."
+        title="Camper Taxatie | Erkend taxatierapport voor jouw camper | Automobiel Taxaties"
+        description="Zeker zijn van de waarde van jouw camper? Wij komen op locatie voor een fysieke inspectie en stellen een erkend taxatierapport op dat geaccepteerd wordt door verzekeraars."
       />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", "name": "Camper Taxatie", "provider": { "@type": "Organization", "name": "Automobiel Taxaties" }, "areaServed": "Netherlands", "url": "https://www.automobieltaxaties.nl/camper-taxatie" }} />
       <SiteHeader />

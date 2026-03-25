@@ -35,7 +35,7 @@ const Schadevaststelling = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta title="Schadevaststelling | Onafhankelijke Schadebeoordeling | Automobiel Taxaties" description="Onafhankelijke schadevaststelling door een erkend taxateur. Bruikbaar bij verzekeringsclaims, geschillen of aankoop van een voertuig met schade." />
+      <PageMeta title="Schadevaststelling | Onafhankelijke schadebeoordeling | Automobiel Taxaties" description="Onafhankelijke vaststelling van schade aan jouw voertuig. Bruikbaar bij verzekeringsclaims, geschillen of aankoop van een voertuig met schade." />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", "name": "Schadevaststelling", "provider": { "@type": "Organization", "name": "Automobiel Taxaties" }, "areaServed": "Netherlands", "url": "https://www.automobieltaxaties.nl/schadevaststelling" }} />
       <SiteHeader />
       <Breadcrumbs items={[{ label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" }, { label: "Schadevaststelling" }]} />

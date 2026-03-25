@@ -135,8 +135,8 @@ const FAQ = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageMeta
-        title="Veelgestelde Vragen over BPM en Taxaties | Automobiel Taxaties"
-        description="Antwoorden op de meest gestelde vragen over BPM-aangifte, taxatierapporten, oldtimers, kosten en levertijden."
+        title="Veelgestelde vragen over BPM en taxatie | Automobiel Taxaties"
+        description="Antwoorden op de meest gestelde vragen over BPM-aangifte, taxatierapporten, oldtimers, campers en de werkwijze van Automobiel Taxaties."
       />
       <SiteHeader />
       <Breadcrumbs items={[{ label: "FAQ" }]} />

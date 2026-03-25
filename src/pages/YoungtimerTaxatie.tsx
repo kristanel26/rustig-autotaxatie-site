@@ -35,7 +35,7 @@ const YoungtimerTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta title="Youngtimer Taxatie | Voertuigen Vanaf 15 Jaar | Automobiel Taxaties" description="Erkende youngtimer taxatie voor verzekering en BPM. Specialist in voertuigen van 15 jaar en ouder. Gratis advies aanvragen." />
+      <PageMeta title="Youngtimer Taxatie | BPM en verzekering voor youngtimers | Automobiel Taxaties" description="Youngtimers hebben een bijzondere fiscale status. Wij bepalen de juiste waarde voor verzekering of BPM-aangifte. Erkend en verdedigbaar rapport." />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", "name": "Youngtimer Taxatie", "provider": { "@type": "Organization", "name": "Automobiel Taxaties" }, "areaServed": "Netherlands", "url": "https://www.automobieltaxaties.nl/youngtimer-taxatie" }} />
       <SiteHeader />
       <Breadcrumbs items={[{ label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" }, { label: "Youngtimer" }]} />

@@ -58,8 +58,8 @@ const VerzekeringstaxatieInfo = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageMeta
-        title="Verzekeringstaxatie | Erkende Waardebepaling | Automobiel Taxaties"
-        description="Professionele verzekeringstaxatie voor oldtimers, youngtimers, campers en motoren. Erkend rapport voor jou verzekeringspolis. Op locatie in het grootste gedeelte van Nederland."
+        title="Verzekeringstaxatie | Waarde vooraf vastleggen | Automobiel Taxaties"
+        description="Leg de waarde van jouw voertuig vooraf vast met een erkend taxatierapport. Voor campers, oldtimers, youngtimers, motors en foodtrucks. Wij komen op locatie."
       />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", "name": "Verzekeringstaxatie", "provider": { "@type": "Organization", "name": "Automobiel Taxaties" }, "areaServed": "Netherlands", "url": "https://www.automobieltaxaties.nl/verzekeringstaxatie" }} />
       <SiteHeader />

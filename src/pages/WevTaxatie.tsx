@@ -51,7 +51,7 @@ const WevTaxatie = () => {
     <div className="min-h-screen bg-background">
       <PageMeta
         title="WEV Taxatie | Werkelijke Economische Waarde | Automobiel Taxaties"
-        description="Objectieve WEV taxatie voor fiscale en juridische doeleinden. Erkend taxatierapport door register taxateur Erik Elderson."
+        description="De werkelijke economische waarde van jouw voertuig bepalen voor de Belastingdienst. Onafhankelijk, verdedigbaar en erkend rapport."
       />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", "name": "WEV Taxatie", "provider": { "@type": "Organization", "name": "Automobiel Taxaties" }, "areaServed": "Netherlands", "url": "https://www.automobieltaxaties.nl/wev-taxatie" }} />
       <SiteHeader />
