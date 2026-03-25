@@ -150,7 +150,7 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => (
-  <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+  <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light" disableTransitionOnChange>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <TooltipProvider>
