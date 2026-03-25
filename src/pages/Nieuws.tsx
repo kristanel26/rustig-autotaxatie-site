@@ -46,8 +46,8 @@ const Nieuws = () => {
   return (
     <div className="min-h-screen bg-white">
       <PageMeta
-        title="Nieuws & Kennisbank | BPM, Taxaties en Wetgeving | Automobiel Taxaties"
-        description="Praktische informatie over BPM, taxaties en voertuigwaardering. Nieuws over wetgeving, jurisprudentie en belastingwijzigingen."
+        title="BPM nieuws en jurisprudentie | Automobiel Taxaties"
+        description="Actuele berichten over BPM-wetgeving, rechtbankuitspraken en wijzigingen in de regelgeving. Blijf op de hoogte van ontwikkelingen die jouw import beïnvloeden."
       />
       <SiteHeader />
       <Breadcrumbs items={[{ label: "Nieuws" }]} />

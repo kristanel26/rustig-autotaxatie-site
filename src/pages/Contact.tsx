@@ -14,8 +14,8 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-white">
       <PageMeta
-        title="Contact | Automobiel Taxaties | 085 483 2461"
-        description="Neem contact op met Automobiel Taxaties. Bel 085 483 2461 of stuur een bericht. Erik reageert binnen één werkdag. Locatie: Druten."
+        title="Contact | Automobiel Taxaties"
+        description="Neem contact op met Automobiel Taxaties. Bel 085 483 2461 of stuur een bericht. Wij reageren binnen één werkdag."
       />
       <SiteHeader />
       <Breadcrumbs items={[{ label: "Contact" }]} />

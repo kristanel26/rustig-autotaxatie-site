@@ -37,8 +37,8 @@ const OverOns = () => {
   return (
     <div className="min-h-screen bg-white">
       <PageMeta
-        title="Over ons | Automobiel Taxaties"
-        description="Automobiel Taxaties is Erik Elderson. Erkend taxateur voor BPM, verzekeringstaxatie, WEV-taxatie en schadevaststelling, werkzaam in het grootste gedeelte van Nederland."
+        title="Over ons | Erik Elderson | Automobiel Taxaties"
+        description="Automobiel Taxaties is opgericht door Erik Elderson. Notarieel Beëdigd TMV Register-Taxateur en Register-Taxateur VRT. Werkzaam in het grootste gedeelte van Nederland."
       />
       <SiteHeader />
       <Breadcrumbs items={[{ label: "Over ons" }]} />

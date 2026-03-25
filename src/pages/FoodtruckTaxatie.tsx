@@ -35,7 +35,7 @@ const FoodtruckTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta title="Foodtruck Taxatie | Mobiele Horeca Waardebepaling | Automobiel Taxaties" description="Specialist in taxatie van foodtrucks en mobiele horecavoertuigen. Erkend rapport voor verzekering en financiering." />
+      <PageMeta title="Foodtruck Taxatie | Waardebepaling voor foodtrucks | Automobiel Taxaties" description="Een foodtruck is meer dan een voertuig. Wij taxeren de complete inrichting en apparatuur mee. Erkend rapport voor verzekering of bedrijfsadministratie." />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", "name": "Foodtruck Taxatie", "provider": { "@type": "Organization", "name": "Automobiel Taxaties" }, "areaServed": "Netherlands", "url": "https://www.automobieltaxaties.nl/foodtruck-taxatie" }} />
       <SiteHeader />
       <Breadcrumbs items={[{ label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" }, { label: "Foodtruck" }]} />

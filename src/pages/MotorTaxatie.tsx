@@ -35,7 +35,7 @@ const MotorTaxatie = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <PageMeta title="Motor Taxatie | Professionele Motorfiets Taxatie | Automobiel Taxaties" description="Erkende taxatie van motorfietsen voor verzekering en waardebepaling. Register taxateur op locatie in het grootste gedeelte van Nederland." />
+      <PageMeta title="Motor Taxatie | Erkend taxatierapport voor jouw motor | Automobiel Taxaties" description="Wij taxeren jouw motor op locatie. Voor verzekering, verkoop of geschillen. Erkend rapport opgesteld door een gecertificeerd taxateur." />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", "name": "Motor Taxatie", "provider": { "@type": "Organization", "name": "Automobiel Taxaties" }, "areaServed": "Netherlands", "url": "https://www.automobieltaxaties.nl/motor-taxatie" }} />
       <SiteHeader />
       <Breadcrumbs items={[{ label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" }, { label: "Motor" }]} />
