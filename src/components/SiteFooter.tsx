@@ -53,7 +53,7 @@ const SiteFooter = () => {
           <form onSubmit={handleNewsletter} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input
               type="email"
-              placeholder="Je e-mailadres"
+              placeholder="Jouw e-mailadres"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
