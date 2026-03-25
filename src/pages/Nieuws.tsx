@@ -123,7 +123,7 @@ const Nieuws = () => {
                     >
                       <img
                         src={categoryImages[featured.category]}
-                        alt=""
+                        alt={`Sfeerfoto categorie ${featured.category}`}
                         className="w-full h-full object-cover absolute inset-0"
                         onError={(e) => { e.currentTarget.style.display = 'none'; }}
                       />
