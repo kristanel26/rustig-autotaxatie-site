@@ -20,7 +20,7 @@ const verzekeringSubLinks = [
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "BPM Taxatie", href: "/bpm-taxatie", dropdown: "bpm" },
-  { label: "Verzekeringstaxatie", href: "/verzekeringstaxatie-info", dropdown: "verzekering" },
+  { label: "Verzekeringstaxatie", href: "/verzekeringstaxatie", dropdown: "verzekering" },
   { label: "WEV Taxatie", href: "/wev-taxatie" },
   
   { label: "Over ons", href: "/over-ons" },
