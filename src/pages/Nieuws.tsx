@@ -6,7 +6,7 @@ import PageMeta from "@/components/PageMeta";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { ArrowRight } from "lucide-react";
 import { useState, useMemo } from "react";
-import heroNieuws from "@/assets/hero-nieuws.jpg";
+import heroNieuws from "@/assets/hero-nieuws-new.png";
 import nieuwsArtikelen from "@/data/nieuwsArtikelen";
 
 const categoryImages: Record<string, string> = {
@@ -55,8 +55,8 @@ const Nieuws = () => {
       {/* Hero */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>
         <div className="absolute inset-0">
-          <img src={heroNieuws} alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />
+          <img src={heroNieuws} alt="" className="w-full h-full object-cover" style={{ objectPosition: 'center' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(29,60,113,0.85) 0%, rgba(29,60,113,0.85) 40%, rgba(29,60,113,0.55) 70%, rgba(29,60,113,0.25) 100%)' }} />
         </div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
           <div style={{ width: 32, height: 2, background: '#ff751f', marginBottom: 12 }} />
@@ -69,10 +69,10 @@ const Nieuws = () => {
           <h1
             style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 700, lineHeight: 1.15, color: '#ffffff', maxWidth: 700 }}
           >
-            Nieuws & Kennisbank
+            BPM nieuws en jurisprudentie
           </h1>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, color: 'rgba(255,255,255,0.9)', lineHeight: 1.7, maxWidth: 600, marginTop: 16 }}>
-            Praktische informatie over BPM, taxaties en voertuigwaardering.
+            Actuele berichten over wijzigingen in wet- en regelgeving, uitspraken en BPM-tarieven.
           </p>
         </div>
       </section>
