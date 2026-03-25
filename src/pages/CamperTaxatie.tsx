@@ -1,5 +1,7 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BekijkOok from "@/components/BekijkOok";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { useRef } from "react";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
@@ -55,6 +57,7 @@ const CamperTaxatie = () => {
         description="Professionele camper taxatie door een specialist in de campermarkt. Erkend rapport voor jou verzekeringspolis. Op locatie bij jouw camper."
       />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" }, { label: "Camper" }]} />
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE CAMPER"
         title="Zekerheid over de waarde van jouw camper"
