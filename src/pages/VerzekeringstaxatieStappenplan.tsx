@@ -94,7 +94,7 @@ const VerzekeringstaxatieStappenplan = () => {
             Van aanvraag tot rapport.<br />Wij regelen het op locatie bij jou.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <Link to="/verzekeringstaxatie-info">
+            <Link to="/verzekeringstaxatie">
               <button className="btn-cta flex items-center gap-2">
                 Verzekeringstaxatie aanvragen
                 <ArrowRight className="w-4 h-4" />
@@ -228,7 +228,7 @@ const VerzekeringstaxatieStappenplan = () => {
           <p className="text-white/80 text-lg mb-8">
             Vraag vrijblijvend een verzekeringstaxatie aan.
           </p>
-          <Link to="/verzekeringstaxatie-info">
+          <Link to="/verzekeringstaxatie">
             <button className="btn-cta flex items-center gap-2 mx-auto">
               Verzekeringstaxatie aanvragen
               <ArrowRight className="w-4 h-4" />

@@ -5,7 +5,7 @@ import logo from "@/assets/logo-automobiel-taxaties.png";
 
 const dienstenLinks = [
   { label: "BPM Taxatie", href: "/bpm-taxatie" },
-  { label: "Verzekeringstaxatie", href: "/verzekeringstaxatie-info" },
+  { label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" },
   { label: "WEV Taxatie", href: "/wev-taxatie" },
   
   { label: "Over ons", href: "/over-ons" },
