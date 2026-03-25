@@ -8,6 +8,13 @@ import { useState, useMemo } from "react";
 import heroNieuws from "@/assets/hero-nieuws.jpg";
 import nieuwsArtikelen from "@/data/nieuwsArtikelen";
 
+const categoryImages: Record<string, string> = {
+  "Jurisprudentie": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80",
+  "Wetgeving": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80",
+  "BPM & Import": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=800&q=80",
+  "Tips & Uitleg": "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80",
+};
+
 const categories = ["Alle berichten", "BPM & Import", "Jurisprudentie", "Wetgeving", "Tips & Uitleg"];
 
 const PAGE_SIZE = 9;
@@ -109,11 +116,17 @@ const Nieuws = () => {
                 >
                   <div className="grid md:grid-cols-2">
                     <div
-                      className="h-[120px] md:h-auto relative"
-                      style={{ background: '#1d3c71', minHeight: 120 }}
+                      className="h-[200px] md:h-auto relative"
+                      style={{ background: '#1d3c71', minHeight: 200 }}
                     >
+                      <img
+                        src={categoryImages[featured.category]}
+                        alt=""
+                        className="w-full h-full object-cover absolute inset-0"
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                      />
                       <span
-                        className="absolute top-4 left-4 text-xs font-bold uppercase rounded-full px-3 py-1"
+                        className="absolute top-4 left-4 text-xs font-bold uppercase rounded-full px-3 py-1 z-10"
                         style={{ background: '#ff751f', color: '#ffffff', letterSpacing: '0.06em' }}
                       >
                         {featured.category}
@@ -146,9 +159,15 @@ const Nieuws = () => {
                     className="block rounded-[14px] overflow-hidden bg-white transition-all duration-200 hover:-translate-y-1 no-underline"
                     style={{ boxShadow: '0 4px 24px rgba(29,60,113,0.08)' }}
                   >
-                    <div className="relative h-[90px]" style={{ background: '#1d3c71' }}>
+                    <div className="relative h-[120px]" style={{ background: '#1d3c71' }}>
+                      <img
+                        src={categoryImages[article.category]}
+                        alt=""
+                        className="w-full h-full object-cover absolute inset-0"
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                      />
                       <span
-                        className="absolute top-4 left-4 text-xs font-bold uppercase rounded-full px-3 py-1"
+                        className="absolute top-4 left-4 text-xs font-bold uppercase rounded-full px-3 py-1 z-10"
                         style={{ background: '#ff751f', color: '#ffffff', letterSpacing: '0.06em' }}
                       >
                         {article.category}
