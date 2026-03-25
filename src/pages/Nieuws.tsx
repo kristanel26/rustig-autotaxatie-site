@@ -4,21 +4,36 @@ import UspBar from "@/components/UspBar";
 import PageMeta from "@/components/PageMeta";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import heroNieuws from "@/assets/hero-nieuws.jpg";
 import nieuwsArtikelen from "@/data/nieuwsArtikelen";
 
 const categories = ["Alle berichten", "BPM & Import", "Jurisprudentie", "Wetgeving", "Tips & Uitleg"];
 
+const PAGE_SIZE = 9;
+
 const Nieuws = () => {
   const [activeCategory, setActiveCategory] = useState("Alle berichten");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
-  const filtered = activeCategory === "Alle berichten"
-    ? nieuwsArtikelen
-    : nieuwsArtikelen.filter((a) => a.category === activeCategory);
+  const filtered = useMemo(() =>
+    activeCategory === "Alle berichten"
+      ? nieuwsArtikelen
+      : nieuwsArtikelen.filter((a) => a.category === activeCategory),
+    [activeCategory]
+  );
+
+  // Reset visible count when category changes
+  const handleCategoryChange = (cat: string) => {
+    setActiveCategory(cat);
+    setVisibleCount(PAGE_SIZE);
+  };
 
   const featured = filtered[0];
   const rest = filtered.slice(1);
+  const visibleRest = rest.slice(0, visibleCount - 1); // -1 because featured counts as 1
+  const totalShown = Math.min(visibleCount, filtered.length);
+  const allLoaded = totalShown >= filtered.length;
 
   return (
     <div className="min-h-screen bg-white">
@@ -60,7 +75,7 @@ const Nieuws = () => {
           {categories.map((cat) => (
             <button
               key={cat}
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => handleCategoryChange(cat)}
               className="px-4 py-2 rounded-full text-sm font-medium transition-all"
               style={{
                 background: activeCategory === cat ? '#1d3c71' : 'transparent',
@@ -122,7 +137,7 @@ const Nieuws = () => {
 
               {/* Grid */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {rest.map((article) => (
+                {visibleRest.map((article) => (
                   <a
                     key={article.id}
                     href={article.url}
@@ -153,6 +168,38 @@ const Nieuws = () => {
                     </div>
                   </a>
                 ))}
+              </div>
+
+              {/* Load more */}
+              <div className="flex flex-col items-center mt-10 gap-3">
+                <p style={{ color: '#698db3', fontSize: 13 }}>
+                  {totalShown} van {filtered.length} artikelen weergegeven
+                </p>
+                {!allLoaded && (
+                  <button
+                    onClick={() => setVisibleCount((prev) => prev + PAGE_SIZE)}
+                    className="font-medium transition-all"
+                    style={{
+                      width: 220,
+                      height: 44,
+                      borderRadius: 7,
+                      border: '1px solid #1d3c71',
+                      background: 'transparent',
+                      color: '#1d3c71',
+                      fontSize: 14,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = '#1d3c71';
+                      e.currentTarget.style.color = '#ffffff';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'transparent';
+                      e.currentTarget.style.color = '#1d3c71';
+                    }}
+                  >
+                    Laad meer artikelen
+                  </button>
+                )}
               </div>
             </>
           )}
