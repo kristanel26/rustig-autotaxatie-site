@@ -160,12 +160,6 @@ const Nieuws = () => {
                     style={{ boxShadow: '0 4px 24px rgba(29,60,113,0.08)' }}
                   >
                     <div className="relative h-[120px]" style={{ background: '#1d3c71' }}>
-                      <img
-                        src={categoryImages[article.category]}
-                        alt=""
-                        className="w-full h-full object-cover absolute inset-0"
-                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                      />
                       <span
                         className="absolute top-4 left-4 text-xs font-bold uppercase rounded-full px-3 py-1 z-10"
                         style={{ background: '#ff751f', color: '#ffffff', letterSpacing: '0.06em' }}
