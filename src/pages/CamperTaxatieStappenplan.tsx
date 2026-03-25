@@ -72,6 +72,7 @@ const CamperTaxatieStappenplan = () => {
         description="Van aanvraag tot rapport. Zo verloopt de verzekeringstaxatie van jouw camper. Bekijk het volledige stappenplan."
       />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" }, { label: "Camper", href: "/camper-taxatie" }, { label: "Stappenplan" }]} />
 
       {/* Hero */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>

@@ -60,6 +60,7 @@ const VerzekeringstaxatieInfo = () => {
         description="Professionele verzekeringstaxatie voor oldtimers, youngtimers, campers en motoren. Erkend rapport voor jou verzekeringspolis. Op locatie in het grootste gedeelte van Nederland."
       />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Verzekeringstaxatie" }]} />
 
       {/* HERO */}
       <LandingHero

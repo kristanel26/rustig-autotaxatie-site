@@ -102,6 +102,7 @@ const WevStappenplan = () => {
         description="Van aanvraag tot taxatierapport. Zo verloopt de WEV-taxatie. Bekijk het volledige stappenplan."
       />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "WEV Taxatie", href: "/wev-taxatie" }, { label: "Stappenplan" }]} />
 
       {/* Hero */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>

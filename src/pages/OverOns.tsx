@@ -40,6 +40,7 @@ const OverOns = () => {
         description="Automobiel Taxaties is Erik Elderson. Erkend taxateur voor BPM, verzekeringstaxatie, WEV-taxatie en schadevaststelling, werkzaam in het grootste gedeelte van Nederland."
       />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Over ons" }]} />
 
       {/* ── HERO with background image ── */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>

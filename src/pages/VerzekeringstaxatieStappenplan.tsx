@@ -72,6 +72,7 @@ const VerzekeringstaxatieStappenplan = () => {
         description="Van aanvraag tot rapport. Zo verloopt de verzekeringstaxatie. Bekijk het volledige stappenplan."
       />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" }, { label: "Stappenplan" }]} />
 
       {/* Hero */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>
