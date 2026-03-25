@@ -1,6 +1,7 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BekijkOok from "@/components/BekijkOok";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
@@ -54,6 +55,8 @@ const CamperTaxatie = () => {
       <PageMeta
         title="Camper Taxatie | Erkende Waardebepaling | Automobiel Taxaties"
         description="Professionele camper taxatie door een specialist in de campermarkt. Erkend rapport voor jou verzekeringspolis. Op locatie bij jouw camper."
+      />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", "name": "Camper Taxatie", "provider": { "@type": "Organization", "name": "Automobiel Taxaties" }, "areaServed": "Netherlands", "url": "https://www.automobieltaxaties.nl/camper-taxatie" }} />
       />
       <SiteHeader />
       <Breadcrumbs items={[{ label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" }, { label: "Camper" }]} />

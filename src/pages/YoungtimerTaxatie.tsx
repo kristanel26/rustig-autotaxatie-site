@@ -1,6 +1,7 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BekijkOok from "@/components/BekijkOok";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import JsonLd from "@/components/JsonLd";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
@@ -35,6 +36,7 @@ const YoungtimerTaxatie = () => {
   return (
     <div className="min-h-screen bg-background">
       <PageMeta title="Youngtimer Taxatie | Voertuigen Vanaf 15 Jaar | Automobiel Taxaties" description="Erkende youngtimer taxatie voor verzekering en BPM. Specialist in voertuigen van 15 jaar en ouder. Gratis advies aanvragen." />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", "name": "Youngtimer Taxatie", "provider": { "@type": "Organization", "name": "Automobiel Taxaties" }, "areaServed": "Netherlands", "url": "https://www.automobieltaxaties.nl/youngtimer-taxatie" }} />
       <SiteHeader />
       <Breadcrumbs items={[{ label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" }, { label: "Youngtimer" }]} />
       <LandingHero
