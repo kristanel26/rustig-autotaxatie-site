@@ -86,6 +86,7 @@ const SiteHeader = () => {
 
       {/* Main navigation */}
       <header
+        aria-label="Hoofdnavigatie"
         className={`sticky top-0 z-50 transition-all duration-300 px-6 lg:px-8 ${
           scrolled
             ? "glass-header py-2 shadow-[0_2px_16px_rgba(0,0,0,0.08)]"
