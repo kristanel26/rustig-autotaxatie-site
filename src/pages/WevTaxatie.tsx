@@ -54,7 +54,6 @@ const WevTaxatie = () => {
         description="Objectieve WEV taxatie voor fiscale en juridische doeleinden. Erkend taxatierapport door register taxateur Erik Elderson."
       />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", "name": "WEV Taxatie", "provider": { "@type": "Organization", "name": "Automobiel Taxaties" }, "areaServed": "Netherlands", "url": "https://www.automobieltaxaties.nl/wev-taxatie" }} />
-      />
       <SiteHeader />
       <Breadcrumbs items={[{ label: "WEV Taxatie" }]} />
       <LandingHero

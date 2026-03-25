@@ -57,7 +57,6 @@ const CamperTaxatie = () => {
         description="Professionele camper taxatie door een specialist in de campermarkt. Erkend rapport voor jou verzekeringspolis. Op locatie bij jouw camper."
       />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Service", "name": "Camper Taxatie", "provider": { "@type": "Organization", "name": "Automobiel Taxaties" }, "areaServed": "Netherlands", "url": "https://www.automobieltaxaties.nl/camper-taxatie" }} />
-      />
       <SiteHeader />
       <Breadcrumbs items={[{ label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" }, { label: "Camper" }]} />
       <LandingHero
