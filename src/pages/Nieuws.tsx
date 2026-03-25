@@ -4,56 +4,21 @@ import UspBar from "@/components/UspBar";
 import PageMeta from "@/components/PageMeta";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { ArrowRight } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import heroNieuws from "@/assets/hero-nieuws.jpg";
-import { supabase } from "@/integrations/supabase/client";
-import { format } from "date-fns";
-import { nl } from "date-fns/locale";
+import nieuwsArtikelen from "@/data/nieuwsArtikelen";
 
-const categories = ["Alle berichten", "BPM & Import", "Oldtimers & Youngtimers", "Verzekeringstaxatie", "Wetgeving", "Tips & Uitleg"];
-
-interface Article {
-  id: string;
-  title: string;
-  slug: string;
-  category: string;
-  excerpt: string | null;
-  published_at: string | null;
-  featured: boolean;
-}
+const categories = ["Alle berichten", "BPM & Import", "Jurisprudentie", "Wetgeving", "Tips & Uitleg"];
 
 const Nieuws = () => {
   const [activeCategory, setActiveCategory] = useState("Alle berichten");
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchArticles = async () => {
-      const { data, error } = await supabase
-        .from("articles")
-        .select("id, title, slug, category, excerpt, published_at, featured")
-        .eq("status", "published")
-        .order("published_at", { ascending: false });
-
-      if (!error && data) {
-        setArticles(data);
-      }
-      setLoading(false);
-    };
-    fetchArticles();
-  }, []);
 
   const filtered = activeCategory === "Alle berichten"
-    ? articles
-    : articles.filter((a) => a.category === activeCategory);
+    ? nieuwsArtikelen
+    : nieuwsArtikelen.filter((a) => a.category === activeCategory);
 
-  const featured = filtered.find((a) => a.featured) || filtered[0];
-  const rest = filtered.filter((a) => a !== featured);
-
-  const formatDate = (dateStr: string | null) => {
-    if (!dateStr) return "";
-    return format(new Date(dateStr), "d MMMM yyyy", { locale: nl });
-  };
+  const featured = filtered[0];
+  const rest = filtered.slice(1);
 
   return (
     <div className="min-h-screen bg-white">
@@ -112,14 +77,7 @@ const Nieuws = () => {
       {/* Articles */}
       <section className="py-16 md:py-24 px-6 lg:px-8" style={{ background: '#f0f4f8' }}>
         <div className="max-w-7xl mx-auto">
-
-          {loading ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="rounded-[14px] bg-white animate-pulse h-[280px]" />
-              ))}
-            </div>
-          ) : filtered.length === 0 ? (
+          {filtered.length === 0 ? (
             <p className="text-center py-16" style={{ color: '#698db3', fontSize: 17 }}>
               Geen artikelen gevonden in deze categorie.
             </p>
@@ -127,8 +85,11 @@ const Nieuws = () => {
             <>
               {/* Featured article */}
               {featured && (
-                <div
-                  className="rounded-[14px] overflow-hidden mb-10 bg-white transition-all duration-200 hover:-translate-y-1"
+                <a
+                  href={featured.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block rounded-[14px] overflow-hidden mb-10 bg-white transition-all duration-200 hover:-translate-y-1 no-underline"
                   style={{ boxShadow: '0 4px 24px rgba(29,60,113,0.08)' }}
                 >
                   <div className="grid md:grid-cols-2">
@@ -144,27 +105,30 @@ const Nieuws = () => {
                       </span>
                     </div>
                     <div className="p-8 md:p-10 flex flex-col justify-center">
-                      <p className="text-xs mb-2" style={{ color: '#698db3' }}>{formatDate(featured.published_at)}</p>
+                      <p className="text-xs mb-2" style={{ color: '#698db3' }}>{featured.dateDisplay}</p>
                       <h2 className="heading-display font-bold mb-3" style={{ fontSize: 24, color: '#1a1a1a', lineHeight: 1.3 }}>
                         {featured.title}
                       </h2>
                       <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, color: '#4a5568', lineHeight: 1.70 }} className="mb-5">
                         {featured.excerpt}
                       </p>
-                      <span className="text-sm font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all cursor-pointer" style={{ color: '#ff751f' }}>
+                      <span className="text-sm font-semibold inline-flex items-center gap-1.5" style={{ color: '#ff751f' }}>
                         Lees meer <ArrowRight className="w-4 h-4" />
                       </span>
                     </div>
                   </div>
-                </div>
+                </a>
               )}
 
               {/* Grid */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {rest.map((article) => (
-                  <div
+                  <a
                     key={article.id}
-                    className="rounded-[14px] overflow-hidden bg-white transition-all duration-200 hover:-translate-y-1 cursor-pointer"
+                    href={article.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block rounded-[14px] overflow-hidden bg-white transition-all duration-200 hover:-translate-y-1 no-underline"
                     style={{ boxShadow: '0 4px 24px rgba(29,60,113,0.08)' }}
                   >
                     <div className="relative h-[90px]" style={{ background: '#1d3c71' }}>
@@ -176,18 +140,18 @@ const Nieuws = () => {
                       </span>
                     </div>
                     <div className="p-4">
-                      <p className="text-xs mb-2" style={{ color: '#698db3' }}>{formatDate(article.published_at)}</p>
+                      <p className="text-xs mb-2" style={{ color: '#698db3' }}>{article.dateDisplay}</p>
                       <h3 className="heading-display font-semibold mb-2" style={{ fontSize: 18, color: '#1a1a1a', lineHeight: 1.3 }}>
                         {article.title}
                       </h3>
-                      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#4a5568', lineHeight: 1.65 }} className="mb-4 line-clamp-3">
+                      <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, color: '#4a5568', lineHeight: 1.65 }} className="mb-4 line-clamp-2">
                         {article.excerpt}
                       </p>
-                      <span className="text-sm font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all" style={{ color: '#ff751f' }}>
+                      <span className="text-sm font-semibold inline-flex items-center gap-1.5" style={{ color: '#ff751f' }}>
                         Lees meer <ArrowRight className="w-3.5 h-3.5" />
                       </span>
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
             </>
