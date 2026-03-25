@@ -70,7 +70,7 @@ const SiteFooter = () => {
       </section>
 
       {/* Main footer */}
-      <footer className="bg-[hsl(var(--primary))] text-white py-14 px-6 lg:px-8">
+      <footer aria-label="Sitenavigatie en contactgegevens" className="bg-[hsl(var(--primary))] text-white py-14 px-6 lg:px-8">
         <div className="max-w-[1100px] mx-auto px-0">
           {/* Orange accent bar above logo */}
           <div className="grid md:grid-cols-3 gap-10 mb-10">

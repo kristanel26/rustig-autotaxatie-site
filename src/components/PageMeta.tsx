@@ -31,8 +31,18 @@ const PageMeta = ({ title, description }: PageMetaProps) => {
     setMeta("og:site_name", "Automobiel Taxaties", true);
     setMeta("og:locale", "nl_NL", true);
 
+    // Canonical URL
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", `https://www.automobieltaxaties.nl${pathname}`);
+
     return () => {
       document.title = "Automobiel Taxaties, Erkend taxatiebureau";
+      canonical?.remove();
     };
   }, [title, description, pathname]);
 
