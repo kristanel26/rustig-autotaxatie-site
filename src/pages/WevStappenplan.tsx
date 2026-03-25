@@ -284,7 +284,7 @@ const WevStappenplan = () => {
           <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
             <input
               type="email"
-              placeholder="Je e-mailadres"
+              placeholder="Jouw e-mailadres"
               className="flex-1 px-4 py-3 rounded-[7px] border text-sm"
               style={{ borderColor: '#d1d5db' }}
             />
