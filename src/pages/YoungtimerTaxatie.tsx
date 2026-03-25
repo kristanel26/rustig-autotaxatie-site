@@ -46,6 +46,7 @@ const YoungtimerTaxatie = () => {
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroYoungtimer}
+        heroAlt="Youngtimer taxatie voor verzekering en BPM"
         compact
       />
       <UspBar />

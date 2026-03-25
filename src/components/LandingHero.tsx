@@ -8,6 +8,7 @@ interface LandingHeroProps {
   description: string | ReactNode;
   ctaText: string;
   onCtaClick: () => void;
+  heroAlt?: string;
   children?: ReactNode;
   heroImage?: string;
   heroImagePosition?: string;
@@ -22,6 +23,7 @@ const LandingHero = ({
   ctaText,
   onCtaClick,
   heroImage,
+  heroAlt,
   heroImagePosition,
   children,
   showPhoneButton = true,
@@ -34,7 +36,7 @@ const LandingHero = ({
         <div className="absolute inset-0">
           <img
             src={heroImage}
-            alt=""
+            alt={heroAlt || ""}
             className="w-full h-full object-cover"
             style={heroImagePosition ? { objectPosition: heroImagePosition } : undefined}
           />

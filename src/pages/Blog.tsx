@@ -67,7 +67,7 @@ const Blog = () => {
       {/* Hero */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>
         <div className="absolute inset-0">
-          <img src={heroBlog} alt="" className="w-full h-full object-cover" />
+          <img src={heroBlog} alt="Blog over BPM en voertuigtaxaties" className="w-full h-full object-cover" />
           <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />
         </div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">

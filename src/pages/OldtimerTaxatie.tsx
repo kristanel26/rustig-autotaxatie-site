@@ -63,6 +63,7 @@ const OldtimerTaxatie = () => {
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroOldtimer}
+        heroAlt="Oldtimer taxatie en waardebepaling"
         compact
       />
       <UspBar />

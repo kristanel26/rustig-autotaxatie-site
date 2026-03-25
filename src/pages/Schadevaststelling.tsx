@@ -46,6 +46,7 @@ const Schadevaststelling = () => {
         ctaText="Schadevaststelling aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroImage}
+        heroAlt="Schadevaststelling onafhankelijk taxatierapport"
         compact
       />
       <UspBar />

@@ -55,7 +55,7 @@ const Nieuws = () => {
       {/* Hero */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>
         <div className="absolute inset-0">
-          <img src={heroNieuws} alt="" className="w-full h-full object-cover" style={{ objectPosition: 'center' }} />
+          <img src={heroNieuws} alt="BPM nieuws en jurisprudentie overzicht" className="w-full h-full object-cover" style={{ objectPosition: 'center' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(29,60,113,0.85) 0%, rgba(29,60,113,0.85) 40%, rgba(29,60,113,0.55) 70%, rgba(29,60,113,0.25) 100%)' }} />
         </div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 w-full">
@@ -123,7 +123,7 @@ const Nieuws = () => {
                     >
                       <img
                         src={categoryImages[featured.category]}
-                        alt=""
+                        alt={`Sfeerfoto categorie ${featured.category}`}
                         className="w-full h-full object-cover absolute inset-0"
                         onError={(e) => { e.currentTarget.style.display = 'none'; }}
                       />

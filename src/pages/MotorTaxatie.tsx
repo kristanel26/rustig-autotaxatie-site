@@ -46,6 +46,7 @@ const MotorTaxatie = () => {
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroMotor}
+        heroAlt="Motor taxatie erkend rapport"
         compact
       />
       <UspBar />

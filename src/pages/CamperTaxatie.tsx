@@ -66,6 +66,7 @@ const CamperTaxatie = () => {
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroCamper}
+        heroAlt="Camper taxatie op locatie door Automobiel Taxaties"
         compact
       />
       <UspBar />

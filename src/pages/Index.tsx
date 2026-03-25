@@ -101,7 +101,7 @@ const Index = () => {
       {/* ── HERO ── */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="" className="w-full h-full object-cover" />
+          <img src={heroImage} alt="Erik Elderson taxateur bij voertuig inspectie" className="w-full h-full object-cover" />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(105deg, rgba(29,60,113,0.82) 0%, rgba(29,60,113,0.60) 55%, rgba(29,60,113,0.25) 100%)' }} />
           <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 30% 60%, rgba(105,141,179,0.18) 0%, transparent 60%)' }} />
         </div>

@@ -73,6 +73,7 @@ const VerzekeringstaxatieInfo = () => {
         ctaText="Verzekeringstaxatie aanvragen"
         onCtaClick={scrollToForm}
         heroImage={heroVerzekeringstaxatie}
+        heroAlt="Verzekeringstaxatie erkende waardebepaling voertuigen"
         compact
       >
         <p className="flex items-center gap-2 text-white/60 text-sm">
