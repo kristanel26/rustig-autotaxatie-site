@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
@@ -60,6 +61,7 @@ const VerzekeringstaxatieInfo = () => {
         description="Professionele verzekeringstaxatie voor oldtimers, youngtimers, campers en motoren. Erkend rapport voor jou verzekeringspolis. Op locatie in het grootste gedeelte van Nederland."
       />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Verzekeringstaxatie" }]} />
 
       {/* HERO */}
       <LandingHero

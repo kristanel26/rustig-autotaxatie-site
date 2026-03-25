@@ -1,5 +1,6 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BekijkOok from "@/components/BekijkOok";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
@@ -43,6 +44,7 @@ const BpmTaxatie = () => {
         description="De laagst haalbare BPM voor jou importvoertuig. Fysieke inspectie op locatie door een erkend TMV en VRT register taxateur. Gratis advies aanvragen."
       />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "BPM Taxatie" }]} />
       <LandingHero
         subtitle="BPM-taxatie"
         title="BPM-taxatie bij import van voertuigen"

@@ -1,5 +1,6 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BekijkOok from "@/components/BekijkOok";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
@@ -35,6 +36,7 @@ const Schadevaststelling = () => {
     <div className="min-h-screen bg-background">
       <PageMeta title="Schadevaststelling | Onafhankelijke Schadebeoordeling | Automobiel Taxaties" description="Onafhankelijke schadevaststelling door een erkend taxateur. Bruikbaar bij verzekeringsclaims, geschillen of aankoop van een voertuig met schade." />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" }, { label: "Schadevaststelling" }]} />
       <LandingHero
         subtitle="SCHADEVASTSTELLING"
         title="Onafhankelijke vaststelling van schade"

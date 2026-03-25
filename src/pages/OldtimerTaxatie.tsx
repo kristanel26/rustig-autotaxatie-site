@@ -1,5 +1,6 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BekijkOok from "@/components/BekijkOok";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
@@ -52,6 +53,7 @@ const OldtimerTaxatie = () => {
         description="Professionele oldtimer taxatie voor verzekering en waardebepaling. Oog voor detail en historie. Op locatie in het grootste gedeelte van Nederland."
       />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" }, { label: "Oldtimer" }]} />
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE OLDTIMER"
         title="Zekerheid over de waarde van jouw oldtimer"

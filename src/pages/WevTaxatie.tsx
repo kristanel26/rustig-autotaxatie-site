@@ -1,5 +1,6 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BekijkOok from "@/components/BekijkOok";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
@@ -52,6 +53,7 @@ const WevTaxatie = () => {
         description="Objectieve WEV taxatie voor fiscale en juridische doeleinden. Erkend taxatierapport door register taxateur Erik Elderson."
       />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "WEV Taxatie" }]} />
       <LandingHero
         subtitle="WEV-TAXATIE"
         title="Werkelijke waarde. Fiscaal verdedigbaar."

@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Link } from "react-router-dom";
 import { Phone, Mail, ChevronDown } from "lucide-react";
@@ -138,6 +139,7 @@ const FAQ = () => {
         description="Antwoorden op de meest gestelde vragen over BPM-aangifte, taxatierapporten, oldtimers, kosten en levertijden."
       />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "FAQ" }]} />
 
       {/* Hero */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>

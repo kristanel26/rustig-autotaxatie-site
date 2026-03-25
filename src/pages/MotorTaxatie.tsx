@@ -1,5 +1,6 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BekijkOok from "@/components/BekijkOok";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
@@ -35,6 +36,7 @@ const MotorTaxatie = () => {
     <div className="min-h-screen bg-background">
       <PageMeta title="Motor Taxatie | Professionele Motorfiets Taxatie | Automobiel Taxaties" description="Erkende taxatie van motorfietsen voor verzekering en waardebepaling. Register taxateur op locatie in het grootste gedeelte van Nederland." />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" }, { label: "Motor" }]} />
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE MOTOR"
         title="Zekerheid over de waarde van jouw motor"

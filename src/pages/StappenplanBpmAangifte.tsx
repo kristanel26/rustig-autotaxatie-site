@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -123,6 +124,7 @@ const StappenplanBpmAangifte = () => {
         description="Bekijk het volledige stappenplan voor een BPM aangifte. Van auto zoeken tot kenteken ontvangen, wij begeleiden je door het hele proces."
       />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "BPM Taxatie", href: "/bpm-taxatie" }, { label: "Stappenplan" }]} />
 
       {/* Hero */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>

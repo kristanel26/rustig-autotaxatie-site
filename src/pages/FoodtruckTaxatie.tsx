@@ -1,5 +1,6 @@
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BekijkOok from "@/components/BekijkOok";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import LandingHero from "@/components/LandingHero";
@@ -35,6 +36,7 @@ const FoodtruckTaxatie = () => {
     <div className="min-h-screen bg-background">
       <PageMeta title="Foodtruck Taxatie | Mobiele Horeca Waardebepaling | Automobiel Taxaties" description="Specialist in taxatie van foodtrucks en mobiele horecavoertuigen. Erkend rapport voor verzekering en financiering." />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Verzekeringstaxatie", href: "/verzekeringstaxatie" }, { label: "Foodtruck" }]} />
       <LandingHero
         subtitle="VERZEKERINGSTAXATIE FOODTRUCK"
         title="Zekerheid over de waarde van jouw foodtruck"

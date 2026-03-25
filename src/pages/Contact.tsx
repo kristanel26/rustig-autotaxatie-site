@@ -1,3 +1,4 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Link } from "react-router-dom";
 import { Phone, Mail, Clock } from "lucide-react";
@@ -17,6 +18,7 @@ const Contact = () => {
         description="Neem contact op met Automobiel Taxaties. Bel 085 483 2461 of stuur een bericht. Erik reageert binnen één werkdag. Locatie: Druten."
       />
       <SiteHeader />
+      <Breadcrumbs items={[{ label: "Contact" }]} />
 
       {/* Hero */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>
