@@ -1,6 +1,5 @@
 import { Suspense, lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
-import ChatWidget from "@/components/ChatWidget";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -9,7 +8,9 @@ import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/internal/ProtectedRoute";
 import RouteFallback from "@/components/RouteFallback";
-import Index from "./pages/Index";
+
+const ChatWidget = lazy(() => import("@/components/ChatWidget"));
+const Index = lazy(() => import("./pages/Index"));
 
 // Public pages — lazy
 const CamperTaxatie = lazy(() => import("./pages/CamperTaxatie"));
@@ -61,7 +62,7 @@ const withSuspense = (node: React.ReactNode) => (
 
 const router = createBrowserRouter([
   // Public website routes
-  { path: "/", element: <Index /> },
+  { path: "/", element: withSuspense(<Index />) },
   { path: "/camper-taxatie", element: withSuspense(<CamperTaxatie />) },
   { path: "/motor-taxatie", element: withSuspense(<MotorTaxatie />) },
   { path: "/oldtimer-taxatie", element: withSuspense(<OldtimerTaxatie />) },
@@ -118,8 +119,10 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <RouterProvider router={router} />
-          <ChatWidget />
+          <RouterProvider router={router} fallbackElement={<RouteFallback />} />
+          <Suspense fallback={null}>
+            <ChatWidget />
+          </Suspense>
         </TooltipProvider>
       </AuthProvider>
     </QueryClientProvider>
