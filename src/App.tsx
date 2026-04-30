@@ -1,11 +1,10 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect, useState, type ComponentType, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
-import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/internal/ProtectedRoute";
 import RouteFallback from "@/components/RouteFallback";
 
@@ -56,7 +55,51 @@ const PDFPreview = lazy(() => import("./pages/internal/PDFPreview"));
 
 const queryClient = new QueryClient();
 
-const withSuspense = (node: React.ReactNode) => (
+const isInternalRoute = (path: string) => path.startsWith("/intern");
+
+const AppProviders = () => {
+  const [AuthProviderComponent, setAuthProviderComponent] =
+    useState<ComponentType<{ children: ReactNode }> | null>(null);
+
+  useEffect(() => {
+    if (!isInternalRoute(window.location.pathname)) return;
+
+    let mounted = true;
+
+    import("@/contexts/AuthContext").then((module) => {
+      if (mounted) {
+        setAuthProviderComponent(() => module.AuthProvider);
+      }
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const content = (
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <RouterProvider router={router} fallbackElement={<RouteFallback />} />
+      <Suspense fallback={null}>
+        <ChatWidget />
+      </Suspense>
+    </TooltipProvider>
+  );
+
+  if (!isInternalRoute(window.location.pathname)) {
+    return content;
+  }
+
+  if (!AuthProviderComponent) {
+    return <RouteFallback />;
+  }
+
+  return <AuthProviderComponent>{content}</AuthProviderComponent>;
+};
+
+const withSuspense = (node: ReactNode) => (
   <Suspense fallback={<RouteFallback />}>{node}</Suspense>
 );
 
@@ -115,16 +158,7 @@ const router = createBrowserRouter([
 const App = () => (
   <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light" disableTransitionOnChange>
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <RouterProvider router={router} fallbackElement={<RouteFallback />} />
-          <Suspense fallback={null}>
-            <ChatWidget />
-          </Suspense>
-        </TooltipProvider>
-      </AuthProvider>
+      <AppProviders />
     </QueryClientProvider>
   </ThemeProvider>
 );
