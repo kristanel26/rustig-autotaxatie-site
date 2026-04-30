@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect, useState, type ComponentType, type ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -57,11 +57,11 @@ const queryClient = new QueryClient();
 
 const isInternalRoute = (path: string) => path.startsWith("/intern");
 
-const AppProviders = ({ children }: { children: React.ReactNode }) => {
+const AppProviders = () => {
   const [AuthProviderComponent, setAuthProviderComponent] =
-    React.useState<React.ComponentType<{ children: React.ReactNode }> | null>(null);
+    useState<ComponentType<{ children: ReactNode }> | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isInternalRoute(window.location.pathname)) return;
 
     let mounted = true;
@@ -99,7 +99,7 @@ const AppProviders = ({ children }: { children: React.ReactNode }) => {
   return <AuthProviderComponent>{content}</AuthProviderComponent>;
 };
 
-const withSuspense = (node: React.ReactNode) => (
+const withSuspense = (node: ReactNode) => (
   <Suspense fallback={<RouteFallback />}>{node}</Suspense>
 );
 
