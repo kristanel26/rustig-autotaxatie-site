@@ -1,3 +1,4 @@
+import { Suspense, lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import ChatWidget from "@/components/ChatWidget";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -7,146 +8,107 @@ import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom"
 import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/internal/ProtectedRoute";
+import RouteFallback from "@/components/RouteFallback";
 import Index from "./pages/Index";
-import CamperTaxatie from "./pages/CamperTaxatie";
-import MotorTaxatie from "./pages/MotorTaxatie";
-import OldtimerTaxatie from "./pages/OldtimerTaxatie";
-import YoungtimerTaxatie from "./pages/YoungtimerTaxatie";
-import FoodtruckTaxatie from "./pages/FoodtruckTaxatie";
-import Schadevaststelling from "./pages/Schadevaststelling";
-import BpmVoorbereiding from "./pages/BpmVoorbereiding";
-import BpmTaxatie from "./pages/BpmTaxatie";
-import BpmMotorTaxatie from "./pages/BpmMotorTaxatie";
-import BpmCamperTaxatie from "./pages/BpmCamperTaxatie";
-import WevTaxatie from "./pages/WevTaxatie";
-import WevStappenplan from "./pages/WevStappenplan";
-import VerzekeringstaxatieInfo from "./pages/VerzekeringstaxatieInfo";
-import Contact from "./pages/Contact";
-import FAQ from "./pages/FAQ";
-import NotFound from "./pages/NotFound";
 
-import StappenplanBpmAangifte from "./pages/StappenplanBpmAangifte";
-import CamperTaxatieStappenplan from "./pages/CamperTaxatieStappenplan";
-import VerzekeringstaxatieStappenplan from "./pages/VerzekeringstaxatieStappenplan";
-import Nieuws from "./pages/Nieuws";
-import OverOns from "./pages/OverOns";
-import CamperInformatieformulier from "./pages/CamperInformatieformulier";
+// Public pages — lazy
+const CamperTaxatie = lazy(() => import("./pages/CamperTaxatie"));
+const MotorTaxatie = lazy(() => import("./pages/MotorTaxatie"));
+const OldtimerTaxatie = lazy(() => import("./pages/OldtimerTaxatie"));
+const YoungtimerTaxatie = lazy(() => import("./pages/YoungtimerTaxatie"));
+const FoodtruckTaxatie = lazy(() => import("./pages/FoodtruckTaxatie"));
+const Schadevaststelling = lazy(() => import("./pages/Schadevaststelling"));
+const BpmVoorbereiding = lazy(() => import("./pages/BpmVoorbereiding"));
+const BpmTaxatie = lazy(() => import("./pages/BpmTaxatie"));
+const BpmMotorTaxatie = lazy(() => import("./pages/BpmMotorTaxatie"));
+const BpmCamperTaxatie = lazy(() => import("./pages/BpmCamperTaxatie"));
+const WevTaxatie = lazy(() => import("./pages/WevTaxatie"));
+const WevStappenplan = lazy(() => import("./pages/WevStappenplan"));
+const VerzekeringstaxatieInfo = lazy(() => import("./pages/VerzekeringstaxatieInfo"));
+const Contact = lazy(() => import("./pages/Contact"));
+const FAQ = lazy(() => import("./pages/FAQ"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const StappenplanBpmAangifte = lazy(() => import("./pages/StappenplanBpmAangifte"));
+const CamperTaxatieStappenplan = lazy(() => import("./pages/CamperTaxatieStappenplan"));
+const VerzekeringstaxatieStappenplan = lazy(() => import("./pages/VerzekeringstaxatieStappenplan"));
+const Nieuws = lazy(() => import("./pages/Nieuws"));
+const OverOns = lazy(() => import("./pages/OverOns"));
+const CamperInformatieformulier = lazy(() => import("./pages/CamperInformatieformulier"));
 
-// Internal pages
-import Login from "./pages/internal/Login";
-import Dashboard from "./pages/internal/Dashboard";
-import Reports from "./pages/internal/Reports";
-import Reminders from "./pages/internal/Reminders";
-import Rapportage from "./pages/internal/Rapportage";
-import Customers from "./pages/internal/Customers";
-import CustomerDetail from "./pages/internal/CustomerDetail";
-import NewReport from "./pages/internal/NewReport";
-import ReportDetail from "./pages/internal/ReportDetail";
-import EditReport from "./pages/internal/EditReport";
-import PDFCover from "./pages/internal/PDFCover";
-import PDFVehicleData from "./pages/internal/PDFVehicleData";
-import PDFAppraisalFindings from "./pages/internal/PDFAppraisalFindings";
-import PDFValuation from "./pages/internal/PDFValuation";
-import PDFPhotos from "./pages/internal/PDFPhotos";
-import PDFPreview from "./pages/internal/PDFPreview";
+// Internal pages — lazy
+const Login = lazy(() => import("./pages/internal/Login"));
+const Dashboard = lazy(() => import("./pages/internal/Dashboard"));
+const Reports = lazy(() => import("./pages/internal/Reports"));
+const Reminders = lazy(() => import("./pages/internal/Reminders"));
+const Rapportage = lazy(() => import("./pages/internal/Rapportage"));
+const Customers = lazy(() => import("./pages/internal/Customers"));
+const CustomerDetail = lazy(() => import("./pages/internal/CustomerDetail"));
+const NewReport = lazy(() => import("./pages/internal/NewReport"));
+const ReportDetail = lazy(() => import("./pages/internal/ReportDetail"));
+const EditReport = lazy(() => import("./pages/internal/EditReport"));
+const PDFCover = lazy(() => import("./pages/internal/PDFCover"));
+const PDFVehicleData = lazy(() => import("./pages/internal/PDFVehicleData"));
+const PDFAppraisalFindings = lazy(() => import("./pages/internal/PDFAppraisalFindings"));
+const PDFValuation = lazy(() => import("./pages/internal/PDFValuation"));
+const PDFPhotos = lazy(() => import("./pages/internal/PDFPhotos"));
+const PDFPreview = lazy(() => import("./pages/internal/PDFPreview"));
 
 const queryClient = new QueryClient();
+
+const withSuspense = (node: React.ReactNode) => (
+  <Suspense fallback={<RouteFallback />}>{node}</Suspense>
+);
 
 const router = createBrowserRouter([
   // Public website routes
   { path: "/", element: <Index /> },
-  { path: "/camper-taxatie", element: <CamperTaxatie /> },
-  { path: "/motor-taxatie", element: <MotorTaxatie /> },
-  { path: "/oldtimer-taxatie", element: <OldtimerTaxatie /> },
-  { path: "/youngtimer-taxatie", element: <YoungtimerTaxatie /> },
-  { path: "/foodtruck-taxatie", element: <FoodtruckTaxatie /> },
-  { path: "/schadevaststelling", element: <Schadevaststelling /> },
-  { path: "/bpm-voorbereiding", element: <BpmVoorbereiding /> },
-  { path: "/bpm-taxatie", element: <BpmTaxatie /> },
-  { path: "/bpm-motor-taxatie", element: <BpmMotorTaxatie /> },
-  { path: "/bpm-camper-taxatie", element: <BpmCamperTaxatie /> },
-  { path: "/wev-taxatie", element: <WevTaxatie /> },
-  { path: "/wev-stappenplan", element: <WevStappenplan /> },
-  { path: "/verzekeringstaxatie", element: <VerzekeringstaxatieInfo /> },
+  { path: "/camper-taxatie", element: withSuspense(<CamperTaxatie />) },
+  { path: "/motor-taxatie", element: withSuspense(<MotorTaxatie />) },
+  { path: "/oldtimer-taxatie", element: withSuspense(<OldtimerTaxatie />) },
+  { path: "/youngtimer-taxatie", element: withSuspense(<YoungtimerTaxatie />) },
+  { path: "/foodtruck-taxatie", element: withSuspense(<FoodtruckTaxatie />) },
+  { path: "/schadevaststelling", element: withSuspense(<Schadevaststelling />) },
+  { path: "/bpm-voorbereiding", element: withSuspense(<BpmVoorbereiding />) },
+  { path: "/bpm-taxatie", element: withSuspense(<BpmTaxatie />) },
+  { path: "/bpm-motor-taxatie", element: withSuspense(<BpmMotorTaxatie />) },
+  { path: "/bpm-camper-taxatie", element: withSuspense(<BpmCamperTaxatie />) },
+  { path: "/wev-taxatie", element: withSuspense(<WevTaxatie />) },
+  { path: "/wev-stappenplan", element: withSuspense(<WevStappenplan />) },
+  { path: "/verzekeringstaxatie", element: withSuspense(<VerzekeringstaxatieInfo />) },
   { path: "/verzekeringstaxatie-info", element: <Navigate to="/verzekeringstaxatie" replace /> },
-  { path: "/contact", element: <Contact /> },
-  { path: "/faq", element: <FAQ /> },
+  { path: "/contact", element: withSuspense(<Contact />) },
+  { path: "/faq", element: withSuspense(<FAQ />) },
   { path: "/blog", element: <Navigate to="/nieuws" replace /> },
-  { path: "/stappenplan-bpm-aangifte", element: <StappenplanBpmAangifte /> },
-  { path: "/camper-taxatie-stappenplan", element: <CamperTaxatieStappenplan /> },
-  { path: "/camper-informatieformulier", element: <CamperInformatieformulier /> },
-  { path: "/verzekering-stappenplan", element: <VerzekeringstaxatieStappenplan /> },
-  { path: "/nieuws", element: <Nieuws /> },
-  { path: "/over-ons", element: <OverOns /> },
+  { path: "/stappenplan-bpm-aangifte", element: withSuspense(<StappenplanBpmAangifte />) },
+  { path: "/camper-taxatie-stappenplan", element: withSuspense(<CamperTaxatieStappenplan />) },
+  { path: "/camper-informatieformulier", element: withSuspense(<CamperInformatieformulier />) },
+  { path: "/verzekering-stappenplan", element: withSuspense(<VerzekeringstaxatieStappenplan />) },
+  { path: "/nieuws", element: withSuspense(<Nieuws />) },
+  { path: "/over-ons", element: withSuspense(<OverOns />) },
   { path: "/werkwijze", element: <Navigate to="/over-ons" replace /> },
-  
+
   // Internal routes - Login is public
-  { path: "/intern/login", element: <Login /> },
-  
+  { path: "/intern/login", element: withSuspense(<Login />) },
+
   // Internal routes - Protected
-  {
-    path: "/intern/dashboard",
-    element: <ProtectedRoute><Dashboard /></ProtectedRoute>,
-  },
-  {
-    path: "/intern/rapporten",
-    element: <ProtectedRoute><Reports /></ProtectedRoute>,
-  },
-  {
-    path: "/intern/herinneringen",
-    element: <ProtectedRoute><Reminders /></ProtectedRoute>,
-  },
-  {
-    path: "/intern/rapportage",
-    element: <ProtectedRoute><Rapportage /></ProtectedRoute>,
-  },
-  {
-    path: "/intern/klanten",
-    element: <ProtectedRoute><Customers /></ProtectedRoute>,
-  },
-  {
-    path: "/intern/klanten/:id",
-    element: <ProtectedRoute><CustomerDetail /></ProtectedRoute>,
-  },
-  {
-    path: "/intern/nieuw-rapport",
-    element: <ProtectedRoute><NewReport /></ProtectedRoute>,
-  },
-  {
-    path: "/intern/rapport/:id",
-    element: <ProtectedRoute><ReportDetail /></ProtectedRoute>,
-  },
-  {
-    path: "/intern/rapport/:id/bewerken",
-    element: <ProtectedRoute><EditReport /></ProtectedRoute>,
-  },
-  {
-    path: "/intern/pdf/voorblad/:id",
-    element: <ProtectedRoute><PDFCover /></ProtectedRoute>,
-  },
-  {
-    path: "/intern/pdf/voertuiggegevens/:id",
-    element: <ProtectedRoute><PDFVehicleData /></ProtectedRoute>,
-  },
-  {
-    path: "/intern/pdf/taxateurbevindingen/:id",
-    element: <ProtectedRoute><PDFAppraisalFindings /></ProtectedRoute>,
-  },
-  {
-    path: "/intern/pdf/waarde/:id",
-    element: <ProtectedRoute><PDFValuation /></ProtectedRoute>,
-  },
-  {
-    path: "/intern/pdf/fotos/:id",
-    element: <ProtectedRoute><PDFPhotos /></ProtectedRoute>,
-  },
-  {
-    path: "/intern/pdf/preview/:id",
-    element: <ProtectedRoute><PDFPreview /></ProtectedRoute>,
-  },
-  
+  { path: "/intern/dashboard", element: withSuspense(<ProtectedRoute><Dashboard /></ProtectedRoute>) },
+  { path: "/intern/rapporten", element: withSuspense(<ProtectedRoute><Reports /></ProtectedRoute>) },
+  { path: "/intern/herinneringen", element: withSuspense(<ProtectedRoute><Reminders /></ProtectedRoute>) },
+  { path: "/intern/rapportage", element: withSuspense(<ProtectedRoute><Rapportage /></ProtectedRoute>) },
+  { path: "/intern/klanten", element: withSuspense(<ProtectedRoute><Customers /></ProtectedRoute>) },
+  { path: "/intern/klanten/:id", element: withSuspense(<ProtectedRoute><CustomerDetail /></ProtectedRoute>) },
+  { path: "/intern/nieuw-rapport", element: withSuspense(<ProtectedRoute><NewReport /></ProtectedRoute>) },
+  { path: "/intern/rapport/:id", element: withSuspense(<ProtectedRoute><ReportDetail /></ProtectedRoute>) },
+  { path: "/intern/rapport/:id/bewerken", element: withSuspense(<ProtectedRoute><EditReport /></ProtectedRoute>) },
+  { path: "/intern/pdf/voorblad/:id", element: withSuspense(<ProtectedRoute><PDFCover /></ProtectedRoute>) },
+  { path: "/intern/pdf/voertuiggegevens/:id", element: withSuspense(<ProtectedRoute><PDFVehicleData /></ProtectedRoute>) },
+  { path: "/intern/pdf/taxateurbevindingen/:id", element: withSuspense(<ProtectedRoute><PDFAppraisalFindings /></ProtectedRoute>) },
+  { path: "/intern/pdf/waarde/:id", element: withSuspense(<ProtectedRoute><PDFValuation /></ProtectedRoute>) },
+  { path: "/intern/pdf/fotos/:id", element: withSuspense(<ProtectedRoute><PDFPhotos /></ProtectedRoute>) },
+  { path: "/intern/pdf/preview/:id", element: withSuspense(<ProtectedRoute><PDFPreview /></ProtectedRoute>) },
+
   // Catch-all
-  { path: "*", element: <NotFound /> },
+  { path: "*", element: withSuspense(<NotFound />) },
 ]);
 
 const App = () => (
