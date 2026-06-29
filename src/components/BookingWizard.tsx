@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Check, ArrowRight, ArrowLeft, Bus, FileText, Scale, Clock, Car, Bike, UtensilsCrossed, CarFront } from "lucide-react";
+import { Check, ArrowRight, ArrowLeft, Bus, FileText, Scale, Clock, Car, Bike, UtensilsCrossed, CarFront, AlertCircle, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const BusIcon = ({ size, style }: { size?: number; style?: React.CSSProperties }) => (
   <Bus size={size || 28} style={style} />
