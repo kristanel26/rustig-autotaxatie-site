@@ -370,6 +370,13 @@ const BookingWizard = () => {
         </div>
       )}
 
+      {errorMsg && (
+        <div role="alert" className="flex items-start gap-2 rounded-lg p-3 mt-6 text-sm" style={{ background: '#fef2f2', color: '#991b1b', border: '1px solid #fecaca' }}>
+          <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+          <span>{errorMsg}</span>
+        </div>
+      )}
+
       {/* Navigation */}
       <div className="flex justify-between mt-8 pt-6" style={{ borderTop: '1px solid #e2e8f0' }}>
         {step > 0 ? (
