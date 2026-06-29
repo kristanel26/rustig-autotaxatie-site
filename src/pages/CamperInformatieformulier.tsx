@@ -553,7 +553,15 @@ const CamperInformatieformulier = () => {
                   <input type="checkbox" checked={agreed} onChange={e => setAgreed(e.target.checked)} className="mt-1 h-4 w-4 rounded border-input accent-[#ff751f]" required />
                   <span className="text-sm text-foreground/80">Ik verklaar hierbij dat alles naar waarheid is ingevuld.</span>
                 </label>
-                <Button type="submit" variant="cta" size="xl" className="w-full" disabled={!agreed}>Informatieformulier verzenden</Button>
+                {errorMsg && (
+                  <div role="alert" className="flex items-start gap-2 rounded-lg p-3 text-sm" style={{ background: '#fef2f2', color: '#991b1b', border: '1px solid #fecaca' }}>
+                    <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+                    <span>{errorMsg}</span>
+                  </div>
+                )}
+                <Button type="submit" variant="cta" size="xl" className="w-full" disabled={!agreed || isSubmitting}>
+                  {isSubmitting ? (<span className="inline-flex items-center gap-2"><Loader2 className="w-4 h-4 animate-spin" /> Versturen…</span>) : "Informatieformulier verzenden"}
+                </Button>
                 <p className="text-xs text-muted-foreground text-center">We gaan zorgvuldig om met jouw gegevens en gebruiken deze alleen voor het verwerken van je taxatie.</p>
               </div>
             </form>
