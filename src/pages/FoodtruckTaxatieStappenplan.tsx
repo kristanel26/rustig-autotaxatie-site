@@ -11,7 +11,8 @@ import stepFoodtruckAanvraagAsset from "@/assets/step-foodtruck-aanvraag.png.ass
 const stepFoodtruckAanvraag = stepFoodtruckAanvraagAsset.url;
 import stepFoodtruckAdviesAsset from "@/assets/step-foodtruck-advies.png.asset.json";
 const stepFoodtruckAdvies = stepFoodtruckAdviesAsset.url;
-import stepFoodtruckInspectie from "@/assets/step-inspectie.png";
+import stepFoodtruckInspectieAsset from "@/assets/step-foodtruck-inspectie.png.asset.json";
+const stepFoodtruckInspectie = stepFoodtruckInspectieAsset.url;
 import stepFoodtruckWaarde from "@/assets/step-camper-waarde.jpg";
 import stepFoodtruckRapport from "@/assets/step-rapport.png";
 import stepFoodtruckRegelen from "@/assets/step-regelen.png";
