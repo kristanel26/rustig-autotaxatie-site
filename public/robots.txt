@@ -12,5 +12,6 @@ Allow: /
 
 User-agent: *
 Allow: /
+Disallow: /intern/
 
 Sitemap: https://www.automobieltaxaties.nl/sitemap.xml
