@@ -14,7 +14,8 @@ const stepFoodtruckAdvies = stepFoodtruckAdviesAsset.url;
 import stepFoodtruckInspectieAsset from "@/assets/step-foodtruck-inspectie.png.asset.json";
 const stepFoodtruckInspectie = stepFoodtruckInspectieAsset.url;
 import stepFoodtruckWaarde from "@/assets/step-camper-waarde.jpg";
-import stepFoodtruckRapport from "@/assets/step-rapport.png";
+import stepFoodtruckRapportAsset from "@/assets/step-foodtruck-rapport.png.asset.json";
+const stepFoodtruckRapport = stepFoodtruckRapportAsset.url;
 import stepFoodtruckRegelen from "@/assets/step-regelen.png";
 
 const steps: { number: number; title: string; image: string; content: React.ReactNode }[] = [
