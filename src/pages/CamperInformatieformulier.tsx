@@ -206,10 +206,6 @@ const CamperInformatieformulier = () => {
                     </div>
 
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <div className="space-y-1.5"><Label>Voorletters en achternaam *</Label><Input required value={g("naam")} onChange={e=>s("naam",e.target.value)} className="h-10" /></div>
-                      <div className="space-y-1.5"><Label>Telefoonnummer *</Label><Input required type="tel" value={g("telefoon")} onChange={e=>s("telefoon",e.target.value)} className="h-10" /></div>
-                    </div>
-                    <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-1.5"><Label>Straatnaam en huisnummer</Label><Input value={g("adres")} onChange={e=>s("adres",e.target.value)} className="h-10" /></div>
                       <div className="space-y-1.5"><Label>Postcode en woonplaats</Label><Input value={g("postcode")} onChange={e=>s("postcode",e.target.value)} className="h-10" /></div>
                     </div>
