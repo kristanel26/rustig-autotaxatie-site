@@ -31,6 +31,10 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const StappenplanBpmAangifte = lazy(() => import("./pages/StappenplanBpmAangifte"));
 const CamperTaxatieStappenplan = lazy(() => import("./pages/CamperTaxatieStappenplan"));
 const VerzekeringstaxatieStappenplan = lazy(() => import("./pages/VerzekeringstaxatieStappenplan"));
+const OldtimerTaxatieStappenplan = lazy(() => import("./pages/OldtimerTaxatieStappenplan"));
+const YoungtimerTaxatieStappenplan = lazy(() => import("./pages/YoungtimerTaxatieStappenplan"));
+const MotorTaxatieStappenplan = lazy(() => import("./pages/MotorTaxatieStappenplan"));
+const FoodtruckTaxatieStappenplan = lazy(() => import("./pages/FoodtruckTaxatieStappenplan"));
 const Nieuws = lazy(() => import("./pages/Nieuws"));
 const OverOns = lazy(() => import("./pages/OverOns"));
 const CamperInformatieformulier = lazy(() => import("./pages/CamperInformatieformulier"));
@@ -127,6 +131,10 @@ const router = createBrowserRouter([
   { path: "/camper-taxatie-stappenplan", element: withSuspense(<CamperTaxatieStappenplan />) },
   { path: "/camper-informatieformulier", element: withSuspense(<CamperInformatieformulier />) },
   { path: "/verzekering-stappenplan", element: withSuspense(<VerzekeringstaxatieStappenplan />) },
+  { path: "/oldtimer-taxatie-stappenplan", element: withSuspense(<OldtimerTaxatieStappenplan />) },
+  { path: "/youngtimer-taxatie-stappenplan", element: withSuspense(<YoungtimerTaxatieStappenplan />) },
+  { path: "/motor-taxatie-stappenplan", element: withSuspense(<MotorTaxatieStappenplan />) },
+  { path: "/foodtruck-taxatie-stappenplan", element: withSuspense(<FoodtruckTaxatieStappenplan />) },
   { path: "/nieuws", element: withSuspense(<Nieuws />) },
   { path: "/over-ons", element: withSuspense(<OverOns />) },
   { path: "/werkwijze", element: <Navigate to="/over-ons" replace /> },

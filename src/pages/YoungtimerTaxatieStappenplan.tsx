@@ -1,0 +1,217 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import PageMeta from "@/components/PageMeta";
+import UspBar from "@/components/UspBar";
+import { Link } from "react-router-dom";
+import { ArrowRight, Info, Phone, CheckCircle } from "lucide-react";
+import heroYoungtimer from "@/assets/hero-youngtimer.jpg";
+import stepYoungtimerAanvraag from "@/assets/step-aanvraag.png";
+import stepYoungtimerAdvies from "@/assets/step-advies.png";
+import stepYoungtimerInspectie from "@/assets/step-inspectie.png";
+import stepYoungtimerWaarde from "@/assets/step-camper-waarde.jpg";
+import stepYoungtimerRapport from "@/assets/step-rapport.png";
+import stepYoungtimerRegelen from "@/assets/step-regelen.png";
+
+const steps: { number: number; title: string; image: string; content: React.ReactNode }[] = [
+  {
+    number: 1,
+    image: stepYoungtimerAanvraag,
+    title: "Aanvraag indienen",
+    content: (
+      <p>Vul het aanvraagformulier in of bel ons. Geef merk, type, bouwjaar en kilometerstand van jouw youngtimer door. Een youngtimer is 15 jaar of ouder, dus controleer ook de eerste tenaamstelling.</p>
+    ),
+  },
+  {
+    number: 2,
+    image: stepYoungtimerAdvies,
+    title: "Advies en bevestiging",
+    content: (
+      <p>Erik beoordeelt de aanvraag en geeft een eerste inschatting van wat een verzekeringstaxatie voor jouw youngtimer oplevert, juist nu de marktwaarde van veel youngtimers stijgt. Na bevestiging plannen we de inspectie in.</p>
+    ),
+  },
+  {
+    number: 3,
+    image: stepYoungtimerInspectie,
+    title: "Fysieke inspectie op locatie",
+    content: (
+      <p>Erik komt naar jouw youngtimer toe. Onderhoudshistorie, technische staat, optieniveau en cosmetische staat worden opgenomen. Lakdiktemetingen worden uitgevoerd en er wordt een uitgebreid fotodossier aangelegd.</p>
+    ),
+  },
+  {
+    number: 4,
+    image: stepYoungtimerWaarde,
+    title: "Marktwaarde bepalen",
+    content: (
+      <p>De waarde wordt vastgesteld op basis van actuele marktdata. Bij gewilde youngtimers ligt de werkelijke waarde vaak hóger dan de dagwaarde die verzekeraars standaard hanteren. Originele staat, lage kilometerstand en gewilde uitvoeringen tellen mee.</p>
+    ),
+  },
+  {
+    number: 5,
+    image: stepYoungtimerRapport,
+    title: "Erkend rapport digitaal ontvangen",
+    content: (
+      <p>Het taxatierapport wordt digitaal opgesteld en per e-mail toegestuurd. Het rapport is opgesteld door een erkend taxateur en geaccepteerd door verzekeraars, zodat de polis op de getaxeerde waarde kan worden afgesloten.</p>
+    ),
+  },
+  {
+    number: 6,
+    image: stepYoungtimerRegelen,
+    title: "Verzekering regelen",
+    content: (
+      <p>Met het rapport sluit je een verzekering af op taxatiewaarde in plaats van dagwaarde. Zo voorkom je dat je bij schade of diefstal wordt afgerekend op een te lage waarde, en blijft de werkelijke marktwaarde van jouw youngtimer verzekerd.</p>
+    ),
+  },
+];
+
+const YoungtimerTaxatieStappenplan = () => {
+  return (
+    <>
+      <PageMeta
+        title="Youngtimertaxatie stappenplan | Automobiel Taxaties"
+        description="Zo verloopt de taxatie van jouw youngtimer, van aanvraag tot erkend rapport, met fysieke inspectie op locatie."
+      />
+      <SiteHeader />
+      <Breadcrumbs items={[{ label: "Youngtimertaxatie", href: "/youngtimer-taxatie" }, { label: "Stappenplan" }]} />
+
+      <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>
+        <div className="absolute inset-0">
+          <img src={heroYoungtimer} alt="Stappenplan youngtimertaxatie aanvragen" className="w-full h-full object-cover" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(29,60,113,0.85) 0%, rgba(29,60,113,0.85) 40%, rgba(29,60,113,0.55) 70%, rgba(29,60,113,0.25) 100%)' }} />
+        </div>
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28 relative z-10">
+          <div style={{ width: 32, height: 2, background: '#ff751f', marginBottom: 12 }} />
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 12, fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#ff751f' }} className="mb-4">
+            YOUNGTIMERTAXATIE
+          </p>
+          <h1 className="text-white font-bold mb-6" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2rem, 4vw, 3.2rem)', lineHeight: 1.15 }}>
+            Zo verloopt de youngtimertaxatie
+          </h1>
+          <p className="text-white/80 text-lg max-w-[550px] mb-8" style={{ lineHeight: 1.7 }}>
+            Van aanvraag tot erkend rapport.<br />Verzekerd op marktwaarde, niet op dagwaarde.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link to="/youngtimer-taxatie">
+              <button className="btn-cta flex items-center gap-2">
+                Youngtimertaxatie aanvragen
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </Link>
+            <a href="tel:+31854832461">
+              <button className="btn-outline-white">
+                <Phone className="w-5 h-5" />
+                085 483 2461
+              </button>
+            </a>
+          </div>
+        </div>
+      </section>
+      <UspBar />
+
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 pt-16 pb-4">
+        <p className="uppercase text-[11px] font-semibold tracking-[0.15em] mb-2" style={{ color: '#ff751f' }}>STAPPENPLAN</p>
+        <h2 className="text-[28px] md:text-[32px] font-bold" style={{ color: '#1d3c71', fontFamily: "'Playfair Display', serif" }}>
+          Van aanvraag tot rapport op marktwaarde
+        </h2>
+      </div>
+
+      {steps.map((step, i) => (
+        <section key={step.number} className="py-12 md:py-16" style={{ background: i % 2 === 1 ? '#f7f8fa' : '#ffffff' }}>
+          <div className="max-w-5xl mx-auto px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-10">
+              <div className="flex gap-5 md:gap-6 flex-1 min-w-0">
+                <div className="shrink-0">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg" style={{ background: '#1d3c71' }}>
+                    {step.number}
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-xl md:text-2xl font-bold mb-4" style={{ color: '#1d3c71', fontFamily: "'Playfair Display', serif" }}>
+                    {step.title}
+                  </h2>
+                  <div className="text-foreground/80 leading-relaxed">{step.content}</div>
+                </div>
+              </div>
+              <div className="shrink-0 md:w-[360px] h-[240px]">
+                <img src={step.image} alt={step.title} className="w-full h-full rounded-lg shadow-md object-cover" loading="lazy" />
+              </div>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <section className="py-14 md:py-16 px-6 md:px-8 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <div className="mb-3" style={{ width: 40, height: 4, background: '#ff751f', borderRadius: 2 }} />
+              <h3 className="font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif', fontSize: 20, color: '#1d3c71', fontWeight: 700 }}>Wat kun je verwachten?</h3>
+              <div className="flex flex-col gap-[10px]">
+                {[
+                  "Onderhoudshistorie en technische staat worden beoordeeld",
+                  "Optieniveau en uitvoering tellen mee in de waarde",
+                  "Vastlegging op marktwaarde in plaats van dagwaarde",
+                  "Rapport geaccepteerd door verzekeraars",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4 bg-white" style={{ borderRadius: 10, padding: '16px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
+                    <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
+                    <span className="text-[15px] leading-normal" style={{ fontFamily: 'Inter, sans-serif', color: '#1a1a1a' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="mb-3" style={{ width: 40, height: 4, background: '#ff751f', borderRadius: 2 }} />
+              <h3 className="font-bold mb-6" style={{ fontFamily: 'Playfair Display, serif', fontSize: 20, color: '#1d3c71', fontWeight: 700 }}>Wat hebben wij nodig?</h3>
+              <div className="flex flex-col gap-[10px]">
+                {[
+                  "Jouw naam en contactgegevens",
+                  "De kentekencard van de youngtimer",
+                  "Onderhoudsboekje of facturen (indien aanwezig)",
+                  "Bijzondere uitvoering of zeldzame opties",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-4 bg-white" style={{ borderRadius: 10, padding: '16px 20px', boxShadow: '0 2px 12px rgba(0,0,0,0.06)' }}>
+                    <CheckCircle className="w-[22px] h-[22px] flex-shrink-0" style={{ color: '#ff751f' }} />
+                    <span className="text-[15px] leading-normal" style={{ fontFamily: 'Inter, sans-serif', color: '#1a1a1a' }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 py-8">
+        <div className="rounded-xl p-6 flex gap-4 items-start" style={{ background: '#EBF2FB', borderLeft: '4px solid #1d3c71' }}>
+          <Info className="w-6 h-6 shrink-0 mt-0.5" style={{ color: '#1d3c71' }} />
+          <div className="text-sm leading-relaxed" style={{ color: '#1d3c71' }}>
+            <p className="mb-2">Een voertuig wordt fiscaal en verzekeringstechnisch vaak vanaf 15 jaar als youngtimer gezien. Het taxatierapport is doorgaans 2 tot 3 jaar geldig.</p>
+            <p className="mb-2">Bij stijgende marktwaarde is het verstandig de taxatie tijdig te vernieuwen, zodat je verzekerd blijft voor de werkelijke waarde.</p>
+            <p>Plan de taxatie voordat je de verzekering afsluit of vernieuwt.</p>
+          </div>
+        </div>
+      </div>
+
+      <section className="py-16 md:py-20" style={{ background: '#1d3c71' }}>
+        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
+          <h2 className="text-white font-bold mb-6" style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(1.5rem, 3vw, 2.2rem)' }}>
+            Zekerheid over de marktwaarde van jouw youngtimer?
+          </h2>
+          <p className="text-white/80 text-lg mb-8">Vraag vrijblijvend een verzekeringstaxatie aan.</p>
+          <Link to="/youngtimer-taxatie">
+            <button className="btn-cta flex items-center gap-2 mx-auto">
+              Youngtimertaxatie aanvragen
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </Link>
+        </div>
+      </section>
+
+      <SiteFooter />
+      <WhatsAppButton />
+    </>
+  );
+};
+
+export default YoungtimerTaxatieStappenplan;
