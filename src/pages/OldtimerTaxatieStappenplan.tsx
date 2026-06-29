@@ -11,7 +11,8 @@ import stepOldtimerAanvraag from "@/assets/step-oldtimer-aanvraag.png";
 import stepOldtimerAdvies from "@/assets/step-advies.png";
 import stepOldtimerInspectie from "@/assets/step-oldtimer-inspectie.png";
 import stepOldtimerWaarde from "@/assets/step-oldtimer-marktwaarde.png";
-import stepOldtimerRapport from "@/assets/step-rapport.png";
+import stepOldtimerRapportAsset from "@/assets/step-oldtimer-rapport.png.asset.json";
+const stepOldtimerRapport = stepOldtimerRapportAsset.url;
 import stepOldtimerRegelen from "@/assets/step-oldtimer-verzekering.png";
 
 const steps: { number: number; title: string; image: string; content: React.ReactNode }[] = [
