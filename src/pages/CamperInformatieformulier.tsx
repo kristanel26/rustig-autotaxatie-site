@@ -571,8 +571,21 @@ const CamperInformatieformulier = () => {
 
                     <div className="space-y-1.5">
                       <Label>Upload facturen, bonnen of documentatie (PDF, JPG, PNG, max 10 MB per bestand)</Label>
-                      <Input type="file" multiple accept=".pdf,.jpg,.jpeg,.png" className="h-auto py-2" />
+                      <Input type="file" multiple accept=".pdf,.jpg,.jpeg,.png" className="h-auto py-2" onChange={e => addFacturen(e.target.files)} />
+                      {facturen.length > 0 && (
+                        <ul className="mt-2 space-y-1">
+                          {facturen.map((file, i) => (
+                            <li key={i} className="flex items-center justify-between text-sm bg-muted/30 rounded px-3 py-1.5">
+                              <span className="truncate">{file.name}</span>
+                              <button type="button" onClick={() => removeFactuur(i)} className="ml-2 text-muted-foreground hover:text-foreground">
+                                <X className="w-4 h-4" />
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
+
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
