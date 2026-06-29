@@ -10,7 +10,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { CheckCircle, FileText, ShieldAlert, Wrench, Upload, X, ImagePlus } from "lucide-react";
+import { CheckCircle, FileText, ShieldAlert, Wrench, Upload, X, ImagePlus, AlertCircle, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 /* ───── helpers ───── */
 const Tog = ({ label, k, isOn, tog }: { label: string; k: string; isOn: (k: string) => boolean; tog: (k: string) => void }) => (
