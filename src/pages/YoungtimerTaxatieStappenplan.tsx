@@ -17,7 +17,8 @@ import stepYoungtimerWaardeAsset from "@/assets/step-youngtimer-marktwaarde.png.
 const stepYoungtimerWaarde = stepYoungtimerWaardeAsset.url;
 import stepYoungtimerRapportAsset from "@/assets/step-youngtimer-rapport.png.asset.json";
 const stepYoungtimerRapport = stepYoungtimerRapportAsset.url;
-import stepYoungtimerRegelen from "@/assets/step-regelen.png";
+import stepYoungtimerRegelenAsset from "@/assets/step-youngtimer-regelen.png.asset.json";
+const stepYoungtimerRegelen = stepYoungtimerRegelenAsset.url;
 
 const steps: { number: number; title: string; image: string; content: React.ReactNode }[] = [
   {
