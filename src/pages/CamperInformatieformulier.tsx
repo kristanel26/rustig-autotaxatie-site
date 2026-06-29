@@ -52,6 +52,8 @@ const introCards = [
 
 const CamperInformatieformulier = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [agreed, setAgreed] = useState(false);
   const [f, setF] = useState<Record<string, string>>({});
   const [toggles, setToggles] = useState<Record<string, boolean>>({});
