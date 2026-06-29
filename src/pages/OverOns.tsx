@@ -180,7 +180,7 @@ const OverOns = () => {
                 In de praktijk betekent dit dat opdrachtgevers weten waar ze aan toe zijn, vooraf en achteraf.
               </p>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
-                Veel klanten werken daarom langdurig met Automobiel Taxaties samen. Niet vanwege snelheid of uitkomst, maar omdat de werkwijze duidelijk is en de rapportages consequent op dezelfde zorgvuldige manier worden opgebouwd.
+                Veel klanten werken daarom langdurig met Automobiel Taxaties samen. Niet alleen vanwege snelheid of uitkomst, maar omdat de werkwijze duidelijk is en de rapportages consequent op dezelfde zorgvuldige manier worden opgebouwd.
               </p>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
                 Je hebt altijd direct contact met Erik zelf. Hij verzorgt de opname, stelt het rapport op en is jouw aanspreekpunt. Zonder tussenpersonen, zodat er geen ruis ontstaat en je snel duidelijkheid hebt.
