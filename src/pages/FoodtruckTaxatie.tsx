@@ -154,7 +154,7 @@ const FoodtruckTaxatie = () => {
               Verzekeringstaxatie aanvragen
               <ArrowDown className="w-4 h-4 ml-2" />
             </Button>
-            <Link to="/verzekering-stappenplan">
+            <Link to="/foodtruck-taxatie-stappenplan">
               <Button variant="outline" size="lg" className="border-2 font-medium" style={{ borderColor: '#1d3c71', color: '#1d3c71' }}>
                 Bekijk het volledige stappenplan
                 <ArrowRight className="w-4 h-4 ml-2" />
