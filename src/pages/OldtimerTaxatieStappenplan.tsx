@@ -7,12 +7,12 @@ import UspBar from "@/components/UspBar";
 import { Link } from "react-router-dom";
 import { ArrowRight, Info, Phone, CheckCircle } from "lucide-react";
 import heroOldtimer from "@/assets/hero-oldtimer.png";
-import stepOldtimerAanvraag from "@/assets/step-aanvraag.png";
+import stepOldtimerAanvraag from "@/assets/step-oldtimer-aanvraag.png";
 import stepOldtimerAdvies from "@/assets/step-advies.png";
-import stepOldtimerInspectie from "@/assets/step-inspectie.png";
+import stepOldtimerInspectie from "@/assets/step-oldtimer-inspectie.png";
 import stepOldtimerWaarde from "@/assets/step-camper-waarde.jpg";
 import stepOldtimerRapport from "@/assets/step-rapport.png";
-import stepOldtimerRegelen from "@/assets/step-regelen.png";
+import stepOldtimerRegelen from "@/assets/step-oldtimer-verzekering.png";
 
 const steps: { number: number; title: string; image: string; content: React.ReactNode }[] = [
   {
