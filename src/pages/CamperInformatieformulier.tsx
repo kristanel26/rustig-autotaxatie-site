@@ -72,7 +72,39 @@ const CamperInformatieformulier = () => {
   };
   const removePhoto = (i: number) => { setPhotos(prev => { URL.revokeObjectURL(prev[i].preview); return prev.filter((_, idx) => idx !== i); }); };
 
-  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); if (!agreed) return; setSubmitted(true); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!agreed) return;
+    setErrorMsg(null);
+    setIsSubmitting(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("verstuur-aanvraag", {
+        body: {
+          bron: "camper-informatieformulier",
+          service_type: "Camper Informatieformulier",
+          naam: f.naam || null,
+          email: f.email || null,
+          telefoon: f.telefoon || null,
+          kenteken: f.kenteken || null,
+          postcode: f.postcode || null,
+          adres: f.adres || null,
+          bericht: f.opmerkingen || null,
+          payload: { velden: f, toggles, fotos_aantal: photos.length },
+        },
+      });
+      if (error || (data as { error?: string })?.error) {
+        throw new Error((data as { error?: string })?.error || error?.message || "Onbekende fout");
+      }
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      setErrorMsg(
+        "Versturen is helaas mislukt. Bel 085 483 2461 of stuur een WhatsApp naar 06 50694978."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   /* ───── Toggle item with optional expanded fields ───── */
   const TogItem = ({ k, label, children }: { k: string; label: string; children?: React.ReactNode }) => (
