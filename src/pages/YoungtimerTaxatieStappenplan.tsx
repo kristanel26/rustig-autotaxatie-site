@@ -85,7 +85,7 @@ const YoungtimerTaxatieStappenplan = () => {
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>
         <div className="absolute inset-0">
           <img src={heroYoungtimer} alt="Stappenplan youngtimertaxatie aanvragen" className="w-full h-full object-cover" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(29,60,113,0.85) 0%, rgba(29,60,113,0.85) 40%, rgba(29,60,113,0.55) 70%, rgba(29,60,113,0.25) 100%)' }} />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(29,60,113,0.65) 0%, rgba(29,60,113,0.45) 50%, rgba(29,60,113,0.15) 100%)' }} />
         </div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28 relative z-10">
           <div style={{ width: 32, height: 2, background: '#ff751f', marginBottom: 12 }} />
