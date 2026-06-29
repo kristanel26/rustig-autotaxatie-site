@@ -397,12 +397,12 @@ const BookingWizard = () => {
             <button
               onClick={handleSubmit}
               className="inline-flex items-center gap-2.5 transition-all duration-200"
-              style={nextBtnStyle}
-              onMouseEnter={(e) => { e.currentTarget.style.background = '#e8651a'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+              style={{ ...nextBtnStyle, opacity: !canNext() || isSubmitting ? 0.6 : 1 }}
+              onMouseEnter={(e) => { if (!isSubmitting) { e.currentTarget.style.background = '#e8651a'; e.currentTarget.style.transform = 'translateY(-2px)'; } }}
               onMouseLeave={(e) => { e.currentTarget.style.background = '#ff751f'; e.currentTarget.style.transform = 'translateY(0)'; }}
-              disabled={!canNext()}
+              disabled={!canNext() || isSubmitting}
             >
-              Verstuur aanvraag <ArrowRight className="w-4 h-4" />
+              {isSubmitting ? (<><Loader2 className="w-4 h-4 animate-spin" /> Versturen…</>) : (<>Verstuur aanvraag <ArrowRight className="w-4 h-4" /></>)}
             </button>
             <a
               href="https://wa.me/31650694978"
