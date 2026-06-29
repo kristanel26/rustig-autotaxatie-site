@@ -10,7 +10,7 @@ import heroOldtimer from "@/assets/hero-oldtimer.png";
 import stepOldtimerAanvraag from "@/assets/step-oldtimer-aanvraag.png";
 import stepOldtimerAdvies from "@/assets/step-advies.png";
 import stepOldtimerInspectie from "@/assets/step-oldtimer-inspectie.png";
-import stepOldtimerWaarde from "@/assets/step-camper-waarde.jpg";
+import stepOldtimerWaarde from "@/assets/step-oldtimer-marktwaarde.png";
 import stepOldtimerRapport from "@/assets/step-rapport.png";
 import stepOldtimerRegelen from "@/assets/step-oldtimer-verzekering.png";
 
