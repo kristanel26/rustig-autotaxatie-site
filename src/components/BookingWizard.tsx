@@ -22,6 +22,8 @@ const steps = ["Type taxatie", "Voertuig", "Locatie & datum", "Contact"];
 const BookingWizard = () => {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [form, setForm] = useState({
     type: "",
     merk_model: "",
@@ -45,7 +47,40 @@ const BookingWizard = () => {
     return true;
   };
 
-  const handleSubmit = () => setSubmitted(true);
+  const selectedLabel = taxatieOptions.find(o => o.value === form.type)?.label || form.type;
+
+  const handleSubmit = async () => {
+    setErrorMsg(null);
+    setIsSubmitting(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("verstuur-aanvraag", {
+        body: {
+          bron: "booking-wizard",
+          service_type: selectedLabel,
+          naam: form.naam,
+          email: form.email || null,
+          telefoon: form.telefoon,
+          kenteken: form.kenteken || null,
+          merk_model: form.merk_model,
+          postcode: form.postcode,
+          stad: form.stad,
+          adres: form.adres || null,
+          gewenste_datum: form.datum || null,
+          payload: { ...form, typeLabel: selectedLabel },
+        },
+      });
+      if (error || (data as { error?: string })?.error) {
+        throw new Error((data as { error?: string })?.error || error?.message || "Onbekende fout");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setErrorMsg(
+        "Versturen is helaas mislukt. Bel 085 483 2461 of stuur een WhatsApp naar 06 50694978."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   if (submitted) {
     return (
