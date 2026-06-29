@@ -200,10 +200,11 @@ const CamperInformatieformulier = () => {
                 <AccordionItem value="opdrachtgever" className="border rounded-lg px-5">
                   <AccordionTrigger className="text-base font-semibold" style={{ color: '#1d3c71' }}>1. Gegevens opdrachtgever</AccordionTrigger>
                   <AccordionContent className="space-y-4 pt-2 pb-4">
-                    <div className="space-y-1.5">
-                      <Label>Factuuroverzicht</Label>
-                      <Input type="file" accept=".jpeg,.jpg,.png,.pdf" className="h-auto py-2" />
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div className="space-y-1.5"><Label>Voorletters en achternaam *</Label><Input required value={g("naam")} onChange={e=>s("naam",e.target.value)} className="h-10" /></div>
+                      <div className="space-y-1.5"><Label>Telefoonnummer *</Label><Input required type="tel" value={g("telefoon")} onChange={e=>s("telefoon",e.target.value)} className="h-10" /></div>
                     </div>
+
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-1.5"><Label>Voorletters en achternaam *</Label><Input required value={g("naam")} onChange={e=>s("naam",e.target.value)} className="h-10" /></div>
                       <div className="space-y-1.5"><Label>Telefoonnummer *</Label><Input required type="tel" value={g("telefoon")} onChange={e=>s("telefoon",e.target.value)} className="h-10" /></div>
