@@ -36,6 +36,8 @@ const IntakeForm = ({
   onSuccess 
 }: IntakeFormProps) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     naam: "",
     email: "",
@@ -45,10 +47,36 @@ const IntakeForm = ({
     bericht: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    onSuccess?.();
+    setErrorMsg(null);
+    setIsSubmitting(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("verstuur-aanvraag", {
+        body: {
+          bron: "intake",
+          service_type: serviceType,
+          naam: formData.naam,
+          email: formData.email,
+          telefoon: formData.telefoon,
+          kenteken: formData.kenteken || null,
+          voertuig_type: formData.voertuigType || null,
+          bericht: formData.bericht || null,
+          payload: { ...formData, serviceType },
+        },
+      });
+      if (error || (data as { error?: string })?.error) {
+        throw new Error((data as { error?: string })?.error || error?.message || "Onbekende fout");
+      }
+      setIsSubmitted(true);
+      onSuccess?.();
+    } catch (err) {
+      setErrorMsg(
+        "Versturen is helaas mislukt. Bel ons op 085 483 2461 of stuur een WhatsApp naar 06 50694978."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
