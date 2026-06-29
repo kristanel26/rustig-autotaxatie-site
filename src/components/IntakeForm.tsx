@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface IntakeFormProps {
   serviceType: string;
@@ -35,6 +36,8 @@ const IntakeForm = ({
   onSuccess 
 }: IntakeFormProps) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     naam: "",
     email: "",
@@ -44,10 +47,36 @@ const IntakeForm = ({
     bericht: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    onSuccess?.();
+    setErrorMsg(null);
+    setIsSubmitting(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("verstuur-aanvraag", {
+        body: {
+          bron: "intake",
+          service_type: serviceType,
+          naam: formData.naam,
+          email: formData.email,
+          telefoon: formData.telefoon,
+          kenteken: formData.kenteken || null,
+          voertuig_type: formData.voertuigType || null,
+          bericht: formData.bericht || null,
+          payload: { ...formData, serviceType },
+        },
+      });
+      if (error || (data as { error?: string })?.error) {
+        throw new Error((data as { error?: string })?.error || error?.message || "Onbekende fout");
+      }
+      setIsSubmitted(true);
+      onSuccess?.();
+    } catch (err) {
+      setErrorMsg(
+        "Versturen is helaas mislukt. Bel ons op 085 483 2461 of stuur een WhatsApp naar 06 50694978."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -255,14 +284,32 @@ const IntakeForm = ({
           />
         </div>
 
+        {errorMsg && (
+          <div
+            role="alert"
+            className="flex items-start gap-2 rounded-lg p-3 text-sm"
+            style={{ background: '#fef2f2', color: '#991b1b', border: '1px solid #fecaca' }}
+          >
+            <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+            <span>{errorMsg}</span>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Button
             type="submit"
             variant="cta"
+            disabled={isSubmitting}
             className="w-full rounded-lg text-[15px] font-semibold"
             style={{ height: 52 }}
           >
-            {submitButtonText || "Verstuur aanvraag"}
+            {isSubmitting ? (
+              <span className="inline-flex items-center gap-2">
+                <Loader2 className="w-4 h-4 animate-spin" /> Versturen…
+              </span>
+            ) : (
+              submitButtonText || "Verstuur aanvraag"
+            )}
           </Button>
           <a
             href="https://wa.me/31650694978"
@@ -277,6 +324,7 @@ const IntakeForm = ({
             App ons direct
           </a>
         </div>
+
 
         <p className="text-sm text-muted-foreground text-center">
           {footerText || "We gaan zorgvuldig om met jouw gegevens en gebruiken deze alleen voor het verwerken van jouw aanvraag."}

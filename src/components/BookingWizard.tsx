@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Check, ArrowRight, ArrowLeft, Bus, FileText, Scale, Clock, Car, Bike, UtensilsCrossed, CarFront } from "lucide-react";
+import { Check, ArrowRight, ArrowLeft, Bus, FileText, Scale, Clock, Car, Bike, UtensilsCrossed, CarFront, AlertCircle, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const BusIcon = ({ size, style }: { size?: number; style?: React.CSSProperties }) => (
   <Bus size={size || 28} style={style} />
@@ -21,6 +22,8 @@ const steps = ["Type taxatie", "Voertuig", "Locatie & datum", "Contact"];
 const BookingWizard = () => {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [form, setForm] = useState({
     type: "",
     merk_model: "",
@@ -44,7 +47,40 @@ const BookingWizard = () => {
     return true;
   };
 
-  const handleSubmit = () => setSubmitted(true);
+  const selectedLabel = taxatieOptions.find(o => o.value === form.type)?.label || form.type;
+
+  const handleSubmit = async () => {
+    setErrorMsg(null);
+    setIsSubmitting(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("verstuur-aanvraag", {
+        body: {
+          bron: "booking-wizard",
+          service_type: selectedLabel,
+          naam: form.naam,
+          email: form.email || null,
+          telefoon: form.telefoon,
+          kenteken: form.kenteken || null,
+          merk_model: form.merk_model,
+          postcode: form.postcode,
+          stad: form.stad,
+          adres: form.adres || null,
+          gewenste_datum: form.datum || null,
+          payload: { ...form, typeLabel: selectedLabel },
+        },
+      });
+      if (error || (data as { error?: string })?.error) {
+        throw new Error((data as { error?: string })?.error || error?.message || "Onbekende fout");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setErrorMsg(
+        "Versturen is helaas mislukt. Bel 085 483 2461 of stuur een WhatsApp naar 06 50694978."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   if (submitted) {
     return (
@@ -334,6 +370,13 @@ const BookingWizard = () => {
         </div>
       )}
 
+      {errorMsg && (
+        <div role="alert" className="flex items-start gap-2 rounded-lg p-3 mt-6 text-sm" style={{ background: '#fef2f2', color: '#991b1b', border: '1px solid #fecaca' }}>
+          <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+          <span>{errorMsg}</span>
+        </div>
+      )}
+
       {/* Navigation */}
       <div className="flex justify-between mt-8 pt-6" style={{ borderTop: '1px solid #e2e8f0' }}>
         {step > 0 ? (
@@ -361,12 +404,12 @@ const BookingWizard = () => {
             <button
               onClick={handleSubmit}
               className="inline-flex items-center gap-2.5 transition-all duration-200"
-              style={nextBtnStyle}
-              onMouseEnter={(e) => { e.currentTarget.style.background = '#e8651a'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+              style={{ ...nextBtnStyle, opacity: !canNext() || isSubmitting ? 0.6 : 1 }}
+              onMouseEnter={(e) => { if (!isSubmitting) { e.currentTarget.style.background = '#e8651a'; e.currentTarget.style.transform = 'translateY(-2px)'; } }}
               onMouseLeave={(e) => { e.currentTarget.style.background = '#ff751f'; e.currentTarget.style.transform = 'translateY(0)'; }}
-              disabled={!canNext()}
+              disabled={!canNext() || isSubmitting}
             >
-              Verstuur aanvraag <ArrowRight className="w-4 h-4" />
+              {isSubmitting ? (<><Loader2 className="w-4 h-4 animate-spin" /> Versturen…</>) : (<>Verstuur aanvraag <ArrowRight className="w-4 h-4" /></>)}
             </button>
             <a
               href="https://wa.me/31650694978"

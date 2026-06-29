@@ -14,6 +14,66 @@ export type Database = {
   }
   public: {
     Tables: {
+      aanvragen: {
+        Row: {
+          adres: string | null
+          bericht: string | null
+          bron: string
+          created_at: string
+          email: string | null
+          gewenste_datum: string | null
+          id: string
+          kenteken: string | null
+          merk_model: string | null
+          naam: string | null
+          payload: Json | null
+          postcode: string | null
+          service_type: string | null
+          stad: string | null
+          status: string
+          telefoon: string | null
+          voertuig_type: string | null
+        }
+        Insert: {
+          adres?: string | null
+          bericht?: string | null
+          bron: string
+          created_at?: string
+          email?: string | null
+          gewenste_datum?: string | null
+          id?: string
+          kenteken?: string | null
+          merk_model?: string | null
+          naam?: string | null
+          payload?: Json | null
+          postcode?: string | null
+          service_type?: string | null
+          stad?: string | null
+          status?: string
+          telefoon?: string | null
+          voertuig_type?: string | null
+        }
+        Update: {
+          adres?: string | null
+          bericht?: string | null
+          bron?: string
+          created_at?: string
+          email?: string | null
+          gewenste_datum?: string | null
+          id?: string
+          kenteken?: string | null
+          merk_model?: string | null
+          naam?: string | null
+          payload?: Json | null
+          postcode?: string | null
+          service_type?: string | null
+          stad?: string | null
+          status?: string
+          telefoon?: string | null
+          voertuig_type?: string | null
+        }
+        Relationships: []
+      }
       articles: {
         Row: {
           category: string
