@@ -12,7 +12,8 @@ import stepYoungtimerAdvies from "@/assets/step-advies.png";
 import stepYoungtimerInspectieAsset from "@/assets/step-youngtimer-inspectie.png.asset.json";
 const stepYoungtimerAanvraag = stepYoungtimerAanvraagAsset.url;
 const stepYoungtimerInspectie = stepYoungtimerInspectieAsset.url;
-import stepYoungtimerWaarde from "@/assets/step-camper-waarde.jpg";
+import stepYoungtimerWaardeAsset from "@/assets/step-youngtimer-marktwaarde.png.asset.json";
+const stepYoungtimerWaarde = stepYoungtimerWaardeAsset.url;
 import stepYoungtimerRapport from "@/assets/step-rapport.png";
 import stepYoungtimerRegelen from "@/assets/step-regelen.png";
 
