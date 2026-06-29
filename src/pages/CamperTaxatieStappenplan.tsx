@@ -78,7 +78,7 @@ const CamperTaxatieStappenplan = () => {
       {/* Hero */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>
         <div className="absolute inset-0">
-          <img src={heroCamperStappenplan.url} alt="Stappenplan camper taxatie aanvragen" className="w-full h-full object-cover object-left-bottom" />
+          <img src={heroCamperStappenplan.url} alt="Stappenplan camper taxatie aanvragen" className="w-full h-full object-cover" style={{ objectPosition: '25% 60%' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(to left, rgba(29,60,113,0.82) 0%, rgba(29,60,113,0.50) 45%, rgba(29,60,113,0.15) 70%, transparent 100%)' }} />
         </div>
         <div className="max-w-7xl w-full mx-auto px-6 lg:px-8 py-20 md:py-28 relative z-10 flex justify-end">
