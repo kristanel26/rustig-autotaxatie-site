@@ -8,6 +8,8 @@ const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
 
 const TO_EMAIL = 'algemeen@automobieltaxaties.nl';
 const FROM_EMAIL = 'Automobiel Taxaties <aanvraag@taxaris.nl>';
+const UPLOADS_BUCKET = 'aanvraag-uploads';
+const SIGNED_URL_TTL = 60 * 60 * 24 * 30; // 30 days
 
 interface AanvraagBody {
   bron: string;
@@ -24,6 +26,8 @@ interface AanvraagBody {
   gewenste_datum?: string;
   bericht?: string;
   payload?: Record<string, unknown>;
+  fotos?: string[];
+  facturen?: string[];
 }
 
 const FIELD_LABELS: Record<string, string> = {
@@ -45,7 +49,11 @@ const FIELD_LABELS: Record<string, string> = {
 const escapeHtml = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-function buildEmailHtml(body: AanvraagBody): { subject: string; html: string; text: string } {
+function buildEmailHtml(
+  body: AanvraagBody,
+  fotoLinks: { path: string; url: string }[],
+  factuurLinks: { path: string; url: string }[],
+): { subject: string; html: string; text: string } {
   const serviceType = body.service_type || body.bron;
   const naam = body.naam || 'onbekend';
   const subject = `Nieuwe aanvraag via website: ${serviceType} - ${naam}`;
@@ -62,7 +70,6 @@ function buildEmailHtml(body: AanvraagBody): { subject: string; html: string; te
     textLines.push(`${label}: ${v}`);
   }
 
-  // Extra payload fields not already in standard fields
   if (body.payload && typeof body.payload === 'object') {
     const extras = Object.entries(body.payload).filter(
       ([k, v]) =>
@@ -86,6 +93,28 @@ function buildEmailHtml(body: AanvraagBody): { subject: string; html: string; te
       }
     }
   }
+
+  const renderLinks = (title: string, links: { path: string; url: string }[]) => {
+    if (links.length === 0) return '';
+    const items = links
+      .map((l, i) => {
+        const name = l.path.split('/').pop() || `bestand-${i + 1}`;
+        return `<li style="margin:4px 0;"><a href="${escapeHtml(l.url)}" style="color:#1d3c71;">${escapeHtml(name)}</a></li>`;
+      })
+      .join('');
+    rows.push(
+      `<tr><td colspan="2" style="padding:14px 12px 6px;font-weight:700;color:#1d3c71;border-bottom:2px solid #ff751f;">${escapeHtml(title)}</td></tr>`
+    );
+    rows.push(
+      `<tr><td colspan="2" style="padding:8px 12px;border-bottom:1px solid #eee;"><ul style="margin:0;padding-left:20px;">${items}</ul><p style="font-size:12px;color:#666;margin:8px 0 0;">Deze links zijn 30 dagen geldig.</p></td></tr>`
+    );
+    textLines.push('', `${title}:`);
+    for (const l of links) textLines.push(`- ${l.url}`);
+    return '';
+  };
+
+  renderLinks("Meegestuurde foto's", fotoLinks);
+  renderLinks('Meegestuurde facturen', factuurLinks);
 
   const datum = new Date().toLocaleString('nl-NL', { timeZone: 'Europe/Amsterdam' });
 
@@ -128,6 +157,31 @@ Deno.serve(async (req) => {
 
     const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY);
 
+    const fotoPaths = Array.isArray(body.fotos) ? body.fotos.filter((p) => typeof p === 'string') : [];
+    const factuurPaths = Array.isArray(body.facturen) ? body.facturen.filter((p) => typeof p === 'string') : [];
+
+    const signMany = async (paths: string[]) => {
+      const out: { path: string; url: string }[] = [];
+      for (const p of paths) {
+        const { data: signed, error } = await supabase.storage
+          .from(UPLOADS_BUCKET)
+          .createSignedUrl(p, SIGNED_URL_TTL);
+        if (!error && signed?.signedUrl) {
+          out.push({ path: p, url: signed.signedUrl });
+        } else {
+          console.error('Signed URL error', p, error);
+        }
+      }
+      return out;
+    };
+
+    const [fotoLinks, factuurLinks] = await Promise.all([signMany(fotoPaths), signMany(factuurPaths)]);
+
+    const mergedPayload: Record<string, unknown> = {
+      ...(body.payload || {}),
+      bestanden: { fotos: fotoPaths, facturen: factuurPaths },
+    };
+
     const { data: inserted, error: dbError } = await supabase
       .from('aanvragen')
       .insert({
@@ -144,7 +198,7 @@ Deno.serve(async (req) => {
         adres: body.adres ?? null,
         gewenste_datum: body.gewenste_datum ?? null,
         bericht: body.bericht ?? null,
-        payload: body.payload ?? null,
+        payload: mergedPayload,
       })
       .select('id')
       .single();
@@ -157,10 +211,8 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { subject, html, text } = buildEmailHtml(body);
+    const { subject, html, text } = buildEmailHtml(body, fotoLinks, factuurLinks);
 
-    // Send via Resend — prefer direct Resend API with RESEND_API_KEY.
-    // Fall back to Lovable connector gateway if only LOVABLE_API_KEY is available.
     let emailOk = false;
     let emailError: string | null = null;
 
@@ -211,7 +263,6 @@ Deno.serve(async (req) => {
 
     if (!emailOk) {
       console.error('Email send failed', emailError);
-      // The aanvraag is saved; still report failure so the UI can react.
       return new Response(
         JSON.stringify({ error: 'Versturen e-mail mislukt', id: inserted?.id }),
         {
