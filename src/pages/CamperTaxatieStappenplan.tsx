@@ -78,33 +78,35 @@ const CamperTaxatieStappenplan = () => {
       {/* Hero */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>
         <div className="absolute inset-0">
-          <img src={heroCamperStappenplan.url} alt="Stappenplan camper taxatie aanvragen" className="w-full h-full object-cover" />
-          <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />
+          <img src={heroCamperStappenplan.url} alt="Stappenplan camper taxatie aanvragen" className="w-full h-full object-cover object-left-bottom" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to left, rgba(29,60,113,0.82) 0%, rgba(29,60,113,0.50) 45%, rgba(29,60,113,0.15) 70%, transparent 100%)' }} />
         </div>
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28 relative z-10">
-          <p className="text-white/70 text-sm font-medium tracking-wider uppercase mb-4">VERZEKERINGSTAXATIE CAMPER</p>
-          <h1
-            className="text-white font-bold mb-6"
-            style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2rem, 4vw, 3.2rem)', lineHeight: 1.15 }}
-          >
-            Zo verloopt de campertaxatie
-          </h1>
-          <p className="text-white/80 text-lg max-w-[550px] mb-8" style={{ lineHeight: 1.7 }}>
-            Van aanvraag tot rapport. Wij regelen het op locatie bij jou.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Link to="/camper-taxatie">
-              <button className="btn-cta flex items-center gap-2">
-                Verzekeringstaxatie aanvragen
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </Link>
-            <a href="tel:+31854832461">
-              <button className="btn-outline-white">
-                <Phone className="w-5 h-5" />
-                085 483 2461
-              </button>
-            </a>
+        <div className="max-w-7xl w-full mx-auto px-6 lg:px-8 py-20 md:py-28 relative z-10 flex justify-end">
+          <div className="text-right max-w-[550px]">
+            <p className="text-white/70 text-sm font-medium tracking-wider uppercase mb-4">VERZEKERINGSTAXATIE CAMPER</p>
+            <h1
+              className="text-white font-bold mb-6"
+              style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(2rem, 4vw, 3.2rem)', lineHeight: 1.15 }}
+            >
+              Zo verloopt de campertaxatie
+            </h1>
+            <p className="text-white/80 text-lg mb-8" style={{ lineHeight: 1.7 }}>
+              Van aanvraag tot rapport. Wij regelen het op locatie bij jou.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-end">
+              <Link to="/camper-taxatie">
+                <button className="btn-cta flex items-center gap-2">
+                  Verzekeringstaxatie aanvragen
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </Link>
+              <a href="tel:+31854832461">
+                <button className="btn-outline-white">
+                  <Phone className="w-5 h-5" />
+                  085 483 2461
+                </button>
+              </a>
+            </div>
           </div>
         </div>
       </section>
