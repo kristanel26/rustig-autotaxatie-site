@@ -284,14 +284,32 @@ const IntakeForm = ({
           />
         </div>
 
+        {errorMsg && (
+          <div
+            role="alert"
+            className="flex items-start gap-2 rounded-lg p-3 text-sm"
+            style={{ background: '#fef2f2', color: '#991b1b', border: '1px solid #fecaca' }}
+          >
+            <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+            <span>{errorMsg}</span>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Button
             type="submit"
             variant="cta"
+            disabled={isSubmitting}
             className="w-full rounded-lg text-[15px] font-semibold"
             style={{ height: 52 }}
           >
-            {submitButtonText || "Verstuur aanvraag"}
+            {isSubmitting ? (
+              <span className="inline-flex items-center gap-2">
+                <Loader2 className="w-4 h-4 animate-spin" /> Versturen…
+              </span>
+            ) : (
+              submitButtonText || "Verstuur aanvraag"
+            )}
           </Button>
           <a
             href="https://wa.me/31650694978"
@@ -306,6 +324,7 @@ const IntakeForm = ({
             App ons direct
           </a>
         </div>
+
 
         <p className="text-sm text-muted-foreground text-center">
           {footerText || "We gaan zorgvuldig om met jouw gegevens en gebruiken deze alleen voor het verwerken van jouw aanvraag."}
