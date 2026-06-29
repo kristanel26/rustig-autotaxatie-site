@@ -6,7 +6,7 @@ import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Link } from "react-router-dom";
 import { ArrowRight, Info, Phone } from "lucide-react";
-import heroCamperStappenplan from "@/assets/hero-camper-stappenplan.jpg";
+import heroCamperStappenplan from "@/assets/hero-camper-stappenplan.png.asset.json";
 import stepAanvraag from "@/assets/step-camper-aanvraag.jpg";
 import stepFormulier from "@/assets/step-camper-formulier.jpg";
 import stepInspectie from "@/assets/step-camper-inspectie.jpg";
@@ -78,7 +78,7 @@ const CamperTaxatieStappenplan = () => {
       {/* Hero */}
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>
         <div className="absolute inset-0">
-          <img src={heroCamperStappenplan} alt="Stappenplan camper taxatie aanvragen" className="w-full h-full object-cover" />
+          <img src={heroCamperStappenplan.url} alt="Stappenplan camper taxatie aanvragen" className="w-full h-full object-cover" />
           <div className="absolute inset-0" style={{ background: 'rgba(29,60,113,0.60)' }} />
         </div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28 relative z-10">
