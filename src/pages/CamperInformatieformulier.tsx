@@ -58,6 +58,7 @@ const CamperInformatieformulier = () => {
   const [f, setF] = useState<Record<string, string>>({});
   const [toggles, setToggles] = useState<Record<string, boolean>>({});
   const [photos, setPhotos] = useState<{ file: File; preview: string }[]>([]);
+  const [facturen, setFacturen] = useState<File[]>([]);
   const photoInputRef = useRef<HTMLInputElement>(null);
 
   const s = (key: string, val: string) => setF(prev => ({ ...prev, [key]: val }));
@@ -72,12 +73,41 @@ const CamperInformatieformulier = () => {
   };
   const removePhoto = (i: number) => { setPhotos(prev => { URL.revokeObjectURL(prev[i].preview); return prev.filter((_, idx) => idx !== i); }); };
 
+  const addFacturen = (files: FileList | null) => {
+    if (!files) return;
+    const nf = Array.from(files).filter(f => f.size <= 10 * 1024 * 1024);
+    setFacturen(prev => [...prev, ...nf]);
+  };
+  const removeFactuur = (i: number) => setFacturen(prev => prev.filter((_, idx) => idx !== i));
+
+  const sanitizeName = (name: string) =>
+    name.replace(/[^a-zA-Z0-9._-]/g, "_").slice(-80);
+
+  const uploadFiles = async (files: File[], folder: string, sub: string) => {
+    const paths: string[] = [];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const path = `${folder}/${sub}/${Date.now()}-${i}-${sanitizeName(file.name)}`;
+      const { error } = await supabase.storage
+        .from("aanvraag-uploads")
+        .upload(path, file, { contentType: file.type || undefined, upsert: false });
+      if (error) throw error;
+      paths.push(path);
+    }
+    return paths;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!agreed) return;
     setErrorMsg(null);
     setIsSubmitting(true);
     try {
+      const folder = (crypto as Crypto & { randomUUID?: () => string }).randomUUID?.() ||
+        `aanvraag-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+      const fotoPaths = await uploadFiles(photos.map(p => p.file), folder, "fotos");
+      const factuurPaths = await uploadFiles(facturen, folder, "facturen");
+
       const { data, error } = await supabase.functions.invoke("verstuur-aanvraag", {
         body: {
           bron: "camper-informatieformulier",
@@ -89,7 +119,9 @@ const CamperInformatieformulier = () => {
           postcode: f.postcode || null,
           adres: f.adres || null,
           bericht: f.opmerkingen || null,
-          payload: { velden: f, toggles, fotos_aantal: photos.length },
+          payload: { velden: f, toggles, fotos_aantal: photos.length, facturen_aantal: facturen.length },
+          fotos: fotoPaths,
+          facturen: factuurPaths,
         },
       });
       if (error || (data as { error?: string })?.error) {
@@ -105,6 +137,7 @@ const CamperInformatieformulier = () => {
       setIsSubmitting(false);
     }
   };
+
 
   /* ───── Toggle item with optional expanded fields ───── */
   const TogItem = ({ k, label, children }: { k: string; label: string; children?: React.ReactNode }) => (
