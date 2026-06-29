@@ -77,10 +77,10 @@ const OldtimerTaxatieStappenplan = () => {
       <SiteHeader />
       <Breadcrumbs items={[{ label: "Oldtimertaxatie", href: "/oldtimer-taxatie" }, { label: "Stappenplan" }]} />
 
-      <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>
+      <section className="relative overflow-hidden flex items-center" style={{ height: 520, minHeight: 520, maxHeight: 520 }}>
         <div className="absolute inset-0">
-          <img src={heroOldtimer} alt="Stappenplan oldtimertaxatie aanvragen" className="w-full h-full object-cover object-right-bottom" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(29,60,113,0.72) 0%, rgba(29,60,113,0.35) 50%, rgba(29,60,113,0.10) 80%, transparent 100%)' }} />
+          <img src={heroOldtimer} alt="Stappenplan oldtimertaxatie aanvragen" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(29,60,113,0.75) 0%, rgba(29,60,113,0.45) 45%, rgba(29,60,113,0.15) 75%, transparent 100%)' }} />
         </div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28 relative z-10">
           <div style={{ width: 32, height: 2, background: '#ff751f', marginBottom: 12 }} />
