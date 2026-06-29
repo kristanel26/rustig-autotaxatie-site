@@ -11,8 +11,10 @@ import stepMotorAanvraagAsset from "@/assets/step-motor-aanvraag.png.asset.json"
 const stepMotorAanvraag = stepMotorAanvraagAsset.url;
 import stepMotorAdviesAsset from "@/assets/step-motor-advies.png.asset.json";
 const stepMotorAdvies = stepMotorAdviesAsset.url;
-import stepMotorInspectie from "@/assets/step-inspectie.png";
-import stepMotorWaarde from "@/assets/step-camper-waarde.jpg";
+import stepMotorInspectieAsset from "@/assets/step-motor-inspectie.png.asset.json";
+const stepMotorInspectie = stepMotorInspectieAsset.url;
+import stepMotorWaardeAsset from "@/assets/step-motor-marktwaarde.png.asset.json";
+const stepMotorWaarde = stepMotorWaardeAsset.url;
 import stepMotorRapport from "@/assets/step-rapport.png";
 import stepMotorRegelen from "@/assets/step-regelen.png";
 
