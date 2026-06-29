@@ -6,7 +6,8 @@ import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
 import { Link } from "react-router-dom";
 import { ArrowRight, Info, Phone, CheckCircle } from "lucide-react";
-import heroOldtimer from "@/assets/hero-oldtimer.png";
+import heroOldtimerAsset from "@/assets/hero-oldtimer.png.asset.json";
+const heroOldtimer = heroOldtimerAsset.url;
 import stepOldtimerAanvraag from "@/assets/step-oldtimer-aanvraag.png";
 import stepOldtimerAdvies from "@/assets/step-advies.png";
 import stepOldtimerInspectie from "@/assets/step-oldtimer-inspectie.png";
@@ -78,8 +79,8 @@ const OldtimerTaxatieStappenplan = () => {
 
       <section className="relative overflow-hidden flex items-center" style={{ height: 420, minHeight: 420, maxHeight: 420 }}>
         <div className="absolute inset-0">
-          <img src={heroOldtimer} alt="Stappenplan oldtimertaxatie aanvragen" className="w-full h-full object-cover" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(29,60,113,0.85) 0%, rgba(29,60,113,0.85) 40%, rgba(29,60,113,0.55) 70%, rgba(29,60,113,0.25) 100%)' }} />
+          <img src={heroOldtimer} alt="Stappenplan oldtimertaxatie aanvragen" className="w-full h-full object-cover object-right-bottom" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(29,60,113,0.72) 0%, rgba(29,60,113,0.35) 50%, rgba(29,60,113,0.10) 80%, transparent 100%)' }} />
         </div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 md:py-28 relative z-10">
           <div style={{ width: 32, height: 2, background: '#ff751f', marginBottom: 12 }} />
