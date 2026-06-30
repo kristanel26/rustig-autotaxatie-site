@@ -21,7 +21,7 @@ import stepFoodtruckRegelenAsset from "@/assets/step-foodtruck-regelen.png.asset
 const stepFoodtruckRegelen = stepFoodtruckRegelenAsset.url;
 import photoFoodtruck from "@/assets/photo-foodtruck.jpg";
 
-const steps: { number: number; title: string; image: string; content: React.ReactNode }[] = [
+const steps: { number: number; title: string; image: string; content: React.ReactNode; cta?: { label: string; href: string } }[] = [
   {
     number: 1,
     image: stepFoodtruckAanvraag,
@@ -32,6 +32,15 @@ const steps: { number: number; title: string; image: string; content: React.Reac
   },
   {
     number: 2,
+    image: photoFoodtruck,
+    title: "Online informatieformulier invullen",
+    content: (
+      <p>Jij kent jouw foodtruck van binnen en buiten. Om een zo volledig en compleet mogelijk taxatierapport te maken, vragen wij jou vooraf een online informatieformulier in te vullen. Hierin geef je informatie over de technische staat, keukenapparatuur, installaties, vergunningen en eventuele aanpassingen. Heb je facturen van aangebrachte apparatuur, inbouw of uitgevoerde reparaties? Upload deze dan via het formulier. Lukt dit niet? Geen probleem, de taxateur bespreekt dit tijdens de inspectie met jou door.</p>
+    ),
+    cta: { label: "Vul het informatieformulier in", href: "/foodtruck-informatieformulier" },
+  },
+  {
+    number: 3,
     image: stepFoodtruckAdvies,
     title: "Advies en bevestiging",
     content: (
@@ -39,7 +48,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     ),
   },
   {
-    number: 3,
+    number: 4,
     image: stepFoodtruckInspectie,
     title: "Fysieke inspectie op locatie",
     content: (
@@ -47,7 +56,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     ),
   },
   {
-    number: 4,
+    number: 5,
     image: stepFoodtruckWaarde,
     title: "Waarde bepalen voor voertuig en inbouw",
     content: (
@@ -55,7 +64,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     ),
   },
   {
-    number: 5,
+    number: 6,
     image: stepFoodtruckRapport,
     title: "Erkend rapport digitaal ontvangen",
     content: (
@@ -63,7 +72,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     ),
   },
   {
-    number: 6,
+    number: 7,
     image: stepFoodtruckRegelen,
     title: "Zakelijke verzekering regelen",
     content: (
