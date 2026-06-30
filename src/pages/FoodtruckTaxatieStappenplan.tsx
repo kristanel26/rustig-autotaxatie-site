@@ -147,6 +147,19 @@ const FoodtruckTaxatieStappenplan = () => {
                     {step.title}
                   </h2>
                   <div className="text-foreground/80 leading-relaxed">{step.content}</div>
+                  {step.cta && (
+                    <Link to={step.cta.href} className="inline-block mt-4">
+                      <button
+                        className="flex items-center gap-2 rounded-lg border-2 px-5 py-2.5 text-sm font-semibold transition-colors"
+                        style={{ borderColor: '#ff751f', color: '#ff751f' }}
+                        onMouseEnter={e => { e.currentTarget.style.background = '#ff751f'; e.currentTarget.style.color = '#fff'; }}
+                        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#ff751f'; }}
+                      >
+                        {step.cta.label}
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+                    </Link>
+                  )}
                 </div>
               </div>
               <div className="shrink-0 md:w-[360px] h-[240px]">
