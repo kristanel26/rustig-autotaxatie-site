@@ -2,6 +2,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
+import CertificationBar from "@/components/CertificationBar";
 import { Link } from "react-router-dom";
 import { Phone, Car, Shield, Scale, Wrench, ArrowRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
