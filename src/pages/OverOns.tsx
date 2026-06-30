@@ -2,6 +2,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import PageMeta from "@/components/PageMeta";
 import UspBar from "@/components/UspBar";
+import CertificationBar from "@/components/CertificationBar";
 import { Link } from "react-router-dom";
 import { Phone, Car, Shield, Scale, Wrench, ArrowRight } from "lucide-react";
 import SiteHeader from "@/components/SiteHeader";
@@ -144,24 +145,8 @@ const OverOns = () => {
               Eigenaar, Notarieel Beëdigd TMV Register-Taxateur, Register-Taxateur VRT
             </p>
 
-            {/* Certification badges */}
-            <div className="flex flex-wrap gap-2 mb-7">
-              {["Federatie TMV", "VRT Register", "FEHAC"].map((badge) => (
-                <span
-                  key={badge}
-                  className="text-[11px] font-semibold"
-                  style={{
-                    letterSpacing: '0.06em',
-                    color: '#1d3c71',
-                    background: '#EBF2FB',
-                    padding: '6px 14px',
-                    borderRadius: 6,
-                  }}
-                >
-                  {badge}
-                </span>
-              ))}
-            </div>
+            {/* Certification logos */}
+            <CertificationBar variant="inline" />
 
             <div className="space-y-3.5 mb-7">
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.78)' }}>
