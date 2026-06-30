@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import erikInspectie from "@/assets/erik-inspectie-overons.jpg";
 
@@ -8,6 +8,18 @@ const fuelOptions = [
   { value: "hybride", label: "Hybride PHEV" },
   { value: "elektrisch", label: "Volledig elektrisch" },
 ];
+
+function calcRestBpm(bpmDate: string, co2Val: string) {
+  const co2 = parseInt(co2Val);
+  if (!bpmDate || isNaN(co2) || co2 <= 0) return null;
+  const today = new Date();
+  const regDate = new Date(bpmDate);
+  const monthsDiff = (today.getFullYear() - regDate.getFullYear()) * 12 + (today.getMonth() - regDate.getMonth());
+  const afschrijving = Math.min(Math.max(monthsDiff * 0.8, 0), 90);
+  const bruto = co2 * 25;
+  const rest = Math.round(bruto * (1 - afschrijving / 100));
+  return { restBpm: rest, afschrijving: Math.round(afschrijving), co2Used: co2 };
+}
 
 interface BpmCalculatorProps {
   /** Show the advice card on the right (default true) */
@@ -29,19 +41,35 @@ const BpmCalculator = ({
   const [bpmFuel, setBpmFuel] = useState("benzine");
   const [bpmCo2Nedc, setBpmCo2Nedc] = useState("");
   const [bpmCo2Wltp, setBpmCo2Wltp] = useState("");
-  const [bpmResult, setBpmResult] = useState<null | { restBpm: number; afschrijving: number }>(null);
+  const [bpmResult, setBpmResult] = useState<null | {
+    restBpm: number;
+    afschrijving: number;
+    method: string;
+    co2Used: number;
+  }>(null);
 
-  const handleBpmCalc = () => {
-    const co2 = bpmCo2Wltp ? parseInt(bpmCo2Wltp) : bpmCo2Nedc ? parseInt(bpmCo2Nedc) : 0;
-    if (!bpmDate || co2 === 0) return;
-    const today = new Date();
-    const regDate = new Date(bpmDate);
-    const monthsDiff = (today.getFullYear() - regDate.getFullYear()) * 12 + (today.getMonth() - regDate.getMonth());
-    const afschrijving = Math.min(Math.max(monthsDiff * 0.8, 0), 90);
-    const bruto = co2 * 25;
-    const rest = Math.round(bruto * (1 - afschrijving / 100));
-    setBpmResult({ restBpm: rest, afschrijving: Math.round(afschrijving) });
-  };
+  useEffect(() => {
+    const nedc = bpmCo2Nedc ? calcRestBpm(bpmDate, bpmCo2Nedc) : null;
+    const wltp = bpmCo2Wltp ? calcRestBpm(bpmDate, bpmCo2Wltp) : null;
+    if (!nedc && !wltp) {
+      setBpmResult(null);
+      return;
+    }
+    let best;
+    if (nedc && wltp) {
+      best = nedc.restBpm <= wltp.restBpm ? { ...nedc, method: "NEDC" } : { ...wltp, method: "WLTP" };
+    } else if (nedc) {
+      best = { ...nedc, method: "NEDC" };
+    } else {
+      best = { ...wltp!, method: "WLTP" };
+    }
+    setBpmResult({
+      restBpm: best.restBpm,
+      afschrijving: best.afschrijving,
+      method: best.method,
+      co2Used: best.co2Used,
+    });
+  }, [bpmDate, bpmCo2Nedc, bpmCo2Wltp]);
 
   return (
     <div className={`grid ${showAdviceCard ? 'md:grid-cols-2' : ''} gap-8 items-stretch`}>
@@ -80,7 +108,7 @@ const BpmCalculator = ({
               <input
                 type="number"
                 value={bpmCo2Nedc}
-                onChange={(e) => { setBpmCo2Nedc(e.target.value); setBpmCo2Wltp(""); }}
+                onChange={(e) => setBpmCo2Nedc(e.target.value)}
                 placeholder="—"
                 className="w-full px-4 py-2.5 rounded-lg border border-border text-sm focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] focus:border-transparent"
               />
@@ -90,23 +118,27 @@ const BpmCalculator = ({
               <input
                 type="number"
                 value={bpmCo2Wltp}
-                onChange={(e) => { setBpmCo2Wltp(e.target.value); setBpmCo2Nedc(""); }}
+                onChange={(e) => setBpmCo2Wltp(e.target.value)}
                 placeholder="—"
                 className="w-full px-4 py-2.5 rounded-lg border border-border text-sm focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] focus:border-transparent"
               />
             </div>
           </div>
-          <button onClick={handleBpmCalc} className="btn-cta w-full text-center">
-            Bereken BPM
-          </button>
+          <p className="text-xs" style={{ color: '#698db3' }}>
+            Vul NEDC en of WLTP in. Wij rekenen automatisch met de gunstigste waarde. De waarde staat op het kentekenbewijs of het Certificaat van Overeenstemming.
+          </p>
           {bpmResult && (
-            <div className="mt-4 p-5 rounded-xl" style={{ background: 'rgba(29,60,113,0.04)', border: '1px solid rgba(29,60,113,0.10)' }}>
+            <div className="p-5 rounded-xl" style={{ background: 'rgba(29,60,113,0.04)', border: '1px solid rgba(29,60,113,0.10)' }}>
               <p className="text-sm mb-1" style={{ color: '#698db3' }}>Indicatie rest-BPM</p>
               <p className="heading-display text-[32px] font-bold" style={{ color: '#1a1a1a' }}>€ {bpmResult.restBpm.toLocaleString('nl-NL')}</p>
               <p className="text-sm mt-2" style={{ color: '#698db3' }}>Afschrijvingspercentage: {bpmResult.afschrijving}%</p>
+              <p className="text-sm mt-2" style={{ color: '#1d3c71' }}>Gerekend met de gunstigste CO₂-waarde ({bpmResult.method}: {bpmResult.co2Used} g/km).</p>
               <p className="text-xs mt-3" style={{ color: '#698db3', opacity: 0.6 }}>Dit is een indicatie. Voor een exacte berekening met juridische onderbouwing, vraag een taxatierapport aan.</p>
             </div>
           )}
+          <button className="btn-cta w-full text-center">
+            Bereken BPM
+          </button>
         </div>
       </div>
 
