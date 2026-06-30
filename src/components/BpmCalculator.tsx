@@ -29,18 +29,46 @@ const BpmCalculator = ({
   const [bpmFuel, setBpmFuel] = useState("benzine");
   const [bpmCo2Nedc, setBpmCo2Nedc] = useState("");
   const [bpmCo2Wltp, setBpmCo2Wltp] = useState("");
-  const [bpmResult, setBpmResult] = useState<null | { restBpm: number; afschrijving: number }>(null);
+  const [bpmResult, setBpmResult] = useState<null | {
+    restBpm: number;
+    afschrijving: number;
+    method: string;
+    co2Used: number;
+  }>(null);
 
-  const handleBpmCalc = () => {
-    const co2 = bpmCo2Wltp ? parseInt(bpmCo2Wltp) : bpmCo2Nedc ? parseInt(bpmCo2Nedc) : 0;
-    if (!bpmDate || co2 === 0) return;
+  const calcRestBpm = (co2Val: string) => {
+    const co2 = parseInt(co2Val);
+    if (!bpmDate || isNaN(co2) || co2 <= 0) return null;
     const today = new Date();
     const regDate = new Date(bpmDate);
     const monthsDiff = (today.getFullYear() - regDate.getFullYear()) * 12 + (today.getMonth() - regDate.getMonth());
     const afschrijving = Math.min(Math.max(monthsDiff * 0.8, 0), 90);
     const bruto = co2 * 25;
     const rest = Math.round(bruto * (1 - afschrijving / 100));
-    setBpmResult({ restBpm: rest, afschrijving: Math.round(afschrijving) });
+    return { restBpm: rest, afschrijving: Math.round(afschrijving), co2Used: co2 };
+  };
+
+  const handleBpmCalc = () => {
+    const nedc = bpmCo2Nedc ? calcRestBpm(bpmCo2Nedc) : null;
+    const wltp = bpmCo2Wltp ? calcRestBpm(bpmCo2Wltp) : null;
+
+    if (!nedc && !wltp) return;
+
+    let best;
+    if (nedc && wltp) {
+      best = nedc.restBpm <= wltp.restBpm ? { ...nedc, method: "NEDC" } : { ...wltp, method: "WLTP" };
+    } else if (nedc) {
+      best = { ...nedc, method: "NEDC" };
+    } else {
+      best = { ...wltp!, method: "WLTP" };
+    }
+
+    setBpmResult({
+      restBpm: best.restBpm,
+      afschrijving: best.afschrijving,
+      method: best.method,
+      co2Used: best.co2Used,
+    });
   };
 
   return (
