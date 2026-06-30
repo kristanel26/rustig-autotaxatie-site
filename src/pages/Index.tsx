@@ -754,7 +754,7 @@ const Index = () => {
       </section>
 
 
-      <CertificationBar />
+      
       <SiteFooter />
 
       <WhatsAppButton />
