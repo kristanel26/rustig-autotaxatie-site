@@ -13,7 +13,7 @@ import heroOldtimer from "@/assets/hero-oldtimer.jpg";
 import heroFoodtruck from "@/assets/hero-foodtruck.jpg";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import CertificationBar from "@/components/CertificationBar";
+
 import BookingWizard from "@/components/BookingWizard";
 
 const diensten = [
@@ -754,7 +754,7 @@ const Index = () => {
       </section>
 
 
-      <CertificationBar />
+      
       <SiteFooter />
 
       <WhatsAppButton />
