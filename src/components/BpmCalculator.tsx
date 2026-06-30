@@ -71,6 +71,29 @@ const BpmCalculator = ({
     });
   };
 
+  useEffect(() => {
+    const nedc = bpmCo2Nedc ? calcRestBpm(bpmCo2Nedc) : null;
+    const wltp = bpmCo2Wltp ? calcRestBpm(bpmCo2Wltp) : null;
+    if (!nedc && !wltp) {
+      setBpmResult(null);
+      return;
+    }
+    let best;
+    if (nedc && wltp) {
+      best = nedc.restBpm <= wltp.restBpm ? { ...nedc, method: "NEDC" } : { ...wltp, method: "WLTP" };
+    } else if (nedc) {
+      best = { ...nedc, method: "NEDC" };
+    } else {
+      best = { ...wltp!, method: "WLTP" };
+    }
+    setBpmResult({
+      restBpm: best.restBpm,
+      afschrijving: best.afschrijving,
+      method: best.method,
+      co2Used: best.co2Used,
+    });
+  }, [bpmDate, bpmCo2Nedc, bpmCo2Wltp]);
+
   return (
     <div className={`grid ${showAdviceCard ? 'md:grid-cols-2' : ''} gap-8 items-stretch`}>
       <div
