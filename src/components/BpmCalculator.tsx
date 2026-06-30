@@ -108,7 +108,7 @@ const BpmCalculator = ({
               <input
                 type="number"
                 value={bpmCo2Nedc}
-                onChange={(e) => { setBpmCo2Nedc(e.target.value); setBpmCo2Wltp(""); }}
+                onChange={(e) => setBpmCo2Nedc(e.target.value)}
                 placeholder="—"
                 className="w-full px-4 py-2.5 rounded-lg border border-border text-sm focus:outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] focus:border-transparent"
               />
