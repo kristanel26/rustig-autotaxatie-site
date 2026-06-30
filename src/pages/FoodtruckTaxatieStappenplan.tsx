@@ -19,6 +19,7 @@ import stepFoodtruckRapportAsset from "@/assets/step-foodtruck-rapport.png.asset
 const stepFoodtruckRapport = stepFoodtruckRapportAsset.url;
 import stepFoodtruckRegelenAsset from "@/assets/step-foodtruck-regelen.png.asset.json";
 const stepFoodtruckRegelen = stepFoodtruckRegelenAsset.url;
+import photoFoodtruck from "@/assets/photo-foodtruck.jpg";
 
 const steps: { number: number; title: string; image: string; content: React.ReactNode }[] = [
   {
