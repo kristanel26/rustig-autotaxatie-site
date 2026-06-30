@@ -35,7 +35,7 @@ const steps: { number: number; title: string; image: string; content: React.Reac
     image: photoFoodtruck,
     title: "Online informatieformulier invullen",
     content: (
-      <p>Jij kent jouw foodtruck van binnen en buiten. Om een zo volledig en compleet mogelijk taxatierapport te maken, vragen wij jou vooraf een online informatieformulier in te vullen. Hierin geef je informatie over de technische staat, keukenapparatuur, installaties, vergunningen en eventuele aanpassingen. Heb je facturen van aangebrachte apparatuur, inbouw of uitgevoerde reparaties? Upload deze dan via het formulier. Lukt dit niet? Geen probleem, de taxateur bespreekt dit tijdens de inspectie met jou door.</p>
+      <p>Jij kent jouw foodtruck als geen ander. Om een zo volledig en compleet mogelijk taxatierapport te maken, vragen wij jou vooraf een online informatieformulier in te vullen. Hierin geef je informatie over de keukenapparatuur, installaties, vergunningen, belettering en eventuele verbouwingen. Heb je facturen van apparatuur, keuringsrapporten of vergunningen? Upload deze dan via het formulier. Lukt dit niet? Geen probleem, de taxateur bespreekt dit tijdens de inspectie met jou door.</p>
     ),
     cta: { label: "Vul het informatieformulier in", href: "/foodtruck-informatieformulier" },
   },
