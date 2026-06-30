@@ -38,6 +38,7 @@ const FoodtruckTaxatieStappenplan = lazy(() => import("./pages/FoodtruckTaxatieS
 const Nieuws = lazy(() => import("./pages/Nieuws"));
 const OverOns = lazy(() => import("./pages/OverOns"));
 const CamperInformatieformulier = lazy(() => import("./pages/CamperInformatieformulier"));
+const FoodtruckInformatieformulier = lazy(() => import("./pages/FoodtruckInformatieformulier"));
 
 // Internal pages — lazy
 const Login = lazy(() => import("./pages/internal/Login"));
@@ -135,6 +136,7 @@ const router = createBrowserRouter([
   { path: "/youngtimer-taxatie-stappenplan", element: withSuspense(<YoungtimerTaxatieStappenplan />) },
   { path: "/motor-taxatie-stappenplan", element: withSuspense(<MotorTaxatieStappenplan />) },
   { path: "/foodtruck-taxatie-stappenplan", element: withSuspense(<FoodtruckTaxatieStappenplan />) },
+  { path: "/foodtruck-informatieformulier", element: withSuspense(<FoodtruckInformatieformulier />) },
   { path: "/nieuws", element: withSuspense(<Nieuws />) },
   { path: "/over-ons", element: withSuspense(<OverOns />) },
   { path: "/werkwijze", element: <Navigate to="/over-ons" replace /> },
