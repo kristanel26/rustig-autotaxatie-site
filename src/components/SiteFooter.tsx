@@ -147,22 +147,19 @@ const SiteFooter = () => {
       </footer>
 
       {/* Certifications bar */}
-      <div className="bg-[hsl(216,58%,22%)] py-5 px-6 lg:px-10" style={{ borderTop: '2px solid #ff751f' }}>
-        <div className="max-w-[1100px] mx-auto flex flex-wrap items-center justify-center gap-12">
+      <div className="bg-[hsl(216,58%,22%)] py-8 px-6 lg:px-10" style={{ borderTop: '2px solid #ff751f' }}>
+        <div className="max-w-[1100px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
           {[
-            { name: "Federatie TMV", sub: "Erkend Taxateur" },
-            { name: "VRT Register", sub: "Register Taxateur" },
-            { name: "FEHAC", sub: "Erkend Rapport" },
-            { name: "Hobeon", sub: "Gecertificeerd" },
-          ].map((cert, i, arr) => (
-            <div key={cert.name} className="flex items-center gap-12">
-              <div className="flex flex-col items-center text-center">
-                <span className="text-[13px] font-bold text-white tracking-wide">{cert.name}</span>
-                <span className="text-[10px] font-normal text-white/50 tracking-wider uppercase mt-0.5">{cert.sub}</span>
+            { src: "/logos/logo_tmv.png", alt: "Federatie TMV", sub: "Erkend Taxateur" },
+            { src: "/logos/logo_vrt.png", alt: "VRT Register", sub: "Register Taxateur" },
+            { src: "/logos/logo_fehac.png", alt: "FEHAC", sub: "Erkend Rapport" },
+            { src: "/logos/logo_hobeon.png", alt: "Hobeon SKO", sub: "Gecertificeerd" },
+          ].map((cert) => (
+            <div key={cert.alt} className="flex flex-col items-center text-center gap-2.5">
+              <div className="bg-white rounded-md px-3 py-2 flex items-center justify-center">
+                <img src={cert.src} alt={cert.alt} className="h-[40px] w-auto object-contain" loading="lazy" />
               </div>
-              {i < arr.length - 1 && (
-                <div className="hidden sm:block w-px h-8 bg-white/15" />
-              )}
+              <span className="text-[10px] font-normal text-white/50 tracking-wider uppercase">{cert.sub}</span>
             </div>
           ))}
         </div>
